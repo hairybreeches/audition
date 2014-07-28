@@ -9,3 +9,4 @@ build/**
 _NCrunch_Audition/**
 packages/**
 **.ncrunchsolution.user
+Model/obj/**
