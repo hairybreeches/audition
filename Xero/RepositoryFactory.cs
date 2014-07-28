@@ -7,13 +7,13 @@ using XeroApi.OAuth;
 
 namespace Xero
 {
-    internal class RepositoryFactory
+    internal class RepositoryFactory : IRepositoryFactory
     {
         private const string UserAgent = "Audition";
         private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
         private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
 
-        public IRepository CreateRepository()
+        public Repository CreateRepository()
         {
             var consumerSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
                 new InMemoryTokenRepository())
