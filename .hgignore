@@ -6,3 +6,6 @@ Excel/obj/**
 Ui/obj/**
 Xero/obj/**
 build/**
+_NCrunch_Audition/**
+packages/**
+**.ncrunchsolution.user
