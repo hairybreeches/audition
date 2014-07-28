@@ -1,0 +1,7 @@
+syntax: glob
+Audition.v12.suo
+Audition/bin/**
+Audition/obj/**
+Excel/obj/**
+Ui/obj/**
+Xero/obj/**
