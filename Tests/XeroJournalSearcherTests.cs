@@ -58,7 +58,11 @@ namespace Tests
 
         IEnumerable<TestCaseData> TimesInsideRange
         {
-            get { yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0)); }
+            get { 
+                yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0));
+                yield return new TestCaseData(new LocalTime(11, 30), new LocalTime(11, 0), new LocalTime(11, 30));
+                yield return new TestCaseData(new LocalTime(10, 46), new LocalTime(10, 46), new LocalTime(11, 30));
+            }
         }
         
         [TestCaseSource("TimesOutsideRange")]
@@ -74,7 +78,7 @@ namespace Tests
             CollectionAssert.IsEmpty(journalIds.ToList());
         }
 
-        [Test]
+                [Test]
         public void CannotCreateATimeFrameWithTimesWhichWrapAround()
         {
             Assert.Throws<InvalidTimeFrameException>(
@@ -83,7 +87,12 @@ namespace Tests
 
         IEnumerable<TestCaseData> TimesOutsideRange
         {
-            get { yield return new TestCaseData(new LocalTime(19, 0), new LocalTime(15, 0), new LocalTime(17, 0)); }
+            get { 
+                yield return new TestCaseData(new LocalTime(19, 0), new LocalTime(15, 0), new LocalTime(17, 0)); 
+                yield return new TestCaseData(new LocalTime(9, 0), new LocalTime(15, 0), new LocalTime(17, 0));  
+                yield return new TestCaseData(new LocalTime(8, 47), new LocalTime(8, 48), new LocalTime(17, 0));  
+                yield return new TestCaseData(new LocalTime(17, 14), new LocalTime(8, 48), new LocalTime(17, 13));  
+            }
         }
 
         private Journal GetJournalPostedAt(LocalTime journalTime)
