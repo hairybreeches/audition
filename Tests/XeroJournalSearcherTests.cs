@@ -52,7 +52,7 @@ namespace Tests
                 () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
         }
 
-    private IJournalSearcher GetJournalSearcher(params Journal[] journals)
+        private IJournalSearcher GetJournalSearcher(params Journal[] journals)
         {
             var repository = Substitute.For<IFullRepository>();
             repository.Journals.Returns(journals.Select(x => x.ToXeroJournal()).AsQueryable());
