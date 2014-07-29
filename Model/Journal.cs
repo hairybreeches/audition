@@ -4,8 +4,15 @@ namespace Model
 {
     public class Journal
     {
-        public Guid Id { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime JournalDate { get; set; }
+        public Journal(Guid id, DateTime created, DateTime journalDate)
+        {
+            JournalDate = journalDate;
+            Created = created;
+            Id = id;
+        }
+
+        public Guid Id { get; private set; }
+        public DateTime Created { get; private set; }
+        public DateTime JournalDate { get; private set; }
     }
 }
