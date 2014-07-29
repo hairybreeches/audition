@@ -7,6 +7,10 @@ namespace Model
     {
         public TimeFrame(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
         {
+            if (toTime < fromTime)
+            {
+                throw new InvalidTimeFrameException("The 'from' time must be before the 'after' time");
+            }
             ToTime = toTime;
             FromTime = fromTime;
             ToDay = toDay;
