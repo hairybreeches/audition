@@ -30,11 +30,11 @@ namespace Tests
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
-        public void SearcherDoesNotReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
+        public void SearcherDoesNotReturnJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
             DayOfWeek toDay)
         {
-            var sundayJournal = GetJournalPostedOn(dayOfWeek);
-            var searcher = GetJournalSearcher(sundayJournal);
+            var journal = GetJournalPostedOn(dayOfWeek);
+            var searcher = GetJournalSearcher(journal);
 
             var weekendJournalIds =
                 searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)))
@@ -74,6 +74,13 @@ namespace Tests
             CollectionAssert.IsEmpty(journalIds.ToList());
         }
 
+        [Test]
+        public void CannotCreateATimeFrameWithTimesWhichWrapAround()
+        {
+            Assert.Throws<InvalidTimeFrameException>(
+                () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
+        }
+
         IEnumerable<TestCaseData> TimesOutsideRange
         {
             get { yield return new TestCaseData(new LocalTime(19, 0), new LocalTime(15, 0), new LocalTime(17, 0)); }
@@ -84,13 +91,6 @@ namespace Tests
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
                 new DateTime());
-        }
-
-        [Test]
-        public void CannotCreateATimeFrameWithTimesWhichWrapAround()
-        {
-            Assert.Throws<InvalidTimeFrameException>(
-                () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
         }
 
         private IJournalSearcher GetJournalSearcher(params Journal[] journals)
