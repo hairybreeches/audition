@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Model
 {
     public interface IJournalSearcher
     {
-        IEnumerable<string> FindJournalsWithin(TimeFrame timeFrame);
+        IEnumerable<Journal> FindJournalsWithin(TimeFrame timeFrame);
     }
 }

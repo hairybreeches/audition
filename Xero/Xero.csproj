@@ -48,6 +48,7 @@
     <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSearcher.cs" />
     <Compile Include="XeroModule.cs" />
   </ItemGroup>
