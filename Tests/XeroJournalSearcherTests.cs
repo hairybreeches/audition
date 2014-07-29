@@ -6,7 +6,6 @@ using NodaTime;
 using NSubstitute;
 using NUnit.Framework;
 using Xero;
-using XeroApi.Model;
 using Journal = Model.Journal;
 
 
@@ -14,7 +13,6 @@ namespace Tests
 {
     public class XeroJournalSearcherTests
     {
-        [TestCase(DayOfWeek.Monday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
@@ -43,6 +41,31 @@ namespace Tests
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(weekendJournalIds);
+        }
+
+        [TestCaseSource("TimesInsideRange")]
+        public void SearcherReturnsJournalsPostedInsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        {
+            var journal = GetJournalPostedAt(journalTime);
+            var searcher = GetJournalSearcher(journal);
+
+            var journalIds =
+                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime))
+                    .Select(x => x.Id);
+
+            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
+        }
+
+        IEnumerable<TestCaseData> TimesInsideRange
+        {
+            get { yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0)); }
+        }
+
+        private Journal GetJournalPostedAt(LocalTime journalTime)
+        {
+            return new Journal(Guid.NewGuid(),
+                new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
+                new DateTime());
         }
 
         [Test]
