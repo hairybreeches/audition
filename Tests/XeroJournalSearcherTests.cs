@@ -16,8 +16,8 @@ namespace Tests
     {
         private static readonly TimeFrame Weekend = new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0),
             new LocalTime(11, 59));
-
-
+        
+        
         [Test]
         public void SearcherReturnsJournalsPostedOnADayInRange()
         {
@@ -28,6 +28,19 @@ namespace Tests
                 searcher.FindJournalsWithin(Weekend).Select(x=>x.Id);
 
             CollectionAssert.AreEqual(weekendJournalIds, new[]{sundayJournal.Id});
+        } 
+        
+        
+        [Test]
+        public void SearcherDoesNotReturnsJournalsPostedOutsideRange()
+        {
+            var mondayJournal = GetJournalPostedOn(DayOfWeek.Monday);
+            var searcher = GetJournalSearcher(mondayJournal);
+
+            var weekendJournalIds =
+                searcher.FindJournalsWithin(Weekend).Select(x=>x.Id);
+
+            CollectionAssert.IsEmpty(weekendJournalIds);
         }
 
         private IJournalSearcher GetJournalSearcher(params Journal[] journals)
