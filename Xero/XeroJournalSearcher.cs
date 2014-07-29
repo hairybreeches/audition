@@ -2,6 +2,7 @@
 using System.Linq;
 using Model;
 using XeroApi.Model;
+using Journal = XeroApi.Model.Journal;
 
 namespace Xero
 {
@@ -15,8 +16,27 @@ namespace Xero
         }
 
         public IEnumerable<Model.Journal> FindJournalsWithin(TimeFrame timeFrame)
-        {            
-            return repository.Journals.ToList().Select(x => x.ToModelJournal());
+        {
+            var allJournals = repository.Journals.ToList();
+            return allJournals.Where(x => DayWithinRange(x, timeFrame)).Select(x => x.ToModelJournal());
+        }
+
+        private bool DayWithinRange(Journal journal, TimeFrame timeFrame)
+        {
+            var creationDay = (int) journal.CreatedDateUTC.DayOfWeek;
+
+            var fromDay = (int) timeFrame.FromDay;
+            var toDay = (int) timeFrame.ToDay;
+
+            if (toDay <= fromDay)
+            {
+                fromDay -= 7;
+            }
+
+
+            return creationDay >= fromDay
+                   &&
+                   creationDay <= toDay;
         }
     }
 }
