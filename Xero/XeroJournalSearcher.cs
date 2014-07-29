@@ -30,13 +30,16 @@ namespace Xero
 
             if (toDay <= fromDay)
             {
-                fromDay -= 7;
+                toDay += 7;
+            }
+
+            if (creationDay < fromDay)
+            {
+                creationDay += 7;
             }
 
 
-            return creationDay >= fromDay
-                   &&
-                   creationDay <= toDay;
+            return creationDay <= toDay;
         }
     }
 }

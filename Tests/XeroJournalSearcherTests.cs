@@ -29,6 +29,18 @@ namespace Tests
                 searcher.FindJournalsWithin(Weekend).Select(x=>x.Id);
 
             CollectionAssert.AreEqual(new[] { sundayJournal.Id }, weekendJournalIds.ToList());
+        }      
+        
+        [Test]
+        public void SearcherReturnsJournalsPostedOnADayInRangeWhenRangeWrapsAround()
+        {
+            var mondayJournal = GetJournalPostedOn(DayOfWeek.Monday);
+            var searcher = GetJournalSearcher(mondayJournal);
+
+            var allJournalIds =
+                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(0,0),new LocalTime(11,59) )).Select(x=>x.Id);
+
+            CollectionAssert.AreEqual(new[] { mondayJournal.Id }, allJournalIds.ToList());
         } 
         
         
