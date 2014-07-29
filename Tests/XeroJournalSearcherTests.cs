@@ -14,44 +14,28 @@ namespace Tests
 {
     public class XeroJournalSearcherTests
     {
-        private static readonly TimeFrame Weekend = new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(11, 59));
-
-        private static readonly TimeFrame Week = new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0, 0), new LocalTime(11, 59));
-        
-        
-        [Test]
-        public void SearcherReturnsJournalsPostedOnADayInRange()
+        [TestCase(DayOfWeek.Monday, DayOfWeek.Monday, DayOfWeek.Sunday)]
+        [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
+        public void SearcherReturnsJournalsPostedOnADayInRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
-            var sundayJournal = GetJournalPostedOn(DayOfWeek.Sunday);
-            var searcher = GetJournalSearcher(sundayJournal);
-
-            var weekendJournalIds =
-                searcher.FindJournalsWithin(Weekend).Select(x=>x.Id);
-
-            CollectionAssert.AreEqual(new[] { sundayJournal.Id }, weekendJournalIds.ToList());
-        }      
-        
-        [Test]
-        public void SearcherReturnsJournalsPostedOnADayInRangeWhenRangeWrapsAround()
-        {
-            var mondayJournal = GetJournalPostedOn(DayOfWeek.Monday);
-            var searcher = GetJournalSearcher(mondayJournal);
+            var journal = GetJournalPostedOn(dayOfWeek);
+            var searcher = GetJournalSearcher(journal);
 
             var allJournalIds =
-                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(0,0),new LocalTime(11,59) )).Select(x=>x.Id);
+                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0),new LocalTime(11, 59)))
+                .Select(x => x.Id);
 
-            CollectionAssert.AreEqual(new[] { mondayJournal.Id }, allJournalIds.ToList());
-        } 
-        
-        
-        [Test]
-        public void SearcherDoesNotReturnsJournalsPostedOutsideRange()
+            CollectionAssert.AreEqual(new[] {journal.Id}, allJournalIds.ToList());
+        }
+
+        [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
+        public void SearcherDoesNotReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
-            var sundayJournal = GetJournalPostedOn(DayOfWeek.Sunday);
+            var sundayJournal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(sundayJournal);
 
             var weekendJournalIds =
-                searcher.FindJournalsWithin(Week).Select(x=>x.Id);
+                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59))).Select(x => x.Id);
 
             CollectionAssert.IsEmpty(weekendJournalIds);
         }
