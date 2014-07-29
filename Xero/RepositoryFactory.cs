@@ -21,6 +21,8 @@ namespace Xero
                 MessageLogger = new DebugMessageLogger()
             };
 
+            consumerSession.GetRequestToken();
+
             LaunchAuthenticationWindow(consumerSession);
 
             var verificationCode = GetInputCode();
