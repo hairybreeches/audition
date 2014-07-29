@@ -28,7 +28,7 @@ namespace Tests
             var weekendJournalIds =
                 searcher.FindJournalsWithin(Weekend).Select(x=>x.Id);
 
-            CollectionAssert.AreEqual(weekendJournalIds, new[]{sundayJournal.Id});
+            CollectionAssert.AreEqual(new[] { sundayJournal.Id }, weekendJournalIds.ToList());
         } 
         
         
