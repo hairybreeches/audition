@@ -8,5 +8,6 @@
   <FrameworkUtilisationTypeForMSpec>UseStaticAnalysis</FrameworkUtilisationTypeForMSpec>
   <FrameworkUtilisationTypeForMSTest>UseStaticAnalysis</FrameworkUtilisationTypeForMSTest>
   <MetricsExclusionList>
+Tests\Tests.csproj
 </MetricsExclusionList>
 </SolutionConfiguration>
