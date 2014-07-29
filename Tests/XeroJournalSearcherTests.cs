@@ -15,7 +15,9 @@ namespace Tests
     public class XeroJournalSearcherTests
     {
         [TestCase(DayOfWeek.Monday, DayOfWeek.Monday, DayOfWeek.Sunday)]
+        [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
+        [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
         public void SearcherReturnsJournalsPostedOnADayInRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
@@ -29,6 +31,7 @@ namespace Tests
         }
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
+        [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
         public void SearcherDoesNotReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var sundayJournal = GetJournalPostedOn(dayOfWeek);
