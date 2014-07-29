@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Model;
+using XeroApi.Model;
 
 namespace Xero
 {
@@ -13,10 +14,10 @@ namespace Xero
             this.repositoryFactory = repositoryFactory;
         }
 
-        public IEnumerable<string> FindJournalsWithin(TimeFrame timeFrame)
+        public IEnumerable<Model.Journal> FindJournalsWithin(TimeFrame timeFrame)
         {
             var repository = repositoryFactory.CreateRepository();
-            return repository.Journals.ToList().Select(x => x.ToString());
+            return repository.Journals.ToList().Select(x => x.ToModelJournal());
         }
     }
 }
