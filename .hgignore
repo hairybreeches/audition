@@ -10,3 +10,4 @@ _NCrunch_Audition/**
 packages/**
 **.ncrunchsolution.user
 Model/obj/**
+Tests/obj/**
