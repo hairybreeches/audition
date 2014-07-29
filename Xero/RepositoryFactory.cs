@@ -13,7 +13,7 @@ namespace Xero
         private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
         private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
 
-        public Repository CreateRepository()
+        public IFullRepository CreateRepository()
         {
             var consumerSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
                 new InMemoryTokenRepository())
@@ -30,7 +30,7 @@ namespace Xero
             consumerSession.ExchangeRequestTokenForAccessToken(verificationCode);
 
             // Wrap the authenticated consumerSession in the repository...
-            return new Repository(consumerSession);
+            return new RepositoryWrapper(new Repository(consumerSession));
         }
 
         private static string GetInputCode()

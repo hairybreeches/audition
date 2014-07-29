@@ -4,6 +4,6 @@ namespace Xero
 {
     internal interface IRepositoryFactory
     {
-        Repository CreateRepository();
+        IFullRepository CreateRepository();
     }
 }
