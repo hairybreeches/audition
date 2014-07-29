@@ -16,7 +16,7 @@ namespace Xero
         public IEnumerable<string> FindJournalsWithin(TimeFrame timeFrame)
         {
             var repository = repositoryFactory.CreateRepository();
-            return repository.Journals.Select(x => x.ToString());
+            return repository.Journals.ToList().Select(x => x.ToString());
         }
     }
 }
