@@ -5,7 +5,7 @@ using XeroApi.Model;
 
 namespace Xero
 {
-    class XeroJournalSearcher : IJournalSearcher
+    public class XeroJournalSearcher : IJournalSearcher
     {
         private readonly IRepositoryFactory repositoryFactory;
 

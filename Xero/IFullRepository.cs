@@ -3,7 +3,7 @@ using XeroApi.Model;
 
 namespace Xero
 {
-    internal interface IFullRepository
+    public interface IFullRepository
     {
         IQueryable<Journal> Journals { get; }
     }
