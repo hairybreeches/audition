@@ -60,6 +60,24 @@ namespace Tests
         {
             get { yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0)); }
         }
+        
+        [TestCaseSource("TimesOutsideRange")]
+        public void SearcherDoesNotReturnJournalsPostedOutsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        {
+            var journal = GetJournalPostedAt(journalTime);
+            var searcher = GetJournalSearcher(journal);
+
+            var journalIds =
+                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime))
+                    .Select(x => x.Id);
+
+            CollectionAssert.IsEmpty(journalIds.ToList());
+        }
+
+        IEnumerable<TestCaseData> TimesOutsideRange
+        {
+            get { yield return new TestCaseData(new LocalTime(19, 0), new LocalTime(15, 0), new LocalTime(17, 0)); }
+        }
 
         private Journal GetJournalPostedAt(LocalTime journalTime)
         {
