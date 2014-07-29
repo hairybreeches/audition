@@ -24,26 +24,35 @@ namespace Tests
             var searcher = GetJournalSearcher(journal);
 
             var allJournalIds =
-                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0),new LocalTime(11, 59)))
-                .Select(x => x.Id);
+                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)))
+                    .Select(x => x.Id);
 
             CollectionAssert.AreEqual(new[] {journal.Id}, allJournalIds.ToList());
         }
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
-        public void SearcherDoesNotReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
+        public void SearcherDoesNotReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
+            DayOfWeek toDay)
         {
             var sundayJournal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(sundayJournal);
 
             var weekendJournalIds =
-                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59))).Select(x => x.Id);
+                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)))
+                    .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(weekendJournalIds);
         }
 
-        private IJournalSearcher GetJournalSearcher(params Journal[] journals)
+        [Test]
+        public void CannotCreateATimeFrameWithTimesWhichWrapAround()
+        {
+            Assert.Throws<InvalidTimeFrameException>(
+                () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
+        }
+
+    private IJournalSearcher GetJournalSearcher(params Journal[] journals)
         {
             var repository = Substitute.For<IFullRepository>();
             repository.Journals.Returns(journals.Select(x => x.ToXeroJournal()).AsQueryable());
