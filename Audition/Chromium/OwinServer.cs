@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Web.Http;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin.Testing;
@@ -9,24 +10,40 @@ namespace Audition.Chromium
 {
     internal class OwinServer
     {
+        private readonly IFileSystem fileSystem;
         private readonly TestServer owinTestServer;
 
         public OwinServer(IFileSystem fileSystem)
         {
+            this.fileSystem = fileSystem;
             if (fileSystem == null)
                 throw new ArgumentNullException("fileSystem");
 
-            owinTestServer = TestServer.Create(app => InitialiseOwinServer(fileSystem, app));
+            owinTestServer = TestServer.Create(app => app
+                .UseFileServer(GetFileOptions())
+                .UseWebApi(GetApiOptions()));
+
         }
 
-        private static IAppBuilder InitialiseOwinServer(IFileSystem fileSystem, IAppBuilder app)
+        private FileServerOptions GetFileOptions()
         {
-            return app.UseFileServer(new FileServerOptions
+            return new FileServerOptions
             {
                 EnableDefaultFiles = false,
                 EnableDirectoryBrowsing = true,
                 FileSystem = fileSystem
-            });
+            };
+        }
+
+        private static HttpConfiguration GetApiOptions()
+        {
+            var config = new HttpConfiguration();
+            config.Routes.MapHttpRoute(
+                name: "Api",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new {id = RouteParameter.Optional}
+                );
+            return config;
         }
 
         public HttpResponseMessage Request(string uri)
