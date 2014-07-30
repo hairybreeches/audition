@@ -11,3 +11,4 @@ packages/**
 **.ncrunchsolution.user
 Model/obj/**
 Tests/obj/**
+**.user
