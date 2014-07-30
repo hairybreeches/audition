@@ -29,7 +29,7 @@ namespace Audition.Chromium
                                              })
                           {
                               Dock = DockStyle.Fill,
-                              RequestHandler = new InterceptingRequestHandler(InternalDomain, new OwinBasedFileServer(new PhysicalFileSystem("dist")).Request)
+                              RequestHandler = new InterceptingRequestHandler(InternalDomain, new OwinServer(new PhysicalFileSystem("dist")).Request)
                           };
 
             webView.PropertyChanged += (sender, args) =>

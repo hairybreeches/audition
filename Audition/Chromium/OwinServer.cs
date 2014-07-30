@@ -7,11 +7,11 @@ using Owin;
 
 namespace Audition.Chromium
 {
-    internal class OwinBasedFileServer
+    internal class OwinServer
     {
         private readonly TestServer owinTestServer;
 
-        public OwinBasedFileServer(IFileSystem fileSystem)
+        public OwinServer(IFileSystem fileSystem)
         {
             if (fileSystem == null)
                 throw new ArgumentNullException("fileSystem");
