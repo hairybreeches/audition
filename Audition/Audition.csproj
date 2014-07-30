@@ -91,7 +91,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Chromium\InterceptingRequestHandler.cs" />
-    <Compile Include="Chromium\OwinBasedFileServer.cs" />
+    <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
