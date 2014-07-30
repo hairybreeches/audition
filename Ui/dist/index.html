@@ -4,8 +4,18 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    
 </head>
 <body style="background-color: blue;">
     Hello world!
+    <div id="container"></div>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>$.ajax({
+    url: "api/search",    
+    success: function (data) {
+        console.log(data);
+        $("#container").html(data);
+    }  
+});</script>
 </body>
 </html>
