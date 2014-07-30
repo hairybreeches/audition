@@ -106,6 +106,7 @@
     <Compile Include="Chromium\ChromiumModule.cs" />
     <Compile Include="Chromium\InterceptingRequestHandler.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
