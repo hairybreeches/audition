@@ -1,26 +1,26 @@
 ﻿using System;
 using Autofac;
-using Model;
-using NodaTime;
 using Xero;
+using System.Windows.Forms;
 
 namespace Audition
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             var builder = new ContainerBuilder();
             builder.RegisterModule<XeroModule>();
+            builder.RegisterModule<ChromiumModule>();
+
             using (var container = builder.Build())
             {
-                var searcher = container.Resolve<IJournalSearcher>();
-                var journals =
-                    searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(9, 0),
-                        new LocalTime(5, 0)));
-
-                Console.WriteLine(String.Join(",\r\n", journals));
-                Console.WriteLine();
+                var window = container.Resolve<AppForm>();                
+                Application.Run(window);
             }
         }
 
