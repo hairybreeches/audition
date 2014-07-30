@@ -1,9 +1,7 @@
-﻿using System.Windows.Forms;
-using Audition.Chromium;
-using Autofac;
+﻿using Autofac;
 using NLog;
 
-namespace Audition
+namespace Audition.Chromium
 {
     class ChromiumModule : Module
     {
