@@ -1,0 +1,24 @@
+include ../components/template
+
+mixin column(title, content)
+	div.col-md-4
+		h2= title 
+		p= content 
+		p
+			a(class="btn btn-default", href="signup", role="button") Learn more &raquo;
+
+
++page('Home')
+	div.jumbotron
+		div.container
+			h1 No more spreadsheets.
+			p Audition Software helps auditors analyse their clients' accounts. Use our tool to find duplicate payments, or to search all journals raised for suspicious activity. No spreadsheets necessary.
+			p
+				a(role="button" class="btn btn-primary btn-lg", href="signup") Try it now &raquo;
+	div.container		
+		div.row
+			+column('Improve recovery rates', 'You want to be able to give your clients the best deal possible. Save time at the planning and execution stage of the audit and perform an ISA-compliant audit faster, allowing you to save your clients money.')
+			
+			+column('Increase ISA compliance', 'ISA 240, the auditor\'s responsibilities relating to fraud, requires the auditor to "Test the appropriateness of journal entries recorded in the general ledger". Many auditors find compliance with this standard difficult and burdensome. We can help.')
+			
+			+column('Import journals easily', 'Tired of tools that take longer to use than doing the task by hand? So are we. Our tool allows you to import your client\'s data directly, so you can get the job done quickly and easily.')

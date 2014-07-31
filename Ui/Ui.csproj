@@ -50,6 +50,14 @@
   <ItemGroup>
     <None Include="package.json" />
     <None Include="README.md" />
+    <None Include="templates\components\analytics.jade" />
+    <None Include="templates\components\footer.jade" />
+    <None Include="templates\components\head.jade" />
+    <None Include="templates\components\navbar.jade" />
+    <None Include="templates\components\scripts.jade" />
+    <None Include="templates\components\template.jade" />
+    <None Include="templates\pages\index.jade" />
+    <None Include="templates\pages\signup.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
