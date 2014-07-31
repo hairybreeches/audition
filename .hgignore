@@ -12,3 +12,4 @@ packages/**
 Model/obj/**
 Tests/obj/**
 **.user
+Ui/node_modules/**
