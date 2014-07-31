@@ -1,0 +1,17 @@
+{
+  "name": "Audition",
+  "version": "1.0.0",
+  "description": "Accounts analysis for financial auditors",
+  "author": "Audition Software Ltd",
+  "repository": {
+    "type": "hg",
+    "url": "https://bitbucket.org/hairybreeches/audition"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-jade": "^0.7.0",
+    "gulp-less": "^1.3.3",
+    "gulp-util": "^3.0.0",
+    "path": "^0.4.9"
+  }
+}
