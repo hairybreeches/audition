@@ -1,0 +1,14 @@
+mixin page(title)
+	doctype html
+	html(lang="en")
+		include head
+		+head(title)
+		body
+			include navbar
+
+			block
+
+			include footer  
+
+			include scripts
+
