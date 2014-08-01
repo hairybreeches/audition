@@ -42,9 +42,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="gulpfile.js" />
     <Content Include="images\sitelogo.svg" />
   </ItemGroup>
