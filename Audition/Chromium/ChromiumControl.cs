@@ -19,7 +19,7 @@ namespace Audition.Chromium
 
         public ChromiumControl(Logger log)
         {
-            var address = AddInternalDomain("views/index.html");
+            var address = AddInternalDomain("views/search.html");
             this.log = log;
             CEF.Initialize(new Settings());
             Dock = DockStyle.Fill;

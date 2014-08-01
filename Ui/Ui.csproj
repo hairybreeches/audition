@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gulpfile.js" />
-    <Content Include="images\sitelogo.svg" />
+    <Content Include="images\A.svg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
@@ -95,13 +95,12 @@
     <None Include="style\_flatstrap\utilities.less" />
     <None Include="style\_flatstrap\variables.less" />
     <None Include="style\_flatstrap\wells.less" />
-    <None Include="templates\components\footer.jade" />
     <None Include="templates\components\head.jade" />
-    <None Include="templates\components\navbar.jade" />
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\template.jade" />
-    <None Include="templates\pages\index.jade" />
-    <None Include="templates\pages\signup.jade" />
+    <None Include="templates\pages\export.jade" />
+    <None Include="templates\pages\login.jade" />
+    <None Include="templates\pages\search.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
