@@ -11,7 +11,7 @@ namespace Audition
         {
             Controls.Add(control);
             
-            Text = "Audition software is awesome";
+            Text = "Audition";
             Icon = Resources.AuditionIcon;
             Size = new Size(820, 420);
             FormBorderStyle = FormBorderStyle.FixedDialog;
