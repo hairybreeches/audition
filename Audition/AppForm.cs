@@ -12,7 +12,7 @@ namespace Audition
             Controls.Add(control);
             
             Text = "Audition software is awesome";
-            Icon = null;
+            Icon = Resources.AuditionIcon;
             Size = new Size(820, 420);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
