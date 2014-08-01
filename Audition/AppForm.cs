@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Audition.Chromium;
-using NLog;
 
 namespace Audition
 {
