@@ -1,15 +1,21 @@
 'use strict';
 
 var gulp = require('gulp'),
-  gutil = require('gulp-util'),
-  jade = require('gulp-jade'),
-	less = require('gulp-less'),
-	path = require('path')
+    gutil = require('gulp-util'),
+    jade = require('gulp-jade'),
+    less = require('gulp-less'),
+    path = require('path'),
+		yargs = require('yargs');
+		
+		
+var args   = yargs.argv;
+
+var targetDir = args.target || '../build/debug/ui/';
 
 gulp.task('templates', function() {
   return gulp.src('./templates/pages/*.jade')
       .pipe(jade({ pretty: true }))
-      .pipe(gulp.dest('../build/debug/views'));
+      .pipe(gulp.dest(targetDir + '/views'));
 });
 
 gulp.task('less', function () {
@@ -17,7 +23,7 @@ gulp.task('less', function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest('../build/debug/style'));
+    .pipe(gulp.dest(targetDir + '/style'));
 });
 
 // Default Task
