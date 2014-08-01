@@ -19,7 +19,7 @@ namespace Audition.Chromium
 
         public ChromiumControl(Logger log)
         {
-            var address = AddInternalDomain("index.html");
+            var address = AddInternalDomain("views/index.html");
             this.log = log;
             CEF.Initialize(new Settings());
             Dock = DockStyle.Fill;
@@ -29,7 +29,7 @@ namespace Audition.Chromium
                                              })
                           {
                               Dock = DockStyle.Fill,
-                              RequestHandler = new InterceptingRequestHandler(InternalDomain, new OwinServer(new PhysicalFileSystem("dist")).Request)
+                              RequestHandler = new InterceptingRequestHandler(InternalDomain, new OwinServer(new PhysicalFileSystem("ui")).Request)
                           };
 
             webView.PropertyChanged += (sender, args) =>
