@@ -1,19 +1,17 @@
 include ../components/template
 
 mixin dayOfWeekSelector()
-	.col-sm-2
-		select.form-control
-			option Mon
-			option Tue
-			option Wed
-			option Thu
-			option Fri
-			option Sat
-			option Sun
+	select.form-control.small-input
+		option Mon
+		option Tue
+		option Wed
+		option Thu
+		option Fri
+		option Sat
+		option Sun
 
 mixin textInput(content)
-	.col-sm-2
-		input.form-control(value=content)
+	input.form-control.small-input(value=content)
 
     
 +page('Sign up')
@@ -24,18 +22,25 @@ mixin textInput(content)
 			fieldset
 				legend.vertical-space Find journals for the period...
 				.form-group
-					+textInput('5/4/2013')
-					label.col-sm-1.control-label To
-					+textInput('4/4/2013')
-				legend.vertical-space posted between...
+					.col-sm-12
+						.well.inline-block
+							+textInput('5/4/2013')
+							label.control-label.between-label to
+							+textInput('4/4/2013')
+							
+				legend.vertical-space posted outside...
 				.form-group
-					+dayOfWeekSelector()
-					label.col-sm-1.control-label to
-					+dayOfWeekSelector()
-					.col-sm-1
-					+textInput('08:00')
-					label.col-sm-1.control-label to
-					+textInput('18:00')
+					.col-sm-6
+						.well.inline-block
+							+dayOfWeekSelector()
+							label.control-label.between-label to
+							+dayOfWeekSelector()
+					.col-sm-6
+						.well.inline-block
+							+textInput('08:00')
+							label.control-label.between-label to
+							+textInput('18:00')
+						
 				hr.vertical-space
 				.form-group
 					div(class="col-sm-4")

@@ -49,6 +49,7 @@
     <None Include="package.json" />
     <None Include="README.md" />
     <None Include="style\bootswatch.less" />
+    <None Include="style\form-ranges.less" />
     <None Include="style\jumbotron.less" />
     <None Include="style\logo.less" />
     <None Include="style\style.less" />
