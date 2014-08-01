@@ -46,6 +46,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="gulpfile.js" />
+    <Content Include="images\sitelogo.svg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />

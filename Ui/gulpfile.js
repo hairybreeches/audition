@@ -26,5 +26,10 @@ gulp.task('less', function () {
     .pipe(gulp.dest(targetDir + '/style'));
 });
 
+gulp.task('images', function () {
+    return gulp.src('images/*')
+      .pipe(gulp.dest(targetDir + '/images'));
+});
+
 // Default Task
-gulp.task('default', ['templates', 'less']);
+gulp.task('default', ['templates', 'less', 'images']);
