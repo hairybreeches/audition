@@ -95,7 +95,6 @@
     <None Include="style\_flatstrap\utilities.less" />
     <None Include="style\_flatstrap\variables.less" />
     <None Include="style\_flatstrap\wells.less" />
-    <None Include="templates\components\analytics.jade" />
     <None Include="templates\components\footer.jade" />
     <None Include="templates\components\head.jade" />
     <None Include="templates\components\navbar.jade" />
