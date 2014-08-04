@@ -12,7 +12,7 @@ namespace Audition
             
             Text = "Audition";
             Icon = Resources.AuditionIcon;
-            Size = new Size(820, 565);
+            Size = new Size(450, 450);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
         }
