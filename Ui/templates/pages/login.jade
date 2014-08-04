@@ -1,0 +1,31 @@
+include ../components/template
+
++page('Login')
+	div.container
+		form.form-horizontal(action="search", method="post")
+			fieldset
+				legend.vertical-space Login to accounts system
+				.form-group
+					label.col-sm-2.control-label Accounts system
+					.col-sm-10
+						select.form-control
+							option SAP
+							option Sage Line 50
+							option Sage Line 200
+				.form-group
+					label.col-sm-2.control-label Application host
+					.col-sm-10
+						input.form-control(type="text" value="acme-sap-host-1")
+						
+				.form-group
+					label.col-sm-2.control-label User ID
+					.col-sm-10
+						input.form-control(type="text" value="2743")
+				.form-group
+					label.col-sm-2.control-label Password
+					.col-sm-10
+						input.form-control(type="password" value="passw0rd")
+				hr.vertical-space
+				.form-group
+					div(class="col-sm-4")
+						button(type="submit" class="btn btn-primary") Login &raquo;
