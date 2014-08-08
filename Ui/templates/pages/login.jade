@@ -1,5 +1,6 @@
 include ../components/template
 include ../components/sap-login
+include ../components/xero-login
 
 
 mixin login-form(system)
@@ -26,4 +27,7 @@ mixin login-form(system)
 							option(value="xero") Xero
 		+login-form('sap')
 			+sap-login()
+		+login-form('xero')
+			+xero-login()
+
 				
