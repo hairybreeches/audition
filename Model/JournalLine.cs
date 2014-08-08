@@ -1,4 +1,6 @@
-﻿namespace Model
+﻿using System;
+
+namespace Model
 {
     public class JournalLine
     {
@@ -14,5 +16,10 @@
         public string AccountName { get; private set; }        
         public JournalType JournalType { get; private set; }
         public decimal Amount { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Join(" ", JournalType, AccountCode, Amount);
+        }
     }
 }
