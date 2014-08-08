@@ -31,5 +31,10 @@ gulp.task('images', function () {
       .pipe(gulp.dest(targetDir + '/images'));
 });
 
+gulp.task('js', function() {
+    return gulp.src('javascript/*.js')
+        .pipe(gulp.dest(targetDir + '/scripts'));
+});
+
 // Default Task
-gulp.task('default', ['templates', 'less', 'images']);
+gulp.task('default', ['templates', 'less', 'images', 'js']);
