@@ -12,7 +12,9 @@ namespace Audition.Controllers
             this.repositoryFactory = repositoryFactory;
         }
 
-        public void PostBeginAuthenticate()
+        [HttpPost]
+        [Route("api/xero/login")]
+        public void BeginAuthenticate()
         {
             repositoryFactory.InitialiseAuthenticationRequest();
         }

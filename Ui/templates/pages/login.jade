@@ -3,8 +3,8 @@ include ../components/sap-login
 include ../components/xero-login
 
 
-mixin login-form(system)
-	form.form-horizontal(action="search", method="post", data-bind="visible: system() === '#{system}'")
+mixin login-form(system, url)
+	form.form-horizontal(action=url, method="post", data-bind="visible: system() === '#{system}'")
 		block
 		hr.vertical-space
 		.form-group
@@ -27,7 +27,7 @@ mixin login-form(system)
 							option(value="xero") Xero
 		+login-form('sap')
 			+sap-login()
-		+login-form('xero')
+		+login-form('xero', "/api/xero/login")
 			+xero-login()
 
 				
