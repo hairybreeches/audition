@@ -1,4 +1,5 @@
 include ../components/template
+include ../components/sap-login
 
 +page('Login')
 	div.container
@@ -12,19 +13,8 @@ include ../components/template
 							option SAP
 							option Sage Line 50
 							option Sage Line 200
-				.form-group
-					label.col-sm-2.control-label Application host
-					.col-sm-10
-						input.form-control(type="text" value="acme-sap-host-1")
-						
-				.form-group
-					label.col-sm-2.control-label User ID
-					.col-sm-10
-						input.form-control(type="text" value="2743")
-				.form-group
-					label.col-sm-2.control-label Password
-					.col-sm-10
-						input.form-control(type="password" value="passw0rd")
+							option Xero
+				+sap-login
 				hr.vertical-space
 				.form-group
 					div(class="col-sm-4")
