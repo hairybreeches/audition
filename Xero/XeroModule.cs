@@ -7,7 +7,7 @@ namespace Xero
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>();
+            builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>().SingleInstance().AsSelf();
             builder.RegisterType<XeroJournalSearcher>().As<IJournalSearcher>();
         }
     }

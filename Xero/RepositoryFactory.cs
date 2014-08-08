@@ -7,42 +7,42 @@ using XeroApi.OAuth;
 
 namespace Xero
 {
-    internal class RepositoryFactory : IRepositoryFactory
+    public class RepositoryFactory : IRepositoryFactory
     {
+        private readonly XeroApiPublicSession xeroApiPublicSession;
         private const string UserAgent = "Audition";
         private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
         private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
 
-        public IFullRepository CreateRepository()
+
+        public RepositoryFactory()
         {
-            var consumerSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
+            xeroApiPublicSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
                 new InMemoryTokenRepository())
             {
                 MessageLogger = new DebugMessageLogger()
             };
+        }        
 
-            consumerSession.GetRequestToken();
-
-            LaunchAuthenticationWindow(consumerSession);
-
-            var verificationCode = GetInputCode();
-
-            consumerSession.ExchangeRequestTokenForAccessToken(verificationCode);
-
-            // Wrap the authenticated consumerSession in the repository...
-            return new RepositoryWrapper(new Repository(consumerSession));
+        public IFullRepository CreateRepository()
+        {           
+            return new RepositoryWrapper(new Repository(xeroApiPublicSession));
         }
 
-        private static string GetInputCode()
+        public void CompleteAuthenticationRequest(string verificationCode)
         {
-            Console.WriteLine("Please input the code you were given in Xero:");
-            var verificationCode = Console.ReadLine();
-            return verificationCode;
+            xeroApiPublicSession.ExchangeRequestTokenForAccessToken(verificationCode);
         }
 
-        private static void LaunchAuthenticationWindow(XeroApiPublicSession consumerSession)
+        public void InitialiseAuthenticationRequest()
         {
-            var authorisationUrl = consumerSession.GetUserAuthorizationUrl();
+            xeroApiPublicSession.GetRequestToken();
+            LaunchAuthenticationWindow();
+        }       
+
+        private void LaunchAuthenticationWindow()
+        {
+            var authorisationUrl = xeroApiPublicSession.GetUserAuthorizationUrl();
             Process.Start(authorisationUrl);
         }
     }

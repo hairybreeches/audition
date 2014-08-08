@@ -107,6 +107,7 @@
     <Compile Include="Chromium\InterceptingRequestHandler.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\XeroLoginController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
