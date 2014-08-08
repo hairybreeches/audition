@@ -1,4 +1,4 @@
-mixin page(title)
+mixin page(title, pagescript)
 	doctype html
 	html(lang="en")
 		include head
@@ -11,4 +11,5 @@ mixin page(title)
 			block
 
 			include scripts
-
+			if pagescript
+				script(src="../scripts/" + pagescript + ".js")
