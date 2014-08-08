@@ -47,6 +47,7 @@
     <Content Include="javascript\bootstrap.min.js" />
     <Content Include="javascript\jquery.min.js" />
     <Content Include="javascript\knockout-3.1.0.js" />
+    <Content Include="javascript\login.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
