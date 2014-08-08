@@ -1,7 +1,17 @@
 include ../components/template
 include ../components/sap-login
 
-+page('Login')
+
+mixin login-form(system)
+	form.form-horizontal(action="search", method="post", data-bind="visible: system() === '#{system}'")
+		block
+		hr.vertical-space
+		.form-group
+			div(class="col-sm-4")
+				button(type="submit" class="btn btn-primary") Login &raquo;
+
+
++page('Login', 'login')
 	div.container
 		form.form-horizontal(action="search", method="post")
 			fieldset
@@ -9,13 +19,11 @@ include ../components/sap-login
 				.form-group
 					label.col-sm-2.control-label Accounts system
 					.col-sm-10
-						select.form-control
-							option SAP
-							option Sage Line 50
-							option Sage Line 200
-							option Xero
-				+sap-login
-				hr.vertical-space
-				.form-group
-					div(class="col-sm-4")
-						button(type="submit" class="btn btn-primary") Login &raquo;
+						select.form-control(data-bind="value: system")
+							option(value="sap") SAP
+							option(value="sage50") Sage Line 50
+							option(value="sage200") Sage Line 200
+							option(value="xero") Xero
+		+login-form('sap')
+			+sap-login()
+				
