@@ -99,7 +99,7 @@ namespace Tests
         {
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
-                new DateTime());
+                new DateTime(), Enumerable.Empty<JournalLine>());
         }
 
         private IJournalSearcher GetJournalSearcher(params Journal[] journals)
@@ -116,7 +116,7 @@ namespace Tests
             var dayOfMonth = 6 + (int) day; //the 6th of July 2014 was a Sunday, Sunday is the 0th element of the enum.
             var journal = new Journal(Guid.NewGuid(), 
                 new DateTime(2014, 7, dayOfMonth),
-                new DateTime());
+                new DateTime(), Enumerable.Empty<JournalLine>());
 
             Assert.AreEqual(day, journal.Created.DayOfWeek,
                 "GetJournalPostedOn should return a journal posted on the right day of the week");
