@@ -99,6 +99,7 @@
     <None Include="style\_flatstrap\variables.less" />
     <None Include="style\_flatstrap\wells.less" />
     <None Include="templates\components\head.jade" />
+    <None Include="templates\components\sap-login.jade" />
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\template.jade" />
     <None Include="templates\pages\export.jade" />
