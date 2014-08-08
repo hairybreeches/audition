@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JournalExtensions.cs" />
+    <Compile Include="JournalTests.cs" />
     <Compile Include="XeroJournalSearcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

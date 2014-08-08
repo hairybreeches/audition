@@ -1,0 +1,24 @@
+using System;
+using System.Runtime.Serialization;
+
+namespace Model
+{
+    public class InvalidJournalException : Exception
+    {
+        public InvalidJournalException()
+        {
+        }
+
+        public InvalidJournalException(string message) : base(message)
+        {
+        }
+
+        public InvalidJournalException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected InvalidJournalException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+}
