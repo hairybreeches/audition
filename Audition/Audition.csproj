@@ -133,7 +133,7 @@
       <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ui\Ui.csproj">
-      <Project>{49CB781A-5A5A-4D6A-8F19-B8D3C0045597}</Project>
+      <Project>{49cb781a-5a5a-4d6a-8f19-b8d3c0045597}</Project>
       <Name>Ui</Name>
     </ProjectReference>
     <ProjectReference Include="..\Xero\Xero.csproj">
