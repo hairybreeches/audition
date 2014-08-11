@@ -12,14 +12,12 @@ namespace Audition.Chromium
     [ComVisible(true)]
     public class ChromiumControl : UserControl, IMenuHandler
     {
-        private const string InternalDomain = WebConstants.InternalDomain;
-
         private readonly Logger log;
         private readonly WebView webView;
 
         public ChromiumControl(Logger log, IRequestHandler requestHandler)
         {
-            var address = AddInternalDomain("views/login.html");
+            var address = WebConstants.GetViewUrl("login.html");
             this.log = log;
             CEF.Initialize(new Settings());
             Dock = DockStyle.Fill;
@@ -54,11 +52,6 @@ namespace Audition.Chromium
             webView.MenuHandler = this;
         }
 
-        private string AddInternalDomain(string address)
-        {
-            return string.Format(@"{0}/{1}", InternalDomain, address);
-        }
-
         private void LogConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
             log.Warn("{0} at {1}:{2}", e.Message, new Uri(e.Source).LocalPath.TrimStart('/'), e.Line);
@@ -88,7 +81,7 @@ namespace Audition.Chromium
         /// <param name="url"></param>
         public void NavigateToUrl(string url)
         {
-            webView.Load(AddInternalDomain(url));
+            webView.Load(WebConstants.AddInternalDomain(url));
         }
 
         protected override void Dispose(bool disposing)
