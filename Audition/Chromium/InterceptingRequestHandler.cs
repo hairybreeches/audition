@@ -36,50 +36,67 @@ namespace Audition.Chromium
             var request = requestResponse.Request;
             if (request.Url.StartsWith(internalDomain))
             {
-                HttpResponseMessage response = GetResponse(request);
-
-                //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
-                var responseContent = response.Content.ReadAsStreamAsync().Result;
-
-                var responseHeaders = response.Headers.ToDictionary(x => x.Key, x => x.Value.First());
-
-                var responseMime = response.IsSuccessStatusCode
-                    ? response.Content.Headers.ContentType.MediaType
-                    : "text/html"; //CEFSharp demands a MimeType of some kind...
-
-                requestResponse.RespondWith(responseContent, responseMime, response.ReasonPhrase, (int)response.StatusCode, responseHeaders);
-
+                var response = GetResponse(request.Url, request.Method, request.Body);
+                Respond(requestResponse, response);
             }
 
             return false;
         }
 
-        private HttpResponseMessage GetResponse(IRequest request)
+        private static void Respond(IRequestResponse requestResponse, HttpResponseMessage response)
         {
-            var requestUri = request.Url.Replace(internalDomain, String.Empty);
+            //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
+            var responseContent = response.Content.ReadAsStreamAsync().Result;
 
-            var method = request.Method.ToUpper();
-            var content = CreateHttpContent(request);
+            var responseHeaders = response.Headers.ToDictionary(x => x.Key, x => x.Value.First());
+
+            var responseMime = response.IsSuccessStatusCode
+                ? response.Content.Headers.ContentType.MediaType
+                : "text/html"; //CEFSharp demands a MimeType of some kind...
+
+            requestResponse.RespondWith(responseContent, responseMime, response.ReasonPhrase, (int) response.StatusCode,
+                responseHeaders);
+        }
+
+        //todo: 302 redirects should just work!
+        private HttpResponseMessage GetResponse(string requestUrl, string requestMethod, string requestContent)
+        {
+            var response = GetImmediateResponse(requestUrl, requestMethod, requestContent);
+
+            if (response.StatusCode == HttpStatusCode.Redirect)
+            {
+                return GetResponse(response.Headers.Location.ToString(), "GET", "");
+            }
+
+            return response;
+        }
+
+        private HttpResponseMessage GetImmediateResponse(string requestUrl, string requestMethod, string requestContent)
+        {
+            var uri = requestUrl.Replace(internalDomain, String.Empty);
+
+            var method = requestMethod.ToUpper();
+            var content = CreateHttpContent(requestContent);
 
             switch (method)
             {
                 case "GET":
-                    return server.GetRequest(requestUri);
+                    return server.GetRequest(uri);
                 case "DELETE":
-                    return server.DeleteRequest(requestUri);
+                    return server.DeleteRequest(uri);
                 case "PUT":
-                    return server.PutRequest(requestUri, content);
+                    return server.PutRequest(uri, content);
                 case "POST":
-                    return server.PostRequest(requestUri, content);
+                    return server.PostRequest(uri, content);
                 default:
                     throw new InvalidHttpMethod(method);
             }
             
         }
 
-        private static StringContent CreateHttpContent(IRequest request)
+        private static StringContent CreateHttpContent(string requestContent)
         {
-            return new StringContent(request.Body ?? "");
+            return new StringContent(requestContent ?? "");
         }
 
         public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
