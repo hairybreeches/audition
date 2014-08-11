@@ -30,18 +30,16 @@ namespace Audition.Chromium
                               RequestHandler = requestHandler
                           };
 
+#if DEBUG
             webView.PropertyChanged += (sender, args) =>
-                                         {
-                                             webView.Address = address;
-
-                                            #if DEBUG
+                                         {                                                                                         
                                              if (args.PropertyName == "IsBrowserInitialized")
                                              {
 
                                                  webView.ShowDevTools();
-                                             }
-                                            #endif
+                                             }                                            
                                          };
+#endif
             webView.ConsoleMessage += LogConsoleMessage;
 
             // Without this:
