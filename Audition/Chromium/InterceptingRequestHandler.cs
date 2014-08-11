@@ -47,7 +47,7 @@ namespace Audition.Chromium
                     ? response.Content.Headers.ContentType.MediaType
                     : "text/html"; //CEFSharp demands a MimeType of some kind...
 
-                requestResponse.RespondWith(responseContent, responseMime, String.Empty, (int) response.StatusCode, responseHeaders);
+                requestResponse.RespondWith(responseContent, responseMime, response.ReasonPhrase, (int)response.StatusCode, responseHeaders);
 
             }
 
