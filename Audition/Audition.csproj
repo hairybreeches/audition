@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Chromium\ChromiumModule.cs" />
     <Compile Include="Chromium\InterceptingRequestHandler.cs" />
+    <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\XeroLoginController.cs" />

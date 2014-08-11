@@ -10,9 +10,9 @@ namespace Audition.Chromium
     {
 
         private readonly string internalDomain;
-        private readonly Func<string, HttpResponseMessage> server;
+        private readonly OwinServer server;
 
-        public InterceptingRequestHandler(string internalDomain, Func<string, HttpResponseMessage> server)
+        public InterceptingRequestHandler(string internalDomain, OwinServer server)
         {
             this.internalDomain = internalDomain;
             this.server = server;
@@ -33,11 +33,10 @@ namespace Audition.Chromium
             * Any modifications to |request| will be observed. If the URL in |request| is changed and |redirectUrl| is also set,
             * the URL in |request| will be used.
             */
-            if (requestResponse.Request.Url.StartsWith(internalDomain))
+            var request = requestResponse.Request;
+            if (request.Url.StartsWith(internalDomain))
             {
-                var requestUri = requestResponse.Request.Url.Replace(internalDomain, String.Empty);
-
-                HttpResponseMessage response = server(requestUri);
+                HttpResponseMessage response = GetResponse(request);
 
                 //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
                 var responseContent = response.Content.ReadAsStreamAsync().Result;
@@ -53,6 +52,34 @@ namespace Audition.Chromium
             }
 
             return false;
+        }
+
+        private HttpResponseMessage GetResponse(IRequest request)
+        {
+            var requestUri = request.Url.Replace(internalDomain, String.Empty);
+
+            var method = request.Method.ToUpper();
+            var content = CreateHttpContent(request);
+
+            switch (method)
+            {
+                case "GET":
+                    return server.GetRequest(requestUri);
+                case "DELETE":
+                    return server.DeleteRequest(requestUri);
+                case "PUT":
+                    return server.PutRequest(requestUri, content);
+                case "POST":
+                    return server.PostRequest(requestUri, content);
+                default:
+                    throw new InvalidHttpMethod(method);
+            }
+            
+        }
+
+        private static StringContent CreateHttpContent(IRequest request)
+        {
+            return new StringContent(request.Body ?? "");
         }
 
         public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
