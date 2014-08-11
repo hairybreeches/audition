@@ -45,9 +45,24 @@ namespace Audition.Chromium
             return config;
         }
 
-        public HttpResponseMessage Request(string uri)
-        {
+        public HttpResponseMessage GetRequest(string uri)
+        {            
             return owinTestServer.HttpClient.GetAsync(uri).Result;
+        }
+        
+        public HttpResponseMessage PostRequest(string uri, HttpContent content)
+        {
+            return owinTestServer.HttpClient.PostAsync(uri, content).Result;
+        }
+
+        public HttpResponseMessage PutRequest(string uri, HttpContent content)
+        {
+            return owinTestServer.HttpClient.PutAsync(uri, content).Result;
+        }
+        
+        public HttpResponseMessage DeleteRequest(string uri)
+        {
+            return owinTestServer.HttpClient.DeleteAsync(uri).Result;
         }
     }
 }
