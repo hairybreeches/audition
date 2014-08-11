@@ -34,12 +34,14 @@ namespace Audition.Chromium
                                          {
                                              webView.Address = address;
 
-                                            if (args.PropertyName == "IsBrowserInitialized" && Keyboard.IsKeyDown(Key.LeftShift))
-                                            {
-                                                
-                                                webView.ShowDevTools();
-                                            }
-                                        };
+                                            #if DEBUG
+                                             if (args.PropertyName == "IsBrowserInitialized")
+                                             {
+
+                                                 webView.ShowDevTools();
+                                             }
+                                            #endif
+                                         };
             webView.ConsoleMessage += LogConsoleMessage;
 
             // Without this:
