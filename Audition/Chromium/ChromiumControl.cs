@@ -12,7 +12,7 @@ namespace Audition.Chromium
     [ComVisible(true)]
     public class ChromiumControl : UserControl, IMenuHandler
     {
-        private const string InternalDomain = @"http://localhost:1337";
+        private const string InternalDomain = WebConstants.InternalDomain;
 
         private readonly Logger log;
         private readonly WebView webView;
@@ -29,7 +29,7 @@ namespace Audition.Chromium
                                              })
                           {
                               Dock = DockStyle.Fill,
-                              RequestHandler = new InterceptingRequestHandler(InternalDomain, owinServer)
+                              RequestHandler = new InterceptingRequestHandler(owinServer)
                           };
 
             webView.PropertyChanged += (sender, args) =>
