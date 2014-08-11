@@ -108,6 +108,7 @@
     <None Include="templates\pages\export.jade" />
     <None Include="templates\pages\login.jade" />
     <None Include="templates\pages\search.jade" />
+    <None Include="templates\pages\xerocompletelogin.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
