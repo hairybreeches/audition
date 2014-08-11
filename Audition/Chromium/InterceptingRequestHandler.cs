@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using CefSharp;
 
 namespace Audition.Chromium
@@ -33,10 +36,10 @@ namespace Audition.Chromium
             * Any modifications to |request| will be observed. If the URL in |request| is changed and |redirectUrl| is also set,
             * the URL in |request| will be used.
             */
-            var request = requestResponse.Request;
+            var request = requestResponse.Request;            
             if (request.Url.StartsWith(internalDomain))
             {
-                var response = GetResponse(request.Url, request.Method, request.Body);
+                var response = GetResponse(request.Url, request.Method, request.Body, request.GetHeaders());
                 Respond(requestResponse, response);
             }
 
@@ -59,44 +62,53 @@ namespace Audition.Chromium
         }
 
         //todo: 302 redirects should just work!
-        private HttpResponseMessage GetResponse(string requestUrl, string requestMethod, string requestContent)
+        private HttpResponseMessage GetResponse(string requestUrl, string requestMethod, string requestContent, IDictionary<string, string> headers)
         {
-            var response = GetImmediateResponse(requestUrl, requestMethod, requestContent);
+            var response = GetImmediateResponse(requestUrl, requestMethod, requestContent, headers);
 
             if (response.StatusCode == HttpStatusCode.Redirect)
             {
-                return GetResponse(response.Headers.Location.ToString(), "GET", "");
+                return GetResponse(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>());
             }
 
             return response;
         }
 
-        private HttpResponseMessage GetImmediateResponse(string requestUrl, string requestMethod, string requestContent)
+        private HttpResponseMessage GetImmediateResponse(string requestUrl, string requestMethod, string requestContent, IDictionary<string, string> headers)
         {
             var uri = requestUrl.Replace(internalDomain, String.Empty);
 
-            var method = requestMethod.ToUpper();
-            var content = CreateHttpContent(requestContent);
+            var content = CreateHttpContent(requestContent, headers);
 
-            switch (method)
+
+            var method = new HttpMethod(requestMethod);
+
+            var request = new HttpRequestMessage(method, uri)
             {
-                case "GET":
-                    return server.GetRequest(uri);
-                case "DELETE":
-                    return server.DeleteRequest(uri);
-                case "PUT":
-                    return server.PutRequest(uri, content);
-                case "POST":
-                    return server.PostRequest(uri, content);
-                default:
-                    throw new InvalidHttpMethod(method);
+                Content = content,
+            };
+
+            foreach (var pair in headers)
+            {
+                request.Headers.TryAddWithoutValidation(pair.Key, pair.Value);
             }
+            
+            return server.ExecuteRequest(request);
+            
             
         }
 
-        private static StringContent CreateHttpContent(string requestContent)
+        private static StringContent CreateHttpContent(string requestContent, IDictionary<string, string> headers)
         {
-            return new StringContent(requestContent ?? "");
+            var content = requestContent ?? "";
+            if (headers.ContainsKey("Content-Type"))
+            {                
+                return new StringContent(content, Encoding.UTF8, headers["Content-Type"]);
+            }
+            else
+            {
+                return new StringContent(content);
+            }
         }
 
         public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
