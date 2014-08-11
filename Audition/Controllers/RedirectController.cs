@@ -8,7 +8,7 @@ namespace Audition.Controllers
     {
         protected RedirectResult RedirectToView(string viewName)
         {
-            return base.Redirect(WebConstants.GetViewUrl(viewName));
+            return base.Redirect(Routing.GetViewUrl(viewName));
         }
     }
 }
