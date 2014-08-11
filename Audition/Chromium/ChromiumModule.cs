@@ -2,6 +2,7 @@
 using System.Web.Http.Dependencies;
 using Autofac;
 using Autofac.Integration.WebApi;
+using CefSharp;
 using Microsoft.Owin.FileSystems;
 using NLog;
 
@@ -14,6 +15,7 @@ namespace Audition.Chromium
             builder.RegisterType<AppForm>();
             builder.RegisterType<ChromiumControl>();
             builder.RegisterType<OwinServer>();
+            builder.RegisterType<InterceptingRequestHandler>().As<IRequestHandler>();
             builder.Register(_ => new PhysicalFileSystem("ui")).As<IFileSystem>();
             builder.RegisterType<AutofacWebApiDependencyResolver>().As<IDependencyResolver>();
             builder.RegisterType<LogFactory>().SingleInstance();

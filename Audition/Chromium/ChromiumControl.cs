@@ -17,7 +17,7 @@ namespace Audition.Chromium
         private readonly Logger log;
         private readonly WebView webView;
 
-        public ChromiumControl(Logger log, OwinServer owinServer)
+        public ChromiumControl(Logger log, IRequestHandler requestHandler)
         {
             var address = AddInternalDomain("views/login.html");
             this.log = log;
@@ -29,7 +29,7 @@ namespace Audition.Chromium
                                              })
                           {
                               Dock = DockStyle.Fill,
-                              RequestHandler = new InterceptingRequestHandler(owinServer)
+                              RequestHandler = requestHandler
                           };
 
             webView.PropertyChanged += (sender, args) =>
