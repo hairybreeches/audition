@@ -14,7 +14,7 @@ namespace Audition.Chromium
 
         public InterceptingRequestHandler(OwinServer server)
         {
-            this.internalDomain = WebConstants.InternalDomain;
+            this.internalDomain = Routing.InternalDomain;
             this.server = server;
         }
 

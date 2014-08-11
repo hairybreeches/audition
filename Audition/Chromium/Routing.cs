@@ -2,7 +2,7 @@
 
 namespace Audition.Chromium
 {
-    public static class WebConstants
+    public static class Routing
     {
         public const string InternalDomain = @"http://localhost:1337";
 

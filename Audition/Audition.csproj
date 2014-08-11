@@ -111,7 +111,7 @@
     <Compile Include="Chromium\InterceptingRequestHandler.cs" />
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
-    <Compile Include="Chromium\WebConstants.cs" />
+    <Compile Include="Chromium\Routing.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\XeroLoginController.cs" />

@@ -17,7 +17,7 @@ namespace Audition.Chromium
 
         public ChromiumControl(Logger log, IRequestHandler requestHandler)
         {
-            var address = WebConstants.GetViewUrl("login.html");
+            var address = Routing.GetViewUrl("login.html");
             this.log = log;
             CEF.Initialize(new Settings());
             Dock = DockStyle.Fill;
@@ -81,7 +81,7 @@ namespace Audition.Chromium
         /// <param name="url"></param>
         public void NavigateToUrl(string url)
         {
-            webView.Load(WebConstants.AddInternalDomain(url));
+            webView.Load(Routing.AddInternalDomain(url));
         }
 
         protected override void Dispose(bool disposing)
