@@ -12,9 +12,9 @@ namespace Audition.Chromium
         private readonly string internalDomain;
         private readonly OwinServer server;
 
-        public InterceptingRequestHandler(string internalDomain, OwinServer server)
+        public InterceptingRequestHandler(OwinServer server)
         {
-            this.internalDomain = internalDomain;
+            this.internalDomain = WebConstants.InternalDomain;
             this.server = server;
         }
 
