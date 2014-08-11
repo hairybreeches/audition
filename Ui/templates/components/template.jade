@@ -6,10 +6,10 @@ mixin page(title, pagescript)
 		body
 			div.container
 				h1= title
-					img.brand-logo.pull-right(src="../images/A.svg")
+					img.brand-logo.pull-right(src="/images/A.svg")
 
 			block
 
 			include scripts
 			if pagescript
-				script(src="../scripts/" + pagescript + ".js")
+				script(src="/scripts/" + pagescript + ".js")
