@@ -1,6 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
+using System.Web.Http.Dependencies;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin.Testing;
@@ -8,12 +10,12 @@ using Owin;
 
 namespace Audition.Chromium
 {
-    internal class OwinServer
+    public class OwinServer
     {
         private readonly IFileSystem fileSystem;
         private readonly TestServer owinTestServer;
 
-        public OwinServer(IFileSystem fileSystem)
+        public OwinServer(IFileSystem fileSystem, IDependencyResolver dependencyResolver)
         {
             this.fileSystem = fileSystem;
             if (fileSystem == null)
@@ -21,7 +23,7 @@ namespace Audition.Chromium
 
             owinTestServer = TestServer.Create(app => app
                 .UseFileServer(GetFileOptions())
-                .UseWebApi(GetApiOptions()));
+                .UseWebApi(GetApiOptions(dependencyResolver)));
 
         }
 
@@ -35,14 +37,11 @@ namespace Audition.Chromium
             };
         }
 
-        private static HttpConfiguration GetApiOptions()
+        private static HttpConfiguration GetApiOptions(IDependencyResolver dependencyResolver)
         {
             var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                name: "Api",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new {id = RouteParameter.Optional}
-                );
+            config.MapHttpAttributeRoutes();
+            config.DependencyResolver = dependencyResolver;
             return config;
         }
 
