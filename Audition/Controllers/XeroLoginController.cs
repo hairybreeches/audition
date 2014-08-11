@@ -23,7 +23,7 @@ namespace Audition.Controllers
         
         [HttpPost]
         [Route("api/xero/completelogin")]
-        public IHttpActionResult PostCompleteAuthenticationRequest(string verificationCode)
+        public IHttpActionResult PostCompleteAuthenticationRequest([FromBody]string verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode);
             return RedirectToView("search.html");
