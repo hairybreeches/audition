@@ -1,9 +1,10 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Results;
 using Xero;
 
 namespace Audition.Controllers
 {
-    public class XeroLoginController : ApiController
+    public class XeroLoginController : RedirectController
     {
         private readonly IRepositoryFactory repositoryFactory;
 
@@ -14,14 +15,18 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route("api/xero/login")]
-        public void BeginAuthenticate()
+        public IHttpActionResult BeginAuthenticate()
         {
             repositoryFactory.InitialiseAuthenticationRequest();
+            return RedirectToView("xerocompletelogin.html");
         }
         
-        public void PostCompleteAuthenticationRequest(string verificationCode)
+        [HttpPost]
+        [Route("api/xero/completelogin")]
+        public IHttpActionResult PostCompleteAuthenticationRequest(string verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode);
+            return RedirectToView("search.html");
         }
     }
 }
