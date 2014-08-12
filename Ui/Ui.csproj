@@ -46,11 +46,13 @@
     <Content Include="images\A.svg" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\login.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
+    <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="style\bootswatch.less" />
     <None Include="style\form-ranges.less" />
