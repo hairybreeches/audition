@@ -51,6 +51,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\search.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />

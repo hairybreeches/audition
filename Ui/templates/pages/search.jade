@@ -1,38 +1,38 @@
 include ../components/template
 
-mixin dayOfWeekSelector()
-	select.form-control.small-input
+mixin dayOfWeekSelector(bindTo)
+	select.form-control.small-input(data-bind="value: " + bindTo)
 		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
 			option= day
 
-mixin textInput()
-	input.form-control.small-input()
+mixin textInput(bindTo)
+	input.form-control.small-input(data-bind="value: " + bindTo)
 
     
-+page('Search')
++page('Search', 'search')
 	div.container
 		form.form-horizontal(action="search", method="post")
 			fieldset
 				legend.vertical-space Find journals for the period...
-				.form-group
+				.form-group(data-bind="with: Period")
 					.col-sm-12
 						.well.inline-block
-							+textInput()
+							+textInput('From')
 							label.control-label.between-label to
-							+textInput()
+							+textInput('To')
 							
 				legend.vertical-space posted outside...
-				.form-group
+				.form-group(data-bind="with: TimeFrame")
 					.col-sm-6
 						.well.inline-block
-							+dayOfWeekSelector()
+							+dayOfWeekSelector('FromDay')
 							label.control-label.between-label to
-							+dayOfWeekSelector()
+							+dayOfWeekSelector('ToDay')
 					.col-sm-6
 						.well.inline-block
-							+textInput()
+							+textInput('FromTime')
 							label.control-label.between-label to
-							+textInput()
+							+textInput('ToTime')
 						
 				hr.vertical-space
 				.form-group
