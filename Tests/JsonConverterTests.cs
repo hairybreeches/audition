@@ -2,6 +2,7 @@
 using Model;
 using NodaTime;
 using NUnit.Framework;
+using Period = Model.Period;
 
 namespace Tests
 {
@@ -14,7 +15,7 @@ namespace Tests
             var parser = new JsonConverter<SearchWindow>();
             var result = parser.ConvertFrom(@"{
             Period: {
-                From: '5/4/2013',
+                From: '5/4/2012',
                 To: '4/4/2013'
             },
 
@@ -39,6 +40,17 @@ namespace Tests
                 ToTime: '18:00:00'
             }");
             Assert.AreEqual(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
+        }      
+        
+        [Test]
+        public void CanDeserializePeriod()
+        {
+            var parser = new JsonConverter<Period>();
+            var result = parser.ConvertFrom(@"{
+                From: '2012-4-5',
+                To: '2013-4-4'
+            }");
+            Assert.AreEqual(new Period(new DateTime(2012,4,5),new DateTime(2013, 4, 4) ), result);
         }
     }
 }

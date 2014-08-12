@@ -4,10 +4,10 @@ namespace Model
 {
     public class Period
     {
-        public Period(DateTime fromDate, DateTime to)
+        public Period(DateTime @from, DateTime to)
         {
             To = to;
-            From = fromDate;
+            From = @from;
         }
 
         public DateTime From { get; private set; }
@@ -16,6 +16,27 @@ namespace Model
         public override string ToString()
         {
             return String.Format("{0} to {1}", From, To);
+        }
+
+        protected bool Equals(Period other)
+        {
+            return From.Equals(other.From) && To.Equals(other.To);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Period) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (From.GetHashCode()*397) ^ To.GetHashCode();
+            }
         }
     }
 }
