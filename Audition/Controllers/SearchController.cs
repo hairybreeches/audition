@@ -8,7 +8,14 @@ namespace Audition.Controllers
 {
     public class SearchController : ApiController
     {
-        public IEnumerable<Journal> GetSearch()
+        private readonly IJournalSearcher searcher;
+
+        public SearchController(IJournalSearcher searcher)
+        {
+            this.searcher = searcher;
+        }
+
+        public IEnumerable<Journal> Search(SearchWindow searchWindow)
         {
             return Enumerable.Empty<Journal>();            
         }
