@@ -1,15 +1,12 @@
 include ../components/template
 
-mixin dayOfWeekSelector(dayToSelect)
+mixin dayOfWeekSelector()
 	select.form-control.small-input
-		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-			if(day === dayToSelect)
-				option(selected="selected")= day
-			else
-				option= day
+		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
+			option= day
 
-mixin textInput(content)
-	input.form-control.small-input(value=content)
+mixin textInput()
+	input.form-control.small-input()
 
     
 +page('Search')
@@ -20,9 +17,9 @@ mixin textInput(content)
 				.form-group
 					.col-sm-12
 						.well.inline-block
-							+textInput('5/4/2013')
+							+textInput()
 							label.control-label.between-label to
-							+textInput('4/4/2013')
+							+textInput()
 							
 				legend.vertical-space posted outside...
 				.form-group
@@ -30,12 +27,12 @@ mixin textInput(content)
 						.well.inline-block
 							+dayOfWeekSelector()
 							label.control-label.between-label to
-							+dayOfWeekSelector('Friday')
+							+dayOfWeekSelector()
 					.col-sm-6
 						.well.inline-block
-							+textInput('08:00')
+							+textInput()
 							label.control-label.between-label to
-							+textInput('18:00')
+							+textInput()
 						
 				hr.vertical-space
 				.form-group
