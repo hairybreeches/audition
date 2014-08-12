@@ -54,4 +54,5 @@ gulp.task('watch', function () {
 });
 
 // Default Task
-gulp.task('default', ['templates', 'less', 'images', 'js', 'express', 'watch']);
+gulp.task('build', ['templates', 'less', 'images', 'js']);
+gulp.task('default', ['build', 'express', 'watch']);
