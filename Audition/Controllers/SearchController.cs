@@ -15,6 +15,8 @@ namespace Audition.Controllers
             this.searcher = searcher;
         }
 
+        [HttpGet]
+        [Route("api/search")]
         public IEnumerable<Journal> Search(SearchWindow searchWindow)
         {
             return Enumerable.Empty<Journal>();            
