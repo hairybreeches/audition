@@ -12,5 +12,10 @@ namespace Model
 
         public DateTime From { get; private set; }
         public DateTime To { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0} to {1}", From, To);
+        }
     }
 }
