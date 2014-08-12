@@ -14,7 +14,7 @@
         },
         submit: function(data, e) {            
             e.preventDefault();
-            $.get('/api/search', data.input, function(output) {
+            $.get('/api/search', { SearchWindow: JSON.stringify(ko.mapping.toJS(data.input)) }, function(output) {
                 console.log(output);
             });
         },
