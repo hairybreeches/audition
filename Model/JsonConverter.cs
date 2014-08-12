@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using Newtonsoft.Json;
+using NodaTime.Serialization.JsonNet;
+using NodaTime.TimeZones;
 
 namespace Model
 {
@@ -19,9 +21,13 @@ namespace Model
         public override object ConvertFrom(ITypeDescriptorContext context,
             CultureInfo culture, object value)
         {            
+
+            
             if (value is string)
             {
-                return JsonConvert.DeserializeObject<T>((string) value);
+                var settings = new JsonSerializerSettings();
+                settings.ConfigureForNodaTime(new DateTimeZoneCache(new BclDateTimeZoneSource()));
+                return JsonConvert.DeserializeObject<T>((string) value, settings);
             }
             return base.ConvertFrom(context, culture, value);
         }
