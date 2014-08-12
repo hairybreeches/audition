@@ -21,5 +21,10 @@ namespace Model
         public DayOfWeek ToDay { get; private set; }
         public LocalTime FromTime { get; private set; }
         public LocalTime ToTime { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Format("From: {0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
+        }
     }
 }
