@@ -1,15 +1,15 @@
 ﻿var model = ko.mapping.fromJS({
         input: {
             Period: {
-                From: "5/4/2013",
-                To: "4/4/2013"
+                From: '2012-4-5',
+                To: '2013-4-4'                
             },
 
             TimeFrame: {
                 FromDay: "Monday",
                 ToDay: "Friday",
-                FromTime: "08:00",
-                ToTime: "18:00"
+                FromTime: "08:00:00",
+                ToTime: "18:00:00"
             }
         },
         submit: function(data, e) {            
