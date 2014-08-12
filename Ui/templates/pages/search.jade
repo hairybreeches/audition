@@ -1,14 +1,17 @@
 include ../components/template
 
-mixin dayOfWeekSelector()
+mixin dayOfWeekSelector(dayToSelect)
 	select.form-control.small-input
-		option Mon
-		option Tue
-		option Wed
-		option Thu
-		option Fri
-		option Sat
-		option Sun
+		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+			if(day === dayToSelect)
+				option(selected="selected")= day
+			else
+				option= day
+			
+			
+			
+			
+			
 
 mixin textInput(content)
 	input.form-control.small-input(value=content)
@@ -32,7 +35,7 @@ mixin textInput(content)
 						.well.inline-block
 							+dayOfWeekSelector()
 							label.control-label.between-label to
-							+dayOfWeekSelector()
+							+dayOfWeekSelector('Friday')
 					.col-sm-6
 						.well.inline-block
 							+textInput('08:00')
