@@ -48,6 +48,8 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\login.js" />
   </ItemGroup>
   <ItemGroup>
