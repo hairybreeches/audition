@@ -117,6 +117,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Exec Command="gulp --target $(OutputPath)ui" />
+    <Exec Command="gulp build --target $(OutputPath)ui" />
   </Target>
 </Project>
