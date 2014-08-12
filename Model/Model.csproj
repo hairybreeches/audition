@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonConverter.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="InvalidJournalException.cs" />
     <Compile Include="InvalidTimeFrameException.cs" />
