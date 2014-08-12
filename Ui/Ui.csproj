@@ -44,10 +44,10 @@
   <ItemGroup>
     <Content Include="gulpfile.js" />
     <Content Include="images\A.svg" />
-    <Content Include="javascript\bootstrap.min.js" />
-    <Content Include="javascript\jquery.min.js" />
-    <Content Include="javascript\knockout-3.1.0.js" />
-    <Content Include="javascript\login.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\login.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
