@@ -51,7 +51,8 @@ namespace Audition.Chromium
             //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
             var responseContent = response.Content.ReadAsStreamAsync().Result;
 
-            var responseHeaders = response.Headers.ToDictionary(x => x.Key, x => x.Value.First());
+            var responseHeaders = response.Headers.Concat(response.Content.Headers)
+                .ToDictionary(x => x.Key, x => x.Value.First());
 
             var responseMime = response.IsSuccessStatusCode
                 ? response.Content.Headers.ContentType.MediaType
