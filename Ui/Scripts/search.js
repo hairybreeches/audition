@@ -12,12 +12,18 @@
                 ToTime: "18:00:00"
             }
         },
-        submit: function(data, e) {            
+
+        submit: function(data, e) {
             e.preventDefault();
-            $.get('/api/search', { SearchWindow: JSON.stringify(ko.mapping.toJS(data.input)) }, function(output) {
-                console.log(output);
+            $.ajax('/api/search', {
+                data: { searchWindow: JSON.stringify(ko.mapping.toJS(data.input)) },
+                contentType: 'application/json',
+                success: function(output) {
+                    console.log(output);
+                },
+                type: 'GET'
             });
-        },
+        },         
 
         output:[]
     });
