@@ -48,17 +48,16 @@ mixin textInput(bindTo)
 				span(data-bind="text: Created")
 			.col-sm-3
 				span(data-bind="text: JournalDate")
-			.col-sm-6
-				.container(data-bind="foreach: Lines")
-					.row
-						.col-sm-2
-							span(data-bind="text: AccountCode")
-						.col-sm-3
-							span(data-bind="text: AccountName")
-						.col-sm-2
-							span(data-bind="text: JournalType")
-						.col-sm-3
-							span(data-bind="text: Amount")
+			.col-sm-6(data-bind="foreach: Lines")
+				.row
+					.col-sm-3
+						span(data-bind="text: AccountCode")
+					.col-sm-3
+						span(data-bind="text: AccountName")
+					.col-sm-3
+						span(data-bind="text: JournalType")
+					.col-sm-3
+						span(data-bind="text: Amount")
 						
 		// /ko
 				
