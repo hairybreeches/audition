@@ -15,7 +15,7 @@ namespace Audition.Chromium
             builder.RegisterType<AppForm>();
             builder.RegisterType<ChromiumControl>();
             builder.RegisterType<OwinServer>();
-            builder.RegisterType<InterceptingRequestHandler>().As<IRequestHandler>();
+            builder.RegisterType<RequestHandler>().As<IRequestHandler>();
             builder.Register(_ => new PhysicalFileSystem("ui")).As<IFileSystem>();
             builder.RegisterType<AutofacWebApiDependencyResolver>().As<IDependencyResolver>();
             builder.RegisterType<LogFactory>().SingleInstance();

@@ -9,13 +9,13 @@ using CefSharp;
 
 namespace Audition.Chromium
 {
-    internal class InterceptingRequestHandler : IRequestHandler
+    internal class RequestHandler : IRequestHandler
     {
 
         private readonly string internalDomain;
         private readonly OwinServer server;
 
-        public InterceptingRequestHandler(OwinServer server)
+        public RequestHandler(OwinServer server)
         {
             this.internalDomain = Routing.InternalDomain;
             this.server = server;
