@@ -66,7 +66,7 @@ namespace Tests
 
         private static T Parse<T>(string value)
         {
-            var parser = new JsonConverter();
+            var parser = new JsonModelBinder();
             var modelBindingContext = GetBindingContext(value, typeof(T));
             var httpActionContext = GetJsonRequest();
 

@@ -18,7 +18,7 @@ namespace Audition.Controllers
 
         [HttpGet]
         [Route("api/search")]
-        public IEnumerable<Journal> Search([ModelBinder(typeof(JsonConverter))] SearchWindow searchWindow)
+        public IEnumerable<Journal> Search([ModelBinder(typeof(JsonModelBinder))] SearchWindow searchWindow)
         {
             return Enumerable.Empty<Journal>();            
         }

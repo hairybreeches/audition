@@ -1,6 +1,7 @@
 ﻿
 namespace Model
 {
+    [ModelBinder(typeof(JsonConverter))]
     public class SearchWindow
     {
         public SearchWindow(TimeFrame timeFrame, Period period)

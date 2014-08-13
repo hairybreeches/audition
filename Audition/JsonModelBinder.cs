@@ -7,7 +7,7 @@ using NodaTime.TimeZones;
 
 namespace Audition
 {
-    public class JsonConverter : IModelBinder
+    public class JsonModelBinder : IModelBinder
     {        
 
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
