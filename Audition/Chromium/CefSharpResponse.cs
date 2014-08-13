@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Audition.Chromium
 {
-    internal class CefSharpResponse
+    public class CefSharpResponse
     {
         public Stream Content { get; private set; }
         public string Mime { get; private set; }
