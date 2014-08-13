@@ -37,7 +37,32 @@ mixin textInput(bindTo)
 			hr.vertical-space
 			.form-group
 				.col-sm-4
-					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;				
+					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;					
+	.container(data-bind="visible: output().some(function(){return true;});")
+		hr.vertical-space
+		h2 Results
+
+		// ko foreach: output
+		.row
+			.col-sm-3
+				span(data-bind="text: Created")
+			.col-sm-3
+				span(data-bind="text: JournalDate")
+			.col-sm-6
+				.container(data-bind="foreach: Lines")
+					.row
+						.col-sm-2
+							span(data-bind="text: AccountCode")
+						.col-sm-3
+							span(data-bind="text: AccountName")
+						.col-sm-2
+							span(data-bind="text: JournalType")
+						.col-sm-3
+							span(data-bind="text: Amount")
 						
+		// /ko
+				
+			
+
 						
 

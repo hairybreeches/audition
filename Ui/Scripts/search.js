@@ -19,11 +19,11 @@
                 data: { searchWindow: JSON.stringify(ko.mapping.toJS(data.input)) },
                 contentType: 'application/json',
                 success: function(output) {
-                    console.log(output);
+                    data.output(output);
                 },
                 type: 'GET'
             });
-        },         
+        },
 
         output:[]
     });
