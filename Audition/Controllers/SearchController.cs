@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using Model;
 
 namespace Audition.Controllers
@@ -17,7 +18,7 @@ namespace Audition.Controllers
 
         [HttpGet]
         [Route("api/search")]
-        public IEnumerable<Journal> Search(SearchWindow searchWindow)
+        public IEnumerable<Journal> Search([ModelBinder(typeof(JsonConverter))] SearchWindow searchWindow)
         {
             return Enumerable.Empty<Journal>();            
         }
