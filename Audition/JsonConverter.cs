@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using NodaTime.Serialization.JsonNet;
 using NodaTime.TimeZones;
 
-namespace Model
+namespace Audition
 {
     public class JsonConverter<T> : TypeConverter
     {
