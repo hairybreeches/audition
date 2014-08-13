@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using CefSharp;
 
@@ -60,7 +61,8 @@ namespace Audition.Chromium
             var content = requestContent ?? "";
             if (headers.ContainsKey("Content-Type"))
             {
-                return new StringContent(content, Encoding.UTF8, headers["Content-Type"]);
+                var mediaType = new MediaTypeHeaderValue(headers["Content-Type"]);
+                return new StringContent(content, Encoding.UTF8, mediaType.MediaType);
             }
             else
             {
