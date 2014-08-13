@@ -30,7 +30,8 @@ namespace Audition.Chromium
             var request = requestResponse.Request;            
             if (request.Url.StartsWith(internalDomain))
             {
-                var response = GetResponse(request.Url, request.Method, request.Body, request.GetHeaders());
+                var httpRequestMessage = HttpConversions.ToOwinHttpRequest(request);
+                var response = GetResponse(httpRequestMessage);
                 Respond(requestResponse, response);
             }
 
@@ -41,29 +42,26 @@ namespace Audition.Chromium
         {
             var cefSharpResponse = HttpConversions.ToCefSharpResponse(response);
 
-
             requestResponse.RespondWith(cefSharpResponse.Content, cefSharpResponse.Mime, cefSharpResponse.ReasonPhrase, cefSharpResponse.StatusCode, 
                 cefSharpResponse.Headers);
         }
 
         //todo: 302 redirects should just work!
-        private HttpResponseMessage GetResponse(string requestUrl, string requestMethod, string requestContent, IDictionary<string, string> headers)
+        private HttpResponseMessage GetResponse(HttpRequestMessage httpRequest)
         {
-            var response = GetImmediateResponse(requestUrl, requestMethod, requestContent, headers);
+            var response = GetImmediateResponse(httpRequest);
 
             if (response.StatusCode == HttpStatusCode.Redirect)
             {
-                return GetResponse(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>());
+                return GetResponse(HttpConversions.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>()));
             }
 
             return response;
         }
 
-        private HttpResponseMessage GetImmediateResponse(string requestUrl, string requestMethod, string requestContent, IDictionary<string, string> headers)
+        private HttpResponseMessage GetImmediateResponse(HttpRequestMessage httpRequest)
         {
-            var request = HttpConversions.ToOwinHttpRequest(requestUrl, requestMethod, requestContent, headers);
-
-            return server.ExecuteRequest(request);
+            return server.ExecuteRequest(httpRequest);
         }        
 
         public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
