@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using CefSharp;
 
 namespace Audition.Chromium
 {
@@ -12,7 +13,7 @@ namespace Audition.Chromium
 
         public static CefSharpResponse ToCefSharpResponse(HttpResponseMessage response)
         {
-//TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
+            //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
             var responseContent = response.Content.ReadAsStreamAsync().Result;
 
             var responseHeaders = response.Headers.Concat(response.Content.Headers)
@@ -27,6 +28,10 @@ namespace Audition.Chromium
             return cefSharpResponse;
         }
 
+        public static HttpRequestMessage ToOwinHttpRequest(IRequest request)
+        {
+            return ToOwinHttpRequest(request.Url, request.Method, request.Body, request.GetHeaders());
+        }
 
         public static HttpRequestMessage ToOwinHttpRequest(string requestUrl, string requestMethod, string requestContent,
             IDictionary<string, string> headers)
