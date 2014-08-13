@@ -1,35 +1,43 @@
 using System;
-using System.ComponentModel;
-using System.Globalization;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
 using Newtonsoft.Json;
 using NodaTime.Serialization.JsonNet;
 using NodaTime.TimeZones;
 
 namespace Audition
 {
-    public class JsonConverter<T> : TypeConverter
-    {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public class JsonConverter : IModelBinder
+    {        
+
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            if (sourceType == typeof(string))
+            if (IsJsonRequest(actionContext))
             {
+                var value = GetStringValue(bindingContext);
+                bindingContext.Model = ParseJson(bindingContext, value);
                 return true;
             }
-            return base.CanConvertFrom(context, sourceType);
+            return false;            
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context,
-            CultureInfo culture, object value)
-        {            
+        private static bool IsJsonRequest(HttpActionContext actionContext)
+        {
+            return String.Equals("application/json", actionContext.Request.Content.Headers.ContentType.MediaType, StringComparison.InvariantCultureIgnoreCase);
+        }
 
-            
-            if (value is string)
-            {
-                var settings = new JsonSerializerSettings();
-                settings.ConfigureForNodaTime(new DateTimeZoneCache(new BclDateTimeZoneSource()));
-                return JsonConvert.DeserializeObject<T>((string) value, settings);
-            }
-            return base.ConvertFrom(context, culture, value);
+        private static object ParseJson(ModelBindingContext bindingContext, string value)
+        {
+            var settings = new JsonSerializerSettings();
+            settings.ConfigureForNodaTime(new DateTimeZoneCache(new BclDateTimeZoneSource()));            
+            return JsonConvert.DeserializeObject(value, bindingContext.ModelType, settings);
+        }
+
+        private static string GetStringValue(ModelBindingContext bindingContext)
+        {
+            var val = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName);
+            return val.RawValue as string;            
         }
     }
 }
