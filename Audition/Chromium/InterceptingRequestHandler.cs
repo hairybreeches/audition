@@ -28,14 +28,6 @@ namespace Audition.Chromium
 
         public bool OnBeforeResourceLoad(IWebBrowser browser, IRequestResponse requestResponse)
         {
-            /*
-            * Called on the IO thread before a resource is loaded. To allow the resource to load normally return false. 
-            * To redirect the resource to a new url populate the |redirectUrl| value and return false. 
-            * To specify data for the resource return a CefStream object in |resourceStream|, use the |response| object to set mime type, 
-            * HTTP status code and optional header values, and return false. To cancel loading of the resource return true.
-            * Any modifications to |request| will be observed. If the URL in |request| is changed and |redirectUrl| is also set,
-            * the URL in |request| will be used.
-            */
             var request = requestResponse.Request;            
             if (request.Url.StartsWith(internalDomain))
             {
