@@ -61,40 +61,10 @@ namespace Audition.Chromium
 
         private HttpResponseMessage GetImmediateResponse(string requestUrl, string requestMethod, string requestContent, IDictionary<string, string> headers)
         {
-            var uri = requestUrl.Replace(internalDomain, String.Empty);
+            var request = HttpConversions.ToOwinHttpRequest(requestUrl, requestMethod, requestContent, headers);
 
-            var content = CreateHttpContent(requestContent, headers);
-
-
-            var method = new HttpMethod(requestMethod);
-
-            var request = new HttpRequestMessage(method, uri)
-            {
-                Content = content,
-            };
-
-            foreach (var pair in headers)
-            {
-                request.Headers.TryAddWithoutValidation(pair.Key, pair.Value);
-            }
-            
             return server.ExecuteRequest(request);
-            
-            
-        }
-
-        private static StringContent CreateHttpContent(string requestContent, IDictionary<string, string> headers)
-        {
-            var content = requestContent ?? "";
-            if (headers.ContainsKey("Content-Type"))
-            {                
-                return new StringContent(content, Encoding.UTF8, headers["Content-Type"]);
-            }
-            else
-            {
-                return new StringContent(content);
-            }
-        }
+        }        
 
         public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
             WebHeaderCollection headers)
