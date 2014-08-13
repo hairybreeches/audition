@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Model
 {
@@ -13,7 +15,9 @@ namespace Model
         }
 
         public string AccountCode { get; private set; }
-        public string AccountName { get; private set; }        
+        public string AccountName { get; private set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public JournalType JournalType { get; private set; }
         public decimal Amount { get; private set; }
 
