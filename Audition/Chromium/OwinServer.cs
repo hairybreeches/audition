@@ -42,6 +42,7 @@ namespace Audition.Chromium
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.DependencyResolver = dependencyResolver;
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
             return config;
         }
 
