@@ -17,7 +17,7 @@ namespace Audition.Chromium
             this.server = server;
         }
 
-        public bool OnBeforeBrowse(IWebBrowser browser, IRequest request, NavigationType naigationvType, bool isRedirect)
+        public bool OnBeforeBrowse(IWebBrowser browser, IRequest request, NavigationType navigationType, bool isRedirect)
         {
             return false;
         }
