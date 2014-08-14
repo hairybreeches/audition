@@ -41,7 +41,21 @@ mixin textInput(bindTo)
 	.container(data-bind="visible: output().some(function(){return true;});")
 		hr.vertical-space
 		h2 Results
-
+		.row.vertical-space
+			.col-sm-3
+				span Date created
+			.col-sm-3
+				span Date of journal
+			.col-sm-6
+				.row
+					.col-sm-3
+						span Account Code
+					.col-sm-3
+						span Account Name
+					.col-sm-3
+						span Dr/Cr
+					.col-sm-3
+						span Amount
 		// ko foreach: output
 		.row.vertical-space
 			.col-sm-3
