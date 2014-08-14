@@ -26,5 +26,15 @@
         },
 
         output:[]
-    });
+});
+
+var userFriendlyDate = function(jsonDate) {
+    var date = new Date(jsonDate);
+    return date.toDateString();
+}
+
+var userFriendlyDateTime = function (jsonDate) {
+    var date = new Date(jsonDate);
+    return date.toTimeString() + ' ' + date.toDateString();
+}
 ko.applyBindings(model);

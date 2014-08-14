@@ -59,9 +59,9 @@ mixin textInput(bindTo)
 		// ko foreach: output
 		.row.vertical-space
 			.col-sm-3
-				span(data-bind="text: Created")
+				span(data-bind="text: userFriendlyDateTime(Created)")
 			.col-sm-3
-				span(data-bind="text: JournalDate")
+				span(data-bind="text: userFriendlyDate(JournalDate)")
 			.col-sm-6(data-bind="foreach: Lines")
 				.row
 					.col-sm-3
