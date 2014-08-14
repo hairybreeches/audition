@@ -2,7 +2,7 @@
 {
     public enum JournalType
     {
-        Debit,
-        Credit
+        Dr,
+        Cr
     }
 }

@@ -28,7 +28,7 @@ namespace Tests
             {
                 AccountCode = line.AccountCode,
                 AccountName = line.AccountName,
-                NetAmount = line.JournalType == JournalType.Credit ? line.Amount*-1 : line.Amount
+                NetAmount = line.JournalType == JournalType.Cr ? line.Amount*-1 : line.Amount
             };
         }
     }

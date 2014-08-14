@@ -29,7 +29,7 @@ namespace Model
 
         private decimal GetLineAmount(JournalLine line)
         {
-            return line.JournalType == JournalType.Credit ? line.Amount * -1 : line.Amount;
+            return line.JournalType == JournalType.Cr ? line.Amount * -1 : line.Amount;
         }
 
         public Guid Id { get; private set; }

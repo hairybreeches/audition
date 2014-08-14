@@ -20,7 +20,7 @@ namespace Xero
 
         private static JournalType JournalType(JournalLine xeroJournalLine)
         {
-            return xeroJournalLine.NetAmount < 0 ? Model.JournalType.Credit : Model.JournalType.Debit;
+            return xeroJournalLine.NetAmount < 0 ? Model.JournalType.Cr : Model.JournalType.Dr;
         }
     }
 }
