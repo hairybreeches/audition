@@ -13,9 +13,9 @@ namespace Tests
             var exception = Assert.Throws<InvalidJournalException>(() => new Journal(Guid.Empty, new DateTime(), new DateTime(),
                 new[]
                 {
-                    new JournalLine("a", "a", JournalType.Credit, 42.3m),
-                    new JournalLine("a", "a", JournalType.Credit, 12.3m),
-                    new JournalLine("a", "a", JournalType.Debit, 54),
+                    new JournalLine("a", "a", JournalType.Cr, 42.3m),
+                    new JournalLine("a", "a", JournalType.Cr, 12.3m),
+                    new JournalLine("a", "a", JournalType.Dr, 54),
                 }));
 
             var error = exception.Message;
