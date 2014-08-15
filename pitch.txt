@@ -8,7 +8,7 @@ ii) journals that could be repeated, ie of the same amounts within a short space
 
 This is time consuming.
 
-Even with a decent level of spreadsheet knowledge, it can be a pain in the ass to extract all the information from a massive spreadsheet the accountant has given you, and it's really easy to make a mistake, so if you don't want to get caught out you'll often check and double check to make sure you haen't missed anything.
+Even with a decent level of spreadsheet knowledge, it can be a pain in the ass to extract all the information from a massive spreadsheet the accountant has given you, and it's really easy to make a mistake, so if you don't want to get caught out you'll often check and double check to make sure you haven't missed anything.
 
 My tool will simplify the process, so that auditors can import the data straight from the accounts. It will only take a few clicks find and export to Excel or .pdf, all journals that were posted outside working hours or could be duplicates as described above. The auditor can then use this as a checklist to do what they do best: use their industry knowledge and professional judgement to inspect the resulting journals and see if any genuine issues arise.
 
