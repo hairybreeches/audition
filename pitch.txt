@@ -1,6 +1,6 @@
 
 
-ISA 240 requires auditors to perform some basic analysis of the journals (accounting entries) posted that make up the accounts.
+ISA 240 requires auditors to perform some basic analysis of the journals posted for the financial period.
 
 In practice, this usually seems to involve getting a dump of the journals as a spreadsheet from the accountant, and doing a combination of spreadsheet wrangling and manual inspection look for:
 i) journals posted outside normal working hours, when supervision or other controls may be laxer.
