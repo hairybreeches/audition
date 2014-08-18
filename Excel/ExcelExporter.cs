@@ -37,8 +37,20 @@ namespace Excel
         private void WriteJournal(CsvWriter writer, Journal journal)
         {
             writer.WriteField(journal.Created);
-            writer.WriteField(journal.JournalDate);   
+            writer.WriteField(journal.JournalDate);
+            foreach (var line in journal.Lines)
+            {
+                WriteLine(writer, line);
+            }
             writer.NextRecord();
+        }
+
+        private static void WriteLine(CsvWriter writer, JournalLine line)
+        {
+            writer.WriteField(line.JournalType);
+            writer.WriteField(line.AccountCode);
+            writer.WriteField(line.AccountName);
+            writer.WriteField(line.Amount);
         }
 
         private CsvWriter CreateWriter(string filename)
