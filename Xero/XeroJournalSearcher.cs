@@ -25,7 +25,8 @@ namespace Xero
 
         public static bool Matches(SearchWindow searchWindow, Journal x)
         {
-            return !searchWindow.Outside.Contains(x.CreatedDateUTC);
+            return searchWindow.Period.Contains(x.JournalDate) && 
+                !searchWindow.Outside.Contains(x.CreatedDateUTC);
         }
     }
 }
