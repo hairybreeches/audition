@@ -22,12 +22,12 @@ namespace Tests
             var journal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(journal);
 
-            var allJournalIds =
+            var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
             
-            CollectionAssert.IsEmpty(allJournalIds);
+            CollectionAssert.IsEmpty(journalIds);
         }        
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
@@ -38,11 +38,11 @@ namespace Tests
             var journal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(journal);
 
-            var weekendJournalIds =
+            var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
-            CollectionAssert.AreEqual(new[] { journal.Id }, weekendJournalIds.ToList());
+            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
         }
 
         [TestCaseSource("TimesInsideRange")]
