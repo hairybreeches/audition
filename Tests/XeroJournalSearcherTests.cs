@@ -128,11 +128,13 @@ namespace Tests
 
         private static SearchWindow CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
         {
+            //the journal will never be outside the time, so will be returned iff the day of the week is interesting
             return CreateSearchWindow(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
         }
 
         private static SearchWindow CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
         {
+            //the journal will never be outside the days of the week, so will be returned iff the time is interesting
             return CreateSearchWindow(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
         }
 
