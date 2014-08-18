@@ -17,7 +17,7 @@ namespace Tests
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
-        public void SearcherReturnsJournalsPostedOnADayInRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
+        public void SearcherDoesNotReturnJournalsPostedOnADayInRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(journal);
@@ -26,12 +26,13 @@ namespace Tests
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
-            CollectionAssert.AreEqual(new[] {journal.Id}, allJournalIds.ToList());
+            
+            CollectionAssert.IsEmpty(allJournalIds);
         }        
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
-        public void SearcherDoesNotReturnJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
+        public void SearcherReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
             DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
@@ -41,11 +42,11 @@ namespace Tests
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
-            CollectionAssert.IsEmpty(weekendJournalIds);
+            CollectionAssert.AreEqual(new[] { journal.Id }, weekendJournalIds.ToList());
         }
 
         [TestCaseSource("TimesInsideRange")]
-        public void SearcherReturnsJournalsPostedInsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        public void SearcherDoesNotReturnJournalsPostedInsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
             var searcher = GetJournalSearcher(journal);
@@ -54,7 +55,7 @@ namespace Tests
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
                     .Select(x => x.Id);
 
-            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
+            CollectionAssert.IsEmpty(journalIds.ToList());
         }        
 
         IEnumerable<TestCaseData> TimesInsideRange
@@ -67,7 +68,7 @@ namespace Tests
         }
         
         [TestCaseSource("TimesOutsideRange")]
-        public void SearcherDoesNotReturnJournalsPostedOutsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        public void SearcherReturnsJournalsPostedOutsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
             var searcher = GetJournalSearcher(journal);
@@ -75,8 +76,7 @@ namespace Tests
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
                     .Select(x => x.Id);
-
-            CollectionAssert.IsEmpty(journalIds.ToList());
+            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());            
         }
 
                 [Test]
@@ -127,7 +127,7 @@ namespace Tests
 
         private static SearchWindow CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
         {
-            return CreateSearchWindow(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)));
+            return CreateSearchWindow(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
         }
 
         private static SearchWindow CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
