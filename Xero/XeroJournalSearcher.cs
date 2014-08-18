@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Model;
 using NodaTime;
 using XeroApi.Model;
-using Journal = XeroApi.Model.Journal;
 
 namespace Xero
 {
@@ -19,21 +19,26 @@ namespace Xero
         public IEnumerable<Model.Journal> FindJournalsWithin(SearchWindow searchWindow)
         {
             var allJournals = repository.Journals.ToList();
-            return allJournals.Where(x => DayWithinRange(x, searchWindow.Outside) && TimeWithinRange(x, searchWindow.Outside)).Select(x => x.ToModelJournal());
+            return allJournals.Where(x => Within(searchWindow.Outside, x.CreatedDateUTC)).Select(x => x.ToModelJournal());
         }
 
-        private bool TimeWithinRange(Journal journal, TimeFrame timeFrame)
+        private bool Within(TimeFrame timeFrame, DateTime dateTime)
         {
-            var createdDateUtc = journal.CreatedDateUTC;
+            return DayWithinRange(timeFrame, dateTime) && TimeWithinRange(timeFrame, dateTime);
+        }
+
+        private bool TimeWithinRange(TimeFrame timeFrame, DateTime dateTime)
+        {
+            var createdDateUtc = dateTime;
             var journalCreationTime = new LocalTime(createdDateUtc.Hour,createdDateUtc.Minute, createdDateUtc.Second);
 
             return journalCreationTime <= timeFrame.ToTime
                    && journalCreationTime >= timeFrame.FromTime;
         }
 
-        private bool DayWithinRange(Journal journal, TimeFrame timeFrame)
+        private bool DayWithinRange(TimeFrame timeFrame, DateTime date)
         {
-            var creationDay = (int) journal.CreatedDateUTC.DayOfWeek;
+            var creationDay = (int) date.DayOfWeek;
 
             var fromDay = (int) timeFrame.FromDay;
             var toDay = (int) timeFrame.ToDay;
