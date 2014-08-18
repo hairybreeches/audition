@@ -1,8 +1,8 @@
 ﻿var model = ko.mapping.fromJS({
         input: {
             Period: {
-                From: '2012-4-5',
-                To: '2013-4-4'                
+                From: '2013-4-5',
+                To: '2014-4-4'                
             },
 
             Outside: {
