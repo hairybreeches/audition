@@ -138,7 +138,7 @@ namespace Tests
 
         private static SearchWindow CreateSearchWindow(TimeFrame timeFrame)
         {
-            return new SearchWindow(timeFrame, new Period(new DateTime(), new DateTime()));
+            return new SearchWindow(timeFrame, new Period(new DateTime(1,1,1), new DateTime(3000,12,31)));
         }
     }
 }
