@@ -3,23 +3,23 @@ namespace Model
 {    
     public class SearchWindow
     {
-        public SearchWindow(TimeFrame outside, DateRange dateRange)
+        public SearchWindow(TimeFrame outside, Period period)
         {
-            DateRange = dateRange;
+            Period = period;
             Outside = outside;
         }
 
         public TimeFrame Outside { get; private set; }
-        public DateRange DateRange { get; private set; }
+        public Period Period { get; private set; }
 
         public override string ToString()
         {
-            return string.Format("Outside {0}, in the period {1}", Outside, DateRange);
+            return string.Format("Outside {0}, in the period {1}", Outside, Period);
         }
 
         protected bool Equals(SearchWindow other)
         {
-            return Equals(Outside, other.Outside) && Equals(DateRange, other.DateRange);
+            return Equals(Outside, other.Outside) && Equals(Period, other.Period);
         }
 
         public override bool Equals(object obj)
@@ -34,7 +34,7 @@ namespace Model
         {
             unchecked
             {
-                return ((Outside != null ? Outside.GetHashCode() : 0)*397) ^ (DateRange != null ? DateRange.GetHashCode() : 0);
+                return ((Outside != null ? Outside.GetHashCode() : 0)*397) ^ (Period != null ? Period.GetHashCode() : 0);
             }
         }
     }

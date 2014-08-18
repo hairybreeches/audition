@@ -2,9 +2,9 @@
 
 namespace Model
 {
-    public class DateRange
+    public class Period
     {
-        public DateRange(DateTime @from, DateTime to)
+        public Period(DateTime @from, DateTime to)
         {
             To = to.Date;
             From = @from.Date;
@@ -18,7 +18,7 @@ namespace Model
             return String.Format("{0} to {1}", From, To);
         }
 
-        protected bool Equals(DateRange other)
+        protected bool Equals(Period other)
         {
             return From.Equals(other.From) && To.Equals(other.To);
         }
@@ -28,7 +28,7 @@ namespace Model
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((DateRange) obj);
+            return Equals((Period) obj);
         }
 
         public override int GetHashCode()

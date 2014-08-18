@@ -56,7 +56,7 @@
     <Compile Include="Journal.cs" />
     <Compile Include="JournalLine.cs" />
     <Compile Include="JournalType.cs" />
-    <Compile Include="DateRange.cs" />
+    <Compile Include="Period.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchWindow.cs" />
     <Compile Include="TimeFrame.cs" />
