@@ -17,7 +17,7 @@ namespace Tests
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
-        public void SearcherDoesNotReturnJournalsPostedOnADayInRange(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
+        public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
             var searcher = GetJournalSearcher(journal);
@@ -32,7 +32,7 @@ namespace Tests
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
-        public void SearcherReturnsJournalsPostedOutsideRange(DayOfWeek dayOfWeek, DayOfWeek fromDay,
+        public void SearcherReturnsJournalsPostedOutsideRangeEvenIfTheTimeIsNotInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay,
             DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
@@ -46,7 +46,7 @@ namespace Tests
         }
 
         [TestCaseSource("TimesInsideRange")]
-        public void SearcherDoesNotReturnJournalsPostedInsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
             var searcher = GetJournalSearcher(journal);
@@ -59,7 +59,7 @@ namespace Tests
         }                
         
         [TestCaseSource("TimesOutsideRange")]
-        public void SearcherReturnsJournalsPostedOutsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
+        public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
             var searcher = GetJournalSearcher(journal);
@@ -114,7 +114,7 @@ namespace Tests
         {
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
-                new DateTime(), Enumerable.Empty<JournalLine>());
+                new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
         }
 
         private IJournalSearcher GetJournalSearcher(params Journal[] journals)
@@ -125,6 +125,7 @@ namespace Tests
             factory.CreateRepository().Returns(repository);
             return new XeroJournalSearcher(factory);
         }
+
         private Journal GetJournalAffecting(DateTime dateTime)
         {
             return new Journal(Guid.NewGuid(),
