@@ -7,6 +7,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Xero;
 using Journal = Model.Journal;
+using Period = Model.Period;
 
 
 namespace Tests
@@ -22,11 +23,11 @@ namespace Tests
             var searcher = GetJournalSearcher(journal);
 
             var allJournalIds =
-                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)))
+                searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
             CollectionAssert.AreEqual(new[] {journal.Id}, allJournalIds.ToList());
-        }
+        }        
 
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Wednesday, DayOfWeek.Sunday, DayOfWeek.Tuesday)]
@@ -37,7 +38,7 @@ namespace Tests
             var searcher = GetJournalSearcher(journal);
 
             var weekendJournalIds =
-                searcher.FindJournalsWithin(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)))
+                searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(weekendJournalIds);
@@ -50,11 +51,11 @@ namespace Tests
             var searcher = GetJournalSearcher(journal);
 
             var journalIds =
-                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime))
+                searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
                     .Select(x => x.Id);
 
             CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
-        }
+        }        
 
         IEnumerable<TestCaseData> TimesInsideRange
         {
@@ -72,7 +73,7 @@ namespace Tests
             var searcher = GetJournalSearcher(journal);
 
             var journalIds =
-                searcher.FindJournalsWithin(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime))
+                searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds.ToList());
@@ -124,6 +125,19 @@ namespace Tests
             return journal;
         }
 
+        private static SearchWindow CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
+        {
+            return CreateSearchWindow(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(11, 59)));
+        }
 
+        private static SearchWindow CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
+        {
+            return CreateSearchWindow(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
+        }
+
+        private static SearchWindow CreateSearchWindow(TimeFrame timeFrame)
+        {
+            return new SearchWindow(timeFrame, new Period(new DateTime(), new DateTime()));
+        }
     }
 }

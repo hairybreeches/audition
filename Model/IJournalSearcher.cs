@@ -5,6 +5,6 @@ namespace Model
 {
     public interface IJournalSearcher
     {
-        IEnumerable<Journal> FindJournalsWithin(TimeFrame timeFrame);
+        IEnumerable<Journal> FindJournalsWithin(SearchWindow searchWindow);
     }
 }
