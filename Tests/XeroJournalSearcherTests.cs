@@ -71,9 +71,22 @@ namespace Tests
         }
 
         [Test]
-        public void SearcherDoesNotReturnJournalsPostedOutsideFinancialPeriod()
+        public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
             var journal = GetJournalAffecting(new DateTime(1991,1,1));
+            var searcher = GetJournalSearcher(journal);
+
+            var journalIds =
+                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
+                    .Select(x => x.Id);
+
+            CollectionAssert.IsEmpty(journalIds);
+        }  
+        
+        [Test]
+        public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
+        {
+            var journal = GetJournalAffecting(new DateTime(1989,12,31,23,59,59));
             var searcher = GetJournalSearcher(journal);
 
             var journalIds =
