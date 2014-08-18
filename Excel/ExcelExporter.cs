@@ -19,25 +19,31 @@ namespace Excel
         {
             using (var writer = CreateWriter(filename))
             {
-                writer.WriteRecords(journals);
-                
+                WriteHeaderRow(writer);
+                foreach (var journal in journals)
+                {
+                    WriteJournal(writer, journal);
+                }                                
             }
+        }
+
+        private void WriteHeaderRow(CsvWriter writer)
+        {
+            writer.WriteField("Created");         
+            writer.WriteField("Date");
+            writer.NextRecord();
+        }
+
+        private void WriteJournal(CsvWriter writer, Journal journal)
+        {
+            writer.WriteField(journal.Created);
+            writer.WriteField(journal.JournalDate);   
+            writer.NextRecord();
         }
 
         private CsvWriter CreateWriter(string filename)
         {
-            var csvWriter = new CsvWriter(fileSystem.OpenFileToWrite(filename));
-            csvWriter.Configuration.RegisterClassMap<JournalMap>();
-            return csvWriter;
+            return new CsvWriter(fileSystem.OpenFileToWrite(filename));
         }        
-    }
-
-    public class JournalMap : CsvClassMap<Journal>
-    {
-        public JournalMap()
-        {
-            Map(m => m.Created).Name("Created");
-            Map(m => m.JournalDate).Name("Date");
-        }
-    }
+    }    
 }
