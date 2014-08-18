@@ -16,10 +16,10 @@ namespace Xero
             repository = repositoryFactory.CreateRepository();
         }
 
-        public IEnumerable<Model.Journal> FindJournalsWithin(TimeFrame timeFrame)
+        public IEnumerable<Model.Journal> FindJournalsWithin(SearchWindow searchWindow)
         {
             var allJournals = repository.Journals.ToList();
-            return allJournals.Where(x => DayWithinRange(x, timeFrame) && TimeWithinRange(x, timeFrame)).Select(x => x.ToModelJournal());
+            return allJournals.Where(x => DayWithinRange(x, searchWindow.Outside) && TimeWithinRange(x, searchWindow.Outside)).Select(x => x.ToModelJournal());
         }
 
         private bool TimeWithinRange(Journal journal, TimeFrame timeFrame)
