@@ -71,6 +71,19 @@ namespace Tests
         }
 
         [Test]
+        public void SearcherDoesNotReturnJournalsPostedOutsideFinancialPeriod()
+        {
+            var journal = GetJournalAffecting(new DateTime(1991,1,1));
+            var searcher = GetJournalSearcher(journal);
+
+            var journalIds =
+                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
+                    .Select(x => x.Id);
+
+            CollectionAssert.IsEmpty(journalIds);
+        }
+
+        [Test]
         public void CannotCreateATimeFrameWithTimesWhichWrapAround()
         {
             Assert.Throws<InvalidTimeFrameException>(
@@ -112,6 +125,12 @@ namespace Tests
             factory.CreateRepository().Returns(repository);
             return new XeroJournalSearcher(factory);
         }
+        private Journal GetJournalAffecting(DateTime dateTime)
+        {
+            return new Journal(Guid.NewGuid(),
+                new DateTime(2014, 7, 1),
+                dateTime, Enumerable.Empty<JournalLine>());
+        }
 
         private Journal GetJournalPostedOn(DayOfWeek day)
         {
@@ -136,6 +155,12 @@ namespace Tests
         {
             //the journal will never be outside the days of the week, so will be returned iff the time is interesting
             return CreateSearchWindow(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
+        }
+        
+        private static SearchWindow CreateSearchWindow(DateTime periodStart, DateTime periodEnd)
+        {
+            //the journal will always be outside the timeframe, so will be returned precisely when it's in the period
+            return new SearchWindow(new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new Period(periodStart, periodEnd));
         }
 
         private static SearchWindow CreateSearchWindow(TimeFrame timeFrame)
