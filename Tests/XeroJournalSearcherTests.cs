@@ -56,16 +56,7 @@ namespace Tests
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds.ToList());
-        }        
-
-        IEnumerable<TestCaseData> TimesInsideRange
-        {
-            get { 
-                yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0));
-                yield return new TestCaseData(new LocalTime(11, 30), new LocalTime(11, 0), new LocalTime(11, 30));
-                yield return new TestCaseData(new LocalTime(10, 46), new LocalTime(10, 46), new LocalTime(11, 30));
-            }
-        }
+        }                
         
         [TestCaseSource("TimesOutsideRange")]
         public void SearcherReturnsJournalsPostedOutsideTime(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
@@ -79,11 +70,21 @@ namespace Tests
             CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());            
         }
 
-                [Test]
+        [Test]
         public void CannotCreateATimeFrameWithTimesWhichWrapAround()
         {
             Assert.Throws<InvalidTimeFrameException>(
                 () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
+        }
+
+        IEnumerable<TestCaseData> TimesInsideRange
+        {
+            get
+            {
+                yield return new TestCaseData(new LocalTime(15, 0), new LocalTime(12, 0), new LocalTime(17, 0));
+                yield return new TestCaseData(new LocalTime(11, 30), new LocalTime(11, 0), new LocalTime(11, 30));
+                yield return new TestCaseData(new LocalTime(10, 46), new LocalTime(10, 46), new LocalTime(11, 30));
+            }
         }
 
         IEnumerable<TestCaseData> TimesOutsideRange
