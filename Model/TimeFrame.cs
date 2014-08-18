@@ -26,6 +26,42 @@ namespace Model
         public LocalTime FromTime { get; private set; }
         public LocalTime ToTime { get; private set; }
 
+        public bool Contains(DateTime dateTime)
+        {
+            return DayWithinRange(this, dateTime) && TimeWithinRange(dateTime);
+        }
+
+        private bool TimeWithinRange(DateTime dateTime)
+        {
+            var createdDateUtc = dateTime;
+            var journalCreationTime = new LocalTime(createdDateUtc.Hour, createdDateUtc.Minute, createdDateUtc.Second);
+
+            return journalCreationTime <= ToTime
+                   && journalCreationTime >= FromTime;
+        }
+
+        private static bool DayWithinRange(TimeFrame timeFrame, DateTime date)
+        {
+            var creationDay = (int)date.DayOfWeek;
+
+            var fromDay = (int)timeFrame.FromDay;
+            var toDay = (int)timeFrame.ToDay;
+
+            if (toDay <= fromDay)
+            {
+                toDay += 7;
+            }
+
+            if (creationDay < fromDay)
+            {
+                creationDay += 7;
+            }
+
+
+            return creationDay <= toDay;
+        }
+
+
         public override string ToString()
         {
             return String.Format("{0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
