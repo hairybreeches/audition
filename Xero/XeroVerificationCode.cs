@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Audition.Controllers
+namespace Xero
 {
     public class XeroVerificationCode
     {
