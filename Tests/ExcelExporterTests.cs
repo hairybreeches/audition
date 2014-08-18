@@ -25,16 +25,16 @@ namespace Tests
                 }  ),
                 new Journal(Guid.NewGuid(), new DateTime(2012,6,5),new DateTime(2012,6,5), new List<JournalLine>
                 {
-                    new JournalLine("9012", "Expenses", JournalType.Cr, 12.4m),
-                    new JournalLine("3001", "Cash", JournalType.Dr, 12.4m)
+                    new JournalLine("8014", "Depreciation", JournalType.Cr, 12.4m),
+                    new JournalLine("4001", "Fixed assets", JournalType.Dr, 12.4m)
                 }  )
             }, "c:\\steve.csv"
             );
 
-            var expected = 
+            var expected =
 @"Created,Date
-04/03/2012 00:00:00,04/03/2012 00:00:00
-05/06/2012 00:00:00,05/06/2012 00:00:00
+04/03/2012 00:00:00,04/03/2012 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+05/06/2012 00:00:00,05/06/2012 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
             Assert.AreEqual(expected, fileSystem.GetFileValue("c:\\steve.csv"));
         }
