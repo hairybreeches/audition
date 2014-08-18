@@ -3,14 +3,14 @@ namespace Model
 {    
     public class SearchWindow
     {
-        public SearchWindow(TimeFrame outside, Period period)
+        public SearchWindow(TimeFrame outside, DateRange period)
         {
             Period = period;
             Outside = outside;
         }
 
         public TimeFrame Outside { get; private set; }
-        public Period Period { get; private set; }
+        public DateRange Period { get; private set; }
 
         public override string ToString()
         {
