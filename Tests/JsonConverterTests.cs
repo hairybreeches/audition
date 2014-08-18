@@ -12,6 +12,7 @@ using Model;
 using NodaTime;
 using NSubstitute;
 using NUnit.Framework;
+using Period = Model.Period;
 
 namespace Tests
 {
@@ -36,7 +37,7 @@ namespace Tests
         }");      
       
             Assert.AreEqual(new SearchWindow(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0), new LocalTime(18,0)),
-                new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
+                new Period(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
                 result);
         }
 
@@ -56,11 +57,11 @@ namespace Tests
        [Test]
        public void CanDeserializePeriod()
        {           
-           var result = Parse<DateRange>(@"{
+           var result = Parse<Period>(@"{
                From: '2012-4-5',
                To: '2013-4-4'
            }");
-           Assert.AreEqual(new DateRange(new DateTime(2012,4,5),new DateTime(2013, 4, 4) ), result);
+           Assert.AreEqual(new Period(new DateTime(2012,4,5),new DateTime(2013, 4, 4) ), result);
        }
 
         private static T Parse<T>(string value)
