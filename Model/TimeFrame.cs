@@ -28,7 +28,7 @@ namespace Model
 
         public override string ToString()
         {
-            return String.Format("From: {0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
+            return String.Format("{0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
         }
 
         protected bool Equals(TimeFrame other)

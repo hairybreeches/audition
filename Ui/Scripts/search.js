@@ -5,7 +5,7 @@
                 To: '2013-4-4'                
             },
 
-            TimeFrame: {
+            Outside: {
                 FromDay: "Monday",
                 ToDay: "Friday",
                 FromTime: "08:00:00",
