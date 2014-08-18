@@ -31,6 +31,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -56,6 +60,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="ExcelExporterTests.cs" />
     <Compile Include="JournalExtensions.cs" />
     <Compile Include="JournalTests.cs" />
@@ -105,4 +111,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+	  <PropertyGroup>
+    <PostBuildEvent>
+      %25WINDIR%25\system32\xcopy /s /y "$(SolutionDir)\packages\CefSharp.WinForms.1.25.3\cef\*.*" "$(TargetDir)"
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

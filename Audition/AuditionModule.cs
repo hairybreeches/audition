@@ -7,7 +7,7 @@ using Module = Autofac.Module;
 
 namespace Audition
 {
-    internal class AuditionModule : Module
+    public class AuditionModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

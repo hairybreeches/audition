@@ -6,17 +6,18 @@
   <AllowStaticCodeContractChecking>false</AllowStaticCodeContractChecking>
   <IgnoreThisComponentCompletely>false</IgnoreThisComponentCompletely>
   <RunPreBuildEvents>false</RunPreBuildEvents>
-  <RunPostBuildEvents>false</RunPostBuildEvents>
+  <RunPostBuildEvents>true</RunPostBuildEvents>
   <PreviouslyBuiltSuccessfully>true</PreviouslyBuiltSuccessfully>
   <InstrumentAssembly>true</InstrumentAssembly>
   <PreventSigningOfAssembly>false</PreventSigningOfAssembly>
   <AnalyseExecutionTimes>true</AnalyseExecutionTimes>
   <IncludeStaticReferencesInWorkspace>true</IncludeStaticReferencesInWorkspace>
   <DefaultTestTimeout>60000</DefaultTestTimeout>
-  <UseBuildConfiguration />
-  <UseBuildPlatform />
-  <ProxyProcessPath />
+  <UseBuildConfiguration></UseBuildConfiguration>
+  <UseBuildPlatform></UseBuildPlatform>
+  <ProxyProcessPath></ProxyProcessPath>
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
   <MSTestThreadApartmentState>STA</MSTestThreadApartmentState>
   <BuildProcessArchitecture>x86</BuildProcessArchitecture>
+  <AdditionalFilesToInclude>..\packages\CefSharp.WinForms.1.25.3\cef\**.*</AdditionalFilesToInclude>
 </ProjectConfiguration>
