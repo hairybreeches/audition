@@ -38,5 +38,11 @@ namespace Model
                 return (From.GetHashCode()*397) ^ To.GetHashCode();
             }
         }
+
+        public bool Contains(DateTime journalDate)
+        {
+            return journalDate >= From
+                   && journalDate <= To;
+        }
     }
 }
