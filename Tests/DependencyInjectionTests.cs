@@ -14,6 +14,7 @@ namespace Tests
     [TestFixture]
     public class DependencyInjectionTests
     {
+        //todo: would be nice to check we can make an AppForm here too
         [TestCaseSource("Controllers")]
         public void CanCreateClass(Type type)
         {
