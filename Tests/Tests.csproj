@@ -78,6 +78,7 @@
     <Compile Include="JournalTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="MockFileSystem.cs" />
+    <Compile Include="TimeFrameTests.cs" />
     <Compile Include="XeroJournalSearcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,7 +112,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-	  <PropertyGroup>
+  <PropertyGroup>
     <PostBuildEvent>
       %25WINDIR%25\system32\xcopy /s /y "$(SolutionDir)\packages\CefSharp.WinForms.1.25.3\cef\*.*" "$(TargetDir)"
     </PostBuildEvent>

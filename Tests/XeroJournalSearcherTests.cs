@@ -94,14 +94,7 @@ namespace Tests
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds);
-        }
-
-        [Test]
-        public void CannotCreateATimeFrameWithTimesWhichWrapAround()
-        {
-            Assert.Throws<InvalidTimeFrameException>(
-                () => new TimeFrame(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
-        }
+        }        
 
         IEnumerable<TestCaseData> TimesInsideRange
         {
