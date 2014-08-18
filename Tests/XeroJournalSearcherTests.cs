@@ -94,7 +94,23 @@ namespace Tests
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds);
-        }        
+        }
+
+        [Test]
+        public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriod()
+        {
+            //given a journal on the last day of the financial period
+            var journal = GetJournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
+            var searcher = GetJournalSearcher(journal);
+
+            //and a period created just with the date, rather than the full datetime
+            var journalIds =
+                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990, 1, 1), new DateTime(1990, 12, 31)))
+                    .Select(x => x.Id);
+
+            //the journal should still be defined as being within the financial period
+            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
+        }
 
         IEnumerable<TestCaseData> TimesInsideRange
         {
