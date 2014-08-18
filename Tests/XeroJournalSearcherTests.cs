@@ -7,7 +7,6 @@ using NSubstitute;
 using NUnit.Framework;
 using Xero;
 using Journal = Model.Journal;
-using Period = Model.Period;
 
 
 namespace Tests
@@ -199,12 +198,12 @@ namespace Tests
         private static SearchWindow CreateSearchWindow(DateTime periodStart, DateTime periodEnd)
         {
             //the journal will always be outside the timeframe, so will be returned precisely when it's in the period
-            return new SearchWindow(new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new Period(periodStart, periodEnd));
+            return new SearchWindow(new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new DateRange(periodStart, periodEnd));
         }
 
         private static SearchWindow CreateSearchWindow(TimeFrame timeFrame)
         {
-            return new SearchWindow(timeFrame, new Period(new DateTime(1,1,1), new DateTime(3000,12,31)));
+            return new SearchWindow(timeFrame, new DateRange(new DateTime(1,1,1), new DateTime(3000,12,31)));
         }
     }
 }
