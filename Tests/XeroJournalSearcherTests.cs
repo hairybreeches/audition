@@ -97,7 +97,7 @@ namespace Tests
         }
 
         [Test]
-        public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriod()
+        public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtEnd()
         {
             //given a journal on the last day of the financial period
             var journal = GetJournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
@@ -106,6 +106,22 @@ namespace Tests
             //and a period created just with the date, rather than the full datetime
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990, 1, 1), new DateTime(1990, 12, 31)))
+                    .Select(x => x.Id);
+
+            //the journal should still be defined as being within the financial period
+            CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
+        }       
+        
+        [Test]
+        public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtStart()
+        {
+            //given a journal on the first day of the financial period
+            var journal = GetJournalAffecting(new DateTime(1990, 1, 1, 0, 0, 0));
+            var searcher = GetJournalSearcher(journal);
+
+            //and a period created badly with a time on the first date
+            var journalIds =
+                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990, 1, 1,23,59,59), new DateTime(1990, 12, 31)))
                     .Select(x => x.Id);
 
             //the journal should still be defined as being within the financial period
