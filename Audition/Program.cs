@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Reflection;
-using Audition.Chromium;
 using Audition.Controllers;
 using Autofac;
-using Autofac.Integration.WebApi;
-using Xero;
 using System.Windows.Forms;
 
 namespace Audition
@@ -18,9 +14,7 @@ namespace Audition
             Application.SetCompatibleTextRenderingDefault(false);
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule<XeroModule>();
-            builder.RegisterModule<ChromiumModule>();            
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());            
+            builder.RegisterModule<AuditionModule>();       
 
             using (var container = builder.Build())
             {                
