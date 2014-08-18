@@ -19,7 +19,7 @@ namespace Xero
         public IEnumerable<Model.Journal> FindJournalsWithin(SearchWindow searchWindow)
         {
             var allJournals = repository.Journals.ToList();
-            return allJournals.Where(x => Within(searchWindow.Outside, x.CreatedDateUTC)).Select(x => x.ToModelJournal());
+            return allJournals.Where(x => !Within(searchWindow.Outside, x.CreatedDateUTC)).Select(x => x.ToModelJournal());
         }
 
         private bool Within(TimeFrame timeFrame, DateTime dateTime)
