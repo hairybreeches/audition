@@ -61,7 +61,7 @@ namespace Tests
                 new KeyValuePair<string, string>("steve", "headerValue"), 
                 new KeyValuePair<string, string>("Content-Type", "application/json; charset=us-ascii"), 
             },converted.Headers);
-            Assert.AreEqual("random/encoding", converted.Mime);
+            Assert.AreEqual("application/json", converted.Mime);
             Assert.AreEqual("I am some other content", StreamToString(converted.Content, Encoding.ASCII));
             Assert.AreEqual("Go elsewhere!", converted.ReasonPhrase);
         }
