@@ -20,13 +20,20 @@ namespace Audition.Chromium
             var responseHeaders = response.Headers.Concat(response.Content.Headers)
                 .ToDictionary(x => x.Key, x => x.Value.First());
 
-            var responseMime = response.IsSuccessStatusCode
-                ? response.Content.Headers.ContentType.MediaType
-                : "text/html"; //CEFSharp demands a MimeType of some kind...
+            var responseMime = GetMime(response); //CEFSharp demands a MimeType of some kind...
 
             var cefSharpResponse = new CefSharpResponse(responseContent, responseMime, response.ReasonPhrase,
                 (int) response.StatusCode, responseHeaders);
             return cefSharpResponse;
+        }
+
+        private static string GetMime(HttpResponseMessage response)
+        {
+            return response != null && response.Content != null && response.Content.Headers != null &&
+                   response.Content.Headers.ContentType != null &&
+                   response.Content.Headers.ContentType.MediaType != null
+                ? response.Content.Headers.ContentType.MediaType
+                : "text/html";
         }
 
         public static HttpRequestMessage ToOwinHttpRequest(IRequest request)
