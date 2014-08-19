@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -15,7 +16,7 @@ namespace Audition.Chromium
         public static CefSharpResponse ToCefSharpResponse(HttpResponseMessage response)
         {
             //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
-            var responseContent = response.Content.ReadAsStreamAsync().Result;
+            var responseContent = GetResponseContent(response);
 
             var responseHeaders = response.Headers.Concat(response.Content.Headers)
                 .ToDictionary(x => x.Key, x => x.Value.First());
@@ -25,6 +26,14 @@ namespace Audition.Chromium
             var cefSharpResponse = new CefSharpResponse(responseContent, responseMime, response.ReasonPhrase,
                 (int) response.StatusCode, responseHeaders);
             return cefSharpResponse;
+        }
+
+        private static MemoryStream GetResponseContent(HttpResponseMessage response)
+        {
+            var responseContent = new MemoryStream();
+            response.Content.ReadAsStreamAsync().Result.CopyTo(responseContent);
+            responseContent.Position = 0;
+            return responseContent;
         }
 
         private static string GetMime(HttpResponseMessage response)
