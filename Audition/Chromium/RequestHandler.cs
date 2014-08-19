@@ -37,10 +37,14 @@ namespace Audition.Chromium
 
         private static void Respond(IRequestResponse requestResponse, HttpResponseMessage response)
         {
-            var cefSharpResponse = HttpConversion.ToCefSharpResponse(response);
+            using (response)
+            {
+                var cefSharpResponse = HttpConversion.ToCefSharpResponse(response);
 
-            requestResponse.RespondWith(cefSharpResponse.Content, cefSharpResponse.Mime, cefSharpResponse.ReasonPhrase, cefSharpResponse.StatusCode, 
-                cefSharpResponse.Headers);
+                requestResponse.RespondWith(cefSharpResponse.Content, cefSharpResponse.Mime,
+                    cefSharpResponse.ReasonPhrase, cefSharpResponse.StatusCode,
+                    cefSharpResponse.Headers);
+            }
         }
 
         //todo: 302 redirects should just work!
