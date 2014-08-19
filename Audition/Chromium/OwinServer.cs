@@ -6,6 +6,9 @@ using System.Web.Http.Dependencies;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin.Testing;
+using Newtonsoft.Json;
+using NodaTime.Serialization.JsonNet;
+using NodaTime.TimeZones;
 using Owin;
 
 namespace Audition.Chromium
@@ -15,7 +18,7 @@ namespace Audition.Chromium
         private readonly IFileSystem fileSystem;
         private readonly TestServer owinTestServer;
 
-        public OwinServer(IFileSystem fileSystem, IDependencyResolver dependencyResolver)
+        public OwinServer(IFileSystem fileSystem, IDependencyResolver dependencyResolver, JsonSerializerSettings jsonSettings)
         {
             this.fileSystem = fileSystem;
             if (fileSystem == null)
@@ -23,7 +26,7 @@ namespace Audition.Chromium
 
             owinTestServer = TestServer.Create(app => app
                 .UseFileServer(GetFileOptions())
-                .UseWebApi(GetApiOptions(dependencyResolver)));
+                .UseWebApi(GetApiOptions(dependencyResolver, jsonSettings)));
 
         }
 
@@ -37,12 +40,13 @@ namespace Audition.Chromium
             };
         }
 
-        private static HttpConfiguration GetApiOptions(IDependencyResolver dependencyResolver)
+        private static HttpConfiguration GetApiOptions(IDependencyResolver dependencyResolver, JsonSerializerSettings jsonSettings)
         {
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.DependencyResolver = dependencyResolver;
-            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;            
+            config.Formatters.JsonFormatter.SerializerSettings = jsonSettings;
             return config;
         }
 

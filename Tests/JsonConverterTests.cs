@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Globalization;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http.Controllers;
-using System.Web.Http.Metadata;
-using System.Web.Http.Metadata.Providers;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.ValueProviders;
-using Audition;
+using Audition.Chromium;
+using Autofac;
 using Model;
+using Newtonsoft.Json;
 using NodaTime;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace Tests
@@ -65,29 +58,13 @@ namespace Tests
 
         private static T Parse<T>(string value)
         {
-            var parser = new JsonModelBinder();
-            var modelBindingContext = GetBindingContext(value, typeof(T));
-            var httpActionContext = GetJsonRequest();
-
-            parser.BindModel(httpActionContext, modelBindingContext);
-            return (T) modelBindingContext.Model;
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<ChromiumModule>();
+            using (var scope = builder.Build())
+            {
+                var settings = scope.Resolve<JsonSerializerSettings>();
+                return JsonConvert.DeserializeObject<T>(value, settings);
+            }
         }
-
-        private static ModelBindingContext GetBindingContext(string value, Type type)
-        {            
-            var modelBindingContext = new ModelBindingContext();
-            modelBindingContext.ModelMetadata = new ModelMetadata(new EmptyModelMetadataProvider(), type, null, type, "");
-            var valueProvider = Substitute.For<IValueProvider>();
-            valueProvider.GetValue(Arg.Any<string>()).Returns(new ValueProviderResult(value, "steve", CultureInfo.CurrentCulture));
-
-            modelBindingContext.ValueProvider = valueProvider;                     
-
-            return modelBindingContext;
-        }
-
-        private static HttpActionContext GetJsonRequest()
-        {
-            return new HttpActionContext(new HttpControllerContext(new HttpRequestContext(), new HttpRequestMessage(){Content = new StringContent("", Encoding.UTF8, "application/json")}, new HttpControllerDescriptor(), Substitute.For<IHttpController>()),new ReflectedHttpActionDescriptor() );
-        }       
     }
 }
