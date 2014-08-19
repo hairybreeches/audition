@@ -8,7 +8,7 @@ using CefSharp;
 
 namespace Audition.Chromium
 {
-    public static class HttpConversions
+    public static class HttpConversion
     {
         private const string InternalDomain = Routing.InternalDomain;
 

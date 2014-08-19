@@ -27,7 +27,7 @@ namespace Audition.Chromium
             var request = requestResponse.Request;            
             if (request.Url.StartsWith(internalDomain))
             {
-                var httpRequestMessage = HttpConversions.ToOwinHttpRequest(request);
+                var httpRequestMessage = HttpConversion.ToOwinHttpRequest(request);
                 var response = GetResponse(httpRequestMessage);
                 Respond(requestResponse, response);
             }
@@ -37,7 +37,7 @@ namespace Audition.Chromium
 
         private static void Respond(IRequestResponse requestResponse, HttpResponseMessage response)
         {
-            var cefSharpResponse = HttpConversions.ToCefSharpResponse(response);
+            var cefSharpResponse = HttpConversion.ToCefSharpResponse(response);
 
             requestResponse.RespondWith(cefSharpResponse.Content, cefSharpResponse.Mime, cefSharpResponse.ReasonPhrase, cefSharpResponse.StatusCode, 
                 cefSharpResponse.Headers);
@@ -50,7 +50,7 @@ namespace Audition.Chromium
 
             if (response.StatusCode == HttpStatusCode.Redirect)
             {
-                return GetResponse(HttpConversions.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>()));
+                return GetResponse(HttpConversion.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>()));
             }
 
             return response;
