@@ -15,7 +15,6 @@ namespace Audition.Chromium
 
         public static CefSharpResponse ToCefSharpResponse(HttpResponseMessage response)
         {
-            //TODO: Copy to separate memory stream so we can dispose of parent HttpResponseMessage
             var responseContent = GetResponseContent(response);
 
             var responseHeaders = response.Headers.Concat(response.Content.Headers)

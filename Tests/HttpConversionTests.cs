@@ -18,52 +18,56 @@ namespace Tests
         public void CanConvertToCefsharpResponse()
         {
             //given an http response
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent("I am some content", Encoding.UTF32, "random/encoding"),
-                ReasonPhrase = "Yay!"                
-            };
-            response.Headers.Add("steve", "headerValue");
-
-            //when we convert it
-            var converted = HttpConversion.ToCefSharpResponse(response);
-
-            //then the fields are all transferred correctly
-            Assert.AreEqual(200, converted.StatusCode);
-            CollectionAssert.AreEquivalent(new[]
+                ReasonPhrase = "Yay!"
+            })
             {
-                new KeyValuePair<string, string>("steve", "headerValue"), 
-                new KeyValuePair<string, string>("Content-Type", "random/encoding; charset=utf-32"), 
-            },converted.Headers);
-            Assert.AreEqual("random/encoding", converted.Mime);
-            Assert.AreEqual("I am some content", StreamToString(converted.Content, Encoding.UTF32));
-            Assert.AreEqual("Yay!", converted.ReasonPhrase);
+                response.Headers.Add("steve", "headerValue");
+
+                //when we convert it
+                var converted = HttpConversion.ToCefSharpResponse(response);
+
+                //then the fields are all transferred correctly
+                Assert.AreEqual(200, converted.StatusCode);
+                CollectionAssert.AreEquivalent(new[]
+                {
+                    new KeyValuePair<string, string>("steve", "headerValue"),
+                    new KeyValuePair<string, string>("Content-Type", "random/encoding; charset=utf-32"),
+                }, converted.Headers);
+                Assert.AreEqual("random/encoding", converted.Mime);
+                Assert.AreEqual("I am some content", StreamToString(converted.Content, Encoding.UTF32));
+                Assert.AreEqual("Yay!", converted.ReasonPhrase);
+            }
         } 
         
         [Test]
         public void CanConvertNonSuccessCefsharpResponse()
         {
             //given an http response
-            var response = new HttpResponseMessage(HttpStatusCode.RedirectMethod)
+            using (var response = new HttpResponseMessage(HttpStatusCode.RedirectMethod)
             {
                 Content = new StringContent("I am some other content", Encoding.ASCII, "application/json"),
-                ReasonPhrase = "Go elsewhere!"                
-            };
-            response.Headers.Add("steve", "headerValue");
-
-            //when we convert it
-            var converted = HttpConversion.ToCefSharpResponse(response);
-
-            //then the fields are all transferred correctly
-            Assert.AreEqual(303, converted.StatusCode);
-            CollectionAssert.AreEquivalent(new[]
+                ReasonPhrase = "Go elsewhere!"
+            })
             {
-                new KeyValuePair<string, string>("steve", "headerValue"), 
-                new KeyValuePair<string, string>("Content-Type", "application/json; charset=us-ascii"), 
-            },converted.Headers);
-            Assert.AreEqual("application/json", converted.Mime);
-            Assert.AreEqual("I am some other content", StreamToString(converted.Content, Encoding.ASCII));
-            Assert.AreEqual("Go elsewhere!", converted.ReasonPhrase);
+                response.Headers.Add("steve", "headerValue");
+
+                //when we convert it
+                var converted = HttpConversion.ToCefSharpResponse(response);
+
+                //then the fields are all transferred correctly
+                Assert.AreEqual(303, converted.StatusCode);
+                CollectionAssert.AreEquivalent(new[]
+                {
+                    new KeyValuePair<string, string>("steve", "headerValue"),
+                    new KeyValuePair<string, string>("Content-Type", "application/json; charset=us-ascii"),
+                }, converted.Headers);
+                Assert.AreEqual("application/json", converted.Mime);
+                Assert.AreEqual("I am some other content", StreamToString(converted.Content, Encoding.ASCII));
+                Assert.AreEqual("Go elsewhere!", converted.ReasonPhrase);
+            }
         }
 
         private string StreamToString(Stream stream, Encoding encoding)
