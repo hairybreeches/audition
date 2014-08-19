@@ -4,11 +4,14 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using CefSharp;
 using Microsoft.Owin.FileSystems;
+using Newtonsoft.Json;
 using NLog;
+using NodaTime.Serialization.JsonNet;
+using NodaTime.TimeZones;
 
 namespace Audition.Chromium
 {
-    class ChromiumModule : Module
+    public class ChromiumModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -21,6 +24,14 @@ namespace Audition.Chromium
             builder.RegisterType<LogFactory>().SingleInstance();
             //todo: http://stackoverflow.com/questions/6623431/passing-in-the-type-of-the-declaring-class-for-nlog-using-autofac
             builder.Register(c => c.Resolve<LogFactory>().GetCurrentClassLogger());
+            builder.Register(_ => JsonSettings());
+        }
+
+        private JsonSerializerSettings JsonSettings()
+        {
+            var settings = new JsonSerializerSettings();
+            settings.ConfigureForNodaTime(new DateTimeZoneCache(new BclDateTimeZoneSource()));
+            return settings;
         }
     }
 }

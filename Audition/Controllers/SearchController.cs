@@ -19,16 +19,16 @@ namespace Audition.Controllers
             this.excelExporter = excelExporter;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/search")]
-        public IEnumerable<Journal> Search([ModelBinder(typeof(JsonModelBinder))] SearchWindow searchWindow)
+        public IEnumerable<Journal> Search(SearchWindow searchWindow)
         {
             return searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route("api/search/export")]
-        public void Export([ModelBinder(typeof(JsonModelBinder))] SaveSearchRequest saveRequest)
+        public void Export(SaveSearchRequest saveRequest)
         {
             var journals = searcher.FindJournalsWithin(saveRequest.SearchWindow);
             excelExporter.WriteJournals(journals, saveRequest.Filename);

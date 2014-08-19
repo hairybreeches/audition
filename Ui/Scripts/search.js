@@ -16,12 +16,12 @@
         submit: function(data, e) {
             e.preventDefault();
             $.ajax('/api/search', {
-                data: { searchWindow: JSON.stringify(ko.mapping.toJS(data.input)) },
+                data: JSON.stringify(ko.mapping.toJS(data.input)),
                 contentType: 'application/json',
                 success: function(output) {
                     data.output(output);
                 },
-                type: 'GET'
+                type: 'POST'
             });
         },
 
@@ -38,12 +38,12 @@
             save: function(data,e) {
                 e.preventDefault();
                 $.ajax('/api/search/export', {
-                    data: {
-                            saveRequest: JSON.stringify({
+
+                    data: JSON.stringify({
                                 searchWindow: ko.mapping.toJS(model.input),
                                 fileName: ko.mapping.toJS(data.fileName)
-                        })
-                    },
+                    }),
+
                     contentType: 'application/json',
                     success: function () {
                         console.log("Saved file");
