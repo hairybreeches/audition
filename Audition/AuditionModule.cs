@@ -2,6 +2,7 @@
 using Audition.Chromium;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Excel;
 using Xero;
 using Module = Autofac.Module;
 
@@ -13,6 +14,7 @@ namespace Audition
         {
             builder.RegisterModule<XeroModule>();
             builder.RegisterModule<ChromiumModule>();
+            builder.RegisterModule<ExcelModule>();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());     
         }
     }

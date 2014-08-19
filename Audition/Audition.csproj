@@ -132,12 +132,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SaveSearchRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Excel\Excel.csproj">
+      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
+      <Name>Excel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
