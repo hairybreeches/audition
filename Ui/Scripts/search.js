@@ -25,7 +25,35 @@
             });
         },
 
-        output:[]
+        output: [],
+
+        toggleShowExport : function() {
+            model.dataExport.visible(!model.dataExport.visible());
+        },
+
+        dataExport: {
+            visible: false,
+            fileName: 'acme-possible-duplicated-journals',
+            fileType: 'xlsx',
+            save: function(data,e) {
+                e.preventDefault();
+                $.ajax('/api/search/export', {
+                    data: {
+                            saveRequest: JSON.stringify({
+                                searchWindow: ko.mapping.toJS(model.input),
+                                fileName: ko.mapping.toJS(data.fileName)
+                        })
+                    },
+                    contentType: 'application/json',
+                    success: function () {
+                        console.log("Saved file");
+                    },
+                    type: 'POST'
+                });
+            }
+        }
+
+
 });
 
 var userFriendlyDate = function(jsonDate) {
