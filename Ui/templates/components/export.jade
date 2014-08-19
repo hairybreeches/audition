@@ -1,0 +1,17 @@
+form.form-horizontal(action="search", method="post")
+	fieldset
+		legend.vertical-space Save results
+		.form-group
+			label.col-lg-2.control-label File name
+			.col-lg-10
+				input.form-control(type="text", data-bind="value: fileName")
+		.form-group
+			label.col-lg-2.control-label File type
+			.col-lg-10
+				select.form-control(data-bind="value: fileType")
+					option(value="xlsx") Excel spreadsheet (.xlsx)
+					option(value="pdf") PDF document (.pdf)
+		hr.vertical-space
+		.form-group
+			div(class="col-sm-4")
+				button(type="submit" class="btn btn-primary" data-bind="click: save") Save &raquo;

@@ -37,7 +37,12 @@ mixin textInput(bindTo)
 			hr.vertical-space
 			.form-group
 				.col-sm-4
-					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;					
+					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;		
+				.col-sm-4
+					button.btn.btn-primary(data-bind="click: toggleShowExport") Export &raquo;
+
+	.container(data-bind="with: dataExport, visible: dataExport.visible")
+		include ../components/export
 	.container(data-bind="visible: output().some(function(){return true;});")
 		hr.vertical-space
 		h2 Results
