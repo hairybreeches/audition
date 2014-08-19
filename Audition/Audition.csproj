@@ -116,7 +116,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Chromium\ChromiumModule.cs" />
-    <Compile Include="Chromium\HttpConversions.cs" />
+    <Compile Include="Chromium\HttpConversion.cs" />
     <Compile Include="Chromium\RequestHandler.cs" />
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
