@@ -4,9 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Audition.Chromium;
+using CefSharp;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Tests
@@ -70,7 +73,28 @@ namespace Tests
             }
         }
 
-        private string StreamToString(Stream stream, Encoding encoding)
+        [Test]
+        public void CanConvertFromCefSharpRequest()
+        {
+            var request = Substitute.For<IRequest>();
+            request.Method.Returns("POST");
+            request.Body.Returns("I am some content");
+            request.GetHeaders().Returns(new Dictionary<string, string>()
+            {
+                {"Content-Type", "application/json"},
+                {"Accept", "text/html"}
+            });            
+
+
+            var converted = HttpConversion.ToOwinHttpRequest(request);
+
+            Assert.AreEqual("I am some content", converted.Content.ReadAsStringAsync().Result);
+            Assert.AreEqual(HttpMethod.Post, converted.Method);
+            Assert.AreEqual("text/html", converted.Headers.Accept.Single().MediaType);
+            Assert.AreEqual("application/json", converted.Content.Headers.ContentType.MediaType);
+        }
+
+        private static string StreamToString(Stream stream, Encoding encoding)
         {
             using (var reader = new StreamReader(stream, encoding))
             {
