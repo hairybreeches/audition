@@ -23,8 +23,8 @@ namespace Tests
             Outside: {
                 FromDay: 'Monday',
                 ToDay: 'Friday',
-                FromTime: '08:00:00',
-                ToTime: '18:00:00'
+                FromTime: '08:00',
+                ToTime: '18:00'
             }
         }");      
       
@@ -40,8 +40,8 @@ namespace Tests
            var result = Parse<TimeFrame>(@"{
                FromDay: 'Monday',
                ToDay: 'Friday',
-               FromTime: '08:00:00',
-               ToTime: '18:00:00'
+               FromTime: '08:00',
+               ToTime: '18:00'
            }");
            Assert.AreEqual(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
        }      
