@@ -64,7 +64,11 @@ namespace SystemTests
                 var requestResponse = new MockRequestResponse("POST", "{'searchWindow':{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Outside':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00:00','ToTime':'18:00:00'}},'fileName':" + JsonConvert.SerializeObject(fileName) + "}", "application/json", "http://localhost:1337/api/search/export");
                 handler.OnBeforeResourceLoad(null, requestResponse);
                 var fileContents = File.ReadAllText(fileName);
-                StringAssert.AreEqualIgnoringCase("steve", fileContents);
+                StringAssert.AreEqualIgnoringCase(
+@"Created,Date
+06/04/2013 00:00:00,06/04/2013 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+06/04/2013 00:00:00,06/04/2013 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+", fileContents);
             }
 
 
