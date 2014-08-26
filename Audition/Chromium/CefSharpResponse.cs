@@ -9,9 +9,9 @@ namespace Audition.Chromium
         public string Mime { get; private set; }
         public string ReasonPhrase { get; private set; }
         public int StatusCode { get; private set; }
-        public Dictionary<string, string> Headers { get; private set; }
+        public IDictionary<string, string> Headers { get; private set; }
 
-        public CefSharpResponse(Stream content, string mime, string reasonPhrase, int statusCode, Dictionary<string, string> headers)
+        public CefSharpResponse(Stream content, string mime, string reasonPhrase, int statusCode, IDictionary<string, string> headers)
         {
             Content = content;
             Mime = mime;
