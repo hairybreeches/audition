@@ -5,8 +5,11 @@ mixin dayOfWeekSelector(bindTo)
 		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
 			option= day
 
-mixin textInput(bindTo)
+mixin timeInput(bindTo)
 	input.form-control.small-input(data-bind="value: " + bindTo)
+	
+mixin dateInput(bindTo)
+	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
 
     
 +page('Search', 'search')
@@ -17,9 +20,9 @@ mixin textInput(bindTo)
 				.form-group(data-bind="with: Period")
 					.col-sm-12
 						.well.inline-block
-							+textInput('From')
+							+dateInput('From')
 							label.control-label.between-label to
-							+textInput('To')
+							+dateInput('To')
 							
 				legend.vertical-space posted outside...
 				.form-group(data-bind="with: Outside")
@@ -30,9 +33,9 @@ mixin textInput(bindTo)
 							+dayOfWeekSelector('ToDay')
 					.col-sm-6
 						.well.inline-block
-							+textInput('FromTime')
+							+timeInput('FromTime')
 							label.control-label.between-label to
-							+textInput('ToTime')
+							+timeInput('ToTime')
 						
 			hr.vertical-space
 			.form-group
