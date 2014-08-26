@@ -8,8 +8,8 @@
             Outside: {
                 FromDay: "Monday",
                 ToDay: "Friday",
-                FromTime: "08:00:00",
-                ToTime: "18:00:00"
+                FromTime: "08:00",
+                ToTime: "18:00"
             }
         },
 
