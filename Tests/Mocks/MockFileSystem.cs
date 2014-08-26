@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Excel;
 
-namespace Tests
+namespace Tests.Mocks
 {
     public class MockFileSystem : IFileSystem
     {

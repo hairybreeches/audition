@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Model;
 using NodaTime;
-using NSubstitute;
 using NUnit.Framework;
+using Tests.Mocks;
 using Xero;
 using Journal = Model.Journal;
 
@@ -154,12 +154,9 @@ namespace Tests
                 new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
         }
 
-        private IJournalSearcher GetJournalSearcher(params Journal[] journals)
+        private static IJournalSearcher GetJournalSearcher(params Journal[] journals)
         {
-            var repository = Substitute.For<IFullRepository>();
-            repository.Journals.Returns(journals.Select(x => x.ToXeroJournal()).AsQueryable());
-            var factory = Substitute.For<IRepositoryFactory>();
-            factory.CreateRepository().Returns(repository);
+            var factory = MockXeroRepositoryFactory.Create(journals);
             return new XeroJournalSearcher(factory);
         }
 
