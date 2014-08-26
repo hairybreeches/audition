@@ -8,6 +8,7 @@ using Audition;
 using Autofac;
 using CefSharp;
 using Model;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Tests.Mocks;
 using Xero;
@@ -60,7 +61,8 @@ namespace SystemTests
                 var fileName = Path.GetTempFileName();
                 var handler = lifetime.Resolve<IRequestHandler>();
 
-                handler.OnBeforeResourceLoad(null, new MockRequestResponse("POST", "{'searchWindow':{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Outside':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00:00','ToTime':'18:00:00'}},'fileName':'" + fileName + "'}", "application/json", "http://localhost:1337/api/search/export"));
+                var requestResponse = new MockRequestResponse("POST", "{'searchWindow':{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Outside':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00:00','ToTime':'18:00:00'}},'fileName':" + JsonConvert.SerializeObject(fileName) + "}", "application/json", "http://localhost:1337/api/search/export");
+                handler.OnBeforeResourceLoad(null, requestResponse);
                 var fileContents = File.ReadAllText(fileName);
                 StringAssert.AreEqualIgnoringCase("steve", fileContents);
             }
