@@ -66,4 +66,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+	<PropertyGroup>
+    <PostBuildEvent>
+      %25WINDIR%25\system32\xcopy /s /y "$(SolutionDir)\packages\CefSharp.WinForms.1.25.3\cef\*.*" "$(TargetDir)"
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
