@@ -6,7 +6,9 @@ using CefSharp;
 using Microsoft.Owin.FileSystems;
 using Newtonsoft.Json;
 using NLog;
+using NodaTime;
 using NodaTime.Serialization.JsonNet;
+using NodaTime.Text;
 using NodaTime.TimeZones;
 
 namespace Audition.Chromium
@@ -29,8 +31,9 @@ namespace Audition.Chromium
 
         private JsonSerializerSettings JsonSettings()
         {
-            var settings = new JsonSerializerSettings();
-            settings.ConfigureForNodaTime(new DateTimeZoneCache(new BclDateTimeZoneSource()));
+            var settings = new JsonSerializerSettings();            
+            var pattern = new NodaPatternConverter<LocalTime>(LocalTimePattern.CreateWithInvariantCulture("HH':'mm"));
+            settings.Converters.Add(pattern);
             return settings;
         }
     }
