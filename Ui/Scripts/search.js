@@ -33,8 +33,21 @@
 
         dataExport: {
             visible: false,
-            fileName: 'acme-possible-duplicated-journals',
-            fileType: 'xlsx',
+            fileName: '',
+            browse: function(data, e) {
+                e.preventDefault();
+                $.ajax('/api/choosefile', {
+
+                    data: {
+                        current: data.fileName(),                        
+                    },
+
+                    success: function (newName) {
+                        data.fileName(newName);
+                    },
+                    type: 'GET'
+                });
+            },
             save: function(data,e) {
                 e.preventDefault();
                 $.ajax('/api/search/export', {
