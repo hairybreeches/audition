@@ -26,7 +26,7 @@ namespace Audition.Controllers
             var fbd = new SaveFileDialog
             {
                 FileName = current,
-                Filter = "Excel spreadsheet|*.xlsx;*.xls|PDF document|*.pdf|All files|*.*"
+                Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|PDF document|*.pdf|All files|*.*"
 
             };            
 
