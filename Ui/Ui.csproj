@@ -157,7 +157,7 @@
     <None Include="templates\components\results.jade" />
     <None Include="templates\components\sap-login.jade" />
     <None Include="templates\components\scripts.jade" />
-    <None Include="templates\components\search.jade" />
+    <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
     <None Include="templates\components\xero-login.jade" />
     <None Include="templates\components\export.jade" />
