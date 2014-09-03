@@ -14,73 +14,12 @@ mixin dateInput(bindTo)
     
 +page('Search', 'search')
 	.container
-		form.form-horizontal(action="search", method="post")
-			fieldset(data-bind="with: input")
-				legend.vertical-space Find journals for the period...
-				.form-group(data-bind="with: Period")
-					.col-sm-12
-						.well.inline-block
-							+dateInput('From')
-							label.control-label.between-label to
-							+dateInput('To')
-							
-				legend.vertical-space posted outside...
-				.form-group(data-bind="with: Outside")
-					.col-md-6
-						.well.inline-block
-							+dayOfWeekSelector('FromDay')
-							label.control-label.between-label to
-							+dayOfWeekSelector('ToDay')
-					.col-md-6
-						.well.inline-block
-							+timeInput('FromTime')
-							label.control-label.between-label to
-							+timeInput('ToTime')
-						
-			.form-group
-				.col-xs-4.vertical-space
-					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;		
-				.col-xs-4.vertical-space
-					button.btn.btn-primary(data-bind="click: toggleShowExport") Export &raquo;
+		include ../components/search
 		hr.vertical-space
-
 	.container(data-bind="with: dataExport, visible: dataExport.visible")
 		include ../components/export
-	.container(data-bind="with:output, visible: output.visible()")		
-		h2 Results
-		.row.vertical-space
-			.col-sm-3
-				span Date created
-			.col-sm-3
-				span Date of journal
-			.col-sm-6
-				.row
-					.col-sm-3
-						span Account Code
-					.col-sm-3
-						span Account Name
-					.col-sm-3
-						span Dr/Cr
-					.col-sm-3
-						span Amount
-		// ko foreach: results
-		.row.vertical-space
-			.col-sm-3
-				span(data-bind="text: userFriendlyDateTime(Created)")
-			.col-sm-3
-				span(data-bind="text: userFriendlyDate(JournalDate)")
-			.col-sm-6(data-bind="foreach: Lines")
-				.row
-					.col-sm-3
-						span(data-bind="text: AccountCode")
-					.col-sm-3
-						span(data-bind="text: AccountName")
-					.col-sm-3
-						span(data-bind="text: JournalType")
-					.col-sm-3
-						span(data-bind="text: Amount")
-						
-		// /ko
+	.container(data-bind="with:output, visible: output.visible()")
+		include ../components/results
 				
 			
 
