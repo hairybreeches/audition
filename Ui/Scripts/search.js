@@ -22,6 +22,7 @@
                 data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
                 contentType: 'application/json',
                 success: model.output.searchSuccess,
+                error: model.output.searchFailure,
                 type: 'POST'
             });
         }
@@ -41,6 +42,11 @@
             model.output.results(results);
         },
 
+        searchFailure: function(jqXhr, textStatus, errorThrown) {
+            model.output.state('error');
+            model.output.lastError(textStatus + " : " + errorThrown);
+        },
+
         showApology: function () {
             var output = model.output;
             return output.state() === 'results' && !output.areResults();
@@ -57,7 +63,13 @@
 
         showSearching: function() {
             return model.output.state() === 'searching';
-        }
+        },
+
+        showError: function () {
+            return model.output.state() === 'error';
+        },
+
+        lastError: ''
     },
 
     toggleShowExport: function () {
