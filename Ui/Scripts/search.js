@@ -17,20 +17,47 @@
         submit: function(data, e) {
             e.preventDefault();
             model.state('output');
+            model.output.startSearch();
             $.ajax('/api/search', {
                 data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
                 contentType: 'application/json',
-                success: function(output) {
-                    model.output.results(output);
-                },
+                success: model.output.searchSuccess,
                 type: 'POST'
             });
         }
     },
-        
+
     output: {
         results: [],
-        visible: function () { return model.state() === 'output'; }
+        visible: function() { return model.state() === 'output'; },
+        state: '',
+
+        startSearch: function() {
+            model.output.state('searching');
+        },
+
+        searchSuccess: function (results) {
+            model.output.state('results');
+            model.output.results(results);
+        },
+
+        showApology: function () {
+            var output = model.output;
+            return output.state() === 'results' && !output.areResults();
+        },
+
+        areResults: function() {
+            return model.output.results().some(function() { return true; });
+        },
+
+        showResults: function () {
+            var output = model.output;
+            return output.state() === 'results' && output.areResults();
+        },
+
+        showSearching: function() {
+            return model.output.state() === 'searching';
+        }
     },
 
     toggleShowExport: function () {

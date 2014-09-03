@@ -1,34 +1,42 @@
-﻿h2 Results
-.row.vertical-space
-	.col-sm-3
-		span Date created
-	.col-sm-3
-		span Date of journal
-	.col-sm-6
-		.row
-			.col-sm-3
-				span Account Code
-			.col-sm-3
-				span Account Name
-			.col-sm-3
-				span Dr/Cr
-			.col-sm-3
-				span Amount
-// ko foreach: results
-.row.vertical-space
-	.col-sm-3
-		span(data-bind="text: userFriendlyDateTime(Created)")
-	.col-sm-3
-		span(data-bind="text: userFriendlyDate(JournalDate)")
-	.col-sm-6(data-bind="foreach: Lines")
-		.row
-			.col-sm-3
-				span(data-bind="text: AccountCode")
-			.col-sm-3
-				span(data-bind="text: AccountName")
-			.col-sm-3
-				span(data-bind="text: JournalType")
-			.col-sm-3
-				span(data-bind="text: Amount")
-				
-// /ko
+﻿div(data-bind="visible: showResults()")
+	h2 Results
+	.row.vertical-space
+		.col-sm-3
+			span Date created
+		.col-sm-3
+			span Date of journal
+		.col-sm-6
+			.row
+				.col-sm-3
+					span Account Code
+				.col-sm-3
+					span Account Name
+				.col-sm-3
+					span Dr/Cr
+				.col-sm-3
+					span Amount
+	// ko foreach: results
+	.row.vertical-space
+		.col-sm-3
+			span(data-bind="text: userFriendlyDateTime(Created)")
+		.col-sm-3
+			span(data-bind="text: userFriendlyDate(JournalDate)")
+		.col-sm-6(data-bind="foreach: Lines")
+			.row
+				.col-sm-3
+					span(data-bind="text: AccountCode")
+				.col-sm-3
+					span(data-bind="text: AccountName")
+				.col-sm-3
+					span(data-bind="text: JournalType")
+				.col-sm-3
+					span(data-bind="text: Amount")
+					
+	// /ko
+
+
+div(data-bind="visible: showApology()")
+	h2 No results
+
+div(data-bind="visible: showSearching()")
+	h2 Searching...
