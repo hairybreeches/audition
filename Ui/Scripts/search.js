@@ -15,17 +15,24 @@
 
         submit: function(data, e) {
             e.preventDefault();
+            model.dataExport.visible(false);
             $.ajax('/api/search', {
                 data: JSON.stringify(ko.mapping.toJS(data.input)),
                 contentType: 'application/json',
                 success: function(output) {
-                    data.output(output);
+                    data.output.results(output);
                 },
                 type: 'POST'
             });
         },
 
-        output: [],
+        output: {
+            results: [],
+            visible: function() {
+                return model.output.results().some(function() { return true; })
+                    && ! model.dataExport.visible();
+            }
+        },
 
         toggleShowExport : function() {
             model.dataExport.visible(!model.dataExport.visible());

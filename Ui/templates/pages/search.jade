@@ -46,8 +46,7 @@ mixin dateInput(bindTo)
 
 	.container(data-bind="with: dataExport, visible: dataExport.visible")
 		include ../components/export
-	.container(data-bind="visible: output().some(function(){return true;});")
-		hr.vertical-space
+	.container(data-bind="with:output, visible: output.visible()")		
 		h2 Results
 		.row.vertical-space
 			.col-sm-3
@@ -64,7 +63,7 @@ mixin dateInput(bindTo)
 						span Dr/Cr
 					.col-sm-3
 						span Amount
-		// ko foreach: output
+		// ko foreach: results
 		.row.vertical-space
 			.col-sm-3
 				span(data-bind="text: userFriendlyDateTime(Created)")
