@@ -16,7 +16,7 @@
 
         submit: function(data, e) {
             e.preventDefault();
-            model.dataExport.visible(false);
+            model.state('output');
             $.ajax('/api/search', {
                 data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
                 contentType: 'application/json',
@@ -30,18 +30,18 @@
         
     output: {
         results: [],
-        visible: function () {
-            return model.output.results().some(function () { return true; })
-                && !model.dataExport.visible();
-        }
+        visible: function () { return model.state() === 'output'; }
     },
 
     toggleShowExport: function () {
-        model.dataExport.visible(!model.dataExport.visible());
+        var newState = model.state() !== 'export' ? 'export' : 'output';
+        model.state(newState);
     },
 
+    state: '',
+
     dataExport: {
-        visible: false,
+        visible: function () { return model.state() === 'export'; },
         fileName: '',
         browse: function (data, e) {
             e.preventDefault();
