@@ -1,4 +1,6 @@
-﻿var model = ko.mapping.fromJS({
+﻿var demodata = "[{\"Id\":\"0421c274-2f50-49e4-8f61-623a4daf67ac\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"9012\",\"AccountName\":\"Expenses\",\"JournalType\":\"Cr\",\"Amount\":23.4},{\"AccountCode\":\"3001\",\"AccountName\":\"Cash\",\"JournalType\":\"Dr\",\"Amount\":23.4}]},{\"Id\":\"c8d99cf8-6867-4767-be1e-abdf54a2a0f8\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"8014\",\"AccountName\":\"Depreciation\",\"JournalType\":\"Cr\",\"Amount\":12.4},{\"AccountCode\":\"4001\",\"AccountName\":\"Fixed assets\",\"JournalType\":\"Dr\",\"Amount\":12.4}]}]";
+
+var model = ko.mapping.fromJS({
     input: {
         parameters: {
             Period: {
@@ -22,7 +24,7 @@
                 data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
                 contentType: 'application/json',
                 success: model.output.searchSuccess,
-                error: model.output.searchFailure,
+                error: function() { model.output.searchSuccess(JSON.parse(demodata)); },
                 type: 'POST'
             });
         }
