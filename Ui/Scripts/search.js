@@ -122,6 +122,11 @@ var userFriendlyDate = function(jsonDate) {
 
 var userFriendlyDateTime = function (jsonDate) {
     var date = new Date(jsonDate);
-    return date.toTimeString() + ' ' + date.toDateString();
+    return getTimeString(date) + ' ' + date.toDateString();
 }
+
+var getTimeString = function(date){
+    return date.toLocaleTimeString("en-UK", {hour: '2-digit', minute: '2-digit', hour12:false});
+}
+
 ko.applyBindings(model);
