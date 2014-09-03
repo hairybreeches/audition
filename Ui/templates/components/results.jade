@@ -40,3 +40,7 @@ div(data-bind="visible: showApology()")
 
 div(data-bind="visible: showSearching()")
 	h2 Searching...
+
+div(data-bind="visible: showError()")
+	h2 Error
+	span(data-bind="text: lastError")
