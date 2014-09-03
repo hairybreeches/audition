@@ -13,7 +13,7 @@ mixin dateInput(bindTo)
 
     
 +page('Search', 'search')
-	.container
+	.container(data-bind="with: input")
 		include ../components/searchInput
 		hr.vertical-space
 	.container(data-bind="with: dataExport, visible: dataExport.visible")

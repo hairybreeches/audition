@@ -1,5 +1,5 @@
 ﻿form.form-horizontal(action="search", method="post")
-	fieldset(data-bind="with: input")
+	fieldset(data-bind="with: parameters")
 		legend.vertical-space Find journals for the period...
 		.form-group(data-bind="with: Period")
 			.col-sm-12
@@ -25,4 +25,4 @@
 		.col-xs-4.vertical-space
 			button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;		
 		.col-xs-4.vertical-space
-			button.btn.btn-primary(data-bind="click: toggleShowExport") Export &raquo;
+			button.btn.btn-primary(data-bind="click: $root.toggleShowExport") Export &raquo;

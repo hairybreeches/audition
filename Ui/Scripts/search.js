@@ -1,8 +1,9 @@
 ﻿var model = ko.mapping.fromJS({
-        input: {
+    input: {
+        parameters: {
             Period: {
                 From: '2013-4-5',
-                To: '2014-4-4'                
+                To: '2014-4-4'
             },
 
             Outside: {
@@ -17,63 +18,62 @@
             e.preventDefault();
             model.dataExport.visible(false);
             $.ajax('/api/search', {
-                data: JSON.stringify(ko.mapping.toJS(data.input)),
+                data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
                 contentType: 'application/json',
                 success: function(output) {
-                    data.output.results(output);
+                    model.output.results(output);
                 },
                 type: 'POST'
             });
-        },
-
-        output: {
-            results: [],
-            visible: function() {
-                return model.output.results().some(function() { return true; })
-                    && ! model.dataExport.visible();
-            }
-        },
-
-        toggleShowExport : function() {
-            model.dataExport.visible(!model.dataExport.visible());
-        },
-
-        dataExport: {
-            visible: false,
-            fileName: '',
-            browse: function(data, e) {
-                e.preventDefault();
-                $.ajax('/api/choosefile', {
-
-                    data: {
-                        current: data.fileName(),                        
-                    },
-
-                    success: function (newName) {
-                        data.fileName(newName);
-                    },
-                    type: 'GET'
-                });
-            },
-            save: function(data,e) {
-                e.preventDefault();
-                $.ajax('/api/search/export', {
-
-                    data: JSON.stringify({
-                                searchWindow: ko.mapping.toJS(model.input),
-                                fileName: ko.mapping.toJS(data.fileName)
-                    }),
-
-                    contentType: 'application/json',
-                    success: function () {
-                        console.log("Saved file");
-                    },
-                    type: 'POST'
-                });
-            }
         }
+    },
+        
+    output: {
+        results: [],
+        visible: function () {
+            return model.output.results().some(function () { return true; })
+                && !model.dataExport.visible();
+        }
+    },
 
+    toggleShowExport: function () {
+        model.dataExport.visible(!model.dataExport.visible());
+    },
 
+    dataExport: {
+        visible: false,
+        fileName: '',
+        browse: function (data, e) {
+            e.preventDefault();
+            $.ajax('/api/choosefile', {
+
+                data: {
+                    current: data.fileName(),
+                },
+
+                success: function (newName) {
+                    data.fileName(newName);
+                },
+                type: 'GET'
+            });
+        },
+        save: function (data, e) {
+            e.preventDefault();
+            $.ajax('/api/search/export', {
+
+                data: JSON.stringify({
+                    searchWindow: ko.mapping.toJS(model.input.parameters),
+                    fileName: ko.mapping.toJS(data.fileName)
+                }),
+
+                contentType: 'application/json',
+                success: function () {
+                    console.log("Saved file");
+                },
+                type: 'POST'
+            });
+        }
+    }
 });
 
 var userFriendlyDate = function(jsonDate) {
