@@ -109,6 +109,7 @@
     <None Include="style\jqueryui-styling.less" />
     <None Include="style\jumbotron.less" />
     <None Include="style\logo.less" />
+    <None Include="style\page.less" />
     <None Include="style\style.less" />
     <None Include="style\verticalspacing.less" />
     <None Include="style\_flatstrap\.csscomb.json" />
