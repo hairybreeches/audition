@@ -16,9 +16,9 @@ mixin dateInput(bindTo)
 	.container(data-bind="with: input")
 		include ../components/searchInput
 		hr.vertical-space
-	.container(data-bind="with: dataExport, visible: dataExport.visible()")
+	.container(data-bind="with: dataExport, visible: dataExport.visible()", style="display: none;")
 		include ../components/export
-	.container(data-bind="with: output, visible: output.visible()")
+	.container(data-bind="with: output, visible: output.visible()", style="display: none")
 		include ../components/results
 				
 			
