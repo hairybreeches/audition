@@ -37,12 +37,12 @@ mixin dateInput(bindTo)
 							label.control-label.between-label to
 							+timeInput('ToTime')
 						
-			hr.vertical-space
 			.form-group
 				.col-xs-4.vertical-space
 					button.btn.btn-primary(type="submit" data-bind="click: submit") Search &raquo;		
 				.col-xs-4.vertical-space
 					button.btn.btn-primary(data-bind="click: toggleShowExport") Export &raquo;
+		hr.vertical-space
 
 	.container(data-bind="with: dataExport, visible: dataExport.visible")
 		include ../components/export
