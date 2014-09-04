@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using System.Web.Http.Results;
 using Excel;
 using Model;
 
@@ -28,10 +29,11 @@ namespace Audition.Controllers
         
         [HttpPost]
         [Route("api/search/export")]
-        public void Export(SaveSearchRequest saveRequest)
+        public IHttpActionResult Export(SaveSearchRequest saveRequest)
         {
             var journals = searcher.FindJournalsWithin(saveRequest.SearchWindow);
             excelExporter.WriteJournals(journals, saveRequest.Filename);
+            return Ok();
         }
     }
 }
