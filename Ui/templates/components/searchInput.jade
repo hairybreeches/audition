@@ -7,19 +7,34 @@
 					+dateInput('From')
 					label.control-label.between-label to
 					+dateInput('To')
-					
-		legend.vertical-space posted outside...
-		.form-group(data-bind="with: Outside")
-			.col-md-6
-				.well.inline-block
-					+dayOfWeekSelector('FromDay')
-					label.control-label.between-label to
-					+dayOfWeekSelector('ToDay')
-			.col-md-6
-				.well.inline-block
-					+timeInput('FromTime')
-					label.control-label.between-label to
-					+timeInput('ToTime')
+		ul.nav.nav-tabs
+			li.active
+				a(href="#time" data-toggle="tab") Outside working hours
+			li
+				a(href="#accounts" data-toggle="tab") Unusual accounts
+			li
+				a(href="#users" data-toggle="tab") Unexpected users
+			li
+				a(href="#date" data-toggle="tab") Year end
+			li
+				a(href="#endings" data-toggle="tab") Round number
+			li
+				a(href="#keyword" data-toggle="tab") Keyword search
+
+		#myTabContent.tab-content
+			.tab-pane.fade.active.in#time
+			legend.vertical-space posted outside...
+			.form-group(data-bind="with: Outside")
+				.col-md-6
+					.well.inline-block
+						+dayOfWeekSelector('FromDay')
+						label.control-label.between-label to
+						+dayOfWeekSelector('ToDay')
+				.col-md-6
+					.well.inline-block
+						+timeInput('FromTime')
+						label.control-label.between-label to
+						+timeInput('ToTime')
 				
 	.form-group
 		.col-xs-4.vertical-space
