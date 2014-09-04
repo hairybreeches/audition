@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
 using System.Web.Http;
 using System.Windows.Forms;
@@ -19,6 +20,14 @@ namespace Audition.Controllers
         public async Task<string> FileChooserDialog(string current)
         {                        
             return await taskFactory.StartNew(() => GetValue(current));
+        }     
+        
+        [HttpGet]
+        [Route("api/openfile")]
+        public IHttpActionResult OpenFile(string fileName)
+        {
+            Process.Start(fileName);
+            return Ok();
         }
 
         private static string GetValue(string current)

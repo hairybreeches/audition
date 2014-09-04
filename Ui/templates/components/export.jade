@@ -12,3 +12,13 @@ form.form-horizontal(action="search", method="post")
 		.form-group
 			div(class="col-sm-4")
 				button(type="submit" class="btn btn-primary" data-bind="click: save") Save &raquo;
+
+.row(data-bind="with: successMessage")
+	.col-md-8.col-md-offset-2
+		.alert.alert-success(data-bind="visible: visible()")
+			button.close(type="button" data-bind="click: hide") x
+			strong Success! 
+			| Your search has been saved to:
+			br
+			a.alert-link(data-bind="text: fileName(), click: openFile", href="#")
+</div>

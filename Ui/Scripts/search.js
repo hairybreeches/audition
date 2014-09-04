@@ -98,6 +98,9 @@
         },
         save: function (data, e) {
             e.preventDefault();
+            model.dataExport.successMessage.hide();
+            var fileName = data.fileName();
+
             $.ajax('/api/search/export', {
 
                 data: JSON.stringify({
@@ -107,10 +110,32 @@
 
                 contentType: 'application/json',
                 success: function () {
-                    console.log("Saved file");
+                    model.dataExport.successMessage.show(fileName);
                 },
                 type: 'POST'
             });
+        },
+        successMessage: {
+            visible: false,
+            hide: function() {
+                model.dataExport.successMessage.visible(false);
+            },
+            fileName: '',
+
+            openFile: function(_, e) {
+                e.preventDefault();
+                $.ajax('/api/openfile', {
+                    data: {
+                        fileName: model.dataExport.successMessage.fileName
+                    },
+                    type: 'GET'
+                });
+            },                       
+
+            show: function(fileName) {
+                model.dataExport.successMessage.visible(true);
+                model.dataExport.successMessage.fileName(fileName);
+            }
         }
     }
 });
