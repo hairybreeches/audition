@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.Results;
+using Audition.Native;
 using Excel;
 using Model;
 
@@ -13,11 +11,13 @@ namespace Audition.Controllers
     {
         private readonly IJournalSearcher searcher;
         private readonly ExcelExporter excelExporter;
+        private readonly IFileSaveChooser fileSaveChooser;
 
-        public SearchController(IJournalSearcher searcher, ExcelExporter excelExporter)
+        public SearchController(IJournalSearcher searcher, ExcelExporter excelExporter, IFileSaveChooser fileSaveChooser)
         {
             this.searcher = searcher;
             this.excelExporter = excelExporter;
+            this.fileSaveChooser = fileSaveChooser;
         }
 
         [HttpPost]
@@ -29,11 +29,12 @@ namespace Audition.Controllers
         
         [HttpPost]
         [Route("api/search/export")]
-        public IHttpActionResult Export(SaveSearchRequest saveRequest)
+        public async Task<IHttpActionResult> Export(SearchWindow saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            excelExporter.WriteJournals(journals, saveRequest.Filename);
-            return Ok();
+            var saveLocation = await fileSaveChooser.GetFileSaveLocation();
+            var journals = searcher.FindJournalsWithin(saveRequest);
+            excelExporter.WriteJournals(journals, saveLocation);
+            return Ok(saveLocation);
         }
     }
 }

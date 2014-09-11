@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
-using Audition.Controllers;
 using Autofac;
 
 namespace Audition.Native
@@ -11,7 +10,7 @@ namespace Audition.Native
         {
             builder.Register(_ => new StaTaskScheduler(1)).SingleInstance();
             builder.Register(_ => new TaskFactory<string>(_.Resolve<StaTaskScheduler>()));
-            builder.RegisterType<FileSaveChooser>();
+            builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
         }
     }
 }

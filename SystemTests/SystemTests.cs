@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Audition;
+using Audition.Controllers;
+using Audition.Native;
 using Autofac;
 using CefSharp;
 using Model;
 using Newtonsoft.Json;
+using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;
 using Xero;
@@ -56,14 +60,16 @@ namespace SystemTests
             builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
                 .As<Microsoft.Owin.FileSystems.IFileSystem>();
 
-
+            var fileChooser = Substitute.For<IFileSaveChooser>();
+            var fileName = Path.GetTempFileName();
+            fileChooser.GetFileSaveLocation().Returns(Task<string>.FromResult(fileName));
+            builder.Register(_ => fileChooser).As<IFileSaveChooser>();
             using (var lifetime = builder.Build())
             {
-                var fileName = Path.GetTempFileName();
                 var handler = lifetime.Resolve<IRequestHandler>();
 
                 var requestResponse = new MockRequestResponse("POST",
-                    "{'searchWindow':" + SearchWindow + ",'fileName':" + JsonConvert.SerializeObject(fileName) + "}",
+                    SearchWindow,
                     "application/json", "http://localhost:1337/api/search/export");
                 handler.OnBeforeResourceLoad(null, requestResponse);
                 var fileContents = File.ReadAllText(fileName);

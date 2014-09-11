@@ -16,7 +16,6 @@
 
         submit: function(data, e) {
             e.preventDefault();
-            model.state('output');
             model.output.startSearch();
             $.ajax('/api/search', {
                 data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
@@ -29,8 +28,7 @@
     },
 
     output: {
-        results: [],
-        visible: function() { return model.state() === 'output'; },
+        results: [],        
         state: '',
 
         startSearch: function() {
@@ -72,49 +70,26 @@
         lastError: ''
     },
 
-    toggleShowExport: function () {
-        var newState = model.state() !== 'export' ? 'export' : 'output';
-        model.state(newState);
-    },
-
-    state: '',
-
     dataExport: {
-        visible: function () { return model.state() === 'export'; },
-        fileName: '',
-        browse: function (data, e) {
-            e.preventDefault();
-            $.ajax('/api/choosefile', {
 
-                data: {
-                    current: data.fileName(),
-                },
-
-                success: function (newName) {
-                    data.fileName(newName);
-                },
-                type: 'GET'
-            });
-        },
         save: function (data, e) {
             e.preventDefault();
-            model.dataExport.successMessage.hide();
-            var fileName = data.fileName();
+            model.dataExport.successMessage.hide();            
 
             $.ajax('/api/search/export', {
 
-                data: JSON.stringify({
-                    searchWindow: ko.mapping.toJS(model.input.parameters),
-                    fileName: ko.mapping.toJS(data.fileName)
-                }),
+                data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
 
                 contentType: 'application/json',
-                success: function () {
+                success: function (fileName) {
                     model.dataExport.successMessage.show(fileName);
                 },
                 type: 'POST'
             });
         },
+
+        fileName: '',
+
         successMessage: {
             visible: false,
             hide: function() {
@@ -132,9 +107,9 @@
                 });
             },                       
 
-            show: function(fileName) {
-                model.dataExport.successMessage.visible(true);
+            show: function (fileName) {
                 model.dataExport.successMessage.fileName(fileName);
+                model.dataExport.successMessage.visible(true);                
             }
         }
     }
