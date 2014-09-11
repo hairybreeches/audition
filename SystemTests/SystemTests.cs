@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Audition;
+using Audition.Chromium;
 using Audition.Controllers;
 using Audition.Native;
 using Autofac;
@@ -57,23 +58,39 @@ namespace SystemTests
 
             var fileChooser = Substitute.For<IFileSaveChooser>();
             var fileName = Path.GetTempFileName();
-            fileChooser.GetFileSaveLocation().Returns(Task<string>.FromResult(fileName));
+            fileChooser.GetFileSaveLocation().Returns(Task.FromResult(fileName));
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
 
-            using (var lifetime = builder.Build())
-            {
-                var handler = lifetime.Resolve<IRequestHandler>();
 
-                var requestResponse = new MockRequestResponse("POST",
+            var requestResponse = new MockRequestResponse("POST",
                     SearchWindow,
                     "application/json", "http://localhost:1337/api/search/export");
-                handler.OnBeforeResourceLoad(null, requestResponse);
-                var fileContents = File.ReadAllText(fileName);
-                StringAssert.AreEqualIgnoringCase(
-                    @"Created,Date
+
+            ExecuteRequest(builder, requestResponse);
+
+            var fileContents = File.ReadAllText(fileName);
+            StringAssert.AreEqualIgnoringCase(
+                @"Created,Date
 06/04/2013 00:00:00,06/04/2013 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
 06/04/2013 00:00:00,06/04/2013 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ", fileContents);
+            
+        }        
+
+        [Test]
+        public void CanReturnJournalsSearchedFor()
+        {
+            var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
+                   "http://localhost:1337/api/search");
+
+            var cefSharpResponse = ExecuteRequest(requestResponse);
+
+            using (var reader = new StreamReader(cefSharpResponse.Content))
+            {
+                var actual = reader.ReadToEnd();
+                Assert.AreEqual(
+                    "[{\"Id\":\"0421c274-2f50-49e4-8f61-623a4daf67ac\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"9012\",\"AccountName\":\"Expenses\",\"JournalType\":\"Cr\",\"Amount\":23.4},{\"AccountCode\":\"3001\",\"AccountName\":\"Cash\",\"JournalType\":\"Dr\",\"Amount\":23.4}]},{\"Id\":\"c8d99cf8-6867-4767-be1e-abdf54a2a0f8\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"8014\",\"AccountName\":\"Depreciation\",\"JournalType\":\"Cr\",\"Amount\":12.4},{\"AccountCode\":\"4001\",\"AccountName\":\"Fixed assets\",\"JournalType\":\"Dr\",\"Amount\":12.4}]}]",
+                    actual);
             }
         }
 
@@ -88,27 +105,23 @@ namespace SystemTests
             return builder;
         }
 
-        [Test]
-        public void CanReturnJournalsSearchedFor()
+        private CefSharpResponse ExecuteRequest(MockRequestResponse requestResponse)
         {
-            var builder = CreateContainerBuilder();
-
+            return ExecuteRequest(CreateContainerBuilder(), requestResponse);
+        }
+        private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
+        {
+            CefSharpResponse cefSharpResponse;
             using (var lifetime = builder.Build())
             {
                 var handler = lifetime.Resolve<IRequestHandler>();
 
-                var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
-                    "http://localhost:1337/api/search");
-               handler.OnBeforeResourceLoad(null, requestResponse);
 
-                using (var reader = new StreamReader(requestResponse.Response.Content))
-                {
-                    var actual = reader.ReadToEnd();
-                    Assert.AreEqual(
-                        "[{\"Id\":\"0421c274-2f50-49e4-8f61-623a4daf67ac\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"9012\",\"AccountName\":\"Expenses\",\"JournalType\":\"Cr\",\"Amount\":23.4},{\"AccountCode\":\"3001\",\"AccountName\":\"Cash\",\"JournalType\":\"Dr\",\"Amount\":23.4}]},{\"Id\":\"c8d99cf8-6867-4767-be1e-abdf54a2a0f8\",\"Created\":\"2013-04-06T00:00:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"8014\",\"AccountName\":\"Depreciation\",\"JournalType\":\"Cr\",\"Amount\":12.4},{\"AccountCode\":\"4001\",\"AccountName\":\"Fixed assets\",\"JournalType\":\"Dr\",\"Amount\":12.4}]}]",
-                        actual);
-                }
+                handler.OnBeforeResourceLoad(null, requestResponse);
+
+                cefSharpResponse = requestResponse.Response;
             }
+            return cefSharpResponse;
         }
     }
 }
