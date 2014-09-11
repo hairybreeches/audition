@@ -124,6 +124,7 @@
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Chromium\Routing.cs" />
+    <Compile Include="Controllers\FileSaveChooser.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
