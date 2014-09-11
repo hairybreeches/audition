@@ -1,27 +1,28 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Schedulers;
 using System.Web.Http;
-using System.Windows.Forms;
 
 namespace Audition.Controllers
 {
     public class FileSystemController : RedirectController
     {
-        private readonly TaskFactory<string> taskFactory;
+        private readonly FileSaveChooser saveChooser;
 
-        public FileSystemController(TaskFactory<string> taskFactory)
+
+        public FileSystemController(FileSaveChooser saveChooser)
         {
-            this.taskFactory = taskFactory;
+            this.saveChooser = saveChooser;            
         }
 
         [HttpGet]
         [Route("api/choosefile")]        
         public async Task<string> FileChooserDialog(string current)
         {                        
-            return await taskFactory.StartNew(() => GetValue(current));
-        }     
-        
+            return await saveChooser.GetFileSaveLocation(current);
+        }
+
+       
+
         [HttpGet]
         [Route("api/openfile")]
         public IHttpActionResult OpenFile(string fileName)
@@ -30,18 +31,6 @@ namespace Audition.Controllers
             return Ok();
         }
 
-        private static string GetValue(string current)
-        {
-            var fbd = new SaveFileDialog
-            {
-                FileName = current,
-                Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|PDF document|*.pdf|All files|*.*"
-
-            };            
-
-            fbd.ShowDialog();
-
-            return fbd.FileName;
-        }
+        
     }
 }
