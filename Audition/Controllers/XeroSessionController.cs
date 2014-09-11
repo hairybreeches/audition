@@ -4,11 +4,11 @@ using Xero;
 
 namespace Audition.Controllers
 {
-    public class XeroLoginController : RedirectController
+    public class XeroSessionController : RedirectController
     {
         private readonly IRepositoryFactory repositoryFactory;
 
-        public XeroLoginController(IRepositoryFactory repositoryFactory)
+        public XeroSessionController(IRepositoryFactory repositoryFactory)
         {
             this.repositoryFactory = repositoryFactory;
         }
