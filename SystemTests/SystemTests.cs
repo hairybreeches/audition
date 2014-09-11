@@ -109,6 +109,7 @@ namespace SystemTests
         {
             return ExecuteRequest(CreateContainerBuilder(), requestResponse);
         }
+
         private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
         {
             CefSharpResponse cefSharpResponse;
