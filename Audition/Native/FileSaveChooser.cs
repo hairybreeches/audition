@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Audition.Controllers;
 
-namespace Audition.Controllers
+namespace Audition.Native
 {
-    public class FileSaveChooser
+    public class FileSaveChooser : IFileSaveChooser
     {
         private readonly TaskFactory<string> taskFactory;
 
@@ -12,16 +13,15 @@ namespace Audition.Controllers
             this.taskFactory = taskFactory;
         }
 
-        public async Task<string> GetFileSaveLocation(string current)
+        public async Task<string> GetFileSaveLocation()
         {
-            return await taskFactory.StartNew(() => GetValue(current));
+            return await taskFactory.StartNew(GetValue);
         }
 
-        private static string GetValue(string current)
+        private static string GetValue()
         {
             var fbd = new SaveFileDialog
             {
-                FileName = current,
                 Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|PDF document|*.pdf|All files|*.*"
 
             };
