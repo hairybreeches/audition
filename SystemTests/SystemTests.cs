@@ -53,17 +53,13 @@ namespace SystemTests
         [Test]
         public void CanSaveJournalsReturnedToAFile()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<AuditionModule>();
-            builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();
-
-            builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
-                .As<Microsoft.Owin.FileSystems.IFileSystem>();
+            var builder = CreateContainerBuilder();
 
             var fileChooser = Substitute.For<IFileSaveChooser>();
             var fileName = Path.GetTempFileName();
             fileChooser.GetFileSaveLocation().Returns(Task<string>.FromResult(fileName));
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
+
             using (var lifetime = builder.Build())
             {
                 var handler = lifetime.Resolve<IRequestHandler>();
@@ -81,8 +77,7 @@ namespace SystemTests
             }
         }
 
-        [Test]
-        public void CanReturnJournalsSearchedFor()
+        private ContainerBuilder CreateContainerBuilder()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
@@ -90,7 +85,13 @@ namespace SystemTests
 
             builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
                 .As<Microsoft.Owin.FileSystems.IFileSystem>();
+            return builder;
+        }
 
+        [Test]
+        public void CanReturnJournalsSearchedFor()
+        {
+            var builder = CreateContainerBuilder();
 
             using (var lifetime = builder.Build())
             {
