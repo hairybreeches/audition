@@ -85,8 +85,7 @@
     <None Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="style\actionlink.less" />
     <None Include="style\bootswatch.less" />
-    <None Include="style\buttons.less" />
-    <None Include="style\form-ranges.less" />
+    <None Include="style\forms.less" />
     <None Include="style\grouped-table.less" />
     <None Include="style\jq-ui-bootstrap\accordion.less" />
     <None Include="style\jq-ui-bootstrap\autocomplete.less" />
