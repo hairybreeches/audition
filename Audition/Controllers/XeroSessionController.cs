@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Results;
+using Audition.Chromium;
 using Xero;
 
 namespace Audition.Controllers
@@ -28,6 +28,14 @@ namespace Audition.Controllers
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
             return RedirectToView("search.html");
+        }
+
+        [HttpPost]
+        [Route("api/xero/logout")]
+        public IHttpActionResult Logout()
+        {
+            repositoryFactory.Logout();
+            return RedirectToView("login.html");
         }
     }
 }

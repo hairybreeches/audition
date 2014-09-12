@@ -7,5 +7,6 @@ namespace Xero
         IFullRepository CreateRepository();
         void CompleteAuthenticationRequest(string verificationCode);
         void InitialiseAuthenticationRequest();
+        void Logout();
     }
 }
