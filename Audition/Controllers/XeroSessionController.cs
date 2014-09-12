@@ -12,8 +12,7 @@ namespace Audition.Controllers
         {
             this.repositoryFactory = repositoryFactory;
         }
-
-        //todo: share these routes between js and c# using CEF
+        
         [HttpPost]
         [Route(Routing.XeroLogin)]
         public IHttpActionResult BeginAuthenticate()
