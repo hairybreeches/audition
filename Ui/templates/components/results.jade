@@ -1,39 +1,31 @@
 ﻿div(data-bind="visible: showResults()")
 	h2 Results
-	.row.vertical-space
-		.col-sm-3
-			span Date created
-		.col-sm-3
-			span Date of journal
-		.col-sm-6
-			.row
-				.col-sm-3
-					span Account Code
-				.col-sm-3
-					span Account Name
-				.col-sm-3
-					span Dr/Cr
-				.col-sm-3
-					span Amount
-	// ko foreach: results
-	.row.vertical-space
-		.col-sm-3
-			span(data-bind="text: userFriendlyDateTime(Created)")
-		.col-sm-3
-			span(data-bind="text: userFriendlyDate(JournalDate)")
-		.col-sm-6(data-bind="foreach: Lines")
-			.row
-				.col-sm-3
-					span(data-bind="text: AccountCode")
-				.col-sm-3
-					span(data-bind="text: AccountName")
-				.col-sm-3
-					span(data-bind="text: JournalType")
-				.col-sm-3
-					span(data-bind="text: Amount")
-					
-	// /ko
-
+	table.table.table-striped.table-hover 
+		thead
+			tr
+				th Date created
+				th Date of journal
+				th Account Code
+				th Account Name
+				th Dr/Cr
+				th Amount
+		tbody(data-bind="foreach: results")			
+			tr
+				td(data-bind="text: userFriendlyDateTime(Created)")
+				td(data-bind="text: userFriendlyDate(JournalDate)")
+				td(data-bind="text: Lines[0].AccountCode")
+				td(data-bind="text: Lines[0].AccountName")
+				td(data-bind="text: Lines[0].JournalType")
+				td(data-bind="text: Lines[0].Amount")
+			// ko foreach: Lines.slice(1)
+			tr
+				td
+				td
+				td(data-bind="text: AccountCode")
+				td(data-bind="text: AccountName")
+				td(data-bind="text: JournalType")
+				td(data-bind="text: Amount")
+			// /ko
 
 div(data-bind="visible: showApology()")
 	h2 No results
