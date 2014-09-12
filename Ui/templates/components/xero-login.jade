@@ -1,4 +1,5 @@
-﻿mixin xero-login()
-	.form-group
-		.col-sm-10.col-sm-offset-2
-			p Press the button below to be redirected to Xero to sign in.
+﻿include forms
+
+mixin xero-login()
+	+form-field('')
+		p Press the button below to be redirected to Xero to sign in.
