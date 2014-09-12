@@ -13,6 +13,10 @@ mixin dateInput(bindTo)
 
     
 +page('Search', 'search')
+	.container
+		.row
+			.col-md-1.col-md-offset-11
+				a.pull-right.action-link(href="/api/xero/logout") Logout
 	.container(data-bind="with: input")
 		include ../components/searchInput
 		hr.vertical-space
