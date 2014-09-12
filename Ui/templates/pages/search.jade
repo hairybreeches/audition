@@ -1,17 +1,5 @@
 include ../components/template
-
-mixin dayOfWeekSelector(bindTo)
-	select.form-control.scaled-input(data-bind="value: " + bindTo)
-		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
-			option= day
-
-mixin timeInput(bindTo)
-	input.form-control.scaled-input(type="time", data-bind="value: " + bindTo)
-	
-mixin dateInput(bindTo)
-	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
-
-    
+   
 +page('Search', 'search')
 	.container
 		.row
