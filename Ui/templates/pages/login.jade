@@ -7,10 +7,9 @@ include ../components/forms
 mixin login-form(system, url)
 	form.form-horizontal(action=url, method="post", data-bind="visible: system() === '#{system}'")
 		block
-		hr.vertical-space
-		.form-group
-			div(class="col-sm-4")
-				button(type="submit" class="btn btn-primary") Login &raquo;
+		+button-group()
+			button.vertical-space.btn.btn-primary(type="submit") Login &raquo;
+
 
 
 +page('Login', 'login')
@@ -28,5 +27,6 @@ mixin login-form(system, url)
 			+sap-login()
 		+login-form('xero', "/api/xero/login")
 			+xero-login()
+		hr.vertical-space
 
 				
