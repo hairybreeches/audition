@@ -83,8 +83,11 @@
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="style\actionlink.less" />
     <None Include="style\bootswatch.less" />
+    <None Include="style\buttons.less" />
     <None Include="style\form-ranges.less" />
+    <None Include="style\grouped-table.less" />
     <None Include="style\jq-ui-bootstrap\accordion.less" />
     <None Include="style\jq-ui-bootstrap\autocomplete.less" />
     <None Include="style\jq-ui-bootstrap\base.less" />
@@ -154,6 +157,7 @@
     <None Include="style\_flatstrap\utilities.less" />
     <None Include="style\_flatstrap\variables.less" />
     <None Include="style\_flatstrap\wells.less" />
+    <None Include="templates\components\forms.jade" />
     <None Include="templates\components\head.jade" />
     <None Include="templates\components\results.jade" />
     <None Include="templates\components\sap-login.jade" />
