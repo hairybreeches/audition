@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Web.Http;
+using Audition.Chromium;
 
 namespace Audition.Controllers
 {
     public class FileSystemController : RedirectController
     {
         [HttpGet]
-        [Route("api/openfile")]
+        [Route(Routing.Openfile)]
         public IHttpActionResult OpenFile(string fileName)
         {
             Process.Start(fileName);

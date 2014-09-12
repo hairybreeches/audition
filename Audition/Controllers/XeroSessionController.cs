@@ -15,7 +15,7 @@ namespace Audition.Controllers
 
         //todo: share these routes between js and c# using CEF
         [HttpPost]
-        [Route("api/xero/login")]
+        [Route(Routing.XeroLogin)]
         public IHttpActionResult BeginAuthenticate()
         {
             repositoryFactory.InitialiseAuthenticationRequest();
@@ -23,7 +23,7 @@ namespace Audition.Controllers
         }
         
         [HttpPost]
-        [Route("api/xero/completelogin")]
+        [Route(Routing.FinishXeroLogin)]
         public IHttpActionResult PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
@@ -31,7 +31,7 @@ namespace Audition.Controllers
         }
 
         [HttpPost]
-        [Route("api/xero/logout")]
+        [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
             repositoryFactory.Logout();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Audition.Chromium;
 using Audition.Native;
 using Excel;
 using Model;
@@ -21,14 +22,14 @@ namespace Audition.Controllers
         }
 
         [HttpPost]
-        [Route("api/search")]
+        [Route(Routing.Search)]
         public IEnumerable<Journal> Search(SearchWindow searchWindow)
         {
             return searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
-        [Route("api/search/export")]
+        [Route(Routing.ExportSearch)]
         public async Task<IHttpActionResult> Export(SearchWindow saveRequest)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
