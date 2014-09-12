@@ -1,13 +1,12 @@
 include ../components/template
+include ../components/forms
 
 +page('Login')
 	div.container
 		form.form-horizontal(action='/api/xero/completelogin', method="post", enc="x-www-form-urlencoded")
 			legend.vertical-space To finish logging in to Xero, enter your confirmation code here
-			.form-group
-				label.col-sm-2.control-label Confirmation code
-				.col-sm-10
-					input.form-control(type="text" value="" name="code")			
+			+form-field('Confirmation code')				
+				input.form-control(type="text" value="" name="code")			
 			.form-group
 				div.col-sm-12.button-group
 					button.btn.btn-primary.vertical-space(type="submit") Login &raquo;
