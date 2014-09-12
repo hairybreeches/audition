@@ -29,7 +29,7 @@ namespace Audition.Controllers
             return RedirectToView("search.html");
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
