@@ -34,7 +34,10 @@ namespace Tests
                 var controllerAssembly = typeof(SearchController).Assembly;
                 return controllerAssembly.GetTypes()
                     .Where(x => x.IsSubclassOf(typeof (ApiController)))
-                    .Where(x=> !x.IsAbstract);
+                    .Where(x=> !x.IsAbstract)
+                    //can't initialise something that plays around with CEF in the tests
+                    //todo: make this work!
+                    .Where(x=> x!= typeof(DevController));
 
             }
         }

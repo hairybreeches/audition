@@ -13,6 +13,7 @@ namespace Audition.Chromium
         public const string Search = "api/search";
 
         public const string InternalDomain = @"http://localhost:1337";
+        public const string ShowDevTools = "api/devtools";
 
         public static string AddInternalDomain(string address)
         {
