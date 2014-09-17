@@ -108,8 +108,6 @@
             });
         },
 
-        fileName: '',
-
         successMessage: {
             visible: false,
             hide: function() {
