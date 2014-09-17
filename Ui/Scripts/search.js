@@ -48,7 +48,7 @@
 
         save: function (e, url, data) {
             e.preventDefault();
-            model.dataExport.successMessage.hide();
+            model.exportSuccessMessage.hide();
 
             $.ajax(url, {
 
@@ -56,7 +56,7 @@
 
                 contentType: 'application/json',
                 success: function (fileName) {
-                    model.dataExport.successMessage.show(fileName);
+                    model.exportSuccessMessage.show(fileName);
                 },
                 type: 'POST'
             });
@@ -106,31 +106,29 @@
         lastError: ''
     },
 
-    dataExport: {
+    exportSuccessMessage: {
+        visible: false,
+        hide: function () {
+            model.exportSuccessMessage.visible(false);
+        },
+        fileName: '',
 
-        successMessage: {
-            visible: false,
-            hide: function() {
-                model.dataExport.successMessage.visible(false);
-            },
-            fileName: '',
+        openFile: function (_, e) {
+            e.preventDefault();
+            $.ajax('/api/openfile', {
+                data: {
+                    fileName: model.exportSuccessMessage.fileName
+                },
+                type: 'GET'
+            });
+        },
 
-            openFile: function(_, e) {
-                e.preventDefault();
-                $.ajax('/api/openfile', {
-                    data: {
-                        fileName: model.dataExport.successMessage.fileName
-                    },
-                    type: 'GET'
-                });
-            },                       
-
-            show: function (fileName) {
-                model.dataExport.successMessage.fileName(fileName);
-                model.dataExport.successMessage.visible(true);                
-            }
+        show: function (fileName) {
+            model.exportSuccessMessage.fileName(fileName);
+            model.exportSuccessMessage.visible(true);
         }
     }
+    
 });
 
 var userFriendlyDate = function(jsonDate) {
