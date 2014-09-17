@@ -39,11 +39,11 @@ form.form-horizontal(action="search", method="post")
 			.form-group(data-bind="with: Outside")
 				.col-xs-12
 					.inline-block
-						.well.inline-block.vertical-space.margin-right
+						.well.inline-block.vertical-space.margin-right(data-bind="with: parameters")
 							+dayOfWeekSelector('FromDay')
 							label.control-label.between-label to
 							+dayOfWeekSelector('ToDay')
-						.well.inline-block.vertical-space
+						.well.inline-block.vertical-space(data-bind="with: parameters")
 							+timeInput('FromTime')
 							label.control-label.between-label to
 							+timeInput('ToTime')
