@@ -76,7 +76,10 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\mousetrap.js" />
+    <Content Include="Scripts\mousetrap.min.js" />
     <Content Include="Scripts\search.js" />
+    <Content Include="Scripts\shortcuts.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
