@@ -12,21 +12,33 @@
                 FromTime: "08:00",
                 ToTime: "18:00"
             },
+
+            submit: function(_, e) {
+                model.input.submit(e, '/api/search', model.input.Outside);
+            },
+
+            save: function(_, e) {
+                model.dataExport.save(e, '/api/search/export', model.input.Outside);
+            },
+
+            serialise: function() {
+                return model.input.serialise(model.input.Outside.parameters);
+            }
         },
         
 
-        serialise: function() {
+        serialise: function(parameters) {
             return JSON.stringify(ko.mapping.toJS({
                 Period: model.input.Period,
-                Parameters: model.input.Outside.parameters
+                Parameters: parameters
             }));
         },
 
-        submit: function(data, e) {
+        submit: function(e, url, data) {
             e.preventDefault();
             model.output.startSearch();
-            $.ajax('/api/search', {
-                data: model.input.serialise(),
+            $.ajax(url, {
+                data: data.serialise(),
                 contentType: 'application/json',
                 success: model.output.searchSuccess,
                 error: model.output.searchFailure,
@@ -80,13 +92,13 @@
 
     dataExport: {
 
-        save: function (data, e) {
+        save: function (e, url, data) {
             e.preventDefault();
             model.dataExport.successMessage.hide();            
 
-            $.ajax('/api/search/export', {
+            $.ajax(url, {
 
-                data: model.input.serialise(),
+                data: data.serialise(),
 
                 contentType: 'application/json',
                 success: function (fileName) {
