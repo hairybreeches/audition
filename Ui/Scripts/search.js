@@ -1,21 +1,23 @@
 ﻿var model = ko.mapping.fromJS({
     input: {
-        parameters: {
-            Period: {
-                From: '2013-4-1',
-                To: '2014-3-31'
-            },
-
-            Outside: {
-                FromDay: "Monday",
-                ToDay: "Friday",
-                FromTime: "08:00",
-                ToTime: "18:00"
-            }
+        Period: {
+            From: '2013-4-1',
+            To: '2014-3-31'
         },
 
+        Outside: {
+            FromDay: "Monday",
+            ToDay: "Friday",
+            FromTime: "08:00",
+            ToTime: "18:00"
+        },
+        
+
         serialise: function() {
-            return JSON.stringify(ko.mapping.toJS(model.input.parameters));
+            return JSON.stringify(ko.mapping.toJS({
+                Period: model.input.Period,
+                Outside: model.input.Outside
+            }));
         },
 
         submit: function(data, e) {
