@@ -94,6 +94,11 @@ namespace Audition.Chromium
             webView.EvaluateScript(script);
         }
 
+        internal void ShowDevTools()
+        {
+            webView.ShowDevTools();
+        }
+
         public bool OnBeforeMenu(IWebBrowser browser)
         {
             return !Keyboard.IsKeyDown(Key.LeftShift);
