@@ -49,7 +49,7 @@ namespace SystemTests
                 }));
 
         private const string SearchWindow =
-            "{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Outside':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00','ToTime':'18:00'}}";
+            "{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Parameters':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00','ToTime':'18:00'}}";
 
         [Test]
         public void CanSaveJournalsReturnedToAFile()

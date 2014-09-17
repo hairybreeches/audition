@@ -20,7 +20,7 @@ namespace Tests
                 To: '2013-4-4'
             },
 
-            Outside: {
+            Parameters: {
                 FromDay: 'Monday',
                 ToDay: 'Friday',
                 FromTime: '08:00',
