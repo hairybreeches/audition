@@ -18,7 +18,7 @@
             },
 
             save: function(_, e) {
-                model.dataExport.save(e, '/api/search/export', model.input.Outside);
+                model.input.save(e, '/api/search/export', model.input.Outside);
             },
 
             serialise: function() {
@@ -44,7 +44,23 @@
                 error: model.output.searchFailure,
                 type: 'POST'
             });
-        }
+        },
+
+        save: function (e, url, data) {
+            e.preventDefault();
+            model.dataExport.successMessage.hide();
+
+            $.ajax(url, {
+
+                data: data.serialise(),
+
+                contentType: 'application/json',
+                success: function (fileName) {
+                    model.dataExport.successMessage.show(fileName);
+                },
+                type: 'POST'
+            });
+        },
     },
 
     output: {
@@ -91,22 +107,6 @@
     },
 
     dataExport: {
-
-        save: function (e, url, data) {
-            e.preventDefault();
-            model.dataExport.successMessage.hide();            
-
-            $.ajax(url, {
-
-                data: data.serialise(),
-
-                contentType: 'application/json',
-                success: function (fileName) {
-                    model.dataExport.successMessage.show(fileName);
-                },
-                type: 'POST'
-            });
-        },
 
         successMessage: {
             visible: false,
