@@ -16,7 +16,7 @@
         serialise: function() {
             return JSON.stringify(ko.mapping.toJS({
                 Period: model.input.Period,
-                Outside: model.input.Outside
+                Parameters: model.input.Outside
             }));
         },
 
