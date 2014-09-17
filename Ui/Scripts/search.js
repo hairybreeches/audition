@@ -6,17 +6,19 @@
         },
 
         Outside: {
-            FromDay: "Monday",
-            ToDay: "Friday",
-            FromTime: "08:00",
-            ToTime: "18:00"
+            parameters: {
+                FromDay: "Monday",
+                ToDay: "Friday",
+                FromTime: "08:00",
+                ToTime: "18:00"
+            },
         },
         
 
         serialise: function() {
             return JSON.stringify(ko.mapping.toJS({
                 Period: model.input.Period,
-                Parameters: model.input.Outside
+                Parameters: model.input.Outside.parameters
             }));
         },
 
