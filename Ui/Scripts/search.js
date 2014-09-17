@@ -14,11 +14,15 @@
             }
         },
 
+        serialise: function() {
+            return JSON.stringify(ko.mapping.toJS(model.input.parameters));
+        },
+
         submit: function(data, e) {
             e.preventDefault();
             model.output.startSearch();
             $.ajax('/api/search', {
-                data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
+                data: model.input.serialise(),
                 contentType: 'application/json',
                 success: model.output.searchSuccess,
                 error: model.output.searchFailure,
@@ -78,7 +82,7 @@
 
             $.ajax('/api/search/export', {
 
-                data: JSON.stringify(ko.mapping.toJS(model.input.parameters)),
+                data: model.input.serialise(),
 
                 contentType: 'application/json',
                 success: function (fileName) {
