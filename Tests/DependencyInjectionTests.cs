@@ -36,7 +36,7 @@ namespace Tests
                     .Where(x => x.IsSubclassOf(typeof (ApiController)))
                     .Where(x=> !x.IsAbstract)
                     //can't initialise something that plays around with CEF in the tests
-                    //todo: make this work!
+                    //todo: it would be nice if we could test the DevController too
                     .Where(x=> x!= typeof(DevController));
 
             }
