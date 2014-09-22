@@ -3,6 +3,7 @@ using System.Linq;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Model;
+using Model.Accounting;
 
 namespace Excel
 {

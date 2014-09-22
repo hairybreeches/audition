@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Model;
+using Model.Accounting;
 using XeroApi.Model;
-using Journal = Model.Journal;
+using Journal = Model.Accounting.Journal;
 using JournalLine = XeroApi.Model.JournalLine;
 
 namespace Tests
@@ -22,7 +23,7 @@ namespace Tests
             };
         }
 
-        private static JournalLine ToXeroJournalLine(Model.JournalLine line)
+        private static JournalLine ToXeroJournalLine(Model.Accounting.JournalLine line)
         {
             return new JournalLine
             {

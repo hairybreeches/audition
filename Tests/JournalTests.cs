@@ -1,5 +1,6 @@
 ﻿using System;
 using Model;
+using Model.Accounting;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace Model.Accounting
 {
     public enum JournalType
     {

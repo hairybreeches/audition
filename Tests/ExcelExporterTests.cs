@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using Excel;
 using Model;
+using Model.Accounting;
 using NUnit.Framework;
 using Tests.Mocks;
 

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Model
+namespace Model.Accounting
 {
     public class InvalidJournalException : Exception
     {

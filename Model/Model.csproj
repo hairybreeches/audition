@@ -52,11 +52,11 @@
   <ItemGroup>
     <Compile Include="AccountsSearchWindow.cs" />
     <Compile Include="IJournalSearcher.cs" />
-    <Compile Include="InvalidJournalException.cs" />
+    <Compile Include="Accounting\InvalidJournalException.cs" />
     <Compile Include="InvalidTimeFrameException.cs" />
-    <Compile Include="Journal.cs" />
-    <Compile Include="JournalLine.cs" />
-    <Compile Include="JournalType.cs" />
+    <Compile Include="Accounting\Journal.cs" />
+    <Compile Include="Accounting\JournalLine.cs" />
+    <Compile Include="Accounting\JournalType.cs" />
     <Compile Include="DateRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HoursSearchWindow.cs" />

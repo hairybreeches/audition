@@ -9,6 +9,7 @@ using Audition.Native;
 using Autofac;
 using CefSharp;
 using Model;
+using Model.Accounting;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
