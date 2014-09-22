@@ -1,5 +1,6 @@
 ﻿using System;
 using Model;
+using Model.Time;
 using NodaTime;
 using NUnit.Framework;
 

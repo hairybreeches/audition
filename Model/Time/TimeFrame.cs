@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NodaTime;
 
-namespace Model
+namespace Model.Time
 {
     public class TimeFrame
     {

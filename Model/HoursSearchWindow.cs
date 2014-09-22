@@ -1,4 +1,6 @@
 ﻿
+using Model.Time;
+
 namespace Model
 {    
     public class HoursSearchWindow

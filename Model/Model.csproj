@@ -53,14 +53,14 @@
     <Compile Include="AccountsSearchWindow.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="Accounting\InvalidJournalException.cs" />
-    <Compile Include="InvalidTimeFrameException.cs" />
+    <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Journal.cs" />
     <Compile Include="Accounting\JournalLine.cs" />
     <Compile Include="Accounting\JournalType.cs" />
-    <Compile Include="DateRange.cs" />
+    <Compile Include="Time\DateRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HoursSearchWindow.cs" />
-    <Compile Include="TimeFrame.cs" />
+    <Compile Include="Time\TimeFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
