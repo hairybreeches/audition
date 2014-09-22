@@ -17,7 +17,7 @@ namespace Xero
             repository = repositoryFactory.CreateRepository();
         }
 
-        public IEnumerable<Model.Journal> FindJournalsWithin(HoursSearchWindow searchWindow)
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(HoursSearchWindow searchWindow)
         {
             var allJournals = repository.Journals.ToList();
             return allJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());

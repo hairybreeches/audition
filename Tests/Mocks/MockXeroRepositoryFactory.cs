@@ -1,5 +1,6 @@
 using System.Linq;
 using Model;
+using Model.Accounting;
 using NSubstitute;
 using Xero;
 

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model;
+using Model.Accounting;
 using NodaTime;
 using NUnit.Framework;
 using Tests.Mocks;
 using Xero;
-using Journal = Model.Journal;
+using Journal = Model.Accounting.Journal;
 
 
 namespace Tests
