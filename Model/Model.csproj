@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SearchWindows\AccountsSearchWindow.cs" />
+    <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="Accounting\InvalidJournalException.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
