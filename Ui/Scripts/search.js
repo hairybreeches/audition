@@ -132,6 +132,10 @@ var model = {
             FromTime: "08:00",
             ToTime: "18:00"
         }, period, output, exportSuccessMessage, '/api/search', '/api/search/export'),
+
+        Accounts: new InputSection({
+            quantity: 10
+        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts')
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
