@@ -7,6 +7,7 @@ using Excel;
 using Model;
 using Model.Accounting;
 using Model.SearchWindows;
+using Model.Time;
 
 namespace Audition.Controllers
 {
@@ -25,14 +26,14 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursSearch)]
-        public IEnumerable<Journal> HoursSearch(HoursSearchWindow searchWindow)
+        public IEnumerable<Journal> HoursSearch(SearchWindow<WorkingHours> searchWindow)
         {
             return searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.HoursExport)]
-        public async Task<IHttpActionResult> HoursExport(HoursSearchWindow saveRequest)
+        public async Task<IHttpActionResult> HoursExport(SearchWindow<WorkingHours> saveRequest)
         {
             var journals = searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);

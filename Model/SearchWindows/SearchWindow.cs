@@ -3,23 +3,23 @@ using Model.Time;
 
 namespace Model.SearchWindows
 {    
-    public class HoursSearchWindow
+    public class SearchWindow<T>
     {
-        public HoursSearchWindow(WorkingHours parameters, DateRange period)
+        public SearchWindow(T parameters, DateRange period)
         {
             Period = period;
             Parameters = parameters;
         }
 
-        public WorkingHours Parameters { get; private set; }
+        public T Parameters { get; private set; }
         public DateRange Period { get; private set; }
 
         public override string ToString()
         {
-            return string.Format("Outside {0}, in the period {1}", Parameters, Period);
+            return string.Format("{0}, in the period {1}", Parameters, Period);
         }
 
-        protected bool Equals(HoursSearchWindow other)
+        protected bool Equals(SearchWindow<T> other)
         {
             return Equals(Parameters, other.Parameters) && Equals(Period, other.Period);
         }
@@ -29,7 +29,7 @@ namespace Model.SearchWindows
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((HoursSearchWindow) obj);
+            return Equals((SearchWindow<T>) obj);
         }
 
         public override int GetHashCode()
