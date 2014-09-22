@@ -1,44 +1,46 @@
-﻿var output = ko.mapping.fromJS({
-    results: [],
-    state: '',
-    lastError: '',
+﻿var Output = function () {
+    var self = this;
+    //fields
+    self.results = ko.observable([]);
+    self.state = ko.observable('');
+    self.lastError = ko.observable('');
 
-    startSearch: function() {
-        model.output.state('searching');
-    },
+    //methods
+    self.startSearch = function() {
+        self.state('searching');
+    };
 
-    searchSuccess: function(results) {
-        model.output.state('results');
-        model.output.results(results);
-    },
+    self.searchSuccess = function(results) {
+        self.state('results');
+        self.results(results);
+    };
 
-    searchFailure: function(jqXhr, textStatus, errorThrown) {
-        model.output.state('error');
-        model.output.lastError(textStatus + " : " + errorThrown);
-    },
+    self.searchFailure = function(jqXhr, textStatus, errorThrown) {
+        self.state('error');
+        self.lastError(textStatus + " : " + errorThrown);
+    };
 
-    showApology: function() {
-        var output = model.output;
-        return output.state() === 'results' && !output.areResults();
-    },
+    //computed fields ("properties")
+    var areResults = function() {
+        return self.results().some(function() { return true; });
+    };
 
-    areResults: function() {
-        return model.output.results().some(function() { return true; });
-    },
+    self.showApology = ko.computed(function() {
+        return self.state() === 'results' && !areResults();
+    });
 
-    showResults: function() {
-        var output = model.output;
-        return output.state() === 'results' && output.areResults();
-    },
+    self.showResults = ko.computed(function() {        
+        return self.state() === 'results' && areResults();
+    });
 
-    showSearching: function() {
-        return model.output.state() === 'searching';
-    },
+    self.showSearching = ko.computed(function() {
+        return self.state() === 'searching';
+    });
 
-    showError: function() {
-        return model.output.state() === 'error';
-    }
-});
+    self.showError = ko.computed(function() {
+        return self.state() === 'error';
+    });
+};
 
 var model = {
     input: ko.mapping.fromJS({
@@ -105,7 +107,7 @@ var model = {
         },
     }),
 
-    output: output,
+    output: new Output(),
 
     exportSuccessMessage: ko.mapping.fromJS({
         visible: false,
