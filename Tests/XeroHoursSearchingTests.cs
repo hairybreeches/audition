@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
 using Tests.Mocks;
-using Xero;
 using Journal = Model.Accounting.Journal;
 
 
@@ -22,7 +20,7 @@ namespace Tests
         public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
@@ -38,7 +36,7 @@ namespace Tests
             DayOfWeek toDay)
         {
             var journal = GetJournalPostedOn(dayOfWeek);
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
@@ -51,7 +49,7 @@ namespace Tests
         public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
@@ -64,7 +62,7 @@ namespace Tests
         public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = GetJournalPostedAt(journalTime);
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
@@ -76,7 +74,7 @@ namespace Tests
         public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
             var journal = GetJournalAffecting(new DateTime(1991,1,1));
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
@@ -89,7 +87,7 @@ namespace Tests
         public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
         {
             var journal = GetJournalAffecting(new DateTime(1989,12,31,23,59,59));
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
@@ -103,7 +101,7 @@ namespace Tests
         {
             //given a journal on the last day of the financial period
             var journal = GetJournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             //and a period created just with the date, rather than the full datetime
             var journalIds =
@@ -119,7 +117,7 @@ namespace Tests
         {
             //given a journal on the first day of the financial period
             var journal = GetJournalAffecting(new DateTime(1990, 1, 1, 0, 0, 0));
-            var searcher = GetJournalSearcher(journal);
+            var searcher = Create.JournalSearcher(journal);
 
             //and a period created badly with a time on the first date
             var journalIds =
@@ -155,12 +153,6 @@ namespace Tests
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
                 new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
-        }
-
-        private static IJournalSearcher GetJournalSearcher(params Journal[] journals)
-        {
-            var factory = MockXeroRepositoryFactory.Create(journals);
-            return new XeroJournalSearcher(factory);
         }
 
         private Journal GetJournalAffecting(DateTime dateTime)
