@@ -1,21 +1,20 @@
 using Model.Time;
+using NodaTime;
 
 namespace Model.SearchWindows
 {
-    public class AccountsSearchWindow
+    public class UnusualAccountsParameters
     {
-        public AccountsSearchWindow(int quantity, DateRange period)
+        public UnusualAccountsParameters(int quantity)
         {
             Quantity = quantity;
-            Period = period;
         }
         
         public int Quantity { get; private set; }
-        public DateRange Period { get; private set; }
-
+        
         public override string ToString()
         {
-            return string.Format("Fewer than {0} entries, in the period {1}", Quantity, Period);
+            return string.Format("Fewer than {0} entries", Quantity);
         }        
     }
 }
