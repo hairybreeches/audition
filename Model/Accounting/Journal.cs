@@ -40,5 +40,30 @@ namespace Model.Accounting
         {
             get { return lines; }            
         }
+
+        protected bool Equals(Journal other)
+        {
+            return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Journal) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (lines != null ? lines.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Id.GetHashCode();
+                hashCode = (hashCode*397) ^ Created.GetHashCode();
+                hashCode = (hashCode*397) ^ JournalDate.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }
