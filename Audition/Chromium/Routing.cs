@@ -11,6 +11,8 @@ namespace Audition.Chromium
 
         public const string HoursSearch = "api/search/hours";
         public const string HoursExport = "api/export/hours";
+        public const string AccountsSearch = "api/search/accounts";
+        public const string AccountsExport = "api/export/accounts";
 
         public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";
