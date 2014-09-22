@@ -30,6 +30,7 @@ namespace Audition.Chromium
                               RequestHandler = requestHandler
                           };
 
+            webView.KeyboardHandler = new ShortcutKeyboardHandler();
             webView.PropertyChanged += (sender, args) =>
                                          {                                                                                         
                                              if (args.PropertyName == "IsBrowserInitialized" && Keyboard.IsKeyDown(Key.LeftShift))
