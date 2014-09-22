@@ -1,5 +1,47 @@
-﻿var model = ko.mapping.fromJS({
-    input: {
+﻿var output = ko.mapping.fromJS({
+    results: [],
+    state: '',
+    lastError: '',
+
+    startSearch: function() {
+        model.output.state('searching');
+    },
+
+    searchSuccess: function(results) {
+        model.output.state('results');
+        model.output.results(results);
+    },
+
+    searchFailure: function(jqXhr, textStatus, errorThrown) {
+        model.output.state('error');
+        model.output.lastError(textStatus + " : " + errorThrown);
+    },
+
+    showApology: function() {
+        var output = model.output;
+        return output.state() === 'results' && !output.areResults();
+    },
+
+    areResults: function() {
+        return model.output.results().some(function() { return true; });
+    },
+
+    showResults: function() {
+        var output = model.output;
+        return output.state() === 'results' && output.areResults();
+    },
+
+    showSearching: function() {
+        return model.output.state() === 'searching';
+    },
+
+    showError: function() {
+        return model.output.state() === 'error';
+    }
+});
+
+var model = {
+    input: ko.mapping.fromJS({
         Period: {
             From: '2013-4-1',
             To: '2014-3-31'
@@ -61,52 +103,11 @@
                 type: 'POST'
             });
         },
-    },
+    }),
 
-    output: {
-        results: [],        
-        state: '',
+    output: output,
 
-        startSearch: function() {
-            model.output.state('searching');
-        },
-
-        searchSuccess: function (results) {
-            model.output.state('results');
-            model.output.results(results);
-        },
-
-        searchFailure: function(jqXhr, textStatus, errorThrown) {
-            model.output.state('error');
-            model.output.lastError(textStatus + " : " + errorThrown);
-        },
-
-        showApology: function () {
-            var output = model.output;
-            return output.state() === 'results' && !output.areResults();
-        },
-
-        areResults: function() {
-            return model.output.results().some(function() { return true; });
-        },
-
-        showResults: function () {
-            var output = model.output;
-            return output.state() === 'results' && output.areResults();
-        },
-
-        showSearching: function() {
-            return model.output.state() === 'searching';
-        },
-
-        showError: function () {
-            return model.output.state() === 'error';
-        },
-
-        lastError: ''
-    },
-
-    exportSuccessMessage: {
+    exportSuccessMessage: ko.mapping.fromJS({
         visible: false,
         hide: function () {
             model.exportSuccessMessage.visible(false);
@@ -127,9 +128,9 @@
             model.exportSuccessMessage.fileName(fileName);
             model.exportSuccessMessage.visible(true);
         }
-    }
+    })
     
-});
+};
 
 var userFriendlyDate = function(jsonDate) {
     var date = new Date(jsonDate);
