@@ -2,6 +2,7 @@
 using Audition.Chromium;
 using Autofac;
 using Model;
+using Model.SearchWindows;
 using Model.Time;
 using Newtonsoft.Json;
 using NodaTime;
