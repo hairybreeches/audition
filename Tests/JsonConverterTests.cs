@@ -30,7 +30,7 @@ namespace Tests
             }
         }");      
       
-            Assert.AreEqual(new HoursSearchWindow(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0), new LocalTime(18,0)),
+            Assert.AreEqual(new HoursSearchWindow(new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0), new LocalTime(18,0)),
                 new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
                 result);
         }
@@ -39,13 +39,13 @@ namespace Tests
        [Test]
        public void CanDeserializeTimeFrame()
        {           
-           var result = Parse<TimeFrame>(@"{
+           var result = Parse<WorkingHours>(@"{
                FromDay: 'Monday',
                ToDay: 'Friday',
                FromTime: '08:00',
                ToTime: '18:00'
            }");
-           Assert.AreEqual(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
+           Assert.AreEqual(new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
        }      
         
        [Test]
