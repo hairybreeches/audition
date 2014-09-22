@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Model;
 using Model.SearchWindows;
-using NodaTime;
-using XeroApi.Model;
+using Model.Time;
 using Journal = XeroApi.Model.Journal;
 
 namespace Xero
@@ -20,14 +18,19 @@ namespace Xero
 
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(HoursSearchWindow searchWindow)
         {
-            var allJournals = repository.Journals.ToList();
-            return allJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
+            var periodJournals = GetJournals(searchWindow.Period).ToList();
+
+            return periodJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
         }
 
         public static bool Matches(HoursSearchWindow searchWindow, Journal x)
         {
-            return searchWindow.Period.Contains(x.JournalDate) && 
-                !searchWindow.Parameters.Contains(x.CreatedDateUTC);
+            return !searchWindow.Parameters.Contains(x.CreatedDateUTC);
+        }
+
+        private IEnumerable<Journal> GetJournals(DateRange period)
+        {
+            repository.Journals.Where(x => period.Contains(x.JournalDate));
         }
     }
 }
