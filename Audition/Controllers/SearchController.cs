@@ -32,8 +32,13 @@ namespace Audition.Controllers
         [Route(Routing.HoursExport)]
         public async Task<IHttpActionResult> HoursExport(SearchWindow saveRequest)
         {
-            var saveLocation = await fileSaveChooser.GetFileSaveLocation();
             var journals = searcher.FindJournalsWithin(saveRequest);
+            return await Export(journals);
+        }
+
+        private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals)
+        {
+            var saveLocation = await fileSaveChooser.GetFileSaveLocation();
             excelExporter.WriteJournals(journals, saveLocation);
             return Ok(saveLocation);
         }
