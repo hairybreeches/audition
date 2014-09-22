@@ -14,7 +14,7 @@ namespace Tests
         [Test]
         public void CanDeserializeSearchWindow()
         {
-            var result = Parse<SearchWindow>(@"{
+            var result = Parse<HoursSearchWindow>(@"{
             Period: {
                 From: '2012-4-5',
                 To: '2013-4-4'
@@ -28,7 +28,7 @@ namespace Tests
             }
         }");      
       
-            Assert.AreEqual(new SearchWindow(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0), new LocalTime(18,0)),
+            Assert.AreEqual(new HoursSearchWindow(new TimeFrame(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0), new LocalTime(18,0)),
                 new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
                 result);
         }

@@ -17,13 +17,13 @@ namespace Xero
             repository = repositoryFactory.CreateRepository();
         }
 
-        public IEnumerable<Model.Journal> FindJournalsWithin(SearchWindow searchWindow)
+        public IEnumerable<Model.Journal> FindJournalsWithin(HoursSearchWindow searchWindow)
         {
             var allJournals = repository.Journals.ToList();
             return allJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
         }
 
-        public static bool Matches(SearchWindow searchWindow, Journal x)
+        public static bool Matches(HoursSearchWindow searchWindow, Journal x)
         {
             return searchWindow.Period.Contains(x.JournalDate) && 
                 !searchWindow.Parameters.Contains(x.CreatedDateUTC);
