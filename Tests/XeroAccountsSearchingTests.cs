@@ -52,10 +52,57 @@ namespace Tests
             //we end up with only one copy of the expected journal - it's not repeated for each rare account it's been posted to.
             CollectionAssert.AreEquivalent(new []{journalPostedToUncommonAccount}, journals);
         }
+        
+        [Test]
+        public void DoesNotReturnJournalsOutsideThePeriod()
+        {
+            //given one journal which includes a line to two rare accounts, but does not apply to the period
+            var journal = JournalPostedTo("d", "e", new DateTime(2000, 4, 5));                
+
+            //and a search window for journals to accounts with <2 postings
+            var searchWindow = new AccountsSearchWindow(2,
+                new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
+
+            //when we do the journal search
+            var searcher = Create.JournalSearcher(journal);
+            var journals = searcher.FindJournalsWithin(searchWindow).ToList();
+
+            //we don't end up with any journals returned
+            CollectionAssert.IsEmpty(journals);
+        }   
+        
+        
+        [Test]
+        public void JournalsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
+        {
+            //given one journal inside the period to an account
+            var journal = JournalPostedTo("a", "b", new DateTime(1999, 1, 1));
+            //and a load posted to the same account, but outside the period
+            var searcher = Create.JournalSearcher(journal, 
+                JournalPostedTo("a", "b", new DateTime(2000,1,1)),
+                JournalPostedTo("a", "b", new DateTime(1998,12,31)),
+                JournalPostedTo("a", "b", new DateTime(2000,1,1)));
+
+
+            //and a search window for journals to accounts with <2 postings
+            var searchWindow = new AccountsSearchWindow(2,
+                new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
+
+            //when we do the journal search            
+            var journals = searcher.FindJournalsWithin(searchWindow).ToList();
+
+            //those journals posted to the account in other periods don't make the account any less unusual.
+            CollectionAssert.AreEquivalent(new[]{journal}, journals);
+        }
 
         private static Journal JournalPostedTo(string accountCode1, string accountCode2)
         {
-            return new Journal(Guid.NewGuid(), new DateTime(1999,12,1), new DateTime(1999,12,1),
+            return JournalPostedTo(accountCode1, accountCode2, new DateTime(1999, 12, 1));
+        }
+
+        private static Journal JournalPostedTo(string accountCode1, string accountCode2, DateTime journalDate)
+        {
+            return new Journal(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
                 new[]
                 {
                     new JournalLine(accountCode1, accountCode1, JournalType.Cr, 2.2m),
