@@ -9,6 +9,17 @@ mixin timeInput(bindTo)
 mixin dateInput(bindTo)
 	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
 
+mixin search-tab(title, bindName)
+	legend.vertical-space #{title}
+	.form-group(data-bind="with: #{bindName}")
+		.col-xs-12
+			.inline-block
+				.inline-block(data-bind="with: parameters")
+					block
+				br
+				.button-group.pull-right
+					button.btn.btn-default.vertical-space(data-bind="click: save") Export &raquo;
+					button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
 
 form.form-horizontal(action="search", method="post")
 	fieldset
@@ -35,20 +46,12 @@ form.form-horizontal(action="search", method="post")
 
 		.tab-content
 			.tab-pane.fade.active.in#time
-				legend.vertical-space posted outside...
-				.form-group(data-bind="with: Outside")
-					.col-xs-12
-						.inline-block
-							.inline-block(data-bind="with: parameters")
-								.well.inline-block.vertical-space.margin-right
-									+dayOfWeekSelector('FromDay')
-									label.control-label.between-label to
-									+dayOfWeekSelector('ToDay')
-								.well.inline-block.vertical-space
-									+timeInput('FromTime')
-									label.control-label.between-label to
-									+timeInput('ToTime')
-							br
-							.button-group.pull-right
-								button.btn.btn-default.vertical-space(data-bind="click: save") Export &raquo;
-								button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
+				+search-tab('posted outside...', 'Outside')
+					.well.inline-block.vertical-space.margin-right
+						+dayOfWeekSelector('FromDay')
+						label.control-label.between-label to
+						+dayOfWeekSelector('ToDay')
+					.well.inline-block.vertical-space
+						+timeInput('FromTime')
+						label.control-label.between-label to
+						+timeInput('ToTime')
