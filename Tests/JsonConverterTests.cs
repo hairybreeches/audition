@@ -33,6 +33,25 @@ namespace Tests
             Assert.AreEqual(new SearchWindow<WorkingHours>(new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8, 0), new LocalTime(18, 0)),
                 new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
                 result);
+        }      
+        
+        [Test]
+        public void CanDeserializeAccountsSearchWindow()
+        {
+            var result = Parse<SearchWindow<UnusualAccountsParameters>>(@"{
+            Period: {
+                From: '2012-4-5',
+                To: '2013-4-4'
+            },
+
+            Parameters: {
+                Quantity: 2
+            }
+        }");
+
+            Assert.AreEqual(new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2), 
+                new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) ) ), 
+                result);
         }
 
         
