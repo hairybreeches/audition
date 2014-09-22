@@ -23,11 +23,11 @@ namespace Xero
             return periodJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
         }
 
-        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(AccountsSearchWindow searchWindow)
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
             var periodJournals = GetJournals(searchWindow.Period).ToList();
             var lookup = new AccountsLookup(periodJournals);
-            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Quantity)
+            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.Quantity)
                 .Select(XeroJournalExtensions.ToModelJournal);
         }
 

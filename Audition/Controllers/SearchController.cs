@@ -41,14 +41,14 @@ namespace Audition.Controllers
         
         [HttpPost]
         [Route(Routing.AccountsSearch)]
-        public IEnumerable<Journal> AccountsSearch(AccountsSearchWindow searchWindow)
+        public IEnumerable<Journal> AccountsSearch(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
             return searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.AccountsExport)]
-        public async Task<IHttpActionResult> AccountsExport(AccountsSearchWindow saveRequest)
+        public async Task<IHttpActionResult> AccountsExport(SearchWindow<UnusualAccountsParameters> saveRequest)
         {
             var journals = searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);

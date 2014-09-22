@@ -23,7 +23,7 @@ namespace Tests
             var searcher = Create.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
-            var searchWindow = new AccountsSearchWindow(2,
+            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
             //when we do the journal search
@@ -43,7 +43,7 @@ namespace Tests
             var searcher = Create.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
-            var searchWindow = new AccountsSearchWindow(2,
+            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
             //when we do the journal search
@@ -60,7 +60,7 @@ namespace Tests
             var journal = JournalPostedTo("d", "e", new DateTime(2000, 4, 5));                
 
             //and a search window for journals to accounts with <2 postings
-            var searchWindow = new AccountsSearchWindow(2,
+            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
             //when we do the journal search
@@ -85,7 +85,7 @@ namespace Tests
 
 
             //and a search window for journals to accounts with <2 postings
-            var searchWindow = new AccountsSearchWindow(2,
+            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
             //when we do the journal search            
