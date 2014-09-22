@@ -23,6 +23,14 @@ namespace Xero
             return periodJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
         }
 
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(AccountsSearchWindow searchWindow)
+        {
+            var periodJournals = GetJournals(searchWindow.Period).ToList();
+            var lookup = new AccountsLookup(periodJournals);
+            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Quantity)
+                .Select(XeroJournalExtensions.ToModelJournal);
+        }
+
         public static bool Matches(HoursSearchWindow searchWindow, Journal x)
         {
             return !searchWindow.Parameters.Contains(x.CreatedDateUTC);
@@ -30,7 +38,7 @@ namespace Xero
 
         private IEnumerable<Journal> GetJournals(DateRange period)
         {
-            repository.Journals.Where(x => period.Contains(x.JournalDate));
+            return repository.Journals.Where(x => period.Contains(x.JournalDate));
         }
     }
 }

@@ -8,5 +8,6 @@ namespace Model
     public interface IJournalSearcher
     {
         IEnumerable<Journal> FindJournalsWithin(HoursSearchWindow searchWindow);
+        IEnumerable<Journal> FindJournalsWithin(AccountsSearchWindow searchWindow);
     }
 }
