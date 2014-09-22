@@ -25,5 +25,30 @@ namespace Model.Accounting
         {
             return String.Join(" ", JournalType, AccountCode, Amount);
         }
+
+        protected bool Equals(JournalLine other)
+        {
+            return string.Equals(AccountCode, other.AccountCode) && string.Equals(AccountName, other.AccountName) && JournalType == other.JournalType && Amount == other.Amount;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((JournalLine) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (AccountCode != null ? AccountCode.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (AccountName != null ? AccountName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) JournalType;
+                hashCode = (hashCode*397) ^ Amount.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }
