@@ -178,24 +178,24 @@ namespace Tests
         private static HoursSearchWindow CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
         {
             //the journal will never be outside the time, so will be returned iff the day of the week is interesting
-            return CreateSearchWindow(new TimeFrame(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
+            return CreateSearchWindow(new WorkingHours(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
         }
 
         private static HoursSearchWindow CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
         {
             //the journal will never be outside the days of the week, so will be returned iff the time is interesting
-            return CreateSearchWindow(new TimeFrame(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
+            return CreateSearchWindow(new WorkingHours(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
         }
         
         private static HoursSearchWindow CreateSearchWindow(DateTime periodStart, DateTime periodEnd)
         {
             //the journal will always be outside the timeframe, so will be returned precisely when it's in the period
-            return new HoursSearchWindow(new TimeFrame(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new DateRange(periodStart, periodEnd));
+            return new HoursSearchWindow(new WorkingHours(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new DateRange(periodStart, periodEnd));
         }
 
-        private static HoursSearchWindow CreateSearchWindow(TimeFrame timeFrame)
+        private static HoursSearchWindow CreateSearchWindow(WorkingHours workingHours)
         {
-            return new HoursSearchWindow(timeFrame, new DateRange(new DateTime(1,1,1), new DateTime(3000,12,31)));
+            return new HoursSearchWindow(workingHours, new DateRange(new DateTime(1,1,1), new DateTime(3000,12,31)));
         }
     }
 }

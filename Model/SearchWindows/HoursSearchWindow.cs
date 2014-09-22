@@ -5,13 +5,13 @@ namespace Model.SearchWindows
 {    
     public class HoursSearchWindow
     {
-        public HoursSearchWindow(TimeFrame parameters, DateRange period)
+        public HoursSearchWindow(WorkingHours parameters, DateRange period)
         {
             Period = period;
             Parameters = parameters;
         }
 
-        public TimeFrame Parameters { get; private set; }
+        public WorkingHours Parameters { get; private set; }
         public DateRange Period { get; private set; }
 
         public override string ToString()

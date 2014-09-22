@@ -5,9 +5,9 @@ using NodaTime;
 
 namespace Model.Time
 {
-    public class TimeFrame
+    public class WorkingHours
     {
-        public TimeFrame(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
+        public WorkingHours(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
         {
             if (toTime < fromTime)
             {
@@ -40,12 +40,12 @@ namespace Model.Time
                    && journalCreationTime >= FromTime;
         }
 
-        private static bool DayWithinRange(TimeFrame timeFrame, DateTime date)
+        private static bool DayWithinRange(WorkingHours workingHours, DateTime date)
         {
             var creationDay = (int)date.DayOfWeek;
 
-            var fromDay = (int)timeFrame.FromDay;
-            var toDay = (int)timeFrame.ToDay;
+            var fromDay = (int)workingHours.FromDay;
+            var toDay = (int)workingHours.ToDay;
 
             if (toDay <= fromDay)
             {
@@ -67,7 +67,7 @@ namespace Model.Time
             return String.Format("{0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
         }
 
-        protected bool Equals(TimeFrame other)
+        protected bool Equals(WorkingHours other)
         {
             return FromDay == other.FromDay && ToDay == other.ToDay && FromTime.Equals(other.FromTime) && ToTime.Equals(other.ToTime);
         }
@@ -77,7 +77,7 @@ namespace Model.Time
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((TimeFrame) obj);
+            return Equals((WorkingHours) obj);
         }
 
         public override int GetHashCode()
