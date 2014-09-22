@@ -91,7 +91,7 @@
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockXeroRepositoryFactory.cs" />
     <Compile Include="TimeFrameTests.cs" />
-    <Compile Include="XeroJournalSearcherTests.cs" />
+    <Compile Include="XeroHoursSearchingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
