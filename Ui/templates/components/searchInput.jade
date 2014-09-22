@@ -58,6 +58,6 @@ form.form-horizontal(action="search", method="post")
 			.tab-pane.fade#accounts
 				+search-tab('posted to accounts with fewer than...', 'Accounts')
 					.well.inline-block.vertical-space.margin-right
-						input.form-control.scaled-input(type="time", data-bind="value: quantity")
+						input.form-control.scaled-input(type="number", data-bind="value: quantity")
 					span.vertical-space.search-text entries
 						
