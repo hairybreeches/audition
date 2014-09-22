@@ -14,7 +14,7 @@ using Journal = Model.Accounting.Journal;
 
 namespace Tests
 {
-    public class XeroJournalSearcherTests
+    public class XeroHoursSearchingTests
     {
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
