@@ -39,16 +39,16 @@ form.form-horizontal(action="search", method="post")
 				.form-group(data-bind="with: Outside")
 					.col-xs-12
 						.inline-block
-							.well.inline-block.vertical-space.margin-right(data-bind="with: parameters")
-								+dayOfWeekSelector('FromDay')
-								label.control-label.between-label to
-								+dayOfWeekSelector('ToDay')
-							.well.inline-block.vertical-space(data-bind="with: parameters")
-								+timeInput('FromTime')
-								label.control-label.between-label to
-								+timeInput('ToTime')
+							.inline-block(data-bind="with: parameters")
+								.well.inline-block.vertical-space.margin-right
+									+dayOfWeekSelector('FromDay')
+									label.control-label.between-label to
+									+dayOfWeekSelector('ToDay')
+								.well.inline-block.vertical-space
+									+timeInput('FromTime')
+									label.control-label.between-label to
+									+timeInput('ToTime')
 							br
 							.button-group.pull-right
 								button.btn.btn-default.vertical-space(data-bind="click: save") Export &raquo;
 								button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
-			
