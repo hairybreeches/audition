@@ -64,7 +64,7 @@ namespace SystemTests
 
             var requestResponse = new MockRequestResponse("POST",
                     SearchWindow,
-                    "application/json", "http://localhost:1337/api/search/export");
+                    "application/json", "http://localhost:1337/api/export/hours");
 
             ExecuteRequest(builder, requestResponse);
 
@@ -81,7 +81,7 @@ namespace SystemTests
         public void CanReturnJournalsSearchedFor()
         {
             var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
-                   "http://localhost:1337/api/search");
+                   "http://localhost:1337/api/search/hours");
 
             var cefSharpResponse = ExecuteRequest(requestResponse);
 

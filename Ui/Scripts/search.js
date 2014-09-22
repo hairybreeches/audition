@@ -131,7 +131,7 @@ var model = {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, output, exportSuccessMessage, '/api/search', '/api/search/export'),
+        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours'),
 
         Accounts: new InputSection({
             quantity: 10
