@@ -38,7 +38,7 @@ namespace Xero
 
         private IEnumerable<Journal> GetJournals(DateRange period)
         {
-            return repository.Journals.Where(x => period.Contains(x.JournalDate));
+            return repository.Journals.ToList().Where(x => period.Contains(x.JournalDate));
         }
     }
 }
