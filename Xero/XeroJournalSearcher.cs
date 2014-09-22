@@ -16,7 +16,7 @@ namespace Xero
             repository = repositoryFactory.CreateRepository();
         }
 
-        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(HoursSearchWindow searchWindow)
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
             var periodJournals = GetJournals(searchWindow.Period).ToList();
 
@@ -31,7 +31,7 @@ namespace Xero
                 .Select(XeroJournalExtensions.ToModelJournal);
         }
 
-        public static bool Matches(HoursSearchWindow searchWindow, Journal x)
+        public static bool Matches(SearchWindow<WorkingHours> searchWindow, Journal x)
         {
             return !searchWindow.Parameters.Contains(x.CreatedDateUTC);
         }
