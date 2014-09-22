@@ -42,6 +42,33 @@
     });
 };
 
+var ExportSuccessMessage = function () {
+    var self = this;
+    //fields
+    self.visible = ko.observable(false);
+    self.fileName = ko.observable('');
+
+    //methods
+    self.hide = function () {
+        self.visible(false);
+    };
+
+    self.openFile = function (_, e) {
+        e.preventDefault();
+        $.ajax('/api/openfile', {
+            data: {
+                fileName: self.fileName()
+            },
+            type: 'GET'
+        });
+    };
+
+    self.show = function (fileName) {
+        self.fileName(fileName);
+        self.visible(true);
+    };
+};
+
 var model = {
     input: ko.mapping.fromJS({
         Period: {
@@ -108,30 +135,7 @@ var model = {
     }),
 
     output: new Output(),
-
-    exportSuccessMessage: ko.mapping.fromJS({
-        visible: false,
-        hide: function () {
-            model.exportSuccessMessage.visible(false);
-        },
-        fileName: '',
-
-        openFile: function (_, e) {
-            e.preventDefault();
-            $.ajax('/api/openfile', {
-                data: {
-                    fileName: model.exportSuccessMessage.fileName
-                },
-                type: 'GET'
-            });
-        },
-
-        show: function (fileName) {
-            model.exportSuccessMessage.fileName(fileName);
-            model.exportSuccessMessage.visible(true);
-        }
-    })
-    
+    exportSuccessMessage: new ExportSuccessMessage()    
 };
 
 var userFriendlyDate = function(jsonDate) {
