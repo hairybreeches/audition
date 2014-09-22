@@ -22,14 +22,14 @@ namespace Audition.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.Search)]
+        [Route(Routing.HoursSearch)]
         public IEnumerable<Journal> Search(SearchWindow searchWindow)
         {
             return searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
-        [Route(Routing.ExportSearch)]
+        [Route(Routing.HoursExport)]
         public async Task<IHttpActionResult> Export(SearchWindow saveRequest)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();

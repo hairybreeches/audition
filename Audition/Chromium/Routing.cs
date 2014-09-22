@@ -9,8 +9,8 @@ namespace Audition.Chromium
         public const string FinishXeroLogin = "api/xero/completelogin";
         public const string Logout = "api/logout";
 
-        public const string Search = "api/search/hours";
-        public const string ExportSearch = "api/export/hours";
+        public const string HoursSearch = "api/search/hours";
+        public const string HoursExport = "api/export/hours";
 
         public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";
