@@ -55,3 +55,9 @@ form.form-horizontal(action="search", method="post")
 						+timeInput('FromTime')
 						label.control-label.between-label to
 						+timeInput('ToTime')
+			.tab-pane.fade#accounts
+				+search-tab('posted to accounts with fewer than...', 'Accounts')
+					.well.inline-block.vertical-space.margin-right
+						input.form-control.scaled-input(type="time", data-bind="value: quantity")
+					span.vertical-space.search-text entries
+						
