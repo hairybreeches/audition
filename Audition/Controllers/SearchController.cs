@@ -6,6 +6,7 @@ using Audition.Native;
 using Excel;
 using Model;
 using Model.Accounting;
+using Model.SearchWindows;
 
 namespace Audition.Controllers
 {

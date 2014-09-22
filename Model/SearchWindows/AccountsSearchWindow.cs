@@ -1,6 +1,6 @@
 using Model.Time;
 
-namespace Model
+namespace Model.SearchWindows
 {
     public class AccountsSearchWindow
     {
