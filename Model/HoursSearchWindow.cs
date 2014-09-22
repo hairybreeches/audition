@@ -1,9 +1,9 @@
 ﻿
 namespace Model
 {    
-    public class SearchWindow
+    public class HoursSearchWindow
     {
-        public SearchWindow(TimeFrame parameters, DateRange period)
+        public HoursSearchWindow(TimeFrame parameters, DateRange period)
         {
             Period = period;
             Parameters = parameters;
@@ -17,7 +17,7 @@ namespace Model
             return string.Format("Outside {0}, in the period {1}", Parameters, Period);
         }
 
-        protected bool Equals(SearchWindow other)
+        protected bool Equals(HoursSearchWindow other)
         {
             return Equals(Parameters, other.Parameters) && Equals(Period, other.Period);
         }
@@ -27,7 +27,7 @@ namespace Model
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((SearchWindow) obj);
+            return Equals((HoursSearchWindow) obj);
         }
 
         public override int GetHashCode()
