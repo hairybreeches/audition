@@ -11,9 +11,9 @@ namespace Audition.Chromium
         public const string ExportSearch = "api/search/export";
         public const string Openfile = "api/openfile";
         public const string Search = "api/search";
-
-        public const string InternalDomain = @"http://localhost:1337";
         public const string ShowDevTools = "api/devtools";
+
+        public const string InternalDomain = @"http://localhost:1337";        
 
         public static string AddInternalDomain(string address)
         {
@@ -23,6 +23,6 @@ namespace Audition.Chromium
         public static string GetViewUrl(string location)
         {
             return AddInternalDomain("views/" + location);
-        }        
+        }
     }
 }
