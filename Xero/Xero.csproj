@@ -50,6 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountsLookup.cs" />
+    <Compile Include="IdEqualityComparer.cs" />
     <Compile Include="IFullRepository.cs" />
     <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="RepositoryFactory.cs" />
