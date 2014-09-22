@@ -5,12 +5,14 @@ namespace Audition.Chromium
     //todo: share these routes between js and c# using CEF
     public static class Routing
     {
-        public const string Logout = "api/logout";
-        public const string FinishXeroLogin = "api/xero/completelogin";
         public const string XeroLogin = "api/xero/login";
-        public const string ExportSearch = "api/search/export";
-        public const string Openfile = "api/openfile";
+        public const string FinishXeroLogin = "api/xero/completelogin";
+        public const string Logout = "api/logout";
+
         public const string Search = "api/search";
+        public const string ExportSearch = "api/search/export";
+
+        public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";
 
         public const string InternalDomain = @"http://localhost:1337";        
