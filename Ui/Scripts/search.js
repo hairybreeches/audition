@@ -69,73 +69,72 @@ var ExportSuccessMessage = function () {
     };
 };
 
+
+var InputSection = function (parameters, period, output, exportSuccessMessage, searchUrl, exportUrl) {
+
+    var self = this;
+    //fields
+    self.parameters = ko.mapping.fromJS(parameters);
+
+    //methods
+    var serialise = function () {
+        return JSON.stringify(ko.mapping.toJS({
+            Period: period,
+            Parameters: self.parameters
+        }));
+    };
+
+    self.submit = function (_, e) {
+        e.preventDefault();
+        output.startSearch();
+        $.ajax(searchUrl, {
+            data: serialise(),
+            contentType: 'application/json',
+            success: output.searchSuccess,
+            error: output.searchFailure,
+            type: 'POST'
+        });
+    };
+
+    self.save = function (_, e) {
+        e.preventDefault();
+        exportSuccessMessage.hide();
+
+        $.ajax(exportUrl, {
+            data: serialise(),
+
+            contentType: 'application/json',
+            success: function (fileName) {
+                exportSuccessMessage.show(fileName);
+            },
+            type: 'POST'
+        });
+    };
+}
+
+var output = new Output();
+
+var exportSuccessMessage = new ExportSuccessMessage();
+
+var period = ko.mapping.fromJS({
+    From: '2013-4-1',
+    To: '2014-3-31'
+});
+
+
 var model = {
-    input: ko.mapping.fromJS({
-        Period: {
-            From: '2013-4-1',
-            To: '2014-3-31'
-        },
+    input: {
+        Period: period,
 
-        Outside: {
-            parameters: {
-                FromDay: "Monday",
-                ToDay: "Friday",
-                FromTime: "08:00",
-                ToTime: "18:00"
-            },
-
-            submit: function(_, e) {
-                model.input.submit(e, '/api/search', model.input.Outside);
-            },
-
-            save: function(_, e) {
-                model.input.save(e, '/api/search/export', model.input.Outside);
-            },
-
-            serialise: function() {
-                return model.input.serialise(model.input.Outside.parameters);
-            }
-        },
-        
-
-        serialise: function(parameters) {
-            return JSON.stringify(ko.mapping.toJS({
-                Period: model.input.Period,
-                Parameters: parameters
-            }));
-        },
-
-        submit: function(e, url, data) {
-            e.preventDefault();
-            model.output.startSearch();
-            $.ajax(url, {
-                data: data.serialise(),
-                contentType: 'application/json',
-                success: model.output.searchSuccess,
-                error: model.output.searchFailure,
-                type: 'POST'
-            });
-        },
-
-        save: function (e, url, data) {
-            e.preventDefault();
-            model.exportSuccessMessage.hide();
-
-            $.ajax(url, {
-
-                data: data.serialise(),
-
-                contentType: 'application/json',
-                success: function (fileName) {
-                    model.exportSuccessMessage.show(fileName);
-                },
-                type: 'POST'
-            });
-        },
-    }),
-
-    output: new Output(),
-    exportSuccessMessage: new ExportSuccessMessage()    
+        Outside: new InputSection({
+            FromDay: "Monday",
+            ToDay: "Friday",
+            FromTime: "08:00",
+            ToTime: "18:00"
+        }, period, output, exportSuccessMessage, '/api/search', '/api/search/export'),
+    },
+    output: output,
+    exportSuccessMessage: exportSuccessMessage 
 };
 
 var userFriendlyDate = function(jsonDate) {
