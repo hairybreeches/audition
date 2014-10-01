@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\KeywordParameters.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />

@@ -20,6 +20,8 @@ namespace Audition.Chromium
         public const string UserExport = "api/export/users";  
         public const string KeywordSearch = "api/search/keyword";
         public const string KeywordExport = "api/export/keyword";
+        public const string EndingSearch = "api/search/ending";
+        public const string EndingExport = "api/export/ending";
 
 
         public const string Openfile = "api/openfile";        
