@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Model.SearchWindows
 {
@@ -10,10 +8,7 @@ namespace Model.SearchWindows
 
         public UserParameters(string users)
         {
-            Usernames = users.Split('\n')
-                .Select(x => x.Trim())
-                .Where(x => !String.IsNullOrEmpty(x))
-                .ToList();
+            Usernames = InputParsing.ParseStringList(users);
         }
     }
 }

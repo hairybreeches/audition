@@ -143,7 +143,11 @@ var model = {
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users')
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users'),
+
+        Keyword: new InputSection({
+            keywords: ""
+        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword'),
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
