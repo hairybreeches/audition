@@ -45,7 +45,7 @@ namespace Tests
             },
 
             Parameters: {
-                Quantity: 2
+                MinimumEntriesToBeConsideredNormal: 2
             }
         }");
 
