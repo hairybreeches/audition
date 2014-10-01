@@ -51,6 +51,11 @@ namespace Xero
             throw new NotSupportedException("Xero does not record who raises individual journals");
         }
 
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<KeywordParameters> searchWindow)
+        {
+            throw new NotSupportedException("Xero does not have the concept of descriptions");
+        }
+
         public static bool Matches(SearchWindow<WorkingHours> searchWindow, Journal x)
         {
             return !searchWindow.Parameters.Contains(x.CreatedDateUTC);

@@ -17,7 +17,9 @@ namespace Audition.Chromium
         public const string DateSearch = "api/search/date";
         public const string DateExport = "api/export/date";     
         public const string UserSearch = "api/search/users";
-        public const string UserExport = "api/export/users";
+        public const string UserExport = "api/export/users";  
+        public const string KeywordSearch = "api/search/keyword";
+        public const string KeywordExport = "api/export/keyword";
 
 
         public const string Openfile = "api/openfile";        
