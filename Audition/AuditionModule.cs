@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Audition.Chromium;
 using Audition.Native;
+using Audition.Session;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Excel;
@@ -16,7 +17,8 @@ namespace Audition
             builder.RegisterModule<XeroModule>();
             builder.RegisterModule<NativeModule>();
             builder.RegisterModule<ChromiumModule>();
-            builder.RegisterModule<ExcelModule>();
+            builder.RegisterModule<ExcelModule>();            
+            builder.RegisterModule<SessionModule>();            
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());     
         }
     }
