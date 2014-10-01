@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model;
+using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using Journal = XeroApi.Model.Journal;
@@ -54,6 +55,32 @@ namespace Xero
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<KeywordParameters> searchWindow)
         {
             throw new NotSupportedException("Xero does not have the concept of descriptions");
+        }
+
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
+        {
+            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
+            var magnitude = (int) Math.Pow(10,searchWindow.Parameters.MinimumZeroesToBeConsideredUnusual);
+            return periodJournals.Where(journal => HasRoundLine(journal, magnitude))
+                .Select(x=>x.ToModelJournal());
+        }
+
+        private bool HasRoundLine(Journal journal, int magnitude)
+        {
+            return journal.JournalLines.Exists(line => ContainsRoundValue(line, magnitude));
+        }
+
+        public bool ContainsRoundValue(XeroApi.Model.JournalLine line, int magnitude)
+        {
+            return IsRound(line.GrossAmount, magnitude)
+                   || IsRound(line.TaxAmount, magnitude)
+                   || IsRound(line.NetAmount, magnitude);
+        }
+
+        public bool IsRound(decimal amount, int magnitude)
+        {
+            var pence = amount*100;
+            return pence !=0 && pence%magnitude == 0;
         }
 
         public static bool Matches(SearchWindow<WorkingHours> searchWindow, Journal x)

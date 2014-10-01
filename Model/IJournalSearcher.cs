@@ -13,5 +13,6 @@ namespace Model
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow);
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow);
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<KeywordParameters> searchWindow);
+        IEnumerable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow);
     }
 }

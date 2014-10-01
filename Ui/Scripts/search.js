@@ -148,6 +148,10 @@ var model = {
         Keyword: new InputSection({
             keywords: ""
         }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword'),
+
+        Ending: new InputSection({
+            minimumZeroesToBeConsideredUnusual: 3
+        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending'),
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
