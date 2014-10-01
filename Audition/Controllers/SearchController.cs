@@ -52,6 +52,21 @@ namespace Audition.Controllers
         {
             var journals = searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
+        }    
+        
+        [HttpPost]
+        [Route(Routing.DateSearch)]
+        public IEnumerable<Journal> DateSearch(SearchWindow<YearEndParameters> searchWindow)
+        {
+            return searcher.FindJournalsWithin(searchWindow);
+        }
+        
+        [HttpPost]
+        [Route(Routing.DateExport)]
+        public async Task<IHttpActionResult> DateExport(SearchWindow<YearEndParameters> saveRequest)
+        {
+            var journals = searcher.FindJournalsWithin(saveRequest);
+            return await Export(journals);
         }
 
         private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals)
