@@ -11,5 +11,6 @@ namespace Model
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow);
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow);
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow);
+        IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow);
     }
 }

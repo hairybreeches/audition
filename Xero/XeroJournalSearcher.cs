@@ -46,6 +46,11 @@ namespace Xero
 
         }
 
+        public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
+        {
+            throw new NotSupportedException("Xero does not record who raises individual journals");
+        }
+
         public static bool Matches(SearchWindow<WorkingHours> searchWindow, Journal x)
         {
             return !searchWindow.Parameters.Contains(x.CreatedDateUTC);

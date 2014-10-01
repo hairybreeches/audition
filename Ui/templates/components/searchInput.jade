@@ -61,6 +61,10 @@ mixin search-tab(title, bindName)
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: quantity")
 					span.vertical-space.search-text entries
+			.tab-pane.fade#users
+				+search-tab('posted by people other than...', 'Users')
+					.well.inline-block.vertical-space
+						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
 			.tab-pane.fade#date
 				+search-tab('posted after the year end or within the previous...', 'Date')
 					.well.inline-block.vertical-space.margin-right
