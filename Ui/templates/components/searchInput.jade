@@ -59,7 +59,7 @@ mixin search-tab(title, bindName)
 			.tab-pane.fade#accounts
 				+search-tab('posted to accounts with fewer than...', 'Accounts')
 					.well.inline-block.vertical-space.margin-right
-						input.form-control.scaled-input(type="number", data-bind="value: quantity")
+						input.form-control.scaled-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
 					span.vertical-space.search-text entries
 			.tab-pane.fade#users
 				+search-tab('posted by people other than...', 'Users')

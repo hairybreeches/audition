@@ -134,7 +134,7 @@ var model = {
         }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours'),
 
         Accounts: new InputSection({
-            quantity: 10
+            minimumEntriesToBeConsideredNormal: 10
         }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts'),
 
         Date: new InputSection({

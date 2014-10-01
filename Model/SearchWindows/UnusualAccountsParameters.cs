@@ -5,21 +5,21 @@ namespace Model.SearchWindows
 {
     public class UnusualAccountsParameters
     {
-        public UnusualAccountsParameters(int quantity)
+        public UnusualAccountsParameters(int minimumEntriesToBeConsideredNormal)
         {
-            Quantity = quantity;
+            MinimumEntriesToBeConsideredNormal = minimumEntriesToBeConsideredNormal;
         }
         
-        public int Quantity { get; private set; }
+        public int MinimumEntriesToBeConsideredNormal { get; private set; }
         
         public override string ToString()
         {
-            return string.Format("Fewer than {0} entries", Quantity);
+            return string.Format("Fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
         }
 
         protected bool Equals(UnusualAccountsParameters other)
         {
-            return Quantity == other.Quantity;
+            return MinimumEntriesToBeConsideredNormal == other.MinimumEntriesToBeConsideredNormal;
         }
 
         public override bool Equals(object obj)
@@ -32,7 +32,7 @@ namespace Model.SearchWindows
 
         public override int GetHashCode()
         {
-            return Quantity;
+            return MinimumEntriesToBeConsideredNormal;
         }
     }
 }

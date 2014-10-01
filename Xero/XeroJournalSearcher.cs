@@ -28,7 +28,7 @@ namespace Xero
         {
             var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
             var lookup = new AccountsLookup(periodJournals);
-            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.Quantity)
+            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal)
                 .Select(XeroJournalExtensions.ToModelJournal);
         }
 
