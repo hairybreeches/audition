@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
@@ -7,10 +7,8 @@ using Model.Time;
 using NodaTime;
 using NUnit.Framework;
 using Tests.Mocks;
-using Journal = Model.Accounting.Journal;
 
-
-namespace Tests
+namespace Tests.SearcherTests
 {
     public class XeroHoursSearchingTests
     {
