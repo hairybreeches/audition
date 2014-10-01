@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
 using Tests.Mocks;
 
-namespace Tests
+namespace Tests.SearcherTests
 {
     [TestFixture]
     public class XeroAccountsSearchingTests
