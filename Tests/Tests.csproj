@@ -88,6 +88,7 @@
     <Compile Include="JournalExtensions.cs" />
     <Compile Include="JournalTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
+    <Compile Include="LoginSessionTests.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockXeroRepositoryFactory.cs" />
     <Compile Include="Mocks\Create.cs" />

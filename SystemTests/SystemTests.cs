@@ -13,6 +13,7 @@ using Model.Accounting;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
+using Tests;
 using Tests.Mocks;
 using Xero;
 
@@ -116,6 +117,7 @@ namespace SystemTests
             CefSharpResponse cefSharpResponse;
             using (var lifetime = builder.Build())
             {
+                Login(lifetime);
                 var handler = lifetime.Resolve<IRequestHandler>();
 
 
@@ -124,6 +126,12 @@ namespace SystemTests
                 cefSharpResponse = requestResponse.Response;
             }
             return cefSharpResponse;
+        }
+
+        private static void Login(IContainer lifetime)
+        {
+            var loginController = lifetime.Resolve<XeroSessionController>();
+            loginController.PostCompleteAuthenticationRequest(new XeroVerificationCode());
         }
     }
 }

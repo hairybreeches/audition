@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Audition.Chromium;
+using Audition.Session;
 using Xero;
 
 namespace Audition.Controllers
@@ -7,12 +8,14 @@ namespace Audition.Controllers
     public class XeroSessionController : RedirectController
     {
         private readonly IRepositoryFactory repositoryFactory;
+        private readonly LoginSession session;
 
-        public XeroSessionController(IRepositoryFactory repositoryFactory)
+        public XeroSessionController(IRepositoryFactory repositoryFactory, LoginSession session)
         {
             this.repositoryFactory = repositoryFactory;
+            this.session = session;
         }
-        
+
         [HttpPost]
         [Route(Routing.XeroLogin)]
         public IHttpActionResult BeginAuthenticate()
@@ -26,6 +29,7 @@ namespace Audition.Controllers
         public IHttpActionResult PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
+            session.Login(new XeroJournalSearcher(repositoryFactory));
             return RedirectToView("search.html");
         }
 
@@ -34,6 +38,7 @@ namespace Audition.Controllers
         public IHttpActionResult Logout()
         {
             repositoryFactory.Logout();
+            session.Logout();
             return RedirectToView("login.html");
         }
     }
