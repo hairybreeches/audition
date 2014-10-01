@@ -66,8 +66,8 @@ mixin search-tab(title, bindName)
 					.well.inline-block.vertical-space
 						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
 			.tab-pane.fade#date
-				+search-tab('posted after the year end or within the previous...', 'Date')
+				+search-tab('posted after the year end or within...', 'Date')
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: daysBeforeYearEnd")
-					span.vertical-space.search-text days
+					span.vertical-space.search-text days before year end
 						
