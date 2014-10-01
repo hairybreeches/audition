@@ -135,7 +135,11 @@ var model = {
 
         Accounts: new InputSection({
             quantity: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts')
+        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts'),
+
+        Date: new InputSection({
+            daysBeforeYearEnd: 10
+        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date')
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
