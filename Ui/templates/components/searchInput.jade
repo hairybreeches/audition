@@ -60,4 +60,9 @@ form.form-horizontal(action="search", method="post")
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: quantity")
 					span.vertical-space.search-text entries
+			.tab-pane.fade#date
+				+search-tab('posted after the year end or within the previous...', 'Date')
+					.well.inline-block.vertical-space.margin-right
+						input.form-control.scaled-input(type="number", data-bind="value: daysBeforeYearEnd")
+					span.vertical-space.search-text days
 						
