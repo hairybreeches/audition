@@ -139,7 +139,11 @@ var model = {
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date')
+        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date'),
+
+        Users: new InputSection({
+            users: ""
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users')
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 

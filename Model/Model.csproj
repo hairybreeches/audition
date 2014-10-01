@@ -53,6 +53,7 @@
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="Accounting\InvalidJournalException.cs" />
+    <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Journal.cs" />

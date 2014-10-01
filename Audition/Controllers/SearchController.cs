@@ -69,6 +69,21 @@ namespace Audition.Controllers
             return await Export(journals);
         }
 
+        [HttpPost]
+        [Route(Routing.UserSearch)]
+        public IEnumerable<Journal> UserSearch(SearchWindow<UserParameters> searchWindow)
+        {
+            return searcher.FindJournalsWithin(searchWindow);
+        }
+        
+        [HttpPost]
+        [Route(Routing.UserExport)]
+        public async Task<IHttpActionResult> UserExport(SearchWindow<UserParameters> saveRequest)
+        {
+            var journals = searcher.FindJournalsWithin(saveRequest);
+            return await Export(journals);
+        }
+
         private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
