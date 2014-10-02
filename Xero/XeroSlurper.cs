@@ -13,7 +13,12 @@ namespace Xero
             
             for (int i = 0; i < 30; i++)
             {
-                foreach (var journal in repository.Journals.Skip(100*i))
+                var journals = repository.Journals.Skip(100*i).ToList();
+
+                if (!journals.Any())
+                    break;
+
+                foreach (var journal in journals)
                 {
                     yield return journal;
                 }
