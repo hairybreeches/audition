@@ -93,6 +93,7 @@
     <Compile Include="Mocks\MockXeroRepositoryFactory.cs" />
     <Compile Include="Mocks\Mock.cs" />
     <Compile Include="SearcherTests\XeroAccountsSearchingTests.cs" />
+    <Compile Include="SearcherTests\XeroDateSearchingTests.cs" />
     <Compile Include="SearcherTests\XeroHoursSearchingTests.cs" />
     <Compile Include="TimeFrameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
