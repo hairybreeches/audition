@@ -11,12 +11,12 @@ namespace Xero
         public IEnumerable<Journal> Slurp(Repository repository)
         {
             
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 30; i++)
             {
                 foreach (var journal in repository.Journals.Skip(100*i))
                 {
                     yield return journal;
-                }                
+                }
             }
         }
     }
