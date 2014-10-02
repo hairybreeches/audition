@@ -20,7 +20,7 @@ namespace Xero
                     yield return journal;
                 }
 
-                if (!journals.Any() || journals.Count < 100)
+                if (journals.Count < 100)
                     break;
 
                 lastTaken = (int) journals.Last().JournalNumber;
