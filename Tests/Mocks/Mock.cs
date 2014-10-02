@@ -4,7 +4,7 @@ using Xero;
 
 namespace Tests.Mocks
 {
-    public static class Create
+    public static class Mock
     {
         public static IJournalSearcher JournalSearcher(params Journal[] journals)
         {

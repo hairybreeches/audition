@@ -17,7 +17,7 @@ namespace Tests.SearcherTests
             //given one journal which includes a line to a rare account (one posting)
             var journalPostedToUncommonAccount = JournalPostedTo("b", "e");
             //and several to accounts with >= 2 postings
-            var searcher = Create.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = Mock.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -37,7 +37,7 @@ namespace Tests.SearcherTests
             var journalPostedToUncommonAccount = JournalPostedTo("d", "e");
 
             //and several to accounts with >= 2 postings
-            var searcher = Create.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = Mock.JournalSearcher(JournalPostedTo("a", "b"), JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -61,7 +61,7 @@ namespace Tests.SearcherTests
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
             //when we do the journal search
-            var searcher = Create.JournalSearcher(journal);
+            var searcher = Mock.JournalSearcher(journal);
             var journals = searcher.FindJournalsWithin(searchWindow).ToList();
 
             //we don't end up with any journals returned
@@ -75,7 +75,7 @@ namespace Tests.SearcherTests
             //given one journal inside the period to an account
             var journal = JournalPostedTo("a", "b", new DateTime(1999, 1, 1));
             //and a load posted to the same account, but outside the period
-            var searcher = Create.JournalSearcher(journal, 
+            var searcher = Mock.JournalSearcher(journal, 
                 JournalPostedTo("a", "b", new DateTime(2000,1,1)),
                 JournalPostedTo("a", "b", new DateTime(1998,12,31)),
                 JournalPostedTo("a", "b", new DateTime(2000,1,1)));
