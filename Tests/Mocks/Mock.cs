@@ -57,5 +57,11 @@ namespace Tests.Mocks
                     new JournalLine(accountCode2, accountCode2, JournalType.Dr, 2.2m)
                 });
         }
+
+        public static Journal JournalForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)
+        {
+            var amountOfPounds = ((decimal) amountOfPence)/100;
+            return new Journal(Guid.NewGuid(), creationDate, journalDate, new []{ new JournalLine("a", "a", JournalType.Cr, amountOfPounds), new JournalLine("b", "b", JournalType.Dr, amountOfPounds)});
+        }
     }
 }

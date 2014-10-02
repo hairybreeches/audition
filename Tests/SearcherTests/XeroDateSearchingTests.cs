@@ -53,8 +53,9 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
         {
-            var journalApplyingToPostYearEnd = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), Enumerable.Empty<JournalLine>());
-            var journalApplyingToPreYearstart = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<JournalLine>());
+            var timeInsideTheFinancialPeriod = YearEnd.Subtract(TimeSpan.FromDays(2));
+            var journalApplyingToPostYearEnd = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<JournalLine>());
+            var journalApplyingToPreYearstart = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<JournalLine>());
 
             var searcher = Mock.JournalSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             var result = searcher.FindJournalsWithin(SearchParameters);
