@@ -3,6 +3,7 @@ using System.Linq;
 using Model;
 using Model.Accounting;
 using NodaTime;
+using NSubstitute;
 using NUnit.Framework;
 using Xero;
 
@@ -12,7 +13,7 @@ namespace Tests.Mocks
     {
         public static IJournalSearcher JournalSearcher(params Journal[] journals)
         {
-            var factory = MockXeroRepositoryFactory.Create(journals);
+            var factory = RepositoryFactory(journals);
             return new XeroJournalSearcher(factory);
         }
 
@@ -62,6 +63,21 @@ namespace Tests.Mocks
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
             return new Journal(Guid.NewGuid(), creationDate, journalDate, new []{ new JournalLine("a", "a", JournalType.Cr, amountOfPounds), new JournalLine("b", "b", JournalType.Dr, amountOfPounds)});
+        }
+
+        public static IRepositoryFactory RepositoryFactory(params Journal[] journals)
+        {
+            var repository = Repository(journals);
+            var factory = Substitute.For<IRepositoryFactory>();
+            factory.CreateRepository().Returns(repository);
+            return factory;
+        }
+
+        private static IFullRepository Repository(params Journal[] journals)
+        {
+            var repository = Substitute.For<IFullRepository>();
+            repository.Journals.Returns(journals.Select(x => JournalExtensions.ToXeroJournal(x)).AsQueryable());
+            return repository;
         }
     }
 }

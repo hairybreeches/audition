@@ -90,7 +90,6 @@
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
-    <Compile Include="Mocks\MockXeroRepositoryFactory.cs" />
     <Compile Include="Mocks\Mock.cs" />
     <Compile Include="SearcherTests\XeroAccountsSearchingTests.cs" />
     <Compile Include="SearcherTests\XeroDateSearchingTests.cs" />
