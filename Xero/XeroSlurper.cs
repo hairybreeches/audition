@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using XeroApi;
 using XeroApi.Model;
 
@@ -15,13 +14,13 @@ namespace Xero
             {
                 var journals = repository.Journals.Skip(100*i).ToList();
 
-                if (!journals.Any())
-                    break;
-
                 foreach (var journal in journals)
                 {
                     yield return journal;
                 }
+
+                if (!journals.Any() || journals.Count < 100)
+                    break;
             }
         }
     }
