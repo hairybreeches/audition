@@ -60,6 +60,7 @@
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSearcher.cs" />
     <Compile Include="XeroModule.cs" />
+    <Compile Include="XeroSlurper.cs" />
     <Compile Include="XeroVerificationCode.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using XeroApi;
+﻿using System.Threading.Tasks;
+using XeroApi;
 
 namespace Xero
 {

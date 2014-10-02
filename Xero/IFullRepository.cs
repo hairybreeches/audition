@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using XeroApi.Model;
 
 namespace Xero
 {
     public interface IFullRepository
     {
-        IQueryable<Journal> Journals { get; }
+        IEnumerable<Journal> Journals { get; }
     }
 }

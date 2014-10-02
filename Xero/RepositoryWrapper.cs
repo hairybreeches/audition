@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using XeroApi;
 using XeroApi.Model;
 
@@ -6,16 +7,11 @@ namespace Xero
 {
     class RepositoryWrapper : IFullRepository
     {
-        private readonly Repository repository;
+        public IEnumerable<Journal> Journals { get; set; }
 
-        public RepositoryWrapper(Repository repository)
+        public RepositoryWrapper(IEnumerable<Journal> journals)
         {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> Journals
-        {
-            get { return repository.Journals; }
+            Journals = journals;
         }
     }
 }

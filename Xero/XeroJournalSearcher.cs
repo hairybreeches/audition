@@ -13,9 +13,9 @@ namespace Xero
     {
         private readonly IFullRepository repository;
 
-        public XeroJournalSearcher(IRepositoryFactory repositoryFactory)
+        public XeroJournalSearcher(IFullRepository repository)
         {
-            repository = repositoryFactory.CreateRepository();
+            this.repository = repository;
         }
 
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
