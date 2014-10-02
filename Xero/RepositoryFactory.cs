@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
@@ -43,7 +44,7 @@ namespace Xero
         {
             var repository = new Repository(xeroApiPublicSession);
             var journals = slurper.Slurp(repository);
-            return new RepositoryWrapper(journals);
+            return new RepositoryWrapper(journals.ToList());
         }
 
         public void CompleteAuthenticationRequest(string verificationCode)
