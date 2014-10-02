@@ -70,7 +70,7 @@ namespace Xero
             return journal.JournalLines.Exists(line => ContainsRoundValue(line, magnitude));
         }
 
-        public bool ContainsRoundValue(XeroApi.Model.JournalLine line, int magnitude)
+        private bool ContainsRoundValue(XeroApi.Model.JournalLine line, int magnitude)
         {
             return IsRound(line.GrossAmount, magnitude)
                    || IsRound(line.TaxAmount, magnitude)
