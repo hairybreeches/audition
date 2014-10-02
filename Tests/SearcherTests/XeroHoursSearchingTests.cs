@@ -17,7 +17,7 @@ namespace Tests.SearcherTests
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
         public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
-            var journal = Mock.GetJournalPostedOn(dayOfWeek);
+            var journal = Mock.JournalPostedOn(dayOfWeek);
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -33,7 +33,7 @@ namespace Tests.SearcherTests
         public void SearcherReturnsJournalsPostedOutsideRangeEvenIfTheTimeIsNotInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay,
             DayOfWeek toDay)
         {
-            var journal = Mock.GetJournalPostedOn(dayOfWeek);
+            var journal = Mock.JournalPostedOn(dayOfWeek);
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -46,7 +46,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("TimesInsideRange")]
         public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
-            var journal = Mock.GetJournalPostedAt(journalTime);
+            var journal = Mock.JournalPostedAt(journalTime);
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -59,7 +59,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("TimesOutsideRange")]
         public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
-            var journal = Mock.GetJournalPostedAt(journalTime);
+            var journal = Mock.JournalPostedAt(journalTime);
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -71,7 +71,7 @@ namespace Tests.SearcherTests
         [Test]
         public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
-            var journal = Mock.GetJournalAffecting(new DateTime(1991,1,1));
+            var journal = Mock.JournalAffecting(new DateTime(1991,1,1));
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -84,7 +84,7 @@ namespace Tests.SearcherTests
         [Test]
         public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
         {
-            var journal = Mock.GetJournalAffecting(new DateTime(1989,12,31,23,59,59));
+            var journal = Mock.JournalAffecting(new DateTime(1989,12,31,23,59,59));
             var searcher = Mock.JournalSearcher(journal);
 
             var journalIds =
@@ -98,7 +98,7 @@ namespace Tests.SearcherTests
         public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtEnd()
         {
             //given a journal on the last day of the financial period
-            var journal = Mock.GetJournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
+            var journal = Mock.JournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
             var searcher = Mock.JournalSearcher(journal);
 
             //and a period created just with the date, rather than the full datetime
@@ -114,7 +114,7 @@ namespace Tests.SearcherTests
         public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtStart()
         {
             //given a journal on the first day of the financial period
-            var journal = Mock.GetJournalAffecting(new DateTime(1990, 1, 1, 0, 0, 0));
+            var journal = Mock.JournalAffecting(new DateTime(1990, 1, 1, 0, 0, 0));
             var searcher = Mock.JournalSearcher(journal);
 
             //and a period created badly with a time on the first date

@@ -16,21 +16,21 @@ namespace Tests.Mocks
             return new XeroJournalSearcher(factory);
         }
 
-        public static Journal GetJournalPostedAt(LocalTime journalTime)
+        public static Journal JournalPostedAt(LocalTime journalTime)
         {
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
                 new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
         }
 
-        public static Journal GetJournalAffecting(DateTime dateTime)
+        public static Journal JournalAffecting(DateTime dateTime)
         {
             return new Journal(Guid.NewGuid(),
                 new DateTime(2014, 7, 1),
                 dateTime, Enumerable.Empty<JournalLine>());
         }
 
-        public static Journal GetJournalPostedOn(DayOfWeek day)
+        public static Journal JournalPostedOn(DayOfWeek day)
         {
             var dayOfMonth = 6 + (int) day; //the 6th of July 2014 was a Sunday, Sunday is the 0th element of the enum.
             var journal = new Journal(Guid.NewGuid(), 
@@ -38,7 +38,7 @@ namespace Tests.Mocks
                 new DateTime(), Enumerable.Empty<JournalLine>());
 
             Assert.AreEqual(day, journal.Created.DayOfWeek,
-                "GetJournalPostedOn should return a journal posted on the right day of the week");
+                "JournalPostedOn should return a journal posted on the right day of the week");
             
             return journal;
         }
