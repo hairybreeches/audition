@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
 using XeroApi;
+using XeroApi.Model;
 using XeroApi.OAuth;
 
 namespace Xero
 {
     public class RepositoryFactory : IRepositoryFactory
     {
+        private readonly XeroSlurper slurper;
         private XeroApiPublicSession xeroApiPublicSession;
         private const string UserAgent = "Audition";
         private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
         private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
 
 
-        public RepositoryFactory()
+        public RepositoryFactory(XeroSlurper slurper)
         {
-            CreateNewSession();            
+            this.slurper = slurper;
+            CreateNewSession();
         }
 
         private void CreateNewSession()
@@ -35,8 +40,10 @@ namespace Xero
         }
 
         public IFullRepository CreateRepository()
-        {           
-            return new RepositoryWrapper(new Repository(xeroApiPublicSession));
+        {
+            var repository = new Repository(xeroApiPublicSession);
+            var journals = slurper.Slurp(repository);
+            return new RepositoryWrapper(journals);
         }
 
         public void CompleteAuthenticationRequest(string verificationCode)

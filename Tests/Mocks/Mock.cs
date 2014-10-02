@@ -13,8 +13,8 @@ namespace Tests.Mocks
     {
         public static IJournalSearcher JournalSearcher(params Journal[] journals)
         {
-            var factory = RepositoryFactory(journals);
-            return new XeroJournalSearcher(factory);
+            var repository = Repository(journals);
+            return new XeroJournalSearcher(repository);
         }
 
         public static Journal JournalPostedAt(LocalTime journalTime)

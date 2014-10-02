@@ -29,7 +29,7 @@ namespace Audition.Controllers
         public IHttpActionResult PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
-            session.Login(new XeroJournalSearcher(repositoryFactory));
+            session.Login(new XeroJournalSearcher(repositoryFactory.CreateRepository()));
             return RedirectToView("search.html");
         }
 
