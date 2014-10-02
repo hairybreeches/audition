@@ -42,7 +42,7 @@ namespace Xero
             var dateRange = new DateRange(startOfSearchPeriod, DateTime.MaxValue);
             var journalsPostedInTimeFrame = GetJournalsPostedDuring(dateRange).ToList();
             return journalsPostedInTimeFrame
-                .Where(x => searchWindow.Period.Contains(x.CreatedDateUTC))
+                .Where(x => searchWindow.Period.Contains(x.JournalDate))
                 .Select(x=>x.ToModelJournal());
 
         }
