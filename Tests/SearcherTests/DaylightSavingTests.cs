@@ -20,14 +20,14 @@ namespace Tests.SearcherTests
         [TestCaseSource("JournalsInside9To5")]
         public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldNotBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned);
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }
         
         [TestCaseSource("JournalsOutside9To5")]
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
         }
 
@@ -103,11 +103,6 @@ namespace Tests.SearcherTests
                 yield return CreateTestCaseData(new DateTime(2014, 6, 20, 23, 30, 00), "BST: journal after end of working week returned");
             }
 
-        }
-
-        private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal)
-        {
-            return ResultsOfSearching(journal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
         }
 
         private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal, WorkingHours workingHours)
