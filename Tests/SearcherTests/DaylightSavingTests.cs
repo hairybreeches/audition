@@ -18,14 +18,14 @@ namespace Tests.SearcherTests
 
 
         [TestCaseSource("JournalsInside9To5")]
-        public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBe(Journal journalThatShouldBeReturned)
+        public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }
         
         [TestCaseSource("JournalsOutside9To5")]
-        public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBe(Journal journalThatShouldBeReturned)
+        public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
