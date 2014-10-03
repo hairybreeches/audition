@@ -5,13 +5,13 @@ using XeroApi.Model;
 
 namespace Xero
 {
-    class RepositoryWrapper : IFullRepository
+    public class RepositoryWrapper : IFullRepository
     {
-        public IEnumerable<Journal> Journals { get; set; }
+        public IEnumerable<Journal> Journals { get; private set; }
 
         public RepositoryWrapper(IEnumerable<Journal> journals)
         {
-            Journals = journals;
+            Journals = journals.ToList();
         }
     }
 }
