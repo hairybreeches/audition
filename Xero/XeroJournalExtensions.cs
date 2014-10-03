@@ -23,5 +23,14 @@ namespace Xero
         {
             return xeroJournalLine.NetAmount < 0 ? Model.Accounting.JournalType.Cr : Model.Accounting.JournalType.Dr;
         }
+
+        public static DateTimeOffset UkCreationTime(this Journal xeroJournal)
+        {
+            var createdDateUtc = xeroJournal.CreatedDateUTC;
+            var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+            var offset = timezone.GetUtcOffset(createdDateUtc);
+            var localDateTime = new DateTimeOffset(createdDateUtc, TimeSpan.Zero).ToOffset(offset);
+            return localDateTime;
+        }
     }
 }

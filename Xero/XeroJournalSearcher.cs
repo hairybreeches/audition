@@ -85,7 +85,7 @@ namespace Xero
 
         private static bool Matches(Journal x, WorkingHours workingHours)
         {
-            return !workingHours.Contains(x.CreatedDateUTC);
+            return !workingHours.Contains(x.UkCreationTime());
         }
 
         private IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
