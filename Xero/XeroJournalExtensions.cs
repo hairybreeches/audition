@@ -11,7 +11,7 @@ namespace Xero
     {
         public static Model.Accounting.Journal ToModelJournal(this Journal xeroJournal)
         {            
-            return new Model.Accounting.Journal(xeroJournal.JournalID, xeroJournal.CreatedDateUTC, xeroJournal.JournalDate, xeroJournal.JournalLines.Select(ToModelJournalLine));
+            return new Model.Accounting.Journal(xeroJournal.JournalID, xeroJournal.UkCreationTime(), xeroJournal.JournalDate, xeroJournal.JournalLines.Select(ToModelJournalLine));
         }
 
         private static Model.Accounting.JournalLine ToModelJournalLine(this JournalLine xeroJournalLine)
