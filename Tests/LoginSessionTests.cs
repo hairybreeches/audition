@@ -1,9 +1,12 @@
-﻿using Audition;
+﻿using System;
+using Audition;
 using Audition.Controllers;
 using Audition.Session;
 using Autofac;
 using Autofac.Core;
 using Model;
+using Model.SearchWindows;
+using Model.Time;
 using NSubstitute;
 using NUnit.Framework;
 using Xero;
@@ -19,7 +22,7 @@ namespace Tests
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                AssertResolvingSearchControllerGivesNotLoggedInException(container);
+                AssertSearchingGivesNotLoggedInException(container);
             }
         }        
 
@@ -42,7 +45,7 @@ namespace Tests
             {
                 Login(container);
                 Logout(container);
-                AssertResolvingSearchControllerGivesNotLoggedInException(container);
+                AssertSearchingGivesNotLoggedInException(container);
             }
         }        
 
@@ -54,10 +57,12 @@ namespace Tests
             return builder;
         }
 
-        private static void AssertResolvingSearchControllerGivesNotLoggedInException(IComponentContext container)
+        private static void AssertSearchingGivesNotLoggedInException(IComponentContext container)
         {
-            var exception = Assert.Throws<DependencyResolutionException>(() => container.Resolve<SearchController>());
-            Assert.IsInstanceOf<NotLoggedInException>(exception.InnerException);
+            var searcher = container.Resolve<SearchController>();
+            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1), new DateRange(DateTime.MinValue, DateTime.MaxValue));
+
+            Assert.Throws<NotLoggedInException>(() => searcher.AccountsSearch(searchWindow));            
         }
 
         private static void Login(IComponentContext container)

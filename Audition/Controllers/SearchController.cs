@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Native;
+using Audition.Session;
 using Excel;
 using Model;
 using Model.Accounting;
@@ -13,13 +14,18 @@ namespace Audition.Controllers
 {
     public class SearchController : ApiController
     {
-        private readonly IJournalSearcher searcher;
+        private IJournalSearcher Searcher
+        {
+            get { return session.GetCurrentJournalSearcher(); }
+        }
+
         private readonly ExcelExporter excelExporter;
         private readonly IFileSaveChooser fileSaveChooser;
+        private readonly LoginSession session;
 
-        public SearchController(IJournalSearcher searcher, ExcelExporter excelExporter, IFileSaveChooser fileSaveChooser)
+        public SearchController(LoginSession session, ExcelExporter excelExporter, IFileSaveChooser fileSaveChooser)
         {
-            this.searcher = searcher;
+            this.session = session;
             this.excelExporter = excelExporter;
             this.fileSaveChooser = fileSaveChooser;
         }
@@ -28,14 +34,14 @@ namespace Audition.Controllers
         [Route(Routing.HoursSearch)]
         public IEnumerable<Journal> HoursSearch(SearchWindow<WorkingHours> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.HoursExport)]
         public async Task<IHttpActionResult> HoursExport(SearchWindow<WorkingHours> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         }      
         
@@ -43,14 +49,14 @@ namespace Audition.Controllers
         [Route(Routing.AccountsSearch)]
         public IEnumerable<Journal> AccountsSearch(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.AccountsExport)]
         public async Task<IHttpActionResult> AccountsExport(SearchWindow<UnusualAccountsParameters> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         }    
         
@@ -58,14 +64,14 @@ namespace Audition.Controllers
         [Route(Routing.DateSearch)]
         public IEnumerable<Journal> DateSearch(SearchWindow<YearEndParameters> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.DateExport)]
         public async Task<IHttpActionResult> DateExport(SearchWindow<YearEndParameters> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         }
 
@@ -73,14 +79,14 @@ namespace Audition.Controllers
         [Route(Routing.UserSearch)]
         public IEnumerable<Journal> UserSearch(SearchWindow<UserParameters> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.UserExport)]
         public async Task<IHttpActionResult> UserExport(SearchWindow<UserParameters> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         } 
         
@@ -88,14 +94,14 @@ namespace Audition.Controllers
         [Route(Routing.KeywordSearch)]
         public IEnumerable<Journal> KeywordSearch(SearchWindow<KeywordParameters> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.KeywordExport)]
         public async Task<IHttpActionResult> KeywordExport(SearchWindow<KeywordParameters> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         }     
         
@@ -103,14 +109,14 @@ namespace Audition.Controllers
         [Route(Routing.EndingSearch)]
         public IEnumerable<Journal> EndingSearch(SearchWindow<EndingParameters> searchWindow)
         {
-            return searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchWindow);
         }
         
         [HttpPost]
         [Route(Routing.EndingExport)]
         public async Task<IHttpActionResult> EndingExport(SearchWindow<EndingParameters> saveRequest)
         {
-            var journals = searcher.FindJournalsWithin(saveRequest);
+            var journals = Searcher.FindJournalsWithin(saveRequest);
             return await Export(journals);
         }
 

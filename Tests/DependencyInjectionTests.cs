@@ -34,8 +34,6 @@ namespace Tests
                 var controllerAssembly = typeof(SearchController).Assembly;
                 return controllerAssembly.GetTypes()
                     .Where(x => x.IsSubclassOf(typeof (ApiController)))
-                    //this is tested in the login controllers
-                    .Where(x => x != (typeof (SearchController)))
                     .Where(x => !x.IsAbstract);
             }
         }

@@ -7,7 +7,6 @@ namespace Audition.Session
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LoginSession>().SingleInstance();
-            builder.Register(componentContext => componentContext.Resolve<LoginSession>().GetCurrentJournalSearcher());
         }
     }
 }
