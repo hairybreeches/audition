@@ -147,11 +147,6 @@ namespace Tests.SearcherTests
             return resultsOfSearch;
         }
 
-        private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, DateTime createdDateLocalTime, string name)
-        {
-            return new TestCaseData(CreateXeroJournalFor(createdDateUtc), createdDateLocalTime).SetName(name);
-        }       
-        
         private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, string name)
         {
             return new TestCaseData(CreateXeroJournalFor(createdDateUtc)).SetName(name);
