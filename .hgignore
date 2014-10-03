@@ -1,0 +1,17 @@
+syntax: glob
+Audition.v12.suo
+Audition/bin/**
+Audition/obj/**
+Excel/obj/**
+Ui/obj/**
+Xero/obj/**
+build/**
+_NCrunch_Audition/**
+packages/**
+**.ncrunchsolution.user
+Model/obj/**
+Tests/obj/**
+**.user
+Ui/node_modules/**
+Ui/npm-debug.log
+SystemTests/obj/**

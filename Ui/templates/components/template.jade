@@ -1,0 +1,15 @@
+mixin page(title, pagescript)
+	doctype html
+	html(lang="en")
+		include head
+		+head(title)
+		body
+			div.container
+				h1= title
+					img.brand-logo.pull-right(src="/Content/images/A.svg")
+
+			block
+
+			include scripts
+			if pagescript
+				script(src="/scripts/" + pagescript + ".js")

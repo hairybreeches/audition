@@ -1,0 +1,40 @@
+﻿div(data-bind="visible: showResults()" display="none")
+	h2 Results
+	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
+		thead
+			tr
+				th Date created
+				th Date of journal
+				th Dr/Cr				
+				th Account Name
+				th Amount
+				th Account Code
+		//ko foreach: results
+		tbody
+				tr
+					td(data-bind="text: userFriendlyDateTime(Created)")
+					td(data-bind="text: userFriendlyDate(JournalDate)")
+					td(data-bind="text: Lines[0].JournalType")
+					td(data-bind="text: Lines[0].AccountName")
+					td(data-bind="text: Lines[0].Amount")
+					td(data-bind="text: Lines[0].AccountCode")
+				// ko foreach: Lines.slice(1)
+				tr
+					td
+					td
+					td(data-bind="text: JournalType")
+					td(data-bind="text: AccountName")
+					td(data-bind="text: Amount")
+					td(data-bind="text: AccountCode")
+				// /ko
+		// /ko
+
+div(data-bind="visible: showApology()" display="none")
+	h2 No results
+
+div(data-bind="visible: showSearching()" display="none")
+	h2 Searching...
+
+div(data-bind="visible: showError()" display="none")
+	h2 Error
+	span(data-bind="text: lastError" display="none")

@@ -1,0 +1,9 @@
+.row
+	.col-md-8.col-md-offset-2
+		.alert.alert-success(data-bind="visible: visible()" display="none")
+			button.close(type="button" data-bind="click: hide") x
+			strong Success! 
+			| Your search has been saved to:
+			br
+			a.alert-link(data-bind="text: fileName(), click: openFile", href="#")
+</div>
