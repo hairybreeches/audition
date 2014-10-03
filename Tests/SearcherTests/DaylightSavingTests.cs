@@ -20,16 +20,27 @@ namespace Tests.SearcherTests
         [TestCaseSource("JournalsInside9To5")]
         public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBe(Journal journalThatShouldBeReturned)
         {
-            var resultsOfSearch = GetResultsOfSearching(journalThatShouldBeReturned);
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }
         
         [TestCaseSource("JournalsOutside9To5")]
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBe(Journal journalThatShouldBeReturned)
         {
-            var resultsOfSearch = GetResultsOfSearching(journalThatShouldBeReturned);
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
 
+        }
+
+        [Test]
+        public void UsesCorrectTimeOffsetToDetermineDay()
+        {
+            //in GMT, this journal is created at 11:30 Friday 20th June 2014
+            //this translates to 00:30 Saturday 21st June 2014 BST, and BST applies since it's in summer
+            var journalWhichCouldBeOnTheWrongDay = CreateXeroJournalFor(new DateTime(2014, 6, 20, 11, 30, 00));
+            var results = ResultsOfSearching(journalWhichCouldBeOnTheWrongDay,
+                new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0, 0), new LocalTime(11, 59)));
+            CollectionAssert.AreEquivalent(results.Select(x=>x.Id), new []{journalWhichCouldBeOnTheWrongDay.JournalID}, "This journal should count as being on the Saturday since BST applies");
         }
 
         public IEnumerable<TestCaseData> JournalsInside9To5
@@ -60,14 +71,19 @@ namespace Tests.SearcherTests
             }
         }
 
-        private static IEnumerable<Model.Accounting.Journal> GetResultsOfSearching(Journal journal)
+        private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal)
         {
-            //a journal is unusual if and only if it is outside 9-5
-            var hours = new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0));
+            return ResultsOfSearching(journal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
+        }
+
+        private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal, WorkingHours workingHours)
+        {
+//a journal is unusual if and only if it is outside 9-5
+            var hours = workingHours;
             var period = new DateRange(DateTime.MinValue, DateTime.MaxValue);
             var window = new SearchWindow<WorkingHours>(hours, period);
 
-            var repository = new RepositoryWrapper(new []{journal});
+            var repository = new RepositoryWrapper(new[] {journal});
             var searcher = new XeroJournalSearcher(repository);
 
             var resultsOfSearch = searcher.FindJournalsWithin(window);
