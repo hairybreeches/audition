@@ -22,7 +22,7 @@ namespace Xero
         {
             var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
 
-            return periodJournals.Where(x => Matches(searchWindow, x)).Select(x => x.ToModelJournal());
+            return periodJournals.Where(x => Matches(x, searchWindow.Parameters)).Select(x => x.ToModelJournal());
         }
 
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
@@ -83,9 +83,9 @@ namespace Xero
             return pence !=0 && pence%magnitude == 0;
         }
 
-        public static bool Matches(SearchWindow<WorkingHours> searchWindow, Journal x)
+        private static bool Matches(Journal x, WorkingHours workingHours)
         {
-            return !searchWindow.Parameters.Contains(x.CreatedDateUTC);
+            return !workingHours.Contains(x.CreatedDateUTC);
         }
 
         private IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
