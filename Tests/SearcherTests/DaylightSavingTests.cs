@@ -16,7 +16,26 @@ namespace Tests.SearcherTests
     [TestFixture]
     public class DaylightSavingTests
     {
-
+        [Test]
+        public void WhenGmtJournalsAreReturnedTheyHaveTheCorrectDateTimeOffset()
+        {
+            var gmtJournal = CreateXeroJournalFor(new DateTime(1999, 12, 21, 16, 0, 0));
+            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
+            var journalTime = resultsOfSearch.Single().Created;
+            Assert.AreEqual(new DateTimeOffset(1999,12,21,16,0,0, TimeSpan.Zero), journalTime);
+            Assert.AreEqual(TimeSpan.Zero, journalTime.Offset);
+        }      
+        
+        
+        [Test]
+        public void WhenBstJournalsAreReturnedTheyHaveTheCorrectDateTimeOffset()
+        {
+            var gmtJournal = CreateXeroJournalFor(new DateTime(1999, 6, 21, 16, 0, 0));
+            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
+            var journalTime = resultsOfSearch.Single().Created;
+            Assert.AreEqual(new DateTimeOffset(1999,6,21,17,0,0, TimeSpan.FromHours(1)), journalTime);
+            Assert.AreEqual(TimeSpan.FromHours(1), journalTime.Offset);
+        }
 
         [TestCaseSource("JournalsInside9To5")]
         public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldNotBeReturned)
@@ -31,7 +50,6 @@ namespace Tests.SearcherTests
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
         }
-
 
         public IEnumerable<TestCaseData> JournalsInside9To5
         {
