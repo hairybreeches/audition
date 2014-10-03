@@ -26,10 +26,10 @@ namespace Xero
 
         public static DateTimeOffset UkCreationTime(this Journal xeroJournal)
         {
-            var createdDateUtc = xeroJournal.CreatedDateUTC;
+            var createdDateUtc = new DateTimeOffset(xeroJournal.CreatedDateUTC, TimeSpan.Zero);
             var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
             var offset = timezone.GetUtcOffset(createdDateUtc);
-            var localDateTime = new DateTimeOffset(createdDateUtc, TimeSpan.Zero).ToOffset(offset);
+            var localDateTime = new DateTimeOffset(createdDateUtc.UtcDateTime, TimeSpan.Zero).ToOffset(offset);
             return localDateTime;
         }
     }
