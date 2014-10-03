@@ -33,7 +33,7 @@ namespace Model.Time
 
         private bool TimeWithinRange(DateTime createdDateUtc)
         {
-            var timezone = TimeZone.CurrentTimeZone;
+            var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
             var offset = timezone.GetUtcOffset(createdDateUtc);
             var localDateTime = new DateTimeOffset(createdDateUtc, TimeSpan.Zero).ToOffset(offset);
             var journalCreationTime = new LocalTime(localDateTime.Hour, localDateTime.Minute, localDateTime.Second);
