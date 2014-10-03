@@ -26,23 +26,20 @@ namespace Model.Time
         public LocalTime FromTime { get; private set; }
         public LocalTime ToTime { get; private set; }
 
-        public bool Contains(DateTime dateTime)
-        {
-            return DayWithinRange(this, dateTime) && TimeWithinRange(dateTime);
+        public bool Contains(DateTimeOffset ukCreationTime)
+        {            
+            return DayWithinRange(this, ukCreationTime) && TimeWithinRange(ukCreationTime);
         }
 
-        private bool TimeWithinRange(DateTime createdDateUtc)
+        private bool TimeWithinRange(DateTimeOffset ukCreationTime)
         {
-            var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
-            var offset = timezone.GetUtcOffset(createdDateUtc);
-            var localDateTime = new DateTimeOffset(createdDateUtc, TimeSpan.Zero).ToOffset(offset);
-            var journalCreationTime = new LocalTime(localDateTime.Hour, localDateTime.Minute, localDateTime.Second);
+            var journalCreationTime = new LocalTime(ukCreationTime.Hour, ukCreationTime.Minute, ukCreationTime.Second);
 
             return journalCreationTime <= ToTime
                    && journalCreationTime >= FromTime;
         }
 
-        private static bool DayWithinRange(WorkingHours workingHours, DateTime date)
+        private static bool DayWithinRange(WorkingHours workingHours, DateTimeOffset date)
         {
             var creationDay = (int)date.DayOfWeek;
 
