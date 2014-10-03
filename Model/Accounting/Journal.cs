@@ -8,7 +8,7 @@ namespace Model.Accounting
     {
         private readonly IList<JournalLine> lines;
 
-        public Journal(Guid id, DateTime created, DateTime journalDate, IEnumerable<JournalLine> lines)
+        public Journal(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
         {
             JournalDate = journalDate;
             this.lines = lines.ToList();
@@ -33,7 +33,7 @@ namespace Model.Accounting
         }
 
         public Guid Id { get; private set; }
-        public DateTime Created { get; private set; }
+        public DateTimeOffset Created { get; private set; }
         public DateTime JournalDate { get; private set; }
 
         public IEnumerable<JournalLine> Lines

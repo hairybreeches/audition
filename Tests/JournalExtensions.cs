@@ -17,7 +17,7 @@ namespace Tests
             return new XeroApi.Model.Journal
             {
                 JournalID = modelJournal.Id,
-                CreatedDateUTC = modelJournal.Created,
+                CreatedDateUTC = modelJournal.Created.UtcDateTime,
                 JournalDate = modelJournal.JournalDate,
                 JournalLines = lines
             };
