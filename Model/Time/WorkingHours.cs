@@ -11,7 +11,7 @@ namespace Model.Time
         {
             if (toTime < fromTime)
             {
-                throw new InvalidTimeFrameException("The 'from' time must be before the 'after' time");
+                throw new InvalidTimeFrameException("The 'from' time must be before the 'to' time");
             }
             ToTime = toTime;
             FromTime = fromTime;
