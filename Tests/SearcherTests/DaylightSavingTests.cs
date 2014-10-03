@@ -29,19 +29,8 @@ namespace Tests.SearcherTests
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
-
         }
 
-        [Test]
-        public void UsesCorrectTimeOffsetToDetermineDay()
-        {
-            //in GMT, this journal is created at 11:30 Friday 20th June 2014
-            //this translates to 00:30 Saturday 21st June 2014 BST, and BST applies since it's in summer
-            var journalWhichCouldBeOnTheWrongDay = CreateXeroJournalFor(new DateTime(2014, 6, 20, 11, 30, 00));
-            var results = ResultsOfSearching(journalWhichCouldBeOnTheWrongDay,
-                new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0, 0), new LocalTime(11, 59)));
-            CollectionAssert.AreEquivalent(results.Select(x=>x.Id), new []{journalWhichCouldBeOnTheWrongDay.JournalID}, "This journal should count as being on the Saturday since BST applies");
-        }
 
         public IEnumerable<TestCaseData> JournalsInside9To5
         {
@@ -69,6 +58,51 @@ namespace Tests.SearcherTests
                 yield return CreateTestCaseData(new DateTime(1999, 6, 21, 16, 30, 00), "BST: journal after end of day returned (fails when you treat BST as GMT)");
 
             }
+        }
+
+        [TestCaseSource("JournalsInsideMonToFri")]
+        public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnDay(Journal journalThatShouldNotBeReturned)
+        {
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
+            CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
+        }  
+        
+        
+        [TestCaseSource("JournalsOutsideMonToFri")]
+        public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnDay(Journal journalThatShouldBeReturned)
+        {
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
+            CollectionAssert.AreEquivalent(resultsOfSearch.Select(x=>x.Id), new []{journalThatShouldBeReturned.JournalID}, "This journal should be returned");
+        }
+        
+        public IEnumerable<TestCaseData> JournalsInsideMonToFri
+        {
+            get
+            {
+                //Monday-Friday runs 15-19 Dec 2014
+                yield return CreateTestCaseData(new DateTime(2014, 12, 15, 0, 30, 00), "GMT: journal after start of working week not returned");
+                yield return CreateTestCaseData(new DateTime(2014, 12, 19, 23, 30, 00), "GMT: journal before end of working week not returned");
+                //Monday-Friday runs 16-20 June 2014
+                //BST is one hour in front, 
+                yield return CreateTestCaseData(new DateTime(2014, 6, 15, 23, 30, 00), "BST: journal after start of working week not returned");
+                yield return CreateTestCaseData(new DateTime(2014, 6, 20, 22, 30, 00), "BST: journal before end of working week not returned");
+            }
+
+        }
+        
+        public IEnumerable<TestCaseData> JournalsOutsideMonToFri
+        {
+            get
+            {
+                //Monday-Friday runs 15-19 Dec 2014
+                yield return CreateTestCaseData(new DateTime(2014, 12, 14, 23, 30, 00), "GMT: journal before start of working week returned");
+                yield return CreateTestCaseData(new DateTime(2014, 12, 20, 00, 30, 00), "GMT: journal after end of working week returned");
+                //Monday-Friday runs 16-20 June 2014
+                //BST is one hour in front, 
+                yield return CreateTestCaseData(new DateTime(2014, 6, 15, 22, 30, 00), "BST: journal before start of working week returned");
+                yield return CreateTestCaseData(new DateTime(2014, 6, 20, 23, 30, 00), "BST: journal after end of working week returned");
+            }
+
         }
 
         private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal)
