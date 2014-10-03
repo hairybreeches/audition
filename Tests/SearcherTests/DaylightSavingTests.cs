@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Model.SearchWindows;
@@ -105,6 +106,33 @@ namespace Tests.SearcherTests
 
         }
 
+        [TestCaseSource("TimezoneSwitchovers")]
+        public void UsesCorrectSwitchoverTimeForGmtToBst(DateTime utcTime, LocalTime ukTime)
+        {
+            var journal = CreateXeroJournalFor(utcTime);
+            var windowContainingJournal = new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday,
+                ukTime.Minus(Period.FromMinutes(30)), ukTime.PlusMinutes(30));
+
+            var results = ResultsOfSearching(journal, windowContainingJournal);
+
+            //the window should contain the journal so should get no results
+            CollectionAssert.IsEmpty(results);
+        }
+
+
+        public IEnumerable<TestCaseData> TimezoneSwitchovers
+        {
+            get
+            {
+                //In 2014, daylight savings starts at 1am on 30th March
+                yield return new TestCaseData(new DateTime(2014, 3, 30, 0, 30, 0), new LocalTime(0, 30)).SetName("Before 1am UTC 30th March 2014 we are at UTC");
+                yield return new TestCaseData(new DateTime(2014, 3, 30, 01, 30, 00), new LocalTime(2,30)).SetName("After 1am UTC 30th March 2014 we are at BST (+1:00)");                
+                //in 2014, daylight savings ends at 2am BST (1am UTC/GMT) 26th October
+                yield return new TestCaseData(new DateTime(2014, 10, 26, 00, 30, 00), new LocalTime(1, 30)).SetName("Before 2am BST (1am GMT) on 26th October we are at BST (+1:00)");
+                yield return new TestCaseData(new DateTime(2014, 10, 26, 01, 30, 00), new LocalTime(01, 30)).SetName("After 1am GMT on 26th October we are at UTC");
+            }
+
+        }
         private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal, WorkingHours workingHours)
         {
 //a journal is unusual if and only if it is outside 9-5
@@ -119,6 +147,11 @@ namespace Tests.SearcherTests
             return resultsOfSearch;
         }
 
+        private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, DateTime createdDateLocalTime, string name)
+        {
+            return new TestCaseData(CreateXeroJournalFor(createdDateUtc), createdDateLocalTime).SetName(name);
+        }       
+        
         private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, string name)
         {
             return new TestCaseData(CreateXeroJournalFor(createdDateUtc)).SetName(name);
