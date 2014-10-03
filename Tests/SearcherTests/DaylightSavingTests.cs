@@ -18,9 +18,9 @@ namespace Tests.SearcherTests
 
 
         [TestCaseSource("JournalsInside9To5")]
-        public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldBeReturned)
+        public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldNotBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned);
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned);
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }
         
