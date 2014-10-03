@@ -31,10 +31,12 @@ namespace Model.Time
             return DayWithinRange(this, dateTime) && TimeWithinRange(dateTime);
         }
 
-        private bool TimeWithinRange(DateTime dateTime)
+        private bool TimeWithinRange(DateTime createdDateUtc)
         {
-            var createdDateUtc = dateTime;
-            var journalCreationTime = new LocalTime(createdDateUtc.Hour, createdDateUtc.Minute, createdDateUtc.Second);
+            var timezone = TimeZone.CurrentTimeZone;
+            var offset = timezone.GetUtcOffset(createdDateUtc);
+            var localDateTime = new DateTimeOffset(createdDateUtc, TimeSpan.Zero).ToOffset(offset);
+            var journalCreationTime = new LocalTime(localDateTime.Hour, localDateTime.Minute, localDateTime.Second);
 
             return journalCreationTime <= ToTime
                    && journalCreationTime >= FromTime;
