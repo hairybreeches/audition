@@ -40,10 +40,10 @@ namespace Xero
             CreateNewSession();
         }
 
-        public IFullRepository CreateRepository()
+        public async Task<IFullRepository> CreateRepository()
         {
             var repository = new Repository(xeroApiPublicSession);
-            var journals = slurper.Slurp(repository);
+            var journals = await slurper.Slurp(repository);
             return new RepositoryWrapper(journals.ToList());
         }
 

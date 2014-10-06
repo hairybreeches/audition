@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Audition.Chromium;
 using Audition.Session;
 using Xero;
@@ -26,10 +27,11 @@ namespace Audition.Controllers
         
         [HttpPost]
         [Route(Routing.FinishXeroLogin)]
-        public IHttpActionResult PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
+        public async Task<IHttpActionResult> PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
-            session.Login(new XeroJournalSearcher(repositoryFactory.CreateRepository()));
+            var repository = await repositoryFactory.CreateRepository();
+            session.Login(new XeroJournalSearcher(repository));
             return RedirectToView("search.html");
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Model;
 using Model.Accounting;
 using NodaTime;
@@ -69,7 +70,7 @@ namespace Tests.Mocks
         {
             var repository = Repository(journals);
             var factory = Substitute.For<IRepositoryFactory>();
-            factory.CreateRepository().Returns(repository);
+            factory.CreateRepository().Returns(Task.FromResult(repository));
             return factory;
         }
 
