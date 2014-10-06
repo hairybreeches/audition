@@ -70,12 +70,12 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, output, exportSuccessMessage, searchUrl, exportUrl) {
+var InputSection = function (parameters, period, output, exportSuccessMessage, searchUrl, exportUrl, blocked) {
 
     var self = this;
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
-
+    self.blocked = ko.observable(blocked || false);
     //methods
     var serialise = function () {
         return JSON.stringify(ko.mapping.toJS({
@@ -143,11 +143,11 @@ var model = {
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users'),
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', true),
 
         Keyword: new InputSection({
             keywords: ""
-        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword'),
+        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword', true),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3

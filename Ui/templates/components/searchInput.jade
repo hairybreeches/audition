@@ -10,9 +10,10 @@ mixin dateInput(bindTo)
 	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
 
 mixin search-tab(title, bindName)
-	form.form-horizontal(action="search", method="post")
+	form.form-horizontal.blockable(action="search", method="post" data-bind="with: #{bindName}")
+		.blockscreen(visible="none" data-bind="visible: blocked()") Sorry, your current accounts system does not support this feature
 		legend.vertical-space #{title}
-		.form-group(data-bind="with: #{bindName}")
+		.form-group
 			.col-xs-12
 				.inline-block
 					.inline-block(data-bind="with: parameters")
