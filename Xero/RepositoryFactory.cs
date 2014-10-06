@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DevDefined.OAuth.Framework;
 using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
+using Model;
 using XeroApi;
 using XeroApi.Model;
 using XeroApi.OAuth;
@@ -49,7 +50,19 @@ namespace Xero
 
         public void CompleteAuthenticationRequest(string verificationCode)
         {
-            xeroApiPublicSession.ExchangeRequestTokenForAccessToken(verificationCode);
+            try
+            {
+                xeroApiPublicSession.ExchangeRequestTokenForAccessToken(verificationCode);
+            }
+            catch (OAuthException e)
+            {
+                if (e.HResult == -2146233088)
+                {
+                    throw new IncorrectLoginDetailsException("The authentication code provided was incorrect");
+                }
+
+                throw;
+            }            
         }
 
         public void InitialiseAuthenticationRequest()
