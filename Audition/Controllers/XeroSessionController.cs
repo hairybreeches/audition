@@ -32,7 +32,7 @@ namespace Audition.Controllers
             repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
             var repository = await repositoryFactory.CreateRepository();
             session.Login(new XeroJournalSearcher(repository));
-            return RedirectToView("search.html");
+            return Ok();
         }
 
         [HttpGet]
