@@ -81,7 +81,7 @@ namespace Tests
             request.Body.Returns("I am some content");
             request.GetHeaders().Returns(new Dictionary<string, string>()
             {
-                {"Content-Type", "application/json"},
+                {"Content-Type", "application/json; charset=us-ascii"},
                 {"Accept", "text/html"}
             });            
 
@@ -91,7 +91,7 @@ namespace Tests
             Assert.AreEqual("I am some content", converted.Content.ReadAsStringAsync().Result);
             Assert.AreEqual(HttpMethod.Post, converted.Method);
             Assert.AreEqual("text/html", converted.Headers.Accept.Single().MediaType);
-            Assert.AreEqual("application/json", converted.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual("application/json", converted.Content.Headers.ContentType.MediaType);            
         }
 
         private static string StreamToString(Stream stream, Encoding encoding)
