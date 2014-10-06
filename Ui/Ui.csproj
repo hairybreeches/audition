@@ -75,6 +75,7 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\xerocompletelogin.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
   </ItemGroup>
