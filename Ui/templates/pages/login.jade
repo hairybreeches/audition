@@ -1,5 +1,4 @@
 include ../components/template
-include ../components/sap-login
 include ../components/xero-login
 include ../components/forms
 
@@ -19,12 +18,8 @@ mixin login-form(system, url)
 				legend.vertical-space Login to accounts system
 				+form-field('Accounts system')
 					select.form-control(data-bind="value: system")
-							option(value="sap") SAP
 							option(value="sage50") Sage Line 50
-							option(value="sage200") Sage Line 200
 							option(value="xero") Xero
-		+login-form('sap')
-			+sap-login()
 		+login-form('xero', "/api/xero/login")
 			+xero-login()
 		hr.vertical-space
