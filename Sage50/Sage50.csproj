@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JournalSearcher.cs" />
+    <Compile Include="Sage50JournalSearcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sage50LoginDetails.cs" />
     <Compile Include="Sage50Module.cs" />
