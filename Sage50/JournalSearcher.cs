@@ -9,9 +9,9 @@ namespace Sage50
 {
     public class JournalSearcher : IJournalSearcher
     {
-        private readonly Sage50LoginDetails loginDetails;
+        private readonly SageConnectionFactory loginDetails;
 
-        public JournalSearcher(Sage50LoginDetails loginDetails)
+        public JournalSearcher(SageConnectionFactory loginDetails)
         {
             this.loginDetails = loginDetails;
         }

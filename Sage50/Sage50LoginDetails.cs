@@ -10,27 +10,6 @@ namespace Sage50
         [Required]
         public string Password { get; set; }
         [Required]
-        public string DataDirectory { get; set; }
-
-
-        public OdbcConnection OpenConnection()
-        {
-            var builder = new OdbcConnectionStringBuilder
-            {
-                Driver = "Sage Line 50 v21"
-            };
-
-            builder["uid"] = Username;
-            builder["dir"] = DataDirectory;
-
-            if (!string.IsNullOrEmpty(Password))
-            {
-                builder["pwd"] = Password;
-            }
-
-            var conn = new OdbcConnection(builder.ConnectionString);
-            conn.Open();
-            return conn;
-        }
+        public string DataDirectory { get; set; }        
     }
 }
