@@ -8,12 +8,10 @@ using Audition.Controllers;
 using Audition.Native;
 using Autofac;
 using CefSharp;
-using Model;
 using Model.Accounting;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
-using Tests;
 using Tests.Mocks;
 using Xero;
 
@@ -90,10 +88,37 @@ namespace SystemTests
             using (var reader = new StreamReader(cefSharpResponse.Content))
             {
                 var actual = reader.ReadToEnd();
-                Assert.AreEqual(
-                    "[{\"Id\":\"0421c274-2f50-49e4-8f61-623a4daf67ac\",\"Created\":\"2013-04-06T00:00:00+01:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"9012\",\"AccountName\":\"Expenses\",\"JournalType\":\"Cr\",\"Amount\":23.4},{\"AccountCode\":\"3001\",\"AccountName\":\"Cash\",\"JournalType\":\"Dr\",\"Amount\":23.4}]},{\"Id\":\"c8d99cf8-6867-4767-be1e-abdf54a2a0f8\",\"Created\":\"2013-04-06T00:00:00+01:00\",\"JournalDate\":\"2013-04-06T00:00:00\",\"Lines\":[{\"AccountCode\":\"8014\",\"AccountName\":\"Depreciation\",\"JournalType\":\"Cr\",\"Amount\":12.4},{\"AccountCode\":\"4001\",\"AccountName\":\"Fixed assets\",\"JournalType\":\"Dr\",\"Amount\":12.4}]}]",
-                    actual);
+                const string readableJson = 
+@"[
+    {
+        'Id':'0421c274-2f50-49e4-8f61-623a4daf67ac',
+        'Created':'2013-04-06T00:00:00+01:00',
+        'JournalDate':'2013-04-06T00:00:00',
+        'Lines':[
+            {'AccountCode':'9012','AccountName':'Expenses','JournalType':'Cr','Amount':23.4},
+            {'AccountCode':'3001','AccountName':'Cash','JournalType':'Dr','Amount':23.4}
+        ]
+    },
+    {
+        'Id':'c8d99cf8-6867-4767-be1e-abdf54a2a0f8',
+        'Created':'2013-04-06T00:00:00+01:00',
+        'JournalDate':'2013-04-06T00:00:00',
+        'Lines':[
+            {'AccountCode':'8014','AccountName':'Depreciation','JournalType':'Cr','Amount':12.4},
+            {'AccountCode':'4001','AccountName':'Fixed assets','JournalType':'Dr','Amount':12.4}
+        ]
+    }
+]";
+                
+                var expectedJson = MungeJson(readableJson);
+                
+                Assert.AreEqual(expectedJson, actual);
             }
+        }
+
+        private static string MungeJson(string value)
+        {           
+            return JsonConvert.SerializeObject(JsonConvert.DeserializeObject(value));           
         }
 
         private ContainerBuilder CreateContainerBuilder()
