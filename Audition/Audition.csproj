@@ -127,10 +127,12 @@
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
     <Compile Include="Native\FileSaveChooser.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
+    <Compile Include="Native\FolderChooser.cs" />
     <Compile Include="Native\IFileSaveChooser.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\XeroSessionController.cs" />
+    <Compile Include="Native\IFolderChooser.cs" />
     <Compile Include="Native\NativeModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
