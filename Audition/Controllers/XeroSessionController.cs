@@ -46,7 +46,7 @@ namespace Audition.Controllers
         }
 
         [HttpGet]
-        [Route(Routing.Logout)]
+        [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
             repositoryFactory.Logout();
