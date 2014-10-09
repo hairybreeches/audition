@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\JournalReader.cs" />
+    <Compile Include="Parsing\SageJournalLine.cs" />
+    <Compile Include="Parsing\JournalLineParsing.cs" />
+    <Compile Include="Parsing\JournalParsing.cs" />
+    <Compile Include="Parsing\SageDataFormatUnexpectedException.cs" />
     <Compile Include="Sage50JournalSearcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sage50LoginDetails.cs" />
