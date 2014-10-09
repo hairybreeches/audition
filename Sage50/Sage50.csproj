@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sage50LoginDetails.cs" />
     <Compile Include="Sage50Module.cs" />
+    <Compile Include="SageConnectionFactory.cs" />
     <Compile Include="SearcherFactory.cs" />
   </ItemGroup>
   <ItemGroup>
