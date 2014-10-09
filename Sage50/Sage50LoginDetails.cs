@@ -17,10 +17,11 @@ namespace Sage50
         {
             var builder = new OdbcConnectionStringBuilder
             {
-                Dsn = "SageDemo",
+                Driver = "Sage Line 50 v21"
             };
 
             builder["uid"] = Username;
+            builder["dir"] = DataDirectory;
 
             if (!string.IsNullOrEmpty(Password))
             {
