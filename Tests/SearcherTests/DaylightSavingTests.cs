@@ -48,7 +48,7 @@ namespace Tests.SearcherTests
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
-            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
+            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
 
         public IEnumerable<TestCaseData> JournalsInside9To5
@@ -91,7 +91,7 @@ namespace Tests.SearcherTests
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnDay(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
-            CollectionAssert.AreEquivalent(resultsOfSearch.Select(x=>x.Id), new []{journalThatShouldBeReturned.JournalID}, "This journal should be returned");
+            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
         
         public IEnumerable<TestCaseData> JournalsInsideMonToFri

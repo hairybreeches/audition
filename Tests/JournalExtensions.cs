@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Model;
 using Model.Accounting;
 using XeroApi.Model;
@@ -16,7 +17,7 @@ namespace Tests
 
             return new XeroApi.Model.Journal
             {
-                JournalID = modelJournal.Id,
+                JournalID = new Guid(modelJournal.Id),
                 CreatedDateUTC = modelJournal.Created.UtcDateTime,
                 JournalDate = modelJournal.JournalDate,
                 JournalLines = lines
