@@ -45,6 +45,12 @@ namespace Model.Accounting
         public string Username { get; private set; }
         public string Description { get; private set; }
 
+        public override string ToString()
+        {
+            return String.Format("Id: {0}, Created: {1}, Date:{2}, Username: {3}, Description: {4} Lines: \n{5}", Id,
+                Created, JournalDate, Username, Description, String.Join("\n", Lines));
+        }
+
         public IEnumerable<JournalLine> Lines
         {
             get { return lines; }            
