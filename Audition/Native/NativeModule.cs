@@ -11,6 +11,7 @@ namespace Audition.Native
             builder.Register(_ => new StaTaskScheduler(1)).SingleInstance();
             builder.Register(_ => new TaskFactory<string>(_.Resolve<StaTaskScheduler>()));
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
+            builder.RegisterType<FolderChooser>().As<IFolderChooser>();
         }
     }
 }
