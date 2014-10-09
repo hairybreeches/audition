@@ -125,6 +125,7 @@
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Chromium\Routing.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
+    <Compile Include="Controllers\Sage50SessionController.cs" />
     <Compile Include="Native\FileSaveChooser.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Native\FolderChooser.cs" />
@@ -157,6 +158,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sage50\Sage50.csproj">
+      <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
+      <Name>Sage50</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ui\Ui.csproj">
       <Project>{49cb781a-5a5a-4d6a-8f19-b8d3c0045597}</Project>

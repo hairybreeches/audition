@@ -15,3 +15,4 @@ Tests/obj/**
 Ui/node_modules/**
 Ui/npm-debug.log
 SystemTests/obj/**
+Sage50/obj/**
