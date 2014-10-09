@@ -52,7 +52,8 @@ namespace Model.Accounting
 
         protected bool Equals(Journal other)
         {
-            return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate);
+            return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate) && Description.Equals(other.Description)
+                && Username.Equals(other.Username);
         }
 
         public override bool Equals(object obj)
