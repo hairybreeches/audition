@@ -9,7 +9,7 @@ namespace Sage50
     {
         public IJournalSearcher CreateJournalSearcher(Sage50LoginDetails loginDetails)
         {
-            return new JournalSearcher(CreateConnectionFactory(loginDetails));
+            return new Sage50JournalSearcher(CreateConnectionFactory(loginDetails));
         }
 
         private static SageConnectionFactory CreateConnectionFactory(Sage50LoginDetails loginDetails)

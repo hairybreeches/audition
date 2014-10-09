@@ -7,13 +7,13 @@ using Model.Time;
 
 namespace Sage50
 {
-    public class JournalSearcher : IJournalSearcher
+    public class Sage50JournalSearcher : IJournalSearcher
     {
-        private readonly SageConnectionFactory loginDetails;
+        private readonly SageConnectionFactory connectionFactory;
 
-        public JournalSearcher(SageConnectionFactory loginDetails)
+        public Sage50JournalSearcher(SageConnectionFactory connectionFactory)
         {
-            this.loginDetails = loginDetails;
+            this.connectionFactory = connectionFactory;
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
