@@ -9,8 +9,15 @@ namespace Model.Accounting
         private readonly IList<JournalLine> lines;
 
         public Journal(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
+            :this(id.ToString(), created, journalDate, String.Empty, String.Empty, lines)
+        {
+            
+        }
+        public Journal(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
         {
             JournalDate = journalDate;
+            Username = username;
+            Description = description;
             this.lines = lines.ToList();
             Created = created;
             Id = id;
@@ -32,9 +39,11 @@ namespace Model.Accounting
             return line.JournalType == JournalType.Cr ? line.Amount * -1 : line.Amount;
         }
 
-        public Guid Id { get; private set; }
+        public string Id { get; private set; }
         public DateTimeOffset Created { get; private set; }
         public DateTime JournalDate { get; private set; }
+        public string Username { get; private set; }
+        public string Description { get; private set; }
 
         public IEnumerable<JournalLine> Lines
         {
