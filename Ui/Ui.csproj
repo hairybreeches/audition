@@ -161,7 +161,6 @@
     <None Include="templates\components\forms.jade" />
     <None Include="templates\components\head.jade" />
     <None Include="templates\components\results.jade" />
-    <None Include="templates\components\sap-login.jade" />
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
