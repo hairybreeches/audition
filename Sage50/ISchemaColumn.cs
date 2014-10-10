@@ -2,7 +2,7 @@ using System.Data;
 
 namespace Sage50
 {
-    interface ISchemaColumn
+    public interface ISchemaColumn
     {
         DataColumn ToDataColumn();
         int Index { get; }
