@@ -127,12 +127,18 @@ namespace SystemTests
 
         private ContainerBuilder CreateContainerBuilder()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<AuditionModule>();
+            var builder = CreateDefaultContainerBuilder();
             builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();
 
             builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
                 .As<Microsoft.Owin.FileSystems.IFileSystem>();
+            return builder;
+        }
+
+        private static ContainerBuilder CreateDefaultContainerBuilder()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<AuditionModule>();
             return builder;
         }
 
