@@ -13,7 +13,7 @@ using Xero;
 namespace SystemTests
 {
     [TestFixture]
-    public class SystemTests
+    public class XeroSystemTests
     {
         private readonly IRepositoryFactory repositoryFactory = Mock.RepositoryFactory(
             new Journal(new Guid("0421c274-2f50-49e4-8f61-623a4daf67ac"), new DateTime(2013, 4, 6), new DateTime(2013, 4, 6),
