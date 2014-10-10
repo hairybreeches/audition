@@ -1,5 +1,6 @@
 ﻿using Audition;
 using Autofac;
+using Microsoft.Owin.FileSystems;
 using Newtonsoft.Json;
 
 namespace SystemTests
@@ -15,6 +16,10 @@ namespace SystemTests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
+
+            builder.Register(_ => new PhysicalFileSystem("."))
+                .As<IFileSystem>();
+
             return builder;
         }
     }
