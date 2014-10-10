@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockRequestResponse.cs" />
+    <Compile Include="SystemFoo.cs" />
     <Compile Include="SystemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
