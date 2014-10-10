@@ -75,7 +75,7 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
-        public IDataReader MockDataReader(IEnumerable<object[]> rows)
+        private static IDataReader MockDataReader(IEnumerable<object[]> rows)
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(GetSageColumns());
@@ -88,7 +88,7 @@ namespace Tests
             return dataTable.CreateDataReader();
         }
 
-        private DataColumn[] GetSageColumns()
+        private static DataColumn[] GetSageColumns()
         {
             return new JournalSchema().Columns.Select(x=>x.ToDataColumn()).ToArray();
         }
