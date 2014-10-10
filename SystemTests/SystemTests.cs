@@ -117,7 +117,7 @@ namespace SystemTests
 
         private string GetResponseContent(MockRequestResponse requestResponse)
         {
-            var cefSharpResponse = ExecuteRequest(requestResponse);
+            var cefSharpResponse = ExecuteRequest(CreateContainerBuilder(), requestResponse);
 
             string actual;
             using (var reader = new StreamReader(cefSharpResponse.Content))
@@ -147,11 +147,6 @@ namespace SystemTests
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
             return builder;
-        }
-
-        private CefSharpResponse ExecuteRequest(MockRequestResponse requestResponse)
-        {
-            return ExecuteRequest(CreateContainerBuilder(), requestResponse);
         }
 
         private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
