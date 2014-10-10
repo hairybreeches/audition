@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JournalSchema.cs" />
     <Compile Include="Parsing\JournalReader.cs" />
     <Compile Include="Parsing\SageJournalLine.cs" />
     <Compile Include="Parsing\JournalLineParsing.cs" />

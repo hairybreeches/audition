@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Model.Accounting;
 using NUnit.Framework;
+using Sage50;
 using Sage50.Parsing;
 
 namespace Tests
@@ -16,7 +17,7 @@ namespace Tests
         [Test]
         public void CanConvertJournal()
         {
-            var reader = new JournalReader(Steve());
+            var reader = new JournalReader(Steve(), new JournalLineParser(new JournalSchema()));
             var journals = reader.GetJournals().ToList();
             CollectionAssert.AreEqual(new[] { new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new []
             {
@@ -60,16 +61,8 @@ namespace Tests
 
         private DataColumn[] GetSageColumns()
         {
-            return new[]
-            {
-                new DataColumn("TRAN_NUMBER", typeof (Int32)),
-                new DataColumn("USER_NAME", typeof (String)),
-                new DataColumn("DATE", typeof (DateTime)),
-                new DataColumn("RECORD_CREATE_DATE", typeof (DateTime)),
-                new DataColumn("NOMINAL_CODE", typeof (String)),
-                new DataColumn("AMOUNT", typeof (double)),
-                new DataColumn("DETAILS", typeof (String)),
-            };
+            return new JournalSchema().Columns;
+
         }
     }
 }

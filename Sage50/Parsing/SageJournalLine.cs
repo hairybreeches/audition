@@ -4,7 +4,7 @@ using Model.Accounting;
 
 namespace Sage50.Parsing
 {
-    internal class SageJournalLine
+    public class SageJournalLine
     {
         public int TransactionId { get; private set; }
         public string Username { get; private set; }

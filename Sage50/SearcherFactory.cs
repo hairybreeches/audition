@@ -1,4 +1,5 @@
-﻿using System.Data.Odbc;
+﻿using System;
+using System.Data.Odbc;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
@@ -7,9 +8,16 @@ namespace Sage50
 {
     public class SearcherFactory
     {
+        private readonly Func<SageConnectionFactory, Sage50JournalSearcher> journalSearcherFactory;
+
+        public SearcherFactory(Func<SageConnectionFactory, Sage50JournalSearcher> journalSearcherFactory)
+        {
+            this.journalSearcherFactory = journalSearcherFactory;
+        }
+
         public IJournalSearcher CreateJournalSearcher(Sage50LoginDetails loginDetails)
         {
-            return new Sage50JournalSearcher(CreateConnectionFactory(loginDetails));
+            return journalSearcherFactory(CreateConnectionFactory(loginDetails));
         }
 
         private static SageConnectionFactory CreateConnectionFactory(Sage50LoginDetails loginDetails)

@@ -8,10 +8,12 @@ namespace Sage50.Parsing
     public class JournalReader
     {
         private readonly IDataReader reader;
+        private readonly JournalLineParser journalLineParser;
 
-        public JournalReader(IDataReader reader)
+        public JournalReader(IDataReader reader, JournalLineParser journalLineParser)
         {
             this.reader = reader;
+            this.journalLineParser = journalLineParser;
         }
 
         public IEnumerable<Journal> GetJournals()
@@ -28,9 +30,9 @@ namespace Sage50.Parsing
             }
         }
 
-        private static SageJournalLine ConvertToLine(IDataRecord record)
+        private SageJournalLine ConvertToLine(IDataRecord record)
         {
-            return JournalLineParsing.CreateJournalLine(record);
+            return journalLineParser.CreateJournalLine(record);
         }    
     }
 }
