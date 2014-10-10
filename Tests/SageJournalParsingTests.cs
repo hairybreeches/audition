@@ -37,7 +37,7 @@ namespace Tests
             var numberOfColumns = schema.Columns.Count();
 
             var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
-            CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0");
+            CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
         public IDataReader MockDataReader()
