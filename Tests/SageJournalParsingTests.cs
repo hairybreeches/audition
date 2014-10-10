@@ -17,7 +17,7 @@ namespace Tests
         [Test]
         public void CanConvertJournal()
         {
-            var reader = new JournalReader(Steve(), new JournalLineParser(new JournalSchema()));
+            var reader = new JournalReader(MockDataReader(), new JournalLineParser(new JournalSchema()));
             var journals = reader.GetJournals().ToList();
             CollectionAssert.AreEqual(new[] { new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new []
             {
@@ -40,7 +40,7 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0");
         }
 
-        public IDataReader Steve()
+        public IDataReader MockDataReader()
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(GetSageColumns());
