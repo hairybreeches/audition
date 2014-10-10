@@ -20,24 +20,8 @@ namespace Model.Accounting
             Description = description;
             this.lines = lines.ToList();
             Created = created;
-            Id = id;
-            ValidateLines();
-        }
-
-        private void ValidateLines()
-        {
-            var sum = Lines.Select(GetLineAmount).Sum();
-
-            if (sum != 0)
-            {
-                throw new InvalidJournalException(String.Format("Lines for journal {0} do not balance: {1}", Id, String.Join(",", Lines.Select(x => x.ToString()))));
-            }
-        }
-
-        private decimal GetLineAmount(JournalLine line)
-        {
-            return line.JournalType == JournalType.Cr ? line.Amount * -1 : line.Amount;
-        }
+            Id = id;            
+        }        
 
         public string Id { get; private set; }
         public DateTimeOffset Created { get; private set; }

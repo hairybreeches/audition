@@ -7,11 +7,28 @@ using JournalLine = XeroApi.Model.JournalLine;
 
 namespace Xero
 {
-    static class XeroJournalExtensions
+    public static class XeroJournalExtensions
     {
         public static Model.Accounting.Journal ToModelJournal(this Journal xeroJournal)
-        {            
-            return new Model.Accounting.Journal(xeroJournal.JournalID, xeroJournal.UkCreationTime(), xeroJournal.JournalDate, xeroJournal.JournalLines.Select(ToModelJournalLine));
+        {
+            var modelJournal = new Model.Accounting.Journal(xeroJournal.JournalID, xeroJournal.UkCreationTime(), xeroJournal.JournalDate, xeroJournal.JournalLines.Select(ToModelJournalLine));
+            ValidateLines(modelJournal);
+            return modelJournal;
+        }
+
+        private static void ValidateLines(Model.Accounting.Journal journal)
+        {
+            var sum = journal.Lines.Select(GetLineAmount).Sum();
+
+            if (sum != 0)
+            {
+                throw new InvalidJournalException(String.Format("Lines for journal {0} do not balance: {1}", journal.Id, String.Join(",", journal.Lines.Select(x => x.ToString()))));
+            }
+        }
+
+        private static decimal GetLineAmount(Model.Accounting.JournalLine line)
+        {
+            return line.JournalType == Model.Accounting.JournalType.Cr ? line.Amount * -1 : line.Amount;
         }
 
         private static Model.Accounting.JournalLine ToModelJournalLine(this JournalLine xeroJournalLine)
