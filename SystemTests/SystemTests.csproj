@@ -74,7 +74,7 @@
     <Compile Include="LifetimeExtensions.cs" />
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="SystemFoo.cs" />
-    <Compile Include="XeroSystemTests.cs" />
+    <Compile Include="XeroTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
