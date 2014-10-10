@@ -39,10 +39,10 @@ namespace SystemTests
             return requestResponse.Response;
         }
 
-        public static void LoginToXero(IComponentContext lifetime)
+        public static void LoginToXero(IComponentContext lifetime, XeroVerificationCode verificationCode)
         {
             var loginController = lifetime.Resolve<XeroSessionController>();
-            loginController.PostCompleteAuthenticationRequest(new XeroVerificationCode());
+            loginController.PostCompleteAuthenticationRequest(verificationCode);
         }
     }
 }
