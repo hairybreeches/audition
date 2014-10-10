@@ -17,50 +17,7 @@ namespace Tests
         [Test]
         public void CanConvertJournals()
         {
-            var reader = new JournalReader(MockDataReader(), new JournalLineParser(new JournalSchema()));
-            var journals = reader.GetJournals().ToList();
-            CollectionAssert.AreEqual(new[] { new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new []
-            {
-                new JournalLine("1200", "1200", JournalType.Dr, 55), 
-                new JournalLine("9998", "9998", JournalType.Cr, 55), 
-                new JournalLine("2200", "2200", JournalType.Dr, 0)
-            }),
-            new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve", "Unpresented Cheque", new []
-            {
-                new JournalLine("1200", "1200", JournalType.Dr, 13), 
-                new JournalLine("9998", "9998", JournalType.Cr, 13), 
-            })}, journals);
-        }
-
-
-        [Test]
-        public void SchemaDefinitionIsValid()
-        {
-            var schema = new JournalSchema();
-
-            var definedColumnNumbers = schema.Columns.Select(x => x.Index).ToList();
-            var numberOfColumns = schema.Columns.Count();
-
-            var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
-            CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
-        }
-
-        public IDataReader MockDataReader()
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(GetSageColumns());
-            foreach (var parameterArray in GetRows())
-            {
-                dataTable.Rows.Add(parameterArray);
-            }
-                
-
-            return dataTable.CreateDataReader();
-        }
-
-        private static IEnumerable<object[]> GetRows()
-        {
-            return new[]
+            var reader = new JournalReader(MockDataReader(new[]
             {
                 new[]
                 {
@@ -83,7 +40,52 @@ namespace Tests
                 {
                     "12", "Steve", "31/12/2013","27/04/2010 17:16", "9998","-13", "Unpresented Cheque"
                 }                
-            };
+            }), new JournalLineParser(new JournalSchema()));
+
+            var journals = reader.GetJournals().ToList();
+            CollectionAssert.AreEqual(new[] { new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new []
+            {
+                new JournalLine("1200", "1200", JournalType.Dr, 55), 
+                new JournalLine("9998", "9998", JournalType.Cr, 55), 
+                new JournalLine("2200", "2200", JournalType.Dr, 0)
+            }),
+            new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve", "Unpresented Cheque", new []
+            {
+                new JournalLine("1200", "1200", JournalType.Dr, 13), 
+                new JournalLine("9998", "9998", JournalType.Cr, 13), 
+            })}, journals);
+        }
+
+        [Test]
+        public void GetRightExceptionWhenJournalLevelInfoMismatched()
+        {
+            
+        }
+
+
+        [Test]
+        public void SchemaDefinitionIsValid()
+        {
+            var schema = new JournalSchema();
+
+            var definedColumnNumbers = schema.Columns.Select(x => x.Index).ToList();
+            var numberOfColumns = schema.Columns.Count();
+
+            var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
+            CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
+        }
+
+        public IDataReader MockDataReader(IEnumerable<object[]> rows)
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(GetSageColumns());
+            foreach (var parameterArray in rows)
+            {
+                dataTable.Rows.Add(parameterArray);
+            }
+                
+
+            return dataTable.CreateDataReader();
         }
 
         private DataColumn[] GetSageColumns()
