@@ -3,12 +3,21 @@ using Audition.Chromium;
 using Audition.Controllers;
 using Autofac;
 using CefSharp;
+using Newtonsoft.Json;
+using Sage50;
 using Xero;
 
 namespace SystemTests
 {
     public static class LifetimeExtensions
     {
+        public static T GetParsedResponseContent<T>(this IComponentContext lifetime, MockRequestResponse requestResponse)
+        {
+            var json = lifetime.GetResponseContent(requestResponse);
+            return JsonConvert.DeserializeObject<T>(json);
+        }        
+        
+        
         public static string GetResponseContent(this IComponentContext lifetime, MockRequestResponse requestResponse)
         {
             var cefSharpResponse = lifetime.ExecuteRequest(requestResponse);            
@@ -29,6 +38,12 @@ namespace SystemTests
         {
             var loginController = lifetime.Resolve<XeroSessionController>();
             loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
+        }
+
+        public static void LoginToSage50(this IComponentContext lifetime, Sage50LoginDetails loginDetails)
+        {
+            var loginController = lifetime.Resolve<Sage50SessionController>();
+            loginController.Login(loginDetails);
         }
     }
 }

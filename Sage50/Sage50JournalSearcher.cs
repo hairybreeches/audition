@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
+using System.Linq;
 using Model;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
+using Sage50.Parsing;
 
 namespace Sage50
 {
@@ -18,7 +21,17 @@ namespace Sage50
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
-            throw new NotImplementedException();
+            using (var connection = connectionFactory.OpenConnection())
+            {
+                var command = GetAllJournalsCommand(connection);
+                var reader = new JournalReader(command.ExecuteReader());
+                return reader.GetJournals().ToList();
+            }
+        }
+
+        private static OdbcCommand GetAllJournalsCommand(OdbcConnection conn)
+        {
+            return new OdbcCommand("SELECT * FROM AUDIT_JOURNAL", conn);
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
