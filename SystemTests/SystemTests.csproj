@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LifetimeExtensions.cs" />
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="SystemFoo.cs" />
     <Compile Include="XeroSystemTests.cs" />

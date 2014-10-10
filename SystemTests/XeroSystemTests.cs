@@ -127,8 +127,8 @@ namespace SystemTests
         {
             using (var lifetime = builder.Build())
             {
-                SystemFoo.LoginToXero(lifetime, new XeroVerificationCode());
-                return SystemFoo.GetResponseContent(lifetime, requestResponse);
+                lifetime.LoginToXero(new XeroVerificationCode());
+                return lifetime.GetResponseContent(requestResponse);
             }
         }
 
@@ -136,8 +136,8 @@ namespace SystemTests
         {
             using (var lifetime = builder.Build())
             {
-                SystemFoo.LoginToXero(lifetime, new XeroVerificationCode());
-                return SystemFoo.ExecuteRequest(lifetime, requestResponse);
+                lifetime.LoginToXero(new XeroVerificationCode());
+                return lifetime.ExecuteRequest(requestResponse);
             }
         }
     }
