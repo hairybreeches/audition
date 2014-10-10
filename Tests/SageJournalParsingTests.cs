@@ -15,7 +15,7 @@ namespace Tests
     public class SageJournalParsingTests
     {
         [Test]
-        public void CanConvertJournal()
+        public void CanConvertJournals()
         {
             var reader = new JournalReader(MockDataReader(), new JournalLineParser(new JournalSchema()));
             var journals = reader.GetJournals().ToList();
@@ -24,6 +24,11 @@ namespace Tests
                 new JournalLine("1200", "1200", JournalType.Dr, 55), 
                 new JournalLine("9998", "9998", JournalType.Cr, 55), 
                 new JournalLine("2200", "2200", JournalType.Dr, 0)
+            }),
+            new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve", "Unpresented Cheque", new []
+            {
+                new JournalLine("1200", "1200", JournalType.Dr, 13), 
+                new JournalLine("9998", "9998", JournalType.Cr, 13), 
             })}, journals);
         }
 
@@ -68,7 +73,16 @@ namespace Tests
                 new[]
                 {
                     "26", "MANAGER", "31/12/2013","27/04/2010 17:16", "2200","0", "Unpresented Cheque"
-                }
+                },
+                
+                new[]
+                {
+                    "12", "Steve", "31/12/2013","27/04/2010 17:16","1200", "13", "Unpresented Cheque"
+                },
+                new[]
+                {
+                    "12", "Steve", "31/12/2013","27/04/2010 17:16", "9998","-13", "Unpresented Cheque"
+                }                
             };
         }
 
