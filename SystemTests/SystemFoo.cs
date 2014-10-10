@@ -23,16 +23,22 @@ namespace SystemTests
             return builder;
         }
 
-        public static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
+        private static string GetResponseContent(IComponentContext lifetime, MockRequestResponse requestResponse)
         {
-            var cefSharpResponse = ExecuteRequest(builder, requestResponse);
-
-            string actual;
+            var cefSharpResponse = ExecuteRequest(lifetime, requestResponse);            
             using (var reader = new StreamReader(cefSharpResponse.Content))
             {
-                actual = reader.ReadToEnd();
+                return reader.ReadToEnd();
             }
-            return actual;
+        }
+
+        public static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
+        {
+            using (var lifetime = builder.Build())
+            {
+                LoginToXero(lifetime);
+                return GetResponseContent(lifetime, requestResponse);
+            }
         }
 
         public static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
