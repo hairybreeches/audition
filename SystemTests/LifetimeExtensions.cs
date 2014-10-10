@@ -28,7 +28,7 @@ namespace SystemTests
         public static void LoginToXero(this IComponentContext lifetime, XeroVerificationCode verificationCode)
         {
             var loginController = lifetime.Resolve<XeroSessionController>();
-            loginController.PostCompleteAuthenticationRequest(verificationCode);
+            loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
         }
     }
 }
