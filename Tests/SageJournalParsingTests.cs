@@ -61,7 +61,7 @@ namespace Tests
 
         private DataColumn[] GetSageColumns()
         {
-            return new JournalSchema().Columns;
+            return new JournalSchema().DataColumns;
 
         }
     }

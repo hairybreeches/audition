@@ -8,81 +8,105 @@ namespace Sage50
 {
     public class JournalSchema
     {
-        private readonly DataColumn[] columns =
-        {
-            new DataColumn("TRAN_NUMBER", typeof (Int32)),
-            new DataColumn("USER_NAME", typeof (String)),
-            new DataColumn("DATE", typeof (DateTime)),
-            new DataColumn("RECORD_CREATE_DATE", typeof (DateTime)),
-            new DataColumn("NOMINAL_CODE", typeof (String)),
-            new DataColumn("AMOUNT", typeof (double)),
-            new DataColumn("DETAILS", typeof (String)),
-        };
+        private readonly SchemaColumn<int> idColumn;
+        private readonly SchemaColumn<string> usernameColumn;
+        private readonly SchemaColumn<DateTime> dateColumn;
+        private readonly SchemaColumn<DateTime> creationTimeColumn;
+        private readonly SchemaColumn<string> nominalCodeColumn;
+        private readonly SchemaColumn<double> amountColumn;
+        private readonly SchemaColumn<string> detailsColumn;
 
-        public DataColumn[] Columns
+        public JournalSchema()
         {
-            get { return columns; }
-        }      
-        
+            idColumn = new SchemaColumn<Int32>("TRAN_NUMBER", 0);
+            usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
+            dateColumn = new SchemaColumn<DateTime>("DATE", 2);
+            creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
+            nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
+            amountColumn = new SchemaColumn<double>("AMOUNT", 5);
+            detailsColumn = new SchemaColumn<string>("DETAILS", 6);
+            ValidateSchemaDefinition();
+        }
+
+        private void ValidateSchemaDefinition()
+        {
+            var definedColumnNumbers = Columns.Select(x => x.Index).ToList();
+            var numberOfColumns = Columns.Count();
+
+            var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
+            if (!definedColumnNumbers.SequenceEqual(expectedDefinedColumnNumbers))
+            {
+                throw new SageDataFormatUnexpectedException(
+                    String.Format("Incorrect column definitions: Column numbers defined: {0}",
+                        String.Join(",", definedColumnNumbers)));
+            }
+        }
+
+        public DataColumn[] DataColumns
+        {
+            get
+            {
+                return Columns                    
+                    .Select(x => x.ToDataColumn())
+                    .ToArray();
+            }
+        }
+
+        private IEnumerable<ISchemaColumn> Columns
+        {
+            get
+            {
+                return new ISchemaColumn[]
+                {
+                    idColumn,
+                    usernameColumn,
+                    dateColumn,
+                    creationTimeColumn,
+                    nominalCodeColumn,
+                    amountColumn,
+                    detailsColumn
+                }.OrderBy(x => x.Index);
+            }
+        }
+
         public IEnumerable<string> ColumnNames
         {
-            get { return columns.Select(x=>x.ColumnName); }
+            get { return Columns.Select(x=>x.FieldName); }
         }
 
         public int GetId(IDataRecord record)
         {
-            return GetField<int>(record, 0);
+            return idColumn.GetField(record);
         }
         
         public string GetUsername(IDataRecord record)
         {
-            return GetField<string>(record, 1);
+            return usernameColumn.GetField(record);
         }
         
         public DateTime GetJournalDate(IDataRecord record)
         {
-            return GetField<DateTime>(record, 2);
+            return dateColumn.GetField(record);
         }
         
         public DateTime GetCreationTime(IDataRecord record)
         {
-            return GetField<DateTime>(record, 3);
+            return creationTimeColumn.GetField(record);
         }
         
         public string GetNominalCode(IDataRecord record)
         {
-            return GetField<string>(record, 4);
+            return nominalCodeColumn.GetField(record);
         }
         
         public double GetAmount(IDataRecord record)
         {
-            return GetField<Double>(record, 5);
+            return amountColumn.GetField(record);
         }
         
         public string GetDescription(IDataRecord record)
         {
-            return GetField<string>(record, 6);
+            return detailsColumn.GetField(record);
         }        
-
-        private T GetField<T>(IDataRecord record, int index)
-        {
-            var fieldName = columns[index].ColumnName;
-
-            var actualFieldName = record.GetName(index);
-            if (actualFieldName != fieldName)
-            {
-                throw new SageDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema. Column {0} was {1}, expected {2}", index, actualFieldName, fieldName));
-            }
-
-            var fieldValue = record[index];
-
-            if (!(fieldValue is T))
-            {
-                throw new SageDataFormatUnexpectedException(String.Format("Unrecognised data schema. {0} was {1}, expected {2}", fieldName, fieldValue.GetType(), typeof(T)));
-            }
-
-            return (T)fieldValue;
-        }
     }
 }
