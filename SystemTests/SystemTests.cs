@@ -157,7 +157,7 @@ namespace SystemTests
             return cefSharpResponse;
         }
 
-        private static void Login(IContainer lifetime)
+        private static void Login(IComponentContext lifetime)
         {
             var loginController = lifetime.Resolve<XeroSessionController>();
             loginController.PostCompleteAuthenticationRequest(new XeroVerificationCode());
