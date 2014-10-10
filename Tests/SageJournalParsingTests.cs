@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using Model.Accounting;
 using NUnit.Framework;
 using Sage50;
@@ -18,26 +16,11 @@ namespace Tests
         public void CanConvertJournals()
         {
             var journals = ParseJournals(
-                new[]
-                {
-                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"
-                },
-                new[]
-                {
-                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "9998", "-55", "Unpresented Cheque"
-                },
-                new[]
-                {
-                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "2200", "0", "Unpresented Cheque"
-                },
-                new[]
-                {
-                    "12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"
-                },
-                new[]
-                {
-                    "12", "Steve", "31/12/2013", "27/04/2010 17:16", "9998", "-13", "Unpresented Cheque"
-                });
+                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"},
+                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "9998", "-55", "Unpresented Cheque"},
+                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "2200", "0", "Unpresented Cheque"},
+                new[]{"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
+                new[]{"12", "Steve", "31/12/2013", "27/04/2010 17:16", "9998", "-13", "Unpresented Cheque"});
 
             var expected = new[]
             {
@@ -59,12 +42,13 @@ namespace Tests
             CollectionAssert.AreEqual(expected, journals);
         }
 
-        private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
+        [Test]
+        public void GetRightExceptionWhenUsernamesMismatched()
         {
-            var reader = new JournalReader(MockDataReader(dataRows), new JournalLineParser(new JournalSchema()));
-            return reader.GetJournals().ToList();
-        }       
-
+            Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+                new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
+                new[] {"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"}));
+        }        
 
         [Test]
         public void SchemaDefinitionIsValid()
@@ -78,6 +62,12 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
+        private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
+        {
+            var reader = new JournalReader(MockDataReader(dataRows), new JournalLineParser(new JournalSchema()));
+            return reader.GetJournals().ToList();
+        }       
+
         private static IDataReader MockDataReader(IEnumerable<object[]> rows)
         {
             var dataTable = new DataTable();
@@ -86,8 +76,6 @@ namespace Tests
             {
                 dataTable.Rows.Add(parameterArray);
             }
-                
-
             return dataTable.CreateDataReader();
         }
 
