@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Model.Accounting
 {
@@ -13,6 +14,8 @@ namespace Model.Accounting
         {
             
         }
+
+        [JsonConstructor]
         public Journal(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
         {
             JournalDate = journalDate;
