@@ -40,6 +40,23 @@ namespace Tests
             };
 
             CollectionAssert.AreEqual(expected, journals);
+        }      
+        
+        
+        [Test]
+        public void CanParseUnbalancedJournals()
+        {
+            var journals = ParseJournals(new[] {"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"});
+
+            var expected = new[]
+            {
+                new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
+                    "Unpresented Cheque", new[]
+                    {
+                        new JournalLine("1200", "1200", JournalType.Dr, 55),
+                    })};
+
+            CollectionAssert.AreEqual(expected, journals, "Sage parsing needs to be able to parse journals which don't balance, because for reasons known only to its devs, Sage supports them");
         }
 
         [Test]
