@@ -1,7 +1,8 @@
 ﻿using System;
-using Model;
 using Model.Accounting;
 using NUnit.Framework;
+using Xero;
+using XeroApi.Model;
 
 namespace Tests
 {
@@ -9,15 +10,30 @@ namespace Tests
     public class JournalTests
     {
         [Test]
-        public void CreatingJournalWithUnbalancedEntriesGivesErrorMessageWhichListsUnbalancedLines()
+        public void CreatingJournalFromXeroJournalWithUnbalancedEntriesGivesErrorMessageWhichListsUnbalancedLines()
         {
-            var exception = Assert.Throws<InvalidJournalException>(() => new Journal(Guid.Empty, new DateTime(), new DateTime(),
-                new[]
+            var exception = Assert.Throws<InvalidJournalException>(() => new XeroApi.Model.Journal
+            {
+                JournalID = Guid.Empty,
+                CreatedDateUTC = new DateTime(),
+                JournalDate = new DateTime(),
+                JournalLines = new JournalLines()
                 {
-                    new JournalLine("a", "a", JournalType.Cr, 42.3m),
-                    new JournalLine("a", "a", JournalType.Cr, 12.3m),
-                    new JournalLine("a", "a", JournalType.Dr, 54),
-                }));
+                    new XeroApi.Model.JournalLine
+                    {
+                        NetAmount = -42.3m
+                    },        
+                    new XeroApi.Model.JournalLine
+                    {
+                        NetAmount = 12.3m
+                    },                  
+                    new XeroApi.Model.JournalLine
+                    {
+                        NetAmount = 54
+                    },
+                }
+
+            }.ToModelJournal());
 
             var error = exception.Message;
 
