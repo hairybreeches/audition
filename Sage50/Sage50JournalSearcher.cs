@@ -27,16 +27,16 @@ namespace Sage50
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
-            using (var connection = connectionFactory.OpenConnection())
-            {
-                var command = GetAllJournalsCommand(connection);                
-                return journalReader.GetJournals(command.ExecuteReader()).ToList();
-            }
+            return ExecuteJournalSearch(String.Format("SELECT {0} FROM AUDIT_JOURNAL", String.Join(",", schema.ColumnNames)));
         }
 
-        private OdbcCommand GetAllJournalsCommand(OdbcConnection conn)
+        private IEnumerable<Journal> ExecuteJournalSearch(string cmdText)
         {
-            return new OdbcCommand(String.Format("SELECT {0} FROM AUDIT_JOURNAL", String.Join(",", schema.ColumnNames)), conn);
+            using (var connection = connectionFactory.OpenConnection())
+            {
+                var command = new OdbcCommand(cmdText, connection);
+                return journalReader.GetJournals(command.ExecuteReader()).ToList();
+            }
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
