@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Audition.Chromium;
 using Audition.Controllers;
 using Autofac;
@@ -14,7 +15,15 @@ namespace SystemTests
         public static T GetParsedResponseContent<T>(this IComponentContext lifetime, MockRequestResponse requestResponse)
         {
             var json = lifetime.GetResponseContent(requestResponse);
-            return JsonConvert.DeserializeObject<T>(json);
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Could not parse: " + json);                
+            }
+            
         }        
         
         
