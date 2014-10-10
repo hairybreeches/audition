@@ -31,7 +31,7 @@ namespace Sage50
 
         private static OdbcCommand GetAllJournalsCommand(OdbcConnection conn)
         {
-            return new OdbcCommand("SELECT * FROM AUDIT_JOURNAL", conn);
+            return new OdbcCommand("SELECT 'TRAN_NUMBER','USER_NAME','DATE','RECORD_CREATE_DATE','NOMINAL_CODE','AMOUNT','DETAILS' FROM AUDIT_JOURNAL", conn);
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)

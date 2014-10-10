@@ -15,12 +15,12 @@ namespace Sage50.Parsing
         {
             return CreateJournalLine(
                 GetField<int>(record, 0, "TRAN_NUMBER"),
-                GetField<string>(record, 7, "USER_NAME"),
+                GetField<string>(record, 1, "USER_NAME"),
                 GetField<DateTime>(record, 2, "DATE"),
-                GetField<DateTime>(record, 31, "RECORD_CREATE_DATE"),
+                GetField<DateTime>(record, 3, "RECORD_CREATE_DATE"),
                 GetField<string>(record, 4, "NOMINAL_CODE"),
-                GetField<Double>(record, 20, "AMOUNT"), 
-                GetField<string>(record, 8, "DETAILS")
+                GetField<Double>(record, 5, "AMOUNT"), 
+                GetField<string>(record, 6, "DETAILS")
                 );
         }
 
