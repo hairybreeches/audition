@@ -8,6 +8,7 @@ using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using Sage50.Parsing;
+using Sage50.Parsing.Schema;
 
 namespace Sage50
 {
