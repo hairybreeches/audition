@@ -82,8 +82,8 @@ namespace Tests
 
         private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
         {
-            var reader = new JournalReader(MockDataReader(dataRows), new JournalLineParser(new JournalSchema()));
-            return reader.GetJournals().ToList();
+            var reader = new JournalReader(new JournalLineParser(new JournalSchema()));
+            return reader.GetJournals(MockDataReader(dataRows)).ToList();
         }       
 
         private static IDataReader MockDataReader(IEnumerable<object[]> rows)
