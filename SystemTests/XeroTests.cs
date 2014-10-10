@@ -15,7 +15,7 @@ using Xero;
 namespace SystemTests
 {
     [TestFixture]
-    public class XeroSystemTests
+    public class XeroTests
     {
         private readonly IRepositoryFactory repositoryFactory = Mock.RepositoryFactory(
             new Journal(new Guid("0421c274-2f50-49e4-8f61-623a4daf67ac"), new DateTime(2013, 4, 6), new DateTime(2013, 4, 6),
@@ -116,10 +116,7 @@ namespace SystemTests
         private ContainerBuilder CreateContainerBuilder()
         {
             var builder = SystemFoo.CreateDefaultContainerBuilder();
-            builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();
-
-            builder.Register(_ => new PhysicalFileSystem("."))
-                .As<IFileSystem>();
+            builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();            
             return builder;
         }
 
