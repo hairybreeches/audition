@@ -17,50 +17,53 @@ namespace Tests
         [Test]
         public void CanConvertJournals()
         {
-            var reader = new JournalReader(MockDataReader(new[]
-            {
+            var journals = ParseJournals(
                 new[]
                 {
-                    "26", "MANAGER", "31/12/2013","27/04/2010 17:16","1200", "55", "Unpresented Cheque"
+                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"
                 },
                 new[]
                 {
-                    "26", "MANAGER", "31/12/2013","27/04/2010 17:16", "9998","-55", "Unpresented Cheque"
+                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "9998", "-55", "Unpresented Cheque"
                 },
                 new[]
                 {
-                    "26", "MANAGER", "31/12/2013","27/04/2010 17:16", "2200","0", "Unpresented Cheque"
-                },
-                
-                new[]
-                {
-                    "12", "Steve", "31/12/2013","27/04/2010 17:16","1200", "13", "Unpresented Cheque"
+                    "26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "2200", "0", "Unpresented Cheque"
                 },
                 new[]
                 {
-                    "12", "Steve", "31/12/2013","27/04/2010 17:16", "9998","-13", "Unpresented Cheque"
-                }                
-            }), new JournalLineParser(new JournalSchema()));
+                    "12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"
+                },
+                new[]
+                {
+                    "12", "Steve", "31/12/2013", "27/04/2010 17:16", "9998", "-13", "Unpresented Cheque"
+                });
 
-            var journals = reader.GetJournals().ToList();
-            CollectionAssert.AreEqual(new[] { new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new []
+            var expected = new[]
             {
-                new JournalLine("1200", "1200", JournalType.Dr, 55), 
-                new JournalLine("9998", "9998", JournalType.Cr, 55), 
-                new JournalLine("2200", "2200", JournalType.Dr, 0)
-            }),
-            new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve", "Unpresented Cheque", new []
-            {
-                new JournalLine("1200", "1200", JournalType.Dr, 13), 
-                new JournalLine("9998", "9998", JournalType.Cr, 13), 
-            })}, journals);
+                new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
+                    "Unpresented Cheque", new[]
+                    {
+                        new JournalLine("1200", "1200", JournalType.Dr, 55),
+                        new JournalLine("9998", "9998", JournalType.Cr, 55),
+                        new JournalLine("2200", "2200", JournalType.Dr, 0)
+                    }),
+                new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve",
+                    "Unpresented Cheque", new[]
+                    {
+                        new JournalLine("1200", "1200", JournalType.Dr, 13),
+                        new JournalLine("9998", "9998", JournalType.Cr, 13),
+                    })
+            };
+
+            CollectionAssert.AreEqual(expected, journals);
         }
 
-        [Test]
-        public void GetRightExceptionWhenJournalLevelInfoMismatched()
+        private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
         {
-            
-        }
+            var reader = new JournalReader(MockDataReader(dataRows), new JournalLineParser(new JournalSchema()));
+            return reader.GetJournals().ToList();
+        }       
 
 
         [Test]
