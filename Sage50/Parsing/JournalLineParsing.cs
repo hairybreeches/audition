@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Data.Odbc;
 using Model.Accounting;
+using Sage50.Parsing.Schema;
 
 namespace Sage50.Parsing
 {

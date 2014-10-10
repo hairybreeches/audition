@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data;
-using Sage50.Parsing;
 
-namespace Sage50
+namespace Sage50.Parsing.Schema
 {
     class SchemaColumn<T> : ISchemaColumn
     {

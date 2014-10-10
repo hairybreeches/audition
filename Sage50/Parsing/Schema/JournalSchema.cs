@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Sage50.Parsing;
 
-namespace Sage50
+namespace Sage50.Parsing.Schema
 {
     public class JournalSchema
     {

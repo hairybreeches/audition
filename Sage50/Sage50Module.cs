@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Sage50.Parsing;
+using Sage50.Parsing.Schema;
 
 namespace Sage50
 {
