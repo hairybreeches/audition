@@ -83,12 +83,8 @@ namespace SystemTests
             var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
                    "http://localhost:1337/api/search/hours");
 
-            var cefSharpResponse = ExecuteRequest(requestResponse);
-
-            using (var reader = new StreamReader(cefSharpResponse.Content))
-            {
-                var actual = reader.ReadToEnd();
-                const string readableJson =
+            var actual = GetResponseContent(requestResponse);
+            const string readableJson =
 @"[
     {
         'Id':'0421c274-2f50-49e4-8f61-623a4daf67ac',
@@ -117,7 +113,18 @@ namespace SystemTests
                 var expectedJson = MungeJson(readableJson);
                 
                 Assert.AreEqual(expectedJson, actual);
+        }
+
+        private string GetResponseContent(MockRequestResponse requestResponse)
+        {
+            var cefSharpResponse = ExecuteRequest(requestResponse);
+
+            string actual;
+            using (var reader = new StreamReader(cefSharpResponse.Content))
+            {
+                actual = reader.ReadToEnd();
             }
+            return actual;
         }
 
         private static string MungeJson(string value)
