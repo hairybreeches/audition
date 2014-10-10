@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Audition;
-using Audition.Chromium;
-using Audition.Controllers;
 using Audition.Native;
 using Autofac;
-using CefSharp;
 using Model.Accounting;
-using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;
@@ -66,9 +61,10 @@ namespace SystemTests
                     SearchWindow,
                     "application/json", "http://localhost:1337/api/export/hours");
 
-            ExecuteRequest(builder, requestResponse);
+            SystemFoo.ExecuteRequest(builder, requestResponse);
 
             var fileContents = File.ReadAllText(fileName);
+
             StringAssert.AreEqualIgnoringCase(
                 @"Created,Date
 06/04/2013 00:00:00 +01:00,06/04/2013 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
@@ -83,7 +79,7 @@ namespace SystemTests
             var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
                    "http://localhost:1337/api/search/hours");
 
-            var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
+            var actual = SystemFoo.GetResponseContent(CreateContainerBuilder(), requestResponse);
             const string readableJson =
 @"[
     {
@@ -110,65 +106,19 @@ namespace SystemTests
     }
 ]";
                 
-                var expectedJson = MungeJson(readableJson);
+                var expectedJson = SystemFoo.MungeJson(readableJson);
                 
                 Assert.AreEqual(expectedJson, actual);
         }
 
-        private static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
-        {
-            var cefSharpResponse = ExecuteRequest(builder, requestResponse);
-
-            string actual;
-            using (var reader = new StreamReader(cefSharpResponse.Content))
-            {
-                actual = reader.ReadToEnd();
-            }
-            return actual;
-        }
-
-        private static string MungeJson(string value)
-        {           
-            return JsonConvert.SerializeObject(JsonConvert.DeserializeObject(value));           
-        }
-
         private ContainerBuilder CreateContainerBuilder()
         {
-            var builder = CreateDefaultContainerBuilder();
+            var builder = SystemFoo.CreateDefaultContainerBuilder();
             builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();
 
             builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
                 .As<Microsoft.Owin.FileSystems.IFileSystem>();
             return builder;
-        }
-
-        private static ContainerBuilder CreateDefaultContainerBuilder()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<AuditionModule>();
-            return builder;
-        }
-
-        private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
-        {
-            CefSharpResponse cefSharpResponse;
-            using (var lifetime = builder.Build())
-            {
-                LoginToXero(lifetime);
-                var handler = lifetime.Resolve<IRequestHandler>();
-
-
-                handler.OnBeforeResourceLoad(null, requestResponse);
-
-                cefSharpResponse = requestResponse.Response;
-            }
-            return cefSharpResponse;
-        }
-
-        private static void LoginToXero(IComponentContext lifetime)
-        {
-            var loginController = lifetime.Resolve<XeroSessionController>();
-            loginController.PostCompleteAuthenticationRequest(new XeroVerificationCode());
         }
     }
 }
