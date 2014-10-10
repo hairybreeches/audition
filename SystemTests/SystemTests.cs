@@ -83,7 +83,7 @@ namespace SystemTests
             var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
                    "http://localhost:1337/api/search/hours");
 
-            var actual = GetResponseContent(requestResponse);
+            var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
             const string readableJson =
 @"[
     {
@@ -115,9 +115,9 @@ namespace SystemTests
                 Assert.AreEqual(expectedJson, actual);
         }
 
-        private string GetResponseContent(MockRequestResponse requestResponse)
+        private static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
         {
-            var cefSharpResponse = ExecuteRequest(CreateContainerBuilder(), requestResponse);
+            var cefSharpResponse = ExecuteRequest(builder, requestResponse);
 
             string actual;
             using (var reader = new StreamReader(cefSharpResponse.Content))
