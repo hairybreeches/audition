@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Audition.Chromium;
 using Audition.Native;
 using Autofac;
+using Microsoft.Owin.FileSystems;
 using Model.Accounting;
 using NSubstitute;
 using NUnit.Framework;
@@ -61,7 +63,7 @@ namespace SystemTests
                     SearchWindow,
                     "application/json", "http://localhost:1337/api/export/hours");
 
-            SystemFoo.ExecuteRequest(builder, requestResponse);
+            ExecuteRequest(builder, requestResponse);
 
             var fileContents = File.ReadAllText(fileName);
 
@@ -79,7 +81,7 @@ namespace SystemTests
             var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
                    "http://localhost:1337/api/search/hours");
 
-            var actual = SystemFoo.GetResponseContent(CreateContainerBuilder(), requestResponse);
+            var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
             const string readableJson =
 @"[
     {
@@ -116,9 +118,27 @@ namespace SystemTests
             var builder = SystemFoo.CreateDefaultContainerBuilder();
             builder.Register(_ => repositoryFactory).As<IRepositoryFactory>();
 
-            builder.Register(_ => new Microsoft.Owin.FileSystems.PhysicalFileSystem("."))
-                .As<Microsoft.Owin.FileSystems.IFileSystem>();
+            builder.Register(_ => new PhysicalFileSystem("."))
+                .As<IFileSystem>();
             return builder;
+        }
+
+        private static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
+        {
+            using (var lifetime = builder.Build())
+            {
+                SystemFoo.LoginToXero(lifetime);
+                return SystemFoo.GetResponseContent(lifetime, requestResponse);
+            }
+        }
+
+        private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
+        {
+            using (var lifetime = builder.Build())
+            {
+                SystemFoo.LoginToXero(lifetime);
+                return SystemFoo.ExecuteRequest(lifetime, requestResponse);
+            }
         }
     }
 }
