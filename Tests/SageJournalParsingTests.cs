@@ -27,6 +27,19 @@ namespace Tests
             })}, journals);
         }
 
+
+        [Test]
+        public void SchemaDefinitionIsValid()
+        {
+            var schema = new JournalSchema();
+
+            var definedColumnNumbers = schema.Columns.Select(x => x.Index).ToList();
+            var numberOfColumns = schema.Columns.Count();
+
+            var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
+            CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0");
+        }
+
         public IDataReader Steve()
         {
             var dataTable = new DataTable();
@@ -61,8 +74,7 @@ namespace Tests
 
         private DataColumn[] GetSageColumns()
         {
-            return new JournalSchema().DataColumns;
-
+            return new JournalSchema().Columns.Select(x=>x.ToDataColumn()).ToArray();
         }
     }
 }

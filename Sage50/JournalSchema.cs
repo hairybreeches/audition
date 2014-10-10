@@ -24,35 +24,10 @@ namespace Sage50
             creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
             nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
             amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-            detailsColumn = new SchemaColumn<string>("DETAILS", 6);
-            ValidateSchemaDefinition();
-        }
+            detailsColumn = new SchemaColumn<string>("DETAILS", 6);            
+        }                
 
-        private void ValidateSchemaDefinition()
-        {
-            var definedColumnNumbers = Columns.Select(x => x.Index).ToList();
-            var numberOfColumns = Columns.Count();
-
-            var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
-            if (!definedColumnNumbers.SequenceEqual(expectedDefinedColumnNumbers))
-            {
-                throw new SageDataFormatUnexpectedException(
-                    String.Format("Incorrect column definitions: Column numbers defined: {0}",
-                        String.Join(",", definedColumnNumbers)));
-            }
-        }
-
-        public DataColumn[] DataColumns
-        {
-            get
-            {
-                return Columns                    
-                    .Select(x => x.ToDataColumn())
-                    .ToArray();
-            }
-        }
-
-        private IEnumerable<ISchemaColumn> Columns
+        public IEnumerable<ISchemaColumn> Columns
         {
             get
             {
