@@ -16,22 +16,21 @@ namespace Sage50
     {
         private readonly SageConnectionFactory connectionFactory;
         private readonly JournalSchema schema;
-        private readonly Func<IDataReader, JournalReader> journalReaderFactory;
+        private readonly JournalReader journalReader;
 
-        public Sage50JournalSearcher(SageConnectionFactory connectionFactory, JournalSchema schema, Func<IDataReader, JournalReader> journalReaderFactory)
+        public Sage50JournalSearcher(SageConnectionFactory connectionFactory, JournalSchema schema,JournalReader journalReader)
         {
             this.connectionFactory = connectionFactory;
             this.schema = schema;
-            this.journalReaderFactory = journalReaderFactory;
+            this.journalReader = journalReader;
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
             using (var connection = connectionFactory.OpenConnection())
             {
-                var command = GetAllJournalsCommand(connection);
-                var reader = journalReaderFactory(command.ExecuteReader());
-                return reader.GetJournals().ToList();
+                var command = GetAllJournalsCommand(connection);                
+                return journalReader.GetJournals(command.ExecuteReader()).ToList();
             }
         }
 
