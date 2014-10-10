@@ -37,18 +37,18 @@ namespace SystemTests
 
         public static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
         {
-            CefSharpResponse cefSharpResponse;
             using (var lifetime = builder.Build())
             {
                 LoginToXero(lifetime);
-                var handler = lifetime.Resolve<IRequestHandler>();
-
-
-                handler.OnBeforeResourceLoad(null, requestResponse);
-
-                cefSharpResponse = requestResponse.Response;
+                return ExecuteRequest(lifetime, requestResponse);
             }
-            return cefSharpResponse;
+        }
+
+        private static CefSharpResponse ExecuteRequest(IComponentContext lifetime, MockRequestResponse requestResponse)
+        {
+            var handler = lifetime.Resolve<IRequestHandler>();
+            handler.OnBeforeResourceLoad(null, requestResponse);
+            return requestResponse.Response;
         }
 
         private static void LoginToXero(IComponentContext lifetime)
