@@ -88,10 +88,5 @@ namespace Xero
         {
             return repository.Journals.ToList().Where(x => period.Contains(x.JournalDate));
         }
-        
-        private IEnumerable<Journal> GetJournalsPostedDuring(DateRange period)
-        {
-            return repository.Journals.ToList().Where(x => period.Contains(x.CreatedDateUTC));
-        }
     }
 }
