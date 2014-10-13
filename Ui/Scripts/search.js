@@ -1,14 +1,26 @@
-﻿var Output = function () {
+﻿var Output = function (unavailableFields) {
     var self = this;
     //fields
     self.results = ko.observable([]);
     self.state = ko.observable('');
-    self.lastError = ko.observable('');
+    self.lastError = ko.observable('');   
 
     //methods
     self.startSearch = function() {
         self.state('searching');
     };
+
+    var showField = function(fieldName) {
+        return !unavailableFields[fieldName];
+    }
+
+    self.showDescription = function() {
+        return showField('description');
+    };
+
+    self.showUsername = function () {
+        return showField('username');
+    }
 
     self.searchSuccess = function(results) {
         self.state('results');
@@ -112,7 +124,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
     };
 }
 
-var output = new Output();
+var output = new Output(searchModel.unavilableFields);
 
 var exportSuccessMessage = new ExportSuccessMessage();
 
