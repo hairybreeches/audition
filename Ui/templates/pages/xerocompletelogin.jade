@@ -1,7 +1,7 @@
 include ../components/template
 include ../components/forms
 
-+page('Login', 'xerocompletelogin')
++page('Login', ['xerocompletelogin'])
 	div.container
 		form.form-horizontal.blockable(action='#', method="post", enc="x-www-form-urlencoded")
 			.blockscreen(visible="none" data-bind="visible: blocked()") Loading...
