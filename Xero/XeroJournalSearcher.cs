@@ -54,7 +54,7 @@ namespace Xero
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
         {
             var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
-            var magnitude = (int) Math.Pow(10,searchWindow.Parameters.MinimumZeroesToBeConsideredUnusual);
+            var magnitude = searchWindow.Parameters.Magnitude();
             return periodJournals.Where(journal => HasRoundLine(journal, magnitude))
                 .Select(x=>x.ToModelJournal());
         }
