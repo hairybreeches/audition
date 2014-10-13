@@ -12,7 +12,7 @@ var Model = function () {
             url: '/api/xero/completelogin',
             data: { code: self.code },
             success: function() {
-                location.href = '/views/search.html';
+                location.href = '/views/xeroSearch.html';
             },
             failure: function () {
                 self.blocked(false);

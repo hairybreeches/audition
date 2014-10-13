@@ -78,6 +78,8 @@
     <Content Include="Scripts\xerocompletelogin.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
+    <None Include="templates\pages\sage50Search.jade" />
+    <None Include="templates\pages\xeroSearch.jade" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
@@ -168,7 +170,7 @@
     <None Include="templates\components\xero-login.jade" />
     <None Include="templates\components\export.jade" />
     <None Include="templates\pages\login.jade" />
-    <None Include="templates\pages\search.jade" />
+    <None Include="templates\components\search.jade" />
     <None Include="templates\pages\xerocompletelogin.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
