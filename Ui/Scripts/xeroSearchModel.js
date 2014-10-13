@@ -4,8 +4,8 @@
         username: true,
     },
 
-    actions: {
-        usernameUnavailable: true,
-        keywordUnavailable: true
+    unavailableActions: {
+        username: true,
+        keyword: true
     },
 }
