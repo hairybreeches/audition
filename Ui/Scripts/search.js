@@ -143,27 +143,27 @@ var model = {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours'),
+        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts'),
+        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts',searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date'),
+        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', true),
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
 
         Keyword: new InputSection({
             keywords: ""
-        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword', true),
+        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword', searchModel.unavailableActions.keyword),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending'),
+        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
