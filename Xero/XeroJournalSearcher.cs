@@ -37,9 +37,7 @@ namespace Xero
         {
             var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
 
-            var periodEndDate = searchWindow.Period.To;
-            var startOfSearchPeriod =
-                periodEndDate.Subtract(TimeSpan.FromDays(searchWindow.Parameters.DaysBeforeYearEnd));
+            var startOfSearchPeriod = searchWindow.CreationStartDate();
             return periodJournals.Where(x => x.UkCreationTime() >= startOfSearchPeriod).Select(x => x.ToModelJournal());            
         }
 
