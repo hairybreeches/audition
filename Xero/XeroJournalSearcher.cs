@@ -35,16 +35,12 @@ namespace Xero
 
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {
-            
+            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
+
             var periodEndDate = searchWindow.Period.To;
             var startOfSearchPeriod =
                 periodEndDate.Subtract(TimeSpan.FromDays(searchWindow.Parameters.DaysBeforeYearEnd));
-            var dateRange = new DateRange(startOfSearchPeriod, DateTime.MaxValue);
-            var journalsPostedInTimeFrame = GetJournalsPostedDuring(dateRange).ToList();
-            return journalsPostedInTimeFrame
-                .Where(x => searchWindow.Period.Contains(x.JournalDate))
-                .Select(x=>x.ToModelJournal());
-
+            return periodJournals.Where(x => x.UkCreationTime() >= startOfSearchPeriod).Select(x => x.ToModelJournal());            
         }
 
         public IEnumerable<Model.Accounting.Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
