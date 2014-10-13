@@ -1,11 +1,11 @@
 include template
    
-mixin search()
+mixin search(logoutUrl)
 	+page('Search', 'search')
 		.container
 			.row
 				.col-md-1.col-md-offset-11
-					a.pull-right.action-link(href="/api/logout") Logout
+					a.pull-right.action-link(href="#{logoutUrl}") Logout
 		.container(data-bind="with: input")
 			include ../components/searchInput
 			hr.vertical-space
