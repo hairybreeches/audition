@@ -62,12 +62,12 @@ namespace Sage50
 
         private string GetPeriodText(DateRange range)
         {
-            return String.Format("DATE > '{0}' AND DATE < '{1}'", range.From.ToString("yyyy-MM-dd"), range.To.ToString("yyyy-MM-dd"));
-        }
-
+            return String.Format("DATE >= '{0}' AND '{1}' >= DATE", range.From.ToString("yyyy-MM-dd"), range.To.ToString("yyyy-MM-dd"));
+        }  
+        
         private string GetCreatedDateText(SearchWindow<YearEndParameters> range)
         {
-            return String.Format("RECORD_CREATE_DATE > '{0}'", range.CreationStartDate().ToString("yyyy-MM-dd"));
+            return String.Format("RECORD_CREATE_DATE >= '{0}'", range.CreationStartDate().ToString("yyyy-MM-dd"));
         }
 
         private IEnumerable<Journal> ExecuteJournalSearch(string cmdText)

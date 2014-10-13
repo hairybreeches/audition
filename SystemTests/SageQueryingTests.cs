@@ -23,8 +23,17 @@ namespace SystemTests
                 GetSearcher()
                     .FindJournalsWithin(new SearchWindow<YearEndParameters>(new YearEndParameters(3),
                         new DateRange(new DateTime(2014, 3, 1), new DateTime(2014, 3, 31))));
-            //all the journals were created in 2010 so no results
-            CollectionAssert.IsEmpty(journals);
+            CollectionAssert.AreEqual(new[]
+            {
+                new Journal("1237", new DateTimeOffset(2014,10,13,15,03,11, new TimeSpan(1,0,0)),new DateTime(2014,3,31), "MANAGER", "", new []
+                {
+                    new JournalLine("0010", "0010", JournalType.Dr, 100)
+                }),
+                new Journal("1238", new DateTimeOffset(2014,10,13,15,03,11, new TimeSpan(1,0,0)),new DateTime(2014,3,31), "MANAGER", "", new []
+                {
+                    new JournalLine("1240", "1240", JournalType.Cr, 100)
+                }),
+            }, journals);
         }
 
 
