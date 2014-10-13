@@ -1,4 +1,5 @@
 mixin page(title, pagescript)
+	- pagescript = pagescript || []
 	doctype html
 	html(lang="en")
 		include head
@@ -11,5 +12,5 @@ mixin page(title, pagescript)
 			block
 
 			include scripts
-			if pagescript
-				script(src="/scripts/" + pagescript + ".js")
+			each script in pagescript
+				script(src="/scripts/" + script + ".js")
