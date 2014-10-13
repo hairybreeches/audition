@@ -54,6 +54,7 @@
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\KeywordParameters.cs" />
+    <Compile Include="SearchWindows\SearchWindowExtensions.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="Accounting\InvalidJournalException.cs" />
