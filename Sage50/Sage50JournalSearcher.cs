@@ -27,7 +27,22 @@ namespace Sage50
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
-            return ExecuteJournalSearch(String.Format("SELECT {0} FROM AUDIT_JOURNAL", String.Join(",", schema.ColumnNames)));
+            return ExecuteJournalSearch(GetJournalsText());
+        }
+
+        private string GetJournalsText()
+        {
+            return String.Format("SELECT {0} FROM AUDIT_JOURNAL", String.Join(",", schema.ColumnNames));
+        }
+
+        private string GetPeriodText(DateRange range)
+        {
+            return String.Format("DATE > '{0}' AND DATE < '{1}'", range.From.ToString("yyyy-MM-dd"), range.To.ToString("yyyy-MM-dd"));
+        }  
+        
+        private string GetCreatedDateText(SearchWindow<YearEndParameters> range)
+        {
+            return String.Format("RECORD_CREATE_DATE > '{0}'", range.CreationStartDate().ToString("yyyy-MM-dd"));
         }
 
         private IEnumerable<Journal> ExecuteJournalSearch(string cmdText)
@@ -46,7 +61,7 @@ namespace Sage50
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {
-            throw new NotImplementedException();
+            return ExecuteJournalSearch(GetJournalsText() + " WHERE " + GetPeriodText(searchWindow.Period) + " AND " + GetCreatedDateText(searchWindow));
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
