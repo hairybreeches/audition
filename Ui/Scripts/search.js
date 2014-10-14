@@ -8,19 +8,7 @@
     //methods
     self.startSearch = function() {
         self.state('searching');
-    };
-
-    var showField = function(fieldName) {
-        return !unavailableFields[fieldName];
-    }
-
-    self.showDescription = function() {
-        return showField('description');
-    };
-
-    self.showUsername = function () {
-        return showField('username');
-    }
+    };    
 
     self.searchSuccess = function(results) {
         self.state('results');
@@ -124,7 +112,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
     };
 }
 
-var output = new Output(searchModel.unavilableFields);
+var output = new Output();
 
 var exportSuccessMessage = new ExportSuccessMessage();
 
@@ -133,8 +121,20 @@ var period = ko.mapping.fromJS({
     To: '2014-3-31'
 });
 
+var showField = function(fieldName) {
+    return !searchModel.unavilableFields[fieldName];
+}
 
 var model = {
+
+    showDescription: function() {
+        return showField('description');
+    },
+
+    showUsername: function () {
+        return showField('username');
+    },
+
     input: {
         Period: period,
 
