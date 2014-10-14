@@ -77,18 +77,33 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.observable(blocked || false);
     //methods
-    var serialise = function () {
-        return JSON.stringify(ko.mapping.toJS({
+
+    var getSearchWindow = function() {
+        return ko.mapping.toJS({
             Period: period,
             Parameters: self.parameters
-        }));
+        });
+    }
+
+    var searchSerialise = function () {
+        return JSON.stringify(getSearchWindow());
     };
+
+    var exportSerialise = function() {
+        return JSON.stringify({
+            SerialisationOptions: {
+                showUsername: model.showUsername(),
+                showDescription: model.showDescription(),
+            },
+            searchWindow: getSearchWindow()
+        });
+    }
 
     self.submit = function (_, e) {
         e.preventDefault();
         output.startSearch();
         $.ajax(searchUrl, {
-            data: serialise(),
+            data: searchSerialise(),
             contentType: 'application/json',
             success: output.searchSuccess,
             error: output.searchFailure,
@@ -101,7 +116,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
         exportSuccessMessage.hide();
 
         $.ajax(exportUrl, {
-            data: serialise(),
+            data: exportSerialise(),
 
             contentType: 'application/json',
             success: function (fileName) {
