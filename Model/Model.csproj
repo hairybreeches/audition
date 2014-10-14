@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportRequest.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Accounting\InvalidJournalException.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />
+    <Compile Include="SerialisationOptions.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Journal.cs" />
     <Compile Include="Accounting\JournalLine.cs" />

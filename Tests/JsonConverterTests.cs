@@ -54,7 +54,31 @@ namespace Tests
                 result);
         }
 
-        
+        [Test]
+        public void CanDeserializeExportRequest()
+        {
+            var result = Parse<ExportRequest<KeywordParameters>>(@"{
+            SearchWindow: {
+                Period: {
+                    From: '2012-4-5',
+                    To: '2013-4-4'
+                },
+
+                Parameters: {
+                    Keywords: 'steve
+                                alf'
+                }
+            },
+
+            SerialisationOptions:{
+                showUsername: true,
+                showDescription: false
+            }
+
+        }");
+            Assert.AreEqual(new ExportRequest<KeywordParameters>(new SearchWindow<KeywordParameters>(new KeywordParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), new SerialisationOptions(true, false)), result);
+        }          
+
        [Test]
        public void CanDeserializeTimeFrame()
        {           
