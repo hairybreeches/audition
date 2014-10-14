@@ -13,9 +13,10 @@ namespace SystemTests
         {
             //vagues search window ever, to return all journals in the searcher
             const string searchWindow = "{'Period':{'From':'1649-01-30', 'To':'4789-7-14'},'Parameters':{'FromDay':'Monday','ToDay':'Friday','FromTime':'00:00','ToTime':'00:00'}}";
+            const string searchRequest = "{pageNumber: 1, searchWindow: " + searchWindow + "}";
 
             var requestResponse = new MockRequestResponse("POST",
-                searchWindow,
+                searchRequest,
                 "application/json", "http://localhost:1337/api/search/hours");
 
             using (var lifetime = SystemFoo.CreateDefaultContainerBuilder().Build())
