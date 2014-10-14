@@ -76,8 +76,11 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
         });
     }
 
-    var searchSerialise = function () {
-        return JSON.stringify(getSearchWindow());
+    var searchSerialise = function() {
+        return JSON.stringify({
+            pageNumber: 1,
+            searchWindow: getSearchWindow()
+        });
     };
 
     var exportSerialise = function() {

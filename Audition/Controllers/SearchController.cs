@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Audition.Chromium;
+using Audition.Requests;
 using Audition.Session;
 using Model.Accounting;
 using Model.Searching;
@@ -25,37 +26,37 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursSearch)]
-        public IEnumerable<Journal> HoursSearch(SearchWindow<WorkingHours> searchWindow)
+        public IEnumerable<Journal> HoursSearch(SearchRequest<WorkingHours> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
         }
         
         [HttpPost]
         [Route(Routing.AccountsSearch)]
-        public IEnumerable<Journal> AccountsSearch(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public IEnumerable<Journal> AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
         }
         
         [HttpPost]
         [Route(Routing.DateSearch)]
-        public IEnumerable<Journal> DateSearch(SearchWindow<YearEndParameters> searchWindow)
+        public IEnumerable<Journal> DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
         }
 
         [HttpPost]
         [Route(Routing.UserSearch)]
-        public IEnumerable<Journal> UserSearch(SearchWindow<UserParameters> searchWindow)
+        public IEnumerable<Journal> UserSearch(SearchRequest<UserParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
         }
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
-        public IEnumerable<Journal> EndingSearch(SearchWindow<EndingParameters> searchWindow)
+        public IEnumerable<Journal> EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
         }
     }
 }
