@@ -78,9 +78,9 @@ namespace SystemTests
             var fileContents = File.ReadAllText(fileName);
 
             StringAssert.AreEqualIgnoringCase(
-                @"Created,Date
-06/04/2013 00:00:00 +01:00,06/04/2013 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-06/04/2013 00:00:00 +01:00,06/04/2013 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+                @"Created,Date,Username
+06/04/2013 00:00:00 +01:00,06/04/2013 00:00:00,,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+06/04/2013 00:00:00 +01:00,06/04/2013 00:00:00,,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ", fileContents);
             
         }        
