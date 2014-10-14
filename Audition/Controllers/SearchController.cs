@@ -42,7 +42,7 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> HoursExport(ExportRequest<WorkingHours> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         }      
         
         [HttpPost]
@@ -57,7 +57,7 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         }    
         
         [HttpPost]
@@ -72,7 +72,7 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> DateExport(ExportRequest<YearEndParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         }
 
         [HttpPost]
@@ -87,7 +87,7 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> UserExport(ExportRequest<UserParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         } 
         
         [HttpPost]
@@ -102,7 +102,7 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> KeywordExport(ExportRequest<KeywordParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         }     
         
         [HttpPost]
@@ -117,13 +117,13 @@ namespace Audition.Controllers
         public async Task<IHttpActionResult> EndingExport(ExportRequest<EndingParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals);
+            return await Export(journals, saveRequest.SerialisationOptions);
         }
 
-        private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals)
+        private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals, SerialisationOptions options)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(journals, saveLocation);
+            excelExporter.WriteJournals(journals, saveLocation, options);
             return Ok(saveLocation);
         }
     }
