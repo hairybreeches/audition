@@ -48,6 +48,16 @@ namespace SystemTests
         private const string SearchWindow =
             "{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Parameters':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00','ToTime':'18:00'}}";
 
+        private static readonly string ExportRequest = @"{
+            SearchWindow:" + SearchWindow + @",
+
+            SerialisationOptions:{
+                showUsername: true,
+                showDescription: false
+            }
+
+        }";
+
         [Test]
         public void CanSaveJournalsReturnedToAFile()
         {
@@ -60,7 +70,7 @@ namespace SystemTests
 
 
             var requestResponse = new MockRequestResponse("POST",
-                    SearchWindow,
+                    ExportRequest,
                     "application/json", "http://localhost:1337/api/export/hours");
 
             ExecuteRequest(builder, requestResponse);
