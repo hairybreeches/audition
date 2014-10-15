@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49CB781A-5A5A-4D6A-8F19-B8D3C0045597}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ui</RootNamespace>
+    <AssemblyName>Ui</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\jqueryui\ui-bg_flat_0_999999_40x100.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_428bca_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_999999_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_f0ad4e_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_f6cf3b_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\A.svg" />
+    <Content Include="Content\images\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\images\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_454545_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_888888_256x240.png" />
+    <Content Include="Content\images\jqueryui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="gulpfile.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.1.js" />
+    <Content Include="Scripts\jquery-ui.min-1.11.1.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\knockout-jqueryui.min.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\sage50SearchModel.js" />
+    <Content Include="Scripts\xerocompletelogin.js" />
+    <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\search.js" />
+    <Content Include="Scripts\xeroSearchModel.js" />
+    <None Include="templates\pages\sage50Search.jade" />
+    <None Include="templates\pages\xeroSearch.jade" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+    <None Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="style\actionlink.less" />
+    <None Include="style\blockscreen.less" />
+    <None Include="style\bootswatch.less" />
+    <None Include="style\forms.less" />
+    <None Include="style\grouped-table.less" />
+    <None Include="style\jq-ui-bootstrap\accordion.less" />
+    <None Include="style\jq-ui-bootstrap\autocomplete.less" />
+    <None Include="style\jq-ui-bootstrap\base.less" />
+    <None Include="style\jq-ui-bootstrap\button.less" />
+    <None Include="style\jq-ui-bootstrap\core.less" />
+    <None Include="style\jq-ui-bootstrap\datepicker.less" />
+    <None Include="style\jq-ui-bootstrap\dialog.less" />
+    <None Include="style\jq-ui-bootstrap\icons.less" />
+    <None Include="style\jq-ui-bootstrap\jq-ui-bootstrap-mixin-adapter.less" />
+    <None Include="style\jq-ui-bootstrap\jq-ui-bootstrap-variable-adapter.less" />
+    <None Include="style\jq-ui-bootstrap\jq-ui-bootstrap.less" />
+    <None Include="style\jq-ui-bootstrap\menu.less" />
+    <None Include="style\jq-ui-bootstrap\misc.less" />
+    <None Include="style\jq-ui-bootstrap\progressbar.less" />
+    <None Include="style\jq-ui-bootstrap\resizable.less" />
+    <None Include="style\jq-ui-bootstrap\selectable.less" />
+    <None Include="style\jq-ui-bootstrap\slider.less" />
+    <None Include="style\jq-ui-bootstrap\spinner.less" />
+    <None Include="style\jq-ui-bootstrap\tabs.less" />
+    <None Include="style\jq-ui-bootstrap\toolbar.less" />
+    <None Include="style\jq-ui-bootstrap\tooltip.less" />
+    <None Include="style\jqueryui-styling.less" />
+    <None Include="style\jumbotron.less" />
+    <None Include="style\logo.less" />
+    <None Include="style\page.less" />
+    <None Include="style\style.less" />
+    <None Include="style\verticalspacing.less" />
+    <None Include="style\_flatstrap\.csscomb.json" />
+    <None Include="style\_flatstrap\.csslintrc" />
+    <None Include="style\_flatstrap\alerts.less" />
+    <None Include="style\_flatstrap\badges.less" />
+    <None Include="style\_flatstrap\bootstrap.less" />
+    <None Include="style\_flatstrap\breadcrumbs.less" />
+    <None Include="style\_flatstrap\button-groups.less" />
+    <None Include="style\_flatstrap\buttons.less" />
+    <None Include="style\_flatstrap\carousel.less" />
+    <None Include="style\_flatstrap\close.less" />
+    <None Include="style\_flatstrap\code.less" />
+    <None Include="style\_flatstrap\component-animations.less" />
+    <None Include="style\_flatstrap\dropdowns.less" />
+    <None Include="style\_flatstrap\forms.less" />
+    <None Include="style\_flatstrap\glyphicons.less" />
+    <None Include="style\_flatstrap\grid.less" />
+    <None Include="style\_flatstrap\input-groups.less" />
+    <None Include="style\_flatstrap\jumbotron.less" />
+    <None Include="style\_flatstrap\labels.less" />
+    <None Include="style\_flatstrap\list-group.less" />
+    <None Include="style\_flatstrap\media.less" />
+    <None Include="style\_flatstrap\mixins.less" />
+    <None Include="style\_flatstrap\modals.less" />
+    <None Include="style\_flatstrap\navbar.less" />
+    <None Include="style\_flatstrap\navs.less" />
+    <None Include="style\_flatstrap\normalize.less" />
+    <None Include="style\_flatstrap\pager.less" />
+    <None Include="style\_flatstrap\pagination.less" />
+    <None Include="style\_flatstrap\panels.less" />
+    <None Include="style\_flatstrap\popovers.less" />
+    <None Include="style\_flatstrap\print.less" />
+    <None Include="style\_flatstrap\progress-bars.less" />
+    <None Include="style\_flatstrap\responsive-utilities.less" />
+    <None Include="style\_flatstrap\scaffolding.less" />
+    <None Include="style\_flatstrap\tables.less" />
+    <None Include="style\_flatstrap\theme.less" />
+    <None Include="style\_flatstrap\thumbnails.less" />
+    <None Include="style\_flatstrap\tooltip.less" />
+    <None Include="style\_flatstrap\type.less" />
+    <None Include="style\_flatstrap\utilities.less" />
+    <None Include="style\_flatstrap\variables.less" />
+    <None Include="style\_flatstrap\wells.less" />
+    <None Include="templates\components\forms.jade" />
+    <None Include="templates\components\head.jade" />
+    <None Include="templates\components\results.jade" />
+    <None Include="templates\components\sage50-login.jade" />
+    <None Include="templates\components\scripts.jade" />
+    <None Include="templates\components\searchInput.jade" />
+    <None Include="templates\components\template.jade" />
+    <None Include="templates\components\xero-login.jade" />
+    <None Include="templates\components\export.jade" />
+    <None Include="templates\pages\login.jade" />
+    <None Include="templates\components\search.jade" />
+    <None Include="templates\pages\xerocompletelogin.jade" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+    <Exec Command="gulp build --target $(OutputPath)ui" />
+  </Target>
+</Project>
