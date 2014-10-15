@@ -12,28 +12,21 @@ namespace Model.Searching
         private readonly IJournalSearcher<YearEndParameters> yearEndSearcher;
         private readonly IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher;
         private readonly IJournalSearcher<EndingParameters> roundNumberSearcher;
-        private readonly IJournalSearcher<KeywordParameters> keywordSearcher;
         private readonly IJournalSearcher<UserParameters> userSearcher;
 
-        public JournalSearcher(IJournalSearcher<WorkingHours> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<KeywordParameters> keywordSearcher, IJournalSearcher<UserParameters> userSearcher)
+        public JournalSearcher(IJournalSearcher<WorkingHours> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<UserParameters> userSearcher)
         {
             this.hoursSearcher = hoursSearcher;
             this.yearEndSearcher = yearEndSearcher;
             this.unusualAccountsSearcher = unusualAccountsSearcher;
             this.roundNumberSearcher = roundNumberSearcher;
-            this.keywordSearcher = keywordSearcher;
             this.userSearcher = userSearcher;
         }       
         
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {
             return yearEndSearcher.FindJournalsWithin(searchWindow);
-        }
-
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<KeywordParameters> searchWindow)
-        {
-            return keywordSearcher.FindJournalsWithin(searchWindow);
-        }
+        }        
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
         {

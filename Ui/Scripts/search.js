@@ -170,11 +170,7 @@ var model = {
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
-
-        Keyword: new InputSection({
-            keywords: ""
-        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword', searchModel.unavailableActions.keyword),
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),        
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3

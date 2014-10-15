@@ -5,7 +5,6 @@
     },
 
     unavailableActions: {
-        username: true,
-        keyword: true
+        username: true
     },
 }

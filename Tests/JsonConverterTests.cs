@@ -58,7 +58,7 @@ namespace Tests
         [Test]
         public void CanDeserializeExportRequest()
         {
-            var result = Parse<ExportRequest<KeywordParameters>>(@"{
+            var result = Parse<ExportRequest<UserParameters>>(@"{
             SearchWindow: {
                 Period: {
                     From: '2012-4-5',
@@ -66,7 +66,7 @@ namespace Tests
                 },
 
                 Parameters: {
-                    Keywords: 'steve
+                    Users: 'steve
                                 alf'
                 }
             },
@@ -77,7 +77,7 @@ namespace Tests
             }
 
         }");
-            Assert.AreEqual(new ExportRequest<KeywordParameters>(new SearchWindow<KeywordParameters>(new KeywordParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), new SerialisationOptions(true, false)), result);
+            Assert.AreEqual(new ExportRequest<UserParameters>(new SearchWindow<UserParameters>(new UserParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), new SerialisationOptions(true, false)), result);
         }          
 
        [Test]

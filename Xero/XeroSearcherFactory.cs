@@ -22,7 +22,6 @@ namespace Xero
                 new YearEndSearcher(repository),
                 new UnusualAccountsSearcher(repository),
                 new RoundNumberSearcher(repository),
-                new NotSupportedSearcher<KeywordParameters>("Xero does not have the concept of descriptions"),
                 new NotSupportedSearcher<UserParameters>("Xero does not record who raises individual journals"));
         }       
 
