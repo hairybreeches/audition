@@ -16,25 +16,21 @@ namespace Xero
         private readonly XeroSlurper slurper;
         private XeroApiPublicSession xeroApiPublicSession;
         private readonly Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory;
-        private const string UserAgent = "Audition";
-        private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
-        private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
+        private readonly Func<XeroApiPublicSession> sessionFactory;
+        
 
 
-        public RepositoryFactory(XeroSlurper slurper, Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory)
+        public RepositoryFactory(XeroSlurper slurper, Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory, Func<XeroApiPublicSession> sessionFactory)
         {
             this.slurper = slurper;
             this.xeroJournalSourceFactory = xeroJournalSourceFactory;
+            this.sessionFactory = sessionFactory;
             CreateNewSession();
         }
 
         private void CreateNewSession()
         {
-            xeroApiPublicSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
-                new InMemoryTokenRepository())
-            {
-                MessageLogger = new DebugMessageLogger()
-            };
+            xeroApiPublicSession = sessionFactory();
         }
 
         public void Logout()
