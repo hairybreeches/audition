@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Model.Accounting;
+using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;

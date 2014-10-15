@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Model;
 using Model.Accounting;
+using Model.Searching;
 using NodaTime;
 using NSubstitute;
 using NUnit.Framework;

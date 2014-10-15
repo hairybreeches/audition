@@ -3,6 +3,7 @@ using System.Data.Odbc;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Model.Searching;
 
 namespace Sage50
 {

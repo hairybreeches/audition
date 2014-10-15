@@ -7,6 +7,7 @@ using DevDefined.OAuth.Framework;
 using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
 using Model;
+using Model.Searching;
 using XeroApi;
 using XeroApi.Model;
 using XeroApi.OAuth;
