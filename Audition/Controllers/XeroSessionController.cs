@@ -5,20 +5,18 @@ using System.Web.Http.Results;
 using Audition.Chromium;
 using Audition.Session;
 using Model;
-using Model.Searching;
-using Model.SearchWindows;
 using Xero;
 
 namespace Audition.Controllers
 {
     public class XeroSessionController : RedirectController
     {
-        private readonly IRepositoryFactory repositoryFactory;
+        private readonly XeroSearcherFactory searcherFactory;
         private readonly LoginSession session;
 
-        public XeroSessionController(IRepositoryFactory repositoryFactory, LoginSession session)
+        public XeroSessionController(XeroSearcherFactory searcherFactory, LoginSession session)
         {
-            this.repositoryFactory = repositoryFactory;
+            this.searcherFactory = searcherFactory;
             this.session = session;
         }
 
@@ -26,7 +24,7 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogin)]
         public IHttpActionResult BeginAuthenticate()
         {
-            repositoryFactory.InitialiseAuthenticationRequest();
+            searcherFactory.InitialiseAuthenticationRequest();
             return RedirectToView("xerocompletelogin.html");
         }
         
@@ -36,24 +34,22 @@ namespace Audition.Controllers
         {
             try
             {
-                repositoryFactory.CompleteAuthenticationRequest(verificationCode.Code);
+                session.Login(await searcherFactory.CreateXeroJournalSearcher(verificationCode.Code));
             }
             catch (IncorrectLoginDetailsException e)
             {
                 return InternalServerError(e);
-            }            
-            var repository = await repositoryFactory.CreateRepository();
-
-            session.Login(JournalSearcher.XeroJournalSearcher(repository));
-
+            }
             return Ok();
         }
+
+        
 
         [HttpGet]
         [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
-            repositoryFactory.Logout();
+            searcherFactory.Logout();
             session.Logout();
             return RedirectToView("login.html");
         }

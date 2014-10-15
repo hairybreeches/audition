@@ -1,6 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Audition;
+using Audition.Controllers;
+using Autofac;
 using Model;
 using Model.Accounting;
 using Model.Searching;
@@ -15,8 +18,15 @@ namespace Tests.Mocks
     {
         public static IJournalSearcher JournalSearcher(params Journal[] journals)
         {
-            var repository = Repository(journals);
-            return Model.Searching.JournalSearcher.XeroJournalSearcher(repository);
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<AuditionModule>();
+
+            var factory = RepositoryFactory(journals);
+            builder.Register(_ => factory).As<IRepositoryFactory>();
+            using (var lifetime = builder.Build())
+            {
+                return lifetime.Resolve<XeroSearcherFactory>().CreateXeroJournalSearcher("").Result;
+            }
         }
 
         public static Journal JournalPostedAt(LocalTime journalTime)

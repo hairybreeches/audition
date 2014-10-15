@@ -163,9 +163,9 @@ namespace Tests.SearcherTests
             var mockXeroJournalSource = Substitute.For<IXeroJournalSource>();
             mockXeroJournalSource.Journals.Returns(new[] {journal}.AsQueryable());
 
-            var factory = new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource);
-            
-            var searcher = JournalSearcher.XeroJournalSearcher(factory.CreateRepository().Result);
+            var factory = new XeroSearcherFactory(new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource));
+
+            var searcher = factory.CreateXeroJournalSearcher("steve").Result;
 
             var resultsOfSearch = searcher.FindJournalsWithin(window);
             return resultsOfSearch;
