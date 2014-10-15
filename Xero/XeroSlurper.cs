@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.Accounting;
-using XeroApi;
 
 namespace Xero
 {
-    public class XeroSlurper
+    internal class XeroSlurper
     {
         public async Task<IEnumerable<Journal>> Slurp(IXeroJournalSource repository)
         {
