@@ -14,13 +14,13 @@ namespace Xero
     internal class RepositoryFactory : IRepositoryFactory
     {
         private readonly XeroSlurper slurper;
-        private XeroApiPublicSession xeroApiPublicSession;
-        private readonly Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory;
-        private readonly Func<XeroApiPublicSession> sessionFactory;
-        
+        private IXeroSession xeroApiPublicSession;
+        private readonly Func<IXeroSession, IXeroJournalSource> xeroJournalSourceFactory;
+        private readonly Func<IXeroSession> sessionFactory;
 
 
-        public RepositoryFactory(XeroSlurper slurper, Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory, Func<XeroApiPublicSession> sessionFactory)
+
+        public RepositoryFactory(XeroSlurper slurper, Func<IXeroSession, IXeroJournalSource> xeroJournalSourceFactory, Func<IXeroSession> sessionFactory)
         {
             this.slurper = slurper;
             this.xeroJournalSourceFactory = xeroJournalSourceFactory;

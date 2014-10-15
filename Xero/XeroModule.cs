@@ -13,6 +13,7 @@ namespace Xero
             builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>().SingleInstance().AsSelf();
             builder.RegisterType<XeroSlurper>();
             builder.RegisterType<XeroSearcherFactory>();
+            builder.RegisterType<XeroSession>().As<IXeroSession>();
             builder.RegisterType<XeroJournalSource>().As<IXeroJournalSource>();
             builder.Register(GetSession);
         }

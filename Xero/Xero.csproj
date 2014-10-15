@@ -52,12 +52,14 @@
   <ItemGroup>
     <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="IXeroJournalSource.cs" />
+    <Compile Include="IXeroSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSource.cs" />
     <Compile Include="XeroModule.cs" />
     <Compile Include="XeroSearcherFactory.cs" />
+    <Compile Include="XeroSession.cs" />
     <Compile Include="XeroSlurper.cs" />
     <Compile Include="XeroVerificationCode.cs" />
   </ItemGroup>
