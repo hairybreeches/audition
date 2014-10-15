@@ -13,10 +13,10 @@ namespace Tests.Mocks
 {
     public static class Mock
     {
-        public static XeroJournalSearcher JournalSearcher(params Journal[] journals)
+        public static JournalSearcher JournalSearcher(params Journal[] journals)
         {
             var repository = Repository(journals);
-            return new XeroJournalSearcher(repository);
+            return new JournalSearcher(repository);
         }
 
         public static Journal JournalPostedAt(LocalTime journalTime)
