@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
+using NSubstitute;
 using NUnit.Framework;
 using Xero;
 using XeroApi.Model;
@@ -158,8 +159,12 @@ namespace Tests.SearcherTests
             var period = new DateRange(DateTime.MinValue, DateTime.MaxValue);
             var window = new SearchWindow<WorkingHours>(hours, period);
 
-            var repository = new RepositoryWrapper(new[] {journal});
-            var searcher = new XeroJournalSearcher(repository);
+            var mockXeroJournalSource = Substitute.For<IXeroJournalSource>();
+            mockXeroJournalSource.Journals.Returns(new[] {journal}.AsQueryable());
+
+            var factory = new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource);
+            
+            var searcher = new XeroJournalSearcher(factory.CreateRepository().Result);
 
             var resultsOfSearch = searcher.FindJournalsWithin(window);
             return resultsOfSearch;

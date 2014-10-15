@@ -52,13 +52,14 @@
   <ItemGroup>
     <Compile Include="AccountsLookup.cs" />
     <Compile Include="IdEqualityComparer.cs" />
-    <Compile Include="IFullRepository.cs" />
     <Compile Include="IRepositoryFactory.cs" />
+    <Compile Include="IXeroJournalSource.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryWrapper.cs" />
+    <Compile Include="JournalRepository.cs" />
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSearcher.cs" />
+    <Compile Include="XeroJournalSource.cs" />
     <Compile Include="XeroModule.cs" />
     <Compile Include="XeroSlurper.cs" />
     <Compile Include="XeroVerificationCode.cs" />

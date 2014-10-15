@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using XeroApi.Model;
+using Model.Accounting;
 
 namespace Xero
 {
@@ -26,7 +26,7 @@ namespace Xero
 
         private void Add(Journal journal)
         {
-            foreach (var line in journal.JournalLines)
+            foreach (var line in journal.Lines)
             {
                 Add(line.AccountCode, journal);
             }

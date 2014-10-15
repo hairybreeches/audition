@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using XeroApi;
-using XeroApi.Model;
+using Model.Accounting;
 
 namespace Xero
 {
-    public class RepositoryWrapper : IFullRepository
+    public class JournalRepository
     {
         public IEnumerable<Journal> Journals { get; private set; }
 
-        public RepositoryWrapper(IEnumerable<Journal> journals)
+        public JournalRepository(IEnumerable<Journal> journals)
         {
             Journals = journals.ToList();
         }

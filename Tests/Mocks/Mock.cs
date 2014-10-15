@@ -74,11 +74,9 @@ namespace Tests.Mocks
             return factory;
         }
 
-        private static IFullRepository Repository(params Journal[] journals)
+        private static JournalRepository Repository(params Journal[] journals)
         {
-            var repository = Substitute.For<IFullRepository>();
-            repository.Journals.Returns(journals.Select(x => JournalExtensions.ToXeroJournal(x)).AsQueryable());
-            return repository;
+            return new JournalRepository(journals);
         }
     }
 }

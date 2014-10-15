@@ -5,7 +5,7 @@ namespace Xero
 {
     public interface IRepositoryFactory
     {
-        Task<IFullRepository> CreateRepository();
+        Task<JournalRepository> CreateRepository();
         void CompleteAuthenticationRequest(string verificationCode);
         void InitialiseAuthenticationRequest();
         void Logout();

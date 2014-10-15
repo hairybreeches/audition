@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,14 +17,16 @@ namespace Xero
     {
         private readonly XeroSlurper slurper;
         private XeroApiPublicSession xeroApiPublicSession;
+        private readonly Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory;
         private const string UserAgent = "Audition";
         private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
         private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
 
 
-        public RepositoryFactory(XeroSlurper slurper)
+        public RepositoryFactory(XeroSlurper slurper, Func<XeroApiPublicSession, IXeroJournalSource> xeroJournalSourceFactory)
         {
             this.slurper = slurper;
+            this.xeroJournalSourceFactory = xeroJournalSourceFactory;
             CreateNewSession();
         }
 
@@ -41,11 +44,11 @@ namespace Xero
             CreateNewSession();
         }
 
-        public async Task<IFullRepository> CreateRepository()
+        public async Task<JournalRepository> CreateRepository()
         {
-            var repository = new Repository(xeroApiPublicSession);
+            var repository = xeroJournalSourceFactory(xeroApiPublicSession);
             var journals = await slurper.Slurp(repository);
-            return new RepositoryWrapper(journals.ToList());
+            return new JournalRepository(journals.ToList());
         }
 
         public void CompleteAuthenticationRequest(string verificationCode)

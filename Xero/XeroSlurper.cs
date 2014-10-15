@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Model.Accounting;
 using XeroApi;
-using XeroApi.Model;
 
 namespace Xero
 {
     public class XeroSlurper
     {
-        public async Task<IEnumerable<Journal>> Slurp(Repository repository)
+        public async Task<IEnumerable<Journal>> Slurp(IXeroJournalSource repository)
         {
             var lastTaken = 0;
-            var journals = new List<Journal>();
+            var journals = new List<XeroApi.Model.Journal>();
             for (var i = 0; i < 30; i++)
             {
                 
@@ -24,12 +24,12 @@ namespace Xero
                 lastTaken = (int) journals.Last().JournalNumber;
             }
 
-            return journals;
+            return journals.Select(x=>x.ToModelJournal());
         }
 
-        private static Task<IEnumerable<Journal>> GetBatch(Repository repository, int lastTaken)
+        private static Task<List<XeroApi.Model.Journal>> GetBatch(IXeroJournalSource repository, int lastTaken)
         {
-            return Task.Run(() => (IEnumerable<Journal>) repository.Journals.Skip(lastTaken).ToList());
+            return Task.Run(() => repository.Journals.Skip(lastTaken).ToList());
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using XeroApi.Model;
+using Model.Accounting;
 
 namespace Xero
 {
@@ -7,12 +7,12 @@ namespace Xero
     {
         public bool Equals(Journal x, Journal y)
         {
-            return x.JournalID.Equals(y.JournalID);
+            return x.Id.Equals(y.Id);
         }
 
         public int GetHashCode(Journal obj)
         {
-            return obj.JournalID.GetHashCode();
+            return obj.Id.GetHashCode();
         }
     }
 }
