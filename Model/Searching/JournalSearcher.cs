@@ -23,18 +23,7 @@ namespace Model.Searching
             this.roundNumberSearcher = roundNumberSearcher;
             this.keywordSearcher = keywordSearcher;
             this.userSearcher = userSearcher;
-        }
-
-        public static IJournalSearcher XeroJournalSearcher(JournalRepository repository)
-        {
-            return new JournalSearcher(
-                new WorkingHoursSearcher(repository), 
-                new YearEndSearcher(repository), 
-                new UnusualAccountsSearcher(repository), 
-                new RoundNumberSearcher(repository),
-                new NotSupportedSearcher<KeywordParameters>("Xero does not have the concept of descriptions"), 
-                new NotSupportedSearcher<UserParameters>("Xero does not record who raises individual journals"));
-        }
+        }       
         
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {

@@ -9,6 +9,7 @@ namespace Xero
         {
             builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>().SingleInstance().AsSelf();
             builder.RegisterType<XeroSlurper>();
+            builder.RegisterType<XeroSearcherFactory>();
             builder.RegisterType<XeroJournalSource>().As<IXeroJournalSource>();
         }
     }
