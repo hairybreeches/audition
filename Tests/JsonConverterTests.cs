@@ -1,5 +1,6 @@
 ﻿using System;
 using Audition.Chromium;
+using Audition.Requests;
 using Autofac;
 using Model;
 using Model.SearchWindows;

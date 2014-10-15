@@ -1,7 +1,8 @@
-﻿using System;
+using System;
+using Model;
 using Model.SearchWindows;
 
-namespace Model
+namespace Audition.Requests
 {
     public class ExportRequest<T>
     {
