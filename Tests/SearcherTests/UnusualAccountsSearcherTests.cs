@@ -16,9 +16,9 @@ namespace Tests.SearcherTests
         public void ReturnsOnlyJournalsPostedToLessUsedAccounts()
         {
             //given one journal which includes a line to a rare account (one posting)
-            var journalPostedToUncommonAccount = Mock.JournalPostedTo("b", "e");
+            var journalPostedToUncommonAccount = CreateJournal.PostedTo("b", "e");
             //and several to accounts with >= 2 postings
-            var searcher = CreateSearcher(Mock.JournalPostedTo("a", "b"), Mock.JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = CreateSearcher(CreateJournal.PostedTo("a", "b"), CreateJournal.PostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -35,10 +35,10 @@ namespace Tests.SearcherTests
         public void DoesNotReturnDuplicatesWhenJournalsPostedToTwoUnusualAccounts()
         {
             //given one journal which includes a line to two rare accounts (just one posting each)
-            var journalPostedToUncommonAccount = Mock.JournalPostedTo("d", "e");
+            var journalPostedToUncommonAccount = CreateJournal.PostedTo("d", "e");
 
             //and several to accounts with >= 2 postings
-            var searcher = CreateSearcher(Mock.JournalPostedTo("a", "b"), Mock.JournalPostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = CreateSearcher(CreateJournal.PostedTo("a", "b"), CreateJournal.PostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -55,7 +55,7 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalsOutsideThePeriod()
         {
             //given one journal which includes a line to two rare accounts, but does not apply to the period
-            var journal = Mock.JournalPostedTo("d", "e", new DateTime(2000, 4, 5));                
+            var journal = CreateJournal.PostedTo("d", "e", new DateTime(2000, 4, 5));                
 
             //and a search window for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -74,12 +74,12 @@ namespace Tests.SearcherTests
         public void JournalsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
         {
             //given one journal inside the period to an account
-            var journal = Mock.JournalPostedTo("a", "b", new DateTime(1999, 1, 1));
+            var journal = CreateJournal.PostedTo("a", "b", new DateTime(1999, 1, 1));
             //and a load posted to the same account, but outside the period
             var searcher = CreateSearcher(journal, 
-                Mock.JournalPostedTo("a", "b", new DateTime(2000,1,1)),
-                Mock.JournalPostedTo("a", "b", new DateTime(1998,12,31)),
-                Mock.JournalPostedTo("a", "b", new DateTime(2000,1,1)));
+                CreateJournal.PostedTo("a", "b", new DateTime(2000,1,1)),
+                CreateJournal.PostedTo("a", "b", new DateTime(1998,12,31)),
+                CreateJournal.PostedTo("a", "b", new DateTime(2000,1,1)));
 
 
             //and a search window for journals to accounts with <2 postings

@@ -20,8 +20,8 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
         {
-            var journalApplyingToPostYearEnd = Mock.JournalForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
-            var journalApplyingToPreYearstart = Mock.JournalForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
+            var journalApplyingToPostYearEnd = CreateJournal.ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
+            var journalApplyingToPreYearstart = CreateJournal.ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
 
             var searcher = CreateSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
@@ -32,7 +32,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWithALineOfZeroValue()
         {
-            var journalForZero = Mock.JournalForAmount(InPeriod, InPeriod, 0);
+            var journalForZero = CreateJournal.ForAmount(InPeriod, InPeriod, 0);
             var searcher = CreateSearcher(journalForZero);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
             CollectionAssert.IsEmpty(result);
@@ -42,7 +42,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalForRoundAmount()
         {
-            var journalForRoundAmount = Mock.JournalForAmount(InPeriod, InPeriod, 1000);
+            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 1000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
@@ -51,7 +51,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalWithExactlyTheRightAmountOfZeroes()
         {
-            var journalForRoundAmount = Mock.JournalForAmount(InPeriod, InPeriod, 1000);
+            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 1000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ));
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
@@ -61,7 +61,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalWithOneTooFewZeroes()
         {
-            var journalForRoundAmount = Mock.JournalForAmount(InPeriod, InPeriod, 10000);
+            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 10000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ));
             CollectionAssert.IsEmpty(result);
