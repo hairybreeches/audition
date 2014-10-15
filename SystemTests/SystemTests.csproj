@@ -69,6 +69,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="XeroApi, Version=1.1.0.33, Culture=neutral, PublicKeyToken=3de03a85ae0f7251, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\XeroAPI.Net.1.1.0.33\lib\XeroApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LifetimeExtensions.cs" />
