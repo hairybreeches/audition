@@ -53,7 +53,7 @@ namespace Tests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
-            builder.Register(_ => Substitute.For<IRepositoryFactory>());
+            builder.Register(_ => Substitute.For<IXeroSession>());
             return builder;
         }
 
