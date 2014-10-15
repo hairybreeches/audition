@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
@@ -9,78 +8,62 @@ namespace Model.Searching
 {
     public class JournalSearcher : IJournalSearcher
     {
-        private readonly JournalRepository repository;
+        private readonly IJournalSearcher<WorkingHours> hoursSearcher;
+        private readonly IJournalSearcher<YearEndParameters> yearEndSearcher;
+        private readonly IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher;
+        private readonly IJournalSearcher<EndingParameters> roundNumberSearcher;
+        private readonly IJournalSearcher<KeywordParameters> keywordSearcher;
+        private readonly IJournalSearcher<UserParameters> userSearcher;
 
-        public JournalSearcher(JournalRepository repository)
+        public JournalSearcher(IJournalSearcher<WorkingHours> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<KeywordParameters> keywordSearcher, IJournalSearcher<UserParameters> userSearcher)
         {
-            this.repository = repository;
+            this.hoursSearcher = hoursSearcher;
+            this.yearEndSearcher = yearEndSearcher;
+            this.unusualAccountsSearcher = unusualAccountsSearcher;
+            this.roundNumberSearcher = roundNumberSearcher;
+            this.keywordSearcher = keywordSearcher;
+            this.userSearcher = userSearcher;
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
+        public static IJournalSearcher XeroJournalSearcher(JournalRepository repository)
         {
-            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
-
-            return periodJournals.Where(x => Matches(x, searchWindow.Parameters));
+            return new JournalSearcher(
+                new WorkingHoursSearcher(repository), 
+                new YearEndSearcher(repository), 
+                new UnusualAccountsSearcher(repository), 
+                new RoundNumberSearcher(repository),
+                new NotSupportedSearcher<KeywordParameters>("Xero does not have the concept of descriptions"), 
+                new NotSupportedSearcher<UserParameters>("Xero does not record who raises individual journals"));
         }
-
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
-        {
-            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
-            var lookup = new AccountsLookup(periodJournals);
-            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
-        }
-
+        
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {
-            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
-
-            var startOfSearchPeriod = searchWindow.CreationStartDate();
-            return periodJournals.Where(x => x.Created >= startOfSearchPeriod);            
-        }
-
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
-        {
-            throw new NotSupportedException("Xero does not record who raises individual journals");
+            return yearEndSearcher.FindJournalsWithin(searchWindow);
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<KeywordParameters> searchWindow)
         {
-            throw new NotSupportedException("Xero does not have the concept of descriptions");
+            return keywordSearcher.FindJournalsWithin(searchWindow);
         }
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
         {
-            var periodJournals = GetJournalsApplyingTo(searchWindow.Period).ToList();
-            var magnitude = searchWindow.Parameters.Magnitude();
-            return periodJournals.Where(journal => HasRoundLine(journal, magnitude));
+            return roundNumberSearcher.FindJournalsWithin(searchWindow);
         }
 
-        private bool HasRoundLine(Journal journal, int magnitude)
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            return journal.Lines.Any(line => ContainsRoundValue(line, magnitude));
+            return unusualAccountsSearcher.FindJournalsWithin(searchWindow);
         }
 
-        private bool ContainsRoundValue(JournalLine line, int magnitude)
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
         {
-            return IsRound(line.Amount, magnitude)
-                   || IsRound(line.Amount, magnitude)
-                   || IsRound(line.Amount, magnitude);
+            return userSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public bool IsRound(decimal amount, int magnitude)
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
         {
-            var pence = amount*100;
-            return pence !=0 && pence%magnitude == 0;
-        }
-
-        private static bool Matches(Journal x, WorkingHours workingHours)
-        {
-            return !workingHours.Contains(x.Created);
-        }
-
-        private IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
-        {
-            return repository.Journals.ToList().Where(x => period.Contains(x.JournalDate));
+            return hoursSearcher.FindJournalsWithin(searchWindow);
         }
     }
 }

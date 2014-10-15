@@ -165,7 +165,7 @@ namespace Tests.SearcherTests
 
             var factory = new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource);
             
-            var searcher = new JournalSearcher(factory.CreateRepository().Result);
+            var searcher = JournalSearcher.XeroJournalSearcher(factory.CreateRepository().Result);
 
             var resultsOfSearch = searcher.FindJournalsWithin(window);
             return resultsOfSearch;
