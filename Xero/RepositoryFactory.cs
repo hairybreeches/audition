@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,13 +7,11 @@ using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
 using Model;
 using Model.Searching;
-using XeroApi;
-using XeroApi.Model;
 using XeroApi.OAuth;
 
 namespace Xero
 {
-    public class RepositoryFactory : IRepositoryFactory
+    internal class RepositoryFactory : IRepositoryFactory
     {
         private readonly XeroSlurper slurper;
         private XeroApiPublicSession xeroApiPublicSession;

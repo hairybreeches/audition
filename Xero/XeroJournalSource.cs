@@ -4,7 +4,7 @@ using XeroApi.Model;
 
 namespace Xero
 {
-    public class XeroJournalSource : IXeroJournalSource
+    internal class XeroJournalSource : IXeroJournalSource
     {
         private readonly Repository repository;
 
