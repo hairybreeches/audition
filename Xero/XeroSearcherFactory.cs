@@ -15,7 +15,7 @@ namespace Xero
 
         public async Task<IJournalSearcher> CreateXeroJournalSearcher(string verificationCode)
         {
-            var repository = await repositoryFactory.CreateRepository();
+            var repository = await repositoryFactory.CreateRepository(verificationCode);
 
             return (IJournalSearcher)new JournalSearcher(
                 new WorkingHoursSearcher(repository),
