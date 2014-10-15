@@ -16,15 +16,10 @@ namespace Tests.Mocks
     {
         public static IRepositoryFactory RepositoryFactory(params Journal[] journals)
         {
-            var repository = Repository(journals);
+            var repository = new JournalRepository(journals);
             var factory = Substitute.For<IRepositoryFactory>();
             factory.CreateRepository(Arg.Any<string>()).Returns(Task.FromResult(repository));
             return factory;
-        }
-
-        private static JournalRepository Repository(params Journal[] journals)
-        {
-            return new JournalRepository(journals);
         }
 
         public static Journal JournalPostedAt(LocalTime journalTime)
