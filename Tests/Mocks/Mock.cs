@@ -1,27 +1,15 @@
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Audition.Controllers;
 using Model;
 using Model.Accounting;
-using Model.Searching;
 using NodaTime;
-using NSubstitute;
 using NUnit.Framework;
-using Xero;
 
 namespace Tests.Mocks
 {
     public static class Mock
     {
-        public static IRepositoryFactory RepositoryFactory(params Journal[] journals)
-        {
-            var repository = new JournalRepository(journals);
-            var factory = Substitute.For<IRepositoryFactory>();
-            factory.CreateRepository(Arg.Any<string>()).Returns(Task.FromResult(repository));
-            return factory;
-        }
-
         public static Journal JournalPostedAt(LocalTime journalTime)
         {
             return new Journal(Guid.NewGuid(),
