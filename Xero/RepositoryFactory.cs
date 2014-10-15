@@ -15,15 +15,13 @@ namespace Xero
     {
         private readonly XeroSlurper slurper;
         private IXeroSession xeroApiPublicSession;
-        private readonly Func<IXeroSession, IXeroJournalSource> xeroJournalSourceFactory;
         private readonly Func<IXeroSession> sessionFactory;
 
 
 
-        public RepositoryFactory(XeroSlurper slurper, Func<IXeroSession, IXeroJournalSource> xeroJournalSourceFactory, Func<IXeroSession> sessionFactory)
+        public RepositoryFactory(XeroSlurper slurper, Func<IXeroSession> sessionFactory)
         {
             this.slurper = slurper;
-            this.xeroJournalSourceFactory = xeroJournalSourceFactory;
             this.sessionFactory = sessionFactory;
             CreateNewSession();
         }
@@ -40,7 +38,7 @@ namespace Xero
 
         public async Task<JournalRepository> CreateRepository()
         {
-            var repository = xeroJournalSourceFactory(xeroApiPublicSession);
+            var repository = xeroApiPublicSession.GetJournalSource();
             var journals = await slurper.Slurp(repository);
             return new JournalRepository(journals.ToList());
         }

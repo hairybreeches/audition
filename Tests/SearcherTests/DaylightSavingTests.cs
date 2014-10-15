@@ -9,8 +9,8 @@ using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
-using NSubstitute;
 using NUnit.Framework;
+using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
 
@@ -161,12 +161,11 @@ namespace Tests.SearcherTests
             var period = new DateRange(DateTime.MinValue, DateTime.MaxValue);
             var window = new SearchWindow<WorkingHours>(hours, period);
 
-            var mockXeroJournalSource = Substitute.For<IXeroJournalSource>();
-            mockXeroJournalSource.Journals.Returns(new[] {journal}.AsQueryable());
 
             var builder = new ContainerBuilder();
             builder.RegisterModule<XeroModule>();
-            builder.Register(_ => mockXeroJournalSource);
+            builder.Register(_ => new MockXeroSession(journal)).As<IXeroSession>();
+
             using (var lifetime = builder.Build())
             {
                 var factory = lifetime.Resolve<XeroSearcherFactory>();                    
