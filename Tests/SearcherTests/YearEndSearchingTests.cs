@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Accounting;
+using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
-using Tests.Mocks;
 
 namespace Tests.SearcherTests
 {
     [TestFixture]
-    public class XeroDateSearchingTests
+    public class YearEndSearchingTests
     {
         private static readonly DateTime YearEnd = new DateTime(2012, 3, 31);
         private static readonly DateTime YearStart = YearEnd.Subtract(TimeSpan.FromDays(365));
@@ -27,7 +24,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalsPostedAfterYearEnd()
         {            
             var postYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.AddDays(1), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
-            var searcher = Mock.JournalSearcher(postYearEndJournal);            
+            var searcher = CreateSearcher(postYearEndJournal);            
             var result = searcher.FindJournalsWithin(SearchParameters);
             CollectionAssert.AreEquivalent(new []{postYearEndJournal}, result);
         }
@@ -36,7 +33,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalsPostedNearYearEnd()
         {            
             var nearYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
-            var searcher = Mock.JournalSearcher(nearYearEndJournal);            
+            var searcher = CreateSearcher(nearYearEndJournal);            
             var result = searcher.FindJournalsWithin(SearchParameters);
             CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
         }
@@ -45,7 +42,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalsPostedExactlyNumberOfDaysBeforeYearEnd()
         {            
             var nearYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
-            var searcher = Mock.JournalSearcher(nearYearEndJournal);            
+            var searcher = CreateSearcher(nearYearEndJournal);            
             var result = searcher.FindJournalsWithin(new SearchWindow<YearEndParameters>(new YearEndParameters(7),FinancialPeriod ));
             CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
         }
@@ -57,7 +54,7 @@ namespace Tests.SearcherTests
             var journalApplyingToPostYearEnd = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<JournalLine>());
             var journalApplyingToPreYearstart = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<JournalLine>());
 
-            var searcher = Mock.JournalSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
+            var searcher = CreateSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             var result = searcher.FindJournalsWithin(SearchParameters);
             CollectionAssert.IsEmpty(result);
         }
@@ -67,9 +64,14 @@ namespace Tests.SearcherTests
         {
             var journalNotNearEnoughToYearEnd = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(6)), YearEnd.Subtract(TimeSpan.FromDays(60)), Enumerable.Empty<JournalLine>());
 
-            var searcher = Mock.JournalSearcher(journalNotNearEnoughToYearEnd);
+            var searcher = CreateSearcher(journalNotNearEnoughToYearEnd);
             var result = searcher.FindJournalsWithin(SearchParameters);
             CollectionAssert.IsEmpty(result);
+        }
+
+        private static YearEndSearcher CreateSearcher(params Journal[] journals)
+        {
+            return new YearEndSearcher(new JournalRepository(journals));
         }
     }
 }
