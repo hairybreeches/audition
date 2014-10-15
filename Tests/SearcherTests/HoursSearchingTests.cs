@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
+using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
@@ -10,7 +11,7 @@ using Tests.Mocks;
 
 namespace Tests.SearcherTests
 {
-    public class XeroHoursSearchingTests
+    public class HoursSearchingTests
     {
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday, DayOfWeek.Sunday)]
@@ -18,7 +19,7 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = Mock.JournalPostedOn(dayOfWeek);
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
@@ -34,7 +35,7 @@ namespace Tests.SearcherTests
             DayOfWeek toDay)
         {
             var journal = Mock.JournalPostedOn(dayOfWeek);
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
@@ -47,7 +48,7 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = Mock.JournalPostedAt(journalTime);
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
@@ -60,7 +61,7 @@ namespace Tests.SearcherTests
         public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = Mock.JournalPostedAt(journalTime);
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
@@ -72,7 +73,7 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
             var journal = Mock.JournalAffecting(new DateTime(1991,1,1));
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
@@ -85,7 +86,7 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
         {
             var journal = Mock.JournalAffecting(new DateTime(1989,12,31,23,59,59));
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             var journalIds =
                 searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
@@ -99,7 +100,7 @@ namespace Tests.SearcherTests
         {
             //given a journal on the last day of the financial period
             var journal = Mock.JournalAffecting(new DateTime(1990, 12, 31, 23, 59, 59));
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             //and a period created just with the date, rather than the full datetime
             var journalIds =
@@ -115,7 +116,7 @@ namespace Tests.SearcherTests
         {
             //given a journal on the first day of the financial period
             var journal = Mock.JournalAffecting(new DateTime(1990, 1, 1, 0, 0, 0));
-            var searcher = Mock.JournalSearcher(journal);
+            var searcher = CreateSearcher(journal);
 
             //and a period created badly with a time on the first date
             var journalIds =
@@ -124,7 +125,7 @@ namespace Tests.SearcherTests
 
             //the journal should still be defined as being within the financial period
             CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
-        }
+        }        
 
         IEnumerable<TestCaseData> TimesInsideRange
         {
@@ -167,6 +168,11 @@ namespace Tests.SearcherTests
         private static SearchWindow<WorkingHours> CreateSearchWindow(WorkingHours workingHours)
         {
             return new SearchWindow<WorkingHours>(workingHours, new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
+        }
+
+        private static WorkingHoursSearcher CreateSearcher(params Journal[] journals)
+        {
+            return new WorkingHoursSearcher(new JournalRepository(journals));
         }
     }
 }
