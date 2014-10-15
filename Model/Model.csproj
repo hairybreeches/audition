@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IncorrectLoginDetailsException.cs" />
+    <Compile Include="Searching\AccountsLookup.cs" />
     <Compile Include="Searching\IdEqualityComparer.cs" />
     <Compile Include="Searching\IJournalSearcher.cs" />
     <Compile Include="Searching\JournalRepository.cs" />

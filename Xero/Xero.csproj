@@ -50,7 +50,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountsLookup.cs" />
     <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="IXeroJournalSource.cs" />
     <Compile Include="RepositoryFactory.cs" />
