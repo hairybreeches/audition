@@ -36,14 +36,15 @@ namespace Xero
             CreateNewSession();
         }
 
-        public async Task<JournalRepository> CreateRepository()
+        public async Task<JournalRepository> CreateRepository(string verificationCode)
         {
+            CompleteAuthenticationRequest(verificationCode);
             var repository = xeroApiPublicSession.GetJournalSource();
             var journals = await slurper.Slurp(repository);
             return new JournalRepository(journals.ToList());
         }
 
-        public void CompleteAuthenticationRequest(string verificationCode)
+        private void CompleteAuthenticationRequest(string verificationCode)
         {
             try
             {

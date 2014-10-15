@@ -29,6 +29,19 @@ namespace Tests.Mocks
             }
         }
 
+        public static IRepositoryFactory RepositoryFactory(params Journal[] journals)
+        {
+            var repository = Repository(journals);
+            var factory = Substitute.For<IRepositoryFactory>();
+            factory.CreateRepository(Arg.Any<string>()).Returns(Task.FromResult(repository));
+            return factory;
+        }
+
+        private static JournalRepository Repository(params Journal[] journals)
+        {
+            return new JournalRepository(journals);
+        }
+
         public static Journal JournalPostedAt(LocalTime journalTime)
         {
             return new Journal(Guid.NewGuid(),
@@ -75,19 +88,6 @@ namespace Tests.Mocks
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
             return new Journal(Guid.NewGuid(), creationDate, journalDate, new []{ new JournalLine("a", "a", JournalType.Cr, amountOfPounds), new JournalLine("b", "b", JournalType.Dr, amountOfPounds)});
-        }
-
-        public static IRepositoryFactory RepositoryFactory(params Journal[] journals)
-        {
-            var repository = Repository(journals);
-            var factory = Substitute.For<IRepositoryFactory>();
-            factory.CreateRepository().Returns(Task.FromResult(repository));
-            return factory;
-        }
-
-        private static JournalRepository Repository(params Journal[] journals)
-        {
-            return new JournalRepository(journals);
         }
     }
 }
