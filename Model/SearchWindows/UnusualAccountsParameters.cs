@@ -1,6 +1,3 @@
-using Model.Time;
-using NodaTime;
-
 namespace Model.SearchWindows
 {
     public class UnusualAccountsParameters

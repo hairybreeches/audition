@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Http.Dependencies;
+﻿using System.Web.Http.Dependencies;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CefSharp;
@@ -9,7 +8,6 @@ using NLog;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using NodaTime.Text;
-using NodaTime.TimeZones;
 
 namespace Audition.Chromium
 {

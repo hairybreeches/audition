@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Model;
 using Model.Accounting;
 using Journal = XeroApi.Model.Journal;
 using JournalLine = XeroApi.Model.JournalLine;

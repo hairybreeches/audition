@@ -1,7 +1,6 @@
 ﻿using System;
-using Audition.Controllers;
-using Autofac;
 using System.Windows.Forms;
+using Autofac;
 
 namespace Audition
 {
