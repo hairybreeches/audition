@@ -90,6 +90,7 @@
     <Compile Include="LoginSessionTests.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\Mock.cs" />
+    <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
     <Compile Include="SearcherTests\XeroAccountsSearchingTests.cs" />

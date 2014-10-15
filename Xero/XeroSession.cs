@@ -1,3 +1,4 @@
+using XeroApi;
 using XeroApi.OAuth;
 
 namespace Xero
@@ -24,6 +25,11 @@ namespace Xero
         public string GetUserAuthorizationUrl()
         {
             return session.GetUserAuthorizationUrl();
+        }
+
+        public IXeroJournalSource GetJournalSource()
+        {
+            return new XeroJournalSource(new Repository(session));
         }
     }
 }
