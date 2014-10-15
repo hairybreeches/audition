@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Audition.Chromium;
 using Audition.Native;
 using Autofac;
-using Microsoft.Owin.FileSystems;
 using Model.Accounting;
 using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
-using Journal = Model.Accounting.Journal;
 using JournalLine = Model.Accounting.JournalLine;
 
 namespace SystemTests

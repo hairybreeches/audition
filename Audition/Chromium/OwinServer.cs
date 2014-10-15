@@ -1,14 +1,11 @@
 using System;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
-using NodaTime.Serialization.JsonNet;
-using NodaTime.TimeZones;
 using Owin;
 
 namespace Audition.Chromium

@@ -3,8 +3,6 @@ using Audition;
 using Audition.Controllers;
 using Audition.Session;
 using Autofac;
-using Autofac.Core;
-using Model;
 using Model.SearchWindows;
 using Model.Time;
 using NSubstitute;

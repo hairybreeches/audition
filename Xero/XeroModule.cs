@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using DevDefined.OAuth.Logging;
 using DevDefined.OAuth.Storage.Basic;
-using Model;
 using XeroApi.OAuth;
 
 namespace Xero

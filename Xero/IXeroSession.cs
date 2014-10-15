@@ -1,5 +1,3 @@
-using DevDefined.OAuth.Storage.Basic;
-
 namespace Xero
 {
     public interface IXeroSession

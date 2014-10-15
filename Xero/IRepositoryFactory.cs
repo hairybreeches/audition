@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Model;
 using Model.Searching;
-using XeroApi;
 
 namespace Xero
 {

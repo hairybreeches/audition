@@ -1,6 +1,4 @@
-﻿using Model;
-using Model.Searching;
-using Xero;
+﻿using Model.Searching;
 
 namespace Audition.Session
 {
