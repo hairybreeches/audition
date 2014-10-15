@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
@@ -163,12 +164,16 @@ namespace Tests.SearcherTests
             var mockXeroJournalSource = Substitute.For<IXeroJournalSource>();
             mockXeroJournalSource.Journals.Returns(new[] {journal}.AsQueryable());
 
-            var factory = new XeroSearcherFactory(new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource));
-
-            var searcher = factory.CreateXeroJournalSearcher("steve").Result;
-
-            var resultsOfSearch = searcher.FindJournalsWithin(window);
-            return resultsOfSearch;
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<XeroModule>();
+            builder.Register(_ => mockXeroJournalSource);
+            using (var lifetime = builder.Build())
+            {
+                var factory = lifetime.Resolve<XeroSearcherFactory>();                    
+                var searcher = factory.CreateXeroJournalSearcher("steve").Result;
+                var resultsOfSearch = searcher.FindJournalsWithin(window);
+                return resultsOfSearch;
+            }
         }
 
         private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, string name)
