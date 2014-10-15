@@ -5,6 +5,7 @@ using System.Web.Http.Results;
 using Audition.Chromium;
 using Audition.Session;
 using Model;
+using Model.Searching;
 using Xero;
 
 namespace Audition.Controllers
@@ -41,7 +42,7 @@ namespace Audition.Controllers
                 return InternalServerError(e);
             }            
             var repository = await repositoryFactory.CreateRepository();
-            session.Login(new XeroJournalSearcher(repository));
+            session.Login(new JournalSearcher(repository));
             return Ok();
         }
 

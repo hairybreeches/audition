@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
@@ -164,7 +165,7 @@ namespace Tests.SearcherTests
 
             var factory = new RepositoryFactory(new XeroSlurper(), _ => mockXeroJournalSource);
             
-            var searcher = new XeroJournalSearcher(factory.CreateRepository().Result);
+            var searcher = new JournalSearcher(factory.CreateRepository().Result);
 
             var resultsOfSearch = searcher.FindJournalsWithin(window);
             return resultsOfSearch;

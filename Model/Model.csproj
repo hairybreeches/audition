@@ -55,6 +55,7 @@
     <Compile Include="Searching\IdEqualityComparer.cs" />
     <Compile Include="Searching\IJournalSearcher.cs" />
     <Compile Include="Searching\JournalRepository.cs" />
+    <Compile Include="Searching\JournalSearcher.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\KeywordParameters.cs" />

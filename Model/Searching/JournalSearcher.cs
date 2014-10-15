@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
 using Model.Accounting;
-using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 
-namespace Xero
+namespace Model.Searching
 {
-    public class XeroJournalSearcher : IJournalSearcher
+    public class JournalSearcher : IJournalSearcher
     {
         private readonly JournalRepository repository;
 
-        public XeroJournalSearcher(JournalRepository repository)
+        public JournalSearcher(JournalRepository repository)
         {
             this.repository = repository;
         }
