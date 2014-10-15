@@ -90,22 +90,7 @@ namespace Audition.Controllers
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
             return await Export(journals, saveRequest.SerialisationOptions);
-        } 
-        
-        [HttpPost]
-        [Route(Routing.KeywordSearch)]
-        public IEnumerable<Journal> KeywordSearch(SearchWindow<KeywordParameters> searchWindow)
-        {
-            return Searcher.FindJournalsWithin(searchWindow);
         }
-        
-        [HttpPost]
-        [Route(Routing.KeywordExport)]
-        public async Task<IHttpActionResult> KeywordExport(ExportRequest<KeywordParameters> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
-        }     
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
