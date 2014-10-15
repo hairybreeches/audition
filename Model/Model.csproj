@@ -52,12 +52,14 @@
   <ItemGroup>
     <Compile Include="ExportRequest.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
+    <Compile Include="Searching\IdEqualityComparer.cs" />
+    <Compile Include="Searching\IJournalSearcher.cs" />
+    <Compile Include="Searching\JournalRepository.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\KeywordParameters.cs" />
     <Compile Include="SearchWindows\SearchWindowExtensions.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
-    <Compile Include="IJournalSearcher.cs" />
     <Compile Include="Accounting\InvalidJournalException.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />

@@ -5,6 +5,7 @@ using System.Data.Odbc;
 using System.Linq;
 using Model;
 using Model.Accounting;
+using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using Sage50.Parsing;

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Model.Accounting;
 
-namespace Xero
+namespace Model.Searching
 {
     public class IdEqualityComparer : IEqualityComparer<Journal>
     {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model;
 using Model.Accounting;
+using Model.Searching;
 
 namespace Xero
 {
