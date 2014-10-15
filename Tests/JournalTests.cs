@@ -17,7 +17,7 @@ namespace Tests
                 JournalID = Guid.Empty,
                 CreatedDateUTC = new DateTime(),
                 JournalDate = new DateTime(),
-                JournalLines = new JournalLines()
+                JournalLines = new JournalLines
                 {
                     new XeroApi.Model.JournalLine
                     {

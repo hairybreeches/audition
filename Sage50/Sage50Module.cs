@@ -8,11 +8,12 @@ namespace Sage50
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SearcherFactory>();
-            builder.RegisterType<Sage50JournalSearcher>();
+            builder.RegisterType<Sage50SearcherFactory>();
             builder.RegisterType<JournalSchema>();
             builder.RegisterType<JournalReader>();
             builder.RegisterType<JournalLineParser>();
+            builder.RegisterType<Sage50RepositoryFactory>();
+            builder.RegisterType<Sage50ConnectionFactory>();
         }
     }
 }

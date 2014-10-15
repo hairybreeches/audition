@@ -8,9 +8,9 @@ namespace Audition.Controllers
     public class Sage50SessionController : RedirectController
     {
         private readonly LoginSession session;
-        private readonly SearcherFactory factory;
+        private readonly Sage50SearcherFactory factory;
 
-        public Sage50SessionController(LoginSession session, SearcherFactory factory)
+        public Sage50SessionController(LoginSession session, Sage50SearcherFactory factory)
         {
             this.session = session;
             this.factory = factory;
