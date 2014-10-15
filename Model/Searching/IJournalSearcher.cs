@@ -5,6 +5,11 @@ using Model.Time;
 
 namespace Model.Searching
 {
+    public interface IJournalSearcher<T>
+    {
+        IEnumerable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow);
+    }
+
     public interface IJournalSearcher
     {
         IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow);
