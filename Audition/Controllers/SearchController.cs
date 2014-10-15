@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Native;
+using Audition.Requests;
 using Audition.Session;
 using Excel;
 using Model;
