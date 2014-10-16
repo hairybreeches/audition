@@ -36,12 +36,13 @@ namespace Tests.SearcherTests
             CollectionAssert.AreEqual(new[]{journal}, result, "The journal should be returned since it's by an unexpected user");
         }
         
-        [Test]
-        public void DoesNotReturnJournalPostedByUserWhenSingleUserSpecified()
+        [TestCase("steve", "steve", TestName = "Basic no match case")]
+        [TestCase("steve", "Steve", TestName = "Match is case insensitive")]
+        public void DoesNotReturnJournalPostedByUserWhenSingleUserSpecified(string username, string userInput)
         {
-            var journal = CreateJournalInPeriodByUser("steve");
+            var journal = CreateJournalInPeriodByUser(username);
             var searcher = CreateSearcher(journal);
-            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("steve"),FinancialPeriod));
+            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters(userInput),FinancialPeriod));
             CollectionAssert.IsEmpty(result, "The journal should not be returned since it's by an expected user");
         }
 
