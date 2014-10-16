@@ -5,7 +5,7 @@ include ../components/forms
 
 
 mixin login-form(system, url)
-	form.form-horizontal(action=url, method="post", data-bind="visible: system() === '#{system}', with: #{system}")
+	form.form-horizontal(action=url, method="post", style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit") Login &raquo;

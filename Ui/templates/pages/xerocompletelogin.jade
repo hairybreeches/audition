@@ -4,7 +4,7 @@ include ../components/forms
 +page('Login', ['xerocompletelogin'])
 	div.container
 		form.form-horizontal.blockable(action='#', method="post", enc="x-www-form-urlencoded")
-			.blockscreen(visible="none" data-bind="visible: blocked()") Loading...
+			.blockscreen(style="display: none;" data-bind="visible: blocked()") Loading...
 			legend.vertical-space To finish logging in to Xero, enter your confirmation code here
 			+form-field('Confirmation code')
 				input.form-control(type="text" data-bind="value: code" name="code")
