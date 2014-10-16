@@ -1,4 +1,4 @@
-﻿div(data-bind="visible: showResults()" display="none")
+﻿div(data-bind="visible: showResults()" style="display: none;")
 	h2 Results
 	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
 		thead
@@ -35,12 +35,12 @@
 				// /ko
 		// /ko
 
-div(data-bind="visible: showApology()" display="none")
+div(data-bind="visible: showApology()" style="display: none;")
 	h2 No results
 
-div(data-bind="visible: showSearching()" display="none")
+div(data-bind="visible: showSearching()" style="display: none;")
 	h2 Searching...
 
-div(data-bind="visible: showError()" display="none")
+div(data-bind="visible: showError()" style="display: none;")
 	h2 Error
-	span(data-bind="text: lastError" display="none")
+	span(data-bind="text: lastError" style="display: none;")
