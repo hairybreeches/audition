@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Model.Accounting;
 using Model.SearchWindows;
 
@@ -15,7 +16,8 @@ namespace Model.Searching
 
         public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
         {
-            return repository.GetJournalsApplyingTo(searchWindow.Period);
+            var lookup = new HashSet<string>(searchWindow.Parameters.Usernames);
+            return repository.GetJournalsApplyingTo(searchWindow.Period).Where(x=> !lookup.Contains(x.Username));
         }
     }
 }

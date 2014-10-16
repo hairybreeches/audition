@@ -27,6 +27,24 @@ namespace Tests.SearcherTests
             CollectionAssert.IsEmpty(result, "Neither of the journals should be returned since they're outside the period");
         }
 
+        [Test]
+        public void ReturnsJournalPostedByOtherUserWhenSingleUserSpecified()
+        {
+            var journal = CreateJournalInPeriodByUser("steve");
+            var searcher = CreateSearcher(journal);
+            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("alf"),FinancialPeriod));
+            CollectionAssert.AreEqual(new[]{journal}, result, "The journal should be returned since it's by an unexpected user");
+        }
+        
+        [Test]
+        public void DoesNotReturnJournalPostedByUserWhenSingleUserSpecified()
+        {
+            var journal = CreateJournalInPeriodByUser("steve");
+            var searcher = CreateSearcher(journal);
+            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("steve"),FinancialPeriod));
+            CollectionAssert.IsEmpty(result, "The journal should not be returned since it's by an expected user");
+        }
+
         private static IJournalSearcher<UserParameters> CreateSearcher(params Journal[] journals)
         {
             return new UserSearcher(new JournalRepository(journals));
