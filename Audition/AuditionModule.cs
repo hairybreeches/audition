@@ -5,6 +5,7 @@ using Audition.Session;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Excel;
+using Sage50;
 using Xero;
 using Module = Autofac.Module;
 
@@ -15,6 +16,7 @@ namespace Audition
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule<XeroModule>();
+            builder.RegisterModule<Sage50Module>();
             builder.RegisterModule<NativeModule>();
             builder.RegisterModule<ChromiumModule>();
             builder.RegisterModule<ExcelModule>();            

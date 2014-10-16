@@ -75,9 +75,13 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\sage50SearchModel.js" />
     <Content Include="Scripts\xerocompletelogin.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
+    <Content Include="Scripts\xeroSearchModel.js" />
+    <None Include="templates\pages\sage50Search.jade" />
+    <None Include="templates\pages\xeroSearch.jade" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
@@ -161,14 +165,14 @@
     <None Include="templates\components\forms.jade" />
     <None Include="templates\components\head.jade" />
     <None Include="templates\components\results.jade" />
-    <None Include="templates\components\sap-login.jade" />
+    <None Include="templates\components\sage50-login.jade" />
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
     <None Include="templates\components\xero-login.jade" />
     <None Include="templates\components\export.jade" />
     <None Include="templates\pages\login.jade" />
-    <None Include="templates\pages\search.jade" />
+    <None Include="templates\components\search.jade" />
     <None Include="templates\pages\xerocompletelogin.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

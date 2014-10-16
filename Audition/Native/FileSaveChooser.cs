@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Audition.Controllers;
 
 namespace Audition.Native
 {

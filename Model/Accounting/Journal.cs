@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Model.Accounting
 {
@@ -9,32 +10,33 @@ namespace Model.Accounting
         private readonly IList<JournalLine> lines;
 
         public Journal(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
+            :this(id.ToString(), created, journalDate, String.Empty, String.Empty, lines)
+        {
+            
+        }
+
+        [JsonConstructor]
+        public Journal(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
         {
             JournalDate = journalDate;
+            Username = username;
+            Description = description;
             this.lines = lines.ToList();
             Created = created;
-            Id = id;
-            ValidateLines();
-        }
+            Id = id;            
+        }        
 
-        private void ValidateLines()
-        {
-            var sum = Lines.Select(GetLineAmount).Sum();
-
-            if (sum != 0)
-            {
-                throw new InvalidJournalException(String.Format("Lines for journal {0} do not balance: {1}", Id, String.Join(",", Lines.Select(x => x.ToString()))));
-            }
-        }
-
-        private decimal GetLineAmount(JournalLine line)
-        {
-            return line.JournalType == JournalType.Cr ? line.Amount * -1 : line.Amount;
-        }
-
-        public Guid Id { get; private set; }
+        public string Id { get; private set; }
         public DateTimeOffset Created { get; private set; }
         public DateTime JournalDate { get; private set; }
+        public string Username { get; private set; }
+        public string Description { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Format("Id: {0}, Created: {1}, Date:{2}, Username: {3}, Description: {4} Lines: {5}", Id,
+                Created, JournalDate, Username, Description, String.Join(",", Lines));
+        }
 
         public IEnumerable<JournalLine> Lines
         {
@@ -43,7 +45,8 @@ namespace Model.Accounting
 
         protected bool Equals(Journal other)
         {
-            return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate);
+            return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate) && Description.Equals(other.Description)
+                && Username.Equals(other.Username);
         }
 
         public override bool Equals(object obj)

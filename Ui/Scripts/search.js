@@ -1,14 +1,14 @@
-﻿var Output = function () {
+﻿var Output = function (unavailableFields) {
     var self = this;
     //fields
     self.results = ko.observable([]);
     self.state = ko.observable('');
-    self.lastError = ko.observable('');
+    self.lastError = ko.observable('');   
 
     //methods
     self.startSearch = function() {
         self.state('searching');
-    };
+    };    
 
     self.searchSuccess = function(results) {
         self.state('results');
@@ -77,18 +77,33 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.observable(blocked || false);
     //methods
-    var serialise = function () {
-        return JSON.stringify(ko.mapping.toJS({
+
+    var getSearchWindow = function() {
+        return ko.mapping.toJS({
             Period: period,
             Parameters: self.parameters
-        }));
+        });
+    }
+
+    var searchSerialise = function () {
+        return JSON.stringify(getSearchWindow());
     };
+
+    var exportSerialise = function() {
+        return JSON.stringify({
+            SerialisationOptions: {
+                showUsername: model.showUsername(),
+                showDescription: model.showDescription(),
+            },
+            searchWindow: getSearchWindow()
+        });
+    }
 
     self.submit = function (_, e) {
         e.preventDefault();
         output.startSearch();
         $.ajax(searchUrl, {
-            data: serialise(),
+            data: searchSerialise(),
             contentType: 'application/json',
             success: output.searchSuccess,
             error: output.searchFailure,
@@ -101,7 +116,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
         exportSuccessMessage.hide();
 
         $.ajax(exportUrl, {
-            data: serialise(),
+            data: exportSerialise(),
 
             contentType: 'application/json',
             success: function (fileName) {
@@ -121,8 +136,20 @@ var period = ko.mapping.fromJS({
     To: '2014-3-31'
 });
 
+var showField = function(fieldName) {
+    return !searchModel.unavilableFields[fieldName];
+}
 
 var model = {
+
+    showDescription: function() {
+        return showField('description');
+    },
+
+    showUsername: function () {
+        return showField('username');
+    },
+
     input: {
         Period: period,
 
@@ -131,27 +158,23 @@ var model = {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours'),
+        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts'),
+        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts',searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date'),
+        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', true),
-
-        Keyword: new InputSection({
-            keywords: ""
-        }, period, output, exportSuccessMessage, '/api/search/keyword', '/api/export/keyword', true),
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),        
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending'),
+        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
     },
     output: output,
     exportSuccessMessage: exportSuccessMessage 
