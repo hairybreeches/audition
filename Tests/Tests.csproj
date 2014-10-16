@@ -94,6 +94,7 @@
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
     <Compile Include="SearcherTests\UnusualAccountsSearcherTests.cs" />
+    <Compile Include="SearcherTests\UserSearcherTests.cs" />
     <Compile Include="SearcherTests\YearEndSearchingTests.cs" />
     <Compile Include="SearcherTests\HoursSearchingTests.cs" />
     <Compile Include="SearcherTests\RoundNumberSearcherTests.cs" />
