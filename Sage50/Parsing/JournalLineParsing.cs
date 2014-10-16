@@ -21,7 +21,6 @@ namespace Sage50.Parsing
         public SageJournalLine CreateJournalLine(IDataRecord record)
         {
             return CreateJournalLine(
-                //dup
                 schema.GetId(record),
                 schema.GetUsername(record),
                 schema.GetJournalDate(record),
