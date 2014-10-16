@@ -35,9 +35,36 @@ namespace Tests.SearcherTests
             var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("alf"),FinancialPeriod));
             CollectionAssert.AreEqual(new[]{journal}, result, "The journal should be returned since it's by an unexpected user");
         }
+
+        [Test]
+        public void ReturnsCorrectUsersWhenUserInputComplex()
+        {
+            var journalsToFind = new[]
+            {
+                CreateJournalInPeriodByUser("francois"),
+                CreateJournalInPeriodByUser("polly"),
+                CreateJournalInPeriodByUser("betty"),
+                CreateJournalInPeriodByUser("francois"),
+            };
+
+            var journals = journalsToFind.Concat(new[]
+            {
+                CreateJournalInPeriodByUser("Elizabeth"), 
+                CreateJournalInPeriodByUser("Elizabeth"), 
+                CreateJournalInPeriodByUser("elizabetH"), 
+                CreateJournalInPeriodByUser("Suzy"), 
+                CreateJournalInPeriodByUser("steVE"), 
+                CreateJournalInPeriodByUser("suzY"), 
+            })
+                //give them a roughly random ordering
+                .OrderBy(x=>x.Id);
+            var searcher = CreateSearcher(journals.ToArray());
+            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("\telizabeth \n\tsTeve  \r\n\tsuzy\n"), FinancialPeriod));
+            CollectionAssert.AreEquivalent(journalsToFind, result, "The searcher should return only the journals by unexpected users"); 
+        }
         
         [TestCase("steve", "steve", TestName = "Basic no match case")]
-        [TestCase("steve", "Steve", TestName = "Match is case insensitive")]
+        [TestCase("stevE", "Steve", TestName = "Match is case insensitive")]
         [TestCase("steve", "\r \tsteve", TestName = "Match ignores leading whitespace")]
         [TestCase("steve", "steve \t\r", TestName = "Match ignores trailing whitespace")]
         [TestCase("alf", "steve\nalf", TestName = "Matches when user second in list")]
