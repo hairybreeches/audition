@@ -21,7 +21,7 @@ namespace Sage50
                 new YearEndSearcher(repository),
                 new UnusualAccountsSearcher(repository),
                 new RoundNumberSearcher(repository),
-                new NotSupportedSearcher<UserParameters>("Feature not yet implemented for Sage 50"));
+                new UserSearcher(repository));
         }
 
         
