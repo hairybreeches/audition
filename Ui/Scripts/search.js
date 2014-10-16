@@ -180,6 +180,7 @@ var model = {
     exportSuccessMessage: exportSuccessMessage 
 };
 
+//todo: these functions belong on a journal object
 var userFriendlyDate = function(jsonDate) {
     var date = new Date(jsonDate);
     return date.toDateString();
@@ -192,6 +193,10 @@ var userFriendlyDateTime = function (jsonDate) {
 
 var getTimeString = function(date){
     return date.toLocaleTimeString("en-UK", {hour: '2-digit', minute: '2-digit', hour12:false});
+}
+
+var formatCurrency = function(decimal) {
+    return '£' + decimal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 ko.applyBindings(model);
