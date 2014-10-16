@@ -1,39 +1,31 @@
-﻿using System.Collections.Generic;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DevDefined.OAuth.Framework;
-using DevDefined.OAuth.Logging;
-using DevDefined.OAuth.Storage.Basic;
 using Model;
-using XeroApi;
-using XeroApi.Model;
-using XeroApi.OAuth;
+using Model.Searching;
 
 namespace Xero
 {
-    public class RepositoryFactory : IRepositoryFactory
+    internal class RepositoryFactory : IRepositoryFactory
     {
         private readonly XeroSlurper slurper;
-        private XeroApiPublicSession xeroApiPublicSession;
-        private const string UserAgent = "Audition";
-        private const string ConsumerKey = "1PNBBUVEELJA2NIZ4DPALJ8UIAUS9H";
-        private const string ConsumerSecret = "OH9UCIP6NRRTR8BOPIIPI4YYXZNGYN";
+        private IXeroSession xeroApiPublicSession;
+        private readonly Func<IXeroSession> sessionFactory;
 
 
-        public RepositoryFactory(XeroSlurper slurper)
+
+        public RepositoryFactory(XeroSlurper slurper, Func<IXeroSession> sessionFactory)
         {
             this.slurper = slurper;
+            this.sessionFactory = sessionFactory;
             CreateNewSession();
         }
 
         private void CreateNewSession()
         {
-            xeroApiPublicSession = new XeroApiPublicSession(UserAgent, ConsumerKey, ConsumerSecret,
-                new InMemoryTokenRepository())
-            {
-                MessageLogger = new DebugMessageLogger()
-            };
+            xeroApiPublicSession = sessionFactory();
         }
 
         public void Logout()
@@ -41,14 +33,15 @@ namespace Xero
             CreateNewSession();
         }
 
-        public async Task<IFullRepository> CreateRepository()
+        public async Task<JournalRepository> CreateRepository(string verificationCode)
         {
-            var repository = new Repository(xeroApiPublicSession);
+            CompleteAuthenticationRequest(verificationCode);
+            var repository = xeroApiPublicSession.GetJournalSource();
             var journals = await slurper.Slurp(repository);
-            return new RepositoryWrapper(journals.ToList());
+            return new JournalRepository(journals.ToList());
         }
 
-        public void CompleteAuthenticationRequest(string verificationCode)
+        private void CompleteAuthenticationRequest(string verificationCode)
         {
             try
             {

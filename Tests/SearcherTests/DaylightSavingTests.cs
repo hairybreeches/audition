@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Autofac;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
+using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
 
@@ -48,7 +47,7 @@ namespace Tests.SearcherTests
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
-            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=>x.Id), "This journal should be returned");
+            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
 
         public IEnumerable<TestCaseData> JournalsInside9To5
@@ -91,7 +90,7 @@ namespace Tests.SearcherTests
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnDay(Journal journalThatShouldBeReturned)
         {
             var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
-            CollectionAssert.AreEquivalent(resultsOfSearch.Select(x=>x.Id), new []{journalThatShouldBeReturned.JournalID}, "This journal should be returned");
+            CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
         
         public IEnumerable<TestCaseData> JournalsInsideMonToFri
@@ -158,11 +157,18 @@ namespace Tests.SearcherTests
             var period = new DateRange(DateTime.MinValue, DateTime.MaxValue);
             var window = new SearchWindow<WorkingHours>(hours, period);
 
-            var repository = new RepositoryWrapper(new[] {journal});
-            var searcher = new XeroJournalSearcher(repository);
 
-            var resultsOfSearch = searcher.FindJournalsWithin(window);
-            return resultsOfSearch;
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<XeroModule>();
+            builder.Register(_ => new MockXeroSession(journal)).As<IXeroSession>();
+
+            using (var lifetime = builder.Build())
+            {
+                var factory = lifetime.Resolve<XeroSearcherFactory>();                    
+                var searcher = factory.CreateXeroJournalSearcher("steve").Result;
+                var resultsOfSearch = searcher.FindJournalsWithin(window);
+                return resultsOfSearch;
+            }
         }
 
         private static TestCaseData CreateTestCaseData(DateTime createdDateUtc, string name)

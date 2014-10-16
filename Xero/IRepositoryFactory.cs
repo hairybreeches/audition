@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
-using XeroApi;
+using Model.Searching;
 
 namespace Xero
 {
     public interface IRepositoryFactory
     {
-        Task<IFullRepository> CreateRepository();
-        void CompleteAuthenticationRequest(string verificationCode);
+        Task<JournalRepository> CreateRepository(string verificationCode);        
         void InitialiseAuthenticationRequest();
         void Logout();
     }

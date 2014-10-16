@@ -69,10 +69,17 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="XeroApi, Version=1.1.0.33, Culture=neutral, PublicKeyToken=3de03a85ae0f7251, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\XeroAPI.Net.1.1.0.33\lib\XeroApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LifetimeExtensions.cs" />
     <Compile Include="MockRequestResponse.cs" />
-    <Compile Include="SystemTests.cs" />
+    <Compile Include="Sage50Tests.cs" />
+    <Compile Include="SystemFoo.cs" />
+    <Compile Include="XeroTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +94,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sage50\Sage50.csproj">
+      <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
+      <Name>Sage50</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tests\Tests.csproj">
       <Project>{fdc54681-cb67-446f-ba2f-38dc63f4a112}</Project>

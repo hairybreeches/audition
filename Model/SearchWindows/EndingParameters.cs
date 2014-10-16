@@ -1,3 +1,5 @@
+using System;
+
 namespace Model.SearchWindows
 {
     public class EndingParameters
@@ -7,6 +9,11 @@ namespace Model.SearchWindows
         public EndingParameters(int minimumZeroesToBeConsideredUnusual)
         {
             MinimumZeroesToBeConsideredUnusual = minimumZeroesToBeConsideredUnusual;
+        }
+
+        public int Magnitude()
+        {
+            return (int) Math.Pow(10, MinimumZeroesToBeConsideredUnusual);
         }
     }
 }

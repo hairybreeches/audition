@@ -43,8 +43,6 @@ mixin search-tab(title, bindName)
 				a(href="#date" data-toggle="tab") Year end
 			li
 				a(href="#endings" data-toggle="tab") Round number
-			li
-				a(href="#keyword" data-toggle="tab") Keyword search
 
 		.tab-content
 			.tab-pane.fade.active.in#time
@@ -71,10 +69,6 @@ mixin search-tab(title, bindName)
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: daysBeforeYearEnd")
 					span.vertical-space.search-text days before year end
-			.tab-pane.fade#keyword
-				+search-tab('with descriptions containing...', 'Keyword')
-					.well.inline-block.vertical-space
-						textarea.form-control(data-bind="value: keywords" rows="8" placeholder="Enter keywords or phrases here, each on a new line")
 			.tab-pane.fade#endings
 				+search-tab('ending in at least...', 'Ending')
 					.well.inline-block.vertical-space.margin-right
