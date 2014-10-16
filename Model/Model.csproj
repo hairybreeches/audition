@@ -59,6 +59,7 @@
     <Compile Include="Searching\NotSupportedSearcher.cs" />
     <Compile Include="Searching\RoundNumberSearcher.cs" />
     <Compile Include="Searching\UnusualAccountsSearcher.cs" />
+    <Compile Include="Searching\UserSearcher.cs" />
     <Compile Include="Searching\WorkingHoursSearcher.cs" />
     <Compile Include="Searching\YearEndSearcher.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
