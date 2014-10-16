@@ -18,7 +18,7 @@ namespace Tests.SearcherTests
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday, DayOfWeek.Monday)]
         public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
-            var journal = CreateJournal.PostedOn(dayOfWeek);
+            var journal = PostedOn(dayOfWeek);
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -34,7 +34,7 @@ namespace Tests.SearcherTests
         public void SearcherReturnsJournalsPostedOutsideRangeEvenIfTheTimeIsNotInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay,
             DayOfWeek toDay)
         {
-            var journal = CreateJournal.PostedOn(dayOfWeek);
+            var journal = PostedOn(dayOfWeek);
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -47,7 +47,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("TimesInsideRange")]
         public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
-            var journal = CreateJournal.PostedAt(journalTime);
+            var journal = PostedAt(journalTime);
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -60,7 +60,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("TimesOutsideRange")]
         public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
-            var journal = CreateJournal.PostedAt(journalTime);
+            var journal = PostedAt(journalTime);
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -72,7 +72,7 @@ namespace Tests.SearcherTests
         [Test]
         public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
-            var journal = CreateJournal.Affecting(new DateTime(1991,1,1));
+            var journal = Affecting(new DateTime(1991,1,1));
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -85,7 +85,7 @@ namespace Tests.SearcherTests
         [Test]
         public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
         {
-            var journal = CreateJournal.Affecting(new DateTime(1989,12,31,23,59,59));
+            var journal = Affecting(new DateTime(1989,12,31,23,59,59));
             var searcher = CreateSearcher(journal);
 
             var journalIds =
@@ -99,7 +99,7 @@ namespace Tests.SearcherTests
         public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtEnd()
         {
             //given a journal on the last day of the financial period
-            var journal = CreateJournal.Affecting(new DateTime(1990, 12, 31, 23, 59, 59));
+            var journal = Affecting(new DateTime(1990, 12, 31, 23, 59, 59));
             var searcher = CreateSearcher(journal);
 
             //and a period created just with the date, rather than the full datetime
@@ -115,7 +115,7 @@ namespace Tests.SearcherTests
         public void SearcherUsesDatesRatherThanDateTimesToDetermineFinancialPeriodAtStart()
         {
             //given a journal on the first day of the financial period
-            var journal = CreateJournal.Affecting(new DateTime(1990, 1, 1, 0, 0, 0));
+            var journal = Affecting(new DateTime(1990, 1, 1, 0, 0, 0));
             var searcher = CreateSearcher(journal);
 
             //and a period created badly with a time on the first date
@@ -173,6 +173,33 @@ namespace Tests.SearcherTests
         private static WorkingHoursSearcher CreateSearcher(params Journal[] journals)
         {
             return new WorkingHoursSearcher(new JournalRepository(journals));
+        }
+
+        private static Journal PostedOn(DayOfWeek day)
+        {
+            var dayOfMonth = 6 + (int) day; //the 6th of July 2014 was a Sunday, Sunday is the 0th element of the enum.
+            var journal = new Journal(Guid.NewGuid(), 
+                new DateTime(2014, 7, dayOfMonth),
+                new DateTime(), Enumerable.Empty<JournalLine>());
+
+            Assert.AreEqual(day, journal.Created.DayOfWeek,
+                "PostedOn should return a journal posted on the right day of the week");
+            
+            return journal;
+        }
+
+        private static Journal PostedAt(LocalTime journalTime)
+        {
+            return new Journal(Guid.NewGuid(),
+                new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
+                new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
+        }
+
+        private static Journal Affecting(DateTime dateTime)
+        {
+            return new Journal(Guid.NewGuid(),
+                new DateTime(2014, 7, 1),
+                dateTime, Enumerable.Empty<JournalLine>());
         }
     }
 }

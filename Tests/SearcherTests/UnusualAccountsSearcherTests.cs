@@ -16,9 +16,9 @@ namespace Tests.SearcherTests
         public void ReturnsOnlyJournalsPostedToLessUsedAccounts()
         {
             //given one journal which includes a line to a rare account (one posting)
-            var journalPostedToUncommonAccount = CreateJournal.PostedTo("b", "e");
+            var journalPostedToUncommonAccount = PostedTo("b", "e");
             //and several to accounts with >= 2 postings
-            var searcher = CreateSearcher(CreateJournal.PostedTo("a", "b"), CreateJournal.PostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = CreateSearcher(PostedTo("a", "b"), PostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -35,10 +35,10 @@ namespace Tests.SearcherTests
         public void DoesNotReturnDuplicatesWhenJournalsPostedToTwoUnusualAccounts()
         {
             //given one journal which includes a line to two rare accounts (just one posting each)
-            var journalPostedToUncommonAccount = CreateJournal.PostedTo("d", "e");
+            var journalPostedToUncommonAccount = PostedTo("d", "e");
 
             //and several to accounts with >= 2 postings
-            var searcher = CreateSearcher(CreateJournal.PostedTo("a", "b"), CreateJournal.PostedTo("b", "a"), journalPostedToUncommonAccount);
+            var searcher = CreateSearcher(PostedTo("a", "b"), PostedTo("b", "a"), journalPostedToUncommonAccount);
 
             //and a search window for the period "all time", for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -55,7 +55,7 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalsOutsideThePeriod()
         {
             //given one journal which includes a line to two rare accounts, but does not apply to the period
-            var journal = CreateJournal.PostedTo("d", "e", new DateTime(2000, 4, 5));                
+            var journal = PostedTo("d", "e", new DateTime(2000, 4, 5));                
 
             //and a search window for journals to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
@@ -74,12 +74,12 @@ namespace Tests.SearcherTests
         public void JournalsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
         {
             //given one journal inside the period to an account
-            var journal = CreateJournal.PostedTo("a", "b", new DateTime(1999, 1, 1));
+            var journal = PostedTo("a", "b", new DateTime(1999, 1, 1));
             //and a load posted to the same account, but outside the period
             var searcher = CreateSearcher(journal, 
-                CreateJournal.PostedTo("a", "b", new DateTime(2000,1,1)),
-                CreateJournal.PostedTo("a", "b", new DateTime(1998,12,31)),
-                CreateJournal.PostedTo("a", "b", new DateTime(2000,1,1)));
+                PostedTo("a", "b", new DateTime(2000,1,1)),
+                PostedTo("a", "b", new DateTime(1998,12,31)),
+                PostedTo("a", "b", new DateTime(2000,1,1)));
 
 
             //and a search window for journals to accounts with <2 postings
@@ -96,6 +96,21 @@ namespace Tests.SearcherTests
         private static UnusualAccountsSearcher CreateSearcher(params Journal[] journals)
         {
             return new UnusualAccountsSearcher(new JournalRepository(journals));
+        }
+
+        public static Journal PostedTo(string accountCode1, string accountCode2, DateTime journalDate)
+        {
+            return new Journal(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
+                new[]
+                {
+                    new JournalLine(accountCode1, accountCode1, JournalType.Cr, 2.2m),
+                    new JournalLine(accountCode2, accountCode2, JournalType.Dr, 2.2m)
+                });
+        }
+
+        private static Journal PostedTo(string accountCode1, string accountCode2)
+        {
+            return PostedTo(accountCode1, accountCode2, new DateTime(1999, 12, 1));
         }
     }
 }
