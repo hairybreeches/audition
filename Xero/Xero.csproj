@@ -55,6 +55,7 @@
     <Compile Include="IXeroSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactory.cs" />
+    <Compile Include="TooManyJournalsException.cs" />
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSource.cs" />
     <Compile Include="XeroModule.cs" />
