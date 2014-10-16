@@ -19,8 +19,8 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
         {
-            var journalApplyingToPostYearEnd = CreateJournal.ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
-            var journalApplyingToPreYearstart = CreateJournal.ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
+            var journalApplyingToPostYearEnd = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
+            var journalApplyingToPreYearstart = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
 
             var searcher = CreateSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
@@ -31,7 +31,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWithALineOfZeroValue()
         {
-            var journalForZero = CreateJournal.ForAmount(InPeriod, InPeriod, 0);
+            var journalForZero = ForAmount(InPeriod, InPeriod, 0);
             var searcher = CreateSearcher(journalForZero);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
             CollectionAssert.IsEmpty(result);
@@ -41,7 +41,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalForRoundAmount()
         {
-            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 1000);
+            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
@@ -50,7 +50,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalWithExactlyTheRightAmountOfZeroes()
         {
-            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 1000);
+            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ));
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
@@ -60,7 +60,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalWithOneTooFewZeroes()
         {
-            var journalForRoundAmount = CreateJournal.ForAmount(InPeriod, InPeriod, 10000);
+            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 10000);
             var searcher = CreateSearcher(journalForRoundAmount);
             var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ));
             CollectionAssert.IsEmpty(result);
@@ -69,6 +69,12 @@ namespace Tests.SearcherTests
         private static RoundNumberSearcher CreateSearcher(params Journal[] journals)
         {
             return new RoundNumberSearcher(new JournalRepository(journals));
+        }
+
+        private static Journal ForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)
+        {
+            var amountOfPounds = ((decimal) amountOfPence)/100;
+            return new Journal(Guid.NewGuid(), creationDate, journalDate, new []{ new JournalLine("a", "a", JournalType.Cr, amountOfPounds), new JournalLine("b", "b", JournalType.Dr, amountOfPounds)});
         }
     }
 }

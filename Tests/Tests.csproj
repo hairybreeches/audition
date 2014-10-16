@@ -89,7 +89,6 @@
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
-    <Compile Include="Mocks\CreateJournal.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
