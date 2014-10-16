@@ -26,7 +26,9 @@ namespace SystemTests
                     Username = "Manager"
                 });
 
-                var journalsReturned = lifetime.GetParsedResponseContent<Journal[]>(requestResponse);
+                var journalsReturned = lifetime.GetParsedResponseContent<Journal[]>(requestResponse)
+                    .OrderBy(x=>int.Parse(x.Id))
+                    .ToArray();
 
                 Assert.AreEqual(1238, journalsReturned.Count(), "We should get all the journals back");
                 Assert.AreEqual(new Journal("26", DateTime.Parse("27/04/2010 17:16:57"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new[]
