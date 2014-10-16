@@ -38,6 +38,9 @@ namespace Tests.SearcherTests
         
         [TestCase("steve", "steve", TestName = "Basic no match case")]
         [TestCase("steve", "Steve", TestName = "Match is case insensitive")]
+        [TestCase("steve", "\r \tsteve", TestName = "Match ignores leading whitespace")]
+        [TestCase("steve", "steve \t\r", TestName = "Match ignores trailing whitespace")]
+        [TestCase("alf", "steve\nalf", TestName = "Matches when user second in list")]
         public void DoesNotReturnJournalPostedByUserWhenSingleUserSpecified(string username, string userInput)
         {
             var journal = CreateJournalInPeriodByUser(username);
