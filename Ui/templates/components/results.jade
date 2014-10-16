@@ -20,7 +20,7 @@
 					td(data-bind="text: Username, visible: $root.showUsername()")
 					td(data-bind="text: Lines[0].JournalType")
 					td(data-bind="text: Lines[0].AccountName")
-					td(data-bind="text: Lines[0].Amount")
+					td(data-bind="text: formatCurrency(Lines[0].Amount)")
 					td(data-bind="text: Lines[0].AccountCode")
 				// ko foreach: Lines.slice(1)
 				tr
@@ -30,7 +30,7 @@
 					td(data-bind="visible: $root.showUsername()")
 					td(data-bind="text: JournalType")
 					td(data-bind="text: AccountName")
-					td(data-bind="text: Amount")
+					td(data-bind="text: formatCurrency(Amount)")
 					td(data-bind="text: AccountCode")
 				// /ko
 		// /ko
