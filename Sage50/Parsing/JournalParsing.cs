@@ -36,12 +36,13 @@ namespace Sage50.Parsing
             return new JournalLine(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
         }
 
-        private static T GetJournalField<T>(IEnumerable<SageJournalLine> journalLines, Func<SageJournalLine, T> getter)
+        private static T GetJournalField<T>(IList<SageJournalLine> journalLines, Func<SageJournalLine, T> getter)
         {
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SageDataFormatUnexpectedException("Expected only one value for property per transaction. Actual values: " + String.Join(", ", values));
+                throw new SageDataFormatUnexpectedException(String.Format("Expected only one value for property per transaction. Actual values for journal {0}: {1}", 
+                    journalLines.First().TransactionId, String.Join(", ", values)));
             }
             return values.Single();
         }

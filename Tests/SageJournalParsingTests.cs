@@ -70,9 +70,15 @@ namespace Tests
         [Test]
         public void GetRightExceptionWhenUsernamesMismatched()
         {
-            Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
                 new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
                 new[] {"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"}));
+
+            StringAssert.Contains("12", exception.Message, "If two fields conflict, user should be told what journal id is affected");
+            foreach (var conflictingUsername in new[]{"Betty, Steve"})
+            {
+                StringAssert.Contains(conflictingUsername, exception.Message, "If two fields conflict, user should be told what the conflicting values are");
+            }
         }
 
         [Test]
