@@ -18,20 +18,21 @@ namespace Sage50.Parsing
             this.schema = schema;
         }
 
-        public SageJournalLine CreateJournalLine(IDataRecord record)
+        public SageJournalLine CreateJournalLine(IDataRecord record, NominalCodeLookup lookup)
         {
+            var nominalCode = schema.GetNominalCode(record);
             return CreateJournalLine(
                 schema.GetId(record),
                 schema.GetUsername(record),
                 schema.GetJournalDate(record),
                 schema.GetCreationTime(record),
-                schema.GetNominalCode(record), 
+                nominalCode, 
                 schema.GetAmount(record),
-                schema.GetDescription(record)
-                );
+                schema.GetDescription(record),
+                lookup.GetNominalCodeName(nominalCode));
         }
 
-        private static SageJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description)
+        private static SageJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             JournalType type;
             decimal amount;
@@ -47,7 +48,7 @@ namespace Sage50.Parsing
                 amount = (Decimal)rawAmount;
             }
 
-            return new SageJournalLine(transactionId, username, journalDate, creationTime, nominalCode, amount, type, description);
+            return new SageJournalLine(transactionId, username, journalDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
         }        
     }
 }

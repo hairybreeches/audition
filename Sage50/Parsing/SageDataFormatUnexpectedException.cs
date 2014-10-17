@@ -7,6 +7,11 @@ namespace Sage50.Parsing
         public SageDataFormatUnexpectedException(string message)
             :base(message)
         {            
+        } 
+        
+        public SageDataFormatUnexpectedException(string message, Exception inner)
+            :base(message, inner)
+        {            
         }
     }
 }

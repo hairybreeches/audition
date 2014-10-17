@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\NominalCodeLookup.cs" />
     <Compile Include="Parsing\Schema\ISchemaColumn.cs" />
     <Compile Include="Parsing\Schema\JournalSchema.cs" />
     <Compile Include="Parsing\Schema\SchemaColumn.cs" />

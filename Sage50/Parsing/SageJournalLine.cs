@@ -13,8 +13,9 @@ namespace Sage50.Parsing
         public JournalType JournalType { get; private set; }
         public decimal Amount { get; private set; }
         public string Description { get; private set; }
+        public string NominalCodeName { get; private set; }
 
-        public SageJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description)
+        public SageJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;
@@ -24,6 +25,7 @@ namespace Sage50.Parsing
             Amount = amount;
             JournalType = type;
             Description = description;
+            NominalCodeName = nominalCodeName;
         }
 
         public override string ToString()
