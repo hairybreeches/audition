@@ -14,9 +14,9 @@ namespace Sage50.Parsing
             this.journalLineParser = journalLineParser;
         }
 
-        public IEnumerable<Journal> GetJournals(IDataReader reader)
+        public IEnumerable<Journal> GetJournals(IDataReader reader, NominalCodeLookup nominalCodeLookup)
         {
-            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(ConvertToLine));
+            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, nominalCodeLookup)));
         }
 
 
@@ -28,9 +28,9 @@ namespace Sage50.Parsing
             }
         }
 
-        private SageJournalLine ConvertToLine(IDataRecord record)
+        private SageJournalLine ConvertToLine(IDataRecord record, NominalCodeLookup lookup)
         {
-            return journalLineParser.CreateJournalLine(record);
+            return journalLineParser.CreateJournalLine(record, lookup);
         }    
     }
 }

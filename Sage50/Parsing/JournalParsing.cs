@@ -33,7 +33,7 @@ namespace Sage50.Parsing
 
         private static JournalLine ToModelLine(SageJournalLine arg)
         {
-            return new JournalLine(arg.NominalCode, arg.NominalCode, arg.JournalType, arg.Amount);
+            return new JournalLine(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
         }
 
         private static T GetJournalField<T>(IEnumerable<SageJournalLine> journalLines, Func<SageJournalLine, T> getter)

@@ -33,9 +33,9 @@ namespace SystemTests
                 Assert.AreEqual(1238, journalsReturned.Count(), "We should get all the journals back");
                 Assert.AreEqual(new Journal("26", DateTime.Parse("27/04/2010 17:16:57"), DateTime.Parse("31/12/2013"), "MANAGER", "Unpresented Cheque", new[]
             {
-                new JournalLine("1200", "1200", JournalType.Dr, 55), 
-                new JournalLine("9998", "9998", JournalType.Cr, 55), 
-                new JournalLine("2200", "2200", JournalType.Dr, 0)
+                new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55), 
+                new JournalLine("9998", "Suspense Account", JournalType.Cr, 55), 
+                new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
             }), journalsReturned[25], "A random journal should be correct");
             }
 

@@ -12,6 +12,14 @@ namespace Tests
     [TestFixture]
     public class SageJournalParsingTests
     {
+        private static readonly IDictionary<string, string> nominalCodeLookup = new Dictionary<string, string>
+        {
+            {"1200", "Bank Current Account"},
+            {"9998", "Suspense Account"},
+            {"2200", "Sales Tax Control Account"}
+        };
+
+
         [Test]
         public void CanConvertJournals()
         {
@@ -27,15 +35,15 @@ namespace Tests
                 new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "1200", JournalType.Dr, 55),
-                        new JournalLine("9998", "9998", JournalType.Cr, 55),
-                        new JournalLine("2200", "2200", JournalType.Dr, 0)
+                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55),
+                        new JournalLine("9998", "Suspense Account", JournalType.Cr, 55),
+                        new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
                     }),
                 new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "1200", JournalType.Dr, 13),
-                        new JournalLine("9998", "9998", JournalType.Cr, 13),
+                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 13),
+                        new JournalLine("9998", "Suspense Account", JournalType.Cr, 13)
                     })
             };
 
@@ -53,7 +61,7 @@ namespace Tests
                 new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "1200", JournalType.Dr, 55),
+                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55)
                     })};
 
             CollectionAssert.AreEqual(expected, journals, "Sage parsing needs to be able to parse journals which don't balance, because for reasons known only to its devs, Sage supports them");
@@ -65,7 +73,21 @@ namespace Tests
             Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
                 new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
                 new[] {"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"}));
-        }        
+        }
+
+        [Test]
+        public void GetFriendlyExceptionWhenNominalCodeNotDefined()
+        {
+            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+                new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "bizarre nominal code", "13", "Unpresented Cheque"}));
+
+            StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
+            foreach (var availableCode in nominalCodeLookup.Keys)
+            {
+                StringAssert.Contains(availableCode, exception.Message, "When a nominal code doesn't exist, the error message should let you know what nominal codes *were* defined");
+            }
+            
+        }
 
         [Test]
         public void SchemaDefinitionIsValid()
@@ -82,7 +104,7 @@ namespace Tests
         private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
         {
             var reader = new JournalReader(new JournalLineParser(new JournalSchema()));
-            return reader.GetJournals(MockDataReader(dataRows)).ToList();
+            return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 
         private static IDataReader MockDataReader(IEnumerable<object[]> rows)

@@ -23,11 +23,19 @@ namespace Sage50
         {
             using (var connection = connectionFactory.OpenConnection(loginDetails))
             {
+                var nominalLookup = CreateNominalCodeLookup(connection);
                 var command = new OdbcCommand(GetJournalsText(), connection);
-                var journals = journalReader.GetJournals(command.ExecuteReader());
+                var journals = journalReader.GetJournals(command.ExecuteReader(), nominalLookup);
                 return new JournalRepository(journals);
 
             }
+        }
+
+        private NominalCodeLookup CreateNominalCodeLookup(OdbcConnection connection)
+        {
+            var command = new OdbcCommand("SELECT ACCOUNT_REF, NAME FROM NOMINAL_LEDGER", connection);
+            var reader = command.ExecuteReader();
+            return NominalCodeLookup.FromQueryResult(reader);
         }
 
         private string GetJournalsText()
