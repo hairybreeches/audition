@@ -23,7 +23,7 @@ namespace Model.Accounting
 
         public override string ToString()
         {
-            return String.Join(" ", JournalType, AccountCode, Amount);
+            return String.Join(" ", JournalType, AccountCode, AccountName, Amount);
         }
 
         protected bool Equals(JournalLine other)
