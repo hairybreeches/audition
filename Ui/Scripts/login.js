@@ -16,7 +16,7 @@
     }
 
     self.submit = function() {
-        model.blocked(true);
+        model.startLogin();
         $.ajax({
             type: "POST",
             url: '/api/sage50/login',
@@ -28,9 +28,7 @@
             success: function () {
                 location.href = '/views/sage50Search.html';
             },
-            failure: function () {
-                model.blocked(false);
-            }
+            error: model.showError
         });
     }
 }
@@ -38,10 +36,7 @@
 
 var XeroLoginModel = function () {
     var self = this;
-
-   
     self.code = ko.observable('');
-
 
     self.initialiseLogin = function() {
         $.ajax({
@@ -50,8 +45,8 @@ var XeroLoginModel = function () {
         });
     }
 
-    self.submit = function () {        
-        model.blocked(true);
+    self.submit = function () {
+        model.startLogin();
         $.ajax({
             type: "POST",
             url: '/api/xero/login',
@@ -59,12 +54,22 @@ var XeroLoginModel = function () {
             success: function () {
                 location.href = '/views/xeroSearch.html';
             },
-            failure: function () {
-                model.blocked(false);
-            }
+            error: model.showError
         });
     }
 }
+
+var ErrorMessage = function () {
+    var self = this;
+    //fields
+    self.visible = ko.observable(false);
+    self.message = ko.observable('');
+
+    //methods
+    self.hide = function () {
+        self.visible(false);
+    };    
+};
 
 
 var LoginModel = function () {
@@ -73,6 +78,20 @@ var LoginModel = function () {
     self.system = ko.observable('');
     self.sage50 = new Sage50LoginModel();
     self.xero = new XeroLoginModel();
+    self.error = new ErrorMessage();
+
+    self.startLogin = function () {
+        self.error.visible(false);
+        self.blocked(true);
+    }
+
+    self.showError = function (jqXHR) {
+        self.blocked(false);
+        var errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.ExceptionMessage : jqXHR.responseText;
+        self.error.message("Cannot login: " + errorMessage);
+        self.error.visible(true);
+    };
+
 }
 
 var model = new LoginModel();
