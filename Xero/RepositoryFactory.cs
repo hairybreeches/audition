@@ -55,7 +55,15 @@ namespace Xero
                 }
 
                 throw;
-            }            
+            }
+            catch (ApplicationException e)
+            {
+                if (e.HResult == -2146232832)
+                {
+                    throw new IncorrectLoginDetailsException("Login to Xero and obtain an authentication code by pressing \"Get Code\"");
+                }
+                throw;
+            }
         }
 
         public void InitialiseAuthenticationRequest()
