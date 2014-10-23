@@ -1,4 +1,4 @@
-﻿var Output = function (unavailableFields) {
+﻿var Output = function () {
     var self = this;
     //fields
     self.results = ko.observable([]);
