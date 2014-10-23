@@ -5,8 +5,7 @@ include ../components/forms
 
 
 mixin login-form(system, url)
-	form.form-horizontal(action=url, method="post", style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
-		
+	div(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")		
 		block
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
@@ -23,10 +22,10 @@ mixin login-form(system, url)
 					select.form-control(data-bind="value: system")
 							option(value="sage50") Sage Line 50
 							option(value="xero") Xero
-		+login-form('xero', "/api/xero/login")
-			+xero-login()
-		+login-form('sage50', "/api/sage50/login")
-			+sage50-login()
+			+login-form('xero', "/api/xero/login")
+				+xero-login()
+			+login-form('sage50', "/api/sage50/login")
+				+sage50-login()
 		.alert.alert-danger(data-bind="visible: error.visible(), with: error" style="display: none;")
 			button.close(type="button" data-bind="click: hide") x
 			span(data-bind="text: message()")
