@@ -17,13 +17,7 @@ namespace Sage50
         {
             try
             {
-                var repository = repositoryFactory.CreateJournalRepository(loginDetails);
-                return new JournalSearcher(
-                    new WorkingHoursSearcher(repository),
-                    new YearEndSearcher(repository),
-                    new UnusualAccountsSearcher(repository),
-                    new RoundNumberSearcher(repository),
-                    new UserSearcher(repository));
+                return CreateJournalSearcherInner(loginDetails);
             }
             catch (OdbcException e)
             {
@@ -41,7 +35,16 @@ namespace Sage50
             }
         }
 
-        
+        private IJournalSearcher CreateJournalSearcherInner(Sage50LoginDetails loginDetails)
+        {
+            var repository = repositoryFactory.CreateJournalRepository(loginDetails);
+            return new JournalSearcher(
+                new WorkingHoursSearcher(repository),
+                new YearEndSearcher(repository),
+                new UnusualAccountsSearcher(repository),
+                new RoundNumberSearcher(repository),
+                new UserSearcher(repository));
+        }
     }
 }
 
