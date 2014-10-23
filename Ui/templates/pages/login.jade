@@ -13,10 +13,10 @@ mixin login-form(system, url)
 
 
 +page('Login', ['login'])
-	.container.blockable
-		.blockscreen(style="display: none;" data-bind="visible: blocked()")
+	.container
 		legend.vertical-space Login to accounts system
-		form.form-horizontal(action="search", method="post")
+		form.form-horizontal.blockable(action="search", method="post")
+			.blockscreen(style="display: none;" data-bind="visible: blocked()")
 			fieldset
 				+form-field('Accounts system')
 					select.form-control(data-bind="value: system")
