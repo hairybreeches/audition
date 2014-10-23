@@ -15,7 +15,7 @@ mixin login-form(system, url)
 
 +page('Login', ['login'])
 	.container.blockable
-		.blockscreen(style="display: none;" data-bind="visible: blocked()") Loading...
+		.blockscreen(style="display: none;" data-bind="visible: blocked()")
 		form.form-horizontal(action="search", method="post")
 			fieldset
 				legend.vertical-space Login to accounts system

@@ -42,6 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\ajax_loader_gray_128.gif" />
     <Content Include="Content\images\jqueryui\ui-bg_flat_0_999999_40x100.png" />
     <Content Include="Content\images\jqueryui\ui-bg_glass_75_ffffff_1x400.png" />
     <Content Include="Content\images\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png" />
