@@ -3,7 +3,6 @@
     self.dataDirectory = ko.observable('');
     self.username = ko.observable('');
     self.password = ko.observable('');
-    self.blocked = ko.observable(false);
 
     self.browseDataDirectory = function() {
         $.ajax('/api/chooseDirectory', {
@@ -17,7 +16,7 @@
     }
 
     self.submit = function() {
-        self.blocked(true);
+        model.blocked(true);
         $.ajax({
             type: "POST",
             url: '/api/sage50/login',
@@ -30,7 +29,7 @@
                 location.href = '/views/sage50Search.html';
             },
             failure: function () {
-                self.blocked(false);
+                model.blocked(false);
             }
         });
     }
@@ -40,7 +39,7 @@
 var XeroLoginModel = function () {
     var self = this;
 
-    self.blocked = ko.observable(false);
+   
     self.code = ko.observable('');
 
 
@@ -52,7 +51,7 @@ var XeroLoginModel = function () {
     }
 
     self.submit = function () {        
-        self.blocked(true);
+        model.blocked(true);
         $.ajax({
             type: "POST",
             url: '/api/xero/login',
@@ -61,14 +60,15 @@ var XeroLoginModel = function () {
                 location.href = '/views/xeroSearch.html';
             },
             failure: function () {
-                self.blocked(false);
+                model.blocked(false);
             }
         });
     }
 }
 
 
-var model = {    
+var model = {
+    blocked: ko.observable(false),
     system: ko.observable(''),
     sage50: new Sage50LoginModel(),
     xero: new XeroLoginModel()
