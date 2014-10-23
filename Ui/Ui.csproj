@@ -76,7 +76,6 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\sage50SearchModel.js" />
-    <Content Include="Scripts\xerocompletelogin.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
     <Content Include="Scripts\xeroSearchModel.js" />
@@ -173,7 +172,6 @@
     <None Include="templates\components\export.jade" />
     <None Include="templates\pages\login.jade" />
     <None Include="templates\components\search.jade" />
-    <None Include="templates\pages\xerocompletelogin.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
