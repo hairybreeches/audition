@@ -21,7 +21,7 @@ namespace Audition.Controllers
         public IHttpActionResult Login(Sage50LoginDetails loginDetails)
         {            
             session.Login(factory.CreateJournalSearcher(loginDetails));
-            return RedirectToView("sage50Search.html");
+            return Ok();
         }               
 
         [HttpGet]

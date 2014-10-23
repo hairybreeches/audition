@@ -5,10 +5,11 @@ include ../components/forms
 
 
 mixin login-form(system, url)
-	form.form-horizontal(action=url, method="post", style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
+	form.form-horizontal.blockable(action=url, method="post", style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
+		.blockscreen(style="display: none;" data-bind="visible: blocked()") Loading...
 		block
 		+button-group()
-			button.vertical-space.btn.btn-primary(type="submit") Login &raquo;
+			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
 
 
 

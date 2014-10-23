@@ -8,6 +8,6 @@ mixin sage50-login()
 		.col-sm-2
 			button.btn.btn-default(type="button", data-bind="click: browseDataDirectory") Browse...
 	+form-field('User ID')
-		input.form-control(type="text" name="username")
+		input.form-control(type="text" name="username" data-bind="value: username")
 	+form-field('Password')
-		input.form-control(type="password" name="password")
+		input.form-control(type="password" name="password" data-bind="value: password")

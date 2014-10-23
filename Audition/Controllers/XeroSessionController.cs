@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Audition.Chromium;
 using Audition.Session;
 using Model;
@@ -19,15 +20,15 @@ namespace Audition.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.XeroLogin)]
+        [Route(Routing.InitialiseXeroLogin)]
         public IHttpActionResult BeginAuthenticate()
         {
             searcherFactory.InitialiseAuthenticationRequest();
-            return RedirectToView("xerocompletelogin.html");
+            return Ok();
         }
         
         [HttpPost]
-        [Route(Routing.FinishXeroLogin)]
+        [Route(Routing.XeroLogin)]
         public async Task<IHttpActionResult> PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
             try
