@@ -67,11 +67,14 @@ var XeroLoginModel = function () {
 }
 
 
-var model = {
-    blocked: ko.observable(false),
-    system: ko.observable(''),
-    sage50: new Sage50LoginModel(),
-    xero: new XeroLoginModel()
+var LoginModel = function () {
+    var self = this;
+    self.blocked = ko.observable(false);
+    self.system = ko.observable('');
+    self.sage50 = new Sage50LoginModel();
+    self.xero = new XeroLoginModel();
 }
+
+var model = new LoginModel();
 
 ko.applyBindings(model);
