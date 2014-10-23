@@ -5,7 +5,7 @@ include ../components/forms
 
 
 mixin login-form(system, url)
-	div(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")		
+	div(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
