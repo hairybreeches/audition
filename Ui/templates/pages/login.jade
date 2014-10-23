@@ -27,6 +27,9 @@ mixin login-form(system, url)
 			+xero-login()
 		+login-form('sage50', "/api/sage50/login")
 			+sage50-login()
+		.alert.alert-danger(data-bind="visible: error.visible(), with: error" style="display: none;")
+			button.close(type="button" data-bind="click: hide") x
+			span(data-bind="text: message()")
 		hr.vertical-space
 
 				
