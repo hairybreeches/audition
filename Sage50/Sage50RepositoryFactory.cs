@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Odbc;
+using System.Linq;
+using Model.Accounting;
 using Model.Searching;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
@@ -24,11 +27,18 @@ namespace Sage50
             using (var connection = connectionFactory.OpenConnection(loginDetails))
             {
                 var nominalLookup = CreateNominalCodeLookup(connection);
-                var command = new OdbcCommand(GetJournalsText(), connection);
-                var journals = journalReader.GetJournals(command.ExecuteReader(), nominalLookup);
+                var journals = GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
+                    .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
                 return new JournalRepository(journals);
 
             }
+        }
+
+        private IList<Journal> GetJournals(OdbcConnection connection, NominalCodeLookup nominalLookup, string tableName)
+        {
+            var command = new OdbcCommand(GetJournalsText(tableName), connection);
+            var odbcDataReader = command.ExecuteReader();
+            return journalReader.GetJournals(odbcDataReader, nominalLookup).ToList();
         }
 
         private NominalCodeLookup CreateNominalCodeLookup(OdbcConnection connection)
@@ -38,9 +48,9 @@ namespace Sage50
             return NominalCodeLookup.FromQueryResult(reader);
         }
 
-        private string GetJournalsText()
+        private string GetJournalsText(string tableName)
         {
-            return String.Format("SELECT {0} FROM AUDIT_JOURNAL", String.Join(",", schema.ColumnNames));
+            return String.Format("SELECT {0} FROM {1}", String.Join(",", schema.ColumnNames), tableName);
         }
     }
 }
