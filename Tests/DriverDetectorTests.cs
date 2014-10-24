@@ -27,6 +27,9 @@ namespace Tests
                 
                 yield return new TestCaseData(new List<string> {"Sage Line 50 v26", "Sage Line 50 vichysoisse add-in", "Sage Line 50 v11", "SQL Server"}).Returns(new Sage50Driver(26, "Sage Line 50 v26"))
                     .SetName("Unparseable 'Sage' drivers are ignored");
+
+                yield return new TestCaseData(new List<string> { "SQL Server", "Odbc Connector Steve", "I'm still not a Sage connector" }).Throws(typeof(SageNotInstalledException))
+                    .SetName("If Sage isn't installed, we get the right type of error");
                 
             }
         }        

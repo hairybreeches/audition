@@ -19,8 +19,14 @@ namespace Sage50
             var sageDrivers = driverNames.Where(x => x.StartsWith("Sage Line 50", true, CultureInfo.CurrentCulture));
             var sortedSageDrivers = sageDrivers.Select(CreateDriver)
                 .Where(x => x != null)
-                .OrderByDescending(x => x.Version);            
-            return sortedSageDrivers.First();
+                .OrderByDescending(x => x.Version);
+
+            if (sortedSageDrivers.Any())
+            {
+                return sortedSageDrivers.First();
+            }
+            
+            throw new SageNotInstalledException();
         }
 
         private static Sage50Driver CreateDriver(string name)
