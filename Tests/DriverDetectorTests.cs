@@ -24,7 +24,6 @@ namespace Tests
                 yield return new TestCaseData(new List<string> {"Sage Line 50 v26", "Sage Line 50 v11", "SQL Server"}).Returns(new Sage50Driver(26, "Sage Line 50 v26"))
                     .SetName("Non-Sage drivers are ignored");    
                 
-                
                 yield return new TestCaseData(new List<string> {"Sage Line 50 v26", "Sage Line 50 vichysoisse add-in", "Sage Line 50 v11", "SQL Server"}).Returns(new Sage50Driver(26, "Sage Line 50 v26"))
                     .SetName("Unparseable 'Sage' drivers are ignored");
 
