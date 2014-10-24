@@ -4,12 +4,7 @@
     self.results = ko.observable([]);
     self.state = ko.observable('');
     self.lastError = ko.observable('');   
-
-    //methods
-    self.startSearch = function() {
-        self.state('searching');
-    };    
-
+      
     self.searchSuccess = function(results) {
         self.state('results');
         self.results(results);
@@ -31,10 +26,6 @@
 
     self.showResults = ko.computed(function() {        
         return self.state() === 'results' && areResults();
-    });
-
-    self.showSearching = ko.computed(function() {
-        return self.state() === 'searching';
     });
 
     self.showError = ko.computed(function() {
@@ -101,12 +92,13 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
 
     self.submit = function (_, e) {
         e.preventDefault();
-        output.startSearch();
+        model.startSearch();
         $.ajax(searchUrl, {
             data: searchSerialise(),
             contentType: 'application/json',
             success: output.searchSuccess,
             error: output.searchFailure,
+            complete: model.finishSearch,
             type: 'POST'
         });
     };
@@ -140,17 +132,29 @@ var showField = function(fieldName) {
     return !searchModel.unavilableFields[fieldName];
 }
 
-var model = {
+var SearchModel = function () {
 
-    showDescription: function() {
+    var self = this;
+
+    self.searching = ko.observable(false);
+
+    self.startSearch = function() {
+        self.searching(true);
+    };
+
+    self.finishSearch = function() {
+        self.searching(false);
+    };
+
+    self.showDescription = function() {
         return showField('description');
-    },
+    };
 
-    showUsername: function () {
+    self.showUsername = function() {
         return showField('username');
-    },
+    };
 
-    input: {
+    self.input = {
         Period: period,
 
         Outside: new InputSection({
@@ -162,7 +166,7 @@ var model = {
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts',searchModel.unavailableActions.accounts),
+        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
@@ -170,16 +174,17 @@ var model = {
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),        
+        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
         }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
-    },
-    output: output,
-    exportSuccessMessage: exportSuccessMessage 
+    };
+    self.output = output;
+    self.exportSuccessMessage = exportSuccessMessage;
 };
 
+var model = new SearchModel();
 //todo: these functions belong on a journal object
 var userFriendlyDate = function(jsonDate) {
     var date = new Date(jsonDate);

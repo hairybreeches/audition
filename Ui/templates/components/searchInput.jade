@@ -23,7 +23,8 @@ mixin search-tab(title, bindName)
 						button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
 						button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
 
-.form-horizontal
+.form-horizontal.blockable
+	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
 	fieldset
 		legend.vertical-space Find journals for the period...
 		.form-group(data-bind="with: Period")
