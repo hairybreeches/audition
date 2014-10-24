@@ -4,19 +4,26 @@ namespace Sage50
 {
     public class Sage50ConnectionFactory
     {
+        private readonly Sage50DriverDetector driverDetector;
+
+        public Sage50ConnectionFactory(Sage50DriverDetector driverDetector)
+        {
+            this.driverDetector = driverDetector;
+        }
+
         public OdbcConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
-            var connectionString = CreateConnectionString(loginDetails);
+            var connectionString = CreateConnectionString(loginDetails, driverDetector.FindBestDriver());
             var conn = new OdbcConnection(connectionString);
             conn.Open();
             return conn;
         }
 
-        private static string CreateConnectionString(Sage50LoginDetails loginDetails)
+        private static string CreateConnectionString(Sage50LoginDetails loginDetails, Sage50Driver driver)
         {
             var builder = new OdbcConnectionStringBuilder
             {
-                Driver = "Sage Line 50 v21"
+                Driver = driver.Name
             };
 
             builder["uid"] = loginDetails.Username;
