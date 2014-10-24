@@ -15,6 +15,7 @@ namespace Sage50
             builder.RegisterType<Sage50RepositoryFactory>();
             builder.RegisterType<Sage50ConnectionFactory>();
             builder.RegisterType<Sage50DriverDetector>();
+            builder.RegisterType<RegistryReader>().As<IRegistryReader>();
         }
     }
 }
