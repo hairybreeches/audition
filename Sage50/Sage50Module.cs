@@ -14,6 +14,7 @@ namespace Sage50
             builder.RegisterType<JournalLineParser>();
             builder.RegisterType<Sage50RepositoryFactory>();
             builder.RegisterType<Sage50ConnectionFactory>();
+            builder.RegisterType<Sage50DriverDetector>();
         }
     }
 }
