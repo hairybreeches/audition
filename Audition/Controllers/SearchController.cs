@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Requests;
+using Audition.Responses;
 using Audition.Session;
+using Model;
 using Model.Accounting;
 using Model.Searching;
 using Model.SearchWindows;
@@ -26,37 +29,51 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursSearch)]
-        public IEnumerable<Journal> HoursSearch(SearchRequest<WorkingHours> searchRequest)
-        {
-            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-        }
-        
+        public SearchResponse HoursSearch(SearchRequest<WorkingHours> searchRequest)
+        {            
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
+        }        
+
         [HttpPost]
         [Route(Routing.AccountsSearch)]
-        public IEnumerable<Journal> AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
+        public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
         
         [HttpPost]
         [Route(Routing.DateSearch)]
-        public IEnumerable<Journal> DateSearch(SearchRequest<YearEndParameters> searchRequest)
+        public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
 
         [HttpPost]
         [Route(Routing.UserSearch)]
-        public IEnumerable<Journal> UserSearch(SearchRequest<UserParameters> searchRequest)
+        public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
-        public IEnumerable<Journal> EndingSearch(SearchRequest<EndingParameters> searchRequest)
+        public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
+        }
+
+        private static SearchResponse SearchResults(IEnumerable<Journal> journals, int pageNumber)
+        {
+            var listOfAllJournals = journals.ToList();
+            var totalResults = listOfAllJournals.Count();
+            var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
+            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize);
+            return new SearchResponse(journalsToReturn, totalResults);
         }
     }
 }
