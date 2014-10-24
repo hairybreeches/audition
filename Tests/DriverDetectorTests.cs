@@ -12,7 +12,13 @@ namespace Tests
         {
             get
             {
-                yield return new TestCaseData(new List<string> {"Sage Line 50 v21"}).Returns(new Sage50Driver(21, "Sage Line 50 v21")).SetName("When only one driver present it is returned");                
+                yield return new TestCaseData(new List<string> {"Sage Line 50 v21"}).Returns(new Sage50Driver(21, "Sage Line 50 v21"))
+                    .SetName("When only one driver present it is returned");
+                yield return new TestCaseData(new List<string> { "Sage Line 50 v11", "Sage Line 50 v13", "Sage Line 50 v22", "Sage Line 50 v33" }).Returns(new Sage50Driver(33, "Sage Line 50 v33"))
+                    .SetName("Returns highest version installed");
+                yield return new TestCaseData(new List<string> {"Sage Line 50 v21", "Sage Line 50 v3"}).Returns(new Sage50Driver(21, "Sage Line 50 v21"))
+                    .SetName("Version numbers are sorted as ints, not strings");
+                
             }
         }        
 
