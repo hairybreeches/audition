@@ -128,6 +128,7 @@
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Chromium\Routing.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\Sage50SessionController.cs" />
     <Compile Include="Native\FileSaveChooser.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
