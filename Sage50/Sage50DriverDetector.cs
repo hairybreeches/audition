@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 
 namespace Sage50
@@ -16,8 +17,22 @@ namespace Sage50
         {
             var driverNames = registryReader.Get32BitOdbcDrivers();
             var sageDrivers = driverNames.Where(x => x.StartsWith("Sage Line 50", true, CultureInfo.CurrentCulture));
-            var sortedSageDrivers = sageDrivers.Select(Sage50Driver.Create).OrderByDescending(x => x.Version);            
+            var sortedSageDrivers = sageDrivers.Select(CreateDriver)
+                .Where(x => x != null)
+                .OrderByDescending(x => x.Version);            
             return sortedSageDrivers.First();
+        }
+
+        private static Sage50Driver CreateDriver(string name)
+        {
+            try
+            {
+                return Sage50Driver.Create(name);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
     }
 }
