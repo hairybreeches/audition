@@ -106,7 +106,7 @@ namespace SystemTests
 
             var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
             const string readableJson =
-@"[
+@"{Journals: [
     {
         'Id':'0421c274-2f50-49e4-8f61-623a4daf67ac',
         'Created':'2013-04-06T01:00:00+01:00',
@@ -129,7 +129,8 @@ namespace SystemTests
             {'AccountCode':'4001','AccountName':'Fixed assets','JournalType':'Dr','Amount':12.4}
         ]
     }
-]";
+],
+TotalResults: 2}";
                 
                 var expectedJson = SystemFoo.MungeJson(readableJson);
                 

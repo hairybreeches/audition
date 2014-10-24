@@ -7,7 +7,7 @@
       
     self.searchSuccess = function(results) {
         self.state('results');
-        self.results(results);
+        self.results(results.Journals);
     };
 
     self.searchFailure = function(jqXhr, textStatus, errorThrown) {
