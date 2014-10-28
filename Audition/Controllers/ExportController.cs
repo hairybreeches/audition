@@ -34,7 +34,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursExport)]
-        public async Task<IHttpActionResult> HoursExport(ExportRequest<WorkingHours> saveRequest)
+        public async Task<IHttpActionResult> HoursExport(ExportRequest<WorkingHoursParameters> saveRequest)
         {
             //todo: duplication!
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);

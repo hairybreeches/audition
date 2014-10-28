@@ -6,7 +6,7 @@ using Model.Time;
 
 namespace Model.Searching
 {
-    public class WorkingHoursSearcher : IJournalSearcher<WorkingHours>
+    public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
     {
         private readonly JournalRepository repository;
 
@@ -15,14 +15,14 @@ namespace Model.Searching
             this.repository = repository;
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
         {
             var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period).ToList();
 
             return periodJournals.Where(x => Matches(x, searchWindow.Parameters));
         }
 
-        private static bool Matches(Journal x, WorkingHours workingHours)
+        private static bool Matches(Journal x, WorkingHoursParameters workingHours)
         {
             return !workingHours.Contains(x.Created);
         } 

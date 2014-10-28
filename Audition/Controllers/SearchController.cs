@@ -29,7 +29,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursSearch)]
-        public SearchResponse HoursSearch(SearchRequest<WorkingHours> searchRequest)
+        public SearchResponse HoursSearch(SearchRequest<WorkingHoursParameters> searchRequest)
         {           
             //todo: duplication!
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);

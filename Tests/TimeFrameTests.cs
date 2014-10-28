@@ -1,4 +1,5 @@
 ﻿using System;
+using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
@@ -12,7 +13,7 @@ namespace Tests
         public void CannotCreateATimeFrameWithTimesWhichWrapAround()
         {
             Assert.Throws<InvalidTimeFrameException>(
-                () => new WorkingHours(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
+                () => new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Saturday, new LocalTime(16, 0), new LocalTime(15, 0)));
         }
     }
 }

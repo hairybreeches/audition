@@ -17,7 +17,7 @@ namespace Tests
         [Test]
         public void CanDeserializeSearchWindow()
         {
-            var result = Parse<SearchWindow<WorkingHours>>(@"{
+            var result = Parse<SearchWindow<WorkingHoursParameters>>(@"{
             Period: {
                 From: '2012-4-5',
                 To: '2013-4-4'
@@ -31,7 +31,7 @@ namespace Tests
             }
         }");
 
-            Assert.AreEqual(new SearchWindow<WorkingHours>(new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8, 0), new LocalTime(18, 0)),
+            Assert.AreEqual(new SearchWindow<WorkingHoursParameters>(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8, 0), new LocalTime(18, 0)),
                 new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) )), 
                 result);
         }      
@@ -104,13 +104,13 @@ namespace Tests
        [Test]
        public void CanDeserializeTimeFrame()
        {           
-           var result = Parse<WorkingHours>(@"{
+           var result = Parse<WorkingHoursParameters>(@"{
                FromDay: 'Monday',
                ToDay: 'Friday',
                FromTime: '08:00',
                ToTime: '18:00'
            }");
-           Assert.AreEqual(new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
+           Assert.AreEqual(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
        }      
         
        [Test]

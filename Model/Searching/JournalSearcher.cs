@@ -7,13 +7,13 @@ namespace Model.Searching
 {
     public class JournalSearcher : IJournalSearcher
     {
-        private readonly IJournalSearcher<WorkingHours> hoursSearcher;
+        private readonly IJournalSearcher<WorkingHoursParameters> hoursSearcher;
         private readonly IJournalSearcher<YearEndParameters> yearEndSearcher;
         private readonly IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher;
         private readonly IJournalSearcher<EndingParameters> roundNumberSearcher;
         private readonly IJournalSearcher<UserParameters> userSearcher;
 
-        public JournalSearcher(IJournalSearcher<WorkingHours> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<UserParameters> userSearcher)
+        public JournalSearcher(IJournalSearcher<WorkingHoursParameters> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<UserParameters> userSearcher)
         {
             this.hoursSearcher = hoursSearcher;
             this.yearEndSearcher = yearEndSearcher;
@@ -42,7 +42,7 @@ namespace Model.Searching
             return userSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHours> searchWindow)
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
         {
             return hoursSearcher.FindJournalsWithin(searchWindow);
         }

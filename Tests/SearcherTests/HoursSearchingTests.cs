@@ -147,27 +147,27 @@ namespace Tests.SearcherTests
             }
         }
 
-        private static SearchWindow<WorkingHours> CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
+        private static SearchWindow<WorkingHoursParameters> CreateSearchWindow(DayOfWeek fromDay, DayOfWeek toDay)
         {
             //the journal will never be outside the time, so will be returned iff the day of the week is interesting
-            return CreateSearchWindow(new WorkingHours(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
+            return CreateSearchWindow(new WorkingHoursParameters(fromDay, toDay, new LocalTime(0, 0), new LocalTime(0, 0)));
         }
 
-        private static SearchWindow<WorkingHours> CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
+        private static SearchWindow<WorkingHoursParameters> CreateSearchWindow(LocalTime fromTime, LocalTime toTime)
         {
             //the journal will never be outside the days of the week, so will be returned iff the time is interesting
-            return CreateSearchWindow(new WorkingHours(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
+            return CreateSearchWindow(new WorkingHoursParameters(DayOfWeek.Sunday, DayOfWeek.Saturday, fromTime, toTime));
         }
 
-        private static SearchWindow<WorkingHours> CreateSearchWindow(DateTime periodStart, DateTime periodEnd)
+        private static SearchWindow<WorkingHoursParameters> CreateSearchWindow(DateTime periodStart, DateTime periodEnd)
         {
             //the journal will always be outside the timeframe, so will be returned precisely when it's in the period
-            return new SearchWindow<WorkingHours>(new WorkingHours(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new DateRange(periodStart, periodEnd));
+            return new SearchWindow<WorkingHoursParameters>(new WorkingHoursParameters(DayOfWeek.Saturday, DayOfWeek.Sunday, new LocalTime(0, 0), new LocalTime(0, 0)), new DateRange(periodStart, periodEnd));
         }
 
-        private static SearchWindow<WorkingHours> CreateSearchWindow(WorkingHours workingHours)
+        private static SearchWindow<WorkingHoursParameters> CreateSearchWindow(WorkingHoursParameters workingHours)
         {
-            return new SearchWindow<WorkingHours>(workingHours, new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
+            return new SearchWindow<WorkingHoursParameters>(workingHours, new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
         }
 
         private static WorkingHoursSearcher CreateSearcher(params Journal[] journals)

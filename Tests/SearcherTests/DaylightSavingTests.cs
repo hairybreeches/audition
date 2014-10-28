@@ -19,7 +19,7 @@ namespace Tests.SearcherTests
         public void WhenGmtJournalsAreReturnedTheyHaveTheCorrectDateTimeOffset()
         {
             var gmtJournal = CreateXeroJournalFor(new DateTime(1999, 12, 21, 16, 0, 0));
-            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
+            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
             var journalTime = resultsOfSearch.Single().Created;
             Assert.AreEqual(new DateTimeOffset(1999,12,21,16,0,0, TimeSpan.Zero), journalTime);
             Assert.AreEqual(TimeSpan.Zero, journalTime.Offset);
@@ -30,7 +30,7 @@ namespace Tests.SearcherTests
         public void WhenBstJournalsAreReturnedTheyHaveTheCorrectDateTimeOffset()
         {
             var gmtJournal = CreateXeroJournalFor(new DateTime(1999, 6, 21, 16, 0, 0));
-            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
+            var resultsOfSearch = ResultsOfSearching(gmtJournal, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(11, 0), new LocalTime(13, 0)));
             var journalTime = resultsOfSearch.Single().Created;
             Assert.AreEqual(new DateTimeOffset(1999,6,21,17,0,0, TimeSpan.FromHours(1)), journalTime);
             Assert.AreEqual(TimeSpan.FromHours(1), journalTime.Offset);
@@ -39,14 +39,14 @@ namespace Tests.SearcherTests
         [TestCaseSource("JournalsInside9To5")]
         public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnTime(Journal journalThatShouldNotBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }
         
         [TestCaseSource("JournalsOutside9To5")]
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnTime(Journal journalThatShouldBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Sunday, new LocalTime(9, 0), new LocalTime(17, 0)));
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
 
@@ -81,7 +81,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("JournalsInsideMonToFri")]
         public void SearcherMakesSureJournalsAreNotReturnedWhenTheyShouldntBeBasedOnDay(Journal journalThatShouldNotBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldNotBeReturned, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
             CollectionAssert.IsEmpty(resultsOfSearch, "This journal should not be returned");
         }  
         
@@ -89,7 +89,7 @@ namespace Tests.SearcherTests
         [TestCaseSource("JournalsOutsideMonToFri")]
         public void SearcherMakesSureJournalsAreReturnedWhenTheyShouldBeBasedOnDay(Journal journalThatShouldBeReturned)
         {
-            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHours(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
+            var resultsOfSearch = ResultsOfSearching(journalThatShouldBeReturned, new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(0,0),new LocalTime(23,59) ));
             CollectionAssert.AreEquivalent(new []{journalThatShouldBeReturned.JournalID}, resultsOfSearch.Select(x=> new Guid(x.Id)), "This journal should be returned");
         }
         
@@ -127,7 +127,7 @@ namespace Tests.SearcherTests
         public void UsesCorrectSwitchoverTimeForGmtToBst(DateTime utcTime, LocalTime ukTime)
         {
             var journal = CreateXeroJournalFor(utcTime);
-            var windowContainingJournal = new WorkingHours(DayOfWeek.Monday, DayOfWeek.Sunday,
+            var windowContainingJournal = new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Sunday,
                 ukTime.Minus(Period.FromMinutes(30)), ukTime.PlusMinutes(30));
 
             var results = ResultsOfSearching(journal, windowContainingJournal);
@@ -150,12 +150,12 @@ namespace Tests.SearcherTests
             }
 
         }
-        private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal, WorkingHours workingHours)
+        private static IEnumerable<Model.Accounting.Journal> ResultsOfSearching(Journal journal, WorkingHoursParameters workingHours)
         {
 //a journal is unusual if and only if it is outside 9-5
             var hours = workingHours;
             var period = new DateRange(DateTime.MinValue, DateTime.MaxValue);
-            var window = new SearchWindow<WorkingHours>(hours, period);
+            var window = new SearchWindow<WorkingHoursParameters>(hours, period);
 
 
             var builder = new ContainerBuilder();

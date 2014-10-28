@@ -1,13 +1,14 @@
 using System;
+using Model.Time;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NodaTime;
 
-namespace Model.Time
+namespace Model.SearchWindows
 {
-    public class WorkingHours
+    public class WorkingHoursParameters
     {
-        public WorkingHours(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
+        public WorkingHoursParameters(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
         {
             if (toTime < fromTime)
             {
@@ -39,7 +40,7 @@ namespace Model.Time
                    && journalCreationTime >= FromTime;
         }
 
-        private static bool DayWithinRange(WorkingHours workingHours, DateTimeOffset date)
+        private static bool DayWithinRange(WorkingHoursParameters workingHours, DateTimeOffset date)
         {
             var creationDay = (int)date.DayOfWeek;
 
@@ -66,7 +67,7 @@ namespace Model.Time
             return String.Format("{0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
         }
 
-        protected bool Equals(WorkingHours other)
+        protected bool Equals(WorkingHoursParameters other)
         {
             return FromDay == other.FromDay && ToDay == other.ToDay && FromTime.Equals(other.FromTime) && ToTime.Equals(other.ToTime);
         }
@@ -76,7 +77,7 @@ namespace Model.Time
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((WorkingHours) obj);
+            return Equals((WorkingHoursParameters) obj);
         }
 
         public override int GetHashCode()
