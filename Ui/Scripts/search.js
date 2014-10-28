@@ -3,8 +3,13 @@
     //fields
     self.results = ko.observable([]);
     self.state = ko.observable('');
-    self.lastError = ko.observable('');   
-      
+    self.lastError = ko.observable('');
+
+    self.lastSearch = {
+        searchWindow: {},
+        searchUrl: ''
+    };
+
     self.searchSuccess = function(results) {
         self.state('results');
         self.results(results.Journals);
@@ -133,8 +138,9 @@ var SearchModel = function () {
         });
     };
 
-    var finishSearch = function () {
+    var finishSearch = function (search) {
         self.searching(false);
+        output.lastSearch =search;
     };
 
     self.search = function(searchUrl, searchWindow, pageNumber) {
@@ -144,7 +150,12 @@ var SearchModel = function () {
             contentType: 'application/json',
             success: output.searchSuccess,
             error: output.searchFailure,
-            complete: finishSearch,
+            complete: function() {
+                finishSearch({
+                    searchWindow: searchWindow,
+                    searchUrl: searchUrl
+                });
+            },
             type: 'POST'
         });
     };
