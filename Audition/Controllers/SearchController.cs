@@ -70,6 +70,7 @@ namespace Audition.Controllers
 
         private static SearchResponse SearchResults(IEnumerable<Journal> journals, int pageNumber)
         {
+            //todo: tests to make sure page number is treated correctly
             var listOfAllJournals = journals.ToList();
             var totalResults = listOfAllJournals.Count();
             var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
