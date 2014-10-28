@@ -11,7 +11,7 @@ namespace Model.SearchWindows
         
         public override string ToString()
         {
-            return string.Format("Fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
+            return string.Format("posted to nominal codes with fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
         }
 
         protected bool Equals(UnusualAccountsParameters other)

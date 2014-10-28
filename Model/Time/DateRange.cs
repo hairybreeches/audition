@@ -15,7 +15,7 @@ namespace Model.Time
 
         public override string ToString()
         {
-            return String.Format("{0} to {1}", From, To);
+            return String.Format("{0} to {1}", From.ToShortDateString(), To.ToShortDateString());
         }
 
         protected bool Equals(DateRange other)

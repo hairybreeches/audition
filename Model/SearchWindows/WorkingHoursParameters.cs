@@ -64,7 +64,7 @@ namespace Model.SearchWindows
 
         public override string ToString()
         {
-            return String.Format("{0} to {1}, {2} to {3}", FromDay, ToDay, FromTime, ToTime);
+            return String.Format("posted outside {0} to {1}, {2} to {3}", FromDay, ToDay, FromTime.ToShortString(), ToTime.ToShortString());
         }
 
         protected bool Equals(WorkingHoursParameters other)

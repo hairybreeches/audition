@@ -14,9 +14,14 @@ namespace Model.SearchWindows
         public T Parameters { get; private set; }
         public DateRange Period { get; private set; }
 
+        public string Description
+        {
+            get { return ToString(); }
+        }
+
         public override string ToString()
         {
-            return string.Format("{0}, in the period {1}", Parameters, Period);
+            return string.Format("Journals {0}, in the period {1}", Parameters, Period);
         }
 
         protected bool Equals(SearchWindow<T> other)
