@@ -5,16 +5,55 @@
     self.state = ko.observable('');
     self.lastError = ko.observable('');
 
-    self.pageNumber = ko.observable(1);
+    var currentPageNumber = ko.observable(1);
+    var lastSearchUrl = '';
+    var lastSearchWindow = {};
 
-    
+    var totalResults = ko.observable(0);
+    var totalPages = ko.computed(function () {
+        //todo: share this page size with C# code in Constants
+        return Math.ceil(totalResults() / 10);
+    });
+
+    var setPage = function (pageNumber) {
+        if (pageNumber > totalPages() || pageNumber < 1) {
+            throw "Cannot go to page " + pageNumber + ". There are " + totalPages() + " pages.";
+        }
+
+        model.search({
+            pageNumber: pageNumber,
+            searchUrl: lastSearchUrl,
+            searchWindow: lastSearchWindow
+        });
+    };
+
+    self.isNextPage = function() {
+        return currentPageNumber() < totalPages();
+    }
+
+    self.goToNextPage = function()
+    {        
+        setPage(currentPageNumber() + 1);
+    }
+
+    self.isPreviousPage = function() {
+        return currentPageNumber() > 1;
+    };
+
+    self.goToPreviousPage = function() {
+        setPage(currentPageNumber() - 1);
+    }
+
     self.setLastSearch = function (search) {
-        self.pageNumber(search.pageNumber);
+        currentPageNumber(search.pageNumber);
+        lastSearchUrl = search.searchUrl;
+        lastSearchWindow = search.searchWindow;
     };
 
     self.searchSuccess = function(results) {
         self.state('results');
         self.results(results.Journals);
+        totalResults(results.TotalResults);
     };
 
     self.searchFailure = function(jqXhr, textStatus, errorThrown) {
