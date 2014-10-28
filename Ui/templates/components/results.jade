@@ -1,5 +1,13 @@
-﻿div(data-bind="visible: showResults()" style="display: none;")
+﻿mixin pager()
+	ul.pager
+		li.previous(data-bind="visible: isPreviousPage()")
+			a(href="#" data-bind="click: goToPreviousPage") ← Previous
+		li.next(data-bind="visible: isNextPage()")
+			a(href="#" data-bind="click: goToNextPage") Next →
+
+div(data-bind="visible: showResults()" style="display: none;")
 	h2 Results
+	+pager()
 	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
 		thead
 			tr
@@ -34,7 +42,7 @@
 					td(data-bind="text: AccountCode")
 				// /ko
 		// /ko
-
+	+pager()
 div(data-bind="visible: showApology()" style="display: none;")
 	h2 No results
 
