@@ -5,9 +5,11 @@
     self.state = ko.observable('');
     self.lastError = ko.observable('');
 
-    self.lastSearch = {
-        searchWindow: {},
-        searchUrl: ''
+    self.pageNumber = ko.observable(1);
+
+    
+    self.setLastSearch = function (search) {
+        self.pageNumber(search.pageNumber);
     };
 
     self.searchSuccess = function(results) {
@@ -144,7 +146,7 @@ var SearchModel = function () {
 
     var finishSearch = function (search) {
         self.searching(false);
-        output.lastSearch = search;
+        output.setLastSearch(search);
     };
 
     self.search = function(search) {
