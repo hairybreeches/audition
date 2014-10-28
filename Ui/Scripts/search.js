@@ -61,7 +61,7 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, output, exportSuccessMessage, searchUrl, exportUrl, blocked) {
+var InputSection = function (parameters, period, exportSuccessMessage, searchUrl, exportUrl, blocked) {
 
     var self = this;
     //fields
@@ -74,14 +74,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
             Period: period,
             Parameters: self.parameters
         });
-    }
-
-    var searchSerialise = function() {
-        return JSON.stringify({
-            pageNumber: 1,
-            searchWindow: getSearchWindow()
-        });
-    };
+    }   
 
     var exportSerialise = function() {
         return JSON.stringify({
@@ -95,15 +88,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
 
     self.submit = function (_, e) {
         e.preventDefault();
-        model.startSearch();
-        $.ajax(searchUrl, {
-            data: searchSerialise(),
-            contentType: 'application/json',
-            success: output.searchSuccess,
-            error: output.searchFailure,
-            complete: model.finishSearch,
-            type: 'POST'
-        });
+        model.search(searchUrl, getSearchWindow(), 1);
     };
 
     self.save = function (_, e) {
@@ -141,12 +126,27 @@ var SearchModel = function () {
 
     self.searching = ko.observable(false);
 
-    self.startSearch = function() {
-        self.searching(true);
+    var searchSerialise = function (searchWindow, pageNumber) {
+        return JSON.stringify({
+            pageNumber: pageNumber,
+            searchWindow: searchWindow
+        });
     };
 
-    self.finishSearch = function() {
+    var finishSearch = function () {
         self.searching(false);
+    };
+
+    self.search = function(searchUrl, searchWindow, pageNumber) {
+        self.searching(true);
+        $.ajax(searchUrl, {
+            data: searchSerialise(searchWindow, pageNumber),
+            contentType: 'application/json',
+            success: output.searchSuccess,
+            error: output.searchFailure,
+            complete: finishSearch,
+            type: 'POST'
+        });
     };
 
     self.showDescription = function() {
@@ -165,23 +165,23 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
+        }, period, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
+        }, period, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
+        }, period, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
+        }, period, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
+        }, period, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
     };
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;
