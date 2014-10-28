@@ -91,9 +91,13 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchUrl
         });
     }
 
-    self.submit = function (_, e) {
+    self.submit = function(_, e) {
         e.preventDefault();
-        model.search(searchUrl, getSearchWindow(), 1);
+        model.search({
+            pageNumber: 1,
+            searchWindow: getSearchWindow(),
+            searchUrl: searchUrl
+        });    
     };
 
     self.save = function (_, e) {
@@ -140,21 +144,18 @@ var SearchModel = function () {
 
     var finishSearch = function (search) {
         self.searching(false);
-        output.lastSearch =search;
+        output.lastSearch = search;
     };
 
-    self.search = function(searchUrl, searchWindow, pageNumber) {
+    self.search = function(search) {
         self.searching(true);
-        $.ajax(searchUrl, {
-            data: searchSerialise(searchWindow, pageNumber),
+        $.ajax(search.searchUrl, {
+            data: searchSerialise(search.searchWindow, search.pageNumber),
             contentType: 'application/json',
             success: output.searchSuccess,
             error: output.searchFailure,
             complete: function() {
-                finishSearch({
-                    searchWindow: searchWindow,
-                    searchUrl: searchUrl
-                });
+                finishSearch(search);
             },
             type: 'POST'
         });
