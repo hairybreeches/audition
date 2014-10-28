@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInjectionTests.cs" />
+    <Compile Include="DescriptionTests.cs" />
     <Compile Include="DriverDetectorTests.cs" />
     <Compile Include="ExcelExporterTests.cs" />
     <Compile Include="FileSystemTests.cs" />

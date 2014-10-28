@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Model.SearchWindows
 {
     public class UserParameters
     {
-        public IEnumerable<string> Usernames { get; private set; }
+        public IList<string> Usernames { get; private set; }
 
         public UserParameters(string users)
         {
@@ -15,6 +16,27 @@ namespace Model.SearchWindows
         protected bool Equals(UserParameters other)
         {
             return Usernames.SequenceEqual(other.Usernames);
+        }
+
+        public override string ToString()
+        {
+            return "posted by users other than " + GetUsersDescriptionString();
+        }
+
+        private string GetUsersDescriptionString()
+        {
+            if (!Usernames.Any())
+            {
+                return "(no users entered)";
+            }
+            if (Usernames.Count == 1)
+            {
+                return Usernames.Single();
+            }
+
+            return String.Join(", ", Usernames.Take(Usernames.Count - 1)) + " or " + Usernames.Last();
+
+
         }
 
         public override bool Equals(object obj)
