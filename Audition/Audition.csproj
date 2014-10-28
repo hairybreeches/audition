@@ -128,6 +128,7 @@
     <Compile Include="Chromium\OwinServer.cs" />
     <Compile Include="Chromium\Routing.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\Sage50SessionController.cs" />
     <Compile Include="Native\FileSaveChooser.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
@@ -141,11 +142,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ExportRequest.cs" />
+    <Compile Include="Requests\SearchRequest.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="Session\LoginSession.cs" />
     <Compile Include="Session\NotLoggedInException.cs" />
     <Compile Include="Session\SessionModule.cs" />

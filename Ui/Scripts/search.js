@@ -1,13 +1,67 @@
 ﻿var Output = function () {
+    //todo: share this page size with C# code in Constants
+    var pageSize = 10;
+
     var self = this;
     //fields
     self.results = ko.observable([]);
     self.state = ko.observable('');
-    self.lastError = ko.observable('');   
-      
+    self.lastError = ko.observable('');
+
+    var currentPageNumber = ko.observable(1);
+    var lastSearchUrl = '';
+    var lastSearchWindow = {};
+
+    var totalResults = ko.observable(0);
+    var totalPages = ko.computed(function () {        
+        return Math.ceil(totalResults() / pageSize);
+    });
+
+    var setPage = function (pageNumber) {
+        if (pageNumber > totalPages() || pageNumber < 1) {
+            throw "Cannot go to page " + pageNumber + ". There are " + totalPages() + " pages.";
+        }
+
+        model.search({
+            pageNumber: pageNumber,
+            searchUrl: lastSearchUrl,
+            searchWindow: lastSearchWindow
+        });
+    };
+
+    self.resultsComment = function() {
+        var firstResult = (pageSize * (currentPageNumber() - 1)) + 1;
+        var lastResult = firstResult + self.results().length - 1;
+        return "Showing " + firstResult + "-" + lastResult + " of " + totalResults() + " results";
+    }
+
+    self.isNextPage = function() {
+        return currentPageNumber() < totalPages();
+    }
+
+    self.goToNextPage = function()
+    {        
+        setPage(currentPageNumber() + 1);
+    }
+
+    self.isPreviousPage = function() {
+        return currentPageNumber() > 1;
+    };
+
+    self.goToPreviousPage = function() {
+        setPage(currentPageNumber() - 1);
+    }
+
+    self.setLastSearch = function (search) {
+        currentPageNumber(search.pageNumber);
+        lastSearchUrl = search.searchUrl;
+        lastSearchWindow = search.searchWindow;
+    };
+
     self.searchSuccess = function(results) {
         self.state('results');
-        self.results(results);
+        self.results(results.Journals);
+        totalResults(results.TotalResults);
     };
 
     self.searchFailure = function(jqXhr, textStatus, errorThrown) {
@@ -61,7 +115,7 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, output, exportSuccessMessage, searchUrl, exportUrl, blocked) {
+var InputSection = function (parameters, period, exportSuccessMessage, searchUrl, exportUrl, blocked) {
 
     var self = this;
     //fields
@@ -74,11 +128,7 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
             Period: period,
             Parameters: self.parameters
         });
-    }
-
-    var searchSerialise = function () {
-        return JSON.stringify(getSearchWindow());
-    };
+    }   
 
     var exportSerialise = function() {
         return JSON.stringify({
@@ -90,17 +140,13 @@ var InputSection = function (parameters, period, output, exportSuccessMessage, s
         });
     }
 
-    self.submit = function (_, e) {
+    self.submit = function(_, e) {
         e.preventDefault();
-        model.startSearch();
-        $.ajax(searchUrl, {
-            data: searchSerialise(),
-            contentType: 'application/json',
-            success: output.searchSuccess,
-            error: output.searchFailure,
-            complete: model.finishSearch,
-            type: 'POST'
-        });
+        model.search({
+            pageNumber: 1,
+            searchWindow: getSearchWindow(),
+            searchUrl: searchUrl
+        });    
     };
 
     self.save = function (_, e) {
@@ -138,12 +184,30 @@ var SearchModel = function () {
 
     self.searching = ko.observable(false);
 
-    self.startSearch = function() {
-        self.searching(true);
+    var searchSerialise = function (searchWindow, pageNumber) {
+        return JSON.stringify({
+            pageNumber: pageNumber,
+            searchWindow: searchWindow
+        });
     };
 
-    self.finishSearch = function() {
+    var finishSearch = function (search) {
         self.searching(false);
+        output.setLastSearch(search);
+    };
+
+    self.search = function(search) {
+        self.searching(true);
+        $.ajax(search.searchUrl, {
+            data: searchSerialise(search.searchWindow, search.pageNumber),
+            contentType: 'application/json',
+            success: output.searchSuccess,
+            error: output.searchFailure,
+            complete: function() {
+                finishSearch(search);
+            },
+            type: 'POST'
+        });
     };
 
     self.showDescription = function() {
@@ -162,23 +226,23 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, output, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
+        }, period, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, output, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
+        }, period, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, output, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
+        }, period, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
 
         Users: new InputSection({
             users: ""
-        }, period, output, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
+        }, period, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, output, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
+        }, period, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
     };
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;

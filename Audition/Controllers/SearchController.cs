@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Web.Http;
 using Audition.Chromium;
-using Audition.Native;
 using Audition.Requests;
+using Audition.Responses;
 using Audition.Session;
-using Excel;
 using Model;
 using Model.Accounting;
 using Model.Searching;
@@ -20,98 +19,62 @@ namespace Audition.Controllers
         {
             get { return session.GetCurrentJournalSearcher(); }
         }
-
-        private readonly ExcelExporter excelExporter;
-        private readonly IFileSaveChooser fileSaveChooser;
+        
         private readonly LoginSession session;
 
-        public SearchController(LoginSession session, ExcelExporter excelExporter, IFileSaveChooser fileSaveChooser)
+        public SearchController(LoginSession session)
         {
             this.session = session;
-            this.excelExporter = excelExporter;
-            this.fileSaveChooser = fileSaveChooser;
         }
 
         [HttpPost]
         [Route(Routing.HoursSearch)]
-        public IEnumerable<Journal> HoursSearch(SearchWindow<WorkingHours> searchWindow)
-        {
-            return Searcher.FindJournalsWithin(searchWindow);
-        }
-        
-        [HttpPost]
-        [Route(Routing.HoursExport)]
-        public async Task<IHttpActionResult> HoursExport(ExportRequest<WorkingHours> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
-        }      
-        
+        public SearchResponse HoursSearch(SearchRequest<WorkingHours> searchRequest)
+        {           
+            //todo: duplication!
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
+        }        
+
         [HttpPost]
         [Route(Routing.AccountsSearch)]
-        public IEnumerable<Journal> AccountsSearch(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
-        
-        [HttpPost]
-        [Route(Routing.AccountsExport)]
-        public async Task<IHttpActionResult> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
-        }    
         
         [HttpPost]
         [Route(Routing.DateSearch)]
-        public IEnumerable<Journal> DateSearch(SearchWindow<YearEndParameters> searchWindow)
+        public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
-        }
-        
-        [HttpPost]
-        [Route(Routing.DateExport)]
-        public async Task<IHttpActionResult> DateExport(ExportRequest<YearEndParameters> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
 
         [HttpPost]
         [Route(Routing.UserSearch)]
-        public IEnumerable<Journal> UserSearch(SearchWindow<UserParameters> searchWindow)
+        public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
-        }
-        
-        [HttpPost]
-        [Route(Routing.UserExport)]
-        public async Task<IHttpActionResult> UserExport(ExportRequest<UserParameters> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
-        public IEnumerable<Journal> EndingSearch(SearchWindow<EndingParameters> searchWindow)
+        public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
-            return Searcher.FindJournalsWithin(searchWindow);
-        }
-        
-        [HttpPost]
-        [Route(Routing.EndingExport)]
-        public async Task<IHttpActionResult> EndingExport(ExportRequest<EndingParameters> saveRequest)
-        {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(journals, saveRequest.SerialisationOptions);
+            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
+            return SearchResults(journals, searchRequest.PageNumber);
         }
 
-        private async Task<IHttpActionResult> Export(IEnumerable<Journal> journals, SerialisationOptions options)
+        private static SearchResponse SearchResults(IEnumerable<Journal> journals, int pageNumber)
         {
-            var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(journals, saveLocation, options);
-            return Ok(saveLocation);
+            var listOfAllJournals = journals.ToList();
+            var totalResults = listOfAllJournals.Count();
+            var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
+            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize);
+            return new SearchResponse(journalsToReturn, totalResults);
         }
     }
 }

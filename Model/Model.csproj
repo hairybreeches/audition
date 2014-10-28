@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="Searching\AccountsLookup.cs" />
     <Compile Include="Searching\IdEqualityComparer.cs" />

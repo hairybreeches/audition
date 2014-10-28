@@ -60,8 +60,8 @@ namespace SystemTests
 
         private const string SearchWindow =
             "{'Period':{'From':'2013-4-5','To':'2014-4-4'},'Parameters':{'FromDay':'Monday','ToDay':'Friday','FromTime':'08:00','ToTime':'18:00'}}";
-
-        private static readonly string ExportRequest = @"{
+        const string SearchRequest = "{pageNumber: 1, searchWindow: " + SearchWindow + "}";
+        private const string ExportRequest = @"{
             SearchWindow:" + SearchWindow + @",
 
             SerialisationOptions:{
@@ -101,12 +101,12 @@ namespace SystemTests
         [Test]
         public void CanReturnJournalsSearchedFor()
         {
-            var requestResponse = new MockRequestResponse("POST", SearchWindow, "application/json",
+            var requestResponse = new MockRequestResponse("POST", SearchRequest, "application/json",
                    "http://localhost:1337/api/search/hours");
 
             var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
             const string readableJson =
-@"[
+@"{Journals: [
     {
         'Id':'0421c274-2f50-49e4-8f61-623a4daf67ac',
         'Created':'2013-04-06T01:00:00+01:00',
@@ -129,7 +129,8 @@ namespace SystemTests
             {'AccountCode':'4001','AccountName':'Fixed assets','JournalType':'Dr','Amount':12.4}
         ]
     }
-]";
+],
+TotalResults: 2}";
                 
                 var expectedJson = SystemFoo.MungeJson(readableJson);
                 

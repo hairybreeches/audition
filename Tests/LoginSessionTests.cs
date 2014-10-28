@@ -1,6 +1,7 @@
 ﻿using System;
 using Audition;
 using Audition.Controllers;
+using Audition.Requests;
 using Audition.Session;
 using Autofac;
 using Model.SearchWindows;
@@ -60,7 +61,7 @@ namespace Tests
             var searcher = container.Resolve<SearchController>();
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1), new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
-            Assert.Throws<NotLoggedInException>(() => searcher.AccountsSearch(searchWindow));            
+            Assert.Throws<NotLoggedInException>(() => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
         }
 
         private static void Login(IComponentContext container)
