@@ -1,4 +1,7 @@
 ﻿var Output = function () {
+    //todo: share this page size with C# code in Constants
+    var pageSize = 10;
+
     var self = this;
     //fields
     self.results = ko.observable([]);
@@ -10,9 +13,8 @@
     var lastSearchWindow = {};
 
     var totalResults = ko.observable(0);
-    var totalPages = ko.computed(function () {
-        //todo: share this page size with C# code in Constants
-        return Math.ceil(totalResults() / 10);
+    var totalPages = ko.computed(function () {        
+        return Math.ceil(totalResults() / pageSize);
     });
 
     var setPage = function (pageNumber) {
@@ -26,6 +28,12 @@
             searchWindow: lastSearchWindow
         });
     };
+
+    self.resultsComment = function() {
+        var firstResult = (pageSize * (currentPageNumber() - 1)) + 1;
+        var lastResult = firstResult + self.results().length - 1;
+        return "Showing " + firstResult + "-" + lastResult + " of " + totalResults() + " results";
+    }
 
     self.isNextPage = function() {
         return currentPageNumber() < totalPages();

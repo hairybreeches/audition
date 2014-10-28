@@ -1,4 +1,5 @@
 ﻿mixin pager()
+	span(data-bind = "text: resultsComment()")
 	ul.pager
 		li.previous(data-bind="visible: isPreviousPage()")
 			a(href="#" data-bind="click: goToPreviousPage") ← Previous
