@@ -1,4 +1,48 @@
-﻿var Output = function () {
+﻿
+
+var Journal = function(json) {
+
+    var self = this;
+
+    var userFriendlyDate = function (jsonDate) {
+        var date = new Date(jsonDate);
+        return date.toDateString();
+    }
+
+    var userFriendlyDateTime = function (jsonDate) {
+        var date = new Date(jsonDate);
+        return getTimeString(date) + ' ' + date.toDateString();
+    }
+
+    var getTimeString = function (date) {
+        return date.toLocaleTimeString("en-UK", { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+
+    self.created = userFriendlyDateTime(json.Created);
+    self.journalDate = userFriendlyDate(json.JournalDate);
+    self.description = json.Description;
+    self.username = json.Username;
+    self.lines = json.Lines.map(function(json) {
+        return new JournalLine(json);
+    });
+}
+
+
+var JournalLine = function(json) {
+    var self = this;
+
+    var formatCurrency = function (decimal) {
+        return '£' + decimal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+
+    self.journalType = json.JournalType;
+    self.accountName = json.AccountName;
+    self.amount = formatCurrency(json.Amount);
+    self.accountCode = json.AccountCode;    
+}
+
+
+var Output = function () {
     //todo: share this page size with C# code in Constants
     var pageSize = 10;
 
@@ -60,7 +104,9 @@
 
     self.searchSuccess = function(results) {
         self.state('results');
-        self.results(results.Journals);
+        self.results(results.Journals.map(function(json) {
+            return new Journal(json);
+        }));
         totalResults(results.TotalResults);
     };
 
@@ -249,23 +295,5 @@ var SearchModel = function () {
 };
 
 var model = new SearchModel();
-//todo: these functions belong on a journal object
-var userFriendlyDate = function(jsonDate) {
-    var date = new Date(jsonDate);
-    return date.toDateString();
-}
-
-var userFriendlyDateTime = function (jsonDate) {
-    var date = new Date(jsonDate);
-    return getTimeString(date) + ' ' + date.toDateString();
-}
-
-var getTimeString = function(date){
-    return date.toLocaleTimeString("en-UK", {hour: '2-digit', minute: '2-digit', hour12:false});
-}
-
-var formatCurrency = function(decimal) {
-    return '£' + decimal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
 
 ko.applyBindings(model);
