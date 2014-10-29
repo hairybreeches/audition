@@ -16,7 +16,7 @@ namespace Tests
         {
             var fileSystem = new MockFileSystem();
             var exporter = new ExcelExporter(fileSystem);
-            exporter.WriteJournals(new List<Journal>
+            exporter.WriteJournals("a description of the search", new List<Journal>
             {
                 //one inside daylight savings
                 new Journal(Guid.NewGuid(), new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.Zero),new DateTime(2012,3,4), new List<JournalLine>
@@ -35,7 +35,8 @@ namespace Tests
             );
 
             var expected =
-@"Created,Date
+@"a description of the search
+Created,Date
 04/03/2012 00:00:00 +00:00,04/03/2012 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
 05/06/2012 00:00:00 +01:00,05/06/2012 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
@@ -47,7 +48,7 @@ namespace Tests
         {
             var fileSystem = new MockFileSystem();
             var exporter = new ExcelExporter(fileSystem);
-            exporter.WriteJournals(new List<Journal>
+            exporter.WriteJournals("What we did to get these journals", new List<Journal>
             {
                 //one inside daylight savings
                 new Journal("id 1", new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.Zero),new DateTime(2012,3,4), "alf", "very interesting journal", new List<JournalLine>
@@ -66,7 +67,8 @@ namespace Tests
             );
 
             var expected =
-@"Created,Date,Username,Description
+@"What we did to get these journals
+Created,Date,Username,Description
 04/03/2012 00:00:00 +00:00,04/03/2012 00:00:00,alf,very interesting journal,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
 05/06/2012 00:00:00 +01:00,05/06/2012 00:00:00,steve,perfectly normal journal,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
