@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
 using Model.Accounting;
+using Model.Persistence;
 using Model.Searching;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
