@@ -20,7 +20,7 @@ namespace Audition.Controllers
         private readonly ExcelExporter excelExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
-        private IJournalSearcher Searcher
+        private JournalSearcher Searcher
         {
             get { return session.GetCurrentJournalSearcher(); }
         }

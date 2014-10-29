@@ -13,11 +13,11 @@ namespace Xero
             this.repositoryFactory = repositoryFactory;
         }
 
-        public async Task<IJournalSearcher> CreateXeroJournalSearcher(string verificationCode)
+        public async Task<JournalSearcher> CreateXeroJournalSearcher(string verificationCode)
         {
             var repository = await repositoryFactory.CreateRepository(verificationCode);
 
-            return (IJournalSearcher)new JournalSearcher(
+            return new JournalSearcher(
                 new WorkingHoursSearcher(repository),
                 new YearEndSearcher(repository),
                 new UnusualAccountsSearcher(repository),
