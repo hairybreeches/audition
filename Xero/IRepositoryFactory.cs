@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Model.Searching;
+using Model.Persistence;
 
 namespace Xero
 {
