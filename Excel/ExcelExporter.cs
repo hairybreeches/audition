@@ -14,16 +14,23 @@ namespace Excel
             this.fileSystem = fileSystem;
         }
 
-        public void WriteJournals(IEnumerable<Journal> journals, string filename, SerialisationOptions options)
+        public void WriteJournals(string description, IEnumerable<Journal> journals, string filename, SerialisationOptions options)
         {
             using (var writer = CreateWriter(filename))
             {
+                WriteDescriptionRow(writer, description);
                 WriteHeaderRow(writer, options);
                 foreach (var journal in journals)
                 {
                     WriteJournal(writer, journal, options);
                 }                                
             }
+        }
+
+        private void WriteDescriptionRow(CsvWriter writer, string description)
+        {
+            writer.WriteField(description);
+            writer.NextRecord();
         }
 
         private void WriteHeaderRow(CsvWriter writer, SerialisationOptions options)
