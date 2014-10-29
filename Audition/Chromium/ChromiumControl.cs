@@ -29,15 +29,7 @@ namespace Audition.Chromium
                               RequestHandler = requestHandler
                           };
 
-            webView.KeyboardHandler = new ShortcutKeyboardHandler();
-            webView.PropertyChanged += (sender, args) =>
-                                         {                                                                                         
-                                             if (args.PropertyName == "IsBrowserInitialized" && Keyboard.IsKeyDown(Key.LeftShift))
-                                             {
-
-                                                 webView.ShowDevTools();
-                                             }                                            
-                                         };
+            webView.KeyboardHandler = new ShortcutKeyboardHandler();            
             webView.ConsoleMessage += LogConsoleMessage;
 
             // Without this:
@@ -73,25 +65,11 @@ namespace Audition.Chromium
             webView.OnInitialized();
         }
 
-        /// <summary>
-        /// The tab must be made visible before calling this method.
-        /// </summary>
-        /// <param name="url"></param>
-        public void NavigateToUrl(string url)
-        {
-            webView.Load(Routing.AddInternalDomain(url));
-        }
-
         protected override void Dispose(bool disposing)
         {
             SizeChanged -= ReinitializeAndResize;
             webView.HandleCreated -= ReinitializeAndResizeInner;
             base.Dispose(disposing);
-        }
-
-        internal void EvaluateJavaScript(string script)
-        {
-            webView.EvaluateScript(script);
         }
 
         internal void ShowDevTools()
