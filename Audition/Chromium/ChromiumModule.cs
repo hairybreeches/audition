@@ -4,7 +4,6 @@ using Autofac.Integration.WebApi;
 using CefSharp;
 using Microsoft.Owin.FileSystems;
 using Newtonsoft.Json;
-using NLog;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using NodaTime.Text;
@@ -21,9 +20,6 @@ namespace Audition.Chromium
             builder.RegisterType<RequestHandler>().As<IRequestHandler>();
             builder.Register(_ => new PhysicalFileSystem("ui")).As<IFileSystem>();
             builder.RegisterType<AutofacWebApiDependencyResolver>().As<IDependencyResolver>();
-            builder.RegisterType<LogFactory>().SingleInstance();
-            //todo: http://stackoverflow.com/questions/6623431/passing-in-the-type-of-the-declaring-class-for-nlog-using-autofac
-            builder.Register(c => c.Resolve<LogFactory>().GetCurrentClassLogger());
             builder.Register(_ => JsonSettings());
         }
 
