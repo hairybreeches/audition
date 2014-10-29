@@ -9,18 +9,21 @@ namespace Audition.Controllers
     {
         private readonly LoginSession session;
         private readonly Sage50SearcherFactory factory;
+        private readonly Sage50RepositoryFactory repositoryFactory;
 
-        public Sage50SessionController(LoginSession session, Sage50SearcherFactory factory)
+        public Sage50SessionController(LoginSession session, Sage50SearcherFactory factory, Sage50RepositoryFactory repositoryFactory)
         {
             this.session = session;
             this.factory = factory;
+            this.repositoryFactory = repositoryFactory;
         }
 
         [HttpPost]
         [Route(Routing.Sage50Login)]
         public IHttpActionResult Login(Sage50LoginDetails loginDetails)
-        {            
-            session.Login(factory.CreateJournalSearcher(loginDetails));
+        {
+            var repository = repositoryFactory.CreateJournalRepository(loginDetails);
+            session.Login(factory, repository);
             return Ok();
         }               
 
