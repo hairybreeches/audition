@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevDefined.OAuth.Framework;
 using Model;
+using Model.Persistence;
 using Model.Searching;
 
 namespace Xero
