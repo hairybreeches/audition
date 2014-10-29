@@ -1,5 +1,5 @@
 ﻿mixin pager()
-	span(data-bind = "text: resultsComment()")
+	h4.text-center(data-bind = "text: resultsComment()")
 	ul.pager
 		li.previous(data-bind="visible: isPreviousPage()")
 			a(href="#" data-bind="click: goToPreviousPage") ← Previous
@@ -7,7 +7,6 @@
 			a(href="#" data-bind="click: goToNextPage") Next →
 
 div(data-bind="visible: showResults()" style="display: none;")
-	h2 Results
 	+pager()
 	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
 		thead
