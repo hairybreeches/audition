@@ -31,14 +31,7 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogin)]
         public async Task<IHttpActionResult> PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
-            try
-            {
-                session.Login(await searcherFactory.CreateXeroJournalSearcher(verificationCode.Code));
-            }
-            catch (IncorrectLoginDetailsException e)
-            {
-                return InternalServerError(e);
-            }
+            session.Login(await searcherFactory.CreateXeroJournalSearcher(verificationCode.Code));
             return Ok();
         }
 
