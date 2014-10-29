@@ -12,18 +12,20 @@ namespace Audition.Controllers
     {
         private readonly XeroSearcherFactory searcherFactory;
         private readonly LoginSession session;
+        private readonly IRepositoryFactory repositoryFactory;
 
-        public XeroSessionController(XeroSearcherFactory searcherFactory, LoginSession session)
+        public XeroSessionController(XeroSearcherFactory searcherFactory, LoginSession session, IRepositoryFactory repositoryFactory)
         {
             this.searcherFactory = searcherFactory;
             this.session = session;
+            this.repositoryFactory = repositoryFactory;
         }
 
         [HttpPost]
         [Route(Routing.InitialiseXeroLogin)]
         public IHttpActionResult BeginAuthenticate()
         {
-            searcherFactory.InitialiseAuthenticationRequest();
+            repositoryFactory.InitialiseAuthenticationRequest();
             return Ok();
         }
         
@@ -31,7 +33,8 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogin)]
         public async Task<IHttpActionResult> PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
-            session.Login(await searcherFactory.CreateXeroJournalSearcher(verificationCode.Code));
+            var repository = await repositoryFactory.CreateRepository(verificationCode.Code);
+            session.Login(searcherFactory, repository);
             return Ok();
         }
 
@@ -41,7 +44,7 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
-            searcherFactory.Logout();
+            repositoryFactory.Logout();
             session.Logout();
             return RedirectToView("login.html");
         }

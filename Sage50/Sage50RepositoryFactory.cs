@@ -23,7 +23,7 @@ namespace Sage50
             this.schema = schema;
         }
 
-        internal InMemoryJournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
+        public InMemoryJournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
         {
             try
             {

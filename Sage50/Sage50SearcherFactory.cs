@@ -1,21 +1,14 @@
 ﻿using System.Data.Odbc;
 using Model;
+using Model.Persistence;
 using Model.Searching;
 
 namespace Sage50
 {
-    public class Sage50SearcherFactory
+    public class Sage50SearcherFactory : IJournalSearcherFactory
     {
-        private readonly Sage50RepositoryFactory repositoryFactory;
-
-        public Sage50SearcherFactory(Sage50RepositoryFactory repositoryFactory)
+        public JournalSearcher CreateJournalSearcher(InMemoryJournalRepository repository)
         {
-            this.repositoryFactory = repositoryFactory;
-        }
-
-        public JournalSearcher CreateJournalSearcher(Sage50LoginDetails loginDetails)
-        {
-            var repository = repositoryFactory.CreateJournalRepository(loginDetails);
             return new JournalSearcher(
                 new WorkingHoursSearcher(repository),
                 new YearEndSearcher(repository),
