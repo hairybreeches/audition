@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
+using Model;
 using Model.Accounting;
 using Model.Persistence;
-using Model.Searching;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
 
@@ -25,13 +25,35 @@ namespace Sage50
 
         internal InMemoryJournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
         {
+            try
+            {
+                return CreateJournalRepositoryInner(loginDetails);
+            }
+            catch (OdbcException e)
+            {
+                var error = e.Errors[0];
+                if (error.SQLState == "08001")
+                {
+                    throw new IncorrectLoginDetailsException("The specified folder does not appear to be a Sage 50 data directory. The data directory can be found by logging in to Sage and clicking help->about from the menu.");
+                }
+                if (error.SQLState == "28000")
+                {
+                    throw new IncorrectLoginDetailsException("Incorrect username or password");
+                }
+
+                throw;
+            }
+            
+        }
+
+        private InMemoryJournalRepository CreateJournalRepositoryInner(Sage50LoginDetails loginDetails)
+        {
             using (var connection = connectionFactory.OpenConnection(loginDetails))
             {
                 var nominalLookup = CreateNominalCodeLookup(connection);
                 var journals = GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
                     .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
                 return new InMemoryJournalRepository(journals);
-
             }
         }
 
