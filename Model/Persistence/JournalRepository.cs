@@ -3,7 +3,7 @@ using System.Linq;
 using Model.Accounting;
 using Model.Time;
 
-namespace Model.Searching
+namespace Model.Persistence
 {
     public class JournalRepository
     {
