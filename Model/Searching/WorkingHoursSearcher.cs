@@ -9,9 +9,9 @@ namespace Model.Searching
 {
     public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
     {
-        private readonly JournalRepository repository;
+        private readonly InMemoryJournalRepository repository;
 
-        public WorkingHoursSearcher(JournalRepository repository)
+        public WorkingHoursSearcher(InMemoryJournalRepository repository)
         {
             this.repository = repository;
         }

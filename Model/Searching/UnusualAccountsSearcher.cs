@@ -8,9 +8,9 @@ namespace Model.Searching
 {
     public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
     {
-        private readonly JournalRepository repository;
+        private readonly InMemoryJournalRepository repository;
 
-        public UnusualAccountsSearcher(JournalRepository repository)
+        public UnusualAccountsSearcher(InMemoryJournalRepository repository)
         {
             this.repository = repository;
         }   
