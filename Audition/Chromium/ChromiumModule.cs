@@ -15,7 +15,7 @@ namespace Audition.Chromium
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AppForm>();
-            builder.RegisterType<ChromiumControl>().SingleInstance();
+            builder.RegisterType<ChromiumControl>();
             builder.RegisterType<OwinServer>();
             builder.RegisterType<RequestHandler>().As<IRequestHandler>();
             builder.Register(_ => new PhysicalFileSystem("ui")).As<IFileSystem>();
