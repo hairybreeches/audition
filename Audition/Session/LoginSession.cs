@@ -4,9 +4,9 @@ namespace Audition.Session
 {
     public class LoginSession
     {
-        private IJournalSearcher searcher;
+        private JournalSearcher searcher;
 
-        public IJournalSearcher GetCurrentJournalSearcher()
+        public JournalSearcher GetCurrentJournalSearcher()
         {
             if (searcher == null)
             {
@@ -15,7 +15,7 @@ namespace Audition.Session
             return searcher;
         }
 
-        public void Login(IJournalSearcher journalSearcher)
+        public void Login(JournalSearcher journalSearcher)
         {
             searcher = journalSearcher;
         }

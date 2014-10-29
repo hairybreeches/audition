@@ -13,7 +13,7 @@ namespace Sage50
             this.repositoryFactory = repositoryFactory;
         }
 
-        public IJournalSearcher CreateJournalSearcher(Sage50LoginDetails loginDetails)
+        public JournalSearcher CreateJournalSearcher(Sage50LoginDetails loginDetails)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Sage50
             }
         }
 
-        private IJournalSearcher CreateJournalSearcherInner(Sage50LoginDetails loginDetails)
+        private JournalSearcher CreateJournalSearcherInner(Sage50LoginDetails loginDetails)
         {
             var repository = repositoryFactory.CreateJournalRepository(loginDetails);
             return new JournalSearcher(

@@ -5,7 +5,7 @@ using Model.Time;
 
 namespace Model.Searching
 {
-    public class JournalSearcher : IJournalSearcher
+    public class JournalSearcher
     {
         private readonly IJournalSearcher<WorkingHoursParameters> hoursSearcher;
         private readonly IJournalSearcher<YearEndParameters> yearEndSearcher;

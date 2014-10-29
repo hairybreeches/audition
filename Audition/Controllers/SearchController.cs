@@ -15,7 +15,7 @@ namespace Audition.Controllers
 {
     public class SearchController : ApiController
     {
-        private IJournalSearcher Searcher
+        private JournalSearcher Searcher
         {
             get { return session.GetCurrentJournalSearcher(); }
         }
