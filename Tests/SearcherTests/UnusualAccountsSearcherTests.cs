@@ -96,7 +96,7 @@ namespace Tests.SearcherTests
 
         private static UnusualAccountsSearcher CreateSearcher(params Journal[] journals)
         {
-            return new UnusualAccountsSearcher(new JournalRepository(journals));
+            return new UnusualAccountsSearcher(new InMemoryJournalRepository(journals));
         }
 
         public static Journal PostedTo(string accountCode1, string accountCode2, DateTime journalDate)

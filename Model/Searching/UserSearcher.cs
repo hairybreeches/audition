@@ -10,9 +10,9 @@ namespace Model.Searching
 {
     public class UserSearcher : IJournalSearcher<UserParameters>
     {
-        private readonly JournalRepository repository;
+        private readonly InMemoryJournalRepository repository;
 
-        public UserSearcher(JournalRepository repository)
+        public UserSearcher(InMemoryJournalRepository repository)
         {
             this.repository = repository;
         }

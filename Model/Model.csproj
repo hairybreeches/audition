@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
-    <Compile Include="Persistence\JournalRepository.cs" />
+    <Compile Include="Persistence\InMemoryJournalRepository.cs" />
     <Compile Include="Searching\AccountsLookup.cs" />
     <Compile Include="Searching\IdEqualityComparer.cs" />
     <Compile Include="Searching\IJournalSearcher.cs" />

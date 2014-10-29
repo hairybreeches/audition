@@ -5,11 +5,11 @@ using Model.Time;
 
 namespace Model.Persistence
 {
-    public class JournalRepository
+    public class InMemoryJournalRepository
     {
         private IEnumerable<Journal> Journals { get; set; }
 
-        public JournalRepository(IEnumerable<Journal> journals)
+        public InMemoryJournalRepository(IEnumerable<Journal> journals)
         {
             Journals = journals.ToList();
         }

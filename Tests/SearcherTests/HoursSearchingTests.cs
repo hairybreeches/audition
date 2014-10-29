@@ -173,7 +173,7 @@ namespace Tests.SearcherTests
 
         private static WorkingHoursSearcher CreateSearcher(params Journal[] journals)
         {
-            return new WorkingHoursSearcher(new JournalRepository(journals));
+            return new WorkingHoursSearcher(new InMemoryJournalRepository(journals));
         }
 
         private static Journal PostedOn(DayOfWeek day)
