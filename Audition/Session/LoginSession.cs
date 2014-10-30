@@ -1,28 +1,31 @@
-﻿using Model.Searching;
+﻿using Model.Persistence;
+using Model.Searching;
 
 namespace Audition.Session
 {
     public class LoginSession
     {
-        private JournalSearcher searcher;
+        private IJournalSearcherFactory searcherFactory;
+        private JournalRepository repository;
 
         public JournalSearcher GetCurrentJournalSearcher()
         {
-            if (searcher == null)
+            if (searcherFactory == null)
             {
                 throw new NotLoggedInException();
             }
-            return searcher;
+            return searcherFactory.CreateJournalSearcher(repository);
         }
 
-        public void Login(JournalSearcher journalSearcher)
+        public void Login(IJournalSearcherFactory newSearcherFactory, JournalRepository newRepository)
         {
-            searcher = journalSearcher;
+            searcherFactory = newSearcherFactory;
+            repository = newRepository;
         }
 
         public void Logout()
         {
-            searcher = null;            
+            searcherFactory = null;            
         }
     }
 }

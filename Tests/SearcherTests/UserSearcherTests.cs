@@ -79,7 +79,7 @@ namespace Tests.SearcherTests
 
         private static IJournalSearcher<UserParameters> CreateSearcher(params Journal[] journals)
         {
-            return new UserSearcher(new InMemoryJournalRepository(journals));
+            return new UserSearcher(new JournalRepository(journals));
         }
 
         private static Journal CreateJournalInPeriodByUser(string user)
