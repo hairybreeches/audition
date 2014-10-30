@@ -6,6 +6,7 @@ namespace Audition.Session
     {
         protected override void Load(ContainerBuilder builder)
         {
+            //this needs to be a single instance since it stores the repository and the current searching functionality
             builder.RegisterType<LoginSession>().SingleInstance();
         }
     }
