@@ -70,6 +70,10 @@
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Searching\Searching.csproj">
+      <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
+      <Name>Searching</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

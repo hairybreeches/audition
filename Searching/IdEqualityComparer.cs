@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Model.Accounting;
 
-namespace Model.Searching
+namespace Searching
 {
     public class IdEqualityComparer : IEqualityComparer<Journal>
     {

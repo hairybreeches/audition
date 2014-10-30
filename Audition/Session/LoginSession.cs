@@ -1,5 +1,5 @@
 ﻿using Model.Persistence;
-using Model.Searching;
+using Searching;
 
 namespace Audition.Session
 {

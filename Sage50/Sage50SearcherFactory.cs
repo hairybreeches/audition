@@ -1,7 +1,5 @@
-﻿using System.Data.Odbc;
-using Model;
-using Model.Persistence;
-using Model.Searching;
+﻿using Model.Persistence;
+using Searching;
 
 namespace Sage50
 {
