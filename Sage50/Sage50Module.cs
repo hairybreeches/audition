@@ -12,7 +12,7 @@ namespace Sage50
             builder.RegisterType<JournalSchema>();
             builder.RegisterType<JournalReader>();
             builder.RegisterType<JournalLineParser>();
-            builder.RegisterType<Sage50RepositoryFactory>();
+            builder.RegisterType<Sage50JournalGetter>();
             builder.RegisterType<Sage50ConnectionFactory>();
             builder.RegisterType<Sage50DriverDetector>();
             builder.RegisterType<RegistryReader>().As<IRegistryReader>();
