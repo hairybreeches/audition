@@ -68,7 +68,7 @@ namespace Tests.SearcherTests
 
         private static RoundNumberSearcher CreateSearcher(params Journal[] journals)
         {
-            return new RoundNumberSearcher(new JournalRepository(journals));
+            return new RoundNumberSearcher(new JournalRepository().UpdateJournals(journals));
         }
 
         private static Journal ForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)

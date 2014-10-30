@@ -9,14 +9,25 @@ namespace Persistence
     {
         private IEnumerable<Journal> Journals { get; set; }
 
-        public JournalRepository(IEnumerable<Journal> journals)
+        public JournalRepository()
         {
-            Journals = journals.ToList();
+            Journals = Enumerable.Empty<Journal>();
         }
 
         public IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
         {
             return Journals.ToList().Where(x => period.Contains(x.JournalDate));
+        }
+
+        public JournalRepository UpdateJournals(IEnumerable<Journal> journals)
+        {
+            Journals = journals;
+            return this;
+        }
+
+        public void ClearJournals()
+        {
+            Journals = Enumerable.Empty<Journal>();
         }
     }
 }

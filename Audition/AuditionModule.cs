@@ -5,6 +5,7 @@ using Audition.Session;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Excel;
+using Persistence;
 using Sage50;
 using Xero;
 using Module = Autofac.Module;
@@ -21,6 +22,7 @@ namespace Audition
             builder.RegisterModule<ChromiumModule>();
             builder.RegisterModule<ExcelModule>();            
             builder.RegisterModule<SessionModule>();            
+            builder.RegisterModule<PersistenceModule>();            
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());     
         }
     }

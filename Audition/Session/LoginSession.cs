@@ -8,11 +8,12 @@ namespace Audition.Session
     public class LoginSession
     {
         private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
-        private JournalRepository repository;
+        private readonly JournalRepository repository;
 
-        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage)
+        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, JournalRepository repository)
         {
-            this.searcherFactoryStorage = searcherFactoryStorage;            
+            this.searcherFactoryStorage = searcherFactoryStorage;
+            this.repository = repository;
         }
 
         public JournalSearcher GetCurrentJournalSearcher()
@@ -23,12 +24,13 @@ namespace Audition.Session
         public void Login(IJournalSearcherFactory newSearcherFactory, IEnumerable<Journal> journals)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
-            repository = new JournalRepository(journals);
+            repository.UpdateJournals(journals);
         }
 
         public void Logout()
         {
-            searcherFactoryStorage.CurrentSearcherFactory = new NotLoggedInJournalSearcherFactory();            
+            searcherFactoryStorage.CurrentSearcherFactory = new NotLoggedInJournalSearcherFactory();
+            repository.ClearJournals();
         }
     }
 }
