@@ -15,9 +15,9 @@ namespace Searching
             this.repository = repository;
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period).ToList();
+            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
 
             return periodJournals.Where(x => Matches(x, searchWindow.Parameters));
         }

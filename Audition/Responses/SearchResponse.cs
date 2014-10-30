@@ -6,13 +6,13 @@ namespace Audition.Responses
 {
     public class SearchResponse
     {
-        public SearchResponse(IEnumerable<Journal> journals, int totalResults)
+        public SearchResponse(IList<Journal> journals, int totalResults)
         {
             TotalResults = totalResults;
-            Journals = journals.ToArray();
+            Journals = journals;
         }
 
-        public Journal[] Journals { get; private set; } 
+        public IList<Journal> Journals { get; private set; } 
         public int TotalResults { get; private set; } 
     }
 }

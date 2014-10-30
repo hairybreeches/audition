@@ -15,9 +15,9 @@ namespace Searching
             this.repository = repository;
         }   
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period).ToList();
+            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
             var lookup = new AccountsLookup(periodJournals);
             return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
         }

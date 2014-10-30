@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 using Model.Accounting;
 using Model.SearchWindows;
 
@@ -6,6 +6,6 @@ namespace Searching
 {
     public interface IJournalSearcher<T>
     {
-        IEnumerable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow);
+        IQueryable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow);
     }
 }
