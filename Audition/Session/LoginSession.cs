@@ -1,4 +1,6 @@
-﻿using Persistence;
+﻿using System.Collections.Generic;
+using Model.Accounting;
+using Persistence;
 using Searching;
 
 namespace Audition.Session
@@ -18,10 +20,10 @@ namespace Audition.Session
             return searcherFactoryStorage.CurrentSearcherFactory.CreateJournalSearcher(repository);
         }
 
-        public void Login(IJournalSearcherFactory newSearcherFactory, JournalRepository newRepository)
+        public void Login(IJournalSearcherFactory newSearcherFactory, IEnumerable<Journal> journals)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
-            repository = newRepository;
+            repository = new JournalRepository(journals);
         }
 
         public void Logout()

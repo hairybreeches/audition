@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DevDefined.OAuth.Framework;
 using Model;
+using Model.Accounting;
 using Persistence;
 
 namespace Xero
 {
-    internal class RepositoryFactory : IRepositoryFactory
+    internal class XeroJournalGetter : IXeroJournalGetter
     {
         private readonly XeroSlurper slurper;
         private IXeroSession xeroApiPublicSession;
@@ -16,7 +18,7 @@ namespace Xero
 
 
 
-        public RepositoryFactory(XeroSlurper slurper, Func<IXeroSession> sessionFactory)
+        public XeroJournalGetter(XeroSlurper slurper, Func<IXeroSession> sessionFactory)
         {
             this.slurper = slurper;
             this.sessionFactory = sessionFactory;
@@ -33,12 +35,11 @@ namespace Xero
             CreateNewSession();
         }
 
-        public async Task<JournalRepository> CreateRepository(string verificationCode)
+        public async Task<IEnumerable<Journal>> GetJournals(string verificationCode)
         {
             CompleteAuthenticationRequest(verificationCode);
             var repository = xeroApiPublicSession.GetJournalSource();
-            var journals = await slurper.Slurp(repository);
-            return new JournalRepository(journals.ToList());
+            return await slurper.Slurp(repository);
         }
 
         private void CompleteAuthenticationRequest(string verificationCode)
