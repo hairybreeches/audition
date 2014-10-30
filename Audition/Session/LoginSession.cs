@@ -8,12 +8,13 @@ namespace Audition.Session
         private IJournalSearcherFactory searcherFactory;
         private JournalRepository repository;
 
-        public JournalSearcher GetCurrentJournalSearcher()
+        public LoginSession()
         {
-            if (searcherFactory == null)
-            {
-                throw new NotLoggedInException();
-            }
+            searcherFactory = new NotLoggedInJournalSearcherFactory();
+        }
+
+        public JournalSearcher GetCurrentJournalSearcher()
+        {            
             return searcherFactory.CreateJournalSearcher(repository);
         }
 
@@ -25,7 +26,7 @@ namespace Audition.Session
 
         public void Logout()
         {
-            searcherFactory = null;            
+            searcherFactory = new NotLoggedInJournalSearcherFactory();            
         }
     }
 }
