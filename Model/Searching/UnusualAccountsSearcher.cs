@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+using System.Linq;
+using Model.Accounting;
+using Model.Persistence;
+using Model.SearchWindows;
+
+namespace Model.Searching
+{
+    public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
+    {
+        private readonly InMemoryJournalRepository repository;
+
+        public UnusualAccountsSearcher(InMemoryJournalRepository repository)
+        {
+            this.repository = repository;
+        }   
+
+        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
+        {
+            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period).ToList();
+            var lookup = new AccountsLookup(periodJournals);
+            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
+        }
+    }
+}
