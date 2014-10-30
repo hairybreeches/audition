@@ -4,7 +4,7 @@ using Model.Accounting;
 using Model.Persistence;
 using Model.SearchWindows;
 
-namespace Model.Searching
+namespace Searching
 {
     public class YearEndSearcher : IJournalSearcher<YearEndParameters>
     {

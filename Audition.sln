@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTests", "SystemTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sage50", "Sage50\Sage50.csproj", "{E1DAF23B-B961-4287-9977-B66035149FB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Searching", "Searching\Searching.csproj", "{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,16 @@ Global
 		{E1DAF23B-B961-4287-9977-B66035149FB6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E1DAF23B-B961-4287-9977-B66035149FB6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E1DAF23B-B961-4287-9977-B66035149FB6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

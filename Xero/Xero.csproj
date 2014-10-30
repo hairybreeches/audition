@@ -72,6 +72,10 @@
       <Project>{bf29018b-4b83-4df4-b0cc-23ace91a0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Searching\Searching.csproj">
+      <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
+      <Name>Searching</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

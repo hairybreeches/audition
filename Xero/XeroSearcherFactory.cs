@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Model.Persistence;
-using Model.Searching;
+﻿using Model.Persistence;
 using Model.SearchWindows;
+using Searching;
 
 namespace Xero
 {

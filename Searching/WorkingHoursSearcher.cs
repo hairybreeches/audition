@@ -3,9 +3,8 @@ using System.Linq;
 using Model.Accounting;
 using Model.Persistence;
 using Model.SearchWindows;
-using Model.Time;
 
-namespace Model.Searching
+namespace Searching
 {
     public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
     {

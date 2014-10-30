@@ -1,6 +1,6 @@
 ﻿using Model.Persistence;
 
-namespace Model.Searching
+namespace Searching
 {
     public interface IJournalSearcherFactory
     {

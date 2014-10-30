@@ -7,9 +7,8 @@ using Audition.Responses;
 using Audition.Session;
 using Model;
 using Model.Accounting;
-using Model.Searching;
 using Model.SearchWindows;
-using Model.Time;
+using Searching;
 
 namespace Audition.Controllers
 {

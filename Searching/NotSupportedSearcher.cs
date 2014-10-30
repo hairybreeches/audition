@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Model.Accounting;
 using Model.SearchWindows;
 
-namespace Model.Searching
+namespace Searching
 {
     public class NotSupportedSearcher<T> : IJournalSearcher<T>
     {

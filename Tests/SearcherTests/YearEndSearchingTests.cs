@@ -2,10 +2,10 @@
 using System.Linq;
 using Model.Accounting;
 using Model.Persistence;
-using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
+using Searching;
 
 namespace Tests.SearcherTests
 {

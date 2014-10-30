@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
 using Model.Persistence;
-using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
+using Searching;
 using Tests.Mocks;
 
 namespace Tests.SearcherTests
