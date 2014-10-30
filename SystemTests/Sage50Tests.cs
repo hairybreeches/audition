@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Audition.Responses;
+using Model;
 using Model.Accounting;
+using Model.Responses;
 using NUnit.Framework;
 using Sage50;
 
