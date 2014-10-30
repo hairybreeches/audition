@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Model.Accounting;
-using Model.Persistence;
 using Model.SearchWindows;
+using Persistence;
 
 namespace Searching
 {

@@ -3,7 +3,7 @@ using System.Linq;
 using Model.Accounting;
 using Model.Time;
 
-namespace Model.Persistence
+namespace Persistence
 {
     public class JournalRepository
     {

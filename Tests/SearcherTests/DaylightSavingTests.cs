@@ -6,6 +6,7 @@ using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
+using Persistence;
 using Tests.Mocks;
 using Xero;
 using XeroApi.Model;

@@ -57,6 +57,13 @@
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37ae0c8d-54f3-4311-92a8-8b099b526211}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

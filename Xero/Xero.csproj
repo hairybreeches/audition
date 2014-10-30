@@ -65,12 +65,17 @@
     <Compile Include="XeroVerificationCode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{bf29018b-4b83-4df4-b0cc-23ace91a0913}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>

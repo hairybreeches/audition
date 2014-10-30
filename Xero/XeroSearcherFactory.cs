@@ -1,5 +1,5 @@
-﻿using Model.Persistence;
-using Model.SearchWindows;
+﻿using Model.SearchWindows;
+using Persistence;
 using Searching;
 
 namespace Xero
