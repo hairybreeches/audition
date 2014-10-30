@@ -7,7 +7,7 @@ namespace Sage50
 {
     public class Sage50SearcherFactory : IJournalSearcherFactory
     {
-        public JournalSearcher CreateJournalSearcher(InMemoryJournalRepository repository)
+        public JournalSearcher CreateJournalSearcher(JournalRepository repository)
         {
             return new JournalSearcher(
                 new WorkingHoursSearcher(repository),
