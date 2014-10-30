@@ -6,8 +6,9 @@ namespace Audition.Session
     public class LoginSession
     {
         private IJournalSearcherFactory searcherFactory;
+        private JournalRepository repository;
 
-        public JournalSearcher GetCurrentJournalSearcher(JournalRepository repository)
+        public JournalSearcher GetCurrentJournalSearcher()
         {
             if (searcherFactory == null)
             {
@@ -16,9 +17,10 @@ namespace Audition.Session
             return searcherFactory.CreateJournalSearcher(repository);
         }
 
-        public void Login(IJournalSearcherFactory newSearcherFactory)
+        public void Login(IJournalSearcherFactory newSearcherFactory, JournalRepository newRepository)
         {
             searcherFactory = newSearcherFactory;
+            repository = newRepository;
         }
 
         public void Logout()

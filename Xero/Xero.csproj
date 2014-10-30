@@ -50,11 +50,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IXeroJournalGetter.cs" />
+    <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="IXeroJournalSource.cs" />
     <Compile Include="IXeroSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XeroJournalGetter.cs" />
+    <Compile Include="RepositoryFactory.cs" />
     <Compile Include="TooManyJournalsException.cs" />
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSource.cs" />

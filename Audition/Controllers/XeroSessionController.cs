@@ -4,7 +4,6 @@ using System.Web.Http.Results;
 using Audition.Chromium;
 using Audition.Session;
 using Model;
-using Model.Persistence;
 using Xero;
 
 namespace Audition.Controllers
@@ -13,22 +12,20 @@ namespace Audition.Controllers
     {
         private readonly XeroSearcherFactory searcherFactory;
         private readonly LoginSession session;
-        private readonly IXeroJournalGetter xeroJournalGetter;
-        private readonly JournalRepository repository;
+        private readonly IRepositoryFactory repositoryFactory;
 
-        public XeroSessionController(XeroSearcherFactory searcherFactory, LoginSession session, IXeroJournalGetter xeroJournalGetter, JournalRepository repository)
+        public XeroSessionController(XeroSearcherFactory searcherFactory, LoginSession session, IRepositoryFactory repositoryFactory)
         {
             this.searcherFactory = searcherFactory;
             this.session = session;
-            this.xeroJournalGetter = xeroJournalGetter;
-            this.repository = repository;
+            this.repositoryFactory = repositoryFactory;
         }
 
         [HttpPost]
         [Route(Routing.InitialiseXeroLogin)]
         public IHttpActionResult BeginAuthenticate()
         {
-            xeroJournalGetter.InitialiseAuthenticationRequest();
+            repositoryFactory.InitialiseAuthenticationRequest();
             return Ok();
         }
         
@@ -36,9 +33,8 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogin)]
         public async Task<IHttpActionResult> PostCompleteAuthenticationRequest(XeroVerificationCode verificationCode)
         {
-            var journals = await xeroJournalGetter.CreateRepository(verificationCode.Code);
-            repository.ReplaceContents(journals);
-            session.Login(searcherFactory);
+            var repository = await repositoryFactory.CreateRepository(verificationCode.Code);
+            session.Login(searcherFactory, repository);
             return Ok();
         }
 
@@ -48,9 +44,8 @@ namespace Audition.Controllers
         [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
         {
-            xeroJournalGetter.Logout();
+            repositoryFactory.Logout();
             session.Logout();
-            repository.Clear();
             return RedirectToView("login.html");
         }
     }

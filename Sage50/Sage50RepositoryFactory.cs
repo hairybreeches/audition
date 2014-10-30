@@ -10,24 +10,24 @@ using Sage50.Parsing.Schema;
 
 namespace Sage50
 {
-    public class Sage50JournalGetter
+    public class Sage50RepositoryFactory
     {
         private readonly JournalReader journalReader;
         private readonly Sage50ConnectionFactory connectionFactory;
         private readonly JournalSchema schema;
 
-        public Sage50JournalGetter(JournalReader journalReader, Sage50ConnectionFactory connectionFactory, JournalSchema schema)
+        public Sage50RepositoryFactory(JournalReader journalReader, Sage50ConnectionFactory connectionFactory, JournalSchema schema)
         {
             this.journalReader = journalReader;
             this.connectionFactory = connectionFactory;
             this.schema = schema;
         }
 
-        public IEnumerable<Journal> GetJournals(Sage50LoginDetails loginDetails)
+        public JournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
         {
             try
             {
-                return GetJournalsInner(loginDetails);
+                return CreateJournalRepositoryInner(loginDetails);
             }
             catch (OdbcException e)
             {
@@ -46,13 +46,14 @@ namespace Sage50
             
         }
 
-        private IEnumerable<Journal> GetJournalsInner(Sage50LoginDetails loginDetails)
+        private JournalRepository CreateJournalRepositoryInner(Sage50LoginDetails loginDetails)
         {
             using (var connection = connectionFactory.OpenConnection(loginDetails))
             {
                 var nominalLookup = CreateNominalCodeLookup(connection);
-                return GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
-                    .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));                
+                var journals = GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
+                    .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
+                return new JournalRepository(journals);
             }
         }
 

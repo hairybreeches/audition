@@ -10,7 +10,7 @@ namespace Xero
         protected override void Load(ContainerBuilder builder)
         {
             //this needs to be a single instance because it stores state between requests: it does the token dance for OAuth login to Xero
-            builder.RegisterType<XeroJournalGetter>().As<IXeroJournalGetter>().SingleInstance();
+            builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>().SingleInstance();
             builder.RegisterType<XeroSlurper>();
             builder.RegisterType<XeroSearcherFactory>();
             builder.RegisterType<XeroSession>().As<IXeroSession>();
