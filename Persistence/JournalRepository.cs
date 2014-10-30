@@ -14,9 +14,9 @@ namespace Persistence
             Journals = Enumerable.Empty<Journal>();
         }
 
-        public IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
+        public IQueryable<Journal> GetJournalsApplyingTo(DateRange period)
         {
-            return Journals.ToList().Where(x => period.Contains(x.JournalDate));
+            return Journals.ToList().Where(x => period.Contains(x.JournalDate)).AsQueryable();
         }
 
         public JournalRepository UpdateJournals(IEnumerable<Journal> journals)
