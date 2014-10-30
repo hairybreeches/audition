@@ -4,7 +4,7 @@ using System.Data.Odbc;
 using System.Linq;
 using Model;
 using Model.Accounting;
-using Model.Persistence;
+using Persistence;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
 

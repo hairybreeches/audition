@@ -1,4 +1,4 @@
-﻿using Model.Persistence;
+﻿using Persistence;
 
 namespace Searching
 {

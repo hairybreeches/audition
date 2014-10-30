@@ -119,6 +119,10 @@
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sage50\Sage50.csproj">
       <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
       <Name>Sage50</Name>

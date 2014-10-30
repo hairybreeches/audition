@@ -1,9 +1,9 @@
 ﻿using System;
 using Model.Accounting;
-using Model.Persistence;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
+using Persistence;
 using Searching;
 
 namespace Tests.SearcherTests
