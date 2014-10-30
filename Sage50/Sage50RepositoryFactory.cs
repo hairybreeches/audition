@@ -23,7 +23,7 @@ namespace Sage50
             this.schema = schema;
         }
 
-        internal InMemoryJournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
+        public JournalRepository CreateJournalRepository(Sage50LoginDetails loginDetails)
         {
             try
             {
@@ -46,14 +46,14 @@ namespace Sage50
             
         }
 
-        private InMemoryJournalRepository CreateJournalRepositoryInner(Sage50LoginDetails loginDetails)
+        private JournalRepository CreateJournalRepositoryInner(Sage50LoginDetails loginDetails)
         {
             using (var connection = connectionFactory.OpenConnection(loginDetails))
             {
                 var nominalLookup = CreateNominalCodeLookup(connection);
                 var journals = GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
                     .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
-                return new InMemoryJournalRepository(journals);
+                return new JournalRepository(journals);
             }
         }
 

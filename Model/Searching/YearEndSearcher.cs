@@ -8,9 +8,9 @@ namespace Model.Searching
 {
     public class YearEndSearcher : IJournalSearcher<YearEndParameters>
     {
-        private readonly InMemoryJournalRepository repository;
+        private readonly JournalRepository repository;
 
-        public YearEndSearcher(InMemoryJournalRepository repository)
+        public YearEndSearcher(JournalRepository repository)
         {
             this.repository = repository;
         }               

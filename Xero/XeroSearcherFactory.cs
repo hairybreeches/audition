@@ -1,22 +1,14 @@
 ﻿using System.Threading.Tasks;
+using Model.Persistence;
 using Model.Searching;
 using Model.SearchWindows;
 
 namespace Xero
 {
-    public class XeroSearcherFactory
+    public class XeroSearcherFactory : IJournalSearcherFactory
     {
-        private readonly IRepositoryFactory repositoryFactory;
-
-        public XeroSearcherFactory(IRepositoryFactory repositoryFactory)
-        {
-            this.repositoryFactory = repositoryFactory;
-        }
-
-        public async Task<JournalSearcher> CreateXeroJournalSearcher(string verificationCode)
-        {
-            var repository = await repositoryFactory.CreateRepository(verificationCode);
-
+        public JournalSearcher CreateJournalSearcher(JournalRepository repository)
+        {            
             return new JournalSearcher(
                 new WorkingHoursSearcher(repository),
                 new YearEndSearcher(repository),
@@ -25,14 +17,5 @@ namespace Xero
                 new NotSupportedSearcher<UserParameters>("Xero does not record who raises individual journals"));
         }       
 
-        public void InitialiseAuthenticationRequest()
-        {
-            repositoryFactory.InitialiseAuthenticationRequest();
-        }
-
-        public void Logout()
-        {
-            repositoryFactory.Logout();
-        }
     }
 }

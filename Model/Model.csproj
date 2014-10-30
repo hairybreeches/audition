@@ -52,10 +52,11 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
-    <Compile Include="Persistence\InMemoryJournalRepository.cs" />
+    <Compile Include="Persistence\JournalRepository.cs" />
     <Compile Include="Searching\AccountsLookup.cs" />
     <Compile Include="Searching\IdEqualityComparer.cs" />
     <Compile Include="Searching\IJournalSearcher.cs" />
+    <Compile Include="Searching\IJournalSearcherFactory.cs" />
     <Compile Include="Searching\JournalSearcher.cs" />
     <Compile Include="Searching\NotSupportedSearcher.cs" />
     <Compile Include="Searching\RoundNumberSearcher.cs" />
