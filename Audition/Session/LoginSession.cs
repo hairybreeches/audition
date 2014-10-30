@@ -5,28 +5,28 @@ namespace Audition.Session
 {
     public class LoginSession
     {
-        private IJournalSearcherFactory searcherFactory;
+        private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
         private JournalRepository repository;
 
-        public LoginSession()
+        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage)
         {
-            searcherFactory = new NotLoggedInJournalSearcherFactory();
+            this.searcherFactoryStorage = searcherFactoryStorage;            
         }
 
         public JournalSearcher GetCurrentJournalSearcher()
         {            
-            return searcherFactory.CreateJournalSearcher(repository);
+            return searcherFactoryStorage.CurrentSearcherFactory.CreateJournalSearcher(repository);
         }
 
         public void Login(IJournalSearcherFactory newSearcherFactory, JournalRepository newRepository)
         {
-            searcherFactory = newSearcherFactory;
+            searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
             repository = newRepository;
         }
 
         public void Logout()
         {
-            searcherFactory = new NotLoggedInJournalSearcherFactory();            
+            searcherFactoryStorage.CurrentSearcherFactory = new NotLoggedInJournalSearcherFactory();            
         }
     }
 }
