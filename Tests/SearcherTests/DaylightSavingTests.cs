@@ -167,7 +167,7 @@ namespace Tests.SearcherTests
             {
                 var factory = lifetime.Resolve<XeroSearcherFactory>();
                 var repoFactory = lifetime.Resolve<IXeroJournalGetter>();
-                var searcher = factory.CreateJournalSearcher(new JournalRepository(repoFactory.GetJournals("steve").Result));
+                var searcher = factory.CreateJournalSearcher(new JournalRepository().UpdateJournals(repoFactory.GetJournals("steve").Result));
                 var resultsOfSearch = searcher.FindJournalsWithin(window);
                 return resultsOfSearch;
             }

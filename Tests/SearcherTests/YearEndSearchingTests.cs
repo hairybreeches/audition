@@ -72,7 +72,7 @@ namespace Tests.SearcherTests
 
         private static YearEndSearcher CreateSearcher(params Journal[] journals)
         {
-            return new YearEndSearcher(new JournalRepository(journals));
+            return new YearEndSearcher(new JournalRepository().UpdateJournals(journals));
         }
     }
 }
