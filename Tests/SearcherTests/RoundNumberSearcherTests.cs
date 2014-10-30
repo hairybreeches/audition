@@ -5,7 +5,6 @@ using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
 using Searching;
-using Tests.Mocks;
 
 namespace Tests.SearcherTests
 {
