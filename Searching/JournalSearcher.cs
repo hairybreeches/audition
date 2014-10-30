@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Model.Accounting;
 using Model.SearchWindows;
 
@@ -21,27 +22,27 @@ namespace Searching
             this.userSearcher = userSearcher;
         }       
         
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
         {
             return yearEndSearcher.FindJournalsWithin(searchWindow);
-        }        
+        }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
         {
             return roundNumberSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
             return unusualAccountsSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
         {
             return userSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
         {
             return hoursSearcher.FindJournalsWithin(searchWindow);
         }

@@ -42,9 +42,9 @@ namespace Searching
             journalList.Add(journal);
         }
 
-        public IEnumerable<Journal> JournalsMadeToUnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
+        public IQueryable<Journal> JournalsMadeToUnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
         {
-            return lookup.Values.Where(x => x.Count < minimumEntriesToBeConsideredNormal).SelectMany(x => x).Distinct(new IdEqualityComparer());
+            return lookup.Values.Where(x => x.Count < minimumEntriesToBeConsideredNormal).SelectMany(x => x).Distinct(new IdEqualityComparer()).AsQueryable();
         }
     }
 }

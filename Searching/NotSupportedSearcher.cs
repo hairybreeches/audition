@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Model.Accounting;
 using Model.SearchWindows;
 
@@ -14,7 +15,7 @@ namespace Searching
             this.errorMessage = errorMessage;
         }
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow)
         {            
             throw new NotSupportedException(errorMessage);
         }

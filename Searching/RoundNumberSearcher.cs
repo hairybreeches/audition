@@ -15,9 +15,9 @@ namespace Searching
             this.repository = repository;
         }  
 
-        public IEnumerable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period).ToList();
+            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
             var magnitude = searchWindow.Parameters.Magnitude();
             return periodJournals.Where(journal => HasRoundLine(journal, magnitude));
         }

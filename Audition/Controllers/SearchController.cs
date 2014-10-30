@@ -67,13 +67,13 @@ namespace Audition.Controllers
             return SearchResults(journals, searchRequest.PageNumber);
         }
 
-        private static SearchResponse SearchResults(IEnumerable<Journal> journals, int pageNumber)
+        private static SearchResponse SearchResults(IQueryable<Journal> journals, int pageNumber)
         {
             //todo: tests to make sure page number is treated correctly
             var listOfAllJournals = journals.ToList();
             var totalResults = listOfAllJournals.Count();
             var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
-            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize);
+            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
             return new SearchResponse(journalsToReturn, totalResults);
         }
     }

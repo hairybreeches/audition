@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Audition.Chromium;
@@ -72,7 +73,7 @@ namespace Audition.Controllers
             return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
         }
 
-        private async Task<IHttpActionResult> Export(string description, IEnumerable<Journal> journals, SerialisationOptions options)
+        private async Task<IHttpActionResult> Export(string description, IQueryable<Journal> journals, SerialisationOptions options)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
             excelExporter.WriteJournals(description, journals, saveLocation, options);
