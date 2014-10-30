@@ -3,10 +3,10 @@ using System.Linq;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Requests;
-using Audition.Responses;
 using Audition.Session;
 using Model;
 using Model.Accounting;
+using Model.Responses;
 using Model.SearchWindows;
 using Searching;
 

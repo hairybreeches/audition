@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
+    <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\SearchWindowExtensions.cs" />

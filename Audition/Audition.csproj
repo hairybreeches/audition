@@ -145,7 +145,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="Session\JournalSearcherFactoryStorage.cs" />
     <Compile Include="Session\LoginSession.cs" />
     <Compile Include="Session\NotLoggedInException.cs" />
@@ -195,6 +194,7 @@
   <ItemGroup>
     <Content Include="audition.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

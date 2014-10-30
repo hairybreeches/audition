@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 using Model.Accounting;
 
-namespace Audition.Responses
+namespace Model.Responses
 {
     public class SearchResponse
     {
