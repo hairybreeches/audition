@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
@@ -8,33 +7,16 @@ namespace Model.Persistence
 {
     public class JournalRepository
     {
-        private IEnumerable<Journal> journals;
+        private IEnumerable<Journal> Journals { get; set; }
 
-        private IEnumerable<Journal> Journals
+        public JournalRepository(IEnumerable<Journal> journals)
         {
-            get
-            {
-                if (journals == null)
-                {
-                    throw new NotLoggedInException();
-                }
-                return journals;
-            }
+            Journals = journals.ToList();
         }
 
         public IEnumerable<Journal> GetJournalsApplyingTo(DateRange period)
         {
             return Journals.ToList().Where(x => period.Contains(x.JournalDate));
-        }
-
-        public void ReplaceContents(IEnumerable<Journal> newJournals)
-        {
-            journals = newJournals;
-        }
-        
-        public void Clear()
-        {
-            journals = null;
         }
     }
 }

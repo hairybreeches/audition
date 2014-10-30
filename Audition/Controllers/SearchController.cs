@@ -7,7 +7,6 @@ using Audition.Responses;
 using Audition.Session;
 using Model;
 using Model.Accounting;
-using Model.Persistence;
 using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
@@ -18,16 +17,14 @@ namespace Audition.Controllers
     {
         private JournalSearcher Searcher
         {
-            get { return session.GetCurrentJournalSearcher(repository); }
+            get { return session.GetCurrentJournalSearcher(); }
         }
         
         private readonly LoginSession session;
-        private readonly JournalRepository repository;
 
-        public SearchController(LoginSession session, JournalRepository repository)
+        public SearchController(LoginSession session)
         {
             this.session = session;
-            this.repository = repository;
         }
 
         [HttpPost]
