@@ -8,6 +8,7 @@ using Audition.Session;
 using Excel;
 using Model;
 using Model.Accounting;
+using Model.Persistence;
 using Model.Searching;
 using Model.SearchWindows;
 using Model.Time;
@@ -17,19 +18,21 @@ namespace Audition.Controllers
     public class ExportController : ApiController
     {
         private readonly LoginSession session;
+        private readonly JournalRepository repository;
         private readonly ExcelExporter excelExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
         private JournalSearcher Searcher
         {
-            get { return session.GetCurrentJournalSearcher(); }
+            get { return session.GetCurrentJournalSearcher(repository); }
         }
 
-        public ExportController(IFileSaveChooser fileSaveChooser, ExcelExporter excelExporter, LoginSession session)
+        public ExportController(IFileSaveChooser fileSaveChooser, ExcelExporter excelExporter, LoginSession session, JournalRepository repository)
         {
             this.fileSaveChooser = fileSaveChooser;
             this.excelExporter = excelExporter;
             this.session = session;
+            this.repository = repository;
         }
 
         [HttpPost]
