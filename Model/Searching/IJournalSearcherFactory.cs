@@ -4,6 +4,6 @@ namespace Model.Searching
 {
     public interface IJournalSearcherFactory
     {
-        JournalSearcher CreateJournalSearcher(InMemoryJournalRepository repository);
+        JournalSearcher CreateJournalSearcher(JournalRepository repository);
     }
 }

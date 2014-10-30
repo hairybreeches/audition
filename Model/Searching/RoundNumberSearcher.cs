@@ -8,9 +8,9 @@ namespace Model.Searching
 {
     public class RoundNumberSearcher : IJournalSearcher<EndingParameters>
     {
-        private readonly InMemoryJournalRepository repository;
+        private readonly JournalRepository repository;
 
-        public RoundNumberSearcher(InMemoryJournalRepository repository)
+        public RoundNumberSearcher(JournalRepository repository)
         {
             this.repository = repository;
         }  
