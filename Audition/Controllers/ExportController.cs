@@ -34,7 +34,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.HoursExport)]
-        public async Task<IHttpActionResult> HoursExport(ExportRequest<WorkingHoursParameters> saveRequest)
+        public async Task<string> HoursExport(ExportRequest<WorkingHoursParameters> saveRequest)
         {
             //todo: duplication!
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
@@ -43,7 +43,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.AccountsExport)]
-        public async Task<IHttpActionResult> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
+        public async Task<string> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
             return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
@@ -51,7 +51,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.DateExport)]
-        public async Task<IHttpActionResult> DateExport(ExportRequest<YearEndParameters> saveRequest)
+        public async Task<string> DateExport(ExportRequest<YearEndParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
             return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
@@ -59,7 +59,7 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.EndingExport)]
-        public async Task<IHttpActionResult> EndingExport(ExportRequest<EndingParameters> saveRequest)
+        public async Task<string> EndingExport(ExportRequest<EndingParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
             return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
@@ -67,17 +67,17 @@ namespace Audition.Controllers
 
         [HttpPost]
         [Route(Routing.UserExport)]
-        public async Task<IHttpActionResult> UserExport(ExportRequest<UserParameters> saveRequest)
+        public async Task<string> UserExport(ExportRequest<UserParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
             return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
         }
 
-        private async Task<IHttpActionResult> Export(string description, IQueryable<Journal> journals, SerialisationOptions options)
+        private async Task<string> Export(string description, IQueryable<Journal> journals, SerialisationOptions options)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
             excelExporter.WriteJournals(description, journals, saveLocation, options);
-            return Ok(saveLocation);
+            return saveLocation;
         }
     }
 }
