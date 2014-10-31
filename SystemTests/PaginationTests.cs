@@ -23,10 +23,19 @@ namespace SystemTests
         public void WhenWeGetALatePageNumberOfASearchWeGetTheRightResult()
         {
             var parameters = new EndingParameters(0);
-            var searchRequest =
-                new SearchRequest<EndingParameters>(new SearchWindow<EndingParameters>(parameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)),149);
+            var searchRequest = new SearchRequest<EndingParameters>(new SearchWindow<EndingParameters>(parameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)),149);
+            var serialisedRequest = JsonConvert.SerializeObject(searchRequest);
+            
 
-            var request = new MockRequestResponse("POST", JsonConvert.SerializeObject(searchRequest), "application/json",
+            var journals = ExecuteSearch(serialisedRequest);
+
+            var ids = journals.Select(x => x.Id);
+            CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), ids);
+        }
+
+        private static IEnumerable<Journal> ExecuteSearch(string serialisedRequest)
+        {
+            var request = new MockRequestResponse("POST", serialisedRequest, "application/json",
                 "http://localhost:1337/" + Routing.EndingSearch);
 
             var builder = SystemFoo.CreateDefaultContainerBuilder();
@@ -34,12 +43,9 @@ namespace SystemTests
             {
                 lifetime.Resolve<JournalRepository>().UpdateJournals(GetJournals());
                 lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
-                var journals = lifetime.GetParsedResponseContent<SearchResponse>(request).Journals;
-                var ids = journals.Select(x => x.Id);
-                CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x=>x.ToString()) ,ids);
-            }            
+               return lifetime.GetParsedResponseContent<SearchResponse>(request).Journals;
+            }
         }
-
 
 
         private static IEnumerable<Journal> GetJournals()
