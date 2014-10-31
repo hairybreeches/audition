@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Requests;
 using Audition.Session;
-using Model;
-using Model.Accounting;
 using Model.Responses;
 using Model.SearchWindows;
+using Persistence;
 using Searching;
 
 namespace Audition.Controllers
@@ -32,7 +30,7 @@ namespace Audition.Controllers
         {           
             //todo: duplication!
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return SearchResults(journals, searchRequest.PageNumber);
+            return journals.SearchResults(searchRequest.PageNumber);
         }        
 
         [HttpPost]
@@ -40,7 +38,7 @@ namespace Audition.Controllers
         public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return SearchResults(journals, searchRequest.PageNumber);
+            return journals.SearchResults(searchRequest.PageNumber);
         }
         
         [HttpPost]
@@ -48,7 +46,7 @@ namespace Audition.Controllers
         public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return SearchResults(journals, searchRequest.PageNumber);
+            return journals.SearchResults(searchRequest.PageNumber);
         }
 
         [HttpPost]
@@ -56,7 +54,7 @@ namespace Audition.Controllers
         public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return SearchResults(journals, searchRequest.PageNumber);
+            return journals.SearchResults(searchRequest.PageNumber);
         }
         
         [HttpPost]
@@ -64,17 +62,7 @@ namespace Audition.Controllers
         public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
             var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return SearchResults(journals, searchRequest.PageNumber);
-        }
-
-        private static SearchResponse SearchResults(IQueryable<Journal> journals, int pageNumber)
-        {
-            //todo: tests to make sure page number is treated correctly
-            var listOfAllJournals = journals.ToList();
-            var totalResults = listOfAllJournals.Count();
-            var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
-            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
-            return new SearchResponse(journalsToReturn, totalResults);
+            return journals.SearchResults(searchRequest.PageNumber);
         }
     }
 }
