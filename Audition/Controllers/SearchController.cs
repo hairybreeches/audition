@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Audition.Chromium;
 using Audition.Requests;
 using Audition.Session;
+using Model.Accounting;
 using Model.Responses;
 using Model.SearchWindows;
 using Persistence;
@@ -27,42 +29,36 @@ namespace Audition.Controllers
         [HttpPost]
         [Route(Routing.HoursSearch)]
         public SearchResponse HoursSearch(SearchRequest<WorkingHoursParameters> searchRequest)
-        {           
-            //todo: duplication!
-            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return journals.SearchResults(searchRequest.PageNumber);
+        {                       
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }        
 
         [HttpPost]
         [Route(Routing.AccountsSearch)]
         public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
-            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return journals.SearchResults(searchRequest.PageNumber);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }
         
         [HttpPost]
         [Route(Routing.DateSearch)]
         public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
-            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return journals.SearchResults(searchRequest.PageNumber);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }
 
         [HttpPost]
         [Route(Routing.UserSearch)]
         public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {
-            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return journals.SearchResults(searchRequest.PageNumber);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
         public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
-            var journals = Searcher.FindJournalsWithin(searchRequest.SearchWindow);
-            return journals.SearchResults(searchRequest.PageNumber);
+            return Searcher.FindJournalsWithin(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }
     }
 }
