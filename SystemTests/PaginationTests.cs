@@ -19,24 +19,34 @@ namespace SystemTests
     [TestFixture]
     public class PaginationTests
     {
-        [Test]
-        public void WhenWeGetALatePageNumberOfASearchWeGetTheRightResult()
+        [TestCaseSource("SearchRequests")]
+        public void WhenWeGetALatePageNumberOfASearchWeGetTheRightResult(string requestData, string route)
         {
-            var parameters = new EndingParameters(0);
-            var searchRequest = new SearchRequest<EndingParameters>(new SearchWindow<EndingParameters>(parameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)),149);
-            var serialisedRequest = JsonConvert.SerializeObject(searchRequest);
-            
-
-            var journals = ExecuteSearch(serialisedRequest);
-
+            var journals = ExecuteSearch(requestData, route);
             var ids = journals.Select(x => x.Id);
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), ids);
         }
 
-        private static IEnumerable<Journal> ExecuteSearch(string serialisedRequest)
+        public IEnumerable<TestCaseData> SearchRequests
+        {
+            get
+            {
+                yield return CreateTestCaseData(new EndingParameters(0), Routing.EndingSearch);
+            }
+        }
+
+        public TestCaseData CreateTestCaseData<T>(T searchParameters, string route)
+        {
+            var searchRequest = new SearchRequest<T>(new SearchWindow<T>(searchParameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)), 149);
+            var serialisedRequest = JsonConvert.SerializeObject(searchRequest);
+
+            return new TestCaseData(serialisedRequest, route);
+        }
+
+        private static IEnumerable<Journal> ExecuteSearch(string serialisedRequest, string route)
         {
             var request = new MockRequestResponse("POST", serialisedRequest, "application/json",
-                "http://localhost:1337/" + Routing.EndingSearch);
+                "http://localhost:1337/" + route);
 
             var builder = SystemFoo.CreateDefaultContainerBuilder();
             using (var lifetime = builder.Build())
