@@ -7,7 +7,7 @@ namespace Persistence
 {
     public static class JournalQueryableExtensions
     {
-        public static SearchResponse SearchResults(this IQueryable<Journal> journals, int pageNumber)
+        public static SearchResponse GetPage(this IQueryable<Journal> journals, int pageNumber)
         {
             //todo: tests to make sure page number is treated correctly
             var listOfAllJournals = journals.ToList();
