@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Model;
 using Model.Accounting;
@@ -15,6 +16,11 @@ namespace Persistence
             var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
             var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
             return new SearchResponse(journalsToReturn, totalResults);
+        }
+
+        public static IEnumerable<Journal> GetAllJournals(this IQueryable<Journal> journals)
+        {
+            return journals;
         }
     }
 }

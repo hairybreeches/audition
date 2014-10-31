@@ -10,6 +10,7 @@ using Excel;
 using Model;
 using Model.Accounting;
 using Model.SearchWindows;
+using Persistence;
 using Searching;
 
 namespace Audition.Controllers
@@ -76,7 +77,7 @@ namespace Audition.Controllers
         private async Task<string> Export(string description, IQueryable<Journal> journals, SerialisationOptions options)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(description, journals, saveLocation, options);
+            excelExporter.WriteJournals(description, journals.GetAllJournals(), saveLocation, options);
             return saveLocation;
         }
     }
