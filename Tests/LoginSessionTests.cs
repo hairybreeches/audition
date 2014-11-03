@@ -8,6 +8,7 @@ using Model.SearchWindows;
 using Model.Time;
 using NSubstitute;
 using NUnit.Framework;
+using Tests.Mocks;
 using Xero;
 
 namespace Tests
@@ -52,7 +53,7 @@ namespace Tests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
-            builder.Register(_ => Substitute.For<IXeroSession>());
+            builder.Register(_ => new MockXeroSession()).As<IXeroSession>();
             return builder;
         }
 
@@ -66,8 +67,7 @@ namespace Tests
 
         private static void Login(IComponentContext container)
         {
-            var loginController = container.Resolve<XeroSessionController>();
-            loginController.PostCompleteAuthenticationRequest(new XeroVerificationCode());
+            container.LoginToXero(new XeroVerificationCode());
         }
 
         private static void Logout(IComponentContext container)
