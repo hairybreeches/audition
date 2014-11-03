@@ -133,7 +133,7 @@ Created,Date,Username
 ],
 TotalResults: 2}";
                 
-                var expectedJson = SystemFoo.MungeJson(readableJson);
+                var expectedJson = Json.MungeJson(readableJson);
                 
                 Assert.AreEqual(expectedJson, actual);
         }
