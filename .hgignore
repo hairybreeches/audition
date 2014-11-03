@@ -1,0 +1,9 @@
+syntax: glob
+Audition.v12.suo
+build/**
+_NCrunch_Audition/**
+packages/**
+**.user
+Ui/node_modules/**
+Ui/npm-debug.log
+*/obj/**
