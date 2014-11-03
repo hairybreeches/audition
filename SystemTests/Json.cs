@@ -2,7 +2,7 @@
 
 namespace SystemTests
 {
-    public static class SystemFoo
+    public static class Json
     {
         public static string MungeJson(string value)
         {           

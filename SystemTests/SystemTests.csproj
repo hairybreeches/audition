@@ -83,7 +83,7 @@
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="PaginationTests.cs" />
     <Compile Include="Sage50Tests.cs" />
-    <Compile Include="SystemFoo.cs" />
+    <Compile Include="Json.cs" />
     <Compile Include="XeroTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
