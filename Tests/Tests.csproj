@@ -90,6 +90,7 @@
     <Compile Include="JournalTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
+    <Compile Include="Mocks\MockExporter.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="SageJournalParsingTests.cs" />

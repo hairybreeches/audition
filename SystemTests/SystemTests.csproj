@@ -96,6 +96,10 @@
       <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
       <Name>Audition</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Excel\Excel.csproj">
+      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
+      <Name>Excel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>

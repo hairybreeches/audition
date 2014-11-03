@@ -1,19 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Audition.Chromium;
+using Audition.Controllers;
+using Audition.Native;
 using Audition.Requests;
 using Audition.Session;
 using Autofac;
+using Excel;
+using Model;
 using Model.Accounting;
 using Model.Responses;
 using Model.SearchWindows;
 using Model.Time;
 using Newtonsoft.Json;
-using NodaTime;
+using NSubstitute;
 using NUnit.Framework;
 using Persistence;
 using Sage50;
+using Tests.Mocks;
 
 namespace SystemTests
 {
@@ -26,7 +32,34 @@ namespace SystemTests
             var journals = ExecuteSearch(requestData, route);
             var ids = journals.Select(x => x.Id);
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), ids);
+        }    
+        
+        [Test]
+        public void ExportsAllJournalsWhenRequested()
+        {
+            var builder = SystemFoo.CreateDefaultContainerBuilder();
+            var fileChooser = Substitute.For<IFileSaveChooser>();
+            fileChooser.GetFileSaveLocation().Returns(Task.FromResult("steve"));
+            builder.Register(_ => fileChooser).As<IFileSaveChooser>();
+            var exporter = new MockExporter();
+            builder.Register(_ => exporter).As<IExcelExporter>();
+
+
+            var requestData =
+                new ExportRequest<EndingParameters>(
+                    new SearchWindow<EndingParameters>(new EndingParameters(0),
+                        new DateRange(DateTime.MinValue, DateTime.MaxValue)), new SerialisationOptions(true, true));
+
+            using (var lifetime = builder.Build())
+            {
+                lifetime.Resolve<JournalRepository>().UpdateJournals(GetJournals());
+                lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+                lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
+                var ids = exporter.WrittenJournals.Select(x => x.Id);
+                CollectionAssert.AreEqual(Enumerable.Range(0, 1500).Select(x => x.ToString()), ids);
+            }           
         }
+
 
         public IEnumerable<TestCaseData> SearchRequests
         {
