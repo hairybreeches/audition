@@ -4,12 +4,13 @@ using Audition.Chromium;
 using Autofac;
 using CefSharp;
 using Newtonsoft.Json;
+using Tests;
 
 namespace SystemTests
 {
     public static class RequestExecution
     {
-        public static T GetParsedResponseContent<T>(this IComponentContext lifetime, MockRequestResponse requestResponse)
+        public static T GetParsedResponseContent<T>(this IContainer lifetime, MockRequestResponse requestResponse)
         {
             var json = lifetime.GetResponseContent(requestResponse);
             try
@@ -23,7 +24,7 @@ namespace SystemTests
             
         }
 
-        public static string GetResponseContent(this IComponentContext lifetime, MockRequestResponse requestResponse)
+        public static string GetResponseContent(this IContainer lifetime, MockRequestResponse requestResponse)
         {
             var cefSharpResponse = lifetime.ExecuteRequest(requestResponse);            
             using (var reader = new StreamReader(cefSharpResponse.Content))
@@ -32,11 +33,14 @@ namespace SystemTests
             }
         }
 
-        public static CefSharpResponse ExecuteRequest(this IComponentContext lifetime, MockRequestResponse requestResponse)
+        public static CefSharpResponse ExecuteRequest(this IContainer lifetime, MockRequestResponse requestResponse)
         {
-            var handler = lifetime.Resolve<IRequestHandler>();
-            handler.OnBeforeResourceLoad(null, requestResponse);
-            return requestResponse.Response;
+            using (var requestScope = lifetime.BeginRequestScope())
+            {
+                var handler = requestScope.Resolve<IRequestHandler>();
+                handler.OnBeforeResourceLoad(null, requestResponse);
+                return requestResponse.Response;
+            }            
         }
     }
 }

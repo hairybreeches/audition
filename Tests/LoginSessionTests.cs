@@ -65,7 +65,7 @@ namespace Tests
             Assert.Throws<NotLoggedInException>(() => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
         }
 
-        private static void Login(IComponentContext container)
+        private static void Login(IContainer container)
         {
             container.LoginToXero(new XeroVerificationCode());
         }
