@@ -79,9 +79,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacConfiguration.cs" />
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="PaginationTests.cs" />
+    <Compile Include="RequestExecution.cs" />
     <Compile Include="Sage50Tests.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="XeroTests.cs" />

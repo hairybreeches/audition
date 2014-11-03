@@ -1,56 +1,21 @@
-﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Audition;
-using Audition.Chromium;
 using Audition.Controllers;
 using Audition.Native;
 using Audition.Session;
 using Autofac;
-using CefSharp;
 using Microsoft.Owin.FileSystems;
 using Model.Accounting;
-using Newtonsoft.Json;
 using NSubstitute;
 using Persistence;
 using Sage50;
 using Xero;
 
-namespace SystemTests
+namespace Tests
 {
     public static class AutofacConfiguration
     {
-        public static T GetParsedResponseContent<T>(this IComponentContext lifetime, MockRequestResponse requestResponse)
-        {
-            var json = lifetime.GetResponseContent(requestResponse);
-            try
-            {
-                return JsonConvert.DeserializeObject<T>(json);
-            }
-            catch (Exception)
-            {
-                throw new Exception("Could not parse: " + json);                
-            }
-            
-        }        
-        
-        public static string GetResponseContent(this IComponentContext lifetime, MockRequestResponse requestResponse)
-        {
-            var cefSharpResponse = lifetime.ExecuteRequest(requestResponse);            
-            using (var reader = new StreamReader(cefSharpResponse.Content))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        public static CefSharpResponse ExecuteRequest(this IComponentContext lifetime, MockRequestResponse requestResponse)
-        {
-            var handler = lifetime.Resolve<IRequestHandler>();
-            handler.OnBeforeResourceLoad(null, requestResponse);
-            return requestResponse.Response;
-        }
-
         public static void LoginToXero(this IComponentContext lifetime, XeroVerificationCode verificationCode)
         {
             var loginController = lifetime.Resolve<XeroSessionController>();
