@@ -14,14 +14,17 @@ namespace Tests
     {
         //todo: would be nice to check we can make an AppForm here too
         [TestCaseSource("Controllers")]
-        public void CanCreateClass(Type type)
+        public void CanCreateControllers(Type type)
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
             using (var container = builder.Build())
             {
-                var result = container.Resolve(type);
-                Assert.NotNull(result);
+                using (var requestScope = container.BeginRequestScope())
+                {
+                    var result = requestScope.Resolve(type);
+                    Assert.NotNull(result);
+                }
             }
         }
 
