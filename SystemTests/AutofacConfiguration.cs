@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Audition;
 using Audition.Chromium;
 using Audition.Controllers;
+using Audition.Native;
 using Audition.Session;
 using Autofac;
 using CefSharp;
 using Microsoft.Owin.FileSystems;
 using Model.Accounting;
 using Newtonsoft.Json;
+using NSubstitute;
 using Persistence;
 using Sage50;
 using Xero;
@@ -76,6 +79,14 @@ namespace SystemTests
             builder.Register(_ => new PhysicalFileSystem("."))
                 .As<IFileSystem>();
 
+            return builder;
+        }
+
+        public static ContainerBuilder SaveExportedFilesTo(this ContainerBuilder builder, string fileName)
+        {
+            var fileChooser = Substitute.For<IFileSaveChooser>();
+            fileChooser.GetFileSaveLocation().Returns(Task.FromResult(fileName));
+            builder.Register(_ => fileChooser).As<IFileSaveChooser>();
             return builder;
         }
     }

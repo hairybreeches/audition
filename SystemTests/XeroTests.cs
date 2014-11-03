@@ -76,10 +76,8 @@ namespace SystemTests
         {
             var builder = CreateContainerBuilder();
 
-            var fileChooser = Substitute.For<IFileSaveChooser>();
             var fileName = Path.GetTempFileName();
-            fileChooser.GetFileSaveLocation().Returns(Task.FromResult(fileName));
-            builder.Register(_ => fileChooser).As<IFileSaveChooser>();
+            builder.SaveExportedFilesTo(fileName);
 
 
             var requestResponse = new MockRequestResponse("POST",
@@ -97,7 +95,7 @@ Created,Date,Username
 06/04/2013 01:00:00 +01:00,06/04/2013 00:00:00,,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ", fileContents);
             
-        }        
+        }
 
         [Test]
         public void CanReturnJournalsSearchedFor()
