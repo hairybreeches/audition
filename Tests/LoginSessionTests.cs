@@ -57,12 +57,17 @@ namespace Tests
             return builder;
         }
 
-        private static void AssertSearchingGivesNotLoggedInException(IComponentContext container)
+        private static void AssertSearchingGivesNotLoggedInException(IContainer container)
         {
-            var searcher = container.Resolve<SearchController>();
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1), new DateRange(DateTime.MinValue, DateTime.MaxValue));
+            using (var requestScope = container.BeginRequestScope())
+            {
+                var searcher = requestScope.Resolve<SearchController>();
+                var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1),
+                    new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
-            Assert.Throws<NotLoggedInException>(() => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
+                Assert.Throws<NotLoggedInException>(
+                    () => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
+            }
         }
 
         private static void Login(IContainer container)
