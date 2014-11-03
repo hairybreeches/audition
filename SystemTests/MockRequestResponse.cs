@@ -4,6 +4,7 @@ using System.IO;
 using Audition.Chromium;
 using CefSharp;
 using NSubstitute;
+using Tests;
 
 namespace SystemTests
 {
@@ -23,12 +24,12 @@ namespace SystemTests
 
         public void Cancel()
         {
-            throw new NotImplementedException();
+            throw new ShouldNotHappenInThisTestException();
         }
 
         public void Redirect(string url)
         {
-            throw new NotImplementedException();
+            throw new ShouldNotHappenInThisTestException();
         }
 
         public void RespondWith(Stream stream, string mimeType, string statusText, int statusCode, IDictionary<string, string> responseHeaders)
@@ -38,7 +39,7 @@ namespace SystemTests
 
         public void RespondWith(Stream stream, string mimeType)
         {
-            throw new NotImplementedException();
+            throw new ShouldNotHappenInThisTestException();
         }
 
         public CefSharpResponse Response { get; private set; }

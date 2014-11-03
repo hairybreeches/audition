@@ -100,6 +100,7 @@
     <Compile Include="SearcherTests\YearEndSearchingTests.cs" />
     <Compile Include="SearcherTests\HoursSearchingTests.cs" />
     <Compile Include="SearcherTests\RoundNumberSearcherTests.cs" />
+    <Compile Include="ShouldNotHappenInThisTestException.cs" />
     <Compile Include="TimeFrameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
