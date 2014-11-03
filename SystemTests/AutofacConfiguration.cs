@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Audition;
 using Audition.Chromium;
 using Audition.Controllers;
 using Audition.Session;
 using Autofac;
 using CefSharp;
+using Microsoft.Owin.FileSystems;
 using Model.Accounting;
 using Newtonsoft.Json;
 using Persistence;
@@ -64,6 +66,17 @@ namespace SystemTests
             lifetime.Resolve<JournalRepository>().UpdateJournals(journals);
             lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
             return lifetime;
+        }
+
+        public static ContainerBuilder CreateDefaultContainerBuilder()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<AuditionModule>();
+
+            builder.Register(_ => new PhysicalFileSystem("."))
+                .As<IFileSystem>();
+
+            return builder;
         }
     }
 }
