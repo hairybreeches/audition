@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Audition.Chromium;
 using Audition.Controllers;
+using Audition.Session;
 using Autofac;
 using CefSharp;
+using Model.Accounting;
 using Newtonsoft.Json;
+using Persistence;
 using Sage50;
 using Xero;
 
@@ -25,7 +29,6 @@ namespace SystemTests
             }
             
         }        
-        
         
         public static string GetResponseContent(this IComponentContext lifetime, MockRequestResponse requestResponse)
         {
@@ -53,6 +56,14 @@ namespace SystemTests
         {
             var loginController = lifetime.Resolve<Sage50SessionController>();
             loginController.Login(loginDetails);
+        }
+
+        public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
+        {
+            var lifetime = builder.Build();
+            lifetime.Resolve<JournalRepository>().UpdateJournals(journals);
+            lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+            return lifetime;
         }
     }
 }

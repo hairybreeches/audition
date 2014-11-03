@@ -50,16 +50,13 @@ namespace SystemTests
                     new SearchWindow<EndingParameters>(new EndingParameters(0),
                         new DateRange(DateTime.MinValue, DateTime.MaxValue)), new SerialisationOptions(true, true));
 
-            using (var lifetime = builder.Build())
+            using (var lifetime = builder.BuildSearchable(GetJournals()))
             {
-                lifetime.Resolve<JournalRepository>().UpdateJournals(GetJournals());
-                lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
                 lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
                 var ids = exporter.WrittenJournals.Select(x => x.Id);
                 CollectionAssert.AreEqual(Enumerable.Range(0, 1500).Select(x => x.ToString()), ids);
             }           
         }
-
 
         public IEnumerable<TestCaseData> SearchRequests
         {
@@ -94,10 +91,8 @@ namespace SystemTests
                 "http://localhost:1337/" + route);
 
             var builder = SystemFoo.CreateDefaultContainerBuilder();
-            using (var lifetime = builder.Build())
+            using (var lifetime = builder.BuildSearchable(GetJournals()))
             {
-                lifetime.Resolve<JournalRepository>().UpdateJournals(GetJournals());
-                lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
                return lifetime.GetParsedResponseContent<SearchResponse>(request).Journals;
             }
         }
