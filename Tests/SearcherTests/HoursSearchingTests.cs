@@ -6,9 +6,6 @@ using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
-using Persistence;
-using Searching;
-using Tests.Mocks;
 
 namespace Tests.SearcherTests
 {
@@ -20,11 +17,10 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedOnADayInRangeUnlessTheTimeMakesThemInteresting(DayOfWeek dayOfWeek, DayOfWeek fromDay, DayOfWeek toDay)
         {
             var journal = PostedOn(dayOfWeek);
-            var searcher = CreateSearcher(journal);
 
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
-                    .Select(x => x.Id);
+
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(fromDay, toDay), journal)
+                .Select(x => x.Id);
 
             
             CollectionAssert.IsEmpty(journalIds);
@@ -36,10 +32,8 @@ namespace Tests.SearcherTests
             DayOfWeek toDay)
         {
             var journal = PostedOn(dayOfWeek);
-            var searcher = CreateSearcher(journal);
 
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(fromDay, toDay))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(fromDay, toDay), journal)
                     .Select(x => x.Id);
 
             CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());
@@ -49,10 +43,8 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedInsideTimeUnlessTheDayMakesThemInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = PostedAt(journalTime);
-            var searcher = CreateSearcher(journal);
 
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(fromTime, toTime), journal)
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds.ToList());
@@ -62,11 +54,9 @@ namespace Tests.SearcherTests
         public void SearcherReturnsJournalsPostedOutsideTimeEvenWhenTheDayIsNotInteresting(LocalTime journalTime, LocalTime fromTime, LocalTime toTime)
         {
             var journal = PostedAt(journalTime);
-            var searcher = CreateSearcher(journal);
-
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(fromTime, toTime))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(fromTime, toTime), journal)
                     .Select(x => x.Id);
+
             CollectionAssert.AreEqual(new[] { journal.Id }, journalIds.ToList());            
         }
 
@@ -74,10 +64,7 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedAfterFinancialPeriod()
         {
             var journal = Affecting(new DateTime(1991,1,1));
-            var searcher = CreateSearcher(journal);
-
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)), journal)
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds);
@@ -87,10 +74,8 @@ namespace Tests.SearcherTests
         public void SearcherDoesNotReturnJournalsPostedBeforeFinancialPeriod()
         {
             var journal = Affecting(new DateTime(1989,12,31,23,59,59));
-            var searcher = CreateSearcher(journal);
 
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(new DateTime(1990,1,1), new DateTime(1990,12,31,23,59,59)), journal)
                     .Select(x => x.Id);
 
             CollectionAssert.IsEmpty(journalIds);
@@ -101,11 +86,9 @@ namespace Tests.SearcherTests
         {
             //given a journal on the last day of the financial period
             var journal = Affecting(new DateTime(1990, 12, 31, 23, 59, 59));
-            var searcher = CreateSearcher(journal);
 
             //and a period created just with the date, rather than the full datetime
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990, 1, 1), new DateTime(1990, 12, 31)))
+            var journalIds =Searching.ExecuteSearch(CreateSearchWindow(new DateTime(1990, 1, 1), new DateTime(1990, 12, 31)), journal)
                     .Select(x => x.Id);
 
             //the journal should still be defined as being within the financial period
@@ -117,11 +100,9 @@ namespace Tests.SearcherTests
         {
             //given a journal on the first day of the financial period
             var journal = Affecting(new DateTime(1990, 1, 1, 0, 0, 0));
-            var searcher = CreateSearcher(journal);
 
             //and a period created badly with a time on the first date
-            var journalIds =
-                searcher.FindJournalsWithin(CreateSearchWindow(new DateTime(1990, 1, 1,23,59,59), new DateTime(1990, 12, 31)))
+            var journalIds = Searching.ExecuteSearch(CreateSearchWindow(new DateTime(1990, 1, 1,23,59,59), new DateTime(1990, 12, 31)), journal)
                     .Select(x => x.Id);
 
             //the journal should still be defined as being within the financial period
@@ -169,11 +150,6 @@ namespace Tests.SearcherTests
         private static SearchWindow<WorkingHoursParameters> CreateSearchWindow(WorkingHoursParameters workingHours)
         {
             return new SearchWindow<WorkingHoursParameters>(workingHours, new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
-        }
-
-        private static WorkingHoursSearcher CreateSearcher(params Journal[] journals)
-        {
-            return new WorkingHoursSearcher(new JournalRepository().UpdateJournals(journals));
         }
 
         private static Journal PostedOn(DayOfWeek day)

@@ -4,8 +4,6 @@ using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
-using Persistence;
-using Searching;
 using Tests.Mocks;
 
 namespace Tests.SearcherTests
@@ -23,8 +21,7 @@ namespace Tests.SearcherTests
             var journalApplyingToPostYearEnd = CreateJournalByUser("steve", YearEnd.AddDays(1));
             var journalApplyingToPreYearstart = CreateJournalByUser("steve", YearStart.Subtract(TimeSpan.FromDays(1)));
 
-            var searcher = CreateSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
-            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("nonexistent"), FinancialPeriod));
+            var result = Searching.ExecuteSearch(new SearchWindow<UserParameters>(new UserParameters("nonexistent"), FinancialPeriod), journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result, "Neither of the journals should be returned since they're outside the period");
         }
 
@@ -32,8 +29,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalPostedByOtherUserWhenSingleUserSpecified()
         {
             var journal = CreateJournalInPeriodByUser("steve");
-            var searcher = CreateSearcher(journal);
-            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("alf"),FinancialPeriod));
+            var result = Searching.ExecuteSearch(new SearchWindow<UserParameters>(new UserParameters("alf"),FinancialPeriod), journal);
             CollectionAssert.AreEqual(new[]{journal}, result, "The journal should be returned since it's by an unexpected user");
         }
 
@@ -59,8 +55,7 @@ namespace Tests.SearcherTests
             })
                 //give them a roughly random ordering
                 .OrderBy(x=>x.Id);
-            var searcher = CreateSearcher(journals.ToArray());
-            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters("\telizabeth \n\tsTeve  \r\n\tsuzy\n"), FinancialPeriod));
+            var result = Searching.ExecuteSearch(new SearchWindow<UserParameters>(new UserParameters("\telizabeth \n\tsTeve  \r\n\tsuzy\n"), FinancialPeriod), journals.ToArray());
             CollectionAssert.AreEquivalent(journalsToFind, result, "The searcher should return only the journals by unexpected users"); 
         }
         
@@ -72,14 +67,8 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalPostedByUserWhenSingleUserSpecified(string username, string userInput)
         {
             var journal = CreateJournalInPeriodByUser(username);
-            var searcher = CreateSearcher(journal);
-            var result = searcher.FindJournalsWithin(new SearchWindow<UserParameters>(new UserParameters(userInput),FinancialPeriod));
+            var result = Searching.ExecuteSearch(new SearchWindow<UserParameters>(new UserParameters(userInput),FinancialPeriod), journal);
             CollectionAssert.IsEmpty(result, "The journal should not be returned since it's by an expected user");
-        }
-
-        private static IJournalSearcher<UserParameters> CreateSearcher(params Journal[] journals)
-        {
-            return new UserSearcher(new JournalRepository().UpdateJournals(journals));
         }
 
         private static Journal CreateJournalInPeriodByUser(string user)
