@@ -14,7 +14,7 @@ using Xero;
 
 namespace SystemTests
 {
-    public static class LifetimeExtensions
+    public static class AutofacConfiguration
     {
         public static T GetParsedResponseContent<T>(this IComponentContext lifetime, MockRequestResponse requestResponse)
         {
