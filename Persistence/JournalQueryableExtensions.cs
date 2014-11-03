@@ -10,7 +10,6 @@ namespace Persistence
     {
         public static SearchResponse GetPage(this IQueryable<Journal> journals, int pageNumber)
         {
-            //todo: tests to make sure page number is treated correctly
             var listOfAllJournals = journals.ToList();
             var totalResults = listOfAllJournals.Count();
             var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
