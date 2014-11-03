@@ -22,6 +22,12 @@ namespace Tests
             loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
         }
 
+        public static void LogoutFromXero(this IComponentContext container)
+        {
+            var loginController = container.Resolve<XeroSessionController>();
+            loginController.Logout();
+        }
+
         public static void LoginToSage50(this IComponentContext lifetime, Sage50LoginDetails loginDetails)
         {
             var loginController = lifetime.Resolve<Sage50SessionController>();
@@ -54,5 +60,7 @@ namespace Tests
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
             return builder;
         }
+
+        
     }
 }
