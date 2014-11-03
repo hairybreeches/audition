@@ -18,7 +18,7 @@ namespace Audition.Controllers
     public class ExportController : ApiController
     {
         private readonly LoginSession session;
-        private readonly ExcelExporter excelExporter;
+        private readonly IExcelExporter excelExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
         private JournalSearcher Searcher
@@ -26,7 +26,7 @@ namespace Audition.Controllers
             get { return session.GetCurrentJournalSearcher(); }
         }
 
-        public ExportController(IFileSaveChooser fileSaveChooser, ExcelExporter excelExporter, LoginSession session)
+        public ExportController(IFileSaveChooser fileSaveChooser, IExcelExporter excelExporter, LoginSession session)
         {
             this.fileSaveChooser = fileSaveChooser;
             this.excelExporter = excelExporter;

@@ -5,7 +5,7 @@ using Model.Accounting;
 
 namespace Excel
 {
-    public class ExcelExporter
+    public class ExcelExporter : IExcelExporter
     {
         private readonly IFileSystem fileSystem;
 
