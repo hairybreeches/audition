@@ -14,6 +14,7 @@ using Model.Time;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
+using Tests;
 using Tests.Mocks;
 
 namespace SystemTests

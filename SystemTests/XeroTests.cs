@@ -7,6 +7,7 @@ using Autofac;
 using Model.Accounting;
 using NSubstitute;
 using NUnit.Framework;
+using Tests;
 using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
