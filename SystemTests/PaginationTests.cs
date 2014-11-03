@@ -35,8 +35,9 @@ namespace SystemTests
                         new DateRange(DateTime.MinValue, DateTime.MaxValue)), new SerialisationOptions(true, true));
 
             using (var lifetime = builder.BuildSearchable(GetJournals()))
+            using (var requestScope = lifetime.BeginRequestScope())
             {
-                lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
+                requestScope.Resolve<ExportController>().EndingExport(requestData).Wait();
                 var ids = exporter.WrittenJournals.Select(x => x.Id);
                 CollectionAssert.AreEqual(Enumerable.Range(0, 1500).Select(x => x.ToString()), ids);
             }           
