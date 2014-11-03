@@ -44,7 +44,7 @@ namespace Tests
             using (var container = builder.Build())
             {
                 Login(container);
-                Logout(container);
+                container.LogoutFromXero();
                 AssertSearchingGivesNotLoggedInException(container);
             }
         }        
@@ -68,12 +68,6 @@ namespace Tests
         private static void Login(IComponentContext container)
         {
             container.LoginToXero(new XeroVerificationCode());
-        }
-
-        private static void Logout(IComponentContext container)
-        {
-            var loginController = container.Resolve<XeroSessionController>();
-            loginController.Logout();
         }
     }
 }
