@@ -49,6 +49,7 @@
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="ExcelModule.cs" />
     <Compile Include="FileSystem.cs" />
+    <Compile Include="IExcelExporter.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
