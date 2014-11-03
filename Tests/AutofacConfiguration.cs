@@ -51,8 +51,11 @@ namespace Tests
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
         {
             var lifetime = builder.Build();
-            lifetime.Resolve<JournalRepository>().UpdateJournals(journals);
-            lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+            using (var requestScope = lifetime.BeginRequestScope())
+            {
+                requestScope.Resolve<JournalRepository>().UpdateJournals(journals);
+                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+            }
             return lifetime;
         }
 
