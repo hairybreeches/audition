@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Audition;
 using Autofac;
 using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
 using Persistence;
+using Searching;
 using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
@@ -160,16 +162,16 @@ namespace Tests.SearcherTests
 
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule<XeroModule>();
+            builder.RegisterModule<AuditionModule>();
             builder.Register(_ => new MockXeroSession(journal)).As<IXeroSession>();
 
             using (var lifetime = builder.Build())
             {
-                var factory = lifetime.Resolve<XeroSearcherFactory>();
-                var repoFactory = lifetime.Resolve<IXeroJournalGetter>();
-                var searcher = factory.CreateJournalSearcher(new JournalRepository().UpdateJournals(repoFactory.GetJournals("steve").Result));
-                var resultsOfSearch = searcher.FindJournalsWithin(window);
-                return resultsOfSearch;
+                lifetime.LoginToXero(new XeroVerificationCode());
+                using (var request = lifetime.BeginRequestScope())
+                {
+                    return new WorkingHoursSearcher(request.Resolve<JournalRepository>()).FindJournalsWithin(window);
+                }
             }
         }
 
