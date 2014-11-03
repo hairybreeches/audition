@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Audition.Controllers;
+using Audition.Requests;
 using Autofac;
 using Model.Accounting;
+using Model.Responses;
 using Model.SearchWindows;
 using NUnit.Framework;
 using Persistence;
@@ -36,15 +39,52 @@ namespace Tests
             return ExecuteSearch(repo => new RoundNumberSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
         }
 
-        private static IEnumerable<Journal> ExecuteSearch(Func<JournalRepository, IEnumerable<Journal>> searchAction, Journal[] journalsInRepository)
+        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<WorkingHoursParameters> searchRequest, IEnumerable<Journal> journals)
+        {
+            return ExecuteSearch(controller => controller.HoursSearch(searchRequest), journals);
+        }
+
+        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<UnusualAccountsParameters> searchRequest, IEnumerable<Journal> journals)
+        {
+            return ExecuteSearch(controller => controller.AccountsSearch(searchRequest), journals);
+        }
+
+        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<YearEndParameters> searchRequest, IEnumerable<Journal> journals)
+        {
+            return ExecuteSearch(controller => controller.DateSearch(searchRequest), journals);
+        }
+
+        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<UserParameters> searchRequest, IEnumerable<Journal> journals)
+        {
+            return ExecuteSearch(controller => controller.UserSearch(searchRequest), journals);
+        }
+
+        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<EndingParameters> searchRequest, IEnumerable<Journal> journals)
+        {
+            return ExecuteSearch(controller => controller.EndingSearch(searchRequest), journals);
+        }
+
+        private static IEnumerable<Journal> ExecuteSearch(Func<SearchController, SearchResponse> searchAction, IEnumerable<Journal> journalsInRepository)
+        {
+            return ExecuteSearch(context => searchAction(context.Resolve<SearchController>()).Journals, journalsInRepository);
+        }
+
+        private static IEnumerable<Journal> ExecuteSearch(Func<JournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
+        {
+            return ExecuteSearch(context => searchAction(context.Resolve<JournalRepository>()), journalsInRepository);
+        }
+
+        private static IEnumerable<Journal> ExecuteSearch(Func<IComponentContext, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
         {
             CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
 
             using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder().BuildSearchable(journalsInRepository))
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                return searchAction(requestScope.Resolve<JournalRepository>());
+                return searchAction(requestScope);
             }
         }
+
+        
     }
 }
