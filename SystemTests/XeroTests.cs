@@ -140,7 +140,7 @@ TotalResults: 2}";
 
         private ContainerBuilder CreateContainerBuilder()
         {
-            var builder = SystemFoo.CreateDefaultContainerBuilder();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
             builder.Register(_ => xeroSession).As<IXeroSession>();            
             return builder;
         }

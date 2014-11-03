@@ -37,7 +37,7 @@ namespace SystemTests
         [Test]
         public void ExportsAllJournalsWhenRequested()
         {
-            var builder = SystemFoo.CreateDefaultContainerBuilder();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
             var fileChooser = Substitute.For<IFileSaveChooser>();
             fileChooser.GetFileSaveLocation().Returns(Task.FromResult("steve"));
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
@@ -90,7 +90,7 @@ namespace SystemTests
             var request = new MockRequestResponse("POST", serialisedRequest, "application/json",
                 "http://localhost:1337/" + route);
 
-            var builder = SystemFoo.CreateDefaultContainerBuilder();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
             using (var lifetime = builder.BuildSearchable(GetJournals()))
             {
                return lifetime.GetParsedResponseContent<SearchResponse>(request).Journals;
