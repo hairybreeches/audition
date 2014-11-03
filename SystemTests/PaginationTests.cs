@@ -17,8 +17,6 @@ using Model.Time;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
-using Persistence;
-using Sage50;
 using Tests.Mocks;
 
 namespace SystemTests
@@ -40,6 +38,7 @@ namespace SystemTests
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder().SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
             builder.Register(_ => exporter).As<IExcelExporter>();
+            builder.Register(_ => Substitute.For<IFileSystem>()).As<IFileSystem>();
 
 
             var requestData =
