@@ -37,10 +37,7 @@ namespace SystemTests
         [Test]
         public void ExportsAllJournalsWhenRequested()
         {
-            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
-            var fileChooser = Substitute.For<IFileSaveChooser>();
-            fileChooser.GetFileSaveLocation().Returns(Task.FromResult("steve"));
-            builder.Register(_ => fileChooser).As<IFileSaveChooser>();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder().SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
             builder.Register(_ => exporter).As<IExcelExporter>();
 
