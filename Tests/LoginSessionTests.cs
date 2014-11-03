@@ -33,7 +33,10 @@ namespace Tests
             using (var container = builder.Build())
             {
                 Login(container);
-                Assert.NotNull(container.Resolve<SearchController>());
+                using (var requestScope = container.BeginRequestScope())
+                {
+                    Assert.NotNull(requestScope.Resolve<SearchController>());                    
+                }
             }
         }        
 
