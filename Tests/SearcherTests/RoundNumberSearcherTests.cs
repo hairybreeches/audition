@@ -3,8 +3,6 @@ using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
-using Persistence;
-using Searching;
 
 namespace Tests.SearcherTests
 {
@@ -22,8 +20,7 @@ namespace Tests.SearcherTests
             var journalApplyingToPostYearEnd = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
             var journalApplyingToPreYearstart = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
 
-            var searcher = CreateSearcher(journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
-            var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1), FinancialPeriod), journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result);
         }     
         
@@ -32,8 +29,7 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalsWithALineOfZeroValue()
         {
             var journalForZero = ForAmount(InPeriod, InPeriod, 0);
-            var searcher = CreateSearcher(journalForZero);
-            var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
+            var result = Searching.ExecuteSearch((new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod )), journalForZero);
             CollectionAssert.IsEmpty(result);
         }  
         
@@ -42,8 +38,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalForRoundAmount()
         {
             var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
-            var searcher = CreateSearcher(journalForRoundAmount);
-            var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ));
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ), journalForRoundAmount);
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
         }        
         
@@ -51,8 +46,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalWithExactlyTheRightAmountOfZeroes()
         {
             var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
-            var searcher = CreateSearcher(journalForRoundAmount);
-            var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ));
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ), journalForRoundAmount);
             CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
         }    
         
@@ -61,15 +55,10 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalWithOneTooFewZeroes()
         {
             var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 10000);
-            var searcher = CreateSearcher(journalForRoundAmount);
-            var result = searcher.FindJournalsWithin(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ));
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ), journalForRoundAmount);
             CollectionAssert.IsEmpty(result);
         }
 
-        private static RoundNumberSearcher CreateSearcher(params Journal[] journals)
-        {
-            return new RoundNumberSearcher(new JournalRepository().UpdateJournals(journals));
-        }
 
         private static Journal ForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)
         {
