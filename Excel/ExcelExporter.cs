@@ -27,13 +27,13 @@ namespace Excel
             }
         }
 
-        private void WriteDescriptionRow(CsvWriter writer, string description)
+        private static void WriteDescriptionRow(ICsvWriter writer, string description)
         {
             writer.WriteField(description);
             writer.NextRecord();
         }
 
-        private void WriteHeaderRow(CsvWriter writer, SerialisationOptions options)
+        private static void WriteHeaderRow(ICsvWriter writer, SerialisationOptions options)
         {
             writer.WriteField("Created");         
             writer.WriteField("Date");
@@ -51,7 +51,7 @@ namespace Excel
             writer.NextRecord();
         }
 
-        private void WriteJournal(CsvWriter writer, Journal journal, SerialisationOptions options)
+        private static void WriteJournal(ICsvWriter writer, Journal journal, SerialisationOptions options)
         {
             writer.WriteField(journal.Created);
             writer.WriteField(journal.JournalDate);
@@ -72,7 +72,7 @@ namespace Excel
             writer.NextRecord();
         }
 
-        private static void WriteLine(CsvWriter writer, JournalLine line)
+        private static void WriteLine(ICsvWriter writer, JournalLine line)
         {
             writer.WriteField(line.JournalType);
             writer.WriteField(line.AccountCode);
@@ -80,7 +80,7 @@ namespace Excel
             writer.WriteField(line.Amount);
         }
 
-        private CsvWriter CreateWriter(string filename)
+        private ICsvWriter CreateWriter(string filename)
         {
             return new CsvWriter(fileSystem.OpenFileToWrite(filename));
         }        
