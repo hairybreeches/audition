@@ -16,22 +16,36 @@ namespace Tests
 {
     public static class AutofacConfiguration
     {
-        public static void LoginToXero(this IComponentContext lifetime, XeroVerificationCode verificationCode)
+        public static ILifetimeScope BeginRequestScope(this IContainer container)
         {
-            var loginController = lifetime.Resolve<XeroSessionController>();
-            loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
+            return container.BeginLifetimeScope("AutofacWebRequest");
         }
 
-        public static void LogoutFromXero(this IComponentContext container)
+        public static void LoginToXero(this IContainer lifetime, XeroVerificationCode verificationCode)
         {
-            var loginController = container.Resolve<XeroSessionController>();
-            loginController.Logout();
+            using (var requestScope = lifetime.BeginRequestScope())
+            {
+                var loginController = requestScope.Resolve<XeroSessionController>();
+                loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
+            }            
         }
 
-        public static void LoginToSage50(this IComponentContext lifetime, Sage50LoginDetails loginDetails)
+        public static void LogoutFromXero(this IContainer container)
         {
-            var loginController = lifetime.Resolve<Sage50SessionController>();
-            loginController.Login(loginDetails);
+            using (var requestScope = container.BeginRequestScope())
+            {
+                var loginController = requestScope.Resolve<XeroSessionController>();
+                loginController.Logout();
+            }
+        }
+
+        public static void LoginToSage50(this IContainer lifetime, Sage50LoginDetails loginDetails)
+        {
+            using (var requestScope = lifetime.BeginRequestScope())
+            {
+                var loginController = requestScope.Resolve<Sage50SessionController>();
+                loginController.Login(loginDetails);
+            }
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
@@ -60,7 +74,5 @@ namespace Tests
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
             return builder;
         }
-
-        
     }
 }
