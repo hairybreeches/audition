@@ -2,32 +2,38 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
 using Model.Time;
+using Raven.Client;
 
 namespace Persistence
 {
     public class JournalRepository
     {
-        private IEnumerable<Journal> Journals { get; set; }
+        private readonly IDocumentSession session;
 
-        public JournalRepository()
+        public JournalRepository(IDocumentSession session)
         {
-            Journals = Enumerable.Empty<Journal>();
+            this.session = session;
         }
 
         public IQueryable<Journal> GetJournalsApplyingTo(DateRange period)
         {
-            return Journals.ToList().Where(x => period.Contains(x.JournalDate)).AsQueryable();
+            return session.Query<Journal>().Where(x => period.Contains(x.JournalDate)).AsQueryable();
         }
 
         public JournalRepository UpdateJournals(IEnumerable<Journal> journals)
         {
-            Journals = journals;
+            ClearJournals();
+            foreach (var journal in journals)
+            {
+                session.Store(journal);
+            }            
+            session.SaveChanges();
             return this;
         }
 
         public void ClearJournals()
         {
-            Journals = Enumerable.Empty<Journal>();
+            
         }
     }
 }
