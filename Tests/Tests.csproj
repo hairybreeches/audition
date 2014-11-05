@@ -100,6 +100,7 @@
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
+    <Compile Include="SearcherTests\PaginationTests.cs" />
     <Compile Include="SearcherTests\UnusualAccountsSearcherTests.cs" />
     <Compile Include="SearcherTests\UserSearcherTests.cs" />
     <Compile Include="SearcherTests\YearEndSearchingTests.cs" />

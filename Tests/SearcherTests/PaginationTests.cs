@@ -12,10 +12,9 @@ using Model.Time;
 using NodaTime;
 using NSubstitute;
 using NUnit.Framework;
-using Tests;
 using Tests.Mocks;
 
-namespace SystemTests
+namespace Tests.SearcherTests
 {
     [TestFixture]
     public class PaginationTests
@@ -43,38 +42,39 @@ namespace SystemTests
             }           
         }
 
+        //todo: surely these can somehow be done as test cases?
         [Test]
         public void PaginationWorksForEndingSearch()
         {
-            var journals = Tests.Searching.ExecuteSearch(CreateSearchRequest(new EndingParameters(0)), GetJournals());
+            var journals = Searching.ExecuteSearch(CreateSearchRequest(new EndingParameters(0)), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
         
         [Test]
         public void PaginationWorksForAccountsSearch()
         {
-            var journals = Tests.Searching.ExecuteSearch(CreateSearchRequest(new UnusualAccountsParameters(1000000000)), GetJournals());
+            var journals = Searching.ExecuteSearch(CreateSearchRequest(new UnusualAccountsParameters(1000000000)), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
         
         [Test]
         public void PaginationWorksForYearEndSearch()
         {
-            var journals = Tests.Searching.ExecuteSearch(CreateSearchRequest(new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days)), GetJournals());
+            var journals = Searching.ExecuteSearch(CreateSearchRequest(new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days)), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
         
         [Test]
         public void PaginationWorksForUserSearch()
         {
-            var journals = Tests.Searching.ExecuteSearch(CreateSearchRequest(new UserParameters("a non-existent user")), GetJournals());
+            var journals = Searching.ExecuteSearch(CreateSearchRequest(new UserParameters("a non-existent user")), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
         
         [Test]
         public void PaginationWorksForWorkingHoursSearch()
         {
-            var journals = Tests.Searching.ExecuteSearch(CreateSearchRequest(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32))), GetJournals());
+            var journals = Searching.ExecuteSearch(CreateSearchRequest(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32))), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
 
