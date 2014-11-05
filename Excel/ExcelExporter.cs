@@ -54,7 +54,7 @@ namespace Excel
         private static void WriteJournal(ICsvWriter writer, Journal journal, SerialisationOptions options)
         {
             writer.WriteField(journal.Created);
-            writer.WriteField(journal.JournalDate);
+            writer.WriteField(journal.JournalDate.ToShortDateString());
             if (options.ShowUsername)
             {
                 writer.WriteField(journal.Username);
