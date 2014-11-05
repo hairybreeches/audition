@@ -37,8 +37,8 @@ namespace Tests
             var expected =
 @"a description of the search
 Created,Date
-04/03/2012 00:00:00 +00:00,04/03/2012 00:00:00,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-05/06/2012 00:00:00 +01:00,05/06/2012 00:00:00,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+04/03/2012 00:00:00 +00:00,04/03/2012,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+05/06/2012 00:00:00 +01:00,05/06/2012,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
             Assert.AreEqual(expected, fileSystem.GetFileValue("c:\\steve.csv"));
         }
@@ -69,8 +69,8 @@ Created,Date
             var expected =
 @"What we did to get these journals
 Created,Date,Username,Description
-04/03/2012 00:00:00 +00:00,04/03/2012 00:00:00,alf,very interesting journal,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-05/06/2012 00:00:00 +01:00,05/06/2012 00:00:00,steve,perfectly normal journal,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+04/03/2012 00:00:00 +00:00,04/03/2012,alf,very interesting journal,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+05/06/2012 00:00:00 +01:00,05/06/2012,steve,perfectly normal journal,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
             Assert.AreEqual(expected, fileSystem.GetFileValue("c:\\steve.csv"));
         }
