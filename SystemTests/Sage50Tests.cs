@@ -26,6 +26,7 @@ namespace SystemTests
             {
                 lifetime.LoginToSage50(new Sage50LoginDetails
                 {
+                    //todo: got to include this in project/repo
                     DataDirectory = @"C:\Programdata\Sage\Accounts\2015\Demodata\ACCDATA",
                     Username = "Manager"
                 });
