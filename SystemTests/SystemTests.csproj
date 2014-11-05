@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockRequestResponse.cs" />
-    <Compile Include="PaginationTests.cs" />
     <Compile Include="RequestExecution.cs" />
     <Compile Include="Sage50Tests.cs" />
     <Compile Include="Json.cs" />
