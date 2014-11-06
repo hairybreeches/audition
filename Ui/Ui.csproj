@@ -66,6 +66,7 @@
     <Content Include="Content\images\jqueryui\ui-icons_cd0a0a_256x240.png" />
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\errors.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

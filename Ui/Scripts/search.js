@@ -110,9 +110,10 @@ var Output = function () {
         totalResults(results.TotalResults);
     };
 
-    self.searchFailure = function(jqXhr, textStatus, errorThrown) {
+    self.searchFailure = function(jqXhr) {
         self.state('error');
-        self.lastError(textStatus + " : " + errorThrown);
+
+        self.lastError(getErrorMessage(jqXhr));
     };
 
     //computed fields ("properties")
