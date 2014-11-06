@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	<Product Id="*" Name="Audition" Language="1033" Version="1.0.0.0" Manufacturer="Audition Software Ltd" UpgradeCode="7e3697d9-e851-400e-9d61-d6f14c58967f">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -9,13 +10,27 @@
 		<Feature Id="ProductFeature" Title="Installer" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcutDesktop"/>
+      <ComponentRef Id="CleanupMainApplicationFolder" />
 		</Feature>
 	</Product>
 
 	<Fragment>
+
+    <Property Id="FOLDERREGISTRYKEY" Value="SOFTWARE\Audition\Audition" />
+    <Property Id="INSTALLFOLDER">
+      <RegistrySearch Key="[FOLDERREGISTRYKEY]" Root="HKLM" Type="raw" Id="INSTALLFOLDER_REGSEARCH" Name="Path" />
+    </Property>
+    
+    
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Audition" />
+        <Directory Id="INSTALLFOLDER" Name="Audition" >
+          <Component Id="CleanupMainApplicationFolder" Guid="*">
+            <RegistryValue Root="HKLM" Key="[FOLDERREGISTRYKEY]" Name="Path" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes"/>
+            <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+          </Component>
+        </Directory>
+        
 			</Directory>
 
       <Directory Id="DesktopFolder" Name="Desktop">
