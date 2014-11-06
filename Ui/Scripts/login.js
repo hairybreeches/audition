@@ -87,7 +87,7 @@ var LoginModel = function () {
 
     self.showError = function (jqXHR) {
         self.blocked(false);
-        var errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.ExceptionMessage : jqXHR.responseText;
+        var errorMessage = getErrorMessage(jqXHR);
         self.error.message(errorMessage);
         self.error.visible(true);
     };
