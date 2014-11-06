@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Installer" Language="1033" Version="1.0.0.0" Manufacturer="Audition Software Ltd" UpgradeCode="7e3697d9-e851-400e-9d61-d6f14c58967f">
+	<Product Id="*" Name="Audition" Language="1033" Version="1.0.0.0" Manufacturer="Audition Software Ltd" UpgradeCode="7e3697d9-e851-400e-9d61-d6f14c58967f">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
