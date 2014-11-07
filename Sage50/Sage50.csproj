@@ -48,6 +48,7 @@
     <Compile Include="IRegistryReader.cs" />
     <Compile Include="ISage50ConnectionFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
+    <Compile Include="Parsing\NominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\Schema\ISchemaColumn.cs" />
     <Compile Include="Parsing\Schema\JournalSchema.cs" />
     <Compile Include="Parsing\Schema\SchemaColumn.cs" />

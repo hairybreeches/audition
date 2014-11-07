@@ -15,11 +15,13 @@ namespace Sage50
     {
         private readonly JournalReader journalReader;        
         private readonly JournalSchema schema;
+        private readonly NominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50JournalGetter(JournalReader journalReader, JournalSchema schema)
+        public Sage50JournalGetter(JournalReader journalReader, JournalSchema schema, NominalCodeLookupFactory nominalCodeLookupFactory)
         {
             this.journalReader = journalReader;            
             this.schema = schema;
+            this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
 
         public IEnumerable<Journal> GetJournals(DbConnection loginDetails)
@@ -71,7 +73,7 @@ namespace Sage50
         {
             var command = CreateCommand(connection, "SELECT ACCOUNT_REF, NAME FROM NOMINAL_LEDGER");
             var reader = command.ExecuteReader();
-            return NominalCodeLookup.FromQueryResult(reader);
+            return nominalCodeLookupFactory.FromQueryResult(reader);
         }
 
         private string GetJournalsText(string tableName)
