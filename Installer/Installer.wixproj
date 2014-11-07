@@ -52,6 +52,9 @@
   <ItemGroup>
     <Folder Include="obj\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="auditionlicence.rtf" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <Target Name="BeforeBuild">
     <HeatDirectory PreprocessorVariable="var.ProductDir" NoLogo="true" ToolPath="$(WixToolPath)" AutogenerateGuids="true" OutputFile="obj/component.wxs" DirectoryRefId="INSTALLFOLDER" SuppressFragments="true" Directory="../build/$(Configuration)/Product" ComponentGroupName="ProductComponents" SuppressRootDirectory="true" SuppressRegistry="true" />
