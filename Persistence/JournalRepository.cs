@@ -21,7 +21,7 @@ namespace Persistence
 
         public JournalRepository UpdateJournals(IEnumerable<Journal> journals)
         {
-            Journals = journals;
+            Journals = journals.ToList();
             return this;
         }
 
