@@ -8,9 +8,9 @@ namespace Searching
 {
     public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
     {
-        private readonly JournalRepository repository;
+        private readonly IJournalRepository repository;
 
-        public UnusualAccountsSearcher(JournalRepository repository)
+        public UnusualAccountsSearcher(IJournalRepository repository)
         {
             this.repository = repository;
         }   

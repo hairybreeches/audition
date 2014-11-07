@@ -53,7 +53,7 @@ namespace Tests
             var lifetime = builder.Build();
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                requestScope.Resolve<JournalRepository>().UpdateJournals(journals);
+                requestScope.Resolve<IJournalRepository>().UpdateJournals(journals);
                 requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
             }
             return lifetime;

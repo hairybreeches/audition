@@ -69,9 +69,9 @@ namespace Tests
             return ExecuteSearch(context => searchAction(context.Resolve<SearchController>()).Journals, journalsInRepository);
         }
 
-        private static IEnumerable<Journal> ExecuteSearch(Func<JournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
+        private static IEnumerable<Journal> ExecuteSearch(Func<IJournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
         {
-            return ExecuteSearch(context => searchAction(context.Resolve<JournalRepository>()), journalsInRepository);
+            return ExecuteSearch(context => searchAction(context.Resolve<IJournalRepository>()), journalsInRepository);
         }
 
         private static IEnumerable<Journal> ExecuteSearch(Func<IComponentContext, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
