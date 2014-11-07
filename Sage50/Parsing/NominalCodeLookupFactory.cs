@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Sage50.Parsing
 {
-    public class NominalCodeLookupFactory
+    public class NominalCodeLookupFactory : INominalCodeLookupFactory
     {
         public NominalCodeLookup FromQueryResult(IDataReader reader)
         {
@@ -20,7 +20,7 @@ namespace Sage50.Parsing
             return new NominalCodeLookup(dictionary);
         }
 
-        private void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
+        public void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
         {
             try
             {
