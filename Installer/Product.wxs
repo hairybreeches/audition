@@ -16,6 +16,11 @@
 
 	<Fragment>
 
+    <PropertyRef Id="NETFRAMEWORK45"/>
+    <Condition Message="Audition requires the .NET Framework 4.5. Please install the .NET Framework from microsoft.com and try again">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+    
     <Property Id="FOLDERREGISTRYKEY" Value="SOFTWARE\Audition\Audition" />
     <Property Id="INSTALLFOLDER">
       <RegistrySearch Key="[FOLDERREGISTRYKEY]" Root="HKLM" Type="raw" Id="INSTALLFOLDER_REGSEARCH" Name="Path" />
