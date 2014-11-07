@@ -15,7 +15,8 @@
 	</Product>
 
 	<Fragment>
-
+    <WixVariable Id="WixUILicenseRtf" Value="auditionlicence.rtf" />
+    
     <PropertyRef Id="NETFRAMEWORK45"/>
     <Condition Message="Audition requires the .NET Framework 4.5. Please install the .NET Framework from microsoft.com and try again">
       <![CDATA[Installed OR NETFRAMEWORK45]]>
