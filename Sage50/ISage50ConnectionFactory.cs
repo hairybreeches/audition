@@ -1,9 +1,9 @@
-using System.Data.Odbc;
+using System.Data.Common;
 
 namespace Sage50
 {
     public interface ISage50ConnectionFactory
     {
-        OdbcConnection OpenConnection(Sage50LoginDetails loginDetails);
+        DbConnection OpenConnection(Sage50LoginDetails loginDetails);
     }
 }
