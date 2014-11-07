@@ -10,9 +10,9 @@ namespace Audition.Controllers
         private readonly LoginSession session;
         private readonly Sage50SearcherFactory factory;
         private readonly Sage50JournalGetter journalGetter;
-        private readonly Sage50ConnectionFactory connectionFactory;
+        private readonly ISage50ConnectionFactory connectionFactory;
 
-        public Sage50SessionController(LoginSession session, Sage50SearcherFactory factory, Sage50JournalGetter journalGetter, Sage50ConnectionFactory connectionFactory)
+        public Sage50SessionController(LoginSession session, Sage50SearcherFactory factory, Sage50JournalGetter journalGetter, ISage50ConnectionFactory connectionFactory)
         {
             this.session = session;
             this.factory = factory;

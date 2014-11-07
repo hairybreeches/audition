@@ -2,7 +2,7 @@
 
 namespace Sage50
 {
-    public class Sage50ConnectionFactory
+    public class Sage50ConnectionFactory : ISage50ConnectionFactory
     {
         private readonly Sage50DriverDetector driverDetector;
 
