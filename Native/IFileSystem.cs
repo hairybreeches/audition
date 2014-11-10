@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Excel
+namespace Native
 {
     public interface IFileSystem
     {

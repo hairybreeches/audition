@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Audition.Chromium;
-using Audition.Native;
 using Autofac;
 using Model.Accounting;
 using NSubstitute;

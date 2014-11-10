@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Excel;
+using Native;
 using NUnit.Framework;
 
 namespace Tests

@@ -9,6 +9,7 @@ using Model;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
+using Native;
 using NodaTime;
 using NSubstitute;
 using NUnit.Framework;
