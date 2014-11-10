@@ -2,6 +2,7 @@
 using CsvHelper;
 using Model;
 using Model.Accounting;
+using Native;
 
 namespace Excel
 {
