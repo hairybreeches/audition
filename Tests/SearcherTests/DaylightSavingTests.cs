@@ -170,7 +170,7 @@ namespace Tests.SearcherTests
                 lifetime.LoginToXero(new XeroVerificationCode());
                 using (var request = lifetime.BeginRequestScope())
                 {
-                    return new WorkingHoursSearcher(request.Resolve<IJournalRepository>()).FindJournalsWithin(window);
+                    return new WorkingHoursSearcher(request.Resolve<IJournalRepository>()).FindJournalsWithin(window).ToList();
                 }
             }
         }

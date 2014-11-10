@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Audition.Controllers;
 using Audition.Requests;
 using Autofac;
@@ -81,7 +82,7 @@ namespace Tests
             using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder().BuildSearchable(journalsInRepository))
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                return searchAction(requestScope);
+                return searchAction(requestScope).ToList();
             }
         }
 

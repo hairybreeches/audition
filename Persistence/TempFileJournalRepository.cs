@@ -13,11 +13,16 @@ namespace Persistence
     public class TempFileJournalRepository : IJournalRepository, IDisposable
     {
         private readonly IFileSystem fileSystem;
-        private readonly string filename;
+        private string filename;
 
         public TempFileJournalRepository(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
+            GenerateNewTempFile();
+        }
+
+        private void GenerateNewTempFile()
+        {
             filename = Path.GetTempFileName();
         }
 
@@ -54,12 +59,18 @@ namespace Persistence
 
         public void ClearJournals()
         {
-            
+            DeleteTempFile();
+            GenerateNewTempFile();
+        }
+
+        private void DeleteTempFile()
+        {
+            fileSystem.DeleteFile(filename);
         }
 
         public void Dispose()
         {
-            ClearJournals();
+            DeleteTempFile();
         }
     }
 }
