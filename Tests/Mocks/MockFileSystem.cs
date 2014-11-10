@@ -21,6 +21,11 @@ namespace Tests.Mocks
             throw new ShouldNotHappenInThisTestException();
         }
 
+        public void DeleteFile(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
         public string GetFileValue(string filename)
         {
             return files[filename];
