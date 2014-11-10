@@ -13,7 +13,7 @@ namespace Persistence
             var listOfAllJournals = journals.ToList();
             var totalResults = listOfAllJournals.Count();
             var numberOfResultsToSkip = (pageNumber - 1) * Constants.Pagesize;
-            var journalsToReturn = listOfAllJournals.OrderBy(x=>x.Created).Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
+            var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
             return new SearchResponse(journalsToReturn, totalResults);
         }
 
