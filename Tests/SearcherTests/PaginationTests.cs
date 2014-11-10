@@ -25,8 +25,7 @@ namespace Tests.SearcherTests
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder().SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
-            builder.Register(_ => exporter).As<IExcelExporter>();
-            builder.Register(_ => Substitute.For<IFileSystem>()).As<IFileSystem>();
+            builder.Register(_ => exporter).As<IExcelExporter>();            
 
 
             var requestData =
