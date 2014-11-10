@@ -9,10 +9,9 @@ using Model;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
-using Native;
 using NodaTime;
-using NSubstitute;
 using NUnit.Framework;
+using Persistence;
 using Tests.Mocks;
 
 namespace Tests.SearcherTests
@@ -76,14 +75,36 @@ namespace Tests.SearcherTests
         {
             var journals = Searching.ExecuteSearch(CreateSearchRequest(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32))), GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1480, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
+        }    
+                
+        
+        [TestCase(15, 0, true, true, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number < 1 gives correct exception")]
+        [TestCase(15, 3, true, true, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number too large gives correct exception")]
+        [TestCase(6, 1, false, false, TestName = "Less than one page of results means the only page has no next or previous")]
+        [TestCase(10, 1, false, false, TestName = "Exactly one page of results means the only page has no next or previous")]
+        [TestCase(40, 2, true, true, TestName = "A page in the middle should have a next and a previous page")]
+        [TestCase(40, 4, true, false, TestName = "A full last page should have a previous but no next")]
+        [TestCase(36, 4, true, false, TestName = "A half-full last page should have a previous but no next")]
+        public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable)
+        {
+            //given a search with some results
+            var searchResults = GetJournals().Take(numberOfResults).AsQueryable();
+            //when we send the pagination result back to the server
+            var searchResponse = searchResults.GetPage(pageNumber);
+
+            //Then the presence of a previous page should be as expected
+            Assert.AreEqual(previousPageShouldBeAvailable, searchResponse.IsPreviousPage, "Response should know whether the page is the first page or not");
+            Assert.AreEqual(nextPageShouldBeAvailable, searchResponse.IsNextPage, "Reponse should know whether the page is the last page or not.");
         }
+
+
 
         public SearchRequest<T> CreateSearchRequest<T>(T searchParameters)
         {
             return new SearchRequest<T>(new SearchWindow<T>(searchParameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)), 149);
         }
 
-       private static IEnumerable<Journal> GetJournals()
+        private static IEnumerable<Journal> GetJournals()
         {
             var startDate = new DateTimeOffset(new DateTime(1999, 1, 1), TimeSpan.Zero);
             for (var i = 0; i < 1500; i++)
