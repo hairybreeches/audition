@@ -129,7 +129,7 @@ Created,Date,Username
         ]
     }
 ],
-TotalResults: 2,IsPreviousPage:false,IsNextPage:false,FirstResult:1}";
+TotalResults: '2',IsPreviousPage:false,IsNextPage:false,FirstResult:1}";
                 
                 var expectedJson = Json.MungeJson(readableJson);
                 

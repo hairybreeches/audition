@@ -54,7 +54,7 @@ var Output = function () {
     var lastSearchUrl = '';
     var lastSearchWindow = {};
 
-    var totalResults = ko.observable(0);
+    var totalResults = ko.observable('');
     var firstResult = ko.observable(0);
 
     var setPage = function (pageNumber) {        
