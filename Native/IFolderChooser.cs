@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Audition.Native
+namespace Native
 {
     public interface IFolderChooser
     {
