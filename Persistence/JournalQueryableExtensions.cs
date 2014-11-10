@@ -26,7 +26,7 @@ namespace Persistence
             var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Constants.Pagesize).ToList();
             var isNextPage = pageNumber < totalPages;
             var isPreviousPage = pageNumber > 1;
-            return new SearchResponse(journalsToReturn, totalResults,  isPreviousPage, isNextPage, firstResult);
+            return new SearchResponse(journalsToReturn, totalResults.ToString(),  isPreviousPage, isNextPage, firstResult);
         }
 
         public static IEnumerable<Journal> GetAllJournals(this IQueryable<Journal> journals)
