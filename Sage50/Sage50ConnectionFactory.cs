@@ -1,8 +1,9 @@
-﻿using System.Data.Odbc;
+﻿using System.Data.Common;
+using System.Data.Odbc;
 
 namespace Sage50
 {
-    public class Sage50ConnectionFactory
+    public class Sage50ConnectionFactory : ISage50ConnectionFactory
     {
         private readonly Sage50DriverDetector driverDetector;
 
@@ -11,7 +12,7 @@ namespace Sage50
             this.driverDetector = driverDetector;
         }
 
-        public OdbcConnection OpenConnection(Sage50LoginDetails loginDetails)
+        public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
             var connectionString = CreateConnectionString(loginDetails, driverDetector.FindBestDriver());
             var conn = new OdbcConnection(connectionString);

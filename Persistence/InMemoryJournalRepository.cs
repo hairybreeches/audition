@@ -5,11 +5,11 @@ using Model.Time;
 
 namespace Persistence
 {
-    public class JournalRepository
+    public class InMemoryJournalRepository : IJournalRepository
     {
         private IEnumerable<Journal> Journals { get; set; }
 
-        public JournalRepository()
+        public InMemoryJournalRepository()
         {
             Journals = Enumerable.Empty<Journal>();
         }
@@ -19,9 +19,9 @@ namespace Persistence
             return Journals.ToList().Where(x => period.Contains(x.JournalDate)).AsQueryable();
         }
 
-        public JournalRepository UpdateJournals(IEnumerable<Journal> journals)
+        public IJournalRepository UpdateJournals(IEnumerable<Journal> journals)
         {
-            Journals = journals;
+            Journals = journals.ToList();
             return this;
         }
 

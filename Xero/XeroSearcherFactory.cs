@@ -6,7 +6,7 @@ namespace Xero
 {
     public class XeroSearcherFactory : IJournalSearcherFactory
     {
-        public JournalSearcher CreateJournalSearcher(JournalRepository repository)
+        public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
         {            
             return new JournalSearcher(
                 new WorkingHoursSearcher(repository),
