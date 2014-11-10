@@ -8,5 +8,10 @@ namespace Native
         {
             return new StreamWriter(filename);
         }
+
+        public StreamReader OpenFileToRead(string filename)
+        {
+            return new StreamReader(filename);
+        }
     }
 }

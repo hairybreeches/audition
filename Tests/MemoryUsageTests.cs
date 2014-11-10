@@ -1,6 +1,6 @@
-﻿using System.Data.Odbc;
-using Audition.Controllers;
+﻿using Audition.Controllers;
 using Autofac;
+using Native;
 using NSubstitute;
 using NUnit.Framework;
 using Persistence;
@@ -22,7 +22,7 @@ namespace Tests
         [Test]
         public void JournalEnumerableEvaluatedInsideRepository()
         {
-            Assert.Throws<EnumerableEvaluatedException>(() => LoginAndAddJournals(new InMemoryJournalRepository()));
+            Assert.Throws<EnumerableEvaluatedException>(() => LoginAndAddJournals(new TempFileJournalRepository(new FileSystem())));
         }
 
         private static void LoginAndAddJournals(IJournalRepository journalRepository)

@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -47,14 +51,18 @@
   <ItemGroup>
     <Compile Include="IJournalRepository.cs" />
     <Compile Include="JournalQueryableExtensions.cs" />
-    <Compile Include="InMemoryJournalRepository.cs" />
     <Compile Include="PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempFileJournalRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native\Native.csproj">
+      <Project>{f42a124d-7365-4a8a-a909-651d1e877c5e}</Project>
+      <Name>Native</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

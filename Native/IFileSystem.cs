@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Native
 {
     public interface IFileSystem
     {
         StreamWriter OpenFileToWrite(string filename);
+        StreamReader OpenFileToRead(string filename);
     }
 }
