@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IJournalRepository.cs" />
+    <Compile Include="InvalidPageNumberException.cs" />
     <Compile Include="JournalQueryableExtensions.cs" />
     <Compile Include="PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
