@@ -37,7 +37,7 @@ namespace Tests.SearcherTests
             {
                 requestScope.Resolve<ExportController>().EndingExport(requestData).Wait();
                 var ids = exporter.WrittenJournals.Select(x => x.Id);
-                CollectionAssert.AreEqual(Enumerable.Range(0, 1500).Select(x => x.ToString()), ids);
+                CollectionAssert.AreEqual(Enumerable.Range(0, 3000).Select(x => x.ToString()), ids);
             }           
         }
 
@@ -85,6 +85,11 @@ namespace Tests.SearcherTests
         [TestCase(40, 2, true, true, "40", TestName = "A page in the middle should have a next and a previous page")]
         [TestCase(40, 4, true, false, "40", TestName = "A full last page should have a previous but no next")]
         [TestCase(36, 4, true, false, "36", TestName = "A half-full last page should have a previous but no next")]
+        [TestCase(2560, 1, false, true, "2560", TestName = "First page of large result set displays correct results string")]
+        [TestCase(2560, 5, true, true, "2560", TestName = "Early middle page of large result set displays correct results string")]
+        [TestCase(2560, 255, true, true, "2560", TestName = "Second last page of large result set displays correct results string")]
+        [TestCase(2560, 256, true, false, "2560", TestName = "A full last page on a large results set should show correct results string")]
+        [TestCase(2556, 256, true, false, "2556", TestName = "A half-full last page on a large results set should show correct results string")]
         public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable, string totalResults)
         {
             //given a search with some results
@@ -108,7 +113,7 @@ namespace Tests.SearcherTests
         private static IEnumerable<Journal> GetJournals()
         {
             var startDate = new DateTimeOffset(new DateTime(1999, 1, 1), TimeSpan.Zero);
-            for (var i = 0; i < 1500; i++)
+            for (var i = 0; i < 3000; i++)
             {
                 yield return new Journal(i.ToString(), startDate.AddMinutes(5 * i), new DateTime(), "steve", "description", new[]
                 {
