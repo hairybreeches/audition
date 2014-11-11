@@ -45,9 +45,9 @@ namespace Persistence
             }
         }
 
-        private static void ValidatePageNumberNotTooBig(int pageNumber, IEnumerable<Journal> listOfAllJournals)
+        private static void ValidatePageNumberNotTooBig(int pageNumber, IEnumerable<Journal> allJournals)
         {
-            if (!listOfAllJournals.Any() && pageNumber > 1)
+            if (!allJournals.Any() && pageNumber > 1)
             {
                 throw new InvalidPageNumberException(String.Format("Page number too big: {0}", pageNumber));
             }            
