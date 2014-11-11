@@ -85,11 +85,11 @@ namespace Tests.SearcherTests
         [TestCase(40, 2, true, true, "40", 11,10, TestName = "A page in the middle should have a next and a previous page")]
         [TestCase(40, 4, true, false, "40", 31,10, TestName = "A full last page should have a previous but no next")]
         [TestCase(36, 4, true, false, "36", 31,6, TestName = "A half-full last page should have a previous but no next")]
-        [TestCase(2560, 1, false, true, "2560", 1,10, TestName = "First page of large result set displays correct results string")]
-        [TestCase(2560, 5, true, true, "2560", 41,10, TestName = "Early middle page of large result set displays correct results string")]
-        [TestCase(2560, 255, true, true, "2560",2541,10,TestName = "Second last page of large result set displays correct results string")]
-        [TestCase(2560, 256, true, false, "2560",2551,10, TestName = "A full last page on a large results set should show correct results string")]
-        [TestCase(2556, 256, true, false, "2556",2551,6, TestName = "A half-full last page on a large results set should show correct results string")]
+        [TestCase(2560, 1, false, true, "more than 2000", 1,10, TestName = "First page of large result set displays correct results string")]
+        [TestCase(2560, 5, true, true, "more than 2000", 41, 10, TestName = "Early middle page of large result set displays correct results string")]
+        [TestCase(2560, 255, true, true, "more than 2000", 2541, 10, TestName = "Second last page of large result set displays correct results string")]
+        [TestCase(2560, 256, true, false, "more than 2000", 2551, 10, TestName = "A full last page on a large results set should show correct results string")]
+        [TestCase(2556, 256, true, false, "more than 2000", 2551, 6, TestName = "A half-full last page on a large results set should show correct results string")]
         public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable, string totalResults, int firstResult, int numberOfResultsReturned)
         {
             //given a search with some results
