@@ -78,14 +78,14 @@ namespace Tests.SearcherTests
         }    
                 
         
-        [TestCase(15, 0, true, true, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number < 1 gives correct exception")]
-        [TestCase(15, 3, true, true, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number too large gives correct exception")]
-        [TestCase(6, 1, false, false, TestName = "Less than one page of results means the only page has no next or previous")]
-        [TestCase(10, 1, false, false, TestName = "Exactly one page of results means the only page has no next or previous")]
-        [TestCase(40, 2, true, true, TestName = "A page in the middle should have a next and a previous page")]
-        [TestCase(40, 4, true, false, TestName = "A full last page should have a previous but no next")]
-        [TestCase(36, 4, true, false, TestName = "A half-full last page should have a previous but no next")]
-        public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable)
+        [TestCase(15, 0, true, true, "15",ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number < 1 gives correct exception")]
+        [TestCase(15, 3, true, true, "15", ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number too large gives correct exception")]
+        [TestCase(6, 1, false, false, "6", TestName = "Less than one page of results means the only page has no next or previous")]
+        [TestCase(10, 1, false, false, "10", TestName = "Exactly one page of results means the only page has no next or previous")]
+        [TestCase(40, 2, true, true, "40", TestName = "A page in the middle should have a next and a previous page")]
+        [TestCase(40, 4, true, false, "40", TestName = "A full last page should have a previous but no next")]
+        [TestCase(36, 4, true, false, "36", TestName = "A half-full last page should have a previous but no next")]
+        public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable, string totalResults)
         {
             //given a search with some results
             var searchResults = GetJournals().Take(numberOfResults).AsQueryable();
@@ -95,6 +95,7 @@ namespace Tests.SearcherTests
             //Then the presence of a previous page should be as expected
             Assert.AreEqual(previousPageShouldBeAvailable, searchResponse.IsPreviousPage, "Response should know whether the page is the first page or not");
             Assert.AreEqual(nextPageShouldBeAvailable, searchResponse.IsNextPage, "Reponse should know whether the page is the last page or not.");
+            Assert.AreEqual(totalResults, searchResponse.TotalResults, "Response should display the correct total number of results");
         }
 
 
