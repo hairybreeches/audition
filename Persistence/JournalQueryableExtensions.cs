@@ -16,19 +16,26 @@ namespace Persistence
         {
             var numberOfResultsToSkip = (pageNumber - 1) * Pagesize;
 
-            var listOfAllJournals = journals.Skip(numberOfResultsToSkip).Take(MaxTotal + 1).ToList();
+            var resultsSet = journals.Skip(numberOfResultsToSkip).Take(MaxTotal + 1).ToList();
 
-            ValidatePageNumber(pageNumber, listOfAllJournals);
+            ValidatePageNumber(pageNumber, resultsSet);
 
-
-            var minimumTotalResults = listOfAllJournals.Count() + numberOfResultsToSkip;            
 
             var firstResult = numberOfResultsToSkip + 1;
 
-            var journalsToReturn = listOfAllJournals.Take(Pagesize).ToList();
-            var isNextPage = listOfAllJournals.Count > Pagesize;
+            var journalsToReturn = resultsSet.Take(Pagesize).ToList();
+            var isNextPage = resultsSet.Count > Pagesize;
             var isPreviousPage = pageNumber > 1;
-            return new SearchResponse(journalsToReturn, minimumTotalResults > MaxTotal? String.Format("more than {0}", MaxTotal) : minimumTotalResults.ToString(),  isPreviousPage, isNextPage, firstResult);
+
+            var totalResults = TotalResults(resultsSet, numberOfResultsToSkip);
+
+            return new SearchResponse(journalsToReturn, totalResults,  isPreviousPage, isNextPage, firstResult);
+        }
+
+        private static string TotalResults(IEnumerable<Journal> resultsSet, int skipped)
+        {
+            var minimumResults = resultsSet.Count() + skipped;
+            return minimumResults > MaxTotal? String.Format("more than {0}", MaxTotal) : minimumResults.ToString();
         }
 
         private static void ValidatePageNumber(int pageNumber, IEnumerable<Journal> listOfAllJournals)
