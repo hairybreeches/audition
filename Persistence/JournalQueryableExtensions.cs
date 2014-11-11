@@ -20,11 +20,11 @@ namespace Persistence
             if (pageNumber > totalPages || pageNumber < 1)
             {
                 throw new InvalidPageNumberException("Cannot go to page " + pageNumber + ". There are " + totalPages + " pages.");
-            }
-
-            var firstResult = (Pagesize*(pageNumber - 1)) + 1;
+            }            
 
             var numberOfResultsToSkip = (pageNumber - 1) * Pagesize;
+            var firstResult = numberOfResultsToSkip + 1;
+
             var journalsToReturn = listOfAllJournals.Skip(numberOfResultsToSkip).Take(Pagesize).ToList();
             var isNextPage = pageNumber < totalPages;
             var isPreviousPage = pageNumber > 1;
