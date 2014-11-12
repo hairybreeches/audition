@@ -7,7 +7,7 @@ namespace Persistence
         protected override void Load(ContainerBuilder builder)
         {
             //this is the in memory storage, so there can only be one instance
-            builder.RegisterType<JournalRepository>().SingleInstance();
+            builder.RegisterType<TempFileJournalRepository>().SingleInstance().As<IJournalRepository>();
         }
     }
 }

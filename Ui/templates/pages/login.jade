@@ -21,7 +21,6 @@ mixin login-form(system, url)
 				+form-field('Accounts system')
 					select.form-control(data-bind="value: system")
 							option(value="sage50") Sage Line 50
-							option(value="xero") Xero
 			+login-form('xero', "/api/xero/login")
 				+xero-login()
 			+login-form('sage50', "/api/sage50/login")

@@ -8,9 +8,9 @@ namespace Searching
 {
     public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
     {
-        private readonly JournalRepository repository;
+        private readonly IJournalRepository repository;
 
-        public UnusualAccountsSearcher(JournalRepository repository)
+        public UnusualAccountsSearcher(IJournalRepository repository)
         {
             this.repository = repository;
         }   
@@ -19,7 +19,8 @@ namespace Searching
         {
             var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
             var lookup = new AccountsLookup(periodJournals);
-            return lookup.JournalsMadeToUnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
+            var unusualAccountCodes = lookup.UnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
+            return periodJournals.Where(journal=>journal.Lines.Any(journalLine => unusualAccountCodes.Contains(journalLine.AccountCode)));
         }
     }
 }

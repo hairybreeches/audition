@@ -43,8 +43,6 @@ var JournalLine = function(json) {
 
 
 var Output = function () {
-    //todo: share this page size with C# code in Constants
-    var pageSize = 10;
 
     var self = this;
     //fields
@@ -56,16 +54,10 @@ var Output = function () {
     var lastSearchUrl = '';
     var lastSearchWindow = {};
 
-    var totalResults = ko.observable(0);
-    var totalPages = ko.computed(function () {        
-        return Math.ceil(totalResults() / pageSize);
-    });
+    var totalResults = ko.observable('');
+    var firstResult = ko.observable(0);
 
-    var setPage = function (pageNumber) {
-        if (pageNumber > totalPages() || pageNumber < 1) {
-            throw "Cannot go to page " + pageNumber + ". There are " + totalPages() + " pages.";
-        }
-
+    var setPage = function (pageNumber) {        
         model.search({
             pageNumber: pageNumber,
             searchUrl: lastSearchUrl,
@@ -73,24 +65,18 @@ var Output = function () {
         });
     };
 
-    self.resultsComment = function() {
-        var firstResult = (pageSize * (currentPageNumber() - 1)) + 1;
-        var lastResult = firstResult + self.results().length - 1;
-        return "Showing " + firstResult + "-" + lastResult + " of " + totalResults() + " results";
+    self.resultsComment = function() {        
+        var lastResult = firstResult() + self.results().length - 1;
+        return "Showing " + firstResult() + "-" + lastResult + " of " + totalResults() + " results";
     }
 
-    self.isNextPage = function() {
-        return currentPageNumber() < totalPages();
-    }
-
+    self.isNextPage = ko.observable(false);
+    self.isPreviousPage = ko.observable(false);
+    
     self.goToNextPage = function()
     {        
         setPage(currentPageNumber() + 1);
     }
-
-    self.isPreviousPage = function() {
-        return currentPageNumber() > 1;
-    };
 
     self.goToPreviousPage = function() {
         setPage(currentPageNumber() - 1);
@@ -107,7 +93,12 @@ var Output = function () {
         self.results(results.Journals.map(function(json) {
             return new Journal(json);
         }));
+
+
         totalResults(results.TotalResults);
+        self.isNextPage(results.IsNextPage);
+        self.isPreviousPage(results.IsPreviousPage);
+        firstResult(results.FirstResult);
     };
 
     self.searchFailure = function(jqXhr) {
