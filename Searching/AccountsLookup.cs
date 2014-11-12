@@ -6,7 +6,7 @@ namespace Searching
 {
     public class AccountsLookup
     {
-        private readonly IDictionary<string, IList<Journal>> lookup = new Dictionary<string, IList<Journal>>();
+        private readonly IDictionary<string, int> lookup = new Dictionary<string, int>();
 
         public AccountsLookup(IEnumerable<Journal> journals)
         {
@@ -27,24 +27,23 @@ namespace Searching
         {
             foreach (var line in journal.Lines)
             {
-                Add(line.AccountCode, journal);
+                Add(line.AccountCode);
             }
         }
 
-        private void Add(string accountCode, Journal journal)
+        private void Add(string accountCode)
         {
-            IList<Journal> journalList;
-            if (!lookup.TryGetValue(accountCode, out journalList))
+            if (!lookup.ContainsKey(accountCode))
             {
-                journalList = lookup[accountCode] = new List<Journal>();
+                lookup[accountCode] = 0;
             }
 
-            journalList.Add(journal);
+            lookup[accountCode] ++;
         }
 
-        public IQueryable<Journal> JournalsMadeToUnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
+        public ISet<string> UnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
         {
-            return lookup.Values.Where(x => x.Count < minimumEntriesToBeConsideredNormal).SelectMany(x => x).Distinct(new IdEqualityComparer()).AsQueryable();
+            return new HashSet<string>(lookup.Where(x => x.Value < minimumEntriesToBeConsideredNormal).Select(x=>x.Key));
         }
     }
 }

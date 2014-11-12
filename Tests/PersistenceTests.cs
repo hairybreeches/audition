@@ -26,13 +26,13 @@ namespace Tests
                 //given some journals saved in one request
                 using (var request = lifetime.BeginRequestScope())
                 {
-                    var repository = request.Resolve<JournalRepository>();
+                    var repository = request.Resolve<IJournalRepository>();
                     repository.UpdateJournals(JournalWithId("a single stored journal"));
                 }
                 //when we make a new request
                 using (var request = lifetime.BeginRequestScope())
                 {
-                    var repository = request.Resolve<JournalRepository>();
+                    var repository = request.Resolve<IJournalRepository>();
                     var journals = repository.GetJournalsApplyingTo(Forever).ToList();
                     //the journals should still be there
                     Assert.AreEqual(journals.Single().Id, "a single stored journal");
@@ -50,7 +50,7 @@ namespace Tests
                 using (var request = lifetime.BeginRequestScope())
                 {
                     //given a repository with some journals in
-                    var repository = request.Resolve<JournalRepository>();
+                    var repository = request.Resolve<IJournalRepository>();
                     repository.UpdateJournals(JournalWithId("an old journal"));
 
                     //when we update the contents of the repository

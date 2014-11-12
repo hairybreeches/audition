@@ -11,7 +11,7 @@
     <AssemblyName>Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-		<AllowedReferenceRelatedFileExtensions Condition=" '$(Configuration)' == 'Release' ">.allowedextension</AllowedReferenceRelatedFileExtensions>
+    <AllowedReferenceRelatedFileExtensions Condition=" '$(Configuration)' == 'Release' ">.allowedextension</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
