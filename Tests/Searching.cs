@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Audition.Controllers;
 using Audition.Requests;
 using Autofac;
@@ -69,9 +70,9 @@ namespace Tests
             return ExecuteSearch(context => searchAction(context.Resolve<SearchController>()).Journals, journalsInRepository);
         }
 
-        private static IEnumerable<Journal> ExecuteSearch(Func<JournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
+        private static IEnumerable<Journal> ExecuteSearch(Func<IJournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
         {
-            return ExecuteSearch(context => searchAction(context.Resolve<JournalRepository>()), journalsInRepository);
+            return ExecuteSearch(context => searchAction(context.Resolve<IJournalRepository>()), journalsInRepository);
         }
 
         private static IEnumerable<Journal> ExecuteSearch(Func<IComponentContext, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
@@ -81,7 +82,7 @@ namespace Tests
             using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder().BuildSearchable(journalsInRepository))
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                return searchAction(requestScope);
+                return searchAction(requestScope).ToList();
             }
         }
 

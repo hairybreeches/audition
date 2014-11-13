@@ -89,12 +89,15 @@
     <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="DescriptionTests.cs" />
     <Compile Include="DriverDetectorTests.cs" />
+    <Compile Include="EnumerableEvaluatedException.cs" />
     <Compile Include="ExcelExporterTests.cs" />
     <Compile Include="FileSystemTests.cs" />
     <Compile Include="HttpConversionTests.cs" />
     <Compile Include="JournalTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
+    <Compile Include="MemoryUsageTests.cs" />
+    <Compile Include="Mocks\ConnectionFactoryWhichThrowsWhenReaderIsEvaluated.cs" />
     <Compile Include="Mocks\MockExporter.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
@@ -128,6 +131,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native\Native.csproj">
+      <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
+      <Name>Native</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>

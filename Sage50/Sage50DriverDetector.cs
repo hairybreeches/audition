@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -13,7 +14,7 @@ namespace Sage50
             this.registryReader = registryReader;
         }
 
-        public Sage50Driver FindBestDriver()
+        public IEnumerable<Sage50Driver> FindSageDrivers()
         {
             var driverNames = registryReader.Get32BitOdbcDrivers();
             var sageDrivers = driverNames.Where(x => x.StartsWith("Sage Line 50", true, CultureInfo.CurrentCulture));
@@ -23,7 +24,7 @@ namespace Sage50
 
             if (sortedSageDrivers.Any())
             {
-                return sortedSageDrivers.First();
+                return sortedSageDrivers;
             }
             
             throw new SageNotInstalledException();

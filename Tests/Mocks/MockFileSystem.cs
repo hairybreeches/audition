@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Excel;
+using Native;
 
 namespace Tests.Mocks
 {
@@ -13,6 +14,16 @@ namespace Tests.Mocks
         {
             var stream = new CopyingStream(value => files[filename] = value);
             return new StreamWriter(stream);
+        }
+
+        public StreamReader OpenFileToRead(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public void DeleteFile(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
         }
 
         public string GetFileValue(string filename)

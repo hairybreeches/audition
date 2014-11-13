@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Audition.Native
+namespace Native
 {
     public class FolderChooser : IFolderChooser
     {

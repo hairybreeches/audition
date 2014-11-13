@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{66CA942F-3B27-4C90-BAED-E8E676C04E1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native", "Native\Native.csproj", "{F42A124D-7365-4A8A-A909-651D1E877C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,16 @@ Global
 		{66CA942F-3B27-4C90-BAED-E8E676C04E1E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{66CA942F-3B27-4C90-BAED-E8E676C04E1E}.Release|x86.ActiveCfg = Release|x86
 		{66CA942F-3B27-4C90-BAED-E8E676C04E1E}.Release|x86.Build.0 = Release|x86
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F42A124D-7365-4A8A-A909-651D1E877C5E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
