@@ -39,7 +39,7 @@ namespace Audition.Controllers
         {
             //todo: duplication!
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
+            return await Export(saveRequest, journals);
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace Audition.Controllers
         public async Task<string> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
+            return await Export(saveRequest, journals);
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace Audition.Controllers
         public async Task<string> DateExport(ExportRequest<YearEndParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
+            return await Export(saveRequest, journals);
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace Audition.Controllers
         public async Task<string> EndingExport(ExportRequest<EndingParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
+            return await Export(saveRequest, journals);
         }
 
         [HttpPost]
@@ -71,13 +71,13 @@ namespace Audition.Controllers
         public async Task<string> UserExport(ExportRequest<UserParameters> saveRequest)
         {
             var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest.SearchWindow.Description, journals, saveRequest.SerialisationOptions);
+            return await Export(saveRequest, journals);
         }
 
-        private async Task<string> Export(string description, IQueryable<Journal> journals, SerialisationOptions options)
+        private async Task<string> Export<T>(ExportRequest<T> exportRequest, IQueryable<Journal> journals)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(description, journals.GetAllJournals(), saveLocation, options);
+            excelExporter.WriteJournals(exportRequest.SearchWindow.Description, journals.GetAllJournals(), saveLocation, exportRequest.SerialisationOptions);
             return saveLocation;
         }
     }
