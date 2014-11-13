@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
+using System.Linq;
 using Model;
 
 namespace Sage50
@@ -16,7 +17,7 @@ namespace Sage50
 
         public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
-            var connectionString = CreateConnectionString(loginDetails, driverDetector.FindBestDriver());
+            var connectionString = CreateConnectionString(loginDetails, driverDetector.FindSageDrivers().First());
             var conn = new OdbcConnection(connectionString);
             OpenConnection(conn);                    
             return conn;

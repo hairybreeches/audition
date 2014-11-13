@@ -50,7 +50,7 @@ namespace Sage50
 
         public override string ToString()
         {
-            return String.Format("{0} (Version {1})", Name, Version);
+            return String.Format("{0} (Version {1}) - {2}", Name, Version, FriendlyName);
         }
 
         protected bool Equals(Sage50Driver other)
