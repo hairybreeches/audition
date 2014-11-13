@@ -17,10 +17,10 @@ namespace Searching
 
         public IQueryable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
-            var lookup = new AccountsLookup(periodJournals);
+            var lookup = new AccountsLookup(repository.GetJournalsApplyingTo(searchWindow.Period));
             var unusualAccountCodes = lookup.UnusualAccountCodes(searchWindow.Parameters.MinimumEntriesToBeConsideredNormal);
-            return periodJournals.Where(journal=>journal.Lines.Any(journalLine => unusualAccountCodes.Contains(journalLine.AccountCode)));
+            return repository.GetJournalsApplyingTo(searchWindow.Period)
+                .Where(journal=>journal.Lines.Any(journalLine => unusualAccountCodes.Contains(journalLine.AccountCode)));
         }
     }
 }
