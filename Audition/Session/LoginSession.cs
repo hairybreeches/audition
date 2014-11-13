@@ -8,9 +8,9 @@ namespace Audition.Session
     public class LoginSession
     {
         private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
-        private readonly JournalRepository repository;
+        private readonly IJournalRepository repository;
 
-        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, JournalRepository repository)
+        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository)
         {
             this.searcherFactoryStorage = searcherFactoryStorage;
             this.repository = repository;

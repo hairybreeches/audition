@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Audition.Chromium;
-using Audition.Native;
 using Autofac;
 using Model.Accounting;
 using NSubstitute;
@@ -130,7 +129,7 @@ Created,Date,Username
         ]
     }
 ],
-TotalResults: 2}";
+TotalResults: '2',IsPreviousPage:false,IsNextPage:false,FirstResult:1}";
                 
                 var expectedJson = Json.MungeJson(readableJson);
                 

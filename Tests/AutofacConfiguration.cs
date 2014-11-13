@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Audition;
 using Audition.Controllers;
-using Audition.Native;
 using Audition.Session;
 using Autofac;
 using Microsoft.Owin.FileSystems;
 using Model.Accounting;
+using Native;
 using NSubstitute;
 using Persistence;
 using Sage50;
 using Xero;
+using IFileSystem = Microsoft.Owin.FileSystems.IFileSystem;
 
 namespace Tests
 {
@@ -53,7 +54,7 @@ namespace Tests
             var lifetime = builder.Build();
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                requestScope.Resolve<JournalRepository>().UpdateJournals(journals);
+                requestScope.Resolve<IJournalRepository>().UpdateJournals(journals);
                 requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
             }
             return lifetime;

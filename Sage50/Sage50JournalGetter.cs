@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
+using System.Data.Common;
 using System.Linq;
-using Model;
 using Model.Accounting;
-using Persistence;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
 
@@ -12,62 +10,44 @@ namespace Sage50
 {
     public class Sage50JournalGetter
     {
-        private readonly JournalReader journalReader;
-        private readonly Sage50ConnectionFactory connectionFactory;
+        private readonly JournalReader journalReader;        
         private readonly JournalSchema schema;
+        private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50JournalGetter(JournalReader journalReader, Sage50ConnectionFactory connectionFactory, JournalSchema schema)
+        public Sage50JournalGetter(JournalReader journalReader, JournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
         {
-            this.journalReader = journalReader;
-            this.connectionFactory = connectionFactory;
+            this.journalReader = journalReader;            
             this.schema = schema;
+            this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
 
-        public IEnumerable<Journal> GetJournals(Sage50LoginDetails loginDetails)
+        public IEnumerable<Journal> GetJournals(DbConnection loginDetails)
         {
-            try
-            {
-                return GetJournalsInner(loginDetails);
-            }
-            catch (OdbcException e)
-            {
-                var error = e.Errors[0];
-                if (error.SQLState == "08001")
-                {
-                    throw new IncorrectLoginDetailsException("The specified folder does not appear to be a Sage 50 data directory. The data directory can be found by logging in to Sage and clicking help->about from the menu.");
-                }
-                if (error.SQLState == "28000")
-                {
-                    throw new IncorrectLoginDetailsException("Incorrect username or password");
-                }
+                var nominalLookup = CreateNominalCodeLookup(loginDetails);
 
-                throw;
-            }
-            
+                return  GetJournals(loginDetails, nominalLookup, "AUDIT_JOURNAL")
+                    .Concat(GetJournals(loginDetails, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
         }
 
-        private IEnumerable<Journal> GetJournalsInner(Sage50LoginDetails loginDetails)
+        private IEnumerable<Journal> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
         {
-            using (var connection = connectionFactory.OpenConnection(loginDetails))
-            {
-                var nominalLookup = CreateNominalCodeLookup(connection);
-                return  GetJournals(connection, nominalLookup, "AUDIT_JOURNAL")
-                    .Concat(GetJournals(connection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
-            }
-        }
-
-        private IList<Journal> GetJournals(OdbcConnection connection, NominalCodeLookup nominalLookup, string tableName)
-        {
-            var command = new OdbcCommand(GetJournalsText(tableName), connection);
+            var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();
-            return journalReader.GetJournals(odbcDataReader, nominalLookup).ToList();
+            return journalReader.GetJournals(odbcDataReader, nominalLookup);
         }
 
-        private NominalCodeLookup CreateNominalCodeLookup(OdbcConnection connection)
+        private DbCommand CreateCommand(DbConnection connection, string commandText)
         {
-            var command = new OdbcCommand("SELECT ACCOUNT_REF, NAME FROM NOMINAL_LEDGER", connection);
+            var command = connection.CreateCommand();
+            command.CommandText = commandText;
+            return command;
+        }
+
+        private NominalCodeLookup CreateNominalCodeLookup(DbConnection connection)
+        {
+            var command = CreateCommand(connection, "SELECT ACCOUNT_REF, NAME FROM NOMINAL_LEDGER");
             var reader = command.ExecuteReader();
-            return NominalCodeLookup.FromQueryResult(reader);
+            return nominalCodeLookupFactory.FromQueryResult(reader);
         }
 
         private string GetJournalsText(string tableName)

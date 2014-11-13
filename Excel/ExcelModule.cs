@@ -6,8 +6,7 @@ namespace Excel
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ExcelExporter>().As<IExcelExporter>();
-            builder.RegisterType<FileSystem>().As<IFileSystem>();
+            builder.RegisterType<ExcelExporter>().As<IExcelExporter>();            
         }
     }
 }

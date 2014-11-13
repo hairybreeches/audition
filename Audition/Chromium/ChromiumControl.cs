@@ -26,6 +26,9 @@ namespace Audition.Chromium
                               RequestHandler = requestHandler
                           };
 
+            webView.PropertyChanged += (sender, args) => webView.Address = address;
+            
+
             webView.KeyboardHandler = new ShortcutKeyboardHandler();            
 
             // Without this:
