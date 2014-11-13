@@ -13,6 +13,7 @@ using Searching;
 
 namespace Tests
 {
+    //todo: so much duplication!
     public static class Searching
     {
         public static IEnumerable<Journal> ExecuteSearch(SearchWindow<WorkingHoursParameters> searchWindow, params Journal[] journalsInRepository)
