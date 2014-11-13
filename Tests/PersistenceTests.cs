@@ -51,7 +51,7 @@ namespace Tests
                 {
                     //given a repository with some journals in
                     var repository = request.Resolve<IJournalRepository>();
-                    repository.UpdateJournals(JournalWithId("an old journal"));
+                    repository.UpdateJournals(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
 
                     //when we update the contents of the repository
                     repository.UpdateJournals(JournalWithId("a new journal"));
