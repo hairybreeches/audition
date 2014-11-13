@@ -8,3 +8,4 @@ Ui/node_modules/**
 Ui/npm-debug.log
 */obj/**
 **.orig
+**.rej
