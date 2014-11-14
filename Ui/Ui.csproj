@@ -183,7 +183,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Exec Command="npm install -dev" />
     <Exec Command="gulp build --target $(OutputPath)ui" />
   </Target>
 </Project>
