@@ -32,14 +32,14 @@ namespace Tests
 
             var expected = new[]
             {
-                new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
+                new Journal("26", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55),
                         new JournalLine("9998", "Suspense Account", JournalType.Cr, 55),
                         new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
                     }),
-                new Journal("12", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "Steve",
+                new Journal("12", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 13),
