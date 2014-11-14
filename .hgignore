@@ -4,7 +4,6 @@ build/**
 _NCrunch_Audition/**
 packages/**
 **.user
-Ui/node_modules/**
 Ui/npm-debug.log
 */obj/**
 **.orig
