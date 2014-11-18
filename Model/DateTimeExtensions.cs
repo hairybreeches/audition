@@ -7,10 +7,19 @@ namespace Model
         public static DateTimeOffset ToUkDateTimeOffsetFromUtc(this DateTime dateTime)
         {
             var dateUtc = new DateTimeOffset(dateTime, TimeSpan.Zero);
-            var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
-            var offset = timezone.GetUtcOffset(dateUtc);
-            var localDateTime = dateUtc.ToOffset(offset);
-            return localDateTime;
-        }               
+            var offset = GetUkOffset(dateUtc);
+            return dateUtc.ToOffset(offset);
+        }
+
+        private static TimeSpan GetUkOffset(DateTimeOffset dateUtc)
+        {
+            var timezone = GetUkTimezone();
+            return timezone.GetUtcOffset(dateUtc);
+        }
+
+        private static TimeZoneInfo GetUkTimezone()
+        {
+            return TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+        }
     }
 }
