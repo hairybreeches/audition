@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="Audition" Language="1033" Version="!(bind.FileVersion.fil392F97D489CB6244052EDAE9F8AEA138)" Manufacturer="Audition Software Ltd" UpgradeCode="7e3697d9-e851-400e-9d61-d6f14c58967f">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcutDesktop"/>
+      <ComponentRef Id="CleanupMainApplicationFolder" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+    <Icon Id="icon" SourceFile="..\Audition\audition.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon" />
+    <WixVariable Id="WixUILicenseRtf" Value="auditionlicence.rtf" />
+    
+    <PropertyRef Id="NETFRAMEWORK45"/>
+    <Condition Message="Audition requires the .NET Framework 4.5. Please install the .NET Framework from microsoft.com and try again">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+    
+    <Property Id="FOLDERREGISTRYKEY" Value="SOFTWARE\Audition\Audition" />
+    <Property Id="INSTALLFOLDER">
+      <RegistrySearch Key="[FOLDERREGISTRYKEY]" Root="HKLM" Type="raw" Id="INSTALLFOLDER_REGSEARCH" Name="Path" />
+    </Property>
+    
+    
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Audition" >
+          <Component Id="CleanupMainApplicationFolder" Guid="*">
+            <RegistryValue Root="HKLM" Key="[FOLDERREGISTRYKEY]" Name="Path" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes"/>
+            <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+          </Component>
+        </Directory>
+        
+			</Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="a3b9513f-e2d1-4f8c-8551-de3eabb0bf48">
+          <Shortcut Id="ApplicationDesktopShortcut"
+             Name="Audition"
+             Description="Audition journal auditing software"
+             Target="[INSTALLFOLDER]Audition.exe"
+             WorkingDirectory="INSTALLFOLDER"/>
+          <RegistryValue
+            Root="HKCU"
+            Key="[FOLDERREGISTRYKEY]"
+            Name="installed"
+            Type="integer"
+            Value="1"
+            KeyPath="yes"/>
+        </Component>
+      </Directory>
+		</Directory>
+    
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+	</Fragment>
+</Wix>
