@@ -94,8 +94,8 @@ namespace SystemTests
             StringAssert.AreEqualIgnoringCase(
                 @"""Journals posted outside Monday to Friday, 8:00 to 18:00, in the period 05/04/2013 to 04/04/2014""
 Created,Date,Username
-06/04/2013 01:00:00 +01:00,06/04/2013,,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-06/04/2013 01:00:00 +01:00,06/04/2013,,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+" + new DateTimeOffset(2013,4,6,1,0,0,TimeSpan.FromHours(1)) +","+ new DateTime(2013,4,6).ToShortDateString() + @",,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+" + new DateTimeOffset(2013,4,6,1,0,0,TimeSpan.FromHours(1)) +","+ new DateTime(2013,4,6).ToShortDateString() + @",,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ", fileContents);
             
         }
