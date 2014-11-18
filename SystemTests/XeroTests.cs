@@ -92,11 +92,15 @@ namespace SystemTests
             var fileContents = File.ReadAllText(fileName);
 
 
-            var expected = String.Format(@"""Journals posted outside Monday to Friday, 8:00 to 18:00, in the period 05/04/2013 to 04/04/2014""
+            var expected = String.Format(@"""Journals posted outside Monday to Friday, 8:00 to 18:00, in the period {0} to {1}""
 Created,Date,Username
-{0},{1},,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-{0},{1},,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
-", new DateTimeOffset(2013,4,6,1,0,0,TimeSpan.FromHours(1)), new DateTime(2013,4,6).ToShortDateString());
+{2},{3},,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+{2},{3},,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+", 
+ new DateTime(2013,4,5).ToShortDateString(),
+ new DateTime(2014,4,4).ToShortDateString(),
+ new DateTimeOffset(2013,4,6,1,0,0,TimeSpan.FromHours(1)), 
+ new DateTime(2013,4,6).ToShortDateString());
 
 
             StringAssert.AreEqualIgnoringCase(expected, fileContents);
