@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Bundle Name="Audition" Version="1.0.0.0" Manufacturer="Audition Software Ltd" UpgradeCode="264f6631-1c6f-4529-ac27-2bc92923dacb">
+	<Bundle Name="Audition" Version="!(bind.packageVersion.Audition)" Manufacturer="Audition Software Ltd" UpgradeCode="264f6631-1c6f-4529-ac27-2bc92923dacb">
 		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
 
 		<Chain>
       <PackageGroupRef Id="NetFx45Web"/>
-			<MsiPackage SourceFile="../build/release/installer/installer.msi" />
+			<MsiPackage SourceFile="../build/release/installer/installer.msi" Name="Audition"/>
 		</Chain>
 	</Bundle>
 </Wix>
