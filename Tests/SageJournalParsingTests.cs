@@ -58,7 +58,7 @@ namespace Tests
 
             var expected = new[]
             {
-                new Journal("26", new DateTime(2010,4,27,17,16,0), new DateTime(2013, 12, 31), "MANAGER",
+                new Journal("26", new DateTimeOffset(2010,4,27,17,16,0, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55)
