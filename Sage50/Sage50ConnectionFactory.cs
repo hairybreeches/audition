@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
@@ -19,6 +20,11 @@ namespace Sage50
         public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
             var drivers = driverDetector.FindSageDrivers();
+            return OpenConnection(loginDetails, drivers);
+        }
+
+        private DbConnection OpenConnection(Sage50LoginDetails loginDetails, IEnumerable<Sage50Driver> drivers)
+        {
             foreach (var driver in drivers)
             {
                 try
@@ -30,10 +36,11 @@ namespace Sage50
                 }
             }
 
-            throw new IncorrectLoginDetailsException("Could not open the specified folder with available versions of Sage 50.\n" +
-                                                     "Check that the folder is a Sage 50 data directory and that the correct version of Sage is installed.\n" +
-                                                     "The data directory can be found by logging in to Sage and clicking help->about from the menu.\n" +            
-                                                     "Available versions of Sage 50: " + String.Join(", ", drivers.Select(x=>x.FriendlyName)));            
+            throw new IncorrectLoginDetailsException(
+                "Could not open the specified folder with available versions of Sage 50.\n" +
+                "Check that the folder is a Sage 50 data directory and that the correct version of Sage is installed.\n" +
+                "The data directory can be found by logging in to Sage and clicking help->about from the menu.\n" +
+                "Available versions of Sage 50: " + String.Join(", ", drivers.Select(x => x.FriendlyName)));
         }
 
         private DbConnection OpenConnection(Sage50LoginDetails loginDetails, Sage50Driver sage50Driver)
