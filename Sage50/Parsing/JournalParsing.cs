@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model;
 using Model.Accounting;
 
 namespace Sage50.Parsing
@@ -22,7 +23,7 @@ namespace Sage50.Parsing
             var journalLines = linesEnumerable.ToList();
             return new Journal(
                 GetJournalField(journalLines, x => x.TransactionId).ToString(),
-                new DateTimeOffset(GetJournalField(journalLines, x => x.CreationTime)),
+                GetJournalField(journalLines, x => x.CreationTime).ToUkDateTimeOffsetFromUkLocalTime(),
                 GetJournalField(journalLines, x => x.JournalDate),
                 GetJournalField(journalLines, x => x.Username),
                 GetJournalField(journalLines, x => x.Description),
