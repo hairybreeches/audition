@@ -26,7 +26,7 @@ namespace SystemTests
             {
                 lifetime.LoginToSage50(new Sage50LoginDetails
                 {                    
-                    DataDirectory = @"Sage50SampleData\ACCDATA",
+                    DataDirectory = @"Sage50SampleData",
                     Username = "Manager"
                 });
 

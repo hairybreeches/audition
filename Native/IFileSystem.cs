@@ -8,5 +8,6 @@ namespace Native
         StreamWriter OpenFileToWrite(string filename);
         StreamReader OpenFileToRead(string filename);
         void DeleteFile(string filename);
+        bool DirectoryExists(string directoryName);
     }
 }

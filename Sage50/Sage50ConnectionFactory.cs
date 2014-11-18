@@ -3,24 +3,45 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
+using System.IO;
 using System.Linq;
 using Model;
+using Native;
 
 namespace Sage50
 {
     public class Sage50ConnectionFactory : ISage50ConnectionFactory
     {
         private readonly Sage50DriverDetector driverDetector;
+        private readonly IFileSystem fileSystem;
 
-        public Sage50ConnectionFactory(Sage50DriverDetector driverDetector)
+        public Sage50ConnectionFactory(Sage50DriverDetector driverDetector, IFileSystem fileSystem)
         {
             this.driverDetector = driverDetector;
+            this.fileSystem = fileSystem;
         }
 
         public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
             var drivers = driverDetector.FindSageDrivers();
-            return OpenConnection(loginDetails, drivers);
+            var folder = GetFolder(loginDetails.DataDirectory);
+            return OpenConnection(new Sage50LoginDetails
+            {
+                DataDirectory = folder,
+                Password = loginDetails.Password,
+                Username = loginDetails.Username
+            }, drivers);
+        }
+
+        private string GetFolder(string dataDirectory)
+        {
+            if (!fileSystem.DirectoryExists(dataDirectory))
+            {
+                throw new IncorrectLoginDetailsException(String.Format("The directory {0} does not exist", dataDirectory));
+            }
+
+            var accdata = Path.Combine(dataDirectory, "ACCDATA");
+            return fileSystem.DirectoryExists(accdata) ? accdata : dataDirectory;
         }
 
         private DbConnection OpenConnection(Sage50LoginDetails loginDetails, IEnumerable<Sage50Driver> drivers)

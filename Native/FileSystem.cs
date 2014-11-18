@@ -14,6 +14,11 @@ namespace Native
         {
             return new StreamReader(filename);
         }
+        
+        public bool DirectoryExists(string directoryName)
+        {
+            return Directory.Exists(directoryName);
+        }
 
         public void DeleteFile(string filename)
         {

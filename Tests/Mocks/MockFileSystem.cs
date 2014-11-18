@@ -26,6 +26,11 @@ namespace Tests.Mocks
             throw new ShouldNotHappenInThisTestException();
         }
 
+        public bool DirectoryExists(string directoryName)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
         public string GetFileValue(string filename)
         {
             return files[filename];
