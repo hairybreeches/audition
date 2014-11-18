@@ -33,7 +33,7 @@ namespace SystemTests
                 var result = lifetime.GetParsedResponseContent<SearchResponse>(requestResponse);
 
                 Assert.AreEqual("1278", result.TotalResults, "We should get all the journals back");
-                Assert.AreEqual(new Journal("8", DateTime.Parse("27/04/2010 17:16:57"), DateTime.Parse("31/12/2013"), "MANAGER", "Opening Balance", new[]
+                Assert.AreEqual(new Journal("8", new DateTimeOffset(2010,4,27,17,16,57, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER", "Opening Balance", new[]
             {
                 new JournalLine("1100", "Debtors Control Account", JournalType.Cr, 0.05m), 
                 new JournalLine("9998", "Suspense Account", JournalType.Dr, 0.05m), 
