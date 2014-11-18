@@ -1,0 +1,33 @@
+include ../components/template
+include ../components/xero-login
+include ../components/sage50-login
+include ../components/forms
+
+
+mixin login-form(system, url)
+	div(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
+		block
+		+button-group()
+			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
+
+
+
++page('Login', ['login'])
+	.container
+		legend.vertical-space Login to accounts system
+		form.form-horizontal.blockable(action="search", method="post")
+			.blockscreen.loadscreen(style="display: none;" data-bind="visible: blocked()")
+			fieldset
+				+form-field('Accounts system')
+					select.form-control(data-bind="value: system")
+							option(value="sage50") Sage Line 50
+			+login-form('xero', "/api/xero/login")
+				+xero-login()
+			+login-form('sage50', "/api/sage50/login")
+				+sage50-login()
+		.alert.alert-danger(data-bind="visible: error.visible(), with: error" style="display: none;")
+			button.close(type="button" data-bind="click: hide") &#10006;
+			span(data-bind="text: message()")
+		hr.vertical-space
+
+				
