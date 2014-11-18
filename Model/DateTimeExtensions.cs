@@ -9,7 +9,7 @@ namespace Model
             var dateUtc = new DateTimeOffset(dateTime, TimeSpan.Zero);
             var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
             var offset = timezone.GetUtcOffset(dateUtc);
-            var localDateTime = new DateTimeOffset(dateUtc.UtcDateTime, TimeSpan.Zero).ToOffset(offset);
+            var localDateTime = dateUtc.ToOffset(offset);
             return localDateTime;
         }               
     }
