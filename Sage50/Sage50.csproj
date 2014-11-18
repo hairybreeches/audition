@@ -74,6 +74,10 @@
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Native\Native.csproj">
+      <Project>{f42a124d-7365-4a8a-a909-651d1e877c5e}</Project>
+      <Name>Native</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
       <Name>Persistence</Name>
