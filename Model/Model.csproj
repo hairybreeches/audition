@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
