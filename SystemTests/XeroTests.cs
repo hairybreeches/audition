@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Audition.Chromium;
 using Autofac;
 using Model.Accounting;
+using Model.Responses;
 using NSubstitute;
 using NUnit.Framework;
 using Tests;
 using Tests.Mocks;
 using Xero;
 using XeroApi.Model;
+using Journal = Model.Accounting.Journal;
 using JournalLine = Model.Accounting.JournalLine;
 
 namespace SystemTests
@@ -103,37 +106,27 @@ Created,Date,Username
             var requestResponse = new MockRequestResponse("POST", SearchRequest, "application/json",
                    "http://localhost:1337/api/search/hours");
 
-            var actual = GetResponseContent(CreateContainerBuilder(), requestResponse);
-            const string readableJson =
-@"{Journals: [
-    {
-        'Id':'0421c274-2f50-49e4-8f61-623a4daf67ac',
-        'Created':'2013-04-06T01:00:00+01:00',
-        'JournalDate':'2013-04-06T00:00:00',
-        'Username':'',
-        'Description':'',
-        'Lines':[
-            {'AccountCode':'9012','AccountName':'Expenses','JournalType':'Cr','Amount':23.4},
-            {'AccountCode':'3001','AccountName':'Cash','JournalType':'Dr','Amount':23.4}
-        ]
-    },
-    {
-        'Id':'c8d99cf8-6867-4767-be1e-abdf54a2a0f8',
-        'Created':'2013-04-06T01:00:00+01:00',
-        'JournalDate':'2013-04-06T00:00:00',
-        'Username':'',
-        'Description':'',
-        'Lines':[
-            {'AccountCode':'8014','AccountName':'Depreciation','JournalType':'Cr','Amount':12.4},
-            {'AccountCode':'4001','AccountName':'Fixed assets','JournalType':'Dr','Amount':12.4}
-        ]
-    }
-],
-TotalResults: '2',IsPreviousPage:false,IsNextPage:false,FirstResult:1}";
+            var actual = GetParsedResponseContent<SearchResponse>(CreateContainerBuilder(), requestResponse);
+            var expected = new SearchResponse(new[]
+            {
+                new Journal(Guid.Parse("0421c274-2f50-49e4-8f61-623a4daf67ac"),
+                    new DateTimeOffset(2013, 4, 6, 1, 0, 0, TimeSpan.FromHours(1)), new DateTime(2013, 4, 6), new[]
+                    {
+                        new JournalLine("9012", "Expenses", JournalType.Cr, 23.4m),
+                        new JournalLine("3001", "Cash", JournalType.Dr, 23.4m),
+                    }),
+                    
+                    new Journal(Guid.Parse("c8d99cf8-6867-4767-be1e-abdf54a2a0f8"),
+                    new DateTimeOffset(2013, 4, 6, 1, 0, 0, TimeSpan.FromHours(1)), new DateTime(2013, 4, 6), new[]
+                    {
+                        new JournalLine("8014", "Depreciation", JournalType.Cr, 12.4m),
+                        new JournalLine("4001", "Fixed assets", JournalType.Dr, 12.4m),
+                    })
+            }, "2", false, false, 1);
+
+                                
                 
-                var expectedJson = Json.MungeJson(readableJson);
-                
-                Assert.AreEqual(expectedJson, actual);
+                Assert.AreEqual(expected, actual);
         }
 
         private ContainerBuilder CreateContainerBuilder()
@@ -143,12 +136,12 @@ TotalResults: '2',IsPreviousPage:false,IsNextPage:false,FirstResult:1}";
             return builder;
         }
 
-        private static string GetResponseContent(ContainerBuilder builder, MockRequestResponse requestResponse)
+        private static T GetParsedResponseContent<T>(ContainerBuilder builder, MockRequestResponse requestResponse)
         {
             using (var lifetime = builder.Build())
             {
                 lifetime.LoginToXero(new XeroVerificationCode());
-                return lifetime.GetResponseContent(requestResponse);
+                return lifetime.GetParsedResponseContent<T>(requestResponse);
             }
         }
 
