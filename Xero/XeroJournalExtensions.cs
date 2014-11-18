@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Model;
 using Model.Accounting;
 using Journal = XeroApi.Model.Journal;
 using JournalLine = XeroApi.Model.JournalLine;
@@ -42,11 +43,7 @@ namespace Xero
 
         public static DateTimeOffset UkCreationTime(this Journal xeroJournal)
         {
-            var createdDateUtc = new DateTimeOffset(xeroJournal.CreatedDateUTC, TimeSpan.Zero);
-            var timezone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
-            var offset = timezone.GetUtcOffset(createdDateUtc);
-            var localDateTime = new DateTimeOffset(createdDateUtc.UtcDateTime, TimeSpan.Zero).ToOffset(offset);
-            return localDateTime;
+            return xeroJournal.CreatedDateUTC.ToUkDateTimeOffsetFromUtc();
         }
     }
 }
