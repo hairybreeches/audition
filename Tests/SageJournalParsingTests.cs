@@ -24,11 +24,11 @@ namespace Tests
         public void CanConvertJournals()
         {
             var journals = ParseJournals(
-                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"},
-                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "9998", "-55", "Unpresented Cheque"},
-                new[]{"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "2200", "0", "Unpresented Cheque"},
-                new[]{"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
-                new[]{"12", "Steve", "31/12/2013", "27/04/2010 17:16", "9998", "-13", "Unpresented Cheque"});
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-55", "Unpresented Cheque" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "2200", "0", "Unpresented Cheque" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-13", "Unpresented Cheque" });
 
             var expected = new[]
             {
@@ -54,11 +54,11 @@ namespace Tests
         [Test]
         public void CanParseUnbalancedJournals()
         {
-            var journals = ParseJournals(new[] {"26", "MANAGER", "31/12/2013", "27/04/2010 17:16", "1200", "55", "Unpresented Cheque"});
+            var journals = ParseJournals(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" });
 
             var expected = new[]
             {
-                new Journal("26", DateTime.Parse("27/04/2010 17:16"), DateTime.Parse("31/12/2013"), "MANAGER",
+                new Journal("26", new DateTime(2010,4,27,17,16,0), new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55)
@@ -71,8 +71,8 @@ namespace Tests
         public void GetRightExceptionWhenUsernamesMismatched()
         {
             var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
-                new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"},
-                new[] {"12", "Steve", "31/12/2013", "27/04/2010 17:16", "1200", "13", "Unpresented Cheque"}));
+                new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010,4,27,17,16,0), "1200", "13", "Unpresented Cheque" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("12", exception.Message, "If two fields conflict, user should be told what journal id is affected");
             foreach (var conflictingUsername in new[]{"Betty, Steve"})
@@ -85,7 +85,7 @@ namespace Tests
         public void GetFriendlyExceptionWhenNominalCodeNotDefined()
         {
             var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
-                new[] {"12", "Betty", "31/12/2013", "27/04/2010 17:16", "bizarre nominal code", "13", "Unpresented Cheque"}));
+                new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "bizarre nominal code", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
             foreach (var availableCode in nominalCodeLookup.Keys)
@@ -107,7 +107,7 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
-        private static IEnumerable<Journal> ParseJournals(params string[][] dataRows)
+        private static IEnumerable<Journal> ParseJournals(params object[][] dataRows)
         {
             var reader = new JournalReader(new JournalLineParser(new JournalSchema()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
