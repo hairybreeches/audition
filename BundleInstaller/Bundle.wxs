@@ -7,7 +7,8 @@
 
 		<Chain>
       <PackageGroupRef Id="NetFx45Web"/>
-			<MsiPackage SourceFile="../build/release/installer/installer.msi" Name="Audition"/>
+			<MsiPackage SourceFile="../build/release/installer/installer.msi" Name="Audition"/>      
+			<ExePackage SourceFile="vcredist_x86.exe" Name="Visual C++"/>      
 		</Chain>
 	</Bundle>
 </Wix>
