@@ -12,7 +12,11 @@
       <ComponentRef Id="ApplicationShortcutDesktop"/>
       <ComponentRef Id="CleanupMainApplicationFolder" />
 		</Feature>
-	</Product>
+    <Feature Id="VCRedist" Title="Visual C++ 11 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+      <MergeRef Id="VCRedist"/>
+    </Feature>
+
+  </Product>
 
 	<Fragment>
     <Icon Id="icon" SourceFile="..\Audition\audition.ico"/>
@@ -31,6 +35,7 @@
     
     
 		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Merge Id="VCRedist" SourceFile="Microsoft_VC110_CRT_x86.msm" DiskId="1" Language="0"/>
 			<Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLFOLDER" Name="Audition" >
           <Component Id="CleanupMainApplicationFolder" Guid="*">
