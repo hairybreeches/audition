@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="auditionlicence.rtf" />
+    <Content Include="Microsoft_VC110_CRT_x86.msm" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <Target Name="BeforeBuild">
