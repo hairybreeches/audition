@@ -11,6 +11,7 @@
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcutDesktop"/>
       <ComponentRef Id="CleanupMainApplicationFolder" />
+      <ComponentRef Id="ApplicationShortcut" />
 		</Feature>
     <Feature Id="VCRedist" Title="Visual C++ 11 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
       <MergeRef Id="VCRedist"/>
@@ -62,6 +63,20 @@
             KeyPath="yes"/>
         </Component>
       </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Audition Software">
+          <Component Id="ApplicationShortcut" Guid="dc1c4287-ea54-489f-a4ad-c36ecb3f05b2">
+            <Shortcut Id="ApplicationStartMenuShortcut"
+                      Name="Audition"
+                      Description="Audition journal auditing software"
+                      Target="[INSTALLFOLDER]Audition.exe"
+                      WorkingDirectory="INSTALLFOLDER"/>
+            <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="[FOLDERREGISTRYKEY]" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+          </Component>
+        </Directory>
+      </Directory>      
 		</Directory>
     
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
