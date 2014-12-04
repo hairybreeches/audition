@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Audition.Chromium;
-using Audition.Requests;
 using Audition.Session;
 using Excel;
 using Model;
@@ -12,6 +11,7 @@ using Model.SearchWindows;
 using Native;
 using Persistence;
 using Searching;
+using Webapp.Requests;
 
 namespace Audition.Controllers
 {

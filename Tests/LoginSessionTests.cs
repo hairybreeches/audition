@@ -1,7 +1,6 @@
 ﻿using System;
 using Audition;
 using Audition.Controllers;
-using Audition.Requests;
 using Audition.Session;
 using Autofac;
 using Model.SearchWindows;
@@ -9,6 +8,7 @@ using Model.Time;
 using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;
+using Webapp.Requests;
 using Xero;
 
 namespace Tests

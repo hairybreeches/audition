@@ -1,6 +1,5 @@
 ﻿using System;
 using Audition.Chromium;
-using Audition.Requests;
 using Autofac;
 using Model;
 using Model.SearchWindows;
@@ -8,6 +7,7 @@ using Model.Time;
 using Newtonsoft.Json;
 using NodaTime;
 using NUnit.Framework;
+using Webapp.Requests;
 
 namespace Tests
 {
