@@ -58,7 +58,6 @@
     <Compile Include="IFolderChooser.cs" />
     <Compile Include="IRegistryKey.cs" />
     <Compile Include="IRegistryReader.cs" />
-    <Compile Include="RegistryKeyDoesNotExistException.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryReader.cs" />
