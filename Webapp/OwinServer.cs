@@ -8,7 +8,7 @@ using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using Owin;
 
-namespace Audition.Chromium
+namespace Webapp
 {
     public class OwinServer
     {
