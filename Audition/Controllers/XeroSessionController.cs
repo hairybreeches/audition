@@ -2,8 +2,8 @@
 using System.Web.Http;
 using System.Web.Http.Results;
 using Audition.Chromium;
-using Audition.Session;
 using Model;
+using Webapp.Session;
 using Xero;
 
 namespace Audition.Controllers

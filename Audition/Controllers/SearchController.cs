@@ -1,11 +1,11 @@
 ﻿using System.Web.Http;
 using Audition.Chromium;
-using Audition.Session;
 using Model.Responses;
 using Model.SearchWindows;
 using Persistence;
 using Searching;
 using Webapp.Requests;
+using Webapp.Session;
 
 namespace Audition.Controllers
 {

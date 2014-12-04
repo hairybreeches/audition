@@ -136,11 +136,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Session\JournalSearcherFactoryStorage.cs" />
-    <Compile Include="Session\LoginSession.cs" />
-    <Compile Include="Session\NotLoggedInException.cs" />
-    <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
-    <Compile Include="Session\SessionModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
