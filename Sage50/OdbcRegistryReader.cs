@@ -3,11 +3,11 @@ using Native;
 
 namespace Sage50
 {
-    public class OdbcOdbcRegistryReader : IOdbcRegistryReader
+    public class OdbcRegistryReader : IOdbcRegistryReader
     {
         private readonly RegistryReader reader;
 
-        public OdbcOdbcRegistryReader(RegistryReader reader)
+        public OdbcRegistryReader(RegistryReader reader)
         {
             this.reader = reader;
         }
