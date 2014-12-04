@@ -8,11 +8,6 @@ namespace Tests.Mocks
     {
         private readonly IDictionary<string, IRegistryKey> lookup = new Dictionary<string, IRegistryKey>();
 
-        public IRegistryKey OpenKey(string keyName)
-        {
-            return lookup[keyName];
-        }
-
         public bool TryOpenKey(string keyName, out IRegistryKey registryKey)
         {
             return lookup.TryGetValue(keyName, out registryKey);
