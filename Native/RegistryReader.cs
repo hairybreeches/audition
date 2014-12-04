@@ -6,15 +6,29 @@ namespace Native
     {
         public IRegistryKey OpenKey(string keyName)
         {
+            IRegistryKey key;
+
+            if (TryOpenKey(keyName, out key))
+            {
+                return key;                
+            }
+
+            throw new RegistryKeyDoesNotExistException(keyName);            
+        }
+
+        public bool TryOpenKey(string keyName, out IRegistryKey registryKey)
+        {
             var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
                 .OpenSubKey(keyName);
 
             if (key == null)
             {
-                throw new RegistryKeyDoesNotExistException(keyName);
+                registryKey = null;
+                return false;
             }
 
-            return  new AuditionRegistryKey(key);
+            registryKey = new AuditionRegistryKey(key);
+            return true;
         }
     }
 }
