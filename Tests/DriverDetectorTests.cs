@@ -65,9 +65,9 @@ namespace Tests
             return new Sage50DriverDetector(registry).FindSageDrivers();
         }
 
-        private static IRegistryReader CreateRegistry(IEnumerable<string> drivers)
+        private static IOdbcRegistryReader CreateRegistry(IEnumerable<string> drivers)
         {
-            var registry = Substitute.For<IRegistryReader>();
+            var registry = Substitute.For<IOdbcRegistryReader>();
             registry.Get32BitOdbcDrivers().Returns(drivers);
             return registry;
         }

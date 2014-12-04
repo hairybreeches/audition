@@ -16,7 +16,7 @@ namespace Sage50
             builder.RegisterType<NominalCodeLookupFactory>().As<INominalCodeLookupFactory>();
             builder.RegisterType<Sage50ConnectionFactory>().As<ISage50ConnectionFactory>();
             builder.RegisterType<Sage50DriverDetector>();
-            builder.RegisterType<RegistryReader>().As<IRegistryReader>();
+            builder.RegisterType<OdbcOdbcRegistryReader>().As<IOdbcRegistryReader>();
         }
     }
 }

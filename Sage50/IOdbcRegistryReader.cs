@@ -2,7 +2,7 @@
 
 namespace Sage50
 {
-    public interface IRegistryReader
+    public interface IOdbcRegistryReader
     {
         IEnumerable<string> Get32BitOdbcDrivers();
     }

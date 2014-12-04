@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRegistryReader.cs" />
+    <Compile Include="IOdbcRegistryReader.cs" />
     <Compile Include="ISage50ConnectionFactory.cs" />
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Parsing\JournalParsing.cs" />
     <Compile Include="Parsing\SageDataFormatUnexpectedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryReader.cs" />
+    <Compile Include="OdbcOdbcRegistryReader.cs" />
     <Compile Include="Sage50ConnectionFactory.cs" />
     <Compile Include="Sage50Driver.cs" />
     <Compile Include="Sage50DriverDetector.cs" />

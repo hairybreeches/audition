@@ -7,16 +7,16 @@ namespace Sage50
 {
     public class Sage50DriverDetector
     {
-        private readonly IRegistryReader registryReader;
+        private readonly IOdbcRegistryReader odbcRegistryReader;
 
-        public Sage50DriverDetector(IRegistryReader registryReader)
+        public Sage50DriverDetector(IOdbcRegistryReader odbcRegistryReader)
         {
-            this.registryReader = registryReader;
+            this.odbcRegistryReader = odbcRegistryReader;
         }
 
         public IEnumerable<Sage50Driver> FindSageDrivers()
         {
-            var driverNames = registryReader.Get32BitOdbcDrivers();
+            var driverNames = odbcRegistryReader.Get32BitOdbcDrivers();
             var sageDrivers = driverNames.Where(x => x.StartsWith("Sage Line 50", true, CultureInfo.CurrentCulture));
             var sortedSageDrivers = sageDrivers.Select(CreateDriver)
                 .Where(x => x != null)
