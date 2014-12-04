@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Audition.Chromium;
-using Audition.Session;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Excel;
 using Native;
 using Persistence;
 using Sage50;
+using Webapp.Session;
 using Xero;
 using Module = Autofac.Module;
 

@@ -1,7 +1,7 @@
 ﻿using Persistence;
 using Searching;
 
-namespace Audition.Session
+namespace Webapp.Session
 {
     public class NotLoggedInJournalSearcherFactory : IJournalSearcherFactory
     {

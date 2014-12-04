@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Audition;
 using Audition.Controllers;
-using Audition.Session;
 using Autofac;
 using Microsoft.Owin.FileSystems;
 using Model.Accounting;
@@ -10,6 +9,7 @@ using Native;
 using NSubstitute;
 using Persistence;
 using Sage50;
+using Webapp.Session;
 using Xero;
 using IFileSystem = Microsoft.Owin.FileSystems.IFileSystem;
 

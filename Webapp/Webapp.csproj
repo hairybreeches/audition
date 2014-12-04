@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -58,6 +62,11 @@
     <Compile Include="Requests\ExportRequest.cs" />
     <Compile Include="Requests\SearchRequest.cs" />
     <Compile Include="Routing.cs" />
+    <Compile Include="Session\JournalSearcherFactoryStorage.cs" />
+    <Compile Include="Session\LoginSession.cs" />
+    <Compile Include="Session\NotLoggedInException.cs" />
+    <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
+    <Compile Include="Session\SessionModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Excel\Excel.csproj">
@@ -71,6 +80,10 @@
     <ProjectReference Include="..\Native\Native.csproj">
       <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
       <Name>Native</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>

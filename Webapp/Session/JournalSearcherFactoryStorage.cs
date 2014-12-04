@@ -1,6 +1,6 @@
 ﻿using Searching;
 
-namespace Audition.Session
+namespace Webapp.Session
 {
     public class JournalSearcherFactoryStorage
     {
