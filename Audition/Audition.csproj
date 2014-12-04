@@ -177,6 +177,10 @@
       <Project>{49cb781a-5a5a-4d6a-8f19-b8d3c0045597}</Project>
       <Name>Ui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Webapp\Webapp.csproj">
+      <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
+      <Name>Webapp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xero\Xero.csproj">
       <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
       <Name>Xero</Name>
