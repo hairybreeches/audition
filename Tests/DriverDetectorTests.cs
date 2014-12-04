@@ -3,6 +3,7 @@ using Native;
 using NSubstitute;
 using NUnit.Framework;
 using Sage50;
+using Tests.Mocks;
 
 namespace Tests
 {
@@ -68,11 +69,8 @@ namespace Tests
 
         private static IRegistryReader CreateRegistry(IEnumerable<string> drivers)
         {
-            var registry = Substitute.For<IRegistryReader>();
-            var key = Substitute.For<IRegistryKey>();
-            key.GetValueNames().Returns(drivers);
-            registry.OpenKey("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers").Returns(key);            
-            return registry;
+            return new MockRegistryReader()
+                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
         }
     }
 }

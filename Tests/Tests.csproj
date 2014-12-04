@@ -100,6 +100,7 @@
     <Compile Include="Mocks\ConnectionFactoryWhichThrowsWhenReaderIsEvaluated.cs" />
     <Compile Include="Mocks\MockExporter.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
+    <Compile Include="Mocks\MockRegistryReader.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="PersistenceTests.cs" />
     <Compile Include="SageJournalParsingTests.cs" />

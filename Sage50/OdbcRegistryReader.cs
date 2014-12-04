@@ -17,13 +17,9 @@ namespace Sage50
         {
             IRegistryKey driversKey;
 
-            try
+            if (!reader.TryOpenKey("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", out driversKey))
             {
-                driversKey = reader.OpenKey("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers");
-            }
-            catch (RegistryKeyDoesNotExistException)
-            {
-                throw new SageNotInstalledException();                
+                throw new SageNotInstalledException();                                
             }
 
             return driversKey.GetValueNames();
