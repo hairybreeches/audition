@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Native;
 using NSubstitute;
 using NUnit.Framework;
 using Sage50;
@@ -62,13 +63,15 @@ namespace Tests
         public IEnumerable<Sage50Driver> FindSageDriver(IEnumerable<string> drivers)
         {
             var registry = CreateRegistry(drivers);
-            return new Sage50DriverDetector(registry).FindSageDrivers();
+            return new Sage50DriverDetector(new OdbcRegistryReader(registry)).FindSageDrivers();
         }
 
-        private static IOdbcRegistryReader CreateRegistry(IEnumerable<string> drivers)
+        private static IRegistryReader CreateRegistry(IEnumerable<string> drivers)
         {
-            var registry = Substitute.For<IOdbcRegistryReader>();
-            registry.Get32BitOdbcDrivers().Returns(drivers);
+            var registry = Substitute.For<IRegistryReader>();
+            var key = Substitute.For<IRegistryKey>();
+            key.GetValueNames().Returns(drivers);
+            registry.OpenKey("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers").Returns(key);            
             return registry;
         }
     }

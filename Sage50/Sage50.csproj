@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOdbcRegistryReader.cs" />
     <Compile Include="ISage50ConnectionFactory.cs" />
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />

@@ -7,9 +7,9 @@ namespace Sage50
 {
     public class Sage50DriverDetector
     {
-        private readonly IOdbcRegistryReader odbcRegistryReader;
+        private readonly OdbcRegistryReader odbcRegistryReader;
 
-        public Sage50DriverDetector(IOdbcRegistryReader odbcRegistryReader)
+        public Sage50DriverDetector(OdbcRegistryReader odbcRegistryReader)
         {
             this.odbcRegistryReader = odbcRegistryReader;
         }
