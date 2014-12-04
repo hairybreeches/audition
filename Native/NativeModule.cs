@@ -13,7 +13,7 @@ namespace Native
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
             builder.RegisterType<FolderChooser>().As<IFolderChooser>();
             builder.RegisterType<FileSystem>().As<IFileSystem>();
-            builder.RegisterType<RegistryReader>();
+            builder.RegisterType<RegistryReader>().As<IRegistryReader>();
         }
     }
 }
