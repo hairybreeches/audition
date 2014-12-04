@@ -2,7 +2,7 @@
 
 namespace Native
 {
-    public class RegistryReader
+    public class RegistryReader : IRegistryReader
     {
         public IRegistryKey OpenKey(string registryKey)
         {
