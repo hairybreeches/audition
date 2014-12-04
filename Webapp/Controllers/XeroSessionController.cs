@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using Audition.Chromium;
-using Model;
 using Webapp.Session;
 using Xero;
 
-namespace Audition.Controllers
+namespace Webapp.Controllers
 {
     public class XeroSessionController : RedirectController
     {

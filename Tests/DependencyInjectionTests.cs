@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Audition;
-using Audition.Controllers;
 using Autofac;
 using NUnit.Framework;
+using Webapp.Controllers;
 
 namespace Tests
 {
