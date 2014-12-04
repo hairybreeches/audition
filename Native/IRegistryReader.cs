@@ -2,6 +2,6 @@
 {
     public interface IRegistryReader
     {
-        IRegistryKey OpenKey(string registryKey);
+        IRegistryKey OpenKey(string keyName);
     }
 }
