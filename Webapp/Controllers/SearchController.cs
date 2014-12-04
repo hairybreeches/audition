@@ -1,13 +1,12 @@
 ﻿using System.Web.Http;
-using Audition.Chromium;
-using Audition.Requests;
-using Audition.Session;
 using Model.Responses;
 using Model.SearchWindows;
 using Persistence;
 using Searching;
+using Webapp.Requests;
+using Webapp.Session;
 
-namespace Audition.Controllers
+namespace Webapp.Controllers
 {
     public class SearchController : ApiController
     {

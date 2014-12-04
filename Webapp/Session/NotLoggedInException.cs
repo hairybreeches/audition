@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Audition.Session
+namespace Webapp.Session
 {
     public class NotLoggedInException : Exception
     {

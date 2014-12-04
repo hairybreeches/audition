@@ -1,6 +1,6 @@
 ﻿using Model.SearchWindows;
 
-namespace Audition.Requests
+namespace Webapp.Requests
 {
     public class SearchRequest<T>
     {

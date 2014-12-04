@@ -1,6 +1,5 @@
 ﻿using System;
 using Audition.Chromium;
-using Audition.Requests;
 using Autofac;
 using Model;
 using Model.SearchWindows;
@@ -8,6 +7,8 @@ using Model.Time;
 using Newtonsoft.Json;
 using NodaTime;
 using NUnit.Framework;
+using Webapp;
+using Webapp.Requests;
 
 namespace Tests
 {
@@ -126,7 +127,7 @@ namespace Tests
         private static T Parse<T>(string value)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<ChromiumModule>();
+            builder.RegisterModule<WebappModule>();
             using (var scope = builder.Build())
             {
                 var settings = scope.Resolve<JsonSerializerSettings>();

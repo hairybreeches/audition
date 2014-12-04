@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Audition.Chromium
+namespace Webapp
 {
     //todo: share these routes between js and c# using CEF
     public static class Routing
