@@ -49,12 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditionRegistryKey.cs" />
     <Compile Include="FileSaveChooser.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="FolderChooser.cs" />
     <Compile Include="IFileSaveChooser.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IFolderChooser.cs" />
+    <Compile Include="IRegistryKey.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryReader.cs" />
