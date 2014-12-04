@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Audition.Controllers;
-using Audition.Requests;
 using Autofac;
 using Excel;
 using Model;
@@ -13,6 +12,7 @@ using NodaTime;
 using NUnit.Framework;
 using Persistence;
 using Tests.Mocks;
+using Webapp.Requests;
 
 namespace Tests.SearcherTests
 {

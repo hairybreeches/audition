@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Audition.Controllers;
-using Audition.Requests;
 using Autofac;
 using Model.Accounting;
 using Model.Responses;
@@ -10,6 +9,7 @@ using Model.SearchWindows;
 using NUnit.Framework;
 using Persistence;
 using Searching;
+using Webapp.Requests;
 
 namespace Tests
 {
