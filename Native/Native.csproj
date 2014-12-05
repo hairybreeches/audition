@@ -58,7 +58,7 @@
     <Compile Include="IRegistry.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryReader.cs" />
+    <Compile Include="Registry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
