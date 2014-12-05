@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
 using Autofac;
+using Microsoft.Win32;
 
 namespace Native
 {
@@ -13,7 +14,8 @@ namespace Native
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
             builder.RegisterType<FolderChooser>().As<IFolderChooser>();
             builder.RegisterType<FileSystem>().As<IFileSystem>();
-            builder.RegisterType<RegistryReader>().As<IRegistryReader>();
+            builder.Register(_=> new RegistryReader(RegistryHive.CurrentUser)).As<ICurrentUserRegistryReader>();
+            builder.Register(_=> new RegistryReader(RegistryHive.LocalMachine)).As<ILocalMachineRegistryReader>();
         }
     }
 }

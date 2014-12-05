@@ -4,11 +4,18 @@ using Microsoft.Win32;
 
 namespace Native
 {
-    public class RegistryReader : IRegistryReader
+    public class RegistryReader : ILocalMachineRegistryReader, ICurrentUserRegistryReader
     {
-        private static bool TryOpenKey(string keyName, out RegistryKey registryKey)
+        private readonly RegistryHive hive;
+
+        public RegistryReader(RegistryHive hive)
         {
-            registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
+            this.hive = hive;
+        }
+
+        private bool TryOpenKey(string keyName, out RegistryKey registryKey)
+        {            
+            registryKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry32)
                 .OpenSubKey(keyName);
 
             return registryKey != null;

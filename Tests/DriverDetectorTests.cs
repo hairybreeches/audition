@@ -68,7 +68,7 @@ namespace Tests
             return new Sage50DriverDetector(new OdbcRegistryReader(registry)).FindSageDrivers();
         }
 
-        private static IRegistryReader CreateRegistry(IEnumerable<string> drivers)
+        private static ILocalMachineRegistryReader CreateRegistry(IEnumerable<string> drivers)
         {
             return new MockRegistryReader()
                 .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);

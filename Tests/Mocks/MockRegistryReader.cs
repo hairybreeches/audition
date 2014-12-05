@@ -6,7 +6,7 @@ using NSubstitute;
 
 namespace Tests.Mocks
 {
-    public class MockRegistryReader : IRegistryReader
+    public class MockRegistryReader : ICurrentUserRegistryReader, ILocalMachineRegistryReader
     {        
         private readonly IDictionary<string, IEnumerable<string>> valueNamesLookup = new Dictionary<string, IEnumerable<string>>();
         private readonly Dictionary<Tuple<string, string>, string> valueLookup = new Dictionary<Tuple<string, string>, string>();
