@@ -9,8 +9,9 @@ namespace Tests
     [TestFixture]
     public class RegistryTests
     {
-        private string Root;
-        private RegistryKey baseKey;
+        private string root;
+        private readonly RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
+        private readonly Registry registry = new Registry(RegistryHive.CurrentUser);
 
 
         [Test]
@@ -18,7 +19,7 @@ namespace Tests
         {
             var location = GetLocationWhichDoesNotExist();
             string keyValue;
-            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetStringValue(location, "key", out keyValue);
+            var returnValue = registry.TryGetStringValue(location, "key", out keyValue);
             Assert.AreEqual(false, returnValue, "When the location does not exist we should not be able to read a value");
         }    
         
@@ -27,7 +28,7 @@ namespace Tests
         {
             var location = GetEmptyLocationWhichExists();
             string keyValue;
-            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetStringValue(location, "key", out keyValue);
+            var returnValue = registry.TryGetStringValue(location, "key", out keyValue);
             Assert.AreEqual(false, returnValue, "When the location exists but the key doesn't we should not be able to read a value");
         }        
         
@@ -36,7 +37,7 @@ namespace Tests
         {
             var location = GetEmptyLocationWhichExists();
             IEnumerable<string> valueNames;
-            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetValueNames(location, out valueNames);
+            var returnValue = registry.TryGetValueNames(location, out valueNames);
             Assert.AreEqual(true, returnValue, "When the location exists we should get an empty list");
             CollectionAssert.IsEmpty(valueNames, "When the location exists we should get an empty list");
         }        
@@ -46,13 +47,13 @@ namespace Tests
         {
             var location = GetLocationWhichDoesNotExist();
             IEnumerable<string> valueNames;
-            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetValueNames(location, out valueNames);
+            var returnValue = registry.TryGetValueNames(location, out valueNames);
             Assert.AreEqual(false, returnValue, "When the location does not exist we should not be able to read value names");
         }
 
         private string GetLocationWhichDoesNotExist()
         {
-            return Root + "\\" + Guid.NewGuid();
+            return root + "\\" + Guid.NewGuid();
         }    
         
         private string GetEmptyLocationWhichExists()
@@ -69,17 +70,16 @@ namespace Tests
 
         [TestFixtureSetUp]
         public void SetUp()
-        {
-            baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
+        {            
             var fixtureKey = Guid.NewGuid().ToString();
-            Root = "Software\\Tests\\" + fixtureKey;
-            CreateLocation(Root);
+            root = "Software\\Tests\\" + fixtureKey;
+            CreateLocation(root);
         }
 
         [TestFixtureTearDown]
         public void TearDown()
         {
-            baseKey.DeleteSubKeyTree(Root);
+            baseKey.DeleteSubKeyTree(root);
         }
     }
 }
