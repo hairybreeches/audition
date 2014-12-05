@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILicence.cs" />
+    <Compile Include="InvalidLicenceKeyException.cs" />
     <Compile Include="Licence.cs" />
     <Compile Include="LicenceStorage.cs" />
+    <Compile Include="LicenceVerifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
