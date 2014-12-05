@@ -39,5 +39,16 @@ namespace Tests.Mocks
             }
         }
 
+        public bool TryGetKeyValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
+        {
+            IRegistryKey key;
+            if (!TryOpenKey(licenceKeyLocation, out key))
+            {
+                licenceKey = null;
+                return false;
+            }
+
+            return key.TryGetStringValue(licenceKeyName, out licenceKey);
+        }
     }
 }

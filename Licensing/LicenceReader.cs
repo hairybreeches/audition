@@ -17,19 +17,7 @@ namespace Licensing
         public ILicence GetLicence()
         {
             string licenceKey;
-            return new Licence(TryGetLicenceKey(out licenceKey));
-        }
-
-        private bool TryGetLicenceKey(out string licenceKey)
-        {
-            IRegistryKey key;
-            if (!registryReader.TryOpenKey(LicenceKeyLocation, out key))
-            {
-                licenceKey = null;
-                return false;
-            }
-
-            return key.TryGetStringValue(LicenceKeyName, out licenceKey);
+            return new Licence(registryReader.TryGetKeyValue(LicenceKeyLocation, LicenceKeyName, out licenceKey));
         }
     }
 }
