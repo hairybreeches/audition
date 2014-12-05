@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Win32;
 
 namespace Native
 {
-    public class Registry : ILocalMachineRegistry, ICurrentUserRegistry
+    public class Registry : ILocalMachineRegistry, ICurrentUserRegistry, IDisposable
     {
        
         private readonly RegistryKey baseKey;
@@ -69,6 +70,11 @@ namespace Native
         {
             var key = CreateLocationInner(location);
             key.SetValue(name, value);
+        }
+
+        public void Dispose()
+        {
+            baseKey.Dispose();
         }
     }
 }

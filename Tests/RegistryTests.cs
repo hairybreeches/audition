@@ -108,6 +108,7 @@ namespace Tests
         {
             baseKey.DeleteSubKeyTree(root);
             baseKey.Dispose();
+            registry.Dispose();
         }
     }
 }
