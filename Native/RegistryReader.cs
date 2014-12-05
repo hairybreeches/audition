@@ -6,36 +6,29 @@ namespace Native
 {
     public class RegistryReader : IRegistryReader
     {
-        private static bool TryOpenKey(string keyName, out IRegistryKey registryKey)
+        private static bool TryOpenKey(string keyName, out RegistryKey registryKey)
         {
-            var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
+            registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
                 .OpenSubKey(keyName);
 
-            if (key == null)
-            {
-                registryKey = null;
-                return false;
-            }
-
-            registryKey = new AuditionRegistryKey(key);
-            return true;
+            return registryKey != null;
         }
 
         public bool TryGetKeyValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
         {
-            IRegistryKey key;
+            RegistryKey key;
             if (!TryOpenKey(licenceKeyLocation, out key))
             {
                 licenceKey = null;
                 return false;
             }
 
-            return key.TryGetStringValue(licenceKeyName, out licenceKey);
+            return TryGetStringValue(key, licenceKeyName, out licenceKey);
         }
 
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
         {
-            IRegistryKey key;
+            RegistryKey key;
 
             if (!TryOpenKey(location, out key))
             {
@@ -46,6 +39,12 @@ namespace Native
 
             valueNames = key.GetValueNames();
             return true;
+        }
+
+        private static bool TryGetStringValue(RegistryKey nativeKey, string name, out string value)
+        {
+            value = nativeKey.GetValue(name) as string;
+            return value != null;
         }
     }
 }
