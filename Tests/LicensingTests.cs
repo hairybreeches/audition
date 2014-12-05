@@ -33,6 +33,7 @@ namespace Tests
         
         [TestCase("123456789012345", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with fewer than 16 digits fails")]
         [TestCase("12345678901234567", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with more than 16 digits fails")]
+        [TestCase("1234567890123456", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with invalid checksum fails")]
         public void LicenceVerificationWorks(string licenceKey)
         {
             GetLicenceStorage(new MockRegistry()).StoreLicence(licenceKey);
@@ -44,7 +45,7 @@ namespace Tests
             //given a registry with no licence key stored in it
             var licenceReader = GetLicenceStorage(new MockRegistry());
             //when we write a new licence and then retrieve the licence
-            licenceReader.StoreLicence("1234567890123456");
+            licenceReader.StoreLicence("123456789012B032");
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed now
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
