@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Native;
 using NSubstitute;
 using NUnit.Framework;
@@ -69,8 +70,9 @@ namespace Tests
 
         private static IRegistryReader CreateRegistry(IEnumerable<string> drivers)
         {
+            var values = drivers.ToDictionary(x => x);
             return new MockRegistryReader()
-                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
+                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", values);
         }
     }
 }
