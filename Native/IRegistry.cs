@@ -16,7 +16,6 @@ namespace Native
 
     public interface ICurrentUserRegistry : IRegistry
     {
-        void CreateLocation(string location);
         void WriteValue(string location, string name, string value);
     }
 }
