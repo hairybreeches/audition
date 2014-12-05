@@ -59,6 +59,17 @@ namespace Tests
             string returnedValue;
             Assert.AreEqual(true, registry.TryGetStringValue(location, "keyName", out returnedValue));
             Assert.AreEqual("value", returnedValue, "The value read should be the one we wrote");
+        }      
+        
+        
+        [Test]
+        public void CanWriteAKeyValueEvenIfTheLocationDoesNotExist()
+        {
+            var location = GetLocationWhichDoesNotExist();
+            WriteValue(location, "keyName", "value");
+            string returnedValue;
+            Assert.AreEqual(true, registry.TryGetStringValue(location, "keyName", out returnedValue));
+            Assert.AreEqual("value", returnedValue, "The value read should be the one we wrote");
         }  
         
         [Test]
