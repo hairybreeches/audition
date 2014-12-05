@@ -23,7 +23,7 @@ namespace Tests
         public void WhenLicenceKeyExistsProductIsLicensed()
         {
             //given a registry with no licence key stored in it
-            var licenceReader = new LicenceReader(new MockRegistryReader().SetValueNames("SOFTWARE\\Audition\\Audition", new Dictionary<string, string> {{"LicenceKey", "I am a licence Key"}}));
+            var licenceReader = new LicenceReader(new MockRegistryReader().SetValue("SOFTWARE\\Audition\\Audition", "LicenceKey", "I am a licence Key"));
             //when we retrieve the licence
             var licence = licenceReader.GetLicence();
             //then the licence will say it's not been fully licensed yet
