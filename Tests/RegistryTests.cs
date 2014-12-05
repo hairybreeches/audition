@@ -59,6 +59,18 @@ namespace Tests
             string returnedValue;
             Assert.AreEqual(true, registry.TryGetStringValue(location, "keyName", out returnedValue));
             Assert.AreEqual("value", returnedValue, "The value read should be the one we wrote");
+        }  
+        
+        [Test]
+        public void CanReadAListOfKeyValuesWhichExist()
+        {
+            var location = GetEmptyLocationWhichExists();
+            WriteValue(location, "keyName", "value");
+            WriteValue(location, "keyName2", "value");
+            WriteValue(location, "another key name", "value");
+            IEnumerable<string> valueNames;
+            Assert.AreEqual(true, registry.TryGetValueNames(location, out valueNames));
+            CollectionAssert.AreEquivalent(new[]{"keyName", "keyName2", "another key name"}, valueNames, "The value names read should be the ones we wrote");
         }
 
         private void WriteValue(string location, string name, string value)
