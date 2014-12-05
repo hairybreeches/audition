@@ -17,15 +17,6 @@ namespace Tests
             get { return "Software\\Tests\\" + fixtureKey; }
         }
 
-        [TestFixtureSetUp]
-        public void SetUp()
-        {
-            var softwareKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32).OpenSubKey("Software", RegistryKeyPermissionCheck.ReadWriteSubTree);
-            testKey = softwareKey.CreateSubKey("Tests");
-            fixtureKey = Guid.NewGuid().ToString();
-            testKey.CreateSubKey(fixtureKey);
-        }
-
         [Test]
         public void WhenWeTryGetValueAndTheLocationDoesntExistMethodReturnsFalse()
         {
@@ -47,6 +38,15 @@ namespace Tests
         private string GetLocationWhichDoesNotExist()
         {
             return Root + "\\" + Guid.NewGuid();
+        }
+
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+            var softwareKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32).OpenSubKey("Software", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            testKey = softwareKey.CreateSubKey("Tests");
+            fixtureKey = Guid.NewGuid().ToString();
+            testKey.CreateSubKey(fixtureKey);
         }
 
         [TestFixtureTearDown]
