@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuditionRegistryKey.cs" />
     <Compile Include="FileSaveChooser.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="FolderChooser.cs" />
