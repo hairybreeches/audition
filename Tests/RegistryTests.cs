@@ -84,7 +84,27 @@ namespace Tests
             CollectionAssert.AreEquivalent(new[]{"keyName", "keyName2", "another key name"}, valueNames, "The value names read should be the ones we wrote");
         }
 
-        private void WriteValue(string location, string name, string value)
+        [Test]
+        public void IfValueIsNotDateTryGetDateValueReturnsFalse()
+        {
+            var location = GetEmptyLocationWhichExists();
+            WriteValue(location, "not a date", "steve");
+            DateTime value;
+            Assert.AreEqual(false, registry.TryGetDateValue(location, "not a date", out value), "if the value can't be parsed as a date, we shouldn't get anything back");
+        }
+        
+        [Test]
+        public void IfValueIsADateTryGetWeGetItBack()
+        {
+            var location = GetEmptyLocationWhichExists();
+            var dateTime = new DateTime(1999,12,31);
+            WriteValue(location, "date", dateTime);
+            DateTime value;
+            Assert.AreEqual(true, registry.TryGetDateValue(location, "date", out value), "if the value can be parsed as a date, we should get it back");
+            Assert.AreEqual(dateTime, value, "if the value can be parsed as a date, we should get it back");
+        }
+
+        private void WriteValue(string location, string name, object value)
         {
             registry.WriteValue(location, name, value);
         }
