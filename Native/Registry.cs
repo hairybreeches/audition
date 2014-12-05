@@ -21,16 +21,16 @@ namespace Native
             return registryKey != null;
         }
 
-        public bool TryGetStringValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
+        public bool TryGetStringValue(string location, string keyName, out string keyValue)
         {
             RegistryKey key;
-            if (!TryOpenKey(licenceKeyLocation, out key))
+            if (!TryOpenKey(location, out key))
             {
-                licenceKey = null;
+                keyValue = null;
                 return false;
             }
 
-            return TryGetStringValue(key, licenceKeyName, out licenceKey);
+            return TryGetStringValue(key, keyName, out keyValue);
         }
 
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
