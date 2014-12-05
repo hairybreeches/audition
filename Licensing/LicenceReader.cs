@@ -4,20 +4,20 @@ namespace Licensing
 {
     public class LicenceReader
     {
-        private readonly ICurrentUserRegistryReader registryReader;
+        private readonly ICurrentUserRegistry registry;
         private const string LicenceKeyLocation = "SOFTWARE\\Audition\\Audition";
         private const string LicenceKeyName = "LicenceKey";
 
 
-        public LicenceReader(ICurrentUserRegistryReader registryReader)
+        public LicenceReader(ICurrentUserRegistry registry)
         {
-            this.registryReader = registryReader;
+            this.registry = registry;
         }
 
         public ILicence GetLicence()
         {
             string licenceKey;
-            return new Licence(registryReader.TryGetStringValue(LicenceKeyLocation, LicenceKeyName, out licenceKey));
+            return new Licence(registry.TryGetStringValue(LicenceKeyLocation, LicenceKeyName, out licenceKey));
         }
     }
 }

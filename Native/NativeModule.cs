@@ -14,8 +14,8 @@ namespace Native
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
             builder.RegisterType<FolderChooser>().As<IFolderChooser>();
             builder.RegisterType<FileSystem>().As<IFileSystem>();
-            builder.Register(_=> new RegistryReader(RegistryHive.CurrentUser)).As<ICurrentUserRegistryReader>();
-            builder.Register(_=> new RegistryReader(RegistryHive.LocalMachine)).As<ILocalMachineRegistryReader>();
+            builder.Register(_=> new Registry(RegistryHive.CurrentUser)).As<ICurrentUserRegistry>();
+            builder.Register(_=> new Registry(RegistryHive.LocalMachine)).As<ILocalMachineRegistry>();
         }
     }
 }
