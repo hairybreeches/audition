@@ -19,5 +19,6 @@ namespace Native
     public interface ICurrentUserRegistry : IRegistry
     {
         void WriteValue(string location, string name, object value);
+        DateTime EnsureValueExists(string location, string keyName, DateTime defaultValue);
     }
 }

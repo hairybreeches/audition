@@ -102,6 +102,32 @@ namespace Tests
             DateTime value;
             Assert.AreEqual(true, registry.TryGetDateValue(location, "date", out value), "if the value can be parsed as a date, we should get it back");
             Assert.AreEqual(dateTime, value, "if the value can be parsed as a date, we should get it back");
+        }   
+        
+        [Test]
+        public void IfValueDoesNotExistEnsureExistsCreatesAndReturnsDefault()
+        {
+            var location = GetEmptyLocationWhichExists();
+            var defaultValue = new DateTime(1999,12,31);                       
+            Assert.AreEqual(defaultValue, registry.EnsureValueExists(location, "date", defaultValue), "if the key doesn't exist, the function should return the default");
+
+            DateTime readValue;
+            Assert.AreEqual(true, registry.TryGetDateValue(location, "date", out readValue), "Afterwards, the value should exist");
+            Assert.AreEqual(defaultValue, readValue, "Afterwards, the value should be set to the default");
+        }     
+        
+        [Test]
+        public void IfValueDoesNotExistsEnsureExistsReturnsAndPreservesValue()
+        {
+            var location = GetEmptyLocationWhichExists();
+            var currentValue = new DateTime(1990, 1, 1);
+            registry.WriteValue(location, "date", currentValue);
+
+            Assert.AreEqual(currentValue, registry.EnsureValueExists(location, "date", new DateTime(1999, 12, 31)), "if the key exists, the function should return the value");
+
+            DateTime readValue;
+            Assert.AreEqual(true, registry.TryGetDateValue(location, "date", out readValue), "Afterwards, the value should exist");
+            Assert.AreEqual(currentValue, readValue, "Afterwards, the value should still be set to the original value");
         }
 
         private void WriteValue(string location, string name, object value)
