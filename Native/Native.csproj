@@ -55,7 +55,7 @@
     <Compile Include="IFileSaveChooser.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IFolderChooser.cs" />
-    <Compile Include="IRegistryReader.cs" />
+    <Compile Include="IRegistry.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryReader.cs" />

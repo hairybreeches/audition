@@ -4,11 +4,11 @@ using Microsoft.Win32;
 
 namespace Native
 {
-    public class RegistryReader : ILocalMachineRegistryReader, ICurrentUserRegistryReader
+    public class Registry : ILocalMachineRegistry, ICurrentUserRegistry
     {
         private readonly RegistryHive hive;
 
-        public RegistryReader(RegistryHive hive)
+        public Registry(RegistryHive hive)
         {
             this.hive = hive;
         }

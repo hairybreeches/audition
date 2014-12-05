@@ -7,9 +7,9 @@ namespace Sage50
 {
     public class OdbcRegistryReader
     {
-        private readonly IRegistryReader reader;
+        private readonly IRegistry reader;
 
-        public OdbcRegistryReader(ILocalMachineRegistryReader reader)
+        public OdbcRegistryReader(ILocalMachineRegistry reader)
         {
             this.reader = reader;
         }
