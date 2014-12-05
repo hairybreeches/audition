@@ -9,13 +9,9 @@ namespace Tests
     [TestFixture]
     public class RegistryTests
     {
-        private string fixtureKey;
-        private RegistryKey testKey;
+        private string Root;
+        private RegistryKey baseKey;
 
-        private string Root
-        {
-            get { return "Software\\Tests\\" + fixtureKey; }
-        }
 
         [Test]
         public void WhenWeTryGetValueAndTheLocationDoesntExistMethodReturnsFalse()
@@ -24,6 +20,25 @@ namespace Tests
             string keyValue;
             var returnValue = new Registry(RegistryHive.CurrentUser).TryGetStringValue(location, "key", out keyValue);
             Assert.AreEqual(false, returnValue, "When the location does not exist we should not be able to read a value");
+        }    
+        
+        [Test]        
+        public void WhenWeTryGetValueAndTheLocationExistsButTheKeyDoesntMethodReturnsFalse()
+        {
+            var location = GetEmptyLocationWhichExists();
+            string keyValue;
+            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetStringValue(location, "key", out keyValue);
+            Assert.AreEqual(false, returnValue, "When the location exists but the key doesn't we should not be able to read a value");
+        }        
+        
+        [Test]        
+        public void WhenWeTryGetValueNamesAndTheLocationExistsWeGetTheEmptyList()
+        {
+            var location = GetEmptyLocationWhichExists();
+            IEnumerable<string> valueNames;
+            var returnValue = new Registry(RegistryHive.CurrentUser).TryGetValueNames(location, out valueNames);
+            Assert.AreEqual(true, returnValue, "When the location exists we should get an empty list");
+            CollectionAssert.IsEmpty(valueNames, "When the location exists we should get an empty list");
         }        
 
         [Test]
@@ -38,21 +53,33 @@ namespace Tests
         private string GetLocationWhichDoesNotExist()
         {
             return Root + "\\" + Guid.NewGuid();
+        }    
+        
+        private string GetEmptyLocationWhichExists()
+        {
+            var location = GetLocationWhichDoesNotExist();
+            CreateLocation(location);
+            return location;
+        }
+
+        private void CreateLocation(string location)
+        {
+            baseKey.CreateSubKey(location);
         }
 
         [TestFixtureSetUp]
         public void SetUp()
         {
-            var softwareKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32).OpenSubKey("Software", RegistryKeyPermissionCheck.ReadWriteSubTree);
-            testKey = softwareKey.CreateSubKey("Tests");
-            fixtureKey = Guid.NewGuid().ToString();
-            testKey.CreateSubKey(fixtureKey);
+            baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
+            var fixtureKey = Guid.NewGuid().ToString();
+            Root = "Software\\Tests\\" + fixtureKey;
+            CreateLocation(Root);
         }
 
         [TestFixtureTearDown]
         public void TearDown()
         {
-            testKey.DeleteSubKey(fixtureKey);
+            baseKey.DeleteSubKeyTree(Root);
         }
     }
 }
