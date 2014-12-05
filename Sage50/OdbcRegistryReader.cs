@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Native;
 
 namespace Sage50
@@ -15,14 +16,28 @@ namespace Sage50
 
         public IEnumerable<string> Get32BitOdbcDrivers()
         {
-            IRegistryKey driversKey;
-
-            if (!reader.TryOpenKey("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", out driversKey))
+            IEnumerable<string> driverNames;
+            if (!TryGetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", out driverNames))
             {
-                throw new SageNotInstalledException();                                
+                throw new SageNotInstalledException();
             }
 
-            return driversKey.GetValueNames();
+            return driverNames;
+        }
+
+        public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
+        {
+            IRegistryKey key;
+
+            if (!reader.TryOpenKey(location, out key))
+            {
+                valueNames = Enumerable.Empty<string>();
+                return false;
+            }
+
+
+            valueNames = key.GetValueNames();
+            return true;
         }
     }
 }
