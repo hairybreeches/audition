@@ -19,5 +19,10 @@ namespace Licensing
             string licenceKey;
             return new Licence(registry.TryGetStringValue(LicenceKeyLocation, LicenceKeyName, out licenceKey));
         }
+
+        public void StoreLicence(string licenceKey)
+        {
+            registry.WriteValue(LicenceKeyLocation, LicenceKeyName, licenceKey);
+        }
     }
 }
