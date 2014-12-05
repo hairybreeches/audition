@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="ILicence.cs" />
     <Compile Include="Licence.cs" />
-    <Compile Include="LicenceReader.cs" />
+    <Compile Include="LicenceStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

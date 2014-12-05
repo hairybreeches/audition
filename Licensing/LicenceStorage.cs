@@ -2,14 +2,14 @@
 
 namespace Licensing
 {
-    public class LicenceReader
+    public class LicenceStorage
     {
         private readonly ICurrentUserRegistry registry;
         private const string LicenceKeyLocation = "SOFTWARE\\Audition\\Audition";
         private const string LicenceKeyName = "LicenceKey";
 
 
-        public LicenceReader(ICurrentUserRegistry registry)
+        public LicenceStorage(ICurrentUserRegistry registry)
         {
             this.registry = registry;
         }
