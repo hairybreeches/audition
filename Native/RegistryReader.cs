@@ -6,7 +6,7 @@ namespace Native
 {
     public class RegistryReader : IRegistryReader
     {
-        public bool TryOpenKey(string keyName, out IRegistryKey registryKey)
+        private static bool TryOpenKey(string keyName, out IRegistryKey registryKey)
         {
             var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
                 .OpenSubKey(keyName);
