@@ -16,5 +16,12 @@ namespace Native
         {
             return nativeKey.GetValueNames();
         }
+
+
+        public bool TryGetStringValue(string name, out string value)
+        {
+            value = nativeKey.GetValue(name) as string;
+            return value != null;
+        }
     }
 }
