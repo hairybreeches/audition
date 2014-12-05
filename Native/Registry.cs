@@ -33,7 +33,19 @@ namespace Native
             }
 
             return TryGetStringValue(key, keyName, out keyValue);
-        }     
+        }
+
+        public DateTime EnsureValueExists(string location, string keyName, DateTime defaultValue)
+        {
+            DateTime currentValue;
+            if (TryGetDateValue(location, keyName, out currentValue))
+            {
+                return currentValue;
+            }
+
+            WriteValue(location, keyName, defaultValue);
+            return defaultValue;
+        }
         
         public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
         {

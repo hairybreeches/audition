@@ -36,8 +36,12 @@ namespace Tests.Mocks
 
         public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
         {
-            keyValue = DateTime.MinValue;
-            return false;
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public DateTime EnsureValueExists(string location, string keyName, DateTime defaultValue)
+        {
+            throw new ShouldNotHappenInThisTestException();
         }
 
         public void WriteValue(string location, string name, object value)
