@@ -24,9 +24,9 @@ namespace Tests.Mocks
             return this;
         }        
 
-        public bool TryGetStringValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
+        public bool TryGetStringValue(string location, string keyName, out string keyValue)
         {
-            return valueLookup.TryGetValue(new Tuple<string, string>(licenceKeyLocation, licenceKeyName), out licenceKey);
+            return valueLookup.TryGetValue(new Tuple<string, string>(location, keyName), out keyValue);
         }
 
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)

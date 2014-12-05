@@ -4,7 +4,7 @@ namespace Native
 {
     public interface IRegistry
     {
-        bool TryGetStringValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey);
+        bool TryGetStringValue(string location, string keyName, out string keyValue);
         bool TryGetValueNames(string location, out IEnumerable<string> valueNames);
     }
 
