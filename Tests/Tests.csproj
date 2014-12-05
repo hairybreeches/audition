@@ -95,6 +95,7 @@
     <Compile Include="HttpConversionTests.cs" />
     <Compile Include="JournalTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
+    <Compile Include="LicensingTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
     <Compile Include="MemoryUsageTests.cs" />
     <Compile Include="Mocks\ConnectionFactoryWhichThrowsWhenReaderIsEvaluated.cs" />
@@ -128,6 +129,10 @@
     <ProjectReference Include="..\Excel\Excel.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>Excel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Licensing\Licensing.csproj">
+      <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
+      <Name>Licensing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
