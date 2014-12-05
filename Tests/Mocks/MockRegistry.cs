@@ -34,14 +34,9 @@ namespace Tests.Mocks
             return valueNamesLookup.TryGetValue(location, out valueNames);
         }
 
-        public void CreateLocation(string location)
-        {
-            throw new ShouldNotHappenInThisTestException();
-        }
-
         public void WriteValue(string location, string name, string value)
         {
-            throw new ShouldNotHappenInThisTestException();
+            SetValue(location, name, value);
         }
     }
 }
