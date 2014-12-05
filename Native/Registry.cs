@@ -6,16 +6,17 @@ namespace Native
 {
     public class Registry : ILocalMachineRegistry, ICurrentUserRegistry
     {
-        private readonly RegistryHive hive;
+       
+        private readonly RegistryKey baseKey;
 
         public Registry(RegistryHive hive)
-        {
-            this.hive = hive;
+        {         
+            baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry32);
         }
 
         private bool TryOpenKey(string keyName, out RegistryKey registryKey)
         {            
-            registryKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry32)
+            registryKey = baseKey
                 .OpenSubKey(keyName);
 
             return registryKey != null;
@@ -52,6 +53,22 @@ namespace Native
         {
             value = nativeKey.GetValue(name) as string;
             return value != null;
+        }
+
+        public void CreateLocation(string location)
+        {
+            CreateLocationInner(location);
+        }
+
+        private RegistryKey CreateLocationInner(string location)
+        {
+            return baseKey.CreateSubKey(location);
+        }
+
+        public void WriteValue(string location, string name, string value)
+        {
+            var key = CreateLocationInner(location);
+            key.SetValue(name, value);
         }
     }
 }
