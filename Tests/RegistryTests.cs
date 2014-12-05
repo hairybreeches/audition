@@ -51,6 +51,21 @@ namespace Tests
             Assert.AreEqual(false, returnValue, "When the location does not exist we should not be able to read value names");
         }
 
+        [Test]
+        public void CanReadAKeyWhichExists()
+        {
+            var location = GetEmptyLocationWhichExists();
+            WriteValue(location, "keyName", "value");
+            string returnedValue;
+            Assert.AreEqual(true, registry.TryGetStringValue(location, "keyName", out returnedValue));
+            Assert.AreEqual("value", returnedValue, "The value read should be the one we wrote");
+        }
+
+        private void WriteValue(string location, string name, string value)
+        {
+            registry.WriteValue(location, name, value);
+        }
+
         private string GetLocationWhichDoesNotExist()
         {
             return root + "\\" + Guid.NewGuid();
@@ -65,7 +80,7 @@ namespace Tests
 
         private void CreateLocation(string location)
         {
-            baseKey.CreateSubKey(location);
+            registry.CreateLocation(location);
         }
 
         [TestFixtureSetUp]
@@ -80,6 +95,7 @@ namespace Tests
         public void TearDown()
         {
             baseKey.DeleteSubKeyTree(root);
+            baseKey.Dispose();
         }
     }
 }
