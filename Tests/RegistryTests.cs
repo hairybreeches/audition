@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Win32;
+using Native;
 using NUnit.Framework;
 using Registry = Native.Registry;
 
@@ -10,7 +11,6 @@ namespace Tests
     public class RegistryTests
     {
         private string root;
-        private readonly RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
         private readonly Registry registry = new Registry(RegistryHive.CurrentUser);
 
 
@@ -117,8 +117,7 @@ namespace Tests
         [TestFixtureTearDown]
         public void TearDown()
         {
-            baseKey.DeleteSubKeyTree(root);
-            baseKey.Dispose();
+            registry.DeleteLocation(root);
             registry.Dispose();
         }
     }

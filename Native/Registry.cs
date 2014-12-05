@@ -76,5 +76,10 @@ namespace Native
         {
             baseKey.Dispose();
         }
+
+        public void DeleteLocation(string location)
+        {
+            baseKey.DeleteSubKeyTree(location);
+        }
     }
 }
