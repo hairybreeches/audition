@@ -104,6 +104,7 @@
     <Compile Include="Mocks\MockRegistry.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="PersistenceTests.cs" />
+    <Compile Include="RegistryTests.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
     <Compile Include="SearcherTests\PaginationTests.cs" />
