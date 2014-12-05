@@ -33,6 +33,18 @@ namespace Native
             }
 
             return TryGetStringValue(key, keyName, out keyValue);
+        }     
+        
+        public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
+        {
+            string stringValue;
+            if(!TryGetStringValue(location, keyName, out stringValue))
+            {
+                keyValue = DateTime.MinValue;
+                return false;
+            }
+
+            return DateTime.TryParse(stringValue, out keyValue);
         }
 
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
@@ -66,7 +78,7 @@ namespace Native
             return baseKey.CreateSubKey(location);
         }
 
-        public void WriteValue(string location, string name, string value)
+        public void WriteValue(string location, string name, object value)
         {
             var key = CreateLocationInner(location);
             key.SetValue(name, value);

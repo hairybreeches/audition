@@ -34,9 +34,15 @@ namespace Tests.Mocks
             return valueNamesLookup.TryGetValue(location, out valueNames);
         }
 
-        public void WriteValue(string location, string name, string value)
+        public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
         {
-            SetValue(location, name, value);
+            keyValue = DateTime.MinValue;
+            return false;
+        }
+
+        public void WriteValue(string location, string name, object value)
+        {
+            SetValue(location, name, value.ToString());
         }
     }
 }

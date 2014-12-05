@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Native
 {
@@ -6,6 +7,7 @@ namespace Native
     {
         bool TryGetStringValue(string location, string keyName, out string keyValue);
         bool TryGetValueNames(string location, out IEnumerable<string> valueNames);
+        bool TryGetDateValue(string location, string keyName, out DateTime keyValue);
     }
 
     //although we will have write access to the Current User registry hive, since we won't be admin it's unlikely we will do Local Machine
@@ -16,6 +18,6 @@ namespace Native
 
     public interface ICurrentUserRegistry : IRegistry
     {
-        void WriteValue(string location, string name, string value);
+        void WriteValue(string location, string name, object value);
     }
 }
