@@ -14,7 +14,7 @@ namespace Native
             return registryKey != null;
         }
 
-        public bool TryGetKeyValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
+        public bool TryGetStringValue(string licenceKeyLocation, string licenceKeyName, out string licenceKey)
         {
             RegistryKey key;
             if (!TryOpenKey(licenceKeyLocation, out key))
