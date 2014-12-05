@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Native;
 using NSubstitute;
 
@@ -49,6 +50,21 @@ namespace Tests.Mocks
             }
 
             return key.TryGetStringValue(licenceKeyName, out licenceKey);
+        }
+
+        public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
+        {
+            IRegistryKey key;
+
+            if (!TryOpenKey(location, out key))
+            {
+                valueNames = Enumerable.Empty<string>();
+                return false;
+            }
+
+
+            valueNames = key.GetValueNames();
+            return true;
         }
     }
 }
