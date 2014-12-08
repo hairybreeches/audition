@@ -185,6 +185,9 @@
     <Content Include="Ui\scripts\knockout.mapping-latest.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ui\scripts\licensing.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ui\scripts\login.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
