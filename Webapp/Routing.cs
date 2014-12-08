@@ -11,7 +11,9 @@ namespace Webapp
 
         public const string Sage50Login = "api/sage50/login";
         public const string Sage50Logout = "api/sage50/logout";
-        
+
+        public const string GetLicence = "api/licence/get";
+        public const string UpdateLicence = "api/licence/update";
 
         public const string HoursSearch = "api/search/hours";
         public const string HoursExport = "api/export/hours";

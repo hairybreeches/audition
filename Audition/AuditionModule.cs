@@ -1,6 +1,7 @@
 ﻿using Audition.Chromium;
 using Autofac;
 using Excel;
+using Licensing;
 using Native;
 using Persistence;
 using Sage50;
@@ -23,6 +24,7 @@ namespace Audition
             builder.RegisterModule<SessionModule>();            
             builder.RegisterModule<PersistenceModule>();
             builder.RegisterModule<WebappModule>();
+            builder.RegisterModule<LicensingModule>();
         }
     }
 }
