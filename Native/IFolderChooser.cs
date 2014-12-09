@@ -4,6 +4,6 @@ namespace Native
 {
     public interface IFolderChooser
     {
-        Task<string> GetFolder();
+        Task<string> GetFolder(string startFolder);
     }
 }
