@@ -65,8 +65,27 @@ namespace Tests
             //then there are 28 days left on the trial
             Assert.AreEqual(28, licence.RemainingTrialDays);
             Assert.AreEqual(true, licence.TrialValid);
+        }
 
+        [TestCase(0, 28, true)]
+        [TestCase(15, 13, true)]        
+        [TestCase(28, 0, true)]
+        [TestCase(29, 0, false)]
+        [TestCase(45, 0, false)]
+        public void TrialRunsDownAsExpected(int daysAfterInitialisation, int expectedDaysRemaining, bool trialStillValid)
+        {
+            //given a blank registry accessed for the first time
+            var mockRegistry = new MockRegistry();
+            var initialAccessDate = new DateTime(1999, 1, 1);
+            var storage = GetLicenceStorage(mockRegistry, initialAccessDate);
+            storage.GetLicence();
 
+            //when we get the licence so many days later
+            var licence = GetLicenceStorage(mockRegistry, initialAccessDate.AddDays(daysAfterInitialisation)).GetLicence();
+
+            //then there are the right number of days left on the trial
+            Assert.AreEqual(expectedDaysRemaining, licence.RemainingTrialDays);
+            Assert.AreEqual(trialStillValid, licence.TrialValid);
         }
 
         private static LicenceStorage GetLicenceStorage(ICurrentUserRegistry registry)
