@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Licensing;
 using Model.Accounting;
 using Persistence;
 using Searching;
@@ -9,15 +10,18 @@ namespace Webapp.Session
     {
         private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
         private readonly IJournalRepository repository;
+        private readonly ILicenceStorage licenceStorage;
 
-        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository)
+        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository, ILicenceStorage licenceStorage)
         {
             this.searcherFactoryStorage = searcherFactoryStorage;
             this.repository = repository;
+            this.licenceStorage = licenceStorage;
         }
 
         public JournalSearcher GetCurrentJournalSearcher()
         {            
+            licenceStorage.EnsureUseAllowed();
             return searcherFactoryStorage.CurrentSearcherFactory.CreateJournalSearcher(repository);
         }
 
