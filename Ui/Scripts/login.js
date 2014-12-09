@@ -96,4 +96,4 @@ var LoginModel = function () {
 
 var model = new LoginModel();
 
-ko.applyBindings(model);
+ko.applyBindings(model, document.getElementById('pageElement'));

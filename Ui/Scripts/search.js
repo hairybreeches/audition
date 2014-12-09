@@ -288,4 +288,4 @@ var SearchModel = function () {
 
 var model = new SearchModel();
 
-ko.applyBindings(model);
+ko.applyBindings(model, document.getElementById('pageElement'));
