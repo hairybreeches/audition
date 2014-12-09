@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using Native;
 using NUnit.Framework;
 using Registry = Native.Registry;
+using RegistryExtensions = Native.RegistryExtensions;
 
 namespace Tests
 {

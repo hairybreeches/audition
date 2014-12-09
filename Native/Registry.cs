@@ -35,30 +35,6 @@ namespace Native
             return TryGetStringValue(key, keyName, out keyValue);
         }
 
-        public DateTime EnsureValueExists(string location, string keyName, DateTime defaultValue)
-        {
-            DateTime currentValue;
-            if (TryGetDateValue(location, keyName, out currentValue))
-            {
-                return currentValue;
-            }
-
-            WriteValue(location, keyName, defaultValue);
-            return defaultValue;
-        }
-        
-        public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
-        {
-            string stringValue;
-            if(!TryGetStringValue(location, keyName, out stringValue))
-            {
-                keyValue = DateTime.MinValue;
-                return false;
-            }
-
-            return DateTime.TryParse(stringValue, out keyValue);
-        }
-
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
         {
             RegistryKey key;

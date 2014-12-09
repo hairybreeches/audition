@@ -32,17 +32,7 @@ namespace Tests.Mocks
         public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
         {
             return valueNamesLookup.TryGetValue(location, out valueNames);
-        }
-
-        public bool TryGetDateValue(string location, string keyName, out DateTime keyValue)
-        {
-            throw new ShouldNotHappenInThisTestException();
-        }
-
-        public DateTime EnsureValueExists(string location, string keyName, DateTime defaultValue)
-        {
-            throw new ShouldNotHappenInThisTestException();
-        }
+        }       
 
         public void WriteValue(string location, string name, object value)
         {
