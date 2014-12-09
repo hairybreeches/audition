@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Licensing;
 using Native;
+using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;
 
@@ -53,7 +55,14 @@ namespace Tests
 
         private static LicenceStorage GetLicenceStorage(ICurrentUserRegistry registry)
         {
-            return new LicenceStorage(registry, new LicenceVerifier(), new Clock());
+            return GetLicenceStorage(registry, DateTime.MinValue);
+        }
+
+        private static LicenceStorage GetLicenceStorage(ICurrentUserRegistry registry, DateTime now)
+        {
+            var clock = Substitute.For<IClock>();
+            clock.GetCurrentDate().Returns(now);
+            return new LicenceStorage(registry, new LicenceVerifier(), clock);
         }
     }
 }
