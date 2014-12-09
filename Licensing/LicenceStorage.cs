@@ -11,7 +11,7 @@ namespace Licensing
         private const string Location = "SOFTWARE\\Audition\\Audition";
         private const string LicenceKeyName = "LicenceKey";
         private const string TrialStartKeyName = "TrialStart";
-        private int numberOfDaysInTrial = 28;
+        private const int NumberOfDaysInTrial = 28;
 
 
         public LicenceStorage(ICurrentUserRegistry registry, LicenceVerifier licenceVerifier, IClock clock)
@@ -37,7 +37,7 @@ namespace Licensing
         private int DaysOfTrialRemaining()
         {
             var trialStartDate = registry.EnsureValueExists(Location, TrialStartKeyName, clock.GetCurrentDate());
-            var expiryDate = trialStartDate.AddDays(28);
+            var expiryDate = trialStartDate.AddDays(NumberOfDaysInTrial);
             return (int) (expiryDate - clock.GetCurrentDate()).TotalDays;
         }
 
