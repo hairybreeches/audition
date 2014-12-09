@@ -212,6 +212,7 @@
     <Content Include="Ui\views\xeroSearch.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\sage50Search.jade" />
     <None Include="templates\pages\xeroSearch.jade" />
   </ItemGroup>
