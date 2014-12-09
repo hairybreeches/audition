@@ -71,7 +71,13 @@ var ErrorMessage = function () {
     //methods
     self.hide = function () {
         self.visible(false);
-    };    
+    };
+
+    self.show = function(jqXHR) {
+        var errorMessage = getErrorMessage(jqXHR);
+        self.message(errorMessage);
+        self.visible(true);
+    }
 };
 
 
@@ -90,9 +96,7 @@ var LoginModel = function () {
 
     self.showError = function (jqXHR) {
         self.blocked(false);
-        var errorMessage = getErrorMessage(jqXHR);
-        self.error.message(errorMessage);
-        self.error.visible(true);
+        self.error.show(jqXHR);
     };
 
 }
