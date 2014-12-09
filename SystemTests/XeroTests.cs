@@ -138,7 +138,9 @@ Created,Date,Username
 
         private ContainerBuilder CreateContainerBuilder()
         {
-            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
+                .WithNoLicensing();
+
             builder.Register(_ => xeroSession).As<IXeroSession>();            
             return builder;
         }

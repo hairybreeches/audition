@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Audition;
 using Autofac;
+using Licensing;
 using Microsoft.Owin.FileSystems;
 using Model.Accounting;
 using Native;
 using NSubstitute;
 using Persistence;
 using Sage50;
+using Tests.Mocks;
 using Webapp.Controllers;
 using Webapp.Session;
 using Xero;
@@ -68,6 +70,12 @@ namespace Tests
             builder.Register(_ => new PhysicalFileSystem("."))
                 .As<IFileSystem>();
 
+            return builder;
+        }
+
+        public static ContainerBuilder WithNoLicensing(this ContainerBuilder builder)
+        {
+            builder.RegisterType<PermissiveLicenceStorage>().As<ILicenceStorage>();
             return builder;
         }
 

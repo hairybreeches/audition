@@ -22,7 +22,9 @@ namespace SystemTests
                 searchRequest,
                 "application/json", "http://localhost:1337/api/search/hours");
 
-            using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder().Build())
+            using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder()
+                .WithNoLicensing()
+                .Build())
             {
                 lifetime.LoginToSage50(new Sage50LoginDetails
                 {                    
