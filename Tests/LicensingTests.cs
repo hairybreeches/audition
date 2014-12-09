@@ -53,7 +53,7 @@ namespace Tests
 
         private static LicenceStorage GetLicenceStorage(ICurrentUserRegistry registry)
         {
-            return new LicenceStorage(registry, new LicenceVerifier());
+            return new LicenceStorage(registry, new LicenceVerifier(), new Clock());
         }
     }
 }
