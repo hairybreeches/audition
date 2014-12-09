@@ -1,4 +1,5 @@
-﻿using Native;
+﻿using System;
+using Native;
 
 namespace Licensing
 {
@@ -6,26 +7,33 @@ namespace Licensing
     {
         private readonly ICurrentUserRegistry registry;
         private readonly LicenceVerifier licenceVerifier;
-        private const string LicenceKeyLocation = "SOFTWARE\\Audition\\Audition";
+        private readonly IClock clock;
+        private const string Location = "SOFTWARE\\Audition\\Audition";
         private const string LicenceKeyName = "LicenceKey";
+        private const string TrialStartKeyName = "TrialStart";
+        private int numberOfDaysInTrial = 28;
 
 
-        public LicenceStorage(ICurrentUserRegistry registry, LicenceVerifier licenceVerifier)
+        public LicenceStorage(ICurrentUserRegistry registry, LicenceVerifier licenceVerifier, IClock clock)
         {
             this.registry = registry;
             this.licenceVerifier = licenceVerifier;
+            this.clock = clock;
         }
 
         public ILicence GetLicence()
         {
             string licenceKey;
-            return new Licence(registry.TryGetStringValue(LicenceKeyLocation, LicenceKeyName, out licenceKey));
+            var isFullyLicensed = registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey);
+            var expiryDate = registry.EnsureValueExists(Location, TrialStartKeyName, clock.GetCurrentDate());
+            var daysOfTrialRemaining = (int) (expiryDate - clock.GetCurrentDate()).TotalDays;
+            return new Licence(isFullyLicensed, daysOfTrialRemaining);
         }
 
         public void StoreLicence(string licenceKey)
         {
             licenceVerifier.VerifyLicence(licenceKey);
-            registry.WriteValue(LicenceKeyLocation, LicenceKeyName, licenceKey);
+            registry.WriteValue(Location, LicenceKeyName, licenceKey);
         }
     }
 }
