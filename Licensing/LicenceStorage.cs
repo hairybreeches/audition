@@ -25,9 +25,15 @@ namespace Licensing
         {
             string licenceKey;
             var isFullyLicensed = registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey);
-            var expiryDate = registry.EnsureValueExists(Location, TrialStartKeyName, clock.GetCurrentDate());
-            var daysOfTrialRemaining = (int) (expiryDate - clock.GetCurrentDate()).TotalDays;
+            var daysOfTrialRemaining = DaysOfTrialRemaining();
             return new Licence(isFullyLicensed, daysOfTrialRemaining);
+        }
+
+        private int DaysOfTrialRemaining()
+        {
+            var trialStartDate = registry.EnsureValueExists(Location, TrialStartKeyName, clock.GetCurrentDate());
+            var expiryDate = trialStartDate.AddDays(28);
+            return (int) (expiryDate - clock.GetCurrentDate()).TotalDays;
         }
 
         public void StoreLicence(string licenceKey)

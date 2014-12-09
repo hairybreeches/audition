@@ -53,6 +53,22 @@ namespace Tests
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
         }
 
+        [Test]
+        public void WhenLicenceDoesNotExistTrialPeriodHas28Days()
+        {
+            //given a blank slate in the regsitry
+            var storage = GetLicenceStorage(new MockRegistry(), new DateTime(1999, 1, 1));
+
+            //when we get the licence
+            var licence = storage.GetLicence();
+
+            //then there are 28 days left on the trial
+            Assert.AreEqual(28, licence.RemainingTrialDays);
+            Assert.AreEqual(true, licence.TrialValid);
+
+
+        }
+
         private static LicenceStorage GetLicenceStorage(ICurrentUserRegistry registry)
         {
             return GetLicenceStorage(registry, DateTime.MinValue);
