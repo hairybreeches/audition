@@ -79,6 +79,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\licensing.js" />
+    <Content Include="Scripts\message.js" />
     <Content Include="Scripts\sage50SearchModel.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
@@ -191,6 +192,9 @@
     <Content Include="Ui\scripts\login.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ui\scripts\message.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ui\scripts\sage50SearchModel.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -212,6 +216,7 @@
     <Content Include="Ui\views\xeroSearch.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\sage50Search.jade" />
     <None Include="templates\pages\xeroSearch.jade" />

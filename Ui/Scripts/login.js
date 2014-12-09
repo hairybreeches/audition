@@ -62,26 +62,13 @@ var XeroLoginModel = function () {
     }
 }
 
-var ErrorMessage = function () {
-    var self = this;
-    //fields
-    self.visible = ko.observable(false);
-    self.message = ko.observable('');
-
-    //methods
-    self.hide = function () {
-        self.visible(false);
-    };    
-};
-
-
 var LoginModel = function () {
     var self = this;
     self.blocked = ko.observable(false);
     self.system = ko.observable('');
     self.sage50 = new Sage50LoginModel();
     self.xero = new XeroLoginModel();
-    self.error = new ErrorMessage();
+    self.error = new Message();
 
     self.startLogin = function () {
         self.error.visible(false);
@@ -90,9 +77,7 @@ var LoginModel = function () {
 
     self.showError = function (jqXHR) {
         self.blocked(false);
-        var errorMessage = getErrorMessage(jqXHR);
-        self.error.message(errorMessage);
-        self.error.visible(true);
+        self.error.show(jqXHR);
     };
 
 }
