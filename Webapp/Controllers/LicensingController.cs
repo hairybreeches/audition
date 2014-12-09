@@ -15,14 +15,14 @@ namespace Webapp.Controllers
 
         [HttpGet]
         [Route(Routing.GetLicence)]
-        public ILicence GetLicence()
+        public Licence GetLicence()
         {
             return storage.GetLicence();
         }
 
         [HttpPost]
         [Route(Routing.UpdateLicence)]
-        public ILicence UpdateLicence(string licenceKey)
+        public Licence UpdateLicence(string licenceKey)
         {
             storage.StoreLicence(licenceKey);
             return GetLicence();

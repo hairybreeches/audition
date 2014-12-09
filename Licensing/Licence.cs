@@ -2,7 +2,7 @@
 
 namespace Licensing
 {
-    class Licence : ILicence
+    public class Licence
     {
         private readonly int remainingTrialDays;
 
