@@ -1,5 +1,4 @@
-﻿using System;
-using Native;
+﻿using Native;
 
 namespace Licensing
 {
@@ -45,6 +44,15 @@ namespace Licensing
         {
             licenceVerifier.VerifyLicence(licenceKey);
             registry.WriteValue(Location, LicenceKeyName, licenceKey);
+        }
+
+        public void EnsureUseAllowed()
+        {
+            var licence = GetLicence();
+            if (!licence.AllowUse)
+            {
+                throw new UnlicensedException();
+            }
         }
     }
 }
