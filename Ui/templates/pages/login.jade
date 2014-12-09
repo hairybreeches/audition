@@ -2,6 +2,7 @@ include ../components/template
 include ../components/xero-login
 include ../components/sage50-login
 include ../components/forms
+include ../components/message
 
 
 mixin login-form(system, url)
@@ -9,12 +10,6 @@ mixin login-form(system, url)
 		block
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
-
-mixin message(bindTo, alertClass)
-	div(data-bind="visible: #{bindTo}.visible(), with: #{bindTo}" style="display: none;" class="alert " + alertClass)
-		button.close(type="button" data-bind="click: hide") &#10006;
-		span(data-bind="text: message()")
-
 
 +page('Login', ['login'])
 	.container

@@ -1,0 +1,4 @@
+mixin message(bindTo, alertClass)
+	div(data-bind="visible: #{bindTo}.visible(), with: #{bindTo}" style="display: none;" class="alert " + alertClass)
+		button.close(type="button" data-bind="click: hide") &#10006;
+		span(data-bind="text: message()")
