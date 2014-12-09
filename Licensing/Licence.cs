@@ -23,5 +23,10 @@ namespace Licensing
         {
             get { return remainingTrialDays >= 0; }
         }
+
+        public bool AllowUse
+        {
+            get { return IsFullyLicensed || TrialValid; }
+        }
     }
 }

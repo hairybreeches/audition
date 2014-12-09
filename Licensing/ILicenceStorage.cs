@@ -4,5 +4,6 @@
     {
         Licence GetLicence();
         void StoreLicence(string licenceKey);
+        void EnsureUseAllowed();
     }
 }

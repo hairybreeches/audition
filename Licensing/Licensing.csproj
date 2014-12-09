@@ -51,6 +51,7 @@
     <Compile Include="LicenceVerifier.cs" />
     <Compile Include="LicensingModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnlicensedException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Native\Native.csproj">
