@@ -23,10 +23,15 @@ namespace Licensing
 
         public ILicence GetLicence()
         {
-            string licenceKey;
-            var isFullyLicensed = registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey);
+            var isFullyLicensed = IsFullyLicensed();
             var daysOfTrialRemaining = DaysOfTrialRemaining();
             return new Licence(isFullyLicensed, daysOfTrialRemaining);
+        }
+
+        private bool IsFullyLicensed()
+        {
+            string licenceKey;
+            return registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey);
         }
 
         private int DaysOfTrialRemaining()
