@@ -14,7 +14,7 @@ var LicenceModel = function() {
             return "";
         }
 
-        if (self.licence.licenceModel.TrialValid()) {
+        if (self.licence.TrialValid()) {
             return licenceModel.RemainingTrialDays() + " days of trial remaining";
         }
 
