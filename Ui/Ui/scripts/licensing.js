@@ -1,29 +1,40 @@
-var licenceModel = ko.mapping.fromJS({
-    IsFullyLicensed: true,
-    TrialValid: true,
-    RemainingTrialDays: 28
-});
+var LicenceModel = function() {
 
-licenceModel.licenceText = ko.computed(function () {
+    var self = this;
 
-    if (licenceModel.IsFullyLicensed()) {
-        return "";
-    }
+    self.licence = ko.mapping.fromJS({
+        IsFullyLicensed: true,
+        TrialValid: true,
+        RemainingTrialDays: 28
+    });
 
-    if (licenceModel.TrialValid()) {
-        return licenceModel.RemainingTrialDays() + " days of trial remaining";
-    }
+    self.licenceText = ko.computed(function () {
 
-    return "Unlicensed";
-});
+        if (self.licence.IsFullyLicensed()) {
+            return "";
+        }
+
+        if (self.licence.licenceModel.TrialValid()) {
+            return licenceModel.RemainingTrialDays() + " days of trial remaining";
+        }
+
+        return "Unlicensed";
+    });
+}
+
+var licenceModel = new LicenceModel();
 
 ko.applyBindings(licenceModel, document.getElementById('licensingElement'));
 
-var updateLicence = function (newLicence) {
-    ko.mapping.fromJS(newLicence, licenceModel);
+var updateLicence = function () {
+
+    $.ajax("/api/licence/get", {
+        success: function (newLicence) {
+            ko.mapping.fromJS(newLicence, licenceModel.licence);
+        },
+        type: 'GET'
+    });
 }
 
-$.ajax("/api/licence/get", {
-    success: updateLicence,
-    type: 'GET'
-});
+updateLicence();
+
