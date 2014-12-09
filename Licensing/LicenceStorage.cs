@@ -21,7 +21,7 @@ namespace Licensing
             this.clock = clock;
         }
 
-        public ILicence GetLicence()
+        public Licence GetLicence()
         {
             var isFullyLicensed = IsFullyLicensed();
             var daysOfTrialRemaining = DaysOfTrialRemaining();

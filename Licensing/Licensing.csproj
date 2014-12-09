@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILicence.cs" />
     <Compile Include="InvalidLicenceKeyException.cs" />
     <Compile Include="Licence.cs" />
     <Compile Include="LicenceStorage.cs" />
