@@ -1,7 +1,7 @@
 var licenceModel = ko.mapping.fromJS({
     IsFullyLicensed: true,
     TrialValid: true,
-    RemainingTrialDays: 28    
+    RemainingTrialDays: 28
 });
 
 licenceModel.licenceText = ko.computed(function () {
