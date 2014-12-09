@@ -37,7 +37,7 @@ namespace Sage50
         {
             if (!fileSystem.DirectoryExists(dataDirectory))
             {
-                throw new IncorrectLoginDetailsException(String.Format("The directory {0} does not exist", dataDirectory));
+                throw new IncorrectLoginDetailsException(String.Format("The directory {0} does not exist. Enter a directory which is a Sage 50 data directory and try again", dataDirectory));
             }
 
             var accdata = Path.Combine(dataDirectory, "ACCDATA");
