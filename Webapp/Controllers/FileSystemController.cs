@@ -24,9 +24,9 @@ namespace Webapp.Controllers
         
         [HttpGet]
         [Route(Routing.ChooseDirectory)]
-        public async Task<IHttpActionResult> OpenFile()
+        public async Task<IHttpActionResult> ChooseFolder(string startFolder)
         {
-            var folder = await folderChooser.GetFolder();
+            var folder = await folderChooser.GetFolder(startFolder);
             return Ok(folder);
         }
 

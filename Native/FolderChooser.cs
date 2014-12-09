@@ -12,14 +12,17 @@ namespace Native
             this.taskFactory = taskFactory;
         }
 
-        public async Task<string> GetFolder()
+        public async Task<string> GetFolder(string startFolder)
         {
-            return await taskFactory.StartNew(GetValue);
+            return await taskFactory.StartNew(() =>GetValue(startFolder));
         }
 
-        private static string GetValue()
+        private static string GetValue(string startFolder)
         {
-            var dialog = new FolderBrowserDialog();
+            var dialog = new FolderBrowserDialog
+            {
+                SelectedPath = startFolder
+            };
 
             dialog.ShowDialog();
 

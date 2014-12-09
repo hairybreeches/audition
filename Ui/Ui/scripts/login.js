@@ -6,6 +6,9 @@ var Sage50LoginModel = function() {
 
     self.browseDataDirectory = function() {
         $.ajax('/api/chooseDirectory', {
+            data: {
+                startFolder: self.dataDirectory()
+            },
             error: function() {
 
             },
