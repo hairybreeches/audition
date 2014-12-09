@@ -15,7 +15,7 @@
         }
 
         if (self.licence.TrialValid()) {
-            return licenceModel.RemainingTrialDays() + " days of trial remaining";
+            return self.licence.RemainingTrialDays() + " days of trial remaining";
         }
 
         return "Unlicensed";
