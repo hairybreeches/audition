@@ -6,7 +6,7 @@ namespace Licensing
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<LicenceStorage>();
+            builder.RegisterType<LicenceStorage>().As<ILicenceStorage>();
             builder.RegisterType<LicenceVerifier>();
         }
     }

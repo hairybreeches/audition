@@ -5,9 +5,9 @@ namespace Webapp.Controllers
 {
     public class LicensingController : ApiController
     {
-        private readonly LicenceStorage storage;
+        private readonly ILicenceStorage storage;
 
-        public LicensingController(LicenceStorage storage)
+        public LicensingController(ILicenceStorage storage)
         {
             this.storage = storage;
         }

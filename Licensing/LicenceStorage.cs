@@ -3,7 +3,7 @@ using Native;
 
 namespace Licensing
 {
-    public class LicenceStorage
+    public class LicenceStorage : ILicenceStorage
     {
         private readonly ICurrentUserRegistry registry;
         private readonly LicenceVerifier licenceVerifier;
