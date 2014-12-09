@@ -59,6 +59,7 @@
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="RegistryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
