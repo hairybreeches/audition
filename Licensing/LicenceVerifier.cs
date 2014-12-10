@@ -31,22 +31,22 @@ namespace Licensing
 
         public bool IsValid(string licenceKey)
         {
-            if (licenceKey.Length != 16)
-            {
-                return false;
-            }
+            return LicenceKeyHas16Characters(licenceKey) && ChecksumValid(licenceKey);            
+        }
 
+        private static bool ChecksumValid(string licenceKey)
+        {
             var firstTenDigits = licenceKey.Take(10);
 
             var checkSum = GetExpectedCheckSum(firstTenDigits);
 
             var lastSixDigits = licenceKey.Substring(10);
-            if (!Equals(checkSum, lastSixDigits))
-            {
-                return false;
-            }
+            return Equals(checkSum, lastSixDigits);
+        }
 
-            return true;
+        private static bool LicenceKeyHas16Characters(string licenceKey)
+        {
+            return licenceKey.Length == 16;
         }
     }
 }
