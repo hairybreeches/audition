@@ -44,6 +44,9 @@
         <div data-bind="visible: errorMessage.visible(), with: errorMessage" style="display: none;" class="alert alert-danger">
           <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
         </div>
+        <div data-bind="visible: successMessage.visible(), with: successMessage" style="display: none;" class="alert alert-success">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span>Licence key validated. This product is now licensed.&nbsp;&nbsp;</span><a data-bind="click: $root.goBack"> <b>Click here to return.</b></a>
+        </div>
       </div>
     </div>
     <script src="/scripts/jquery-2.1.1.min.js"></script>
