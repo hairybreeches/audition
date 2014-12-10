@@ -7,8 +7,8 @@ var EnterLicenceModel = function () {
         window.history.back();
     }
 
-    self.errorMessage = new ErrorMessage();    
-
+    self.errorMessage = new ErrorMessage();
+    self.successMessage = new Message();
     self.submit = function() {
         $.ajax("/api/licence/update", {
             type: 'GET',
