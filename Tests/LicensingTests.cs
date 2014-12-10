@@ -31,27 +31,22 @@ namespace Tests
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
-        }     
-        
+        }                             
+
+        [TestCase("123456789012B032", TestName = "Basic success case")]
         [TestCase("123456789012345", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with fewer than 16 digits fails")]
         [TestCase("12345678901234567", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with more than 16 digits fails")]
         [TestCase("1234567890123456", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with invalid checksum fails")]
-        public void LicenceVerificationWorks(string licenceKey)
-        {
-            GetLicenceStorage(new MockRegistry()).StoreLicence(licenceKey);
-        }    
-        
-        [Test]
-        public void CanWriteAndRetrieveLicenceKey()
+        public void CanWriteAndRetrieveLicenceKeyWhenValid(string licenceKey)
         {
             //given a registry with no licence key stored in it
             var licenceReader = GetLicenceStorage(new MockRegistry());
             //when we write a new licence and then retrieve the licence
-            licenceReader.StoreLicence("123456789012B032");
+            licenceReader.StoreLicence(licenceKey);
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed now
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
-        }
+        }                  
 
         [Test]
         public void WhenLicenceDoesNotExistTrialPeriodHas28Days()
