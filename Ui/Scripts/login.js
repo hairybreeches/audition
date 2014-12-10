@@ -68,7 +68,7 @@ var LoginModel = function () {
     self.system = ko.observable('');
     self.sage50 = new Sage50LoginModel();
     self.xero = new XeroLoginModel();
-    self.error = new Message();
+    self.error = new ErrorMessage();
 
     self.startLogin = function () {
         self.error.visible(false);
