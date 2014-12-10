@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<LiveObjectList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Objects>
+    <LiveObject>
+      <ID>4c66e28d-5b6f-4136-8272-76e1741d2a31</ID>
+      <Subject>What's your backup plan?</Subject>
+      <Signature>L5qYNjrAF+LkxviqFChUAv210Nyv7EiZUGyt34GV5QhPuoIBRa2ywiwJFzv8Axg4gD7FknH9SOqAI1REYxcqbW7BLLpqxSJjYD0p3Zv5pg0R48nBOFA8yfpkKrstkgVvg1vTiEkDjWCfxC4HCDfux0YvXWCsOeqvhUV0tMc3jtA=</Signature>
+      <HTML>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" /&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;style&gt;BODY {
+	BACKGROUND: #ffffff left top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none
+}
+H2 {
+	FONT-SIZE: 22px; FONT-FAMILY: Helvetica,Arial,sans-serif; FONT-WEIGHT: normal; COLOR: #34b233; PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 22px; PADDING-RIGHT: 0px
+}
+P {
+	FONT-SIZE: 14px; FONT-FAMILY: Arial, Helvetica, sans-serif; FONT-WEIGHT: normal; COLOR: #666666; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 22px; PADDING-RIGHT: 0px; mso-table-lspace: 0; mso-table-rspace: 0
+}
+TABLE TD {
+	BACKGROUND-COLOR: white
+}
+.tableDark TD {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.quote {
+	PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 20px; PADDING-RIGHT: 5px; BACKGROUND-COLOR: #e7e7e7
+}
+&lt;/style&gt;
+
+&lt;h2&gt;What's your backup plan?&lt;/h2&gt;
+&lt;div id="LiveLinkContent"&gt;
+&lt;p&gt;Your Sage Accounts data is a vital part of your business, and in your new Sage 50 Accounts protecting it just got easier.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Taking regular backups ensures that whatever happens you always have a safe copy of your data to go back to. The new Sage Accounts Backup Manager does the job for you. Simply specify when and how often you want to back up your data and what type of backup you need, and that's it, the Backup Manager does the rest. No need to remember to back up each day, it's all done for you so you can get on with other things. &lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=32103?Link=fromlivelink" target="_blank"&gt;Read more &amp;gt;&amp;gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Watch our &lt;a style="COLOR: orange" href="http://www.youtube.com/watch?v=-CTyRtOzECI&amp;list=PL3bspobfolBKOAWb4X09znUvh7MnMhRyo&amp;feature=share&amp;index=8?Link=fromlivelink" target="_blank"&gt;quick demo&lt;/a&gt; now.&lt;/p&gt;&lt;/div&gt;&lt;img src="data:image/gif;base64,R0lGODlhZAA3AIQAAP///wB/ZECfi3+/sRCHbmCvnu/39TCXgb/f2K/XziCPd3C3qM/n4o/Hu5/PxVCnld/v7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEBAAAh+QQAAAAAACwAAAAAZAA3AAAI/wABCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CD9jTg4IGCAEiTHijgwADBBAUOJE1KQMCCBAaLEph6oIFTBwLChhUIYYFUrgsggGywdarbpAUYIDj69q0CrADm1kVKoMEAtwYK7IWrlqPgwYgTJ13gQHGAtlQdE2Cw8a/jy5gzK56sETJSBQsaIEgwoIDnpVMFDBDt94HnvaoHuN68AIFABg3o8nV6EYHbA7wLJhAQADgAwQUKFzSg++2A4AAMWN57QDnBw0gHYGzgFi9CBMFtJ/9sXNcBQu51CUAv+IAqRvJJG2j0/faAwuZJtSeEMNU7RQZvFZCAeBXR59YCChH3FoEI6aafRWchdoBV/jEwgFgYhhXhVA8etEBdCwwg4ogkDqAbghcx8BpiCoyG32UdGjSdZkkJkBEDL9LoWIwFzahjARs5sKGOivFIkI80GtnbaCM+MORUoJUoInYcKkRljRlmiaF5JRk4FZDf1WVjQgq6RRlKCax3UJlJKZRAemoKZMCKAch30octKjTnW3EK9GFdYBp0JVV95vWAdRUZ0F6NTRnEwJMBFBCnioMdwKVACUCaVJ4FMXBYXxhpOuECCwiQI1UFDOAAabJdNiFmCjycIKJRbz1wUQJ0EqnrrlOhaFFgmi3Ka11DsokYAf5dVNapX1KGgLG/oZcUVIMJYKFbADjA7GPPfYRbAVkOkGanspkaQFhM5eWWbRA08ACGA5zp40AWhrXVqMkKlSC2+mbEX2r9OjRAdQcZMKSdASf0KF8LnAlAu6+pl3BCSCqG8MSCahYoxgfhCiPHC0mXK1LJgewQaRkyVqjJPgUEADs=" /&gt;&lt;/body&gt;&lt;/html&gt;</HTML>
+      <Type>SUPPORTNEWS</Type>
+      <Filter xsi:type="AndFilter">
+        <Children>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>08/09/2014</Value>
+            <Operator>from</Operator>
+          </Filter>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>17/10/2014</Value>
+            <Operator>to</Operator>
+          </Filter>
+          <Filter xsi:type="VersionFilter">
+            <AttributeName>Program Version</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>21.0.0.0</Value>
+            <Operator>&gt;=</Operator>
+          </Filter>
+        </Children>
+      </Filter>
+      <Read>false</Read>
+      <Deleted>false</Deleted>
+      <Saved>false</Saved>
+    </LiveObject>
+    <LiveObject>
+      <ID>ba6b6b12-7518-4845-a44c-12dc25ca336e</ID>
+      <Subject>What's your backup plan?</Subject>
+      <Signature>fovEW41kXxf3mHkg+jQPoXhvaRODfMc6omnsstHQWj/mldVFnNUunRnhEzCM63u+8NAF3rJOOWJRK808+nS8yRngbIF1L5fMVukG8tK1z4FmBASfUApwsioRXqrFvK6TqBCRSmbyAeCsdsNKisRcJW/n+p4fjIVawKRH7g7uJrg=</Signature>
+      <HTML>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" /&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;style&gt;BODY {
+	BACKGROUND: #ffffff left top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none
+}
+H2 {
+	FONT-SIZE: 22px; FONT-FAMILY: Helvetica,Arial,sans-serif; FONT-WEIGHT: normal; COLOR: #34b233; PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; LINE-HEIGHT: 22px; PADDING-RIGHT: 0px
+}
+P {
+	FONT-SIZE: 14px; FONT-FAMILY: Arial, Helvetica, sans-serif; FONT-WEIGHT: normal; COLOR: #666666; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 22px; PADDING-RIGHT: 0px; mso-table-lspace: 0; mso-table-rspace: 0
+}
+TABLE TD {
+	BACKGROUND-COLOR: white
+}
+.tableDark TD {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.quote {
+	PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 20px; PADDING-RIGHT: 5px; BACKGROUND-COLOR: #e7e7e7
+}
+&lt;/style&gt;
+
+&lt;h2&gt;What's your backup plan?&lt;/h2&gt;
+&lt;div id="LiveLinkContent"&gt;
+&lt;p&gt;Your Sage Accounts data is a vital part of your business, so it's important to protect it with a regular backup routine. &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Taking regular backups ensures that whatever happens you always have a safe copy of your data to go back to, and it's easy to do through File &amp;gt; Backup. Our guide explains the backup routine we recommend and, if needed, explains how to restore a backup. &lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=26438?Link=fromlivelink" target="_blank"&gt;Read more &amp;gt;&amp;gt;&lt;/a&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;In Sage 50 Accounts v21, protecting your data just got even easier with the new Sage Accounts Backup Manager. Simply specify when and how often you want to back up your data and what type of backup you need, and that's it, the Backup Manager does the rest. No need to remember to back up each day, it's all done for you so you can get on with other things. &lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=32103?Link=fromlivelink" target="_blank"&gt;Read more&lt;/a&gt; or watch our &lt;a style="COLOR: orange" href="http://www.youtube.com/watch?v=-CTyRtOzECI&amp;list=PL3bspobfolBKOAWb4X09znUvh7MnMhRyo&amp;feature=share&amp;index=8?Link=fromlivelink" target="_blank"&gt;quick demo&lt;/a&gt; now.&lt;/p&gt;&lt;/div&gt;&lt;img src="data:image/gif;base64,R0lGODlhZAA3AIQAAP///wB/ZECfi3+/sRCHbmCvnu/39TCXgb/f2K/XziCPd3C3qM/n4o/Hu5/PxVCnld/v7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEBAAAh+QQAAAAAACwAAAAAZAA3AAAI/wABCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CD9jTg4IGCAEiTHijgwADBBAUOJE1KQMCCBAaLEph6oIFTBwLChhUIYYFUrgsggGywdarbpAUYIDj69q0CrADm1kVKoMEAtwYK7IWrlqPgwYgTJ13gQHGAtlQdE2Cw8a/jy5gzK56sETJSBQsaIEgwoIDnpVMFDBDt94HnvaoHuN68AIFABg3o8nV6EYHbA7wLJhAQADgAwQUKFzSg++2A4AAMWN57QDnBw0gHYGzgFi9CBMFtJ/9sXNcBQu51CUAv+IAqRvJJG2j0/faAwuZJtSeEMNU7RQZvFZCAeBXR59YCChH3FoEI6aafRWchdoBV/jEwgFgYhhXhVA8etEBdCwwg4ogkDqAbghcx8BpiCoyG32UdGjSdZkkJkBEDL9LoWIwFzahjARs5sKGOivFIkI80GtnbaCM+MORUoJUoInYcKkRljRlmiaF5JRk4FZDf1WVjQgq6RRlKCax3UJlJKZRAemoKZMCKAch30octKjTnW3EK9GFdYBp0JVV95vWAdRUZ0F6NTRnEwJMBFBCnioMdwKVACUCaVJ4FMXBYXxhpOuECCwiQI1UFDOAAabJdNiFmCjycIKJRbz1wUQJ0EqnrrlOhaFFgmi3Ka11DsokYAf5dVNapX1KGgLG/oZcUVIMJYKFbADjA7GPPfYRbAVkOkGanspkaQFhM5eWWbRA08ACGA5zp40AWhrXVqMkKlSC2+mbEX2r9OjRAdQcZMKSdASf0KF8LnAlAu6+pl3BCSCqG8MSCahYoxgfhCiPHC0mXK1LJgewQaRkyVqjJPgUEADs=" /&gt;&lt;/body&gt;&lt;/html&gt;</HTML>
+      <Type>SUPPORTNEWS</Type>
+      <Filter xsi:type="AndFilter">
+        <Children>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>08/09/2014</Value>
+            <Operator>from</Operator>
+          </Filter>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>17/10/2014</Value>
+            <Operator>to</Operator>
+          </Filter>
+          <Filter xsi:type="OrFilter">
+            <Children>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.0.9.320</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.01.09.326</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.02.09.345</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.03.09.355</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.04.09.364</Value>
+                <Operator>=</Operator>
+              </Filter>
+            </Children>
+          </Filter>
+        </Children>
+      </Filter>
+      <Read>false</Read>
+      <Deleted>false</Deleted>
+      <Saved>false</Saved>
+    </LiveObject>
+    <LiveObject>
+      <ID>10ede4e0-0686-466b-bd86-98ca61d830b9</ID>
+      <Subject>Welcome to the new Sage 50 Accounts</Subject>
+      <Signature>fnf7m209kJ/a4AzP/2G0PVX2NIMJd8K4W4VoeMpfR0qK6pxDipCS/3l2LiPWDvDcmkXSubYx6fHu6SPct0evrvGWftwNR9+tOeu/vXuDy4CD5LSTlepgzfFY0BCA8hDykSi0uAe9txFKe8TfamPBm+Mf+FRu8C0rrOjq/RrRNOc=</Signature>
+      <HTML>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" /&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="COLOR: #007f64; FONT: 16pt 'Tahoma'"&gt;
+&lt;p&gt;&lt;b&gt;Welcome to the new Sage 50 Accounts&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div style="COLOR: #000000; FONT: 10pt 'Tahoma'"&gt;
+&lt;h4&gt;Great benefits for you and your business&lt;/h4&gt;
+&lt;p&gt;When running a business, your priority needs to be running your business rather than maintaining your accounts. With that in mind we've worked with our customers to make improvements to Sage 50 Accounts that make it quicker and easier to use and give you greater flexibility in the way you work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Work on your accounts from home and the office. &lt;/li&gt;
+&lt;li&gt;View business performance on the go using the new mobile apps. &lt;/li&gt;
+&lt;li&gt;Give your accountant real time access to your accounts. &lt;/li&gt;
+&lt;li&gt;&lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=32103" target="_blank"&gt;Schedule your backups&lt;/a&gt; and even back up while other users are logged in. &lt;/li&gt;
+&lt;li&gt;Find what you need quickly with one-click navigation and &lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=14471" target="_blank"&gt;customise your desktop&lt;/a&gt; for faster processing. &lt;/li&gt;
+&lt;li&gt;&lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=32146" target="_blank"&gt;View, edit or delete transactions&lt;/a&gt; all in one place in the new Transactions area. &lt;/li&gt;
+&lt;li&gt;Access your profit and loss and balance sheet quickly and easily in the improved Nominal codes area. &lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;Find out more about the new features in the Help Centre at &lt;a style="COLOR: orange" href="http://www.sage.co.uk/new50accounts?Link=fromlivelink&amp;id=v21" target="_blank"&gt;sage.co.uk/new50accounts&lt;/a&gt; &lt;/p&gt;
+&lt;h4&gt;Get to grips with the new navigation quickly&lt;/h4&gt;
+&lt;p&gt;To discover all of the great improvements we've made to how you navigate and use the new Sage 50 Accounts, watch our &lt;a style="COLOR: orange" href="http://youtu.be/YzmoAJnutBo?list=PL3bspobfolBKOAWb4X09znUvh7MnMhRyo" target="_blank"&gt;quick video&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you've upgraded from an earlier version, take a look at our guide to the changes in Ask Sage article &lt;a style="COLOR: orange" href="http://www.sage.co.uk/asksage/viewarticle.asp?p_faqid=31688" target="_blank"&gt;31688&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;New to Sage 50 Accounts?&lt;/h4&gt;
+&lt;p&gt;For help with getting started, take a look at Help &amp;gt; Customise your company, or for help in any area of your software at any time, press F1.&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</HTML>
+      <Type>SUPPORTNEWS</Type>
+      <Filter xsi:type="AndFilter">
+        <Children>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>04/09/2014</Value>
+            <Operator>from</Operator>
+          </Filter>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>01/09/2015</Value>
+            <Operator>to</Operator>
+          </Filter>
+          <Filter xsi:type="VersionFilter">
+            <AttributeName>Program Version</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>21.0.0.0</Value>
+            <Operator>&gt;</Operator>
+          </Filter>
+        </Children>
+      </Filter>
+      <Read>false</Read>
+      <Deleted>false</Deleted>
+      <Saved>false</Saved>
+    </LiveObject>
+    <LiveObject>
+      <ID>12636fc1-1132-4ac7-b616-d8cf50a2681e</ID>
+      <Subject>Welcome to Live Link</Subject>
+      <Signature>l0UIvEXEBWawNlkYDOzbSpr45hyPtrnz6K8d6FnL2xaaJlN0u43kk0wr6Lpsth6Sh/Gj6zcIkmnYK+Qs+WAf5APjCgaXjzCDmNPjZ0tNgkR14ReXkHd6jZTiAc/V6e1Wyiw5lZ/+dw4kTj8t6ujNS94BuQvdI+mg7COSszFUIrA=</Signature>
+      <HTML>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" /&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="COLOR: #007f64; FONT: 16pt 'Tahoma'"&gt;
+&lt;p&gt;&lt;b&gt;Welcome to Live Link&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div style="COLOR: #333333; FONT: 10pt 'Tahoma'"&gt;
+&lt;p&gt;Have you ever wanted to know what's going on at Sage without having to call us?&lt;/p&gt;
+&lt;p&gt;Live Link is a great new way to keep up to date with the latest information about your software and support.&amp;nbsp; We'll also use this to let you know about any issues which may affect you, how to perform procedures at the relevant times of year and any offers that may be of interest to you.&lt;/p&gt;
+&lt;p&gt;You'll get three different types of message:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;b&gt;Alert&amp;nbsp;&lt;/b&gt;- Critical information that may significantly affect you.&amp;nbsp; For example, the government gateway may not be accepting submissions therefore you would not be able to submit any of your returns.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;b&gt;Sage News&lt;/b&gt; - Details about offers and other Sage products and services that could help you with other areas of your business.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;b&gt;Support News&lt;/b&gt; - Expert advice and support tips about using your Sage software.&amp;nbsp; For example, if your year end is due we'll send you information about how to run the year end, including links to articles and videos to ensure you have a trouble free year end.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;The support options are tailored specifically to you and your SageCover contract, and you can use these to contact us for further help with your software.&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</HTML>
+      <Type>SUPPORTNEWS</Type>
+      <Filter xsi:type="AndFilter">
+        <Children>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>01/01/2014</Value>
+            <Operator>from</Operator>
+          </Filter>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>01/09/2015</Value>
+            <Operator>to</Operator>
+          </Filter>
+        </Children>
+      </Filter>
+      <Read>false</Read>
+      <Deleted>false</Deleted>
+      <Saved>false</Saved>
+    </LiveObject>
+    <LiveObject>
+      <ID>b507a18e-fddf-495a-aff3-815535d0f342</ID>
+      <Subject>Sage 50 Accounts 2014 - The VAT Edition </Subject>
+      <Signature>AwHDPc8lXtHI9qZATMwnQfn2FAo2L1ggxGBktviysF+kZrvdVTIZc/9iT8Y+rs+79A2+3bhTxYWJmPCDGeTsQVBtK9UB/SniND1YjfATuK9tHeVUFhAs+YY+y4JU/fhRmXeyWUQ43TFpRkM/p/L5hx3fqY/3jzjVwxXxVbbCeRk=</Signature>
+      <HTML>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" /&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="COLOR: #007f64; FONT: 16pt 'Tahoma'"&gt;
+&lt;p&gt;&lt;b&gt;Sage 50 Accounts 2014 - The VAT Edition&lt;/b&gt; &lt;/p&gt;&lt;/div&gt;
+&lt;div style="COLOR: #000000; FONT: 10pt 'Tahoma'"&gt;
+&lt;p&gt;Welcome to Sage 50 Accounts 2014: The VAT Edition, the market-leading accounts software that makes managing your customers, suppliers and day-to-day finances as easy as possible. &lt;/p&gt;
+&lt;p&gt;From invoicing customers and paying suppliers, to dealing with every aspect of your VAT and accounts, it helps you manage all the different areas of your business. It gives you the reliable information you need to stay in control and drive your business success. By keeping accounts simple, it helps ease your way through your day and leaves you free to focus on your business. &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://support.sage.co.uk/default.aspx?page=27&amp;p_faqid=30853&amp;p_lvl1=311"&gt;Find out more about the new features in Sage 50 Accounts 2014&lt;/a&gt; &lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</HTML>
+      <Type>SUPPORTNEWS</Type>
+      <Filter xsi:type="AndFilter">
+        <Children>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>01/01/2014</Value>
+            <Operator>from</Operator>
+          </Filter>
+          <Filter xsi:type="CurrentDateFilter">
+            <AttributeName>Current Date</AttributeName>
+            <Comparison>EXACTMATCH</Comparison>
+            <Value>01/09/2015</Value>
+            <Operator>to</Operator>
+          </Filter>
+          <Filter xsi:type="OrFilter">
+            <Children>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.0.9.320</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.01.09.326</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.02.09.345</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.03.09.55</Value>
+                <Operator>=</Operator>
+              </Filter>
+              <Filter xsi:type="VersionFilter">
+                <AttributeName>Program Version</AttributeName>
+                <Comparison>EXACTMATCH</Comparison>
+                <Value>20.04.09.0364</Value>
+                <Operator>=</Operator>
+              </Filter>
+            </Children>
+          </Filter>
+        </Children>
+      </Filter>
+      <Read>false</Read>
+      <Deleted>false</Deleted>
+      <Saved>false</Saved>
+    </LiveObject>
+  </Objects>
+</LiveObjectList>
