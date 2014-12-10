@@ -67,6 +67,7 @@
     <Content Include="Content\images\jqueryui\ui-icons_cd0a0a_256x240.png" />
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\enterLicence.js" />
     <Content Include="Scripts\errors.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -153,6 +154,9 @@
     <Content Include="Ui\scripts\bootstrap.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ui\scripts\enterLicence.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ui\scripts\errors.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -207,6 +211,9 @@
     <Content Include="Ui\style\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ui\views\enterLicence.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ui\views\login.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -218,6 +225,7 @@
     </Content>
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
+    <None Include="templates\pages\enterLicence.jade" />
     <None Include="templates\pages\sage50Search.jade" />
     <None Include="templates\pages\xeroSearch.jade" />
   </ItemGroup>
