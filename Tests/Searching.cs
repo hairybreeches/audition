@@ -80,7 +80,10 @@ namespace Tests
         {
             CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
 
-            using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder().BuildSearchable(journalsInRepository))
+            using (var lifetime = AutofacConfiguration
+                .CreateDefaultContainerBuilder()
+                .WithNoLicensing()
+                .BuildSearchable(journalsInRepository))
             using (var requestScope = lifetime.BeginRequestScope())
             {
                 return searchAction(requestScope).ToList();

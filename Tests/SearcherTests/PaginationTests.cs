@@ -22,7 +22,9 @@ namespace Tests.SearcherTests
         [Test]
         public void ExportsAllJournalsWhenRequested()
         {
-            var builder = AutofacConfiguration.CreateDefaultContainerBuilder().SaveExportedFilesTo("steve");
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
+                .WithNoLicensing()
+                .SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
             builder.Register(_ => exporter).As<IExcelExporter>();            
 

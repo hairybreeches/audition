@@ -56,6 +56,7 @@ namespace Tests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
+            builder.WithNoLicensing();
             builder.Register(_ => new MockXeroSession()).As<IXeroSession>();
             return builder;
         }
