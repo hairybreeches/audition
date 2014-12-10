@@ -30,7 +30,12 @@ namespace Licensing
         private bool IsFullyLicensed()
         {
             string licenceKey;
-            return registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey);
+            if (!registry.TryGetStringValue(Location, LicenceKeyName, out licenceKey))
+            {
+                return false;
+            }
+
+            return licenceVerifier.IsValid(licenceKey);
         }
 
         private int DaysOfTrialRemaining()
