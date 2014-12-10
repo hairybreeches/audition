@@ -42,8 +42,9 @@ namespace Licensing
 
         public void StoreLicence(string licenceKey)
         {
-            licenceVerifier.VerifyLicence(licenceKey);
-            registry.WriteValue(Location, LicenceKeyName, licenceKey);
+            var trimmedKey = licenceKey.Trim();
+            licenceVerifier.VerifyLicence(trimmedKey);
+            registry.WriteValue(Location, LicenceKeyName, trimmedKey);
         }
 
         public void EnsureUseAllowed()
