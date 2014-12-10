@@ -26,7 +26,7 @@ namespace Tests
         public void WhenLicenceKeyExistsProductIsLicensed()
         {
             //given a registry with a licence key stored in it
-            var licenceReader = GetLicenceStorage(new MockRegistry().SetValue("SOFTWARE\\Audition\\Audition", "LicenceKey", "1234567890123456"));
+            var licenceReader = GetLicenceStorage(new MockRegistry().SetLicenceKey("1234567890123456"));
             //when we retrieve the licence
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed
@@ -47,7 +47,7 @@ namespace Tests
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed now
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
-        }                  
+        }
 
         [Test]
         public void WhenLicenceDoesNotExistTrialPeriodHas28Days()
