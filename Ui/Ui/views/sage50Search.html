@@ -17,8 +17,8 @@
           <h1>Search<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
         </div>
       </div>
-      <div id="licensingElement" class="row">
-        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right"></a></div>
+      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
+        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
       </div>
     </div>
     <div id="pageElement">

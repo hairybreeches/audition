@@ -8,6 +8,10 @@
         RemainingTrialDays: 28
     });
 
+    self.showLicensingInfo = ko.computed(function() {
+        return !self.licence.IsFullyLicensed();
+    });
+
     self.licenceText = ko.computed(function () {
 
         if (self.licence.IsFullyLicensed()) {
