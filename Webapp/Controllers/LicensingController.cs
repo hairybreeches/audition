@@ -20,7 +20,7 @@ namespace Webapp.Controllers
             return storage.GetLicence();
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route(Routing.UpdateLicence)]
         public Licence UpdateLicence(string licenceKey)
         {
