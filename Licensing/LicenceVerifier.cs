@@ -9,21 +9,10 @@ namespace Licensing
     {
         public void VerifyLicence(string licenceKey)
         {
-            if (licenceKey.Length != 16)
+            if (!IsValid(licenceKey))
             {
                 throw new InvalidLicenceKeyException();
-            }
-          
-            var firstTenDigits = licenceKey.Take(10);
-
-            var checkSum = GetExpectedCheckSum(firstTenDigits);
-
-            var lastSixDigits = licenceKey.Substring(10);
-            if (!Equals(checkSum, lastSixDigits))
-            {
-                throw new InvalidLicenceKeyException();
-            }
-
+            }                     
         }
 
         private static string GetExpectedCheckSum(IEnumerable<char> hashInput)
@@ -38,6 +27,26 @@ namespace Licensing
         static byte[] GetBytes(IEnumerable<char> characters)
         {
             return characters.Select(x => (byte) x).ToArray();            
+        }
+
+        public bool IsValid(string licenceKey)
+        {
+            if (licenceKey.Length != 16)
+            {
+                return false;
+            }
+
+            var firstTenDigits = licenceKey.Take(10);
+
+            var checkSum = GetExpectedCheckSum(firstTenDigits);
+
+            var lastSixDigits = licenceKey.Substring(10);
+            if (!Equals(checkSum, lastSixDigits))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Tests
     [TestFixture]
     public class LicensingTests
     {
+        private const string ValidLicenceKey = "123456789012B032";
+
         [Test]
         public void WhenNoLicenceKeyExistsProductIsUnlicensed()
         {
@@ -26,15 +28,15 @@ namespace Tests
         public void WhenLicenceKeyExistsProductIsLicensed()
         {
             //given a registry with a licence key stored in it
-            var licenceReader = GetLicenceStorage(new MockRegistry().SetLicenceKey("1234567890123456"));
+            var licenceReader = GetLicenceStorage(new MockRegistry().SetLicenceKey(ValidLicenceKey));
             //when we retrieve the licence
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
         }                             
 
-        [TestCase("123456789012B032", TestName = "Basic success case")]
-        [TestCase("  123456789012B032  ", TestName = "Key with leading and trailing whitespace")]
+        [TestCase(ValidLicenceKey, TestName = "Basic success case")]
+        [TestCase("  " + ValidLicenceKey + "    ", TestName = "Key with leading and trailing whitespace")]
         [TestCase("123456789012345", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with fewer than 16 digits fails")]
         [TestCase("12345678901234567", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with more than 16 digits fails")]
         [TestCase("1234567890123456", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with invalid checksum fails")]
@@ -47,6 +49,16 @@ namespace Tests
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed now
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
+        }
+
+        [Test]
+        public void WhenInvalidLicenceStoredItIsIgnored()
+        {
+            //given a registry with an invalid licence key
+            var registry = new MockRegistry().SetLicenceKey("1234567890123456");
+            var licence = GetLicenceStorage(registry).GetLicence();
+            Assert.AreEqual(false, licence.IsFullyLicensed, "The false licence should be ignored or removed");
+
         }
 
         [Test]
