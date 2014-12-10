@@ -1,3 +1,10 @@
 ﻿var getErrorMessage = function (jqXHR) {
-    return jqXHR.responseJSON ? jqXHR.responseJSON.ExceptionMessage : jqXHR.responseText;
+
+    var getServerErrorMessage = function(response) {
+        return response.ExceptionMessage || response.Message;
+    }
+
+    return jqXHR.responseJSON ?  getServerErrorMessage(jqXHR.responseJSON): jqXHR.responseText;
 }
+
+
