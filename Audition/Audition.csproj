@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.37.0.0-pre02\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.37.0.0-pre02\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +14,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AllowedReferenceRelatedFileExtensions Condition=" '$(Configuration)' == 'Release' ">.allowedextension</AllowedReferenceRelatedFileExtensions>
+    <NuGetPackageImportStamp>4e7fe2df</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -40,14 +43,6 @@
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp, Version=1.25.4.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.WinForms.1.25.3\lib\net40\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.WinForms, Version=1.25.4.29918, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.WinForms.1.25.3\lib\net40\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -165,9 +160,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <PostBuildEvent>
-      %25WINDIR%25\system32\xcopy /s /y "$(SolutionDir)\packages\CefSharp.WinForms.1.25.3\cef\*.*" "$(TargetDir)"
-    </PostBuildEvent>
-  </PropertyGroup>
+  
+  <Import Project="..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.3.2062.1898\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.2062.1898\build\cef.redist.x64.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.37.0.0-pre02\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.37.0.0-pre02\build\CefSharp.WinForms.props'))" />
+  </Target>
+  <Import Project="..\packages\cef.redist.x64.3.2062.1898\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2062.1898\build\cef.redist.x64.targets')" />
+  <Import Project="..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.37.0.0-pre02\build\CefSharp.Common.targets')" />
 </Project>
