@@ -1,0 +1,51 @@
+﻿mixin pager()
+	h4.text-center(data-bind = "text: resultsComment()")
+	ul.pager
+		li.previous(data-bind="visible: isPreviousPage()")
+			a(href="#" data-bind="click: goToPreviousPage") ← Previous
+		li.next(data-bind="visible: isNextPage()")
+			a(href="#" data-bind="click: goToNextPage") Next →
+
+div(data-bind="visible: showResults()" style="display: none;")
+	+pager()
+	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
+		thead
+			tr
+				th Date created
+				th Date of journal
+				th(data-bind="visible: $root.showDescription()") Description
+				th(data-bind="visible: $root.showUsername()") Username
+				th Dr/Cr				
+				th Account Name
+				th Amount
+				th Account Code
+		//ko foreach: results
+		tbody
+				tr
+					td(data-bind="text: created")
+					td(data-bind="text: journalDate")
+					td(data-bind="text: description, visible: $root.showDescription()")
+					td(data-bind="text: username, visible: $root.showUsername()")
+					td(data-bind="text: lines[0].journalType")
+					td(data-bind="text: lines[0].accountName")
+					td(data-bind="text: lines[0].amount")
+					td(data-bind="text: lines[0].accountCode")
+				// ko foreach: lines.slice(1)
+				tr
+					td
+					td
+					td(data-bind="visible: $root.showDescription()")
+					td(data-bind="visible: $root.showUsername()")
+					td(data-bind="text: journalType")
+					td(data-bind="text: accountName")
+					td(data-bind="text: amount")
+					td(data-bind="text: accountCode")
+				// /ko
+		// /ko
+	+pager()
+div(data-bind="visible: showApology()" style="display: none;")
+	h2 No results
+
+div(data-bind="visible: showError()" style="display: none;")
+	h2 Error
+	span(data-bind="text: lastError")
