@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Net;
 using System.Net.Http;
 using CefSharp;
 using Webapp;
