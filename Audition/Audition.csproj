@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Chromium\ChromiumModule.cs" />
     <Compile Include="Chromium\HttpConversion.cs" />
+    <Compile Include="Chromium\NameValueCollectionExtensions.cs" />
     <Compile Include="Chromium\RequestHandler.cs" />
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
@@ -160,7 +161,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
   <Import Project="..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2062.1898\build\cef.redist.x86.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
