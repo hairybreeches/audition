@@ -36,5 +36,15 @@ namespace Audition.Chromium
         }
 
 
+        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, CefEventFlags modifiers, bool isSystemKey)
+        {
+            return false;
+        }
+
+        public bool OnPreKeyEvent(IWebBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode, CefEventFlags modifiers,
+            bool isSystemKey, bool isKeyboardShortcut)
+        {
+            return false;            
+        }
     }
 }
