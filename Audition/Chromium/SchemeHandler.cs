@@ -7,13 +7,13 @@ using Webapp;
 
 namespace Audition.Chromium
 {
-    internal class RequestHandler : ISchemeHandler
+    internal class SchemeHandler : ISchemeHandler
     {
 
         private readonly string internalDomain;
         private readonly OwinServer server;
 
-        public RequestHandler(OwinServer server)
+        public SchemeHandler(OwinServer server)
         {
             this.internalDomain = Routing.InternalDomain;
             this.server = server;

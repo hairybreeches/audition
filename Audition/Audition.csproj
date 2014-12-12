@@ -70,7 +70,7 @@
     <Compile Include="Chromium\ChromiumModule.cs" />
     <Compile Include="Chromium\HttpConversion.cs" />
     <Compile Include="Chromium\NameValueCollectionExtensions.cs" />
-    <Compile Include="Chromium\RequestHandler.cs" />
+    <Compile Include="Chromium\SchemeHandler.cs" />
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
     <Compile Include="Program.cs" />

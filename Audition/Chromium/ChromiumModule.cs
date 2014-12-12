@@ -11,7 +11,7 @@ namespace Audition.Chromium
             builder.RegisterType<AppForm>();
             builder.RegisterType<ChromiumControl>();
 
-            builder.RegisterType<RequestHandler>().As<IRequestHandler>();                       
+            builder.RegisterType<SchemeHandler>().As<IRequestHandler>();                       
         }
     }
 }
