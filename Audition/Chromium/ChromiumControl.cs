@@ -16,7 +16,7 @@ namespace Audition.Chromium
         public ChromiumControl(ISchemeHandlerFactory schemeHandlerFactory)
         {
             var address = Routing.GetViewUrl("login.html");
-            CEF.Initialize(new Settings());
+            Cef.Initialize(new CefSettings());
             Dock = DockStyle.Fill;
             webView = new WebView(address, new BrowserSettings
                                              {
