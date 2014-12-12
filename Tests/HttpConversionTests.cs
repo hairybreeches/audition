@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -76,11 +77,10 @@ namespace Tests
             var request = Substitute.For<IRequest>();
             request.Method.Returns("POST");
             request.Body.Returns("I am some content");
-            request.GetHeaders().Returns(new Dictionary<string, string>()
-            {
-                {"Content-Type", "application/json; charset=us-ascii"},
-                {"Accept", "text/html"}
-            });            
+            var headers = new NameValueCollection();
+            headers["Content-Type"] = "application/json; charset=us-ascii";
+            headers["Accept"] = "text/html";
+            request.Headers.Returns(headers);            
 
 
             var converted = HttpConversion.ToOwinHttpRequest(request);
