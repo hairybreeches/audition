@@ -14,5 +14,16 @@ namespace Audition.Chromium
             }
             return dict;
         }
+
+        public static NameValueCollection ToNameValueCollection(this IDictionary<string, string> headers)
+        {
+            var collection = new NameValueCollection();
+            foreach (var header in headers)
+            {
+                collection.Add(header.Key, header.Value);
+            }
+
+            return collection;
+        }
     }
 }

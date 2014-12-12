@@ -18,7 +18,7 @@ namespace Audition.Chromium
             Mime = mime;
             ReasonPhrase = reasonPhrase;
             StatusCode = statusCode;
-            Headers = headers;
+            Headers = headers.ToNameValueCollection();
         }
     }
 }
