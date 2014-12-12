@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http;
 using CefSharp;
@@ -6,7 +7,7 @@ using Webapp;
 
 namespace Audition.Chromium
 {
-    internal class RequestHandler : IRequestHandler
+    internal class RequestHandler : ISchemeHandler
     {
 
         private readonly string internalDomain;
@@ -18,33 +19,30 @@ namespace Audition.Chromium
             this.server = server;
         }
 
-        public bool OnBeforeBrowse(IWebBrowser browser, IRequest request, NavigationType navigationType, bool isRedirect)
-        {
-            return false;
-        }
-
-        public bool OnBeforeResourceLoad(IWebBrowser browser, IRequestResponse requestResponse)
-        {
-            var request = requestResponse.Request;            
+        public bool ProcessRequestAsync(IRequest request, ISchemeHandlerResponse response,
+            OnRequestCompletedHandler requestCompletedCallback)
+        {            
             if (request.Url.StartsWith(internalDomain))
             {
                 var httpRequestMessage = HttpConversion.ToOwinHttpRequest(request);
-                var response = GetResponse(httpRequestMessage);
-                Respond(requestResponse, response);
+                var httpResponse = GetResponse(httpRequestMessage);
+                Respond(response, httpResponse);
             }
 
             return false;
         }
 
-        private static void Respond(IRequestResponse requestResponse, HttpResponseMessage response)
+        private static void Respond(ISchemeHandlerResponse requestResponse, HttpResponseMessage response)
         {
             using (response)
             {
                 var cefSharpResponse = HttpConversion.ToCefSharpResponse(response);
 
-                requestResponse.RespondWith(cefSharpResponse.Content, cefSharpResponse.Mime,
-                    cefSharpResponse.ReasonPhrase, cefSharpResponse.StatusCode,
-                    cefSharpResponse.Headers);
+                requestResponse.CloseStream = true;
+                requestResponse.ResponseStream = cefSharpResponse.Content;
+                requestResponse.MimeType = cefSharpResponse.Mime;
+                requestResponse.StatusCode = cefSharpResponse.StatusCode;
+                requestResponse.ResponseHeaders = cefSharpResponse.Headers;
             }
         }
 
@@ -55,7 +53,9 @@ namespace Audition.Chromium
 
             if (response.StatusCode == HttpStatusCode.Redirect)
             {
-                return GetResponse(HttpConversion.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "", new Dictionary<string, string>()));
+                return
+                    GetResponse(HttpConversion.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "",
+                        new Dictionary<string, string>()));
             }
 
             return response;
@@ -64,23 +64,6 @@ namespace Audition.Chromium
         private HttpResponseMessage GetImmediateResponse(HttpRequestMessage httpRequest)
         {
             return server.ExecuteRequest(httpRequest);
-        }        
-
-        public void OnResourceResponse(IWebBrowser browser, string url, int status, string statusText, string mimeType,
-            WebHeaderCollection headers)
-        {
-        }
-
-        public bool GetDownloadHandler(IWebBrowser browser, string mimeType, string fileName, long contentLength,
-            ref IDownloadHandler handler)
-        {
-            return false;
-        }
-
-        public bool GetAuthCredentials(IWebBrowser browser, bool isProxy, string host, int port, string realm, string scheme,
-            ref string username, ref string password)
-        {
-            return false;
         }
     }
 }
