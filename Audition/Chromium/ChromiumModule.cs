@@ -12,6 +12,7 @@ namespace Audition.Chromium
             builder.RegisterType<ChromiumControl>();
 
             builder.RegisterType<SchemeHandler>().As<ISchemeHandler>();                       
+            builder.RegisterType<SchemeHandlerFactory>().As<ISchemeHandlerFactory>();                       
         }
     }
 }

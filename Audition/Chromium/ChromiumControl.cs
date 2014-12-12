@@ -13,7 +13,7 @@ namespace Audition.Chromium
     {
         private readonly WebView webView;
 
-        public ChromiumControl(IRequestHandler requestHandler)
+        public ChromiumControl(ISchemeHandlerFactory schemeHandlerFactory)
         {
             var address = Routing.GetViewUrl("login.html");
             CEF.Initialize(new Settings());

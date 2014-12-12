@@ -72,6 +72,7 @@
     <Compile Include="Chromium\NameValueCollectionExtensions.cs" />
     <Compile Include="Chromium\SchemeHandler.cs" />
     <Compile Include="Chromium\InvalidHttpMethod.cs" />
+    <Compile Include="Chromium\SchemeHandlerFactory.cs" />
     <Compile Include="Chromium\ShortcutKeyboardHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
