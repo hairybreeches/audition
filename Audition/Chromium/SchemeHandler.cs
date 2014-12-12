@@ -48,22 +48,7 @@ namespace Audition.Chromium
             }
         }
 
-        //todo: 302 redirects should just work!
         private HttpResponseMessage GetResponse(HttpRequestMessage httpRequest)
-        {
-            var response = GetImmediateResponse(httpRequest);
-
-            if (response.StatusCode == HttpStatusCode.Redirect)
-            {
-                return
-                    GetResponse(HttpConversion.ToOwinHttpRequest(response.Headers.Location.ToString(), "GET", "",
-                        new Dictionary<string, string>()));
-            }
-
-            return response;
-        }
-
-        private HttpResponseMessage GetImmediateResponse(HttpRequestMessage httpRequest)
         {
             return server.ExecuteRequest(httpRequest);
         }
