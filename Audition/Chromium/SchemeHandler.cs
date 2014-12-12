@@ -28,6 +28,7 @@ namespace Audition.Chromium
                 var httpResponse = GetResponse(httpRequestMessage);
                 Respond(response, httpResponse);
                 requestCompletedCallback();
+                return true;
             }
             
             return false;
