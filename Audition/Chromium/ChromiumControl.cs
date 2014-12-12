@@ -31,41 +31,10 @@ namespace Audition.Chromium
             
 
             webView.KeyboardHandler = new ShortcutKeyboardHandler();            
-
-            // Without this:
-            //  The webview isn't initialized for a while after the tab is shown, so we have to wait, polling it.
-            //  About 1/3 times when the tab gets created the webview only fills the top left hand corner of it.
-            SizeChanged += ReinitializeAndResize;
-
             Controls.Add(webView);
 
             webView.MenuHandler = this;
-        }
-
-        private void ReinitializeAndResize(object o, EventArgs a)
-        {
-            if (webView.IsHandleCreated)
-            {
-                ReinitializeAndResizeInner(o,a);
-            }
-            else
-            {
-                webView.HandleCreated += ReinitializeAndResizeInner;
-            }
-        }
-
-        private void ReinitializeAndResizeInner(object o, EventArgs a)
-        {
-            //This method is oddly named but seems to work.
-            webView.OnInitialized();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            SizeChanged -= ReinitializeAndResize;
-            webView.HandleCreated -= ReinitializeAndResizeInner;
-            base.Dispose(disposing);
-        }
+        }        
 
         internal void ShowDevTools()
         {
