@@ -11,14 +11,14 @@ namespace Audition.Chromium
     [ComVisible(true)]
     public class ChromiumControl : UserControl, IMenuHandler
     {
-        private readonly WebView webView;
+        private readonly ChromiumWebBrowser webView;
 
         public ChromiumControl(ISchemeHandlerFactory schemeHandlerFactory)
         {
             var address = Routing.GetViewUrl("login.html");
             Cef.Initialize(new CefSettings());
             Dock = DockStyle.Fill;
-            webView = new WebView(address, new BrowserSettings
+            webView = new ChromiumWebBrowser(address, new BrowserSettings
                                              {
                                                  WebSecurityDisabled = true
                                              })
