@@ -18,10 +18,7 @@ namespace Audition.Chromium
             var address = Routing.GetViewUrl("login.html");
             Cef.Initialize(new CefSettings());
             Dock = DockStyle.Fill;
-            webView = new ChromiumWebBrowser(address, new BrowserSettings
-                                             {
-                                                 WebSecurityDisabled = true
-                                             })
+            webView = new ChromiumWebBrowser(address)
                           {
                               Dock = DockStyle.Fill,
                               RequestHandler = requestHandler
