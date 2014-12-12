@@ -27,8 +27,9 @@ namespace Audition.Chromium
                 var httpRequestMessage = HttpConversion.ToOwinHttpRequest(request);
                 var httpResponse = GetResponse(httpRequestMessage);
                 Respond(response, httpResponse);
+                requestCompletedCallback();
             }
-
+            
             return false;
         }
 
