@@ -6,7 +6,6 @@ namespace Audition.Chromium
 {
     public class ShortcutKeyboardHandler : IKeyboardHandler
     {        
-        private const int ctrlshift = 1027;
         private const int w = 23;
         private const int e = 5;
         private const int r = 18;
@@ -17,11 +16,11 @@ namespace Audition.Chromium
             shortcuts.Add(w, browser => browser.Back());
             shortcuts.Add(e, browser => browser.Reload(true));
             shortcuts.Add(r, browser => browser.ShowDevTools());
-        }
+        }        
 
-        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, int modifiers, bool isSystemKey, bool isAfterJavaScript)
+        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, CefEventFlags modifiers, bool isSystemKey)
         {
-            if (type == KeyType.Char && isAfterJavaScript == false && modifiers == ctrlshift)
+            if (type == KeyType.Char && ControlShift(modifiers))
             {
                 Action<IWebBrowser> action;
                 if (shortcuts.TryGetValue(code, out action))
@@ -35,10 +34,14 @@ namespace Audition.Chromium
             return false;
         }
 
-
-        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, CefEventFlags modifiers, bool isSystemKey)
+        private bool ControlShift(CefEventFlags modifiers)
         {
-            return false;
+            return KeyDown(modifiers, CefEventFlags.ControlDown) && KeyDown(modifiers, CefEventFlags.ShiftDown);
+        }
+
+        private static bool KeyDown(CefEventFlags modifiers, CefEventFlags key)
+        {
+            return (modifiers & key) != CefEventFlags.None;
         }
 
         public bool OnPreKeyEvent(IWebBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode, CefEventFlags modifiers,
