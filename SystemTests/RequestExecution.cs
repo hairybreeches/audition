@@ -10,9 +10,9 @@ namespace SystemTests
 {
     public static class RequestExecution
     {
-        public static T GetParsedResponseContent<T>(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static T GetParsedResponseContent<T>(this IContainer lifetime, MockRequest request)
         {
-            var json = lifetime.GetResponseContent(requestResponse);
+            var json = lifetime.GetResponseContent(request);
             try
             {
                 return JsonConvert.DeserializeObject<T>(json);
@@ -24,22 +24,23 @@ namespace SystemTests
             
         }
 
-        public static string GetResponseContent(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static string GetResponseContent(this IContainer lifetime, MockRequest request)
         {
-            var cefSharpResponse = lifetime.ExecuteRequest(requestResponse);            
-            using (var reader = new StreamReader(cefSharpResponse.Content))
+            var cefSharpResponse = lifetime.ExecuteRequest(request);            
+            using (var reader = new StreamReader(cefSharpResponse.ResponseStream))
             {
                 return reader.ReadToEnd();
             }
         }
 
-        public static CefSharpResponse ExecuteRequest(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static ISchemeHandlerResponse ExecuteRequest(this IContainer lifetime, MockRequest request)
         {
             using (var requestScope = lifetime.BeginRequestScope())
             {
-                var handler = requestScope.Resolve<IRequestHandler>();
-                handler.OnBeforeResourceLoad(null, requestResponse);
-                return requestResponse.Response;
+                var response = new MockResponse();
+                var handler = requestScope.Resolve<ISchemeHandler>();
+                handler.ProcessRequestAsync(request, response, null);
+                return response;
             }            
         }
     }

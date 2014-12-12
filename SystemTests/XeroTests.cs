@@ -83,7 +83,7 @@ namespace SystemTests
             builder.SaveExportedFilesTo(fileName);
 
 
-            var requestResponse = new MockRequestResponse("POST",
+            var requestResponse = new MockRequest("POST",
                     ExportRequest,
                     "application/json", "http://localhost:1337/api/export/hours");
 
@@ -110,7 +110,7 @@ Created,Date,Username
         [Test]
         public void CanReturnJournalsSearchedFor()
         {
-            var requestResponse = new MockRequestResponse("POST", SearchRequest, "application/json",
+            var requestResponse = new MockRequest("POST", SearchRequest, "application/json",
                    "http://localhost:1337/api/search/hours");
 
             var actual = GetParsedResponseContent<SearchResponse>(CreateContainerBuilder(), requestResponse);
@@ -145,21 +145,21 @@ Created,Date,Username
             return builder;
         }
 
-        private static T GetParsedResponseContent<T>(ContainerBuilder builder, MockRequestResponse requestResponse)
+        private static T GetParsedResponseContent<T>(ContainerBuilder builder, MockRequest request)
         {
             using (var lifetime = builder.Build())
             {
                 lifetime.LoginToXero(new XeroVerificationCode());
-                return lifetime.GetParsedResponseContent<T>(requestResponse);
+                return lifetime.GetParsedResponseContent<T>(request);
             }
         }
 
-        private static CefSharpResponse ExecuteRequest(ContainerBuilder builder, MockRequestResponse requestResponse)
+        private static void ExecuteRequest(ContainerBuilder builder, MockRequest request)
         {
             using (var lifetime = builder.Build())
             {
                 lifetime.LoginToXero(new XeroVerificationCode());
-                return lifetime.ExecuteRequest(requestResponse);
+                lifetime.ExecuteRequest(request);
             }
         }
     }
