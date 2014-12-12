@@ -25,9 +25,7 @@ namespace Audition.Chromium
                           {
                               Dock = DockStyle.Fill,
                               RequestHandler = requestHandler
-                          };
-
-            webView.PropertyChanged += (sender, args) => webView.Address = address;
+                          };            
             
 
             webView.KeyboardHandler = new ShortcutKeyboardHandler();            
