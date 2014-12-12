@@ -25,12 +25,12 @@ namespace Audition.Chromium
             Cef.Initialize(cefSettings);
             Dock = DockStyle.Fill;
             webView = new ChromiumWebBrowser(address)
-                          {
-                              Dock = DockStyle.Fill,                               
-                          };            
-            
+            {
+                Dock = DockStyle.Fill,
+                KeyboardHandler = new ShortcutKeyboardHandler(),
+            };
 
-            webView.KeyboardHandler = new ShortcutKeyboardHandler();            
+
             Controls.Add(webView);
 
             webView.MenuHandler = this;
