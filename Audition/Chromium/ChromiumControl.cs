@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -13,15 +14,19 @@ namespace Audition.Chromium
     {
         private readonly ChromiumWebBrowser webView;
 
-        public ChromiumControl(ISchemeHandlerFactory schemeHandlerFactory)
+        public ChromiumControl(IEnumerable<CefCustomScheme> schemes)
         {
             var address = Routing.GetViewUrl("login.html");
-            Cef.Initialize(new CefSettings());
+            var cefSettings = new CefSettings();
+            foreach (var scheme in schemes)
+            {
+                cefSettings.RegisterScheme(scheme);
+            }
+            Cef.Initialize(cefSettings);
             Dock = DockStyle.Fill;
             webView = new ChromiumWebBrowser(address)
                           {
-                              Dock = DockStyle.Fill,
-                              RequestHandler = requestHandler
+                              Dock = DockStyle.Fill,                               
                           };            
             
 
