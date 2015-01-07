@@ -105,6 +105,7 @@
     <Compile Include="Mocks\MockRegistryExtensions.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="Mocks\PermissiveLicenceStorage.cs" />
+    <Compile Include="MostRecentListTests.cs" />
     <Compile Include="PersistenceTests.cs" />
     <Compile Include="RegistryTests.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
@@ -156,6 +157,10 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
     </ProjectReference>
     <ProjectReference Include="..\Webapp\Webapp.csproj">
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
