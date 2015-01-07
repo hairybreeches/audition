@@ -26,6 +26,8 @@ namespace Webapp
         public const string EndingSearch = "api/search/ending";
         public const string EndingExport = "api/export/ending";
 
+        public const string Sage50DataLocations = "api/userdata/sage50DataLocations";
+
 
         public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";
