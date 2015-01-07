@@ -122,6 +122,10 @@
       <Project>{49cb781a-5a5a-4d6a-8f19-b8d3c0045597}</Project>
       <Name>Ui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Webapp\Webapp.csproj">
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
       <Name>Webapp</Name>

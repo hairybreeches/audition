@@ -5,6 +5,7 @@ using Licensing;
 using Native;
 using Persistence;
 using Sage50;
+using UserData;
 using Webapp;
 using Webapp.Session;
 using Xero;
@@ -25,6 +26,7 @@ namespace Audition
             builder.RegisterModule<PersistenceModule>();
             builder.RegisterModule<WebappModule>();
             builder.RegisterModule<LicensingModule>();
+            builder.RegisterModule<UserDataModule>();
         }
     }
 }
