@@ -4,7 +4,7 @@ namespace UserData
 {
     public class UserDetails
     {
-        private readonly MostRecentList sageDataLocations = new MostRecentList();        
+        private readonly MostRecentList sageDataLocations = new MostRecentList(20);        
 
 
         public IEnumerable<string> Sage50DataLocations
