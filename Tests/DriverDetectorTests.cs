@@ -64,14 +64,8 @@ namespace Tests
         [TestCaseSource("DriverTestCases")]
         public IEnumerable<Sage50Driver> FindSageDriver(IEnumerable<string> drivers)
         {
-            var registry = CreateRegistry(drivers);
+            var registry = MockRegistry.CreateRegistryWithSage50Drivers(drivers);
             return new Sage50DriverDetector(new OdbcRegistryReader(registry)).FindSageDrivers();
-        }
-
-        private static ILocalMachineRegistry CreateRegistry(IEnumerable<string> drivers)
-        {
-            return new MockRegistry()
-                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
         }
     }
 }

@@ -38,5 +38,11 @@ namespace Tests.Mocks
         {
             SetValue(location, name, value.ToString());
         }
+
+        public static ILocalMachineRegistry CreateRegistryWithSage50Drivers(IEnumerable<string> drivers)
+        {
+            return new MockRegistry()
+                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
+        }
     }
 }
