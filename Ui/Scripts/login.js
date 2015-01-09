@@ -98,5 +98,5 @@ $("#sage50dataDirectory").autocomplete({
             }
         });
     },
-    minLength: 3
+    minLength: 0
 });
