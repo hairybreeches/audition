@@ -108,6 +108,7 @@
     <Compile Include="MostRecentListTests.cs" />
     <Compile Include="PersistenceTests.cs" />
     <Compile Include="RegistryTests.cs" />
+    <Compile Include="Sage50DataDirectoryStorageTests.cs" />
     <Compile Include="SageJournalParsingTests.cs" />
     <Compile Include="SearcherTests\DaylightSavingTests.cs" />
     <Compile Include="SearcherTests\PaginationTests.cs" />

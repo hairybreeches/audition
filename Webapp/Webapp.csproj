@@ -146,10 +146,6 @@
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserData\UserData.csproj">
-      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
-      <Name>UserData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Xero\Xero.csproj">
       <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
       <Name>Xero</Name>
