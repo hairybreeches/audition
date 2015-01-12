@@ -26,7 +26,7 @@ namespace Tests.Mocks
 
         public MockRegistry SetValueNames(string keyName, IEnumerable<string> valueNames)
         {
-            this.valueNamesLookup[keyName] = valueNames;
+            valueNamesLookup[keyName] = valueNames;
             return this;
         } 
         
