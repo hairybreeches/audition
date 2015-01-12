@@ -103,6 +103,7 @@
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockRegistry.cs" />
     <Compile Include="Mocks\MockRegistryExtensions.cs" />
+    <Compile Include="Mocks\MockUserDetailsStorage.cs" />
     <Compile Include="Mocks\MockXeroSession.cs" />
     <Compile Include="Mocks\PermissiveLicenceStorage.cs" />
     <Compile Include="MostRecentListTests.cs" />
