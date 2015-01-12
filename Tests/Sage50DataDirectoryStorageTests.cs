@@ -65,7 +65,7 @@ namespace Tests
 
         private static IEnumerable<string> GetDataDirectories(string[] existentDirectories, string[] sageDriversInstalled, params string[] directoriesUsed)
         {                        
-            var registry = MockRegistry.CreateRegistryWithSage50Drivers(sageDriversInstalled);
+            var registry = new MockRegistry().SetSage50Drivers(sageDriversInstalled);
             var fileSystem = CreateFileSystem(existentDirectories);
             var userDetails = CreateUserDetails(directoriesUsed);
 
