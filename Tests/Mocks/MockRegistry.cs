@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Native;
-using NSubstitute;
 
 namespace Tests.Mocks
 {
@@ -43,6 +41,12 @@ namespace Tests.Mocks
         {
             return new MockRegistry()
                 .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
+        }
+
+        public MockRegistry SetLicenceKey(string licenceKey)
+        {
+            SetValue("SOFTWARE\\Audition\\Audition", "LicenceKey", licenceKey);
+            return this;
         }
     }
 }
