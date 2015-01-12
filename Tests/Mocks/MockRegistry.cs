@@ -36,10 +36,10 @@ namespace Tests.Mocks
             return this;
         }                
 
-        public static ILocalMachineRegistry CreateRegistryWithSage50Drivers(params string[] drivers)
+        public MockRegistry SetSage50Drivers(params string[] drivers)
         {
-            return new MockRegistry()
-                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
+            SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
+            return this;
         }
 
         public MockRegistry SetLicenceKey(string licenceKey)
