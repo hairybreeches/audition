@@ -19,12 +19,20 @@ namespace Tests
             {
                 yield return new TestCaseData(new string[0], new[] { "Sage Line 50 v20" }, new string[0], new string[0])
                     .SetName("Does Not Return Non-existent DemoData Directories");
+                
                 yield return new TestCaseData(
                         new[] {"C:\\programdata\\sage\\accounts\\2014\\demodata"},
                         new[] {"Sage Line 50 v20"},
                         new string[0],
                         new[] {"C:\\programdata\\sage\\accounts\\2014\\demodata"})
                     .SetName("Returns Existing DemoDataD irectories");
+                
+                yield return new TestCaseData(
+                        new[] {"C:\\programdata\\sage\\accounts\\2014\\demodata"},
+                        new[] {"Sage Line 50 v20"},
+                        new[] { "C:\\programdata\\sage\\accounts\\2014\\demodata" },
+                        new[] {"C:\\programdata\\sage\\accounts\\2014\\demodata"})
+                    .SetName("Does not return duplicates when user has used a demo data folder");
 
                 yield return new TestCaseData(new[]
                 {
