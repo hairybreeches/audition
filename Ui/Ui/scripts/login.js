@@ -86,7 +86,7 @@ var model = new LoginModel();
 
 ko.applyBindings(model, document.getElementById('pageElement'));
 
-$("#sage50dataDirectory").autocomplete({
+$("#sage50dataDirectory").typeahead({
     source: function (request, response) {
         $.ajax({
             url: "/api/userdata/sage50DataLocations",
