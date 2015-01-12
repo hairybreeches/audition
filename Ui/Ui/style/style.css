@@ -2992,7 +2992,7 @@ input[type="button"].btn-block {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #00bc8c;
+  color: #464545;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
@@ -7353,7 +7353,7 @@ button.ui-button::-moz-focus-inner {
   font-weight: normal;
   background-color: #ffffff;
   border-color: #ffffff;
-  color: #00bc8c;
+  color: #464545;
   /* Fix problem with border in ui-state-active */
 }
 .ui-menu .ui-menu-item a.ui-corner-all {
