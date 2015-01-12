@@ -77,12 +77,12 @@ namespace Tests
 
             //which has some data saved in it
             var savedDetails = new UserDetails();
-            savedDetails.AddSage50DataLocation("a location");                        
+            savedDetails.AddSage50DataLocation("c:\\Audition\\Sage50");
             storage.Save(savedDetails);
 
             //then the details can be loaded correctly
             var loadedDetails = storage.Load();
-            CollectionAssert.AreEqual(new[] { "a location" }, loadedDetails.Sage50DataLocations);
+            CollectionAssert.AreEqual(new[] { "c:\\Audition\\Sage50" }, loadedDetails.Sage50DataLocations);
         }  
 
         private static UserDetailsStorage CreateStorage()
