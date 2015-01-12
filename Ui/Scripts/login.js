@@ -85,3 +85,19 @@ var LoginModel = function () {
 var model = new LoginModel();
 
 ko.applyBindings(model, document.getElementById('pageElement'));
+
+$("#sage50dataDirectory").typeahead({
+    source: function (request, response) {
+        $.ajax({
+            url: "/api/userdata/sage50DataLocations",
+            data: {
+                enteredData: request.term
+            },            
+            success: function (data) {
+                response(data);
+            }
+        });
+    },
+    showHintOnFocus: true,
+    minLength: 0
+});

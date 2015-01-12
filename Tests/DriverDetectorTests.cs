@@ -16,7 +16,7 @@ namespace Tests
             get
             {
                 yield return new TestCaseData(new List<string> {"Sage Line 50 v21"})
-                    .Returns(new[]{new Sage50Driver(21, "Sage Line 50 v21", "Sage 2015")})
+                    .Returns(new[]{new Sage50Driver(21, "Sage Line 50 v21", "2015")})
                     .SetName("When only one driver present it is returned");
 
                 yield return new TestCaseData(new List<string> { "Sage Line 50 v11", "Sage Line 50 v13", "Sage Line 50 v22", "Sage Line 50 v33" })
@@ -32,7 +32,7 @@ namespace Tests
                 yield return new TestCaseData(new List<string> {"Sage Line 50 v21", "Sage Line 50 v3"})
                     .Returns(new[]
                     {
-                        new Sage50Driver(21, "Sage Line 50 v21", "Sage 2015"),
+                        new Sage50Driver(21, "Sage Line 50 v21", "2015"),
                         new Sage50Driver(3, "Sage Line 50 v3", "Sage Line 50 v3"),
                     }
                     )
@@ -41,7 +41,7 @@ namespace Tests
                 yield return new TestCaseData(new List<string> { "Sage Line 50 v16", "Sage Line 50 v11", "SQL Server" })
                     .Returns(new []
                     {
-                     new Sage50Driver(16, "Sage Line 50 v16", "Sage 2010"),
+                     new Sage50Driver(16, "Sage Line 50 v16", "2010"),
                      new Sage50Driver(11, "Sage Line 50 v11", "Sage Line 50 v11"),      
                     })
                     .SetName("Non-Sage drivers are ignored");
@@ -64,14 +64,8 @@ namespace Tests
         [TestCaseSource("DriverTestCases")]
         public IEnumerable<Sage50Driver> FindSageDriver(IEnumerable<string> drivers)
         {
-            var registry = CreateRegistry(drivers);
+            var registry = new MockRegistry().SetSage50Drivers(drivers.ToArray());
             return new Sage50DriverDetector(new OdbcRegistryReader(registry)).FindSageDrivers();
-        }
-
-        private static ILocalMachineRegistry CreateRegistry(IEnumerable<string> drivers)
-        {
-            return new MockRegistry()
-                .SetValueNames("SOFTWARE\\ODBC\\ODBCINST.INI\\ODBC Drivers", drivers);
         }
     }
 }
