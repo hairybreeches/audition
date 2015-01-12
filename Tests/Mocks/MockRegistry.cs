@@ -9,6 +9,20 @@ namespace Tests.Mocks
         private readonly IDictionary<string, IEnumerable<string>> valueNamesLookup = new Dictionary<string, IEnumerable<string>>();
         private readonly Dictionary<Tuple<string, string>, string> valueLookup = new Dictionary<Tuple<string, string>, string>();
 
+        public bool TryGetStringValue(string location, string keyName, out string keyValue)
+        {
+            return valueLookup.TryGetValue(new Tuple<string, string>(location, keyName), out keyValue);
+        }
+
+        public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
+        {
+            return valueNamesLookup.TryGetValue(location, out valueNames);
+        }
+
+        public void WriteValue(string location, string name, object value)
+        {
+            SetValue(location, name, value.ToString());
+        }
 
         public MockRegistry SetValueNames(string keyName, IEnumerable<string> valueNames)
         {
@@ -20,22 +34,7 @@ namespace Tests.Mocks
         {
             valueLookup[new Tuple<string, string>(keyLocation, keyName)] = value;
             return this;
-        }        
-
-        public bool TryGetStringValue(string location, string keyName, out string keyValue)
-        {
-            return valueLookup.TryGetValue(new Tuple<string, string>(location, keyName), out keyValue);
-        }
-
-        public bool TryGetValueNames(string location, out IEnumerable<string> valueNames)
-        {
-            return valueNamesLookup.TryGetValue(location, out valueNames);
-        }       
-
-        public void WriteValue(string location, string name, object value)
-        {
-            SetValue(location, name, value.ToString());
-        }
+        }                
 
         public static ILocalMachineRegistry CreateRegistryWithSage50Drivers(params string[] drivers)
         {
