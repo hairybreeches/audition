@@ -76,9 +76,7 @@ namespace Tests
 
         private static Sage50DataDirectoryStorage CreateSage50DataDirectoryStorage(IFileSystem fileSystem, ILocalMachineRegistry registry, UserDetails userDetails)
         {
-            var storage = Substitute.For<IUserDetailsStorage>();
-            storage.Load().Returns(userDetails);
-            return new Sage50DataDirectoryStorage(storage, fileSystem, new Sage50DriverDetector(new OdbcRegistryReader(registry)));
+            return new Sage50DataDirectoryStorage(new MockUserDetailsStorage(userDetails), fileSystem, new Sage50DriverDetector(new OdbcRegistryReader(registry)));
         }
 
         private static UserDetails CreateUserDetails(IEnumerable<string> directoriesUsed)

@@ -10,6 +10,7 @@ using NSubstitute;
 using Persistence;
 using Sage50;
 using Tests.Mocks;
+using UserData;
 using Webapp.Controllers;
 using Webapp.Session;
 using Xero;
@@ -69,6 +70,7 @@ namespace Tests
 
             builder.Register(_ => new PhysicalFileSystem("."))
                 .As<IFileSystem>();
+            builder.RegisterType<MockUserDetailsStorage>().As<IUserDetailsStorage>();
 
             return builder;
         }
