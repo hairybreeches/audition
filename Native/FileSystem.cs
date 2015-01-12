@@ -20,6 +20,19 @@ namespace Native
             return Directory.Exists(directoryName);
         }
 
+        public void EnsureDirectoryExists(string directory)
+        {
+            if (!DirectoryExists(directory))
+            {
+                CreateDirectory(directory);
+            }
+        }
+
+        private void CreateDirectory(string directory)
+        {
+            Directory.CreateDirectory(directory);
+        }
+
         public void DeleteFile(string filename)
         {
             try
