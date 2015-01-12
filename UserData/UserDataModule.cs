@@ -6,7 +6,7 @@ namespace UserData
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UserDetails>().SingleInstance();
+            builder.RegisterType<UserDetailsStorage>().As<IUserDetailsStorage>();
         }
     }
 }
