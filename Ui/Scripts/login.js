@@ -98,6 +98,5 @@ $("#sage50dataDirectory").typeahead({
             }
         });
     },
-    showHintOnFocus: true,
     minLength: 0
 });
