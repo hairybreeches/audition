@@ -1,5 +1,5 @@
 ﻿var searchModel = {
-    unavilableFields: {
+    unavailableFields: {
         description: true,
         username: true,
     },
