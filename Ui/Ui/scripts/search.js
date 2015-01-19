@@ -213,7 +213,7 @@ var period = ko.mapping.fromJS({
 });
 
 var showField = function(fieldName) {
-    return !searchModel.unavilableFields[fieldName];
+    return !searchModel.unavailableFields[fieldName];
 }
 
 var SearchModel = function () {
