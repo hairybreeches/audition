@@ -47,7 +47,6 @@
     <Compile Include="JournalSearcherFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccountsLookup.cs" />
-    <Compile Include="IdEqualityComparer.cs" />
     <Compile Include="IJournalSearcher.cs" />
     <Compile Include="IJournalSearcherFactory.cs" />
     <Compile Include="JournalSearcher.cs" />
