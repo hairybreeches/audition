@@ -9,6 +9,7 @@ using Native;
 using NSubstitute;
 using Persistence;
 using Sage50;
+using Searching;
 using Tests.Mocks;
 using UserData;
 using Webapp.Controllers;
@@ -58,7 +59,7 @@ namespace Tests
             using (var requestScope = lifetime.BeginRequestScope())
             {
                 requestScope.Resolve<IJournalRepository>().UpdateJournals(journals);
-                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = JournalSearcherFactory.EverythingAvailable;
             }
             return lifetime;
         }
