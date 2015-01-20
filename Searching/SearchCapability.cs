@@ -11,26 +11,26 @@ namespace Searching
 
 
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchField> unavailableFields { get; private set; }
+        public IEnumerable<SearchField> UnavailableFields { get; private set; }
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchAction> unavailableActions { get; private set; }        
+        public IEnumerable<SearchAction> UnavailableActions { get; private set; }        
 
         //todo: can work out one of these from the other
         public SearchCapability(IEnumerable<SearchField> unavailableFields, IEnumerable<SearchAction> unavailableActions)
         {
-            this.unavailableFields = unavailableFields;
-            this.unavailableActions = unavailableActions;            
+            UnavailableFields = unavailableFields;
+            UnavailableActions = unavailableActions;            
         }        
     }
 
     public enum SearchAction
     {
-        users
+        Users
     }
 
     public enum SearchField
     {
-        description,
-        username
+        Description,
+        Username
     }
 }

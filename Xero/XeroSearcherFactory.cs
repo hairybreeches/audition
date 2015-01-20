@@ -18,7 +18,7 @@ namespace Xero
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(new []{SearchField.description, SearchField.username}, new []{SearchAction.users});
+            return new SearchCapability(new []{SearchField.Description, SearchField.Username}, new []{SearchAction.Users});
         }
     }
 }
