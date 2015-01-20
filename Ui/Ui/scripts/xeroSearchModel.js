@@ -5,6 +5,6 @@ var searchModel = {
     },
 
     unavailableActions: {
-        username: true
+        users: true
     },
 }
