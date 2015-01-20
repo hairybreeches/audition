@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Licensing", "Licensing\Lice
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserData", "UserData\UserData.csproj", "{726B204C-4FB4-47D7-AD3A-753F2E256DE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompiledUi", "CompiledUi\CompiledUi.csproj", "{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -217,6 +219,16 @@ Global
 		{726B204C-4FB4-47D7-AD3A-753F2E256DE4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{726B204C-4FB4-47D7-AD3A-753F2E256DE4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{726B204C-4FB4-47D7-AD3A-753F2E256DE4}.Release|x86.ActiveCfg = Release|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,5 +250,6 @@ Global
 		{E765DBD3-CADA-4EFC-8740-3EF81191EC24} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 		{356EAAC1-1C70-42B8-A2AA-55995B86D9C1} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 		{726B204C-4FB4-47D7-AD3A-753F2E256DE4} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
+		{B7FE3453-BB5D-410D-86EF-C1274AFF5A6E} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 	EndGlobalSection
 EndGlobal
