@@ -32,6 +32,7 @@ namespace Webapp.Controllers
         {
             var journals = await journalGetter.GetJournals(verificationCode.Code);
             session.Login(searcherFactory, journals);
+            journalGetter.Logout();
             return Ok();
         }
 
@@ -40,8 +41,7 @@ namespace Webapp.Controllers
         [HttpGet]
         [Route(Routing.XeroLogout)]
         public IHttpActionResult Logout()
-        {
-            journalGetter.Logout();
+        {            
             session.Logout();
             return RedirectToView("login.html");
         }
