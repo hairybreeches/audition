@@ -153,9 +153,11 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, exportSuccessMessage, searchUrl, exportUrl, blocked) {
+var InputSection = function (parameters, period, exportSuccessMessage, name, blocked) {
 
     var self = this;
+    var exportUrl = '/api/export/' + name;
+    var searchUrl = '/api/search/' + name;
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.observable(blocked || false);
@@ -264,23 +266,23 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, exportSuccessMessage, '/api/search/hours', '/api/export/hours', searchModel.unavailableActions.hours),
+        }, period, exportSuccessMessage, 'hours', searchModel.unavailableActions.hours),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, exportSuccessMessage, '/api/search/accounts', '/api/export/accounts', searchModel.unavailableActions.accounts),
+        }, period, exportSuccessMessage, 'accounts', searchModel.unavailableActions.accounts),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, exportSuccessMessage, '/api/search/date', '/api/export/date', searchModel.unavailableActions.date),
+        }, period, exportSuccessMessage, 'date', searchModel.unavailableActions.date),
 
         Users: new InputSection({
             users: ""
-        }, period, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.users),
+        }, period, exportSuccessMessage, 'users', searchModel.unavailableActions.users),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, exportSuccessMessage, '/api/search/ending', '/api/export/ending', searchModel.unavailableActions.ending)
+        }, period, exportSuccessMessage, 'ending', searchModel.unavailableActions.ending)
     };
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;
