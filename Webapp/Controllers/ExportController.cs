@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -34,47 +35,42 @@ namespace Webapp.Controllers
         [Route(Routing.HoursExport)]
         public async Task<string> HoursExport(ExportRequest<WorkingHoursParameters> saveRequest)
         {
-            //todo: duplication!
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest, journals);
+            return await Export(saveRequest, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.AccountsExport)]
         public async Task<string> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
         {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest, journals);
+            return await Export(saveRequest, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.DateExport)]
         public async Task<string> DateExport(ExportRequest<YearEndParameters> saveRequest)
         {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest, journals);
+            return await Export(saveRequest, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.EndingExport)]
         public async Task<string> EndingExport(ExportRequest<EndingParameters> saveRequest)
         {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest, journals);
+            return await Export(saveRequest, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.UserExport)]
         public async Task<string> UserExport(ExportRequest<UserParameters> saveRequest)
         {
-            var journals = Searcher.FindJournalsWithin(saveRequest.SearchWindow);
-            return await Export(saveRequest, journals);
+            return await Export(saveRequest, Searcher.FindJournalsWithin);
         }
 
-        private async Task<string> Export<T>(ExportRequest<T> exportRequest, IQueryable<Journal> journals)
+        private async Task<string> Export<T>(ExportRequest<T> saveRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(exportRequest.SearchWindow.Description, journals.GetAllJournals(), saveLocation, exportRequest.SerialisationOptions);
+            excelExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation,
+                saveRequest.SerialisationOptions);
             return saveLocation;
         }
     }
