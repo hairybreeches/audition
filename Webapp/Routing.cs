@@ -4,10 +4,10 @@ namespace Webapp
 {
     //todo: share these routes between js and c# using CEF
     public static class Routing
-    {        
+    {
+        
         public const string InitialiseXeroLogin = "api/xero/initialiselogin";
         public const string XeroLogin = "api/xero/login";
-        public const string XeroLogout = "api/xero/logout";
 
         public const string Sage50Login = "api/sage50/login";
         public const string Sage50Logout = "api/sage50/logout";
@@ -29,6 +29,7 @@ namespace Webapp
         public const string Sage50DataLocations = "api/userdata/sage50DataLocations";
 
         public const string SearchCapability = "api/session/searchCapability";
+        public const string Logout = "api/session/logout";
 
 
         public const string Openfile = "api/openfile";        

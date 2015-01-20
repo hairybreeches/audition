@@ -5,7 +5,7 @@ include ../components/template
 	.container
 		.row
 			.col-md-1.col-md-offset-11
-				a.pull-right.action-link(href="#{logoutUrl}") Logout
+				a.pull-right.action-link(href="/api/session/logout") Logout
 	.container(data-bind="with: input")
 		include ../components/searchInput
 		hr.vertical-space

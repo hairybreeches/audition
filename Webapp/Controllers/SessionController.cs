@@ -4,7 +4,7 @@ using Webapp.Session;
 
 namespace Webapp.Controllers
 {
-    public class SessionController : ApiController
+    public class SessionController : RedirectController
     {
         private readonly LoginSession session;
 
@@ -18,6 +18,14 @@ namespace Webapp.Controllers
         public SearchCapability GetSearchCapability()
         {
             return session.GetCurrentSearchCapability();
+        }
+
+        [HttpGet]
+        [Route(Routing.Logout)]
+        public IHttpActionResult Logout()
+        {
+            session.Logout();
+            return RedirectToView("login.html");
         }
     }
 }

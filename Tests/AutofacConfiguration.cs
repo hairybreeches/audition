@@ -34,12 +34,12 @@ namespace Tests
             }            
         }
 
-        public static void LogoutFromXero(this IContainer container)
+        public static void Logout(this IContainer container)
         {
             using (var requestScope = container.BeginRequestScope())
             {
-                var loginController = requestScope.Resolve<XeroSessionController>();
-                loginController.Logout();
+                var sessionController = requestScope.Resolve<SessionController>();
+                sessionController.Logout();
             }
         }
 

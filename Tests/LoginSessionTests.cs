@@ -47,7 +47,7 @@ namespace Tests
             using (var container = builder.Build())
             {
                 Login(container);
-                container.LogoutFromXero();
+                container.Logout();
                 AssertSearchingGivesNotLoggedInException(container);
             }
         }        
