@@ -35,15 +35,5 @@ namespace Webapp.Controllers
             journalGetter.Logout();
             return Ok();
         }
-
-        
-
-        [HttpGet]
-        [Route(Routing.XeroLogout)]
-        public IHttpActionResult Logout()
-        {            
-            session.Logout();
-            return RedirectToView("login.html");
-        }
     }
 }

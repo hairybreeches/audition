@@ -34,13 +34,5 @@ namespace Webapp.Controllers
 
             return Ok();
         }               
-
-        [HttpGet]
-        [Route(Routing.Sage50Logout)]
-        public IHttpActionResult Logout()
-        {
-            session.Logout();
-            return RedirectToView("login.html");
-        }
     }
 }
