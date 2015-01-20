@@ -226,11 +226,11 @@ var period = ko.mapping.fromJS({
     To: '2014-3-31'
 });
 
-var showField = function(fieldName) {
-    return searchModel.unavailableFields.indexOf(fieldName) === -1;
-}
-
 var SearchModel = function () {
+
+    var showField = function (fieldName) {
+        return searchModel.unavailableFields.indexOf(fieldName) === -1;
+    }
 
     var self = this;
 
