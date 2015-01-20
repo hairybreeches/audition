@@ -170,7 +170,7 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.computed(function() {
-        return searchCapabilities.unavailableActions.indexOf(name) !== -1;
+        return searchCapabilities.UnavailableActions.indexOf(name) !== -1;
     });
         
     //methods
@@ -229,7 +229,7 @@ var period = ko.mapping.fromJS({
 var SearchModel = function () {
 
     var showField = function (fieldName) {
-        return searchCapabilities.unavailableFields.indexOf(fieldName) === -1;
+        return searchCapabilities.UnavailableFields.indexOf(fieldName) === -1;
     }
 
     var self = this;
