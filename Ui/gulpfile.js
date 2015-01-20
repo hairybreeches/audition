@@ -38,6 +38,11 @@ gulp.task('js', function() {
         .pipe(gulp.dest(targetDir + '/scripts'));
 });
 
+gulp.task('userScripts', function () {
+    return gulp.src('userScripts/*.js')
+        .pipe(gulp.dest(targetDir + '/scripts'));
+});
+
 gulp.task('express', function() {
 
 	var servePath = path.resolve(targetDir);
@@ -49,10 +54,11 @@ gulp.task('express', function() {
 gulp.task('watch', function () {
   gulp.watch('style/**/*.less', ['less']);
   gulp.watch('Scripts/*.js', ['js']);
+  gulp.watch('UserScripts/*.js', ['userScripts']);
   gulp.watch('templates/**/*.jade', ['templates']);
   gulp.watch('images/**/*', ['images']);
 });
 
 // Default Task
-gulp.task('build', ['templates', 'less', 'content', 'js']);
+gulp.task('build', ['templates', 'less', 'content', 'js', 'userScripts']);
 gulp.task('default', ['build', 'express', 'watch']);

@@ -68,8 +68,8 @@
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
-    <Content Include="Scripts\enterLicence.js" />
-    <Content Include="Scripts\errors.js" />
+    <Content Include="UserScripts\enterLicence.js" />
+    <Content Include="UserScripts\errors.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -80,10 +80,10 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="Scripts\licensing.js" />
-    <Content Include="Scripts\message.js" />
-    <Content Include="Scripts\login.js" />
-    <Content Include="Scripts\search.js" />
+    <Content Include="UserScripts\licensing.js" />
+    <Content Include="UserScripts\message.js" />
+    <Content Include="UserScripts\login.js" />
+    <Content Include="UserScripts\search.js" />
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />
@@ -179,6 +179,7 @@
     <None Include="templates\pages\login.jade" />
     <None Include="templates\pages\search.jade" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
