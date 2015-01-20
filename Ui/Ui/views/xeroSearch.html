@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+      <title>Audition Software | Search</title><!-- Bootstrap core CSS -->
+      <link href="/style/style.css" rel="stylesheet">
+    </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Search<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
+        </div>
+      </div>
+      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
+        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
+      </div>
+    </div>
+    <div id="pageElement">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-1 col-md-offset-11"><a href="/api/xero/logout" class="pull-right action-link">Logout</a></div>
+        </div>
+      </div>
+      <div data-bind="with: input" class="container">
+        <div class="form-horizontal blockable">
+          <div style="display: none;" data-bind="visible: $root.searching" class="blockscreen loadscreen"></div>
+          <fieldset>
+            <legend class="vertical-space">Find journals for the period...</legend>
+            <div data-bind="with: Period" class="form-group">
+              <div class="col-sm-12">
+                <div class="well inline-block">
+                    <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: From" class="form-control small-input">
+                  <label class="control-label between-label">to</label>
+                    <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: To" class="form-control small-input">
+                </div>
+              </div>
+            </div>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#time" data-toggle="tab">Outside working hours</a></li>
+              <li><a href="#accounts" data-toggle="tab">Unusual accounts</a></li>
+              <li><a href="#users" data-toggle="tab">Unexpected users</a></li>
+              <li><a href="#date" data-toggle="tab">Year end</a></li>
+              <li><a href="#endings" data-toggle="tab">Round number</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="time" class="tab-pane fade active in">
+                  <form action="search" method="post" data-bind="with: Outside" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()" class="blockscreen">Sorry, your current accounts system does not support this feature</div>
+                    <legend class="vertical-space">posted outside...</legend>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <div class="inline-block">
+                          <div data-bind="with: parameters" class="inline-block">
+                            <div class="well inline-block vertical-space margin-right">
+                                <select data-bind="value: FromDay" class="form-control scaled-input">
+                                  <option>Monday</option>
+                                  <option>Tuesday</option>
+                                  <option>Wednesday</option>
+                                  <option>Thursday</option>
+                                  <option>Friday</option>
+                                  <option>Saturday</option>
+                                  <option>Sunday</option>
+                                </select>
+                              <label class="control-label between-label">to</label>
+                                <select data-bind="value: ToDay" class="form-control scaled-input">
+                                  <option>Monday</option>
+                                  <option>Tuesday</option>
+                                  <option>Wednesday</option>
+                                  <option>Thursday</option>
+                                  <option>Friday</option>
+                                  <option>Saturday</option>
+                                  <option>Sunday</option>
+                                </select>
+                            </div>
+                            <div class="well inline-block vertical-space">
+                                <input type="time" data-bind="value: FromTime" class="form-control scaled-input">
+                              <label class="control-label between-label">to</label>
+                                <input type="time" data-bind="value: ToTime" class="form-control scaled-input">
+                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+              <div id="accounts" class="tab-pane fade">
+                  <form action="search" method="post" data-bind="with: Accounts" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()" class="blockscreen">Sorry, your current accounts system does not support this feature</div>
+                    <legend class="vertical-space">posted to accounts with fewer than...</legend>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <div class="inline-block">
+                          <div data-bind="with: parameters" class="inline-block">
+                            <div class="well inline-block vertical-space margin-right">
+                              <input type="number" data-bind="value: minimumEntriesToBeConsideredNormal" class="form-control scaled-input">
+                            </div><span class="vertical-space search-text">entries</span>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+              <div id="users" class="tab-pane fade">
+                  <form action="search" method="post" data-bind="with: Users" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()" class="blockscreen">Sorry, your current accounts system does not support this feature</div>
+                    <legend class="vertical-space">posted by people other than...</legend>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <div class="inline-block">
+                          <div data-bind="with: parameters" class="inline-block">
+                            <div class="well inline-block vertical-space">
+                              <textarea data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line" class="form-control"></textarea>
+                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+              <div id="date" class="tab-pane fade">
+                  <form action="search" method="post" data-bind="with: Date" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()" class="blockscreen">Sorry, your current accounts system does not support this feature</div>
+                    <legend class="vertical-space">posted after the year end or within...</legend>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <div class="inline-block">
+                          <div data-bind="with: parameters" class="inline-block">
+                            <div class="well inline-block vertical-space margin-right">
+                              <input type="number" data-bind="value: daysBeforeYearEnd" class="form-control scaled-input">
+                            </div><span class="vertical-space search-text">days before year end</span>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+              <div id="endings" class="tab-pane fade">
+                  <form action="search" method="post" data-bind="with: Ending" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()" class="blockscreen">Sorry, your current accounts system does not support this feature</div>
+                    <legend class="vertical-space">ending in at least...</legend>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <div class="inline-block">
+                          <div data-bind="with: parameters" class="inline-block">
+                            <div class="well inline-block vertical-space margin-right">
+                              <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control scaled-input">
+                            </div><span class="vertical-space search-text">zeroes.</span>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="vertical-space">
+      </div>
+      <div data-bind="with: exportSuccessMessage" class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div data-bind="visible: visible()" style="display: none;" class="alert alert-success">
+              <button type="button" data-bind="click: hide" class="close">&#10006;</button><strong>Success! </strong>Your search has been saved to:<br><a data-bind="text: fileName(), click: openFile" href="#" class="alert-link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-bind="with: output" class="container">
+        <div data-bind="visible: showResults()" style="display: none;">
+            <h4 data-bind="text: resultsComment()" class="text-center"></h4>
+            <ul class="pager">
+              <li data-bind="visible: isPreviousPage()" class="previous"><a href="#" data-bind="click: goToPreviousPage">← Previous</a></li>
+              <li data-bind="visible: isNextPage()" class="next"><a href="#" data-bind="click: goToNextPage">Next →</a></li>
+            </ul>
+          <table class="table grouped-table grouped-hover-table grouped-striped-table vertical-space">
+            <thead>
+              <tr>
+                <th>Date created</th>
+                <th>Date of journal</th>
+                <th data-bind="visible: $root.showDescription()">Description</th>
+                <th data-bind="visible: $root.showUsername()">Username</th>
+                <th>Dr/Cr				</th>
+                <th>Account Name</th>
+                <th>Amount</th>
+                <th>Account Code</th>
+              </tr>
+            </thead>
+            <!--ko foreach: results-->
+            <tbody>
+              <tr>
+                <td data-bind="text: created"></td>
+                <td data-bind="text: journalDate"></td>
+                <td data-bind="text: description, visible: $root.showDescription()"></td>
+                <td data-bind="text: username, visible: $root.showUsername()"></td>
+                <td data-bind="text: lines[0].journalType"></td>
+                <td data-bind="text: lines[0].accountName"></td>
+                <td data-bind="text: lines[0].amount"></td>
+                <td data-bind="text: lines[0].accountCode"></td>
+              </tr>
+              <!-- ko foreach: lines.slice(1)-->
+              <tr>
+                <td></td>
+                <td></td>
+                <td data-bind="visible: $root.showDescription()"></td>
+                <td data-bind="visible: $root.showUsername()"></td>
+                <td data-bind="text: journalType"></td>
+                <td data-bind="text: accountName"></td>
+                <td data-bind="text: amount"></td>
+                <td data-bind="text: accountCode"></td>
+              </tr>
+              <!-- /ko-->
+            </tbody>
+            <!-- /ko-->
+          </table>
+            <h4 data-bind="text: resultsComment()" class="text-center"></h4>
+            <ul class="pager">
+              <li data-bind="visible: isPreviousPage()" class="previous"><a href="#" data-bind="click: goToPreviousPage">← Previous</a></li>
+              <li data-bind="visible: isNextPage()" class="next"><a href="#" data-bind="click: goToNextPage">Next →</a></li>
+            </ul>
+        </div>
+        <div data-bind="visible: showApology()" style="display: none;">
+          <h2>No results</h2>
+        </div>
+        <div data-bind="visible: showError()" style="display: none;">
+          <h2>Error</h2><span data-bind="text: lastError"></span>
+        </div>
+      </div>
+    </div>
+    <script src="/scripts/jquery-2.1.1.min.js"></script>
+    <script src="/scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/knockout-3.1.0.js"></script>
+    <script src="/scripts/knockout.mapping-latest.js"></script>
+    <script src="/scripts/knockout-jqueryui.min.js"></script>
+    <script src="/scripts/message.js"></script>
+    <script src="/scripts/errors.js"></script>
+    <script src="/scripts/licensing.js"></script>
+    <script src="/scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="/scripts/xeroSearchModel.js"></script>
+    <script src="/scripts/search.js"></script>
+  </body>
+</html>
