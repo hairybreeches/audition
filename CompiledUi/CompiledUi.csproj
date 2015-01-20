@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\build\Debug\Product\Ui</OutputPath>
+    <OutputPath>..\build\Debug\Product\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\build\Release\Product\Ui</OutputPath>
+    <OutputPath>..\build\Release\Product\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,136 +43,136 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="content\images\A.svg">
+    <Content Include="Ui\content\images\A.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\ajax_loader_gray_128.gif">
+    <Content Include="Ui\content\images\ajax_loader_gray_128.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_flat_0_999999_40x100.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_flat_0_999999_40x100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_glass_65_ffffff_1x400.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_glass_65_ffffff_1x400.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_glass_75_dadada_1x400.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_glass_75_dadada_1x400.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_glass_75_ffffff_1x400.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_glass_75_ffffff_1x400.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png">
+    <Content Include="Ui\content\images\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_222222_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_222222_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_2e83ff_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_2e83ff_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_428bca_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_428bca_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_454545_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_454545_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_555555_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_555555_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_888888_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_888888_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_999999_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_999999_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_cd0a0a_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_cd0a0a_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_f0ad4e_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_f0ad4e_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_f6cf3b_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_f6cf3b_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\images\jqueryui\ui-icons_ffffff_256x240.png">
+    <Content Include="Ui\content\images\jqueryui\ui-icons_ffffff_256x240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\bootstrap.min.js">
+    <Content Include="Ui\scripts\bootstrap.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\bootstrap3-typeahead.min.js">
+    <Content Include="Ui\scripts\bootstrap3-typeahead.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\enterLicence.js">
+    <Content Include="Ui\scripts\enterLicence.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\errors.js">
+    <Content Include="Ui\scripts\errors.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\jquery-2.1.1.intellisense.js">
+    <Content Include="Ui\scripts\jquery-2.1.1.intellisense.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\jquery-2.1.1.js">
+    <Content Include="Ui\scripts\jquery-2.1.1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\jquery-2.1.1.min.js">
+    <Content Include="Ui\scripts\jquery-2.1.1.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\jquery-ui-1.11.1.js">
+    <Content Include="Ui\scripts\jquery-ui-1.11.1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\jquery-ui.min-1.11.1.js">
+    <Content Include="Ui\scripts\jquery-ui.min-1.11.1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\knockout-3.1.0.debug.js">
+    <Content Include="Ui\scripts\knockout-3.1.0.debug.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\knockout-3.1.0.js">
+    <Content Include="Ui\scripts\knockout-3.1.0.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\knockout-jqueryui.min.js">
+    <Content Include="Ui\scripts\knockout-jqueryui.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\knockout.mapping-latest.debug.js">
+    <Content Include="Ui\scripts\knockout.mapping-latest.debug.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\knockout.mapping-latest.js">
+    <Content Include="Ui\scripts\knockout.mapping-latest.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\licensing.js">
+    <Content Include="Ui\scripts\licensing.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\login.js">
+    <Content Include="Ui\scripts\login.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\message.js">
+    <Content Include="Ui\scripts\message.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\search.js">
+    <Content Include="Ui\scripts\search.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="style\style.css">
+    <Content Include="Ui\style\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="views\enterLicence.html">
+    <Content Include="Ui\views\enterLicence.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="views\login.html">
+    <Content Include="Ui\views\login.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="views\search.html">
+    <Content Include="Ui\views\search.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
