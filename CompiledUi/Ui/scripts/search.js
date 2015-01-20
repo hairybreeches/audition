@@ -1,6 +1,6 @@
 var searchCapabilities = ko.mapping.fromJS({
-    UnavailableFields: [],
-    UnavailableActions: []
+    AvailableFields: [],
+    AvailableActions: []
 });
 
 $.ajax("/api/session/searchCapability", {
@@ -170,7 +170,7 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.computed(function() {
-        return searchCapabilities.UnavailableActions.indexOf(name) !== -1;
+        return searchCapabilities.AvailableActions.indexOf(name) === -1;
     });
         
     //methods
@@ -229,7 +229,7 @@ var period = ko.mapping.fromJS({
 var SearchModel = function () {
 
     var showField = function (fieldName) {
-        return searchCapabilities.UnavailableFields.indexOf(fieldName) === -1;
+        return searchCapabilities.AvailableFields.indexOf(fieldName) !== -1;
     }
 
     var self = this;
@@ -260,15 +260,35 @@ var SearchModel = function () {
             },
             type: 'POST'
         });
-    };
+    };    
 
+    self.showAccountCode = function () {
+        return showField('AccountCode');
+    };
+    self.showAccountName = function () {
+        return showField('AccountName');
+    };
+    self.showAmount = function () {
+        return showField('Amount');
+    };
+    self.showCreated = function () {
+        return showField('Created');
+    };
+    self.showJournalDate = function () {
+        return showField('JournalDate');
+    };
+    self.showJournalType = function () {
+        return showField('JournalType');
+    };
     self.showDescription = function() {
         return showField('Description');
     };
-
     self.showUsername = function() {
         return showField('Username');
-    };
+    }
+    self.showJournalLine = function() {
+        return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showJournalType();
+    }
 
     self.input = {
         Period: period,

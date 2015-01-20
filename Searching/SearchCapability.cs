@@ -7,30 +7,58 @@ namespace Searching
 {
     public class SearchCapability
     {
-        public static SearchCapability EverythingAvailable = new SearchCapability(Enumerable.Empty<SearchField>(), Enumerable.Empty<SearchAction>());
+        public static SearchCapability EverythingAvailable = new SearchCapability(
+            new[]{
+            SearchField.AccountCode, 
+            SearchField.AccountName, 
+            SearchField.Amount,
+            SearchField.Created, 
+            SearchField.Description, 
+            SearchField.JournalDate, 
+            SearchField.JournalType, 
+            SearchField.Username
+            }, 
+            new[]
+            {
+                SearchAction.Accounts, 
+                SearchAction.Date, 
+                SearchAction.Ending, 
+                SearchAction.Hours, 
+                SearchAction.Users, 
+            });
 
 
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchField> UnavailableFields { get; private set; }
+        public IEnumerable<SearchField> AvailableFields { get; private set; }
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchAction> UnavailableActions { get; private set; }        
+        public IEnumerable<SearchAction> AvailableActions { get; private set; }        
 
         //todo: can work out one of these from the other
-        public SearchCapability(IEnumerable<SearchField> unavailableFields, IEnumerable<SearchAction> unavailableActions)
+        public SearchCapability(IEnumerable<SearchField> availableFields, IEnumerable<SearchAction> availableActions)
         {
-            UnavailableFields = unavailableFields;
-            UnavailableActions = unavailableActions;            
+            AvailableFields = availableFields;
+            AvailableActions = availableActions;            
         }        
     }
 
     public enum SearchAction
     {
-        Users
+        Users,
+        Hours,
+        Accounts,
+        Date,
+        Ending
     }
 
     public enum SearchField
     {
         Description,
-        Username
+        Username,
+        Created,
+        JournalDate,
+        AccountCode,
+        AccountName,
+        Amount,
+        JournalType
     }
 }
