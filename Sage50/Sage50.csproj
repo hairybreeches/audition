@@ -66,7 +66,6 @@
     <Compile Include="Sage50LoginDetails.cs" />
     <Compile Include="Sage50Module.cs" />
     <Compile Include="Sage50JournalGetter.cs" />
-    <Compile Include="Sage50SearcherFactory.cs" />
     <Compile Include="SageNotInstalledException.cs" />
   </ItemGroup>
   <ItemGroup>

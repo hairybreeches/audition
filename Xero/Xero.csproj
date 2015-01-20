@@ -60,7 +60,6 @@
     <Compile Include="XeroJournalExtensions.cs" />
     <Compile Include="XeroJournalSource.cs" />
     <Compile Include="XeroModule.cs" />
-    <Compile Include="XeroSearcherFactory.cs" />
     <Compile Include="XeroSession.cs" />
     <Compile Include="XeroSlurper.cs" />
     <Compile Include="XeroVerificationCode.cs" />
