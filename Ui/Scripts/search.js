@@ -1,4 +1,13 @@
-﻿
+﻿var searchModel = ko.mapping.fromJS({
+    unavailableFields: [],
+    unavailableActions: []
+});
+
+$.ajax("/api/session/searchCapability", {
+    success: function (data) {
+        ko.mapping.fromJS(data, searchModel);
+    }
+});
 
 var Journal = function(json) {
 
@@ -161,7 +170,7 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.computed(function() {
-        return searchCapabilities.unavailableActions[name] || false;
+        return searchCapabilities.unavailableActions.indexOf(name) !== -1;
     });
         
     //methods
@@ -290,6 +299,7 @@ var SearchModel = function () {
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;
 };
+
 
 var model = new SearchModel();
 

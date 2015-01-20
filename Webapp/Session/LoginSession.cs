@@ -3,6 +3,7 @@ using Licensing;
 using Model.Accounting;
 using Persistence;
 using Searching;
+using Webapp.Controllers;
 
 namespace Webapp.Session
 {
@@ -35,6 +36,11 @@ namespace Webapp.Session
         {
             searcherFactoryStorage.CurrentSearcherFactory = new NotLoggedInJournalSearcherFactory();
             repository.ClearJournals();
+        }
+
+        public SearchCapability GetCurrentSearchCapability()
+        {
+            return searcherFactoryStorage.CurrentSearcherFactory.GetSearchCapability();
         }
     }
 }

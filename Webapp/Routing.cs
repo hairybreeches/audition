@@ -28,6 +28,8 @@ namespace Webapp
 
         public const string Sage50DataLocations = "api/userdata/sage50DataLocations";
 
+        public const string SearchCapability = "api/session/searchCapability";
+
 
         public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";

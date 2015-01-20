@@ -103,6 +103,7 @@
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\Sage50SessionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="Controllers\XeroSessionController.cs" />
     <Compile Include="OwinServer.cs" />

@@ -82,10 +82,8 @@
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\licensing.js" />
     <Content Include="Scripts\message.js" />
-    <Content Include="Scripts\sage50SearchModel.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\search.js" />
-    <Content Include="Scripts\xeroSearchModel.js" />
     <Content Include="Ui\content\images\A.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -203,13 +201,7 @@
     <Content Include="Ui\scripts\message.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\sage50SearchModel.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Ui\scripts\search.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Ui\scripts\xeroSearchModel.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\style\style.css">
@@ -221,17 +213,12 @@
     <Content Include="Ui\views\login.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\views\sage50Search.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Ui\views\xeroSearch.html">
+    <Content Include="Ui\views\search.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />
-    <None Include="templates\pages\sage50Search.jade" />
-    <None Include="templates\pages\xeroSearch.jade" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.json" />
@@ -322,7 +309,7 @@
     <None Include="templates\components\xero-login.jade" />
     <None Include="templates\components\export.jade" />
     <None Include="templates\pages\login.jade" />
-    <None Include="templates\components\search.jade" />
+    <None Include="templates\pages\search.jade" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
