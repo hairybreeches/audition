@@ -276,7 +276,7 @@ var SearchModel = function () {
 
         Users: new InputSection({
             users: ""
-        }, period, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.username),
+        }, period, exportSuccessMessage, '/api/search/users', '/api/export/users', searchModel.unavailableActions.users),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3

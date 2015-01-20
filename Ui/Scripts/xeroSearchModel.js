@@ -5,6 +5,6 @@
     },
 
     unavailableActions: {
-        username: true
+        users: true
     },
 }
