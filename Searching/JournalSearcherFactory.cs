@@ -67,9 +67,12 @@ namespace Searching
             {
                 yield return SearchAction.Hours;
             }
-            
-            if(UserSearchingSupported())
+
+            if (UserSearchingSupported())
+            {
                 yield return SearchAction.Users;
+            }
+                
         }
 
         private bool UserSearchingSupported()
