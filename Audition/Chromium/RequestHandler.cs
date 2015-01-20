@@ -48,7 +48,7 @@ namespace Audition.Chromium
             }
         }
 
-        //todo: 302 redirects should just work!
+        //todo: 302 redirects should just work - and do in the newest version of CEF, when they've fixed the other bugs.
         private HttpResponseMessage GetResponse(HttpRequestMessage httpRequest)
         {
             var response = GetImmediateResponse(httpRequest);
