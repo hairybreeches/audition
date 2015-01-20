@@ -18,7 +18,22 @@ namespace Xero
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(new []{SearchField.Description, SearchField.Username}, new []{SearchAction.Users});
+            return new SearchCapability(
+            new[]{
+            SearchField.AccountCode, 
+            SearchField.AccountName, 
+            SearchField.Amount,
+            SearchField.Created, 
+            SearchField.JournalDate, 
+            SearchField.JournalType
+            },
+            new[]
+            {
+                SearchAction.Accounts, 
+                SearchAction.Date, 
+                SearchAction.Ending, 
+                SearchAction.Hours
+            });
         }
     }
 }

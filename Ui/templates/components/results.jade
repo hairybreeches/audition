@@ -11,35 +11,35 @@ div(data-bind="visible: showResults()" style="display: none;")
 	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
 		thead
 			tr
-				th Date created
-				th Date of journal
+				th(data-bind="visible: $root.showCreated()") Date created
+				th(data-bind="visible: $root.showJournalDate()") Date of journal
 				th(data-bind="visible: $root.showDescription()") Description
 				th(data-bind="visible: $root.showUsername()") Username
-				th Dr/Cr				
-				th Account Name
-				th Amount
-				th Account Code
+				th(data-bind="visible: $root.showJournalType()") Dr/Cr				
+				th(data-bind="visible: $root.showAccountName()") Account Name
+				th(data-bind="visible: $root.showAmount()") Amount
+				th(data-bind="visible: $root.showAccountCode()") Account Code
 		//ko foreach: results
 		tbody
 				tr
-					td(data-bind="text: created")
-					td(data-bind="text: journalDate")
+					td(data-bind="text: created, visible: $root.showCreated()")
+					td(data-bind="text: journalDate, visible: $root.showJournalDate()")
 					td(data-bind="text: description, visible: $root.showDescription()")
 					td(data-bind="text: username, visible: $root.showUsername()")
-					td(data-bind="text: lines[0].journalType")
-					td(data-bind="text: lines[0].accountName")
-					td(data-bind="text: lines[0].amount")
-					td(data-bind="text: lines[0].accountCode")
+					td(data-bind="text: lines[0].journalType, visible: $root.showJournalType()")
+					td(data-bind="text: lines[0].accountName, visible: $root.showAccountName()")
+					td(data-bind="text: lines[0].amount, visible: $root.showAmount()")
+					td(data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()")
 				// ko foreach: lines.slice(1)
-				tr
-					td
-					td
+				tr(data-bind="visible: $root.showJournalLine()")
+					td(data-bind="visible: $root.showCreated()")
+					td(data-bind="visible: $root.showJournalDate()")
 					td(data-bind="visible: $root.showDescription()")
 					td(data-bind="visible: $root.showUsername()")
-					td(data-bind="text: journalType")
-					td(data-bind="text: accountName")
-					td(data-bind="text: amount")
-					td(data-bind="text: accountCode")
+					td(data-bind="text: journalType, visible: $root.showJournalType()")
+					td(data-bind="text: accountName, visible: $root.showAccountName()")
+					td(data-bind="text: amount, visible: $root.showAmount()")
+					td(data-bind="text: accountCode, visible: $root.showAccountCode()")
 				// /ko
 		// /ko
 	+pager()
