@@ -14,7 +14,11 @@ namespace Xero
                 new UnusualAccountsSearcher(repository),
                 new RoundNumberSearcher(repository),
                 new NotSupportedSearcher<UserParameters>("Xero does not record who raises individual journals"));
-        }       
+        }
 
+        public SearchCapability GetSearchCapability()
+        {
+            return new SearchCapability(new []{SearchField.description, SearchField.username}, new []{SearchAction.users});
+        }
     }
 }

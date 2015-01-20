@@ -1,4 +1,8 @@
-﻿var Sage50LoginModel = function() {
+﻿var goToSearch = function() {
+    location.href = '/views/search.html';
+};
+
+var Sage50LoginModel = function () {
     var self = this;
     self.dataDirectory = ko.observable('');
     self.username = ko.observable('');
@@ -28,9 +32,7 @@
                  password: self.password(),
                  dataDirectory: self.dataDirectory(),
             },
-            success: function () {
-                location.href = '/views/sage50Search.html';
-            },
+            success: goToSearch,
             error: model.showError
         });
     }
@@ -54,9 +56,7 @@ var XeroLoginModel = function () {
             type: "POST",
             url: '/api/xero/login',
             data: { code: self.code },
-            success: function () {
-                location.href = '/views/xeroSearch.html';
-            },
+            success: goToSearch,
             error: model.showError
         });
     }
@@ -100,3 +100,4 @@ $("#sage50dataDirectory").typeahead({
     },
     minLength: 0
 });
+
