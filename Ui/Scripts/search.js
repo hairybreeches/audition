@@ -1,11 +1,11 @@
-﻿var searchModel = ko.mapping.fromJS({
+﻿var searchCapabilities = ko.mapping.fromJS({
     unavailableFields: [],
     unavailableActions: []
 });
 
 $.ajax("/api/session/searchCapability", {
     success: function (data) {
-        ko.mapping.fromJS(data, searchModel);
+        ko.mapping.fromJS(data, searchCapabilities);
     }
 });
 
@@ -229,7 +229,7 @@ var period = ko.mapping.fromJS({
 var SearchModel = function () {
 
     var showField = function (fieldName) {
-        return searchModel.unavailableFields.indexOf(fieldName) === -1;
+        return searchCapabilities.unavailableFields.indexOf(fieldName) === -1;
     }
 
     var self = this;
@@ -278,23 +278,23 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, exportSuccessMessage, searchModel, 'hours'),
+        }, period, exportSuccessMessage, searchCapabilities, 'hours'),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, exportSuccessMessage, searchModel, 'accounts'),
+        }, period, exportSuccessMessage, searchCapabilities, 'accounts'),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, exportSuccessMessage, searchModel, 'date'),
+        }, period, exportSuccessMessage, searchCapabilities, 'date'),
 
         Users: new InputSection({
             users: ""
-        }, period, exportSuccessMessage, searchModel, 'users'),
+        }, period, exportSuccessMessage, searchCapabilities, 'users'),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, exportSuccessMessage, searchModel, 'ending')
+        }, period, exportSuccessMessage, searchCapabilities, 'ending')
     };
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;
