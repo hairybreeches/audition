@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 		
 var args   = yargs.argv;
 
-var targetDir = args.target || '../CompiledUi/';
+var targetDir = args.target || '../CompiledUi/Ui';
 
 gulp.task('templates', function() {
   return gulp.src('./templates/pages/*.jade')
