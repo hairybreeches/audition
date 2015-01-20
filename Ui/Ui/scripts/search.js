@@ -153,14 +153,17 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, exportSuccessMessage, name, blocked) {
+var InputSection = function (parameters, period, exportSuccessMessage, searchCapabilities, name) {
 
     var self = this;
     var exportUrl = '/api/export/' + name;
     var searchUrl = '/api/search/' + name;
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
-    self.blocked = ko.observable(blocked || false);
+    self.blocked = ko.computed(function() {
+        return searchCapabilities.unavailableActions[name] || false;
+    });
+        
     //methods
 
     var getSearchWindow = function() {
@@ -266,23 +269,23 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, exportSuccessMessage, 'hours', searchModel.unavailableActions.hours),
+        }, period, exportSuccessMessage, searchModel, 'hours'),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: 10
-        }, period, exportSuccessMessage, 'accounts', searchModel.unavailableActions.accounts),
+        }, period, exportSuccessMessage, searchModel, 'accounts'),
 
         Date: new InputSection({
             daysBeforeYearEnd: 10
-        }, period, exportSuccessMessage, 'date', searchModel.unavailableActions.date),
+        }, period, exportSuccessMessage, searchModel, 'date'),
 
         Users: new InputSection({
             users: ""
-        }, period, exportSuccessMessage, 'users', searchModel.unavailableActions.users),
+        }, period, exportSuccessMessage, searchModel, 'users'),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: 3
-        }, period, exportSuccessMessage, 'ending', searchModel.unavailableActions.ending)
+        }, period, exportSuccessMessage, searchModel, 'ending')
     };
     self.output = output;
     self.exportSuccessMessage = exportSuccessMessage;
