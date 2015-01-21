@@ -84,6 +84,7 @@
     <Content Include="UserScripts\message.js" />
     <Content Include="UserScripts\login.js" />
     <Content Include="UserScripts\search.js" />
+    <None Include="templates\components\excelImport.jade" />
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />
