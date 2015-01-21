@@ -81,9 +81,11 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="UserScripts\excelLogin.js" />
     <Content Include="UserScripts\licensing.js" />
     <Content Include="UserScripts\message.js" />
     <Content Include="UserScripts\login.js" />
+    <Content Include="UserScripts\sage50Login.js" />
     <Content Include="UserScripts\search.js" />
     <None Include="templates\components\excelImport.jade" />
     <None Include="templates\components\message.jade" />
