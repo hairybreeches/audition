@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISage50ConnectionFactory.cs" />
+    <Compile Include="ISage50JournalGetter.cs" />
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
     <Compile Include="Parsing\NominalCodeLookupFactory.cs" />

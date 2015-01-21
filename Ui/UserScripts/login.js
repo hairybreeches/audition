@@ -38,36 +38,11 @@ var Sage50LoginModel = function () {
     }
 }
 
-
-var XeroLoginModel = function () {
-    var self = this;
-    self.code = ko.observable('');
-
-    self.initialiseLogin = function() {
-        $.ajax({
-            type: "POST",
-            url: '/api/xero/initialiselogin'
-        });
-    }
-
-    self.submit = function () {
-        model.startLogin();
-        $.ajax({
-            type: "POST",
-            url: '/api/xero/login',
-            data: { code: self.code },
-            success: goToSearch,
-            error: model.showError
-        });
-    }
-}
-
 var LoginModel = function () {
     var self = this;
     self.blocked = ko.observable(false);
     self.system = ko.observable('');
     self.sage50 = new Sage50LoginModel();
-    self.xero = new XeroLoginModel();
     self.error = new ErrorMessage();
 
     self.startLogin = function () {

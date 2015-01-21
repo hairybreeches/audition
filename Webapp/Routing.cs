@@ -6,9 +6,6 @@ namespace Webapp
     public static class Routing
     {
         
-        public const string InitialiseXeroLogin = "api/xero/initialiselogin";
-        public const string XeroLogin = "api/xero/login";
-
         public const string Sage50Login = "api/sage50/login";
         public const string Sage50Logout = "api/sage50/logout";
 

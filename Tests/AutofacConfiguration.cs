@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 using Audition;
 using Autofac;
@@ -14,7 +15,6 @@ using Tests.Mocks;
 using UserData;
 using Webapp.Controllers;
 using Webapp.Session;
-using Xero;
 using IFileSystem = Microsoft.Owin.FileSystems.IFileSystem;
 
 namespace Tests
@@ -24,15 +24,6 @@ namespace Tests
         public static ILifetimeScope BeginRequestScope(this IContainer container)
         {
             return container.BeginLifetimeScope("AutofacWebRequest");
-        }
-
-        public static void LoginToXero(this IContainer lifetime, XeroVerificationCode verificationCode)
-        {
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                var loginController = requestScope.Resolve<XeroSessionController>();
-                loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
-            }            
         }
 
         public static void Logout(this IContainer container)
@@ -79,6 +70,15 @@ namespace Tests
         public static ContainerBuilder WithNoLicensing(this ContainerBuilder builder)
         {
             builder.RegisterType<PermissiveLicenceStorage>().As<ILicenceStorage>();
+            return builder;
+        }
+        
+        public static ContainerBuilder Sage50LoginReturns(this ContainerBuilder builder, params Journal[] journals)
+        {
+            builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
+            var journalGetter = Substitute.For<ISage50JournalGetter>();
+            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(journals);
+            builder.Register(_ => journalGetter);
             return builder;
         }
 

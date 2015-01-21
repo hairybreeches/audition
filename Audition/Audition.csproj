@@ -130,10 +130,6 @@
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
       <Name>Webapp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Xero\Xero.csproj">
-      <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
-      <Name>Xero</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
