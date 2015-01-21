@@ -7,7 +7,7 @@
     self.browseDataDirectory = function() {
         $.ajax('/api/chooseDirectory', {
             data: {
-                startFolder: self.dataDirectory()
+                start: self.dataDirectory()
             },
             error: function() {
 
