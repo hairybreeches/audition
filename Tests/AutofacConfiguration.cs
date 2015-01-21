@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 using Audition;
 using Autofac;
@@ -69,6 +70,15 @@ namespace Tests
         public static ContainerBuilder WithNoLicensing(this ContainerBuilder builder)
         {
             builder.RegisterType<PermissiveLicenceStorage>().As<ILicenceStorage>();
+            return builder;
+        }
+        
+        public static ContainerBuilder Sage50LoginReturns(this ContainerBuilder builder, params Journal[] journals)
+        {
+            builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
+            var journalGetter = Substitute.For<ISage50JournalGetter>();
+            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(journals);
+            builder.Register(_ => journalGetter);
             return builder;
         }
 
