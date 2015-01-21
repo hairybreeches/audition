@@ -54,7 +54,8 @@ namespace Tests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
-            builder.WithNoLicensing();            
+            builder.WithNoLicensing()
+                .Sage50LoginReturns();            
             return builder;
         }
 
