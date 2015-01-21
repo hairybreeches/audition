@@ -4,19 +4,7 @@
     self.username = ko.observable('');
     self.password = ko.observable('');
 
-    self.browseDataDirectory = function() {
-        $.ajax('/api/chooseDirectory', {
-            data: {
-                start: self.dataDirectory()
-            },
-            error: function() {
-
-            },
-            success: function(folderChosen) {
-                self.dataDirectory(folderChosen);
-            }
-        });
-    }
+    self.browseDataDirectory = createBrowseFunction('/api/chooseDirectory', self.dataDirectory);
 
     self.submit = function() {
         model.login('/api/sage50/login', {

@@ -68,6 +68,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
+    <Content Include="UserScripts\browse.js" />
     <Content Include="UserScripts\enterLicence.js" />
     <Content Include="UserScripts\errors.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
