@@ -115,6 +115,9 @@
     <Content Include="Ui\scripts\bootstrap3-typeahead.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ui\scripts\browse.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ui\scripts\enterLicence.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
