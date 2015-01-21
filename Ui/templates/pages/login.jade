@@ -1,5 +1,4 @@
 include ../components/template
-include ../components/xero-login
 include ../components/sage50-login
 include ../components/forms
 include ../components/message
@@ -19,10 +18,7 @@ mixin login-form(system, url)
 			fieldset
 				+form-field('Accounts system')
 					select.form-control(data-bind="value: system")
-							option(value="sage50") Sage Line 50
-							option(value="xero") Xero
-			+login-form('xero', "/api/xero/login")
-				+xero-login()
+							option(value="sage50") Sage Line 50			
 			+login-form('sage50', "/api/sage50/login")
 				+sage50-login()
 		+errorMessage('error')

@@ -3,13 +3,11 @@ using Audition;
 using Autofac;
 using Model.SearchWindows;
 using Model.Time;
-using NSubstitute;
 using NUnit.Framework;
-using Tests.Mocks;
+using Sage50;
 using Webapp.Controllers;
 using Webapp.Requests;
 using Webapp.Session;
-using Xero;
 
 namespace Tests
 {
@@ -56,8 +54,7 @@ namespace Tests
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
-            builder.WithNoLicensing();
-            builder.Register(_ => new MockXeroSession()).As<IXeroSession>();
+            builder.WithNoLicensing();            
             return builder;
         }
 
@@ -76,7 +73,7 @@ namespace Tests
 
         private static void Login(IContainer container)
         {
-            container.LoginToXero(new XeroVerificationCode());
+            container.LoginToSage50(new Sage50LoginDetails());
         }
     }
 }
