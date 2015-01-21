@@ -8,7 +8,6 @@ using Sage50;
 using UserData;
 using Webapp;
 using Webapp.Session;
-using Xero;
 using Module = Autofac.Module;
 
 namespace Audition
@@ -17,7 +16,6 @@ namespace Audition
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<XeroModule>();
             builder.RegisterModule<Sage50Module>();
             builder.RegisterModule<NativeModule>();
             builder.RegisterModule<ChromiumModule>();

@@ -174,7 +174,6 @@
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
-    <None Include="templates\components\xero-login.jade" />
     <None Include="templates\components\export.jade" />
     <None Include="templates\pages\login.jade" />
     <None Include="templates\pages\search.jade" />

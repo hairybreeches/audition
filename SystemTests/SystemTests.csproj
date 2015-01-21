@@ -73,17 +73,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="XeroApi, Version=1.1.0.33, Culture=neutral, PublicKeyToken=3de03a85ae0f7251, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\XeroAPI.Net.1.1.0.33\lib\XeroApi.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LicensingTests.cs" />
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="RequestExecution.cs" />
     <Compile Include="Sage50Tests.cs" />
-    <Compile Include="XeroTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -984,10 +979,6 @@
     <ProjectReference Include="..\Webapp\Webapp.csproj">
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
       <Name>Webapp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xero\Xero.csproj">
-      <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
-      <Name>Xero</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

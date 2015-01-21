@@ -14,7 +14,6 @@ using Tests.Mocks;
 using UserData;
 using Webapp.Controllers;
 using Webapp.Session;
-using Xero;
 using IFileSystem = Microsoft.Owin.FileSystems.IFileSystem;
 
 namespace Tests
@@ -24,15 +23,6 @@ namespace Tests
         public static ILifetimeScope BeginRequestScope(this IContainer container)
         {
             return container.BeginLifetimeScope("AutofacWebRequest");
-        }
-
-        public static void LoginToXero(this IContainer lifetime, XeroVerificationCode verificationCode)
-        {
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                var loginController = requestScope.Resolve<XeroSessionController>();
-                loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
-            }            
         }
 
         public static void Logout(this IContainer container)
