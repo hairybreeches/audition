@@ -1,0 +1,20 @@
+mixin page(title, pagescript)
+	- pagescript = pagescript || []
+	doctype html
+	html(lang="en")
+		include head
+		+head(title)
+		body
+			div.container
+				.row
+					.col-md-12
+						h1= title
+							img.brand-logo.pull-right(src="/Content/images/A.svg")
+				include licensing
+
+			#pageElement
+				block
+
+			include scripts
+			each script in pagescript
+				script(src="/scripts/" + script + ".js")

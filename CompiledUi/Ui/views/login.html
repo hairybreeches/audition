@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+      <title>Audition Software | Login</title><!-- Bootstrap core CSS -->
+      <link href="/style/style.css" rel="stylesheet">
+    </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Login<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
+        </div>
+      </div>
+      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
+        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
+      </div>
+    </div>
+    <div id="pageElement">
+      <div class="container">
+        <legend class="vertical-space">Login to accounts system</legend>
+        <form action="search" method="post" class="form-horizontal blockable">
+          <div style="display: none;" data-bind="visible: blocked()" class="blockscreen loadscreen"></div>
+          <fieldset>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Accounts system</label>
+              <div class="col-sm-6">
+                <select data-bind="value: system" class="form-control">
+                  <option value="sage50">Sage Line 50			</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <div style="display: none;" data-bind="visible: system() === 'sage50', with: sage50">
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Data location</label>
+              <div class="col-sm-6">
+                <input id="sage50dataDirectory" type="text" data-bind="value: dataDirectory" name="dataDirectory" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" data-bind="click: browseDataDirectory" class="btn btn-default">Browse...</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">User ID</label>
+              <div class="col-sm-6">
+                <input type="text" name="username" data-bind="value: username" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Password</label>
+              <div class="col-sm-6">
+                <input type="password" name="password" data-bind="value: password" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label"></label>
+              <div class="col-sm-6">
+                <div class="button-group pull-right">
+                  <button type="submit" data-bind="click: submit" class="vertical-space btn btn-primary">Login &raquo;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div data-bind="visible: error.visible(), with: error" style="display: none;" class="alert alert-danger">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
+        </div>
+        <hr class="vertical-space">
+      </div>
+    </div>
+    <script src="/scripts/jquery-2.1.1.min.js"></script>
+    <script src="/scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/knockout-3.1.0.js"></script>
+    <script src="/scripts/knockout.mapping-latest.js"></script>
+    <script src="/scripts/knockout-jqueryui.min.js"></script>
+    <script src="/scripts/message.js"></script>
+    <script src="/scripts/errors.js"></script>
+    <script src="/scripts/licensing.js"></script>
+    <script src="/scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="/scripts/login.js"></script>
+  </body>
+</html>

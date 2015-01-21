@@ -1,0 +1,10 @@
+﻿mixin form-field(label)
+	.form-group
+		label.col-sm-2.col-sm-offset-2.control-label #{label}
+		.col-sm-6
+			block
+
+mixin button-group()
+	+form-field('')
+		.button-group.pull-right
+			block
