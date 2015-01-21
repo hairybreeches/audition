@@ -11,7 +11,7 @@ mixin login-form(system, url)
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
 
-+page('Login', ['login'])
++page('Login', ['sage50Login', 'excelLogin', 'login'])
 	.container
 		legend.vertical-space Login to accounts system
 		form.form-horizontal.blockable(action="search", method="post")
