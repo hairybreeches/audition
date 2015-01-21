@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Excel;
+using CsvExport;
 using Model.Accounting;
 using Model.SearchWindows;
 using Native;
@@ -16,7 +16,7 @@ namespace Webapp.Controllers
     public class ExportController : ApiController
     {
         private readonly LoginSession session;
-        private readonly IExcelExporter excelExporter;
+        private readonly ICsvExporter csvExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
         private JournalSearcher Searcher
@@ -24,10 +24,10 @@ namespace Webapp.Controllers
             get { return session.GetCurrentJournalSearcher(); }
         }
 
-        public ExportController(IFileSaveChooser fileSaveChooser, IExcelExporter excelExporter, LoginSession session)
+        public ExportController(IFileSaveChooser fileSaveChooser, ICsvExporter csvExporter, LoginSession session)
         {
             this.fileSaveChooser = fileSaveChooser;
-            this.excelExporter = excelExporter;
+            this.csvExporter = csvExporter;
             this.session = session;
         }
 
@@ -69,7 +69,7 @@ namespace Webapp.Controllers
         private async Task<string> Export<T>(ExportRequest<T> saveRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            excelExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation,
+            csvExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation,
                 saveRequest.SerialisationOptions);
             return saveLocation;
         }

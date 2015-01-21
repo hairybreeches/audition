@@ -7,8 +7,8 @@
     <ProjectGuid>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Excel</RootNamespace>
-    <AssemblyName>Excel</AssemblyName>
+    <RootNamespace>CsvExport</RootNamespace>
+    <AssemblyName>CsvExport</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AllowedReferenceRelatedFileExtensions Condition=" '$(Configuration)' == 'Release' ">.allowedextension</AllowedReferenceRelatedFileExtensions>
@@ -47,9 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExcelExporter.cs" />
-    <Compile Include="ExcelModule.cs" />
-    <Compile Include="IExcelExporter.cs" />
+    <Compile Include="CsvExporter.cs" />
+    <Compile Include="CsvExportModule.cs" />
+    <Compile Include="ICsvExporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

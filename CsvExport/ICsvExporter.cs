@@ -2,9 +2,9 @@
 using Model;
 using Model.Accounting;
 
-namespace Excel
+namespace CsvExport
 {
-    public interface IExcelExporter
+    public interface ICsvExporter
     {
         void WriteJournals(string description, IEnumerable<Journal> journals, string filename, SerialisationOptions options);
     }

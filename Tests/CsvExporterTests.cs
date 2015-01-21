@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Excel;
+using CsvExport;
 using Model;
 using Model.Accounting;
 using NUnit.Framework;
@@ -9,13 +9,13 @@ using Tests.Mocks;
 namespace Tests
 {
     [TestFixture]
-    public class ExcelExporterTests
+    public class CsvExporterTests
     {
         [Test]
         public void ExportsJournalsCorrectly()
         {
             var fileSystem = new MockFileSystem();
-            var exporter = new ExcelExporter(fileSystem);
+            var exporter = new CsvExporter(fileSystem);
             exporter.WriteJournals("a description of the search", new List<Journal>
             {
                 //one inside daylight savings
@@ -47,7 +47,7 @@ Created,Date
         public void ShowsUsernameAndDescriptionIfSpecified()
         {
             var fileSystem = new MockFileSystem();
-            var exporter = new ExcelExporter(fileSystem);
+            var exporter = new CsvExporter(fileSystem);
             exporter.WriteJournals("What we did to get these journals", new List<Journal>
             {
                 //one inside daylight savings

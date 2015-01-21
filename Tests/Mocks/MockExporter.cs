@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Excel;
+using CsvExport;
 using Model;
 using Model.Accounting;
 
 namespace Tests.Mocks
 {
-    public class MockExporter : IExcelExporter
+    public class MockExporter : ICsvExporter
     {
         public IEnumerable<Journal> WrittenJournals { get; private set; }
 

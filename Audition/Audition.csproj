@@ -94,9 +94,9 @@
       <Project>{b7fe3453-bb5d-410d-86ef-c1274aff5a6e}</Project>
       <Name>CompiledUi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Excel\Excel.csproj">
+    <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
-      <Name>Excel</Name>
+      <Name>CsvExport</Name>
     </ProjectReference>
     <ProjectReference Include="..\Licensing\Licensing.csproj">
       <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>

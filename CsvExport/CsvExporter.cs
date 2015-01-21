@@ -4,13 +4,13 @@ using Model;
 using Model.Accounting;
 using Native;
 
-namespace Excel
+namespace CsvExport
 {
-    public class ExcelExporter : IExcelExporter
+    public class CsvExporter : ICsvExporter
     {
         private readonly IFileSystem fileSystem;
 
-        public ExcelExporter(IFileSystem fileSystem)
+        public CsvExporter(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
         }

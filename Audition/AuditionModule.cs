@@ -1,6 +1,6 @@
 ﻿using Audition.Chromium;
 using Autofac;
-using Excel;
+using CsvExport;
 using Licensing;
 using Native;
 using Persistence;
@@ -21,7 +21,7 @@ namespace Audition
             builder.RegisterModule<Sage50Module>();
             builder.RegisterModule<NativeModule>();
             builder.RegisterModule<ChromiumModule>();
-            builder.RegisterModule<ExcelModule>();            
+            builder.RegisterModule<CsvExportModule>();            
             builder.RegisterModule<SessionModule>();            
             builder.RegisterModule<PersistenceModule>();
             builder.RegisterModule<WebappModule>();
