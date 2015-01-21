@@ -38,6 +38,8 @@ var ExcelLoginModel = function() {
         return data;
     }
 
+    self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
+
     self.submit = function() {
         model.login('/api/excel/login', getData());
     };
