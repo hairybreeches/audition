@@ -50,10 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clock.cs" />
+    <Compile Include="ExcelFileChooser.cs" />
     <Compile Include="FileSaveChooser.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="FolderChooser.cs" />
     <Compile Include="IClock.cs" />
+    <Compile Include="IExcelFileChooser.cs" />
     <Compile Include="IFileSaveChooser.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IFolderChooser.cs" />

@@ -12,6 +12,7 @@ namespace Native
             builder.Register(_ => new StaTaskScheduler(1)).SingleInstance();
             builder.Register(_ => new TaskFactory<string>(_.Resolve<StaTaskScheduler>()));
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
+            builder.RegisterType<ExcelFileChooser>().As<IExcelFileChooser>();
             builder.RegisterType<FolderChooser>().As<IFolderChooser>();
             builder.RegisterType<Clock>().As<IClock>();
             builder.RegisterType<FileSystem>().As<IFileSystem>();
