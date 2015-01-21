@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+      <title>Audition Software | Enter Licence</title><!-- Bootstrap core CSS -->
+      <link href="/style/style.css" rel="stylesheet">
+    </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Enter Licence<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
+        </div>
+      </div>
+      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
+        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
+      </div>
+    </div>
+    <div id="pageElement">
+      <div class="container">
+        <legend class="vertical-space">Enter your Audition licence key</legend>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 col-sm-offset-2 control-label">Licence Key</label>
+            <div class="col-sm-6">
+              <input data-bind="value: licenceKey" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 col-sm-offset-2 control-label"></label>
+            <div class="col-sm-6">
+              <div class="button-group pull-right">
+                <button type="button" data-bind="click: goBack" class="vertical-space btn btn-default">Cancel &raquo;</button>
+                <button type="submit" data-bind="click: submit" class="vertical-space btn btn-primary">Enter &raquo;</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div data-bind="visible: errorMessage.visible(), with: errorMessage" style="display: none;" class="alert alert-danger">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
+        </div>
+        <div data-bind="visible: successMessage.visible(), with: successMessage" style="display: none;" class="alert alert-success">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span>Licence key validated. This product is now licensed.&nbsp;&nbsp;</span><a data-bind="click: $root.goBack" href="#"> <b>Click here to return.</b></a>
+        </div>
+      </div>
+    </div>
+    <script src="/scripts/jquery-2.1.1.min.js"></script>
+    <script src="/scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/knockout-3.1.0.js"></script>
+    <script src="/scripts/knockout.mapping-latest.js"></script>
+    <script src="/scripts/knockout-jqueryui.min.js"></script>
+    <script src="/scripts/message.js"></script>
+    <script src="/scripts/errors.js"></script>
+    <script src="/scripts/licensing.js"></script>
+    <script src="/scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="/scripts/enterLicence.js"></script>
+  </body>
+</html>

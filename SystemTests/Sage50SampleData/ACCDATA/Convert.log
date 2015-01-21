@@ -1,0 +1,27 @@
+Status:
+
+  Converting V20.x
+
+Exceptions:
+
+  Sales Ledger - Last payment date field is zero
+  Sales Ledger monthly bucket values have been rebuilt from Audit Trail transactions
+  Purchase Ledger - Last payment date field is zero
+  Purchase Ledger monthly bucket values have been rebuilt from Audit Trail transactions
+  NOTE: For Intrastat purposes, all product weights are now considered to be expressed in Kilograms. Please update your stock records as appropriate.
+  Please run the Foreign Trader Setup Wizard to setup the Exchange Rate Variance nominal code.
+  Your existing country code table has been replaced with an updated version.
+  Your next invoice and order numbers may have been updated. Please check them before continuing.
+   
+  Before using the program we recommend that you check your user's access levels
+   
+  Conversion Successful
+
+Errors:
+
+  No Conversion Errors
+   
+   
+   
+  Conversion Log : 
+  C:\DOCUMENTS AND SETTINGS\ALL USERS\APPLICATION DATA\SAGE\ACCOUNTS\2015\COMPANY.001\ACCDATA\Convert.log
