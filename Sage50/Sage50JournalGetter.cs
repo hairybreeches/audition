@@ -8,7 +8,7 @@ using Sage50.Parsing.Schema;
 
 namespace Sage50
 {
-    public class Sage50JournalGetter
+    public class Sage50JournalGetter : ISage50JournalGetter
     {
         private readonly JournalReader journalReader;        
         private readonly JournalSchema schema;
