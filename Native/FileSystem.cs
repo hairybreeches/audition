@@ -28,6 +28,16 @@ namespace Native
             }
         }
 
+        public bool FileExists(string filename)
+        {
+            return File.Exists(filename);
+        }
+
+        public Stream OpenFileStreamToRead(string filename)
+        {
+            return File.Open(filename, FileMode.Open, FileAccess.Read);
+        }
+
         private void CreateDirectory(string directory)
         {
             Directory.CreateDirectory(directory);
