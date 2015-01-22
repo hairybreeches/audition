@@ -6,6 +6,6 @@ namespace ExcelImport
     public class ExcelImportMapping
     {
         public string Filename { get; set; }
-        public Dictionary<SearchField, string> Lookups { get; set; } 
+        public FieldLookups Lookups { get; set; } 
     }
 }
