@@ -54,6 +54,7 @@
     <Compile Include="CouldNotOpenExcelFileException.cs" />
     <Compile Include="ExcelColumnNamer.cs" />
     <Compile Include="ExcelImportMapping.cs" />
+    <Compile Include="ExcelImportModule.cs" />
     <Compile Include="FieldLookups.cs" />
     <Compile Include="HeaderReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

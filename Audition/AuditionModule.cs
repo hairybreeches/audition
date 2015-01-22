@@ -1,6 +1,7 @@
 ﻿using Audition.Chromium;
 using Autofac;
 using CsvExport;
+using ExcelImport;
 using Licensing;
 using Native;
 using Persistence;
@@ -25,6 +26,7 @@ namespace Audition
             builder.RegisterModule<WebappModule>();
             builder.RegisterModule<LicensingModule>();
             builder.RegisterModule<UserDataModule>();
+            builder.RegisterModule<ExcelImportModule>();
         }
     }
 }
