@@ -89,6 +89,7 @@
     <Compile Include="CsvExporterTests.cs" />
     <Compile Include="ExcelColumnNamerTests.cs" />
     <Compile Include="FileSystemTests.cs" />
+    <Compile Include="HeaderReadingTests.cs" />
     <Compile Include="HttpConversionTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LicensingTests.cs" />
@@ -129,6 +130,10 @@
     <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>CsvExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
       <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>

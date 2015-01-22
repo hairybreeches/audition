@@ -36,6 +36,16 @@ namespace Tests.Mocks
             throw new ShouldNotHappenInThisTestException();
         }
 
+        public bool FileExists(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public Stream OpenFileStreamToRead(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
         public string GetFileValue(string filename)
         {
             return files[filename];
