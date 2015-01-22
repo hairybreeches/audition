@@ -68,6 +68,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
+    <Content Include="UserScripts\browse.js" />
     <Content Include="UserScripts\enterLicence.js" />
     <Content Include="UserScripts\errors.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -80,10 +81,13 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="UserScripts\excelLogin.js" />
     <Content Include="UserScripts\licensing.js" />
     <Content Include="UserScripts\message.js" />
     <Content Include="UserScripts\login.js" />
+    <Content Include="UserScripts\sage50Login.js" />
     <Content Include="UserScripts\search.js" />
+    <None Include="templates\components\excelImport.jade" />
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />

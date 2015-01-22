@@ -32,6 +32,7 @@
               <div class="col-sm-6">
                 <select data-bind="value: system" class="form-control">
                   <option value="sage50">Sage Line 50			</option>
+                  <option value="excel">Excel			</option>
                 </select>
               </div>
             </div>
@@ -67,6 +68,177 @@
               </div>
             </div>
           </div>
+          <div style="display: none;" data-bind="visible: system() === 'excel', with: excel">
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">File location</label>
+              <div class="col-sm-6">
+                <input id="excelFileLocation" type="text" data-bind="value: fileLocation" name="fileLocation" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" data-bind="click: browseExcelFile" class="btn btn-default">Browse...	</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">JournalDate</label>
+              <div class="col-sm-6">
+                <select name="JournalDate" data-bind="value: JournalDate" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
+              <div class="col-sm-6">
+                <select name="Description" data-bind="value: Description" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Username</label>
+              <div class="col-sm-6">
+                <select name="Username" data-bind="value: Username" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Created</label>
+              <div class="col-sm-6">
+                <select name="Created" data-bind="value: Created" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">AccountCode</label>
+              <div class="col-sm-6">
+                <select name="AccountCode" data-bind="value: AccountCode" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">AccountName</label>
+              <div class="col-sm-6">
+                <select name="AccountName" data-bind="value: AccountName" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
+              <div class="col-sm-6">
+                <select name="Amount" data-bind="value: Amount" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">JournalType</label>
+              <div class="col-sm-6">
+                <select name="JournalType" data-bind="value: JournalType" class="form-control">
+                  <option value="A">Row A</option>
+                  <option value="B">Row B</option>
+                  <option value="C">Row C</option>
+                  <option value="D">Row D</option>
+                  <option value="E">Row E</option>
+                  <option value="F">Row F</option>
+                  <option value="G">Row G</option>
+                  <option value="H">Row H</option>
+                  <option value="I">Row I</option>
+                  <option value="J">Row J</option>
+                  <option value="K">Row K</option>
+                  <option value="L">Row L</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label"></label>
+              <div class="col-sm-6">
+                <div class="button-group pull-right">
+                  <button type="submit" data-bind="click: submit" class="vertical-space btn btn-primary">Login &raquo;</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
         <div data-bind="visible: error.visible(), with: error" style="display: none;" class="alert alert-danger">
           <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
@@ -84,6 +256,9 @@
     <script src="/scripts/errors.js"></script>
     <script src="/scripts/licensing.js"></script>
     <script src="/scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="/scripts/browse.js"></script>
+    <script src="/scripts/sage50Login.js"></script>
+    <script src="/scripts/excelLogin.js"></script>
     <script src="/scripts/login.js"></script>
   </body>
 </html>

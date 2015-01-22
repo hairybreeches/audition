@@ -1,60 +1,36 @@
-var goToSearch = function() {
-    location.href = '/views/search.html';
-};
-
-var Sage50LoginModel = function () {
-    var self = this;
-    self.dataDirectory = ko.observable('');
-    self.username = ko.observable('');
-    self.password = ko.observable('');
-
-    self.browseDataDirectory = function() {
-        $.ajax('/api/chooseDirectory', {
-            data: {
-                startFolder: self.dataDirectory()
-            },
-            error: function() {
-
-            },
-            success: function(folderChosen) {
-                self.dataDirectory(folderChosen);
-            }
-        });
-    }
-
-    self.submit = function() {
-        model.startLogin();
-        $.ajax({
-            type: "POST",
-            url: '/api/sage50/login',
-            data: {
-                 username: self.username(),
-                 password: self.password(),
-                 dataDirectory: self.dataDirectory(),
-            },
-            success: goToSearch,
-            error: model.showError
-        });
-    }
-}
-
-var LoginModel = function () {
+var LoginModel = function() {
     var self = this;
     self.blocked = ko.observable(false);
     self.system = ko.observable('');
     self.sage50 = new Sage50LoginModel();
+    self.excel = new ExcelLoginModel();
     self.error = new ErrorMessage();
 
-    self.startLogin = function () {
-        self.error.visible(false);
-        self.blocked(true);
-    }
+    var goToSearch = function() {
+        location.href = '/views/search.html';
+    };
 
-    self.showError = function (jqXHR) {
+    var showError = function(jqXHR) {
         self.blocked(false);
         self.error.show(jqXHR);
     };
 
+    var startLogin = function() {
+        self.error.visible(false);
+        self.blocked(true);
+    }
+
+    self.login = function(url, data) {
+        startLogin();
+        $.ajax({
+            contentType: 'application/json',
+            type: "POST",
+            url: url,
+            data: JSON.stringify(data),
+            success: goToSearch,
+            error: showError
+        });
+    }
 }
 
 var model = new LoginModel();
@@ -75,4 +51,3 @@ $("#sage50dataDirectory").typeahead({
     },
     minLength: 0
 });
-

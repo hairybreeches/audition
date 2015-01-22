@@ -1,0 +1,21 @@
+﻿include forms
+
+mixin row-dropdown(field)
+	+form-field(field)
+		select.form-control(name="#{field}" data-bind="value: #{field}")
+			each row in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+				option(value="#{row}") Row #{row}
+
+
+mixin excel-login()
+	.form-group
+		label.col-sm-2.col-sm-offset-2.control-label File location
+		.col-sm-6
+			input#excelFileLocation.form-control(type="text" data-bind="value: fileLocation" name="fileLocation")
+		.col-sm-2
+			button.btn.btn-default(type="button", data-bind="click: browseExcelFile") Browse...	
+						
+	+row-dropdown('JournalDate')
+	each field in ['Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'JournalType']
+		+row-dropdown(field)
+		
