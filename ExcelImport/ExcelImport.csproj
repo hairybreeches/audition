@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelColumnNamer.cs" />
     <Compile Include="ExcelImportMapping.cs" />
     <Compile Include="FieldLookups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
