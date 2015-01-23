@@ -22,10 +22,10 @@ namespace Webapp.Controllers
         
         
         [Route(Routing.GetExcelHeaders)]
-        [HttpGet]
-        public IEnumerable<string> GetHeaders(string filename)
+        [HttpPost]
+        public IEnumerable<string> GetHeaders(HeaderRowData headerRowData)
         {
-            return headerReader.ReadHeaders(filename);
+            return headerReader.ReadHeaders(headerRowData);
         }
     }
 }

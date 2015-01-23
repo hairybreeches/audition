@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using Excel;
@@ -18,12 +19,33 @@ namespace ExcelImport
             this.columnNamer = columnNamer;
         }
 
-        public IEnumerable<string> ReadHeaders(string filename)
+        public IEnumerable<string> ReadHeaders(HeaderRowData data)
         {
-            var reader = GetReader(filename);
+            var reader = GetReader(data.Filename);
+            if (data.UseHeaderRow)
+            {
+                return GetHeaderRowColumnNames(reader);
+            }
+            else
+            {
+                return GetExcelColumnNames(reader);                
+            }
+
+            
+        }
+
+        private IEnumerable<string> GetHeaderRowColumnNames(IExcelDataReader reader)
+        {
+            reader.IsFirstRowAsColumnNames = true;
+            var result = reader.AsDataSet();
+            return result.Tables[0].Columns.OfType<DataColumn>().Select(x => x.ColumnName);
+        }
+
+        private IEnumerable<string> GetExcelColumnNames(IExcelDataReader reader)
+        {
             var result = reader.AsDataSet();
             return Enumerable.Range(0, result.Tables[0].Columns.Count)
-                .Select(x => columnNamer.GetColumnName(x));            
+                .Select(x => columnNamer.GetColumnName(x));
         }
 
         private IExcelDataReader GetReader(string filename)

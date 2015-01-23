@@ -57,6 +57,7 @@
     <Compile Include="ExcelImportModule.cs" />
     <Compile Include="FieldLookups.cs" />
     <Compile Include="HeaderReader.cs" />
+    <Compile Include="HeaderRowData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
