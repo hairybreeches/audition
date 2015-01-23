@@ -13,4 +13,19 @@
             dataDirectory: self.dataDirectory(),
         });
     }
+
+    $("#sage50dataDirectory").typeahead({
+        source: function (request, response) {
+            $.ajax({
+                url: "/api/userdata/sage50DataLocations",
+                data: {
+                    enteredData: request.term
+                },
+                success: function (data) {
+                    response(data);
+                }
+            });
+        },
+        minLength: 0
+    });
 };
