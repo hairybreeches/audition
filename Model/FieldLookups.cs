@@ -9,11 +9,16 @@ namespace Model
         public string AccountCode { get; set; }
         public string AccountName { get; set; }
         public string Amount { get; set; }
-        public string JournalType { get; set; }
 
         protected bool Equals(FieldLookups other)
         {
-            return string.Equals(Description, other.Description) && string.Equals(Username, other.Username) && string.Equals(Created, other.Created) && string.Equals(JournalDate, other.JournalDate) && string.Equals(AccountCode, other.AccountCode) && string.Equals(AccountName, other.AccountName) && string.Equals(Amount, other.Amount) && string.Equals(JournalType, other.JournalType);
+            return string.Equals(Description, other.Description)
+                   && string.Equals(Username, other.Username)
+                   && string.Equals(Created, other.Created)
+                   && string.Equals(JournalDate, other.JournalDate)
+                   && string.Equals(AccountCode, other.AccountCode)
+                   && string.Equals(AccountName, other.AccountName)
+                   && string.Equals(Amount, other.Amount);
         }
 
         public override bool Equals(object obj)
@@ -35,7 +40,6 @@ namespace Model
                 hashCode = (hashCode*397) ^ (AccountCode != null ? AccountCode.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (AccountName != null ? AccountName.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Amount != null ? Amount.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (JournalType != null ? JournalType.GetHashCode() : 0);
                 return hashCode;
             }
         }
