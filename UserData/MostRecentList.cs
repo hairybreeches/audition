@@ -3,10 +3,10 @@ using System.Linq;
 
 namespace UserData
 {
-    public class MostRecentList
+    public class MostRecentList<T>
     {
         private readonly int numberToRecord;
-        private IEnumerable<string> stack;
+        private IEnumerable<T> stack;
 
         public MostRecentList()
             :this(5)
@@ -16,10 +16,10 @@ namespace UserData
         public MostRecentList(int numberToRecord)
         {
             this.numberToRecord = numberToRecord;
-            stack = new List<string>();
+            stack = new List<T>();
         }
 
-        public void AddUsage(string value)
+        public void AddUsage(T value)
         {
             stack = new[]{value}
                 .Concat(stack)
@@ -28,7 +28,7 @@ namespace UserData
             
         }
 
-        public IEnumerable<string> GetMostRecentValues()
+        public IEnumerable<T> GetMostRecentValues()
         {
             return stack;
         }
