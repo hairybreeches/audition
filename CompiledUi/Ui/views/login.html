@@ -72,7 +72,7 @@
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">File location</label>
               <div class="col-sm-6">
-                <input id="excelFileLocation" type="text" data-bind="value: fileLocation" name="fileLocation" class="form-control">
+                <input id="excelFileLocation" type="text" data-bind="textInput: fileLocation" name="fileLocation" class="form-control">
               </div>
               <div class="col-sm-2">
                 <button type="button" data-bind="click: browseExcelFile" class="btn btn-default">Browse...	</button>
@@ -81,152 +81,64 @@
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">JournalDate</label>
               <div class="col-sm-6">
-                <select name="JournalDate" data-bind="value: JournalDate" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="JournalDate" data-bind="value: JournalDate, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
               <div class="col-sm-6">
-                <select name="Description" data-bind="value: Description" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="Description" data-bind="value: Description, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Username</label>
               <div class="col-sm-6">
-                <select name="Username" data-bind="value: Username" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="Username" data-bind="value: Username, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Created</label>
               <div class="col-sm-6">
-                <select name="Created" data-bind="value: Created" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="Created" data-bind="value: Created, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">AccountCode</label>
               <div class="col-sm-6">
-                <select name="AccountCode" data-bind="value: AccountCode" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="AccountCode" data-bind="value: AccountCode, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">AccountName</label>
               <div class="col-sm-6">
-                <select name="AccountName" data-bind="value: AccountName" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="AccountName" data-bind="value: AccountName, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
               <div class="col-sm-6">
-                <select name="Amount" data-bind="value: Amount" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="Amount" data-bind="value: Amount, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">JournalType</label>
               <div class="col-sm-6">
-                <select name="JournalType" data-bind="value: JournalType" class="form-control">
-                  <option value="A">Row A</option>
-                  <option value="B">Row B</option>
-                  <option value="C">Row C</option>
-                  <option value="D">Row D</option>
-                  <option value="E">Row E</option>
-                  <option value="F">Row F</option>
-                  <option value="G">Row G</option>
-                  <option value="H">Row H</option>
-                  <option value="I">Row I</option>
-                  <option value="J">Row J</option>
-                  <option value="K">Row K</option>
-                  <option value="L">Row L</option>
+                <select name="JournalType" data-bind="value: JournalType, foreach: columnNames" class="form-control">
+                  <option data-bind="attr: { label: $data, value: $index}"></option>
                 </select>
               </div>
             </div>
