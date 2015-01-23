@@ -142,10 +142,10 @@
     <Content Include="Ui\scripts\jquery-ui.min-1.11.1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\knockout-3.1.0.debug.js">
+    <Content Include="Ui\scripts\knockout-3.2.0.debug.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\knockout-3.1.0.js">
+    <Content Include="Ui\scripts\knockout-3.2.0.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\scripts\knockout-jqueryui.min.js">
