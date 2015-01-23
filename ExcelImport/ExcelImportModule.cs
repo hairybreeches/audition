@@ -8,6 +8,7 @@ namespace ExcelImport
         {
             builder.RegisterType<HeaderReader>();
             builder.RegisterType<ExcelColumnNamer>();
+            builder.RegisterType<ExcelDataFileStorage>();
         }
     }
 }

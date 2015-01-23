@@ -53,14 +53,17 @@
   <ItemGroup>
     <Compile Include="CouldNotOpenExcelFileException.cs" />
     <Compile Include="ExcelColumnNamer.cs" />
-    <Compile Include="ExcelImportMapping.cs" />
+    <Compile Include="ExcelDataFileStorage.cs" />
     <Compile Include="ExcelImportModule.cs" />
-    <Compile Include="FieldLookups.cs" />
     <Compile Include="HeaderReader.cs" />
     <Compile Include="HeaderRowData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native\Native.csproj">
       <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
       <Name>Native</Name>
@@ -68,6 +71,10 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
