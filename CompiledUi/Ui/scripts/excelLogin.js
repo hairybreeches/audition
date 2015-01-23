@@ -2,6 +2,7 @@ var ExcelLoginModel = function() {
     var self = this;
 
     self.fileLocation = ko.observable('');
+    self.useHeaderRow = ko.observable(true);
     var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount'];
     fields.forEach(
         function(fieldName) {
@@ -10,7 +11,8 @@ var ExcelLoginModel = function() {
 
     var getData = function() {
         var data = {
-            Filename: self.fileLocation()
+            Filename: self.fileLocation(),
+            UseHeaderRow: self.useHeaderRow()
         };
 
         data.Lookups = fields.reduce(function(lookups, fieldName) {
