@@ -3,8 +3,8 @@
 
 
 mixin row-dropdown(field)
-	+form-field(field)
-		select.form-control(name="#{field}" data-bind="value: #{field}, foreach: columnNames")
+	+form-field(field.label)
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, foreach: columnNames")
 				option(data-bind="attr: { label: $data, value: $index}")
 
 
@@ -16,7 +16,7 @@ mixin excel-login()
 		.col-sm-2
 			button.btn.btn-default(type="button", data-bind="click: browseExcelFile") Browse...	
 						
-	+row-dropdown('JournalDate')
-	each field in ['Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount']
+	+row-dropdown({label: 'Date', fieldName: 'JournalDate'})
+	each field in [	{label: 'Nominal code', fieldName: 'AccountCode'}, {label: 'Nominal name', fieldName: 'AccountName'}, {label: 'Amount', fieldName: 'Amount'}, {label: 'Created by', fieldName: 'Username'}, {label: 'Created date', fieldName: 'Created'}, {label: 'Description', fieldName: 'Description'}]
 		+row-dropdown(field)
 		
