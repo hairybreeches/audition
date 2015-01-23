@@ -53,4 +53,6 @@
     self.submit = function() {
         model.login('/api/excel/login', getData());
     };
+
+    autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
 };
