@@ -2,7 +2,7 @@ var ExcelLoginModel = function() {
     var self = this;
 
     self.fileLocation = ko.observable('');
-    var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'JournalType'];
+    var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount'];
     fields.forEach(
         function(fieldName) {
             self[fieldName] = ko.observable('A');

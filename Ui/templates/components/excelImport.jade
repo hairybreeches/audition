@@ -17,6 +17,6 @@ mixin excel-login()
 			button.btn.btn-default(type="button", data-bind="click: browseExcelFile") Browse...	
 						
 	+row-dropdown('JournalDate')
-	each field in ['Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'JournalType']
+	each field in ['Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount']
 		+row-dropdown(field)
 		
