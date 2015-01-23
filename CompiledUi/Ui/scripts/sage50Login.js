@@ -13,4 +13,6 @@ var Sage50LoginModel = function() {
             dataDirectory: self.dataDirectory(),
         });
     }
+
+    autocomplete("#sage50dataDirectory", "/api/userdata/sage50DataLocations");
 };
