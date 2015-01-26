@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Excel;
+using Model;
 using Native;
 
 namespace ExcelImport
@@ -28,7 +29,9 @@ namespace ExcelImport
         public IEnumerable<string> ReadHeaders(HeaderRowData data)
         {
             var dataSet = GetDataSet(data.Filename, data.UseHeaderRow);
-            return data.UseHeaderRow ? GetHeaderRowColumnNames(dataSet) : GetExcelColumnNames(dataSet);
+            var sheet = dataSet.Tables[data.Sheet];
+            var dataColumns = sheet.Columns.OfType<DataColumn>();
+            return data.UseHeaderRow ? GetHeaderRowColumnNames(dataColumns) : GetExcelColumnNames(dataColumns);
         }
 
         private DataSet GetDataSet(string filename, bool headerRow = false)
@@ -38,14 +41,14 @@ namespace ExcelImport
             return reader.AsDataSet();
         }
 
-        private IEnumerable<string> GetHeaderRowColumnNames(DataSet dataSet)
+        private static IEnumerable<string> GetHeaderRowColumnNames(IEnumerable<DataColumn> dataColumns)
         {            
-            return dataSet.Tables[0].Columns.OfType<DataColumn>().Select(x => x.ColumnName);
+            return dataColumns.Select(x => x.ColumnName);
         }
 
-        private IEnumerable<string> GetExcelColumnNames(DataSet dataSet)
+        private IEnumerable<string> GetExcelColumnNames(IEnumerable<DataColumn> dataColumns)
         {            
-            return Enumerable.Range(0, dataSet.Tables[0].Columns.Count)
+            return Enumerable.Range(0, dataColumns.Count())
                 .Select(x => columnNamer.GetColumnName(x));
         }
 

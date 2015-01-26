@@ -4,13 +4,12 @@ namespace Model
 {
     public class ExcelImportMapping
     {
-        public string Filename { get; set; }
-        public bool UseHeaderRow { get; set; }
+        public HeaderRowData SheetData { get; set; }
         public FieldLookups Lookups { get; set; }
 
         protected bool Equals(ExcelImportMapping other)
         {
-            return string.Equals(Filename, other.Filename, StringComparison.CurrentCultureIgnoreCase) && UseHeaderRow.Equals(other.UseHeaderRow) && Equals(Lookups, other.Lookups);
+            return Equals(SheetData, other.SheetData) && Equals(Lookups, other.Lookups);
         }
 
         public override bool Equals(object obj)
@@ -25,10 +24,7 @@ namespace Model
         {
             unchecked
             {
-                var hashCode = (Filename != null ? Filename.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ UseHeaderRow.GetHashCode();
-                hashCode = (hashCode*397) ^ (Lookups != null ? Lookups.GetHashCode() : 0);
-                return hashCode;
+                return ((SheetData != null ? SheetData.GetHashCode() : 0)*397) ^ (Lookups != null ? Lookups.GetHashCode() : 0);
             }
         }
     }

@@ -56,7 +56,6 @@
     <Compile Include="ExcelDataFileStorage.cs" />
     <Compile Include="ExcelImportModule.cs" />
     <Compile Include="MetadataReader.cs" />
-    <Compile Include="HeaderRowData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
