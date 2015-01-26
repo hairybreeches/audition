@@ -1,6 +1,6 @@
-using System;
+using Model;
 
-namespace Model
+namespace ExcelImport
 {
     public class ExcelImportMapping
     {
