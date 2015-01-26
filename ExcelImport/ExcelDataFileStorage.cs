@@ -23,15 +23,20 @@ namespace ExcelImport
              return userDetailsStorage.Load();
         }
 
-        private IEnumerable<ExcelImportMapping> GetDemoDataLocations()
+        private static IEnumerable<ExcelImportMapping> GetDemoDataLocations()
         {
             return new[]
             {
-                new ExcelImportMapping()
+                new ExcelImportMapping
                 {
-                    Filename = Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
-                    Lookups = new FieldLookups(),
-                    UseHeaderRow = true
+                    SheetData = new HeaderRowData
+                    {
+                        Filename = Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
+                        UseHeaderRow = true,
+                        Sheet = 0
+                    },
+
+                    Lookups = new FieldLookups()
                 }
             };
         }        
@@ -47,7 +52,7 @@ namespace ExcelImport
         {
             return GetUserDetails().ExcelMappings
                 .Concat(GetDemoDataLocations())
-                .Select(x => x.Filename)
+                .Select(x => x.SheetData.Filename)
                 .Distinct(StringComparer.CurrentCultureIgnoreCase);
         }
     }

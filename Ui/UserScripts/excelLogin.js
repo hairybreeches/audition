@@ -12,8 +12,11 @@
 
     var getData = function() {
         var data = {
-            Filename: self.fileLocation(),
-            UseHeaderRow: self.useHeaderRow()
+            SheetData: {
+                Filename: self.fileLocation(),
+                UseHeaderRow: self.useHeaderRow(),
+                Sheet: self.sheet()
+            }
         };
 
         data.Lookups = fields.reduce(function(lookups, fieldName) {
@@ -26,14 +29,14 @@
 
     self.columnNames = ko.observableArray(['Enter an excel spreadsheet name above']);
 
-    var updateColumnNames = function(fileLocation, useHeaderRow) {
+    var updateColumnNames = function(fileLocation, useHeaderRow, sheet) {
         $.ajax('/api/excel/getHeaders', {
             type: "POST",
             contentType: 'application/json',
             data: JSON.stringify({
                 Filename: fileLocation,
-                UseHeaderRow: useHeaderRow
-
+                UseHeaderRow: useHeaderRow,
+                Sheet: sheet
             }),
             success: function(data) {
                 self.columnNames(data);
@@ -56,14 +59,18 @@
     }
 
     self.fileLocation.subscribe(function (newFilename) {
-        return updateColumnNames(newFilename, self.useHeaderRow());
+        return updateColumnNames(newFilename, self.useHeaderRow(), self.sheet());
+    });
+
+    self.useHeaderRow.subscribe(function (newUseHeaderRow) {
+        return updateColumnNames(self.fileLocation(), newUseHeaderRow, self.sheet());
+    });
+
+    self.sheet.subscribe(function (newSheet) {
+        return updateColumnNames(self.fileLocation(), self.useHeaderRow(), newSheet);
     });
 
     self.fileLocation.subscribe(updateSheetNames);
-
-    self.useHeaderRow.subscribe(function (newUseHeaderRow) {
-        return updateColumnNames(self.fileLocation(), newUseHeaderRow);
-    });
 
     self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
 
