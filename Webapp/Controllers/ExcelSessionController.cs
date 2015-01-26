@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using ExcelImport;
 using Model;
@@ -7,12 +8,12 @@ namespace Webapp.Controllers
 {
     public class ExcelSessionController : ApiController
     {
-        private readonly HeaderReader headerReader;
+        private readonly MetadataReader metadataReader;
         private readonly ExcelDataFileStorage dataFileStorage;
 
-        public ExcelSessionController(HeaderReader headerReader, ExcelDataFileStorage dataFileStorage)
+        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage)
         {
-            this.headerReader = headerReader;
+            this.metadataReader = metadataReader;
             this.dataFileStorage = dataFileStorage;
         }
 
@@ -28,7 +29,15 @@ namespace Webapp.Controllers
         [HttpPost]
         public IEnumerable<string> GetHeaders(HeaderRowData headerRowData)
         {
-            return headerReader.ReadHeaders(headerRowData);
+            return metadataReader.ReadHeaders(headerRowData);
         }
+
+        [Route(Routing.GetExcelSheets)]
+        [HttpGet]
+        public IEnumerable<string> GetSheets(String filename)
+        {
+            return metadataReader.ReadSheets(filename);
+        }
+
     }
 }

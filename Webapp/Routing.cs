@@ -5,7 +5,8 @@ namespace Webapp
     //todo: share these routes between js and c# using CEF
     public static class Routing
     {
-        
+
+        public const string GetExcelSheets = "api/excel/getSheetNames";
         public const string GetExcelHeaders = "api/excel/getHeaders";
         public const string ExcelLogin = "api/excel/login";
 
