@@ -52,9 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="ExcelImportMapping.cs" />
-    <Compile Include="FieldLookups.cs" />
-    <Compile Include="HeaderRowData.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />

@@ -54,7 +54,10 @@
     <Compile Include="CouldNotOpenExcelFileException.cs" />
     <Compile Include="ExcelColumnNamer.cs" />
     <Compile Include="ExcelDataFileStorage.cs" />
+    <Compile Include="ExcelImportMapping.cs" />
     <Compile Include="ExcelImportModule.cs" />
+    <Compile Include="FieldLookups.cs" />
+    <Compile Include="HeaderRowData.cs" />
     <Compile Include="MetadataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

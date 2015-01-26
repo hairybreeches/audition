@@ -1,4 +1,4 @@
-namespace Model
+namespace ExcelImport
 {
     public class FieldLookups
     {
