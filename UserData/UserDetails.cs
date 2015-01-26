@@ -6,7 +6,7 @@ namespace UserData
     public class UserDetails
     {
         private readonly MostRecentList<string> sageDataLocations = new MostRecentList<string>(20);        
-        private readonly MostRecentList<ExcelImportMapping> excelImportList = new MostRecentList<ExcelImportMapping>(20);        
+        private readonly MostRecentList<string> excelImportList = new MostRecentList<string>(20);        
 
 
         public IEnumerable<string> Sage50DataLocations
@@ -20,12 +20,12 @@ namespace UserData
             sageDataLocations.AddUsage(location);
         }    
         
-        public void AddExcelMapping(ExcelImportMapping mapping)
+        public void AddExcelFile(string mapping)
         {
             excelImportList.AddUsage(mapping);
         }
 
-        public IEnumerable<ExcelImportMapping> ExcelMappings
+        public IEnumerable<string> ExcelFiles
         {
             get { return excelImportList.GetMostRecentValues(); }
         }
