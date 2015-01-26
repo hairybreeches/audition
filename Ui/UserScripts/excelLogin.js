@@ -3,6 +3,7 @@
 
     self.fileLocation = ko.observable('');
     self.useHeaderRow = ko.observable(true);
+    self.sheet = ko.observable(0);
     var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount'];
     fields.forEach(
         function(fieldName) {
@@ -23,7 +24,7 @@
         return data;
     }
 
-    self.columnNames = ko.observableArray(['Enter an excel spreadsheet name above']);    
+    self.columnNames = ko.observableArray(['Enter an excel spreadsheet name above']);
 
     var updateColumnNames = function(fileLocation, useHeaderRow) {
         $.ajax('/api/excel/getHeaders', {
@@ -38,11 +39,27 @@
                 self.columnNames(data);
             }
         });
+    };
+
+    self.sheetNames = ko.observableArray(['Enter an excel spreadsheet name above']);
+
+    var updateSheetNames = function(fileLocation) {
+        $.ajax('/api/excel/getSheetNames', {
+            type: "GET",            
+            data: {
+                filename: fileLocation
+            },
+            success: function(data) {
+                self.sheetNames(data);
+            }
+        });
     }
 
     self.fileLocation.subscribe(function (newFilename) {
         return updateColumnNames(newFilename, self.useHeaderRow());
     });
+
+    self.fileLocation.subscribe(updateSheetNames);
 
     self.useHeaderRow.subscribe(function (newUseHeaderRow) {
         return updateColumnNames(self.fileLocation(), newUseHeaderRow);

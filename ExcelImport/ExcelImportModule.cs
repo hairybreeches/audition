@@ -6,7 +6,7 @@ namespace ExcelImport
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HeaderReader>();
+            builder.RegisterType<MetadataReader>();
             builder.RegisterType<ExcelColumnNamer>();
             builder.RegisterType<ExcelDataFileStorage>();
         }

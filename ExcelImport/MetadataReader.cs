@@ -8,43 +8,44 @@ using Native;
 
 namespace ExcelImport
 {
-    public class HeaderReader
+    public class MetadataReader
     {
         private readonly IFileSystem fileSystem;
         private readonly ExcelColumnNamer columnNamer;
 
-        public HeaderReader(IFileSystem fileSystem, ExcelColumnNamer columnNamer)
+        public MetadataReader(IFileSystem fileSystem, ExcelColumnNamer columnNamer)
         {
             this.fileSystem = fileSystem;
             this.columnNamer = columnNamer;
         }
 
+        public IEnumerable<string> ReadSheets(string filename)
+        {
+            var dataSet = GetDataSet(filename);
+            return dataSet.Tables.OfType<DataTable>().Select(x => x.TableName);
+        }
+
         public IEnumerable<string> ReadHeaders(HeaderRowData data)
         {
-            var reader = GetReader(data.Filename);
-            if (data.UseHeaderRow)
-            {
-                return GetHeaderRowColumnNames(reader);
-            }
-            else
-            {
-                return GetExcelColumnNames(reader);                
-            }
-
-            
+            var dataSet = GetDataSet(data.Filename, data.UseHeaderRow);
+            return data.UseHeaderRow ? GetHeaderRowColumnNames(dataSet) : GetExcelColumnNames(dataSet);
         }
 
-        private IEnumerable<string> GetHeaderRowColumnNames(IExcelDataReader reader)
+        private DataSet GetDataSet(string filename, bool headerRow = false)
         {
-            reader.IsFirstRowAsColumnNames = true;
-            var result = reader.AsDataSet();
-            return result.Tables[0].Columns.OfType<DataColumn>().Select(x => x.ColumnName);
+            var reader = GetReader(filename);
+            reader.IsFirstRowAsColumnNames = headerRow;
+            return reader.AsDataSet();
         }
 
-        private IEnumerable<string> GetExcelColumnNames(IExcelDataReader reader)
-        {
-            var result = reader.AsDataSet();
-            return Enumerable.Range(0, result.Tables[0].Columns.Count)
+        private IEnumerable<string> GetHeaderRowColumnNames(DataSet dataSet)
+        {            
+            return dataSet.Tables[0].Columns.OfType<DataColumn>().Select(x => x.ColumnName);
+        }
+
+        private IEnumerable<string> GetExcelColumnNames(DataSet dataSet)
+        {            
+            return Enumerable.Range(0, dataSet.Tables[0].Columns.Count)
                 .Select(x => columnNamer.GetColumnName(x));
         }
 
@@ -73,5 +74,7 @@ namespace ExcelImport
         {
             return fileSystem.OpenFileStreamToRead(filename);
         }
+
+        
     }
 }
