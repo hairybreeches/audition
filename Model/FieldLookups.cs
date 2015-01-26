@@ -2,13 +2,13 @@ namespace Model
 {
     public class FieldLookups
     {
-        public string Description { get; set; }
-        public string Username { get; set; }
-        public string Created { get; set; }
-        public string JournalDate { get; set; }
-        public string AccountCode { get; set; }
-        public string AccountName { get; set; }
-        public string Amount { get; set; }
+        public int Description { get; set; }
+        public int Username { get; set; }
+        public int Created { get; set; }
+        public int JournalDate { get; set; }
+        public int AccountCode { get; set; }
+        public int AccountName { get; set; }
+        public int Amount { get; set; }
 
         protected bool Equals(FieldLookups other)
         {
