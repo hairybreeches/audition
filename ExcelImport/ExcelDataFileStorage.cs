@@ -23,36 +23,25 @@ namespace ExcelImport
              return userDetailsStorage.Load();
         }
 
-        private static IEnumerable<ExcelImportMapping> GetDemoDataLocations()
+        private static IEnumerable<string> GetDemoDataLocations()
         {
             return new[]
             {
-                new ExcelImportMapping
-                {
-                    SheetData = new HeaderRowData
-                    {
-                        Filename = Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
-                        UseHeaderRow = true,
-                        Sheet = 0
-                    },
-
-                    Lookups = new FieldLookups()
-                }
+                Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
             };
         }        
 
         public void StoreUsage(ExcelImportMapping mapping)
         {
             var details = GetUserDetails();
-            details.AddExcelMapping(mapping);
+            details.AddExcelFile(mapping.SheetData.Filename);
             userDetailsStorage.Save(details);
         }
 
         public IEnumerable<string> GetExcelDataFiles()
         {
-            return GetUserDetails().ExcelMappings
-                .Concat(GetDemoDataLocations())
-                .Select(x => x.SheetData.Filename)
+            return GetUserDetails().ExcelFiles
+                .Concat(GetDemoDataLocations())                
                 .Distinct(StringComparer.CurrentCultureIgnoreCase);
         }
     }
