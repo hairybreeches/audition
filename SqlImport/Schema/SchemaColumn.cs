@@ -31,14 +31,6 @@ namespace SqlImport.Schema
 
         public T GetField(IDataRecord record)
         {
-            var actualFieldName = record.GetName(Index);
-            if (actualFieldName != FieldName)
-            {
-                throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema. Column {0} was {1}, expected {2}", Index,
-                        actualFieldName, FieldName));
-            }
-
             var fieldValue = record[Index];
 
             if (!(fieldValue is T))
