@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using ExcelImport;
-using Model;
+using Webapp.Session;
 
 namespace Webapp.Controllers
 {
@@ -10,11 +10,17 @@ namespace Webapp.Controllers
     {
         private readonly MetadataReader metadataReader;
         private readonly ExcelDataFileStorage dataFileStorage;
+        private readonly ExcelJournalReader journalReader;
+        private readonly LoginSession session;
+        private readonly ExcelSearcherFactoryFactory searcherFactoryFactory;
 
-        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage)
+        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, ExcelSearcherFactoryFactory searcherFactoryFactory)
         {
             this.metadataReader = metadataReader;
             this.dataFileStorage = dataFileStorage;
+            this.journalReader = journalReader;
+            this.session = session;
+            this.searcherFactoryFactory = searcherFactoryFactory;
         }
 
         [Route(Routing.ExcelLogin)]
@@ -22,6 +28,7 @@ namespace Webapp.Controllers
         public void ExcelLogin(ExcelImportMapping importMapping)
         {
             dataFileStorage.StoreUsage(importMapping);
+            session.Login(searcherFactoryFactory.CreateSearcherFactory(importMapping.Lookups), journalReader.ReadJournals(importMapping));
         }    
         
         

@@ -55,8 +55,10 @@
     <Compile Include="ExcelColumnNamer.cs" />
     <Compile Include="ExcelDataConverter.cs" />
     <Compile Include="ExcelDataFileStorage.cs" />
+    <Compile Include="ExcelJournalReader.cs" />
     <Compile Include="ExcelImportMapping.cs" />
     <Compile Include="ExcelImportModule.cs" />
+    <Compile Include="ExcelSearcherFactoryFactory.cs" />
     <Compile Include="FieldLookups.cs" />
     <Compile Include="HeaderRowData.cs" />
     <Compile Include="MetadataReader.cs" />
@@ -74,6 +76,10 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserData\UserData.csproj">
       <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>

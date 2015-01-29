@@ -1,3 +1,8 @@
+using System;
+using System.ComponentModel;
+using Searching;
+using SqlImport.Schema;
+
 namespace ExcelImport
 {
     public class FieldLookups
@@ -10,38 +15,82 @@ namespace ExcelImport
         public int AccountName { get; set; }
         public int Amount { get; set; }
 
-        protected bool Equals(FieldLookups other)
+        public JournalSchema ToJournalSchema()
         {
-            return string.Equals(Description, other.Description)
-                   && string.Equals(Username, other.Username)
-                   && string.Equals(Created, other.Created)
-                   && string.Equals(JournalDate, other.JournalDate)
-                   && string.Equals(AccountCode, other.AccountCode)
-                   && string.Equals(AccountName, other.AccountName)
-                   && string.Equals(Amount, other.Amount);
+            return new JournalSchema(
+                new UnmappedColumn<int>(),
+                GetColumn<string>(Username, "Username"),
+                GetColumn<DateTime>(JournalDate, "Journal date"),
+                GetColumn<DateTime>(Created, "Created"),
+                GetColumn<string>(AccountCode, "Account code"),
+                GetColumn<double>(Amount, "Amount"),
+                GetColumn<string>(Description, "Description"),
+                GetColumn<string>(AccountName, "Account name"));
         }
 
-        public override bool Equals(object obj)
+        private static ISchemaColumn<T> GetColumn<T>(int columnIndex, string columnName)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((FieldLookups) obj);
+            return IsSet(columnIndex) ? (ISchemaColumn<T>) new UnmappedColumn<T>() : new SchemaColumn<T>(columnName, columnIndex);
         }
 
-        public override int GetHashCode()
+        public bool IsDisplayable(DisplayField displayField)
         {
-            unchecked
+            return IsSet(SetIndicator(displayField));
+        }
+
+        private static bool IsSet(int column)
+        {
+            return column != -1;
+        }
+
+        public bool IsSearchable(SearchAction searchAction)
+        {
+            return IsSet(SetIndicator(searchAction));
+        }
+
+        private int SetIndicator(SearchAction searchAction)
+        {
+            switch (searchAction)
             {
-                var hashCode = (Description != null ? Description.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Username != null ? Username.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Created != null ? Created.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (JournalDate != null ? JournalDate.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (AccountCode != null ? AccountCode.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (AccountName != null ? AccountName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Amount != null ? Amount.GetHashCode() : 0);
-                return hashCode;
+                case SearchAction.Accounts:
+                    return AccountCode;
+                case SearchAction.Date:
+                    return Created;
+                case SearchAction.Ending:
+                    return Amount;
+                case SearchAction.Hours:
+                    return Created;
+                case SearchAction.Users:
+                    return Username;
+                default:
+                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
             }
         }
+
+        private int SetIndicator(DisplayField displayField)
+        {
+            switch (displayField)
+            {
+                case DisplayField.AccountCode:
+                    return AccountCode;
+                case DisplayField.AccountName:
+                    return AccountName;
+                case DisplayField.Amount:
+                    return Amount;
+                case DisplayField.Created:
+                    return Created;
+                case DisplayField.Description:
+                    return Description;
+                case DisplayField.JournalDate:
+                    return JournalDate;
+                case DisplayField.Username:
+                    return Username;
+                case DisplayField.JournalType:
+                    return Amount;
+                default:
+                    throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
+
+            }
+        }        
     }
 }
