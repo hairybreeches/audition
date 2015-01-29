@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CouldNotOpenExcelFileException.cs" />
+    <Compile Include="DateTimeConverterColumn.cs" />
     <Compile Include="ExcelColumnNamer.cs" />
     <Compile Include="ExcelDataConverter.cs" />
     <Compile Include="ExcelDataFileStorage.cs" />

@@ -23,13 +23,19 @@ namespace ExcelImport
             return new JournalSchema(
                 new UnmappedColumn<int>(),
                 GetColumn<string>(Username, "Username"),
-                GetColumn<DateTime>(JournalDate, "Journal date"),
-                GetColumn<DateTime>(Created, "Created"),
+                GetDateColumn(JournalDate, "Journal date"),
+                GetDateColumn(Created, "Created"),
                 GetColumn<string>(AccountCode, "Account code"),
                 GetColumn<double>(Amount, "Amount"),
                 GetColumn<string>(Description, "Description"),
                 GetColumn<string>(AccountName, "Account name"));
         }
+
+        private static ISchemaColumn<DateTime> GetDateColumn(int columnIndex, string columnName)
+        {
+            return IsSet(columnIndex) ? new DateTimeConverterColumn(columnName, columnIndex) : (ISchemaColumn<DateTime>) new UnmappedColumn<DateTime>();
+        }
+
         public IEnumerable<SearchAction> GetUnavailableActions()
         {
             return Enums.GetAllValues<SearchAction>()
