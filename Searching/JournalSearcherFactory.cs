@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model;
 using Model.SearchWindows;
 using Persistence;
 
@@ -11,14 +12,7 @@ namespace Searching
 
         public static IJournalSearcherFactory EverythingAvailable = new JournalSearcherFactory(
             new Dictionary<SearchAction, string>(),
-            DisplayField.AccountCode,
-            DisplayField.AccountName,
-            DisplayField.Amount,
-            DisplayField.Created,
-            DisplayField.Description,
-            DisplayField.JournalDate,
-            DisplayField.JournalType,
-            DisplayField.Username);
+            Enums.GetAllValues<DisplayField>());
 
         private readonly IDictionary<SearchAction, string> unvailableActionMessages;
 
