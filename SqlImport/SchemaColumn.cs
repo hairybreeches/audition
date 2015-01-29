@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Data;
-using SqlImport;
 
-namespace Sage50.Parsing.Schema
+namespace SqlImport
 {
-    class SchemaColumn<T> : ISchemaColumn
+    public class SchemaColumn<T> : ISchemaColumn
     {
         private readonly int index;
         private readonly string fieldName;

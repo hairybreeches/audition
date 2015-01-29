@@ -50,9 +50,7 @@
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
     <Compile Include="Parsing\NominalCodeLookupFactory.cs" />
-    <Compile Include="Parsing\Schema\ISchemaColumn.cs" />
     <Compile Include="Parsing\Schema\JournalSchema.cs" />
-    <Compile Include="Parsing\Schema\SchemaColumn.cs" />
     <Compile Include="Parsing\JournalReader.cs" />
     <Compile Include="Parsing\SageJournalLine.cs" />
     <Compile Include="Parsing\JournalLineParsing.cs" />
