@@ -12,14 +12,7 @@ namespace Sage50.Parsing
     /// </summary>
     public class JournalLineParser
     {
-        private readonly JournalSchema schema;
-
-        public JournalLineParser(JournalSchema schema)
-        {
-            this.schema = schema;
-        }
-
-        public SqlJournalLine CreateJournalLine(IDataRecord record)
+        public SqlJournalLine CreateJournalLine(IDataRecord record, JournalSchema schema)
         {
             var nominalCode = schema.GetNominalCode(record);
             return CreateJournalLine(
