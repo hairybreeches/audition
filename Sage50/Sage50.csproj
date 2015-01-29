@@ -50,7 +50,7 @@
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
     <Compile Include="Parsing\NominalCodeLookupFactory.cs" />
-    <Compile Include="Parsing\JournalReader.cs" />
+    <Compile Include="Parsing\SageJournalReader.cs" />
     <Compile Include="Parsing\SageJournalSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OdbcRegistryReader.cs" />
