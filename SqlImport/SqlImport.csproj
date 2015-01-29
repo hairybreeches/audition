@@ -46,6 +46,7 @@
     <Compile Include="SchemaColumn.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlJournalLine.cs" />
+    <Compile Include="UnmappedColumn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
