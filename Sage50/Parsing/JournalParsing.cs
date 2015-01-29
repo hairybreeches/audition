@@ -8,18 +8,18 @@ using SqlImport;
 namespace Sage50.Parsing
 {
     /// <summary>
-    /// Knows how to turn intermediate parsing step SageJournalLine into Journals.
+    /// Knows how to turn intermediate parsing step SqlJournalLine into Journals.
     /// Don't use this directly, use a JournalReader.
     /// </summary>
     static class JournalParsing
     {
-        public static IEnumerable<Journal> ReadJournals(IEnumerable<SageJournalLine> lines)
+        public static IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateJournal);
         }
 
-        private static Journal CreateJournal(IEnumerable<SageJournalLine> linesEnumerable)
+        private static Journal CreateJournal(IEnumerable<SqlJournalLine> linesEnumerable)
         {
             var journalLines = linesEnumerable.ToList();
             return new Journal(
@@ -33,12 +33,12 @@ namespace Sage50.Parsing
 
         }
 
-        private static JournalLine ToModelLine(SageJournalLine arg)
+        private static JournalLine ToModelLine(SqlJournalLine arg)
         {
             return new JournalLine(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
         }
 
-        private static T GetJournalField<T>(IList<SageJournalLine> journalLines, Func<SageJournalLine, T> getter)
+        private static T GetJournalField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter)
         {
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)

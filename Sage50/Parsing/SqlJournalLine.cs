@@ -3,7 +3,7 @@ using Model.Accounting;
 
 namespace Sage50.Parsing
 {
-    public class SageJournalLine
+    public class SqlJournalLine
     {
         public int TransactionId { get; private set; }
         public string Username { get; private set; }
@@ -15,7 +15,7 @@ namespace Sage50.Parsing
         public string Description { get; private set; }
         public string NominalCodeName { get; private set; }
 
-        public SageJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
+        public SqlJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;

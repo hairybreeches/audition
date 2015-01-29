@@ -6,7 +6,7 @@ using Sage50.Parsing.Schema;
 namespace Sage50.Parsing
 {
     /// <summary>
-    /// Knows how to turn the raw IDataRecord from the db into a SageJournalLine
+    /// Knows how to turn the raw IDataRecord from the db into a SqlJournalLine
     /// Don't use this directly, use a JournalReader.
     /// </summary>
     public class JournalLineParser
@@ -18,7 +18,7 @@ namespace Sage50.Parsing
             this.schema = schema;
         }
 
-        public SageJournalLine CreateJournalLine(IDataRecord record, NominalCodeLookup lookup)
+        public SqlJournalLine CreateJournalLine(IDataRecord record, NominalCodeLookup lookup)
         {
             var nominalCode = schema.GetNominalCode(record);
             return CreateJournalLine(
@@ -32,7 +32,7 @@ namespace Sage50.Parsing
                 lookup.GetNominalCodeName(nominalCode));
         }
 
-        private static SageJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             JournalType type;
             decimal amount;
@@ -48,7 +48,7 @@ namespace Sage50.Parsing
                 amount = (Decimal)rawAmount;
             }
 
-            return new SageJournalLine(transactionId, username, journalDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
+            return new SqlJournalLine(transactionId, username, journalDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
         }        
     }
 }
