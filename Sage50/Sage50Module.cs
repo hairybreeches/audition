@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Sage50.Parsing;
-using Sage50.Parsing.Schema;
 
 namespace Sage50
 {
@@ -8,9 +7,8 @@ namespace Sage50
     {
         protected override void Load(ContainerBuilder builder)
         {            
-            builder.RegisterType<JournalSchema>();
-            builder.RegisterType<JournalReader>();
-            builder.RegisterType<JournalLineParser>();
+            builder.RegisterType<SageJournalSchema>();
+            builder.RegisterType<SageJournalReader>();
             builder.RegisterType<Sage50JournalGetter>().As<ISage50JournalGetter>();
             builder.RegisterType<NominalCodeLookupFactory>().As<INominalCodeLookupFactory>();
             builder.RegisterType<Sage50ConnectionFactory>().As<ISage50ConnectionFactory>();

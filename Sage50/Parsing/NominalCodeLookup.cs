@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SqlImport;
 
 namespace Sage50.Parsing
 {
@@ -20,7 +21,7 @@ namespace Sage50.Parsing
                 return lookup[nominalCode];
             }
 
-            throw new SageDataFormatUnexpectedException(String.Format("Could not find lookup value for nominal code {0}, available nominal codes are {1}", nominalCode, String.Join(", ", lookup.Keys)));     
+            throw new SqlDataFormatUnexpectedException(String.Format("Could not find lookup value for nominal code {0}, available nominal codes are {1}", nominalCode, String.Join(", ", lookup.Keys)));     
         }
     }
 }
