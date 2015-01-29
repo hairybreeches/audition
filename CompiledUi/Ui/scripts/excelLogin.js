@@ -27,7 +27,7 @@ var ExcelLoginModel = function() {
         return data;
     }
 
-    self.columnNames = ko.observableArray(['Enter an excel spreadsheet name above']);
+    self.columnNames = ko.observableArray([]);
 
     var updateColumnNames = function(fileLocation, useHeaderRow, sheet) {
         $.ajax('/api/excel/getHeaders', {
@@ -44,7 +44,7 @@ var ExcelLoginModel = function() {
         });
     };
 
-    self.sheetNames = ko.observableArray(['Enter an excel spreadsheet name above']);
+    self.sheetNames = ko.observableArray([]);
 
     var updateSheetNames = function(fileLocation) {
         $.ajax('/api/excel/getSheetNames', {
