@@ -44,6 +44,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaColumn.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
+    <Compile Include="SqlJournalLine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

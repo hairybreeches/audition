@@ -1,7 +1,7 @@
 using System;
 using Model.Accounting;
 
-namespace Sage50.Parsing
+namespace SqlImport
 {
     public class SqlJournalLine
     {

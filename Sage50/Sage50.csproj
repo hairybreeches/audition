@@ -52,7 +52,6 @@
     <Compile Include="Parsing\NominalCodeLookupFactory.cs" />
     <Compile Include="Parsing\Schema\JournalSchema.cs" />
     <Compile Include="Parsing\JournalReader.cs" />
-    <Compile Include="Parsing\SqlJournalLine.cs" />
     <Compile Include="Parsing\JournalLineParsing.cs" />
     <Compile Include="Parsing\JournalParsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
