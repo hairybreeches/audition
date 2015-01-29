@@ -23,25 +23,4 @@ namespace Searching
                 });
         }        
     }
-
-    public enum SearchAction
-    {
-        Users,
-        Hours,
-        Accounts,
-        Date,
-        Ending
-    }
-
-    public enum DisplayField
-    {
-        Description,
-        Username,
-        Created,
-        JournalDate,
-        AccountCode,
-        AccountName,
-        Amount,
-        JournalType
-    }
 }
