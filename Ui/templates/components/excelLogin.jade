@@ -4,7 +4,9 @@
 
 mixin row-dropdown(field)
 	+form-field(field.label)
-		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, foreach: columnNames")
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}")
+			option(value="-1" label="Do not map this field")
+			optgroup(data-bind="foreach: columnNames" label="Map this field to:")
 				option(data-bind="attr: { label: $data, value: $index}")
 
 
