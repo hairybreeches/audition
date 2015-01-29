@@ -14,8 +14,7 @@ namespace ExcelImport
 
         private static IDictionary<SearchAction, string> UnvailableActionMessages(FieldLookups lookups)
         {
-            return Enums.GetAllValues<SearchAction>()
-                .Where(x => !lookups.IsSearchable(x))
+            return lookups.GetUnavailableActions()
                 .Aggregate(new Dictionary<SearchAction, string>(),
                     (dictionary, action) =>
                     {
