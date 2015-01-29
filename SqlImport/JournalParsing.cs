@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Model;
 using Model.Accounting;
-using SqlImport;
 
-namespace Sage50.Parsing
+namespace SqlImport
 {
     /// <summary>
     /// Knows how to turn intermediate parsing step SqlJournalLine into Journals.
     /// Don't use this directly, use a JournalReader.
     /// </summary>
-    static class JournalParsing
+    public static class JournalParsing
     {
         public static IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
         {
