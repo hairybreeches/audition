@@ -11,7 +11,7 @@ namespace Tests
         [Test]
         public void WithoutHeaderRowHeaderReaderReturnsLetteredListOfCorrectSize()
         {
-            var reader = new MetadataReader(new FileSystem(), new ExcelColumnNamer());
+            var reader = CreateReader();
             CollectionAssert.AreEqual(new[]
             {
                 "Column A",
@@ -45,7 +45,7 @@ namespace Tests
         [Test]
         public void WitheaderRowHeaderReaderReturnsFirstCell()
         {
-            var reader = new MetadataReader(new FileSystem(), new ExcelColumnNamer());
+            var reader = CreateReader();
             CollectionAssert.AreEqual(new[]
             {
                 "No",
@@ -76,5 +76,9 @@ namespace Tests
                 }));
         }
 
+        private static MetadataReader CreateReader()
+        {
+            return new MetadataReader(new ExcelColumnNamer(), new ExcelDataConverter(new FileSystem()));
+        }
     }
 }
