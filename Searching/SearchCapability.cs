@@ -9,10 +9,10 @@ namespace Searching
     public class SearchCapability
     {       
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchField> AvailableFields { get; private set; }
+        public IEnumerable<DisplayField> AvailableFields { get; private set; }
         public IDictionary<string, string> UnvailableActionMessages { get; private set; }        
         
-        public SearchCapability(IEnumerable<SearchField> availableFields, IDictionary<SearchAction, string> unvailableActionMessages)
+        public SearchCapability(IEnumerable<DisplayField> availableFields, IDictionary<SearchAction, string> unvailableActionMessages)
         {
             AvailableFields = availableFields;
             UnvailableActionMessages = unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
@@ -33,7 +33,7 @@ namespace Searching
         Ending
     }
 
-    public enum SearchField
+    public enum DisplayField
     {
         Description,
         Username,
