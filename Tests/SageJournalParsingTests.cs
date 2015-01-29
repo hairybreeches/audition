@@ -110,7 +110,7 @@ namespace Tests
 
         private static IEnumerable<Journal> ParseJournals(params object[][] dataRows)
         {
-            var reader = new JournalReader(new JournalLineParser(new JournalSchema()));
+            var reader = new JournalReader(new JournalLineParser(), new JournalSchema());
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 
