@@ -9,7 +9,7 @@ namespace Sage50
         protected override void Load(ContainerBuilder builder)
         {            
             builder.RegisterType<SageJournalSchema>();
-            builder.RegisterType<JournalReader>();
+            builder.RegisterType<SageJournalReader>();
             builder.RegisterType<JournalLineParser>();
             builder.RegisterType<Sage50JournalGetter>().As<ISage50JournalGetter>();
             builder.RegisterType<NominalCodeLookupFactory>().As<INominalCodeLookupFactory>();
@@ -17,6 +17,7 @@ namespace Sage50
             builder.RegisterType<Sage50DriverDetector>();
             builder.RegisterType<OdbcRegistryReader>();
             builder.RegisterType<Sage50DataDirectoryStorage>();
+            builder.RegisterType<SqlJournalReader>();
         }
     }
 }

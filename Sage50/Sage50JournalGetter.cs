@@ -10,13 +10,13 @@ namespace Sage50
 {
     public class Sage50JournalGetter : ISage50JournalGetter
     {
-        private readonly JournalReader journalReader;        
+        private readonly SageJournalReader sageJournalReader;        
         private readonly JournalSchema schema;
         private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50JournalGetter(JournalReader journalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
+        public Sage50JournalGetter(SageJournalReader sageJournalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
         {
-            this.journalReader = journalReader;            
+            this.sageJournalReader = sageJournalReader;            
             this.schema = schema;
             this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
@@ -33,7 +33,7 @@ namespace Sage50
         {
             var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();
-            return journalReader.GetJournals(odbcDataReader, nominalLookup);
+            return sageJournalReader.GetJournals(odbcDataReader, nominalLookup);
         }
 
         private DbCommand CreateCommand(DbConnection connection, string commandText)
