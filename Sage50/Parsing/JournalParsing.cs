@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model;
 using Model.Accounting;
+using SqlImport;
 
 namespace Sage50.Parsing
 {

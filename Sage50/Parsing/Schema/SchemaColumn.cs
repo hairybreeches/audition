@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using SqlImport;
 
 namespace Sage50.Parsing.Schema
 {

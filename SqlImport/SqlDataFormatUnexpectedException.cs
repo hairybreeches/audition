@@ -1,6 +1,6 @@
 using System;
 
-namespace Sage50.Parsing
+namespace SqlImport
 {
     public class SqlDataFormatUnexpectedException : Exception
     {
