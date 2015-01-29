@@ -35,13 +35,18 @@ namespace ExcelImport
             return Enums.GetAllValues<SearchAction>()
                 .Where(x => !IsSearchable(x));
         }
+        public DisplayField[] GetDisplayableFields()
+        {
+            return Enums.GetAllValues<DisplayField>()
+                .Where(IsDisplayable).ToArray();
+        }
 
         private static ISchemaColumn<T> GetColumn<T>(int columnIndex, string columnName)
         {
             return IsSet(columnIndex) ? (ISchemaColumn<T>) new UnmappedColumn<T>() : new SchemaColumn<T>(columnName, columnIndex);
         }
 
-        public bool IsDisplayable(DisplayField displayField)
+        private bool IsDisplayable(DisplayField displayField)
         {
             return IsSet(SetIndicator(displayField));
         }
@@ -99,6 +104,6 @@ namespace ExcelImport
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
 
             }
-        }        
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace ExcelImport
     {
         public IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups)
         {
-            return new JournalSearcherFactory(UnvailableActionMessages(lookups), GetDisplayFields(lookups));
+            return new JournalSearcherFactory(UnvailableActionMessages(lookups), lookups.GetDisplayableFields());
         }
 
         private static IDictionary<SearchAction, string> UnvailableActionMessages(FieldLookups lookups)
@@ -21,12 +21,6 @@ namespace ExcelImport
                         dictionary.Add(action, "search unavailable, please map field");
                         return dictionary;
                     });
-        }
-
-        private static DisplayField[] GetDisplayFields(FieldLookups lookups)
-        {
-            return Enums.GetAllValues<DisplayField>()
-                .Where(lookups.IsDisplayable).ToArray();
         }
     }
 }
