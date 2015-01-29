@@ -21,7 +21,7 @@ namespace ExcelImport
         public JournalSchema ToJournalSchema()
         {
             return new JournalSchema(
-                new UnmappedColumn<int>(),
+                new RecordNumberIdColumn(),
                 GetColumn<string>(Username, "Username"),
                 GetDateColumn(JournalDate, "Journal date"),
                 GetDateColumn(Created, "Created"),
