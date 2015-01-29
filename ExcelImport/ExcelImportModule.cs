@@ -9,6 +9,7 @@ namespace ExcelImport
             builder.RegisterType<MetadataReader>();
             builder.RegisterType<ExcelColumnNamer>();
             builder.RegisterType<ExcelDataFileStorage>();
+            builder.RegisterType<ExcelDataConverter>();
         }
     }
 }
