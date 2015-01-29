@@ -8,13 +8,13 @@ namespace Sage50.Parsing.Schema
 {
     public class JournalSchema
     {
-        private readonly SchemaColumn<int> idColumn;
-        private readonly SchemaColumn<string> usernameColumn;
-        private readonly SchemaColumn<DateTime> dateColumn;
-        private readonly SchemaColumn<DateTime> creationTimeColumn;
-        private readonly SchemaColumn<string> nominalCodeColumn;
-        private readonly SchemaColumn<double> amountColumn;
-        private readonly SchemaColumn<string> detailsColumn;
+        private readonly ISchemaColumn<int> idColumn;
+        private readonly ISchemaColumn<string> usernameColumn;
+        private readonly ISchemaColumn<DateTime> dateColumn;
+        private readonly ISchemaColumn<DateTime> creationTimeColumn;
+        private readonly ISchemaColumn<string> nominalCodeColumn;
+        private readonly ISchemaColumn<double> amountColumn;
+        private readonly ISchemaColumn<string> detailsColumn;
 
         public JournalSchema()
         {
