@@ -15,6 +15,7 @@ namespace Sage50.Parsing.Schema
         private readonly ISchemaColumn<string> nominalCodeColumn;
         private readonly ISchemaColumn<double> amountColumn;
         private readonly ISchemaColumn<string> detailsColumn;
+        private readonly ISchemaColumn<string> nominalCodeNameColumn;
 
         public JournalSchema()
         {
@@ -24,10 +25,11 @@ namespace Sage50.Parsing.Schema
             creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
             nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
             amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-            detailsColumn = new SchemaColumn<string>("DETAILS", 6);            
+            detailsColumn = new SchemaColumn<string>("DETAILS", 6);
+            nominalCodeNameColumn = new UnmappedColumn<string>();
         }                
 
-        public IEnumerable<ISchemaColumn> Columns
+        public IEnumerable<ISchemaColumn> MappedColumns
         {
             get
             {
@@ -39,14 +41,17 @@ namespace Sage50.Parsing.Schema
                     creationTimeColumn,
                     nominalCodeColumn,
                     amountColumn,
-                    detailsColumn
-                }.OrderBy(x => x.Index);
+                    detailsColumn,
+                    nominalCodeNameColumn
+                }
+                .Where(x => x.Index != -1)
+                .OrderBy(x => x.Index);
             }
         }
 
         public IEnumerable<string> ColumnNames
         {
-            get { return Columns.Select(x=>x.FieldName); }
+            get { return MappedColumns.Select(x=>x.FieldName); }
         }
 
         public int GetId(IDataRecord record)
@@ -82,6 +87,34 @@ namespace Sage50.Parsing.Schema
         public string GetDescription(IDataRecord record)
         {
             return detailsColumn.GetField(record);
-        }        
+        }
+
+        public string GetNominalCodeName(IDataRecord record)
+        {
+            return nominalCodeNameColumn.GetField(record);
+        }
+    }
+
+    public class UnmappedColumn<T> : ISchemaColumn<T>
+    {
+        public T GetField(IDataRecord record)
+        {
+            return default(T);
+        }
+
+        public DataColumn ToDataColumn()
+        {
+            return null;
+        }
+
+        public int Index
+        {
+            get { return -1; }
+        }
+
+        public string FieldName
+        {
+            get { return String.Empty; }
+        }
     }
 }

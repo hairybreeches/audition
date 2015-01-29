@@ -19,7 +19,7 @@ namespace Sage50.Parsing
             this.schema = schema;
         }
 
-        public SqlJournalLine CreateJournalLine(IDataRecord record, NominalCodeLookup lookup)
+        public SqlJournalLine CreateJournalLine(IDataRecord record)
         {
             var nominalCode = schema.GetNominalCode(record);
             return CreateJournalLine(
@@ -30,7 +30,7 @@ namespace Sage50.Parsing
                 nominalCode, 
                 schema.GetAmount(record),
                 schema.GetDescription(record),
-                lookup.GetNominalCodeName(nominalCode));
+                schema.GetNominalCodeName(record));
         }
 
         private static SqlJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)

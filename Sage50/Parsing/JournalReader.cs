@@ -31,7 +31,9 @@ namespace Sage50.Parsing
 
         private SqlJournalLine ConvertToLine(IDataRecord record, NominalCodeLookup lookup)
         {
-            return journalLineParser.CreateJournalLine(record, lookup);
-        }    
+            var sqlJournalLine = journalLineParser.CreateJournalLine(record);
+            sqlJournalLine.NominalCodeName = lookup.GetNominalCodeName(sqlJournalLine.NominalCode);
+            return sqlJournalLine;
+        }
     }
 }
