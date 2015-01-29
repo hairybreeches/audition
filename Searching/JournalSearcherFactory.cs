@@ -7,25 +7,25 @@ namespace Searching
 {
     public class JournalSearcherFactory : IJournalSearcherFactory
     {
-        private readonly ISet<SearchField> availableFields;
+        private readonly ISet<DisplayField> availableFields;
 
         public static IJournalSearcherFactory EverythingAvailable = new JournalSearcherFactory(
             new Dictionary<SearchAction, string>(),
-            SearchField.AccountCode,
-            SearchField.AccountName,
-            SearchField.Amount,
-            SearchField.Created,
-            SearchField.Description,
-            SearchField.JournalDate,
-            SearchField.JournalType,
-            SearchField.Username);
+            DisplayField.AccountCode,
+            DisplayField.AccountName,
+            DisplayField.Amount,
+            DisplayField.Created,
+            DisplayField.Description,
+            DisplayField.JournalDate,
+            DisplayField.JournalType,
+            DisplayField.Username);
 
         private readonly IDictionary<SearchAction, string> unvailableActionMessages;
 
-        public JournalSearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params SearchField[] availableFields)
+        public JournalSearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params DisplayField[] availableFields)
         {
             this.unvailableActionMessages = unvailableActionMessages;           
-            this.availableFields = new HashSet<SearchField>(availableFields);
+            this.availableFields = new HashSet<DisplayField>(availableFields);
         }
 
         public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
