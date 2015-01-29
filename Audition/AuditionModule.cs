@@ -6,6 +6,7 @@ using Licensing;
 using Native;
 using Persistence;
 using Sage50;
+using SqlImport;
 using UserData;
 using Webapp;
 using Webapp.Session;
@@ -27,6 +28,7 @@ namespace Audition
             builder.RegisterModule<LicensingModule>();
             builder.RegisterModule<UserDataModule>();
             builder.RegisterModule<ExcelImportModule>();
+            builder.RegisterModule<SqlImportModule>();
         }
     }
 }
