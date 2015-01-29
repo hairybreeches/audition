@@ -29,15 +29,15 @@ namespace SqlImport.Schema
             return new DataColumn(FieldName, typeof(T));
         }
 
-        public T GetField(IDataRecord record)
+        public T GetField(IDataRecord record, int recordIndex)
         {
             var fieldValue = record[Index];
 
             if (!(fieldValue is T))
             {
                 throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema. {0} was {1}, expected {2}", FieldName,
-                        fieldValue.GetType(), typeof(T)));
+                    String.Format("Unrecognised data schema at row {0}. {1} was {2}, expected {3}", 
+                    recordIndex, FieldName, fieldValue.GetType(), typeof(T)));
             }
 
             return (T)fieldValue;

@@ -29,17 +29,17 @@ namespace Sage50.Parsing
             get { return column.FieldName; }
         }
 
-        public T GetField(IDataRecord record)
+        public T GetField(IDataRecord record, int recordIndex)
         {
             var actualFieldName = record.GetName(Index);
             if (actualFieldName != FieldName)
             {
                 throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema. Column {0} was {1}, expected {2}", Index,
-                        actualFieldName, FieldName));
+                    String.Format("Unrecognised data schema at row {0}. Column {1} was {2}, expected {3}", 
+                    recordIndex, Index, actualFieldName, FieldName));
             }
 
-            return column.GetField(record);
+            return column.GetField(record, recordIndex);
         }
     }
 }
