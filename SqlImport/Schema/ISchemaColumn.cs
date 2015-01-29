@@ -1,7 +1,12 @@
 using System.Data;
 
-namespace Sage50.Parsing.Schema
+namespace SqlImport.Schema
 {
+    public interface ISchemaColumn<T> : ISchemaColumn
+    {
+        T GetField(IDataRecord record);
+    }
+
     public interface ISchemaColumn
     {
         DataColumn ToDataColumn();

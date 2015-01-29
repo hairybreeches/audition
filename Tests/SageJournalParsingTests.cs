@@ -5,7 +5,7 @@ using System.Linq;
 using Model.Accounting;
 using NUnit.Framework;
 using Sage50.Parsing;
-using Sage50.Parsing.Schema;
+using SqlImport;
 
 namespace Tests
 {
@@ -70,7 +70,7 @@ namespace Tests
         [Test]
         public void GetRightExceptionWhenUsernamesMismatched()
         {
-            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010,4,27,17,16,0), "1200", "13", "Unpresented Cheque" },
                 new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" }));
 
@@ -84,7 +84,7 @@ namespace Tests
         [Test]
         public void GetFriendlyExceptionWhenNominalCodeNotDefined()
         {
-            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "bizarre nominal code", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
@@ -98,10 +98,10 @@ namespace Tests
         [Test]
         public void SchemaDefinitionIsValid()
         {
-            var schema = new JournalSchema();
+            var schema = new SageJournalSchema();
 
-            var definedColumnNumbers = schema.Columns.Select(x => x.Index).ToList();
-            var numberOfColumns = schema.Columns.Count();
+            var definedColumnNumbers = schema.MappedColumns.Select(x => x.Index).ToList();
+            var numberOfColumns = schema.MappedColumns.Count();
 
             var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
@@ -109,7 +109,7 @@ namespace Tests
 
         private static IEnumerable<Journal> ParseJournals(params object[][] dataRows)
         {
-            var reader = new JournalReader(new JournalLineParser(new JournalSchema()));
+            var reader = new SageJournalReader(new SageJournalSchema(), new SqlJournalReader(new JournalLineParser()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 
@@ -126,7 +126,7 @@ namespace Tests
 
         private static DataColumn[] GetSageColumns()
         {
-            return new JournalSchema().Columns.Select(x=>x.ToDataColumn()).ToArray();
+            return new SageJournalSchema().MappedColumns.Select(x=>x.ToDataColumn()).ToArray();
         }
     }
 }
