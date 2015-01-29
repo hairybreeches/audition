@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -9,13 +10,17 @@ namespace Searching
     {       
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
         public IEnumerable<SearchField> AvailableFields { get; private set; }
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IEnumerable<SearchAction> AvailableActions { get; private set; }        
+        public IDictionary<string, string> UnvailableActionMessages { get; private set; }        
         
-        public SearchCapability(IEnumerable<SearchField> availableFields, IEnumerable<SearchAction> availableActions)
+        public SearchCapability(IEnumerable<SearchField> availableFields, IDictionary<SearchAction, string> unvailableActionMessages)
         {
             AvailableFields = availableFields;
-            AvailableActions = availableActions;            
+            UnvailableActionMessages = unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
+                (dictionary, kvp) =>
+                {
+                    dictionary.Add(kvp.Key.ToString(), kvp.Value);
+                    return dictionary;
+                });
         }        
     }
 

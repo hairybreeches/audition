@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Model.SearchWindows;
 using Persistence;
 
@@ -9,6 +10,7 @@ namespace Searching
         private readonly ISet<SearchField> availableFields;
 
         public static IJournalSearcherFactory EverythingAvailable = new JournalSearcherFactory(
+            new Dictionary<SearchAction, string>(),
             SearchField.AccountCode,
             SearchField.AccountName,
             SearchField.Amount,
@@ -18,91 +20,37 @@ namespace Searching
             SearchField.JournalType,
             SearchField.Username);
 
-        public JournalSearcherFactory(params SearchField[] availableFields)
+        private readonly IDictionary<SearchAction, string> unvailableActionMessages;
+
+        public JournalSearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params SearchField[] availableFields)
         {
+            this.unvailableActionMessages = unvailableActionMessages;           
             this.availableFields = new HashSet<SearchField>(availableFields);
         }
 
         public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
         {
             return new JournalSearcher(
-                HoursSearchingSupported()? (IJournalSearcher<WorkingHoursParameters>) 
-                    new WorkingHoursSearcher(repository) : new NotSupportedSearcher<WorkingHoursParameters>(""),
-
-                DateSearchingSupported() ? (IJournalSearcher<YearEndParameters>) 
-                    new YearEndSearcher(repository) : new NotSupportedSearcher<YearEndParameters>(""),
-
-                AccountsSearchingSupported() ? (IJournalSearcher<UnusualAccountsParameters>) 
-                    new UnusualAccountsSearcher(repository) : new NotSupportedSearcher<UnusualAccountsParameters>(""),
-
-                EndingSearchingSupported() ? (IJournalSearcher<EndingParameters>) 
-                    new RoundNumberSearcher(repository) : new NotSupportedSearcher<EndingParameters>(""),
-
-                UserSearchingSupported() ? (IJournalSearcher<UserParameters>) 
-                    new UserSearcher(repository) : new NotSupportedSearcher<UserParameters>("")
-                );
+                GetSearcher(repo => new WorkingHoursSearcher(repo), SearchAction.Hours, repository),
+                GetSearcher(repo => new YearEndSearcher(repo), SearchAction.Date, repository),
+                GetSearcher(repo => new UnusualAccountsSearcher(repo), SearchAction.Accounts, repository),
+                GetSearcher(repo => new RoundNumberSearcher(repo), SearchAction.Ending, repository),
+                GetSearcher(repo => new UserSearcher(repo), SearchAction.Users, repository));
         }
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(availableFields, GetAvailableActions());
+            return new SearchCapability(availableFields, unvailableActionMessages);
         }
 
-        private IEnumerable<SearchAction> GetAvailableActions()
+        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository)
         {
-            if (AccountsSearchingSupported())
-            {
-                yield return SearchAction.Accounts;
-            }
-            if (DateSearchingSupported())
-            {
-                yield return SearchAction.Date;
-            }
-            if (EndingSearchingSupported())
-            {
-                yield return SearchAction.Ending;
+            return SearchingSupported(action)? searchFactory(repository) : new NotSupportedSearcher<T>(unvailableActionMessages[action]);
             }
 
-            if (HoursSearchingSupported())
+        private bool SearchingSupported(SearchAction searchAction)
             {
-                yield return SearchAction.Hours;
-            }
-
-            if (UserSearchingSupported())
-            {
-                yield return SearchAction.Users;
-            }
-                
-        }
-
-        private bool UserSearchingSupported()
-        {
-            return FieldSupported(SearchField.Username);
-        }
-
-        private bool HoursSearchingSupported()
-        {
-            return FieldSupported(SearchField.Created);
-        }
-
-        private bool EndingSearchingSupported()
-        {
-            return FieldSupported(SearchField.Amount);
-        }
-
-        private bool DateSearchingSupported()
-        {
-            return FieldSupported(SearchField.Created);
-        }
-
-        private bool AccountsSearchingSupported()
-        {
-            return FieldSupported(SearchField.AccountCode);
-        }
-
-        private bool FieldSupported(SearchField accountCode)
-        {
-            return availableFields.Contains(accountCode);
+            return !unvailableActionMessages.ContainsKey(searchAction);
         }
     }
 }
