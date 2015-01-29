@@ -43,7 +43,7 @@ namespace ExcelImport
 
         private static ISchemaColumn<T> GetColumn<T>(int columnIndex, string columnName)
         {
-            return IsSet(columnIndex) ? (ISchemaColumn<T>) new UnmappedColumn<T>() : new SchemaColumn<T>(columnName, columnIndex);
+            return IsSet(columnIndex) ? new SchemaColumn<T>(columnName, columnIndex) : (ISchemaColumn<T>) new UnmappedColumn<T>();
         }
 
         private bool IsDisplayable(DisplayField displayField)
