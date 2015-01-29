@@ -17,16 +17,24 @@ namespace Sage50.Parsing.Schema
         private readonly ISchemaColumn<string> detailsColumn;
         private readonly ISchemaColumn<string> nominalCodeNameColumn;
 
-        public JournalSchema()
+        public JournalSchema(
+            ISchemaColumn<int> idColumn, 
+            ISchemaColumn<string> usernameColumn, 
+            ISchemaColumn<DateTime> dateColumn, 
+            ISchemaColumn<DateTime> creationTimeColumn, 
+            ISchemaColumn<string> nominalCodeColumn, 
+            ISchemaColumn<double> amountColumn, 
+            ISchemaColumn<string> descriptionColumn, 
+            ISchemaColumn<string> nominalCodeNameColumn)
         {
-            idColumn = new SchemaColumn<Int32>("TRAN_NUMBER", 0);
-            usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
-            dateColumn = new SchemaColumn<DateTime>("DATE", 2);
-            creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
-            nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
-            amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-            detailsColumn = new SchemaColumn<string>("DETAILS", 6);
-            nominalCodeNameColumn = new UnmappedColumn<string>();
+            this.idColumn = idColumn;
+            this.usernameColumn = usernameColumn;
+            this.dateColumn = dateColumn;
+            this.creationTimeColumn = creationTimeColumn;
+            this.nominalCodeColumn = nominalCodeColumn;
+            this.amountColumn = amountColumn;
+            detailsColumn = descriptionColumn;
+            this.nominalCodeNameColumn = nominalCodeNameColumn;
         }                
 
         public IEnumerable<ISchemaColumn> MappedColumns
