@@ -101,8 +101,8 @@ namespace Tests
         {
             var schema = new JournalSchema();
 
-            var definedColumnNumbers = schema.Columns.Select(x => x.Index).ToList();
-            var numberOfColumns = schema.Columns.Count();
+            var definedColumnNumbers = schema.MappedColumns.Select(x => x.Index).ToList();
+            var numberOfColumns = schema.MappedColumns.Count();
 
             var expectedDefinedColumnNumbers = Enumerable.Range(0, numberOfColumns).ToList();
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
@@ -127,7 +127,7 @@ namespace Tests
 
         private static DataColumn[] GetSageColumns()
         {
-            return new JournalSchema().Columns.Select(x=>x.ToDataColumn()).ToArray();
+            return new JournalSchema().MappedColumns.Select(x=>x.ToDataColumn()).ToArray();
         }
     }
 }
