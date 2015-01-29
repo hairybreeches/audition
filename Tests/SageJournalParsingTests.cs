@@ -5,7 +5,6 @@ using System.Linq;
 using Model.Accounting;
 using NUnit.Framework;
 using Sage50.Parsing;
-using Sage50.Parsing.Schema;
 using SqlImport;
 
 namespace Tests
