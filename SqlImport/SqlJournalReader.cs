@@ -16,6 +16,11 @@ namespace SqlImport
             this.journalLineParser = journalLineParser;
         }
 
+        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalSchema schema)
+        {
+            return GetJournals(reader, schema, line => line);
+        }
+            
         public IEnumerable<Journal> GetJournals(IDataReader reader, JournalSchema schema, Func<SqlJournalLine, SqlJournalLine> adapter)
         {
             return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, schema, adapter)));
