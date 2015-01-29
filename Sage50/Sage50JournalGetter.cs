@@ -5,6 +5,7 @@ using System.Linq;
 using Model.Accounting;
 using Sage50.Parsing;
 using Sage50.Parsing.Schema;
+using SqlImport;
 
 namespace Sage50
 {

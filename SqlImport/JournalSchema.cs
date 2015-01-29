@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using SqlImport;
 
-namespace Sage50.Parsing.Schema
+namespace SqlImport
 {
     public class JournalSchema
     {
