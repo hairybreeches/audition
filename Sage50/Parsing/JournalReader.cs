@@ -12,7 +12,7 @@ namespace Sage50.Parsing
         private readonly JournalLineParser journalLineParser;
         private readonly JournalSchema schema;
 
-        public JournalReader(JournalLineParser journalLineParser, JournalSchema schema)
+        public JournalReader(JournalLineParser journalLineParser, SageJournalSchema schema)
         {
             this.journalLineParser = journalLineParser;
             this.schema = schema;

@@ -8,7 +8,7 @@ namespace Sage50
     {
         protected override void Load(ContainerBuilder builder)
         {            
-            builder.RegisterType<JournalSchema>();
+            builder.RegisterType<SageJournalSchema>();
             builder.RegisterType<JournalReader>();
             builder.RegisterType<JournalLineParser>();
             builder.RegisterType<Sage50JournalGetter>().As<ISage50JournalGetter>();

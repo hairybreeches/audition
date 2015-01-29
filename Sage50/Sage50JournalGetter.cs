@@ -14,7 +14,7 @@ namespace Sage50
         private readonly JournalSchema schema;
         private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50JournalGetter(JournalReader journalReader, JournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
+        public Sage50JournalGetter(JournalReader journalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
         {
             this.journalReader = journalReader;            
             this.schema = schema;
