@@ -1,6 +1,12 @@
 ﻿var searchCapabilities = ko.mapping.fromJS({
     AvailableFields: [],
-    AvailableActions: []
+    UnvailableActionMessages: {
+        Hours: false,
+        Accounts: false,
+        Users: false,
+        Date: false,
+        Ending: false
+    }
 });
 
 $.ajax("/api/session/searchCapability", {
@@ -170,7 +176,11 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
     //fields
     self.parameters = ko.mapping.fromJS(parameters);
     self.blocked = ko.computed(function() {
-        return searchCapabilities.AvailableActions.indexOf(name) === -1;
+        return !!searchCapabilities.UnvailableActionMessages[name]();
+    });
+
+    self.errorMessage = ko.computed(function() {
+        return searchCapabilities.UnvailableActionMessages[name]() || "";
     });
         
     //methods
