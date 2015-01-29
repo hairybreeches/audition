@@ -4,7 +4,7 @@ namespace SqlImport.Schema
 {
     public interface ISchemaColumn<T> : ISchemaColumn
     {
-        T GetField(IDataRecord record);
+        T GetField(IDataRecord record, int recordIndex);
     }
 
     public interface ISchemaColumn

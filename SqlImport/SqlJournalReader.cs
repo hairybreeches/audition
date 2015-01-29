@@ -10,6 +10,7 @@ namespace SqlImport
     public class SqlJournalReader
     {
         private readonly JournalLineParser journalLineParser;
+        private int recordIndex = 0;
 
         public SqlJournalReader(JournalLineParser journalLineParser)
         {
@@ -28,7 +29,8 @@ namespace SqlImport
 
         private SqlJournalLine ConvertToLine(IDataRecord record, JournalSchema schema, Func<SqlJournalLine, SqlJournalLine> adapter)
         {
-            var sqlJournalLine = journalLineParser.CreateJournalLine(record, schema);
+            var sqlJournalLine = journalLineParser.CreateJournalLine(record, schema, recordIndex);
+            recordIndex++;
             return adapter(sqlJournalLine);
         }
 

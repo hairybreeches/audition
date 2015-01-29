@@ -61,44 +61,44 @@ namespace SqlImport.Schema
             get { return MappedColumns.Select(x=>x.FieldName); }
         }
 
-        public int GetId(IDataRecord record)
+        public int GetId(IDataRecord record, int recordIndex)
         {
-            return idColumn.GetField(record);
+            return idColumn.GetField(record, recordIndex);
         }
         
-        public string GetUsername(IDataRecord record)
+        public string GetUsername(IDataRecord record, int recordIndex)
         {
-            return usernameColumn.GetField(record);
+            return usernameColumn.GetField(record, recordIndex);
         }
         
-        public DateTime GetJournalDate(IDataRecord record)
+        public DateTime GetJournalDate(IDataRecord record, int recordIndex)
         {
-            return dateColumn.GetField(record);
+            return dateColumn.GetField(record, recordIndex);
         }
         
-        public DateTime GetCreationTime(IDataRecord record)
+        public DateTime GetCreationTime(IDataRecord record, int recordIndex)
         {
-            return creationTimeColumn.GetField(record);
+            return creationTimeColumn.GetField(record, recordIndex);
         }
         
-        public string GetNominalCode(IDataRecord record)
+        public string GetNominalCode(IDataRecord record, int recordIndex)
         {
-            return nominalCodeColumn.GetField(record);
+            return nominalCodeColumn.GetField(record, recordIndex);
         }
         
-        public double GetAmount(IDataRecord record)
+        public double GetAmount(IDataRecord record, int recordIndex)
         {
-            return amountColumn.GetField(record);
+            return amountColumn.GetField(record, recordIndex);
         }
         
-        public string GetDescription(IDataRecord record)
+        public string GetDescription(IDataRecord record, int recordIndex)
         {
-            return detailsColumn.GetField(record);
+            return detailsColumn.GetField(record, recordIndex);
         }
 
-        public string GetNominalCodeName(IDataRecord record)
+        public string GetNominalCodeName(IDataRecord record, int recordIndex)
         {
-            return nominalCodeNameColumn.GetField(record);
+            return nominalCodeNameColumn.GetField(record, recordIndex);
         }
     }
 }

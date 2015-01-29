@@ -14,9 +14,9 @@ namespace ExcelImport
         }
 
 
-        public DateTime GetField(IDataRecord record)
+        public DateTime GetField(IDataRecord record, int recordIndex)
         {
-            return DateTime.Parse(inner.GetField(record));
+            return DateTime.Parse(inner.GetField(record, recordIndex));
         }
 
         public int Index

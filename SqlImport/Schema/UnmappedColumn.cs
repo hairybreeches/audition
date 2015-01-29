@@ -5,7 +5,7 @@ namespace SqlImport.Schema
 {
     public class UnmappedColumn<T> : ISchemaColumn<T>
     {
-        public T GetField(IDataRecord record)
+        public T GetField(IDataRecord record, int recordIndex)
         {
             return default(T);
         }
