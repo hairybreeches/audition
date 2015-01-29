@@ -8,4 +8,9 @@ namespace SqlImport
         int Index { get; }
         string FieldName { get; }
     }
+    
+    public interface ISchemaColumn<T> : ISchemaColumn
+    {
+        T GetField(IDataRecord record);
+    }
 }
