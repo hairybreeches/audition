@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using Model;
 using Searching;
 using SqlImport.Schema;
 
@@ -27,6 +30,11 @@ namespace ExcelImport
                 GetColumn<string>(Description, "Description"),
                 GetColumn<string>(AccountName, "Account name"));
         }
+        public IEnumerable<SearchAction> GetUnavailableActions()
+        {
+            return Enums.GetAllValues<SearchAction>()
+                .Where(x => !IsSearchable(x));
+        }
 
         private static ISchemaColumn<T> GetColumn<T>(int columnIndex, string columnName)
         {
@@ -43,7 +51,7 @@ namespace ExcelImport
             return column != -1;
         }
 
-        public bool IsSearchable(SearchAction searchAction)
+        private bool IsSearchable(SearchAction searchAction)
         {
             return IsSet(SetIndicator(searchAction));
         }
