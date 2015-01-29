@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelImportTests.cs" />
     <Compile Include="LicensingTests.cs" />
     <Compile Include="MockRequestResponse.cs" />
     <Compile Include="RequestExecution.cs" />
@@ -947,6 +948,10 @@
     <ProjectReference Include="..\Audition\Audition.csproj">
       <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
       <Name>Audition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
     </ProjectReference>
     <ProjectReference Include="..\Licensing\Licensing.csproj">
       <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>

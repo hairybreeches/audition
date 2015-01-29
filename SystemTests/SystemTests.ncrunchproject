@@ -19,5 +19,5 @@
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
   <MSTestThreadApartmentState>STA</MSTestThreadApartmentState>
   <BuildProcessArchitecture>x86</BuildProcessArchitecture>
-  <AdditionalFilesToInclude>..\packages\CefSharp.WinForms.1.25.3\**.*</AdditionalFilesToInclude>
+  <AdditionalFilesToInclude>..\packages\CefSharp.WinForms.1.25.3\**.*;..\ExcelImport\ExampleSage50Export.xlsx</AdditionalFilesToInclude>
 </ProjectConfiguration>
