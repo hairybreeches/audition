@@ -34,7 +34,7 @@ namespace Sage50.Parsing.Schema
             var actualFieldName = record.GetName(Index);
             if (actualFieldName != FieldName)
             {
-                throw new SageDataFormatUnexpectedException(
+                throw new SqlDataFormatUnexpectedException(
                     String.Format("Unrecognised data schema. Column {0} was {1}, expected {2}", Index,
                         actualFieldName, FieldName));
             }
@@ -43,7 +43,7 @@ namespace Sage50.Parsing.Schema
 
             if (!(fieldValue is T))
             {
-                throw new SageDataFormatUnexpectedException(
+                throw new SqlDataFormatUnexpectedException(
                     String.Format("Unrecognised data schema. {0} was {1}, expected {2}", FieldName,
                         fieldValue.GetType(), typeof(T)));
             }

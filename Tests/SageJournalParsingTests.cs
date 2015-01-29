@@ -70,7 +70,7 @@ namespace Tests
         [Test]
         public void GetRightExceptionWhenUsernamesMismatched()
         {
-            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010,4,27,17,16,0), "1200", "13", "Unpresented Cheque" },
                 new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" }));
 
@@ -84,7 +84,7 @@ namespace Tests
         [Test]
         public void GetFriendlyExceptionWhenNominalCodeNotDefined()
         {
-            var exception = Assert.Throws<SageDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "bizarre nominal code", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");

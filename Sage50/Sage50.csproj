@@ -57,7 +57,7 @@
     <Compile Include="Parsing\SageJournalLine.cs" />
     <Compile Include="Parsing\JournalLineParsing.cs" />
     <Compile Include="Parsing\JournalParsing.cs" />
-    <Compile Include="Parsing\SageDataFormatUnexpectedException.cs" />
+    <Compile Include="Parsing\SqlDataFormatUnexpectedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OdbcRegistryReader.cs" />
     <Compile Include="Sage50ConnectionFactory.cs" />
