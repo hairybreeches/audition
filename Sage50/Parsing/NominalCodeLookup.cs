@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SqlImport;
 
 namespace Sage50.Parsing
 {
