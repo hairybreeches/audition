@@ -10,6 +10,8 @@ namespace ExcelImport
             builder.RegisterType<ExcelColumnNamer>();
             builder.RegisterType<ExcelDataFileStorage>();
             builder.RegisterType<ExcelDataConverter>();
+            builder.RegisterType<ExcelJournalReader>();
+            builder.RegisterType<ExcelSearcherFactoryFactory>();
         }
     }
 }
