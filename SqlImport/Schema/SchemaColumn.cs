@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace SqlImport
+namespace SqlImport.Schema
 {
     public class SchemaColumn<T> : ISchemaColumn<T>
     {

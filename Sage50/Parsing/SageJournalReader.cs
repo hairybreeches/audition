@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Common;
 using Model.Accounting;
 using SqlImport;
+using SqlImport.Schema;
 
 namespace Sage50.Parsing
 {
