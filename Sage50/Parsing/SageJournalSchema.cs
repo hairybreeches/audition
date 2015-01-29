@@ -1,7 +1,7 @@
 using System;
 using SqlImport;
 
-namespace Sage50.Parsing.Schema
+namespace Sage50.Parsing
 {
     public class SageJournalSchema : JournalSchema
     {
