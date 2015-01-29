@@ -8,6 +8,8 @@ namespace ExcelImport
         public int Sheet { get; set; }
         public bool UseHeaderRow { get; set; }
 
+        public int SkipRows { get; set; }
+
         protected bool Equals(HeaderRowData other)
         {
             return string.Equals(Filename, other.Filename, StringComparison.InvariantCultureIgnoreCase) && Sheet == other.Sheet && UseHeaderRow.Equals(other.UseHeaderRow);
