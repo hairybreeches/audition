@@ -30,7 +30,6 @@ namespace SystemTests
                         Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
                         Sheet = 0,
                         UseHeaderRow = true,
-                        SkipRows = 2
                     },
 
                     Lookups = new FieldLookups
