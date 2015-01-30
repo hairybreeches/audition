@@ -18,8 +18,7 @@ namespace ExcelImport
 
         public IEnumerable<Journal> ReadJournals(ExcelImportMapping importMapping)
         {
-            var sheetReader = dataConverter.GetSheet(importMapping.SheetData).CreateDataReader();
-
+            var sheetReader = dataConverter.GetSheet(importMapping.SheetData).CreateDataReader();            
             do
             {
                 if (!sheetReader.Read())
