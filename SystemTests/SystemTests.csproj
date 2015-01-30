@@ -84,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ExcelSampleData.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Sage50SampleData\ACCDATA\1.COA">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
