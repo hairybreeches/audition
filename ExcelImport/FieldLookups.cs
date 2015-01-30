@@ -25,8 +25,8 @@ namespace ExcelImport
             return new JournalDataReader(
                 GetIdColumn(),
                 GetColumn<string>(Username, "Username"),
-                GetDateColumn(JournalDate, "Journal date"),
-                GetDateColumn(Created, "Created"),
+                GetDateColumn(JournalDate),
+                GetDateColumn(Created),
                 GetColumn<string>(AccountCode, "Account code"),
                 GetColumn<double>(Amount, "Amount"),
                 GetColumn<string>(Description, "Description"),
@@ -38,9 +38,9 @@ namespace ExcelImport
             return IsSet(Id) ? (ISqlDataReader<string>) new ToStringDataColumn("Id", Id) : new RecordNumberReader();
         }
 
-        private static ISqlDataReader<DateTime> GetDateColumn(int columnIndex, string columnName)
+        private static ISqlDataReader<DateTime> GetDateColumn(int columnIndex)
         {
-            return IsSet(columnIndex) ? new DateTimeConverterDecorator(new SchemaColumn<string>(columnName, columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
+            return IsSet(columnIndex) ? new DateTimeReader(columnIndex) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
         }
 
         public IEnumerable<SearchAction> GetUnavailableActions()

@@ -44,11 +44,12 @@ namespace SystemTests
             }, 1);
 
             Assert.AreEqual("1278", result.TotalResults, "We should get all the journals back");
+
             Assert.AreEqual(new Journal("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
-                new JournalLine("1100", "Debtors Control Account", JournalType.Cr, 0.05m), 
-                new JournalLine("9998", "Suspense Account", JournalType.Dr, 0.05m), 
-                new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
+                new JournalLine("1100", null, JournalType.Cr, 0.05m), 
+                new JournalLine("9998", null, JournalType.Dr, 0.05m), 
+                new JournalLine("2200", null, JournalType.Dr, 0)
             }), result.Journals[7], "A random journal should be correct");
         }      
         
