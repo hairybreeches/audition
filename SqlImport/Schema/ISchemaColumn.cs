@@ -2,7 +2,7 @@ using System.Data;
 
 namespace SqlImport.Schema
 {
-    public interface ISchemaColumn<T> : ISchemaColumn
+    public interface ISchemaColumn<out T> : ISchemaColumn
     {
         T GetField(IDataRecord record, int recordIndex);
     }
