@@ -2,16 +2,16 @@
 
 namespace SqlImport.Schema
 {
-    public class RecordNumberIdColumn : ISchemaColumn<int>
+    public class RecordNumberIdColumn : ISchemaColumn<string>
     {
         public RecordNumberIdColumn()
         {
             FieldName = "Id";
         }
 
-        public int GetField(IDataRecord record, int recordIndex)
+        public string GetField(IDataRecord record, int recordIndex)
         {
-            return recordIndex;
+            return recordIndex.ToString();
         }
 
         public DataColumn ToDataColumn()

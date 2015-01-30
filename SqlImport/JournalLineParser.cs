@@ -24,7 +24,7 @@ namespace SqlImport
                 schema.GetNominalCodeName(record, recordIndex));
         }
 
-        private static SqlJournalLine CreateJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             JournalType type;
             decimal amount;
