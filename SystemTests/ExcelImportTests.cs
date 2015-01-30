@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using ExcelImport;
+using Model;
 using Model.Accounting;
 using Model.Responses;
 using Model.SearchWindows;
@@ -52,9 +53,10 @@ namespace SystemTests
         
         
         [Test]
-        public void EmptySpreadsheetReturnsNoJournals()
+        [ExpectedException(typeof(NoJournalsException))]
+        public void EmptySpreadsheetThrowsNoJournalsException()
         {
-            var results = GetAllJournalsFromSearch(new ExcelImportMapping
+            GetAllJournalsFromSearch(new ExcelImportMapping
             {
                 SheetData = new HeaderRowData
                 {
@@ -74,8 +76,6 @@ namespace SystemTests
                 }
             }, 1);
 
-            Assert.AreEqual("0", results.TotalResults);
-            CollectionAssert.IsEmpty(results.Journals);
         }
 
         private static SearchResponse GetAllJournalsFromSearch(ExcelImportMapping importMapping, int pageNumber)

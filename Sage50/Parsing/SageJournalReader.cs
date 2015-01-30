@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using Model;
 using Model.Accounting;
 using SqlImport;
 using SqlImport.Schema;
@@ -37,7 +38,7 @@ namespace Sage50.Parsing
             }
             else
             {
-                return Enumerable.Empty<Journal>();
+                throw new NoJournalsException("Successfully opened the accounts in Sage, but the appear to have no entries");
             }
             
         }
