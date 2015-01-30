@@ -2,12 +2,12 @@ using System.Data;
 
 namespace SqlImport.Schema
 {
-    public class ToStringColumn : ISchemaColumn<string>
+    public class ToStringDataColumn : ISqlDataReader<string>, ISchemaColumn
     {
         private readonly string fieldName;
         private readonly int index;
 
-        public ToStringColumn(string fieldName, int index)
+        public ToStringDataColumn(string fieldName, int index)
         {
             this.fieldName = fieldName;
             this.index = index;

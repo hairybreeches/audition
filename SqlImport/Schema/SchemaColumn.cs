@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SqlImport.Schema
 {
-    public class SchemaColumn<T> : ISchemaColumn<T>
+    public class SchemaColumn<T> : ISqlDataReader<T>, ISchemaColumn
     {
         private readonly int index;
         private readonly string fieldName;
