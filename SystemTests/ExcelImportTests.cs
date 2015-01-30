@@ -1,9 +1,11 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using ExcelImport;
 using Model.Accounting;
+using Model.Responses;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
@@ -19,46 +21,53 @@ namespace SystemTests
         [Test]
         public void CanImportExcelData()
         {
-            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
-            using (var scope = builder.Build())
+            var results = GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                var controller = scope.Resolve<ExcelSessionController>();
-                controller.ExcelLogin(new ExcelImportMapping
+                SheetData = new HeaderRowData
                 {
-                    SheetData = new HeaderRowData
-                    {
-                        Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
-                        Sheet = 0,
-                        UseHeaderRow = true,
-                    },
+                    Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
+                    Sheet = 0,
+                    UseHeaderRow = true,
+                },
+                Lookups = new FieldLookups
+                {
+                    AccountCode = 3,
+                    AccountName = -1,
+                    Amount = 9,
+                    Created = -1,
+                    Description = 5,
+                    JournalDate = 6,
+                    Username = 19
+                }
+            }, 7);
 
-                    Lookups = new FieldLookups
-                    {
-                        AccountCode = 3,
-                        AccountName = -1,
-                        Amount = 9,
-                        Created = -1,
-                        Description = 5,
-                        JournalDate = 6,
-                        Username = 19
-                    }
-                });
-
-                var searchController = scope.Resolve<SearchController>();
-                var results =
-                    searchController.UserSearch(
-                        new SearchRequest<UserParameters>(
-                            new SearchWindow<UserParameters>(new UserParameters("Steve"), 
-                                new DateRange(DateTime.MinValue, DateTime.MaxValue)), 7));
-
-                Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment", 
+            Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
                     new[]
                     {
                         new JournalLine("7100", null, JournalType.Dr, 450)
-                    }), results.Journals[2], "A random journal should be correct");
+                    }), results.Journals[3], "A random journal should be correct");
 
-                Assert.AreEqual(1234, results.TotalResults);
+            Assert.AreEqual("1234", results.TotalResults);
+        }
+
+        private static SearchResponse GetAllJournalsFromSearch(ExcelImportMapping importMapping, int pageNumber)
+        {
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
+            SearchResponse results;
+            using (var scope = builder.Build())
+            {
+                var controller = scope.Resolve<ExcelSessionController>();
+                controller.ExcelLogin(importMapping);
+
+                var searchController = scope.Resolve<SearchController>();
+                results =
+                    searchController.UserSearch(
+                        new SearchRequest<UserParameters>(
+                            new SearchWindow<UserParameters>(new UserParameters("Steve"),
+                                new DateRange(DateTime.MinValue, DateTime.MaxValue)), pageNumber));
             }
+            return results;
         }
     }
+
 }
