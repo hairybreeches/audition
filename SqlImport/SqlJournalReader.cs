@@ -36,10 +36,11 @@ namespace SqlImport
 
         private static IEnumerable<IDataRecord> GetLineRecords(IDataReader reader)
         {
-            while (reader.Read())
+            do
             {
                 yield return reader;
-            }
+            } while (reader.Read());
+
         }
     }
 }

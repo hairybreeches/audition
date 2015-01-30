@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using Model.Accounting;
 using SqlImport;
 using SqlImport.Schema;
@@ -30,7 +31,15 @@ namespace Sage50.Parsing
 
         public IEnumerable<Journal> GetJournals(IDataReader dataReader, NominalCodeLookup nominalLookup)
         {
-            return sqlJournalReader.GetJournals(dataReader, schema, line => AddNominalCode(line, nominalLookup));
+            if (dataReader.Read())
+            {
+                return sqlJournalReader.GetJournals(dataReader, schema, line => AddNominalCode(line, nominalLookup));
+            }
+            else
+            {
+                return Enumerable.Empty<Journal>();
+            }
+            
         }
     }
 }
