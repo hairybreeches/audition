@@ -7,6 +7,7 @@ namespace SqlImport.Schema
         public RecordNumberIdColumn()
         {
             FieldName = "Id";
+            Index = -1;
         }
 
         public string GetField(IDataRecord record, int recordIndex)
