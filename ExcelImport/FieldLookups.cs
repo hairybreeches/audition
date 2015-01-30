@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using Model;
 using Searching;
-using SqlImport.Schema;
+using SqlImport;
+using SqlImport.DataReaders;
 
 namespace ExcelImport
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace SqlImport.Schema
+namespace SqlImport.DataReaders
 {
     public class ColumnNameVerifierDecorator<T> : ISqlDataReader<T>
     {

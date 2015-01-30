@@ -45,18 +45,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRecordExtensions.cs" />
+    <Compile Include="ISchemaColumn.cs" />
     <Compile Include="JournalLineParser.cs" />
     <Compile Include="JournalParsing.cs" />
+    <Compile Include="JournalSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schema\ColumnNameVerifierDecorator.cs" />
-    <Compile Include="Schema\DateTimeConverterDecorator.cs" />
-    <Compile Include="Schema\ISchemaColumn.cs" />
-    <Compile Include="Schema\ISqlDataReader.cs" />
-    <Compile Include="Schema\JournalSchema.cs" />
-    <Compile Include="Schema\RecordNumberReader.cs" />
-    <Compile Include="Schema\SchemaColumn.cs" />
-    <Compile Include="Schema\ToStringDataColumn.cs" />
-    <Compile Include="Schema\NullDataReader.cs" />
+    <Compile Include="DataReaders\ColumnNameVerifierDecorator.cs" />
+    <Compile Include="DataReaders\DateTimeConverterDecorator.cs" />
+    <Compile Include="DataReaders\ISqlDataReader.cs" />
+    <Compile Include="DataReaders\RecordNumberReader.cs" />
+    <Compile Include="DataReaders\SchemaColumn.cs" />
+    <Compile Include="DataReaders\ToStringDataColumn.cs" />
+    <Compile Include="DataReaders\NullDataReader.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />
     <Compile Include="SqlJournalLine.cs" />

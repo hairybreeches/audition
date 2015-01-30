@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SqlImport.Schema
+namespace SqlImport.DataReaders
 {
     public class RecordNumberReader : ISqlDataReader<string>
     {        

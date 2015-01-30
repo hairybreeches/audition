@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using SqlImport.DataReaders;
 
-namespace SqlImport.Schema
+namespace SqlImport
 {
     public class JournalSchema
     {

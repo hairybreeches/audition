@@ -1,7 +1,6 @@
-using System;
 using System.Data;
 
-namespace SqlImport.Schema
+namespace SqlImport.DataReaders
 {
     public class NullDataReader<T> : ISqlDataReader<T>
     {
