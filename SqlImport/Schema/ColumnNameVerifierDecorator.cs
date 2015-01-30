@@ -1,11 +1,9 @@
 using System;
 using System.Data;
-using SqlImport;
-using SqlImport.Schema;
 
-namespace Sage50.Parsing
+namespace SqlImport.Schema
 {
-    internal class ColumnNameVerifierDecorator<T> : ISchemaColumn<T>
+    public class ColumnNameVerifierDecorator<T> : ISchemaColumn<T>
     {
         private readonly ISchemaColumn<T> column;
 

@@ -1,7 +1,6 @@
 ﻿using System.Data;
-using SqlImport.Schema;
 
-namespace ExcelImport
+namespace SqlImport.Schema
 {
     public class RecordNumberIdColumn : ISchemaColumn<int>
     {
