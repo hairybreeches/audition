@@ -4,7 +4,7 @@
     self.fileLocation = ko.observable('');
     self.useHeaderRow = ko.observable(true);
     self.sheet = ko.observable(0);
-    var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount'];
+    var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'Id'];
     fields.forEach(
         function(fieldName) {
             self[fieldName] = ko.observable('A');
