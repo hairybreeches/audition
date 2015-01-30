@@ -22,7 +22,7 @@ namespace SqlImport
         {
             var journalLines = linesEnumerable.ToList();
             return new Journal(
-                GetJournalField(journalLines, x => x.TransactionId).ToString(),
+                GetJournalField(journalLines, x => x.TransactionId),
                 GetJournalField(journalLines, x => x.CreationTime).ToUkDateTimeOffsetFromUkLocalTime(),
                 GetJournalField(journalLines, x => x.JournalDate),
                 GetJournalField(journalLines, x => x.Username),

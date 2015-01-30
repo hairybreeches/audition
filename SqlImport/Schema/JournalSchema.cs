@@ -7,7 +7,7 @@ namespace SqlImport.Schema
 {
     public class JournalSchema
     {
-        private readonly ISchemaColumn<int> idColumn;
+        private readonly ISchemaColumn<string> idColumn;
         private readonly ISchemaColumn<string> usernameColumn;
         private readonly ISchemaColumn<DateTime> dateColumn;
         private readonly ISchemaColumn<DateTime> creationTimeColumn;
@@ -17,7 +17,7 @@ namespace SqlImport.Schema
         private readonly ISchemaColumn<string> nominalCodeNameColumn;
 
         public JournalSchema(
-            ISchemaColumn<int> idColumn, 
+            ISchemaColumn<string> idColumn, 
             ISchemaColumn<string> usernameColumn, 
             ISchemaColumn<DateTime> dateColumn, 
             ISchemaColumn<DateTime> creationTimeColumn, 
@@ -61,7 +61,7 @@ namespace SqlImport.Schema
             get { return MappedColumns.Select(x=>x.FieldName); }
         }
 
-        public int GetId(IDataRecord record, int recordIndex)
+        public string GetId(IDataRecord record, int recordIndex)
         {
             return idColumn.GetField(record, recordIndex);
         }

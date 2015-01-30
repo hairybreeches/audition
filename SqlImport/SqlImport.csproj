@@ -54,6 +54,7 @@
     <Compile Include="Schema\JournalSchema.cs" />
     <Compile Include="Schema\RecordNumberIdColumn.cs" />
     <Compile Include="Schema\SchemaColumn.cs" />
+    <Compile Include="Schema\IntToStringDecorator.cs" />
     <Compile Include="Schema\UnmappedColumn.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />

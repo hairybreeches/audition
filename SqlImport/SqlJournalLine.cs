@@ -5,7 +5,7 @@ namespace SqlImport
 {
     public class SqlJournalLine
     {
-        public int TransactionId { get; private set; }
+        public string TransactionId { get; private set; }
         public string Username { get; private set; }
         public DateTime JournalDate { get; private set; }
         public DateTime CreationTime { get; private set; }
@@ -15,7 +15,7 @@ namespace SqlImport
         public string Description { get; private set; }
         public string NominalCodeName { get; set; }
 
-        public SqlJournalLine(int transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
+        public SqlJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;
