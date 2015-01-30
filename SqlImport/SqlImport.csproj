@@ -49,7 +49,7 @@
     <Compile Include="ISchemaColumn.cs" />
     <Compile Include="JournalLineParser.cs" />
     <Compile Include="JournalParsing.cs" />
-    <Compile Include="JournalSchema.cs" />
+    <Compile Include="JournalDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataReaders\ColumnNameVerifierDecorator.cs" />
     <Compile Include="DataReaders\DateTimeConverterDecorator.cs" />

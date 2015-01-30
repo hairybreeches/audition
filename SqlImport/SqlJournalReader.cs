@@ -15,14 +15,14 @@ namespace SqlImport
             this.journalLineParser = journalLineParser;
         }
 
-        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalSchema schema)
+        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalDataReader dataReader)
         {
-            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, schema)));
+            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
         }
 
-        private SqlJournalLine ConvertToLine(IDataRecord record, JournalSchema schema)
+        private SqlJournalLine ConvertToLine(IDataRecord record, JournalDataReader dataReader)
         {
-            var sqlJournalLine = journalLineParser.CreateJournalLine(record, schema, recordIndex);
+            var sqlJournalLine = journalLineParser.CreateJournalLine(record, dataReader, recordIndex);
             recordIndex++;
             return sqlJournalLine;
         }

@@ -22,7 +22,7 @@ namespace Sage50.Parsing
         {
             if (dataReader.Read())
             {
-                return sqlJournalReader.GetJournals(dataReader, schema.CreateJournalSchema(nominalLookup));
+                return sqlJournalReader.GetJournals(dataReader, schema.CreateJournalReader(nominalLookup));
             }
             else
             {
