@@ -38,7 +38,8 @@ namespace SystemTests
                     Created = -1,
                     Description = 5,
                     JournalDate = 6,
-                    Username = 19
+                    Username = 19,
+                    Id=-1
                 }
             }, 7);
 

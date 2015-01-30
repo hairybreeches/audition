@@ -17,11 +17,12 @@ namespace ExcelImport
         public int AccountCode { get; set; }
         public int AccountName { get; set; }
         public int Amount { get; set; }
+        public int Id { get; set; }
 
         public JournalSchema ToJournalSchema()
         {
             return new JournalSchema(
-                new RecordNumberIdColumn(),
+                GetIdColumn(),
                 GetColumn<string>(Username, "Username"),
                 GetDateColumn(JournalDate, "Journal date"),
                 GetDateColumn(Created, "Created"),
@@ -29,6 +30,11 @@ namespace ExcelImport
                 GetColumn<double>(Amount, "Amount"),
                 GetColumn<string>(Description, "Description"),
                 GetColumn<string>(AccountName, "Account name"));
+        }
+
+        private ISchemaColumn<string> GetIdColumn()
+        {
+            return IsSet(Id) ? (ISchemaColumn<string>) new ToStringColumn("Id", Id) : new RecordNumberIdColumn();
         }
 
         private static ISchemaColumn<DateTime> GetDateColumn(int columnIndex, string columnName)
