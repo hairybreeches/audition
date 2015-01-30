@@ -28,6 +28,7 @@ namespace ExcelImport
             return new[]
             {
                 Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
+                Path.GetFullPath(".\\ComplexSage50Export.xls"),
             };
         }        
 
