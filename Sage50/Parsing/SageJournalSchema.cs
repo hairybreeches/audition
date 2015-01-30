@@ -31,7 +31,6 @@ namespace Sage50.Parsing
                     amountColumn,
                     detailsColumn                    
                 }
-                .Where(x => x.Index != -1)
                 .OrderBy(x => x.Index);
             }
         }
