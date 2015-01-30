@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Model;
 using Model.Accounting;
 using SqlImport;
 
@@ -23,7 +24,7 @@ namespace ExcelImport
             {
                 if (!sheetReader.Read())
                 {
-                    return Enumerable.Empty<Journal>();
+                    throw new NoJournalsException("Successfully opened the spreadsheet, but it appears to have no rows apart from header/empty rows");
                 }
             } while (sheetReader.RowIsEmpty());
 
