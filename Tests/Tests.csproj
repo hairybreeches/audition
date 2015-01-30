@@ -85,7 +85,6 @@
     <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="DescriptionTests.cs" />
     <Compile Include="DriverDetectorTests.cs" />
-    <Compile Include="EnumerableEvaluatedException.cs" />
     <Compile Include="CsvExporterTests.cs" />
     <Compile Include="ExcelColumnNamerTests.cs" />
     <Compile Include="FileSystemTests.cs" />
@@ -94,8 +93,6 @@
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LicensingTests.cs" />
     <Compile Include="LoginSessionTests.cs" />
-    <Compile Include="MemoryUsageTests.cs" />
-    <Compile Include="Mocks\ConnectionFactoryWhichThrowsWhenReaderIsEvaluated.cs" />
     <Compile Include="Mocks\MockExporter.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockRegistry.cs" />
