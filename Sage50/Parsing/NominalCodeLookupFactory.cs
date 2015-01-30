@@ -21,7 +21,7 @@ namespace Sage50.Parsing
             return new NominalCodeLookup(dictionary);
         }
 
-        public void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
+        private static void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
         {
             try
             {
