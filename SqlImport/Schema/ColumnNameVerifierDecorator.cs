@@ -3,41 +3,26 @@ using System.Data;
 
 namespace SqlImport.Schema
 {
-    public class ColumnNameVerifierDecorator<T> : ISchemaColumn<T>
+    public class ColumnNameVerifierDecorator<T> : ISqlDataReader<T>
     {
-        private readonly ISchemaColumn<T> column;
+        private readonly SchemaColumn<T> innerColumn;
 
-        public ColumnNameVerifierDecorator(ISchemaColumn<T> column)
+        public ColumnNameVerifierDecorator(SchemaColumn<T> innerColumn)
         {
-            this.column = column;
-        }
-
-        public DataColumn ToDataColumn()
-        {
-            return column.ToDataColumn();
-        }
-
-        public int Index
-        {
-            get { return column.Index; }
-        }
-
-        public string FieldName
-        {
-            get { return column.FieldName; }
+            this.innerColumn = innerColumn;
         }
 
         public T GetField(IDataRecord record, int recordIndex)
         {
-            var actualFieldName = record.GetName(Index);
-            if (actualFieldName != FieldName)
+            var actualFieldName = record.GetName(innerColumn.Index);
+            if (actualFieldName != innerColumn.FieldName)
             {
                 throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema at row {0}. Column {1} was {2}, expected {3}", 
-                    recordIndex, Index, actualFieldName, FieldName));
+                    String.Format("Unrecognised data schema at row {0}. Column {1} was {2}, expected {3}",
+                    recordIndex, innerColumn.Index, actualFieldName, innerColumn.FieldName));
             }
 
-            return column.GetField(record, recordIndex);
+            return innerColumn.GetField(record, recordIndex);
         }
     }
 }

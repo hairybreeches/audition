@@ -7,24 +7,24 @@ namespace SqlImport.Schema
 {
     public class JournalSchema
     {
-        private readonly ISchemaColumn<string> idColumn;
-        private readonly ISchemaColumn<string> usernameColumn;
-        private readonly ISchemaColumn<DateTime> dateColumn;
-        private readonly ISchemaColumn<DateTime> creationTimeColumn;
-        private readonly ISchemaColumn<string> nominalCodeColumn;
-        private readonly ISchemaColumn<double> amountColumn;
-        private readonly ISchemaColumn<string> detailsColumn;
-        private readonly ISchemaColumn<string> nominalCodeNameColumn;
+        private readonly ISqlDataReader<string> idColumn;
+        private readonly ISqlDataReader<string> usernameColumn;
+        private readonly ISqlDataReader<DateTime> dateColumn;
+        private readonly ISqlDataReader<DateTime> creationTimeColumn;
+        private readonly ISqlDataReader<string> nominalCodeColumn;
+        private readonly ISqlDataReader<double> amountColumn;
+        private readonly ISqlDataReader<string> detailsColumn;
+        private readonly ISqlDataReader<string> nominalCodeNameColumn;
 
         public JournalSchema(
-            ISchemaColumn<string> idColumn, 
-            ISchemaColumn<string> usernameColumn, 
-            ISchemaColumn<DateTime> dateColumn, 
-            ISchemaColumn<DateTime> creationTimeColumn, 
-            ISchemaColumn<string> nominalCodeColumn, 
-            ISchemaColumn<double> amountColumn, 
-            ISchemaColumn<string> descriptionColumn, 
-            ISchemaColumn<string> nominalCodeNameColumn)
+            ISqlDataReader<string> idColumn, 
+            ISqlDataReader<string> usernameColumn, 
+            ISqlDataReader<DateTime> dateColumn, 
+            ISqlDataReader<DateTime> creationTimeColumn, 
+            ISqlDataReader<string> nominalCodeColumn, 
+            ISqlDataReader<double> amountColumn, 
+            ISqlDataReader<string> descriptionColumn, 
+            ISqlDataReader<string> nominalCodeNameColumn)
         {
             this.idColumn = idColumn;
             this.usernameColumn = usernameColumn;
@@ -36,30 +36,7 @@ namespace SqlImport.Schema
             this.nominalCodeNameColumn = nominalCodeNameColumn;
         }                
 
-        public IEnumerable<ISchemaColumn> MappedColumns
-        {
-            get
-            {
-                return new ISchemaColumn[]
-                {
-                    idColumn,
-                    usernameColumn,
-                    dateColumn,
-                    creationTimeColumn,
-                    nominalCodeColumn,
-                    amountColumn,
-                    detailsColumn,
-                    nominalCodeNameColumn
-                }
-                .Where(x => x.Index != -1)
-                .OrderBy(x => x.Index);
-            }
-        }
-
-        public IEnumerable<string> ColumnNames
-        {
-            get { return MappedColumns.Select(x=>x.FieldName); }
-        }
+        
 
         public string GetId(IDataRecord record, int recordIndex)
         {

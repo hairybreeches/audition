@@ -32,14 +32,14 @@ namespace ExcelImport
                 GetColumn<string>(AccountName, "Account name"));
         }
 
-        private ISchemaColumn<string> GetIdColumn()
+        private ISqlDataReader<string> GetIdColumn()
         {
-            return IsSet(Id) ? (ISchemaColumn<string>) new ToStringColumn("Id", Id) : new RecordNumberIdColumn();
+            return IsSet(Id) ? (ISqlDataReader<string>) new ToStringDataColumn("Id", Id) : new RecordNumberReader();
         }
 
-        private static ISchemaColumn<DateTime> GetDateColumn(int columnIndex, string columnName)
+        private static ISqlDataReader<DateTime> GetDateColumn(int columnIndex, string columnName)
         {
-            return IsSet(columnIndex) ? new DateTimeConverterColumn(columnName, columnIndex) : (ISchemaColumn<DateTime>) new UnmappedColumn<DateTime>();
+            return IsSet(columnIndex) ? new DateTimeConverterDecorator(new SchemaColumn<string>(columnName, columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
         }
 
         public IEnumerable<SearchAction> GetUnavailableActions()
@@ -53,9 +53,9 @@ namespace ExcelImport
                 .Where(IsDisplayable).ToArray();
         }
 
-        private static ISchemaColumn<T> GetColumn<T>(int columnIndex, string columnName)
+        private static ISqlDataReader<T> GetColumn<T>(int columnIndex, string columnName)
         {
-            return IsSet(columnIndex) ? new SchemaColumn<T>(columnName, columnIndex) : (ISchemaColumn<T>) new UnmappedColumn<T>();
+            return IsSet(columnIndex) ? new SchemaColumn<T>(columnName, columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(DisplayField displayField)

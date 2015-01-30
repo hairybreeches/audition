@@ -4,15 +4,13 @@ using System.Data.Common;
 using System.Linq;
 using Model.Accounting;
 using Sage50.Parsing;
-using SqlImport;
-using SqlImport.Schema;
 
 namespace Sage50
 {
     public class Sage50JournalGetter : ISage50JournalGetter
     {
         private readonly SageJournalReader sageJournalReader;        
-        private readonly JournalSchema schema;
+        private readonly SageJournalSchema schema;
         private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
         public Sage50JournalGetter(SageJournalReader sageJournalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
