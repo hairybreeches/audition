@@ -41,7 +41,7 @@ namespace SystemTests
                 }
             }, 7);
 
-            Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
+            Assert.AreEqual(new Journal("63", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
                     new[]
                     {
                         new JournalLine("7100", null, JournalType.Dr, 450)
