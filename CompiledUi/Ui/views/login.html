@@ -99,7 +99,6 @@
               <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
               <div class="col-sm-6">
                 <select name="JournalDate" data-bind="value: JournalDate" class="form-control">
-                  <option value="-1" label="Do not map this field"></option>
                   <optgroup data-bind="foreach: columnNames" label="Map this field to:">
                     <option data-bind="attr: { label: $data, value: $index}"></option>
                   </optgroup>
