@@ -20,6 +20,39 @@ namespace SystemTests
     public class ExcelImportTests
     {
         [Test]
+        public void CanImportDataFromExcelCombiningOnId()
+        {
+            var result = GetAllJournalsFromSearch(new ExcelImportMapping
+            {
+                SheetData = new SheetMetadata
+                {
+                    Filename = "..\\..\\..\\ExcelImport\\ComplexSage50Export.xls",
+                    Sheet = 0,
+                    UseHeaderRow = true,
+                },
+                Lookups = new FieldLookups
+                {
+                    AccountCode = 4,
+                    AccountName = -1,
+                    Amount = 20,
+                    Created = 31,
+                    Description = 8,
+                    JournalDate = 2,
+                    Username = 7,
+                    Id=0
+                }
+            }, 1);
+
+            Assert.AreEqual("1278", result.TotalResults, "We should get all the journals back");
+            Assert.AreEqual(new Journal("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
+            {
+                new JournalLine("1100", "Debtors Control Account", JournalType.Cr, 0.05m), 
+                new JournalLine("9998", "Suspense Account", JournalType.Dr, 0.05m), 
+                new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
+            }), result.Journals[7], "A random journal should be correct");
+        }      
+        
+        [Test]
         public void CanImportExcelData()
         {
             var results = GetAllJournalsFromSearch(new ExcelImportMapping
