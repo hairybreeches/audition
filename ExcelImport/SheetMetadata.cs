@@ -2,13 +2,13 @@ using System;
 
 namespace ExcelImport
 {
-    public class HeaderRowData
+    public class SheetMetadata
     {
         public string Filename { get; set; }
         public int Sheet { get; set; }
         public bool UseHeaderRow { get; set; }
 
-        protected bool Equals(HeaderRowData other)
+        protected bool Equals(SheetMetadata other)
         {
             return string.Equals(Filename, other.Filename, StringComparison.InvariantCultureIgnoreCase) && Sheet == other.Sheet && UseHeaderRow.Equals(other.UseHeaderRow);
         }
@@ -18,7 +18,7 @@ namespace ExcelImport
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((HeaderRowData) obj);
+            return Equals((SheetMetadata) obj);
         }
 
         public override int GetHashCode()

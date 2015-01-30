@@ -35,7 +35,7 @@ namespace Tests
                 "Column S",
                 "Column T",
             },
-                reader.ReadHeaders(new HeaderRowData
+                reader.ReadHeaders(new SheetMetadata
                 {
                     Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
                     UseHeaderRow = false
@@ -69,7 +69,7 @@ namespace Tests
                 "VAT Rec Date",
                 "User Name",
             },
-                reader.ReadHeaders(new HeaderRowData
+                reader.ReadHeaders(new SheetMetadata
                 {
                     Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
                     UseHeaderRow = true

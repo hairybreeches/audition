@@ -4,7 +4,7 @@ namespace ExcelImport
 {
     public class ExcelImportMapping
     {
-        public HeaderRowData SheetData { get; set; }
+        public SheetMetadata SheetData { get; set; }
         public FieldLookups Lookups { get; set; }
 
         protected bool Equals(ExcelImportMapping other)
