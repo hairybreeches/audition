@@ -10,17 +10,17 @@ namespace SqlImport
     /// </summary>
     public class JournalLineParser
     {
-        public SqlJournalLine CreateJournalLine(IDataRecord record, JournalSchema schema, int recordIndex)
+        public SqlJournalLine CreateJournalLine(IDataRecord record, JournalDataReader dataReader, int recordIndex)
         {
             return CreateJournalLine(
-                schema.GetId(record, recordIndex),
-                schema.GetUsername(record, recordIndex),
-                schema.GetJournalDate(record, recordIndex),
-                schema.GetCreationTime(record, recordIndex),
-                schema.GetNominalCode(record, recordIndex),
-                schema.GetAmount(record, recordIndex),
-                schema.GetDescription(record, recordIndex),
-                schema.GetNominalCodeName(record, recordIndex));
+                dataReader.GetId(record, recordIndex),
+                dataReader.GetUsername(record, recordIndex),
+                dataReader.GetJournalDate(record, recordIndex),
+                dataReader.GetCreationTime(record, recordIndex),
+                dataReader.GetNominalCode(record, recordIndex),
+                dataReader.GetAmount(record, recordIndex),
+                dataReader.GetDescription(record, recordIndex),
+                dataReader.GetNominalCodeName(record, recordIndex));
         }
 
         private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)

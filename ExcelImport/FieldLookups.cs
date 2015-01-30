@@ -20,9 +20,9 @@ namespace ExcelImport
         public int Amount { get; set; }
         public int Id { get; set; }
 
-        public JournalSchema ToJournalSchema()
+        public JournalDataReader ToJournalSchema()
         {
-            return new JournalSchema(
+            return new JournalDataReader(
                 GetIdColumn(),
                 GetColumn<string>(Username, "Username"),
                 GetDateColumn(JournalDate, "Journal date"),

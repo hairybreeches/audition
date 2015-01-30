@@ -35,9 +35,9 @@ namespace Sage50.Parsing
             }
         }
 
-        public JournalSchema CreateJournalSchema(IValueLookup<string, string> nominalCodeNameLookup)
+        public JournalDataReader CreateJournalReader(IValueLookup<string, string> nominalCodeNameLookup)
         {
-            return new JournalSchema(
+            return new JournalDataReader(
                 idColumn, 
                 new ColumnNameVerifierDecorator<string>(usernameColumn), 
                 new ColumnNameVerifierDecorator<DateTime>(dateColumn), 

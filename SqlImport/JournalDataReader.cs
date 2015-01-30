@@ -4,7 +4,7 @@ using SqlImport.DataReaders;
 
 namespace SqlImport
 {
-    public class JournalSchema
+    public class JournalDataReader
     {
         private readonly ISqlDataReader<string> idColumn;
         private readonly ISqlDataReader<string> usernameColumn;
@@ -15,7 +15,7 @@ namespace SqlImport
         private readonly ISqlDataReader<string> detailsColumn;
         private readonly ISqlDataReader<string> nominalCodeNameColumn;
 
-        public JournalSchema(
+        public JournalDataReader(
             ISqlDataReader<string> idColumn, 
             ISqlDataReader<string> usernameColumn, 
             ISqlDataReader<DateTime> dateColumn, 
