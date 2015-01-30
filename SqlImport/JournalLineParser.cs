@@ -1,7 +1,6 @@
 using System;
 using System.Data;
 using Model.Accounting;
-using SqlImport.Schema;
 
 namespace SqlImport
 {

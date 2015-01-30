@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SqlImport.Schema;
+using SqlImport;
+using SqlImport.DataReaders;
 
 namespace Sage50.Parsing
 {

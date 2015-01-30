@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Model.Accounting;
-using SqlImport.Schema;
 
 namespace SqlImport
 {

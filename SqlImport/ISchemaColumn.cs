@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace SqlImport.Schema
+namespace SqlImport
 {
     public interface ISchemaColumn
     {
