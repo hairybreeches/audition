@@ -47,9 +47,9 @@ namespace SystemTests
 
                 var searchController = scope.Resolve<SearchController>();
                 var results =
-                    searchController.EndingSearch(
-                        new SearchRequest<EndingParameters>(
-                            new SearchWindow<EndingParameters>(new EndingParameters(0),
+                    searchController.UserSearch(
+                        new SearchRequest<UserParameters>(
+                            new SearchWindow<UserParameters>(new UserParameters("Steve"), 
                                 new DateRange(DateTime.MinValue, DateTime.MaxValue)), 7));
 
                 Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment", 
