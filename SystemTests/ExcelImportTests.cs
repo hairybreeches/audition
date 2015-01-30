@@ -48,6 +48,34 @@ namespace SystemTests
                     }), results.Journals[3], "A random journal should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
+        }      
+        
+        
+        [Test]
+        public void EmptySpreadsheetReturnsNoJournals()
+        {
+            var results = GetAllJournalsFromSearch(new ExcelImportMapping
+            {
+                SheetData = new HeaderRowData
+                {
+                    Filename = ".\\ExcelSampleData.xls",
+                    Sheet = 0,
+                    UseHeaderRow = true,
+                },
+                Lookups = new FieldLookups
+                {
+                    AccountCode = 3,
+                    AccountName = -1,
+                    Amount = 9,
+                    Created = -1,
+                    Description = 5,
+                    JournalDate = 6,
+                    Username = 19
+                }
+            }, 1);
+
+            Assert.AreEqual("0", results.TotalResults);
+            CollectionAssert.IsEmpty(results.Journals);
         }
 
         private static SearchResponse GetAllJournalsFromSearch(ExcelImportMapping importMapping, int pageNumber)
