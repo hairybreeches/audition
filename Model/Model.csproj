@@ -54,6 +54,7 @@
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
+    <Compile Include="IValueLookup.cs" />
     <Compile Include="NoJournalsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />

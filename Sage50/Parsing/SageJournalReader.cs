@@ -25,7 +25,7 @@ namespace Sage50.Parsing
         {
             //a little cheeky, that we mutate rather than creating a new object here, but there could be a lot of these
             //and the SqlJournalLine is an "in progress" object
-            journalLine.NominalCodeName = lookup.GetNominalCodeName(journalLine.NominalCode);
+            journalLine.NominalCodeName = lookup.GetLookupValue(journalLine.NominalCode);
             return journalLine;
         }
 
