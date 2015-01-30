@@ -48,8 +48,11 @@
     <Compile Include="JournalLineParser.cs" />
     <Compile Include="JournalParsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schema\ColumnNameVerifierDecorator.cs" />
+    <Compile Include="Schema\DateTimeConverterColumn.cs" />
     <Compile Include="Schema\ISchemaColumn.cs" />
     <Compile Include="Schema\JournalSchema.cs" />
+    <Compile Include="Schema\RecordNumberIdColumn.cs" />
     <Compile Include="Schema\SchemaColumn.cs" />
     <Compile Include="Schema\UnmappedColumn.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
