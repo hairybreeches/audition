@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,19 +17,14 @@ namespace SqlImport
 
         public IEnumerable<Journal> GetJournals(IDataReader reader, JournalSchema schema)
         {
-            return GetJournals(reader, schema, line => line);
-        }
-            
-        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalSchema schema, Func<SqlJournalLine, SqlJournalLine> adapter)
-        {
-            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, schema, adapter)));
+            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, schema)));
         }
 
-        private SqlJournalLine ConvertToLine(IDataRecord record, JournalSchema schema, Func<SqlJournalLine, SqlJournalLine> adapter)
+        private SqlJournalLine ConvertToLine(IDataRecord record, JournalSchema schema)
         {
             var sqlJournalLine = journalLineParser.CreateJournalLine(record, schema, recordIndex);
             recordIndex++;
-            return adapter(sqlJournalLine);
+            return sqlJournalLine;
         }
 
         private static IEnumerable<IDataRecord> GetLineRecords(IDataReader reader)

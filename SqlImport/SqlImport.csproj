@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataReaders\LookupConverter.cs" />
     <Compile Include="DataRecordExtensions.cs" />
     <Compile Include="ISchemaColumn.cs" />
     <Compile Include="JournalLineParser.cs" />

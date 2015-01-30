@@ -1,33 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model;
 using SqlImport;
 using SqlImport.DataReaders;
 
 namespace Sage50.Parsing
 {
-    public class SageJournalSchema : JournalSchema
+    public class SageJournalSchema
     {
-        private static readonly ToStringDataColumn IdColumn = new ToStringDataColumn("TRAN_NUMBER", 0);
-        private static readonly SchemaColumn<string> UsernameColumn = new SchemaColumn<string>("USER_NAME", 1);
-        private static readonly SchemaColumn<DateTime> DateColumn = new SchemaColumn<DateTime>("DATE", 2);
-        private static readonly SchemaColumn<DateTime> CreationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
-        private static readonly SchemaColumn<string> NominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
-        private static readonly SchemaColumn<double> AmountColumn = new SchemaColumn<double>("AMOUNT", 5);
-        private static readonly SchemaColumn<string> DetailsColumn = new SchemaColumn<string>("DETAILS", 6);
-
-        public SageJournalSchema()
-            :base(
-                IdColumn, 
-                new ColumnNameVerifierDecorator<string>(UsernameColumn), 
-                new ColumnNameVerifierDecorator<DateTime>(DateColumn), 
-                new ColumnNameVerifierDecorator<DateTime>(CreationTimeColumn), 
-                new ColumnNameVerifierDecorator<string>(NominalCodeColumn), 
-                new ColumnNameVerifierDecorator<double>(AmountColumn), 
-                new ColumnNameVerifierDecorator<string>(DetailsColumn), 
-                new NullDataReader<string>())
-        {            
-        }
+        private readonly ToStringDataColumn idColumn = new ToStringDataColumn("TRAN_NUMBER", 0);
+        private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
+        private readonly SchemaColumn<DateTime> dateColumn = new SchemaColumn<DateTime>("DATE", 2);
+        private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
+        private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
+        private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 5);
+        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);        
 
         public IEnumerable<ISchemaColumn> MappedColumns
         {
@@ -35,17 +23,30 @@ namespace Sage50.Parsing
             {
                 return new ISchemaColumn[]
                 {
-                    IdColumn,
-                    UsernameColumn,
-                    DateColumn,
-                    CreationTimeColumn,
-                    NominalCodeColumn,
-                    AmountColumn,
-                    DetailsColumn                    
+                    idColumn,
+                    usernameColumn,
+                    dateColumn,
+                    creationTimeColumn,
+                    nominalCodeColumn,
+                    amountColumn,
+                    detailsColumn                    
                 }
                 .Where(x => x.Index != -1)
                 .OrderBy(x => x.Index);
             }
+        }
+
+        public JournalSchema CreateJournalSchema(IValueLookup<string, string> nominalCodeNameLookup)
+        {
+            return new JournalSchema(
+                idColumn, 
+                new ColumnNameVerifierDecorator<string>(usernameColumn), 
+                new ColumnNameVerifierDecorator<DateTime>(dateColumn), 
+                new ColumnNameVerifierDecorator<DateTime>(creationTimeColumn), 
+                new ColumnNameVerifierDecorator<string>(nominalCodeColumn), 
+                new ColumnNameVerifierDecorator<double>(amountColumn), 
+                new ColumnNameVerifierDecorator<string>(detailsColumn), 
+                new LookupConverter<string, string>(nominalCodeColumn, nominalCodeNameLookup));
         }
 
         public IEnumerable<string> ColumnNames
