@@ -7,7 +7,7 @@ namespace Sage50.Parsing
     {
         public SageJournalSchema()
             :base(
-                new IntToStringDecorator(new ColumnNameVerifierDecorator<int>(new SchemaColumn<int>("TRAN_NUMBER", 0))), 
+                new ToStringColumn("TRAN_NUMBER", 0), 
                 new ColumnNameVerifierDecorator<string>(new SchemaColumn<string>("USER_NAME", 1)), 
                 new ColumnNameVerifierDecorator<DateTime>(new SchemaColumn<DateTime>("DATE", 2)), 
                 new ColumnNameVerifierDecorator<DateTime>(new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3)), 
