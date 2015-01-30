@@ -24,7 +24,7 @@ namespace SystemTests
         {
             var results = GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                SheetData = new HeaderRowData
+                SheetData = new SheetMetadata
                 {
                     Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
                     Sheet = 0,
@@ -58,7 +58,7 @@ namespace SystemTests
         {
             GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                SheetData = new HeaderRowData
+                SheetData = new SheetMetadata
                 {
                     Filename = ".\\ExcelSampleData.xls",
                     Sheet = 0,

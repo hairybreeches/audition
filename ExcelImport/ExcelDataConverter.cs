@@ -15,7 +15,7 @@ namespace ExcelImport
             this.fileSystem = fileSystem;
         }
 
-        public DataTable GetSheet(HeaderRowData data)
+        public DataTable GetSheet(SheetMetadata data)
         {
             var dataSet = GetDataSet(data.Filename, data.UseHeaderRow);
             var sheet = dataSet.Tables[data.Sheet];

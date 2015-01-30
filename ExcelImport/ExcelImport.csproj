@@ -61,7 +61,7 @@
     <Compile Include="ExcelImportModule.cs" />
     <Compile Include="ExcelSearcherFactoryFactory.cs" />
     <Compile Include="FieldLookups.cs" />
-    <Compile Include="HeaderRowData.cs" />
+    <Compile Include="SheetMetadata.cs" />
     <Compile Include="MetadataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordNumberIdColumn.cs" />

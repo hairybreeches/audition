@@ -21,7 +21,7 @@ namespace ExcelImport
             return dataSet.Tables.OfType<DataTable>().Select(x => x.TableName);
         }
 
-        public IEnumerable<string> ReadHeaders(HeaderRowData data)
+        public IEnumerable<string> ReadHeaders(SheetMetadata data)
         {
             var sheet = dataConverter.GetSheet(data);
             var dataColumns = sheet.Columns.OfType<DataColumn>();

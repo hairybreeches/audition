@@ -34,9 +34,9 @@ namespace Webapp.Controllers
         
         [Route(Routing.GetExcelHeaders)]
         [HttpPost]
-        public IEnumerable<string> GetHeaders(HeaderRowData headerRowData)
+        public IEnumerable<string> GetHeaders(SheetMetadata sheetMetadata)
         {
-            return metadataReader.ReadHeaders(headerRowData);
+            return metadataReader.ReadHeaders(sheetMetadata);
         }
 
         [Route(Routing.GetExcelSheets)]
