@@ -32,7 +32,7 @@ namespace ExcelImport
             id = lookups.Id;
         }
 
-        public JournalDataReader ToJournalSchema()
+        public JournalDataReader GetDataReader()
         {
             return new JournalDataReader(
                 GetIdColumn(),
