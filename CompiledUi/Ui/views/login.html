@@ -24,20 +24,22 @@
     <div id="pageElement">
       <div class="container">
         <legend class="vertical-space">Login to accounts system</legend>
-        <form action="search" method="post" class="form-horizontal blockable">
+        <div action="search" method="post" class="blockable">
           <div style="display: none;" data-bind="visible: blocked()" class="blockscreen loadscreen"></div>
-          <fieldset>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Accounts system</label>
-              <div class="col-sm-6">
-                <select data-bind="value: system" class="form-control">
-                  <option value="sage50">Sage Line 50			</option>
-                  <option value="excel">Excel			</option>
-                </select>
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Accounts system</label>
+                <div class="col-sm-6">
+                  <select data-bind="value: system" class="form-control">
+                    <option value="sage50">Sage Line 50			</option>
+                    <option value="excel">Excel			</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          </fieldset>
-          <div style="display: none;" data-bind="visible: system() === 'sage50', with: sage50">
+            </fieldset>
+          </form>
+          <form style="display: none;" data-bind="visible: system() === 'sage50', with: sage50" class="form-horizontal">
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Data location</label>
               <div class="col-sm-6">
@@ -67,8 +69,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div style="display: none;" data-bind="visible: system() === 'excel', with: excel">
+          </form>
+          <form style="display: none;" data-bind="visible: system() === 'excel', with: excel" class="form-horizontal">
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">File location</label>
               <div class="col-sm-6">
@@ -190,8 +192,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
         <div data-bind="visible: error.visible(), with: error" style="display: none;" class="alert alert-danger">
           <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
         </div>
