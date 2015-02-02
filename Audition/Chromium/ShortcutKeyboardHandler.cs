@@ -6,7 +6,7 @@ namespace Audition.Chromium
 {
     public class ShortcutKeyboardHandler : IKeyboardHandler
     {        
-        private const int ctrlshift = 1027;
+        private const int ctrlshift = 6;
         private const int w = 23;
         private const int e = 5;
         private const int r = 18;
