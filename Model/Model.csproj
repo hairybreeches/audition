@@ -60,7 +60,6 @@
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
-    <Compile Include="Accounting\InvalidJournalException.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\WorkingHoursParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />
