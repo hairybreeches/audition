@@ -1,0 +1,1025 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{4F989BB2-F673-4CAC-AA85-9CA87DDE160F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemTests</RootNamespace>
+    <AssemblyName>SystemTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\Debug\Tests\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\build\Release\Tests\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp">
+      <HintPath>..\packages\CefSharp.WinForms.1.25.3\lib\net40\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms">
+      <HintPath>..\packages\CefSharp.WinForms.1.25.3\lib\net40\CefSharp.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems">
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.2.1.0\lib\net40\Microsoft.Owin.FileSystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NodaTime.2.0.0-alpha20140808\lib\net35-Client\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET45\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExcelImportTests.cs" />
+    <Compile Include="LicensingTests.cs" />
+    <Compile Include="MockRequestResponse.cs" />
+    <Compile Include="RequestExecution.cs" />
+    <Compile Include="Sage50Tests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ExcelSampleData.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Sage50SampleData\ACCDATA\1.COA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\2.COA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACCDATA.INI">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACCESS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACCOUNT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACCRUAL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACCSTAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLCHNG.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLCHNGX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLCMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLCUPD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLCUPDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLGMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLJCHGX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLJRNL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLJRNLX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLMCHG.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLMCHGX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLMMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ACLUCHX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ASSETS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ASTCAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ASTDATA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ASTINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BANK.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BANKWWW.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BILLS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKFRXIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKSTAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKSTATIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKSTLN.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKSTLNIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BKSTLNXX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BNKFOREX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BNKINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BNKREMDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\BNKREMIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_LABEL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_LABEL_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_LOCATION.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_LOCATION_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_MASTERID_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_MEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_EVENT_USERNAME_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_RECURRENCE_PATTERN.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CALENDAR_RECURRENCE_PATTERN_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CASHFLOW.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CATEGORY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CATEVDAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CATEVIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CHARTPRIMARYCATEGORY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CHARTSECONDARYCATEGORY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISPRT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISPRTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISRTN.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISRTNIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSCOIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSCOLD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSETUP.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSRT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSRTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSTX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSTXIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSUB.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISSUBIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISTRAIL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CISTRAIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CIS_SUBCONTRACTOR_ACTIVE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CLTRADAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CNTHIMEM.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CNTHIPIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CNTHISDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CNTHISIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COLINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COLMNDAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COMDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COMDAIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COMMENTS.RPT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COMMUNICATION_ADDRESS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COMMUNICATION_ADDRESS_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_MAJOR_TYPE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_MAJOR_TYPE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_OUTCOME.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_OUTCOME_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_TYPE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTACT_HISTORY_CONTACT_TYPE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTINDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTINDD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CONTMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\Convert.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COUNTRY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\COURWWW.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CREDMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CREDWWW.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CTRYIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\CURRENCY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\DELETEDRECORDS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\DELETEDRECORDS_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\DEPARTM.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\DEPINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\DISPREAS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\EBANKING.INI">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ECSALESLISTARCHIVE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ECSALESLISTARCHIVE_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ECSALESNARRATIVE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\EC_SALES_NARRATIVE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ERRORS.RPT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\ESUBMSSN.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FINBDG.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FINBDGIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FINBDGNOMIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FINRATES.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FUND.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FUNDIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FUNDTIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\FUNDTYPE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\GDNDATA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\GDNINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\GNDATA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\GNINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\HEADER.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\HEADERHI.DTH">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INTRASTD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVITEM.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVITEMINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVITEMRECURINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVOICE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVPRECX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVRECIT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVRECIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\INVRECUR.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\LAUNCHPADTASKSTATE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\LAUNCHPADTASKSTATE_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\LETTER_TYPE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\LETTER_TYPE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\LETTER_TYPE_TYPE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\MANAGER.DPC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\MANAGER.DPI">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\MISCWWW.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\NOMINAL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\NOMINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\OPENINGBALANCEREVERSAL.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PAYMENT_METHOD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PAYMENT_METHOD_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCBDGTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCBUDGET.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCCCTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCOSTCD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCOSTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCOSTTP.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCTYPUX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCCUNQIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCDESCIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCONTRNS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCONTRNX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCOTRNRX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCPRNTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRELAIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRELATI.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRESIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRESRCE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCREVCD.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCREVIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRSUNIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRTYPE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRTYPIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCRUNQIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCSTAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCSTATIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCSUNQIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRANIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRANS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNAIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNCIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNPIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNPOX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNSAX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PCTRNSIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\POPITEMINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\POPITEMRECURINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\POPRECIT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\POPRECIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\POPRECUR.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PREPAY.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PRICE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PRICEIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PRJUNQIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PRLST.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PRLSTIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PROJECT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PROJIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PROTXPAYMENT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PROTXPAYMENTIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PUOINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PUOITEM.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PUORDER.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURCHASE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURCHASEDA_ACCOUNT_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURCHASE_ACTIVE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURDAIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\PURINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\QUEUE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\RECUR.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\RECURRING_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\REMIT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\REMITIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\REVERSECHARGESALESLISTARCHIVE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\REVERSECHARGESALESLISTARCHIVE_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\RTDARCHIVE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\RTDARCHIVE_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SageBackup.INI">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SAGEPAY_EMAIL_MAP.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SAGEPAY_EMAIL_MAP_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALDA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALDAIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALES.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALESDA_ACCOUNT_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALES_ACTIVE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SALINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SAOINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SAOITEM.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SAORDER.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SETUP.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSBANKS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSCUSTOMERINFO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSCUSTOMERINFO_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSDEPOSIT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSDEPOSIT_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSPAYMENTS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSPAYMENTS_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSPAYMENTS_SIPSID_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSSUPPLIERINFO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SIPSSUPPLIERINFO_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOFACATE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPITEMINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPITEMRECURINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPPRECX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPRECIT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPRECIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SOPRECUR.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SPLHIIDX.DTH">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SPLITIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SPLITS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SPLITSHI.DTH">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\SRVTEXT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STKALCIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STKALLOC.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STKCAT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STKINDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STKTRANS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STOCK.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\STOCK_ACTIVE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TABLEMETADATA.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TABLEMETADATAIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TAX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TODO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TODOIDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\TODOMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.001.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.002.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.003.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.004.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.005.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\UPDATE.006.S50">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\USAGE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\USAGEHI.DTH">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\USER.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\USERTOOLBARSTATE.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\USERTOOLBARSTATE_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATLEDGER.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATLEDGER_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATRETURNRECEIPT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATRETURNS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATRETURNS_IDX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATRTNIX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATRTNMEMO.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VATVERIFYSETTINGS.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VERBRESULT.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\VERBRESULT_INDEX.DTA">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Sage50SampleData\ACCDATA\WARNINGS.RPT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Audition\Audition.csproj">
+      <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
+      <Name>Audition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Licensing\Licensing.csproj">
+      <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
+      <Name>Licensing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native\Native.csproj">
+      <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
+      <Name>Native</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sage50\Sage50.csproj">
+      <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
+      <Name>Sage50</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Searching\Searching.csproj">
+      <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
+      <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tests\Tests.csproj">
+      <Project>{fdc54681-cb67-446f-ba2f-38dc63f4a112}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webapp\Webapp.csproj">
+      <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
+      <Name>Webapp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sage50SampleData\ACCDATA\LiveLink_Configuration_MANAGER.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sage50SampleData\ACCDATA\LiveLink_Messages_MANAGER.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sage50SampleData\ACCDATA\TMail\TMail.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sage50SampleData\ACCDATA\IMAGES\" />
+    <Folder Include="Sage50SampleData\ACCDATA\TMail\Export\Sent\" />
+    <Folder Include="Sage50SampleData\ACCDATA\TMail\Import\Archive\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+      %25WINDIR%25\system32\xcopy /s /y "$(SolutionDir)\packages\CefSharp.WinForms.1.25.3\cef\*.*" "$(TargetDir)"
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
