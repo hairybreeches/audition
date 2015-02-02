@@ -5,12 +5,10 @@ namespace SqlImport.DataReaders
 {
     public class SqlDataReader<T> : ISqlDataReader<T>
     {
-        private readonly string fieldName;
         private readonly int index;
 
-        public SqlDataReader(string fieldName, int index)
+        public SqlDataReader(int index)
         {
-            this.fieldName = fieldName;
             this.index = index;
         }
 
@@ -21,8 +19,8 @@ namespace SqlImport.DataReaders
             if (!(fieldValue is T))
             {
                 throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema at row {0}. {1} was {2}, expected {3}",
-                        recordIndex, fieldName, fieldValue.GetType(), typeof(T)));
+                    String.Format("Unrecognised data schema. Value '{0}' from column {1} was {2}, expected {3}", 
+                    fieldValue, index, fieldValue.GetType(), typeof(T)));
             }
 
             return (T)fieldValue;
