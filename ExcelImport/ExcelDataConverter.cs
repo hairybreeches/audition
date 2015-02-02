@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using Excel;
 using Native;
+using SqlImport;
 
 namespace ExcelImport
 {
@@ -20,6 +21,13 @@ namespace ExcelImport
             var dataSet = GetDataSet(data.Filename, data.UseHeaderRow);
             var sheet = dataSet.Tables[data.Sheet];
             return sheet;
+        }
+
+        public DataReader ReadSheet(SheetMetadata data)
+        {
+            var sheet = GetSheet(data);
+            var firstRow = data.UseHeaderRow ? 2 : 1;
+            return new DataReader(sheet.CreateDataReader(), firstRow);
         }
 
         public DataSet GetDataSet(string filename, bool headerRow = false)

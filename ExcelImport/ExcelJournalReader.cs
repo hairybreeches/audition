@@ -19,14 +19,14 @@ namespace ExcelImport
 
         public IEnumerable<Journal> ReadJournals(SheetMetadata sheetMetadata, ExcelDataMapper excelDataMapper)
         {
-            var sheetReader = dataConverter.GetSheet(sheetMetadata).CreateDataReader();            
+            var sheetReader = dataConverter.ReadSheet(sheetMetadata);            
             do
             {
                 if (!sheetReader.Read())
                 {
                     return Enumerable.Empty<Journal>();
                 }
-            } while (sheetReader.RowIsEmpty());
+            } while (sheetReader.CurrentRecord().RowIsEmpty());
 
             return sqlJournalReader.GetJournals(sheetReader, excelDataMapper.GetDataReader());
         }

@@ -15,7 +15,7 @@ namespace SqlImport
             this.journalLineParser = journalLineParser;
         }
 
-        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalDataReader dataReader)
+        public IEnumerable<Journal> GetJournals(DataReader reader, JournalDataReader dataReader)
         {
             return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
         }
@@ -27,11 +27,11 @@ namespace SqlImport
             return sqlJournalLine;
         }
 
-        private static IEnumerable<IDataRecord> GetLineRecords(IDataReader reader)
+        private static IEnumerable<IDataRecord> GetLineRecords(DataReader reader)
         {
             do
             {
-                yield return reader;
+                yield return reader.CurrentRecord();
             } while (reader.Read());
 
         }
