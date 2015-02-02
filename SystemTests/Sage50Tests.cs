@@ -32,7 +32,7 @@ namespace SystemTests
                     Username = "Manager"
                 });
 
-                var result = lifetime.GetParsedResponseContent<SearchResponse>(requestResponse);
+                var result = lifetime.GetParsedResponseContent<SearchResponse>(requestResponse).Result;
 
                 Assert.AreEqual("1278", result.TotalResults, "We should get all the journals back");
                 Assert.AreEqual(new Journal("8", new DateTimeOffset(2010,4,27,17,16,57, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER", "Opening Balance", new[]
