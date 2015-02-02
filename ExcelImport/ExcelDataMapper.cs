@@ -11,6 +11,7 @@ namespace ExcelImport
 {
     public class ExcelDataMapper
     {
+        private readonly ExcelColumnNamer namer;
         private readonly int description;
         private readonly int username;
         private readonly int created;
@@ -20,8 +21,9 @@ namespace ExcelImport
         private readonly int amount;
         private readonly int id;
 
-        public ExcelDataMapper(FieldLookups lookups)
+        public ExcelDataMapper(FieldLookups lookups, ExcelColumnNamer namer)
         {
+            this.namer = namer;
             description = lookups.Description;
             username = lookups.Username;
             created = lookups.Created;
@@ -36,23 +38,23 @@ namespace ExcelImport
         {
             return new JournalDataReader(
                 GetIdColumn(),
-                GetColumn<string>(username, "Username"),
+                GetColumn<string>(username),
                 GetDateColumn(journalDate),
                 GetDateColumn(created),
-                GetColumn<string>(accountCode, "Account code"),
-                GetColumn<double>(amount, "Amount"),
-                GetColumn<string>(description, "Description"),
-                GetColumn<string>(accountName, "Account name"));
+                GetColumn<string>(accountCode),
+                GetColumn<double>(amount),
+                GetColumn<string>(description),
+                GetColumn<string>(accountName));
         }
 
         private ISqlDataReader<string> GetIdColumn()
         {
-            return IsSet(id) ? (ISqlDataReader<string>) new ToStringDataReader(id) : new RecordNumberReader();
+            return IsSet(id) ? (ISqlDataReader<string>) new ToStringDataReader(id, namer.GetColumnName(id)) : new RecordNumberReader();
         }
 
-        private static ISqlDataReader<DateTime> GetDateColumn(int columnIndex)
+        private ISqlDataReader<DateTime> GetDateColumn(int columnIndex)
         {
-            return IsSet(columnIndex) ? new DateTimeReader(columnIndex) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
+            return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
         }
 
         public IEnumerable<SearchAction> GetUnavailableActions()
@@ -66,9 +68,9 @@ namespace ExcelImport
                 .Where(IsDisplayable).ToArray();
         }
 
-        private static ISqlDataReader<T> GetColumn<T>(int columnIndex, string columnName)
+        private ISqlDataReader<T> GetColumn<T>(int columnIndex)
         {
-            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
+            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(DisplayField displayField)

@@ -6,10 +6,12 @@ namespace SqlImport.DataReaders
     public class DateTimeReader : ISqlDataReader<DateTime>
     {
         private readonly int columnIndex;
+        private readonly string userFriendlyColumnName;
 
-        public DateTimeReader(int columnIndex)
+        public DateTimeReader(int columnIndex, string userFriendlyColumnName)
         {
             this.columnIndex = columnIndex;
+            this.userFriendlyColumnName = userFriendlyColumnName;
         }
 
         public DateTime GetField(IDataRecord record, int recordIndex)
@@ -32,7 +34,7 @@ namespace SqlImport.DataReaders
                 return DateTime.FromOADate((double) value);
             }
             
-            throw new SqlDataFormatUnexpectedException(String.Format("Could not interpret value '{0}' from column {1} as a date", value, columnIndex));
+            throw new SqlDataFormatUnexpectedException(String.Format("Could not interpret value '{0}' from column {1} as a date", value, userFriendlyColumnName));
         }
     }
 }

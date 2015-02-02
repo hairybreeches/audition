@@ -9,7 +9,7 @@ namespace Sage50.Parsing
 {
     public class SageJournalSchema
     {
-        private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index));
+        private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index, name));
         private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
         private readonly SchemaColumn<DateTime> dateColumn = new SchemaColumn<DateTime>("DATE", 2);
         private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
