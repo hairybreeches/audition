@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Threading.Tasks;
 using CefSharp;
 using Webapp;
 
@@ -12,7 +13,7 @@ namespace Audition.Chromium
 
         public SchemeHandler(OwinServer server)
         {
-            this.internalDomain = Routing.InternalDomain;
+            internalDomain = Routing.InternalDomain;
             this.server = server;
         }
 
@@ -22,9 +23,11 @@ namespace Audition.Chromium
             if (request.Url.StartsWith(internalDomain))
             {
                 var httpRequestMessage = HttpConversion.ToOwinHttpRequest(request);
-                var httpResponse = GetResponse(httpRequestMessage);
-                Respond(response, httpResponse);
-                requestCompletedCallback();
+                GetResponse(httpRequestMessage).ContinueWith(requestTask =>
+                {
+                    Respond(response, requestTask.Result);
+                    requestCompletedCallback();                    
+                });
                 return true;
             }
             
@@ -45,9 +48,9 @@ namespace Audition.Chromium
             }
         }
 
-        private HttpResponseMessage GetResponse(HttpRequestMessage httpRequest)
+        private async Task<HttpResponseMessage> GetResponse(HttpRequestMessage httpRequest)
         {
-            return server.ExecuteRequest(httpRequest);
+            return await server.ExecuteRequest(httpRequest);
         }
     }
 }
