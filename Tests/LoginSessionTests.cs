@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Audition;
 using Autofac;
+using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
@@ -55,7 +57,7 @@ namespace Tests
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
             builder.WithNoLicensing()
-                .Sage50LoginReturns();            
+                .Sage50LoginReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
             return builder;
         }
 

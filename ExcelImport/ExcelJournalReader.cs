@@ -24,7 +24,7 @@ namespace ExcelImport
             {
                 if (!sheetReader.Read())
                 {
-                    throw new NoJournalsException("Successfully opened the spreadsheet, but it appears to have no rows apart from header/empty rows");
+                    return Enumerable.Empty<Journal>();
                 }
             } while (sheetReader.RowIsEmpty());
 

@@ -47,13 +47,19 @@ namespace Persistence
         } 
         
         public IJournalRepository UpdateJournals(IEnumerable<Journal> journals)
-        {            
+        {
+            var importedJournal = false;
             using(var writer = fileSystem.OpenFileToWrite(filename))
             foreach (var journal in journals)
             {
+                importedJournal = true;
                 writer.WriteLine(JsonConvert.SerializeObject(journal));
             }
 
+            if (!importedJournal)
+            {
+                throw new NoJournalsException("Successfully opened accounts, but there seemed to be no journal entries");
+            }
             return this;
         }
 
