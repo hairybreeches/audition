@@ -1,0 +1,78 @@
+﻿mixin dayOfWeekSelector(bindTo)
+	select.form-control.scaled-input(data-bind="value: " + bindTo)
+		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
+			option= day
+
+mixin timeInput(bindTo)
+	input.form-control.scaled-input(type="time", data-bind="value: " + bindTo)
+	
+mixin dateInput(bindTo)
+	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
+
+mixin search-tab(title, bindName)
+	form.form-horizontal.blockable(action="search", method="post" data-bind="with: #{bindName}")
+		.blockscreen(style="display: none;" data-bind="visible: blocked(), text: errorMessage")
+		legend.vertical-space #{title}
+		.form-group
+			.col-xs-12
+				.inline-block
+					.inline-block(data-bind="with: parameters")
+						block
+					br
+					.button-group.pull-right
+						button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
+						button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
+
+.form-horizontal.blockable
+	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
+	fieldset
+		legend.vertical-space Find journals for the period...
+		.form-group(data-bind="with: Period")
+			.col-sm-12
+				.well.inline-block
+					+dateInput('From')
+					label.control-label.between-label to
+					+dateInput('To')
+		ul.nav.nav-tabs
+			li.active
+				a(href="#time" data-toggle="tab") Outside working hours
+			li
+				a(href="#accounts" data-toggle="tab") Unusual accounts
+			li
+				a(href="#users" data-toggle="tab") Unexpected users
+			li
+				a(href="#date" data-toggle="tab") Year end
+			li
+				a(href="#endings" data-toggle="tab") Round number
+
+		.tab-content
+			.tab-pane.fade.active.in#time
+				+search-tab('posted outside...', 'Outside')
+					.well.inline-block.vertical-space.margin-right
+						+dayOfWeekSelector('FromDay')
+						label.control-label.between-label to
+						+dayOfWeekSelector('ToDay')
+					.well.inline-block.vertical-space
+						+timeInput('FromTime')
+						label.control-label.between-label to
+						+timeInput('ToTime')
+			.tab-pane.fade#accounts
+				+search-tab('posted to accounts with fewer than...', 'Accounts')
+					.well.inline-block.vertical-space.margin-right
+						input.form-control.scaled-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
+					span.vertical-space.search-text entries
+			.tab-pane.fade#users
+				+search-tab('posted by people other than...', 'Users')
+					.well.inline-block.vertical-space
+						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
+			.tab-pane.fade#date
+				+search-tab('posted after the year end or within...', 'Date')
+					.well.inline-block.vertical-space.margin-right
+						input.form-control.scaled-input(type="number", data-bind="value: daysBeforeYearEnd")
+					span.vertical-space.search-text days before year end
+			.tab-pane.fade#endings
+				+search-tab('ending in at least...', 'Ending')
+					.well.inline-block.vertical-space.margin-right
+						input.form-control.scaled-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
+					span.vertical-space.search-text zeroes.
+						
