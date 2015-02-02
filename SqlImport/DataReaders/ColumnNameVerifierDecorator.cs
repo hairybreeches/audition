@@ -18,8 +18,8 @@ namespace SqlImport.DataReaders
             if (actualFieldName != innerColumn.FieldName)
             {
                 throw new SqlDataFormatUnexpectedException(
-                    String.Format("Unrecognised data schema at row {0}. Column {1} was {2}, expected {3}",
-                    recordIndex, innerColumn.Index, actualFieldName, innerColumn.FieldName));
+                    String.Format("Unrecognised data schema. Column {0} was {1}, expected {2}", 
+                    innerColumn.Index, actualFieldName, innerColumn.FieldName));
             }
 
             return innerColumn.GetField(record, recordIndex);
