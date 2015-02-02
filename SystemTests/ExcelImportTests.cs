@@ -72,13 +72,13 @@ namespace SystemTests
                     username : 19,
                     id:-1
                 )
-            }, 7);
+            }, 6);
 
-            Assert.AreEqual(new Journal("63", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
+            Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
                     new[]
                     {
-                        new JournalLine("7100", null, JournalType.Dr, 450)
-                    }), results.Journals[3], "A random journal should be correct");
+                        new JournalLine("7502", null, JournalType.Dr, 50)
+                    }), results.Journals[9], "A random journal should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      
