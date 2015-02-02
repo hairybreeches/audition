@@ -11,9 +11,9 @@ namespace SystemTests
 {
     public static class RequestExecution
     {
-        public static T GetParsedResponseContent<T>(this IContainer lifetime, IRequest request)
+        public async static Task<T> GetParsedResponseContent<T>(this IContainer lifetime, IRequest request)
         {
-            var json = lifetime.GetResponseContent(request);
+            var json = await lifetime.GetResponseContent(request);
             try
             {
                 return JsonConvert.DeserializeObject<T>(json);
@@ -25,20 +25,24 @@ namespace SystemTests
             
         }
 
-        public static string GetResponseContent(this IContainer lifetime, IRequest request)
+        public static async Task<string> GetResponseContent(this IContainer lifetime, IRequest request)
         {
-            var cefSharpResponse = lifetime.ExecuteRequest(request);            
+            var cefSharpResponse = await lifetime.ExecuteRequest(request);            
             using (var reader = new StreamReader(cefSharpResponse.ResponseStream))
             {
                 return reader.ReadToEnd();
             }
         }
 
-        public static ISchemeHandlerResponse ExecuteRequest(this IContainer lifetime, IRequest request)
+        public static Task<ISchemeHandlerResponse> ExecuteRequest(this IContainer lifetime, IRequest request)
         {
-            var handler = lifetime.Resolve<IRequestHandler>();
-            handler.ProcessRequestAsync(request, response, () => { });
-            return requestResponse.Response;
+            var t = new TaskCompletionSource<ISchemeHandlerResponse>();
+            var response = new MockResponse();
+            var handler = lifetime.Resolve<ISchemeHandler>();
+            
+            handler.ProcessRequestAsync(request, response, () => t.TrySetResult(response));
+            return t.Task;
+            
             }            
         }
     }
