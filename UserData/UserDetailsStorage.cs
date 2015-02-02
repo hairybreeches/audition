@@ -35,14 +35,15 @@ namespace UserData
         
         public UserDetails Load()
         {
-            try
+            if(fileSystem.FileExists(filename))
             {
+
                 using (var reader = fileSystem.OpenFileToRead(filename))
                 {
                     return JsonConvert.DeserializeObject<UserDetails>(reader.ReadToEnd()) ?? new UserDetails();
                 }
             }
-            catch (FileNotFoundException)
+            else
             {
                 return new UserDetails();
             }            

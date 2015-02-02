@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using Microsoft.Owin.FileSystems;
@@ -47,9 +48,9 @@ namespace Webapp
             return config;
         }
 
-        public HttpResponseMessage ExecuteRequest(HttpRequestMessage message)
+        public async Task<HttpResponseMessage> ExecuteRequest(HttpRequestMessage message)
         {            
-            return owinTestServer.HttpClient.SendAsync(message).Result;
+            return await owinTestServer.HttpClient.SendAsync(message);
         }               
     }
 }
