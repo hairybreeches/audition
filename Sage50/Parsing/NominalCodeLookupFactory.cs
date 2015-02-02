@@ -12,13 +12,17 @@ namespace Sage50.Parsing
             var dictionary = new Dictionary<string, string>();
             while (reader.Read())
             {
-                var nominalCode = (string)reader[0];
-                var nominalCodeName = (string)reader[1];
-
-                AddNominalCode(dictionary, nominalCode, nominalCodeName);
-
+                AddValue(dictionary, reader);
             }
             return new NominalCodeLookup(dictionary);
+        }
+
+        private static void AddValue(Dictionary<string, string> dictionary, IDataRecord reader)
+        {
+            var nominalCode = (string) reader[0];
+            var nominalCodeName = (string) reader[1];
+
+            AddNominalCode(dictionary, nominalCode, nominalCodeName);
         }
 
         private static void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)

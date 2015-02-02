@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using Model.Accounting;
 using Sage50.Parsing;
+using SqlImport;
 
 namespace Sage50
 {
@@ -32,7 +33,7 @@ namespace Sage50
         {
             var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();
-            return sageJournalReader.GetJournals(odbcDataReader, nominalLookup);
+            return sageJournalReader.GetJournals(new DataReader(odbcDataReader,0 ), nominalLookup);
         }
 
         private DbCommand CreateCommand(DbConnection connection, string commandText)
