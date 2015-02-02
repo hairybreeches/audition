@@ -21,9 +21,10 @@ namespace SqlImport.DataReaders
                 return (DateTime) value;
             }
 
-            if (value is string)
+            DateTime dateTimeParse;
+            if (value is string && DateTime.TryParse(value as string, out dateTimeParse))
             {
-                return DateTime.Parse(value as string);
+                return dateTimeParse;
             }
 
             if (value is double)
