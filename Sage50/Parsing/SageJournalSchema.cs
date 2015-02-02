@@ -9,7 +9,7 @@ namespace Sage50.Parsing
 {
     public class SageJournalSchema
     {
-        private readonly ToStringDataColumn idColumn = new ToStringDataColumn("TRAN_NUMBER", 0);
+        private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index));
         private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
         private readonly SchemaColumn<DateTime> dateColumn = new SchemaColumn<DateTime>("DATE", 2);
         private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
@@ -38,14 +38,14 @@ namespace Sage50.Parsing
         public JournalDataReader CreateJournalReader(IValueLookup<string, string> nominalCodeNameLookup)
         {
             return new JournalDataReader(
-                idColumn, 
-                new ColumnNameVerifierDecorator<string>(usernameColumn), 
-                new ColumnNameVerifierDecorator<DateTime>(dateColumn), 
-                new ColumnNameVerifierDecorator<DateTime>(creationTimeColumn), 
-                new ColumnNameVerifierDecorator<string>(nominalCodeColumn), 
-                new ColumnNameVerifierDecorator<double>(amountColumn), 
-                new ColumnNameVerifierDecorator<string>(detailsColumn), 
-                new LookupConverter<string, string>(nominalCodeColumn, nominalCodeNameLookup));
+                idColumn.DataReader, 
+                usernameColumn.DataReader, 
+                dateColumn.DataReader,
+                creationTimeColumn.DataReader, 
+                nominalCodeColumn.DataReader, 
+                amountColumn.DataReader, 
+                detailsColumn.DataReader, 
+                new LookupConverter<string, string>(nominalCodeColumn.DataReader, nominalCodeNameLookup));
         }
 
         public IEnumerable<string> ColumnNames
