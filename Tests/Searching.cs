@@ -84,9 +84,8 @@ namespace Tests
                 .CreateDefaultContainerBuilder()
                 .WithNoLicensing()
                 .BuildSearchable(journalsInRepository))
-            using (var requestScope = lifetime.BeginRequestScope())
             {
-                return searchAction(requestScope).ToList();
+                return searchAction(lifetime).ToList();
             }
         }
 

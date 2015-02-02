@@ -20,11 +20,8 @@ namespace Tests
             builder.RegisterModule<AuditionModule>();
             using (var container = builder.Build())
             {
-                using (var requestScope = container.BeginRequestScope())
-                {
-                    var result = requestScope.Resolve(type);
-                    Assert.NotNull(result);
-                }
+                var result = container.Resolve(type);
+                Assert.NotNull(result);
             }
         }
 

@@ -24,19 +24,14 @@ namespace Tests
             using (var lifetime = builder.Build())
             {
                 //given some journals saved in one request
-                using (var request = lifetime.BeginRequestScope())
-                {
-                    var repository = request.Resolve<IJournalRepository>();
-                    repository.UpdateJournals(JournalWithId("a single stored journal"));
-                }
+
+                var saveRepository = lifetime.Resolve<IJournalRepository>();
+                saveRepository.UpdateJournals(JournalWithId("a single stored journal"));
                 //when we make a new request
-                using (var request = lifetime.BeginRequestScope())
-                {
-                    var repository = request.Resolve<IJournalRepository>();
-                    var journals = repository.GetJournalsApplyingTo(Forever).ToList();
-                    //the journals should still be there
-                    Assert.AreEqual(journals.Single().Id, "a single stored journal");
-                }
+                var loadRepository = lifetime.Resolve<IJournalRepository>();
+                var journals = loadRepository.GetJournalsApplyingTo(Forever).ToList();
+                //the journals should still be there
+                Assert.AreEqual(journals.Single().Id, "a single stored journal");
             }
         }
 
@@ -47,20 +42,17 @@ namespace Tests
             builder.RegisterModule<AuditionModule>();
             using (var lifetime = builder.Build())
             {
-                using (var request = lifetime.BeginRequestScope())
-                {
-                    //given a repository with some journals in
-                    var repository = request.Resolve<IJournalRepository>();
-                    repository.UpdateJournals(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
+                //given a repository with some journals in
+                var repository = lifetime.Resolve<IJournalRepository>();
+                repository.UpdateJournals(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
 
-                    //when we update the contents of the repository
-                    repository.UpdateJournals(JournalWithId("a new journal"));
+                //when we update the contents of the repository
+                repository.UpdateJournals(JournalWithId("a new journal"));
 
-                    var journals = repository.GetJournalsApplyingTo(Forever).ToList();
+                var journals = repository.GetJournalsApplyingTo(Forever).ToList();
 
-                    //the old contents should be blatted and only the new ones remain.
-                    Assert.AreEqual(journals.Single().Id, "a new journal");
-                } 
+                //the old contents should be blatted and only the new ones remain.
+                Assert.AreEqual(journals.Single().Id, "a new journal");
             }
         }
 

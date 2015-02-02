@@ -35,12 +35,9 @@ namespace SystemTests
 
         public static CefSharpResponse ExecuteRequest(this IContainer lifetime, MockRequestResponse requestResponse)
         {
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                var handler = requestScope.Resolve<IRequestHandler>();
-                handler.OnBeforeResourceLoad(null, requestResponse);
-                return requestResponse.Response;
-            }            
+            var handler = lifetime.Resolve<IRequestHandler>();
+            handler.OnBeforeResourceLoad(null, requestResponse);
+            return requestResponse.Response;
         }
     }
 }
