@@ -21,37 +21,24 @@ namespace Tests
 {
     public static class AutofacConfiguration
     {
-        public static ILifetimeScope BeginRequestScope(this IContainer container)
-        {
-            return container.BeginLifetimeScope("AutofacWebRequest");
-        }
 
         public static void Logout(this IContainer container)
         {
-            using (var requestScope = container.BeginRequestScope())
-            {
-                var sessionController = requestScope.Resolve<SessionController>();
-                sessionController.Logout();
-            }
+            var sessionController = container.Resolve<SessionController>();
+            sessionController.Logout();
         }
 
         public static void LoginToSage50(this IContainer lifetime, Sage50LoginDetails loginDetails)
         {
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                var loginController = requestScope.Resolve<Sage50SessionController>();
-                loginController.Login(loginDetails);
-            }
+            var loginController = lifetime.Resolve<Sage50SessionController>();
+            loginController.Login(loginDetails);
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
         {
             var lifetime = builder.Build();
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                requestScope.Resolve<IJournalRepository>().UpdateJournals(journals);
-                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = JournalSearcherFactory.EverythingAvailable;
-            }
+            lifetime.Resolve<IJournalRepository>().UpdateJournals(journals);
+            lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = JournalSearcherFactory.EverythingAvailable;
             return lifetime;
         }
 

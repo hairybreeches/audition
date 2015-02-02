@@ -35,12 +35,11 @@ namespace Tests.SearcherTests
                         new DateRange(DateTime.MinValue, DateTime.MaxValue)), new SerialisationOptions(true, true));
 
             using (var lifetime = builder.BuildSearchable(GetJournals()))
-            using (var requestScope = lifetime.BeginRequestScope())
             {
-                requestScope.Resolve<ExportController>().EndingExport(requestData).Wait();
+                lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
                 var ids = exporter.WrittenJournals.Select(x => x.Id);
                 CollectionAssert.AreEqual(Enumerable.Range(1, 3000).Select(x => x.ToString()), ids);
-            }           
+            }
         }
 
         //todo: surely these can somehow be done as test cases?
