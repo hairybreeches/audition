@@ -47,7 +47,7 @@ namespace Audition.Chromium
 
         public static HttpRequestMessage ToOwinHttpRequest(IRequest request)
         {
-            return ToOwinHttpRequest(request.Url, request.Method, request.Body, request.GetHeaders());
+            return ToOwinHttpRequest(request.Url, request.Method, request.Body, request.Headers.ToDictionary());
         }
 
         public static HttpRequestMessage ToOwinHttpRequest(string requestUrl, string requestMethod, string requestContent,
