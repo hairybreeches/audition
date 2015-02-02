@@ -17,9 +17,9 @@ namespace ExcelImport
             this.sqlJournalReader = sqlJournalReader;
         }
 
-        public IEnumerable<Journal> ReadJournals(ExcelImportMapping importMapping)
+        public IEnumerable<Journal> ReadJournals(SheetMetadata sheetMetadata, ExcelDataMapper excelDataMapper)
         {
-            var sheetReader = dataConverter.GetSheet(importMapping.SheetData).CreateDataReader();            
+            var sheetReader = dataConverter.GetSheet(sheetMetadata).CreateDataReader();            
             do
             {
                 if (!sheetReader.Read())
@@ -28,7 +28,7 @@ namespace ExcelImport
                 }
             } while (sheetReader.RowIsEmpty());
 
-            return sqlJournalReader.GetJournals(sheetReader, importMapping.Lookups.ToJournalSchema());
+            return sqlJournalReader.GetJournals(sheetReader, excelDataMapper.ToJournalSchema());
         }
     }
 }
