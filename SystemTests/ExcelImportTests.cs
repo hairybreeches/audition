@@ -1,7 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
 using ExcelImport;
 using Model;
@@ -31,16 +28,16 @@ namespace SystemTests
                     UseHeaderRow = true,
                 },
                 Lookups = new FieldLookups
-                {
-                    AccountCode = 4,
-                    AccountName = -1,
-                    Amount = 20,
-                    Created = 31,
-                    Description = 8,
-                    JournalDate = 2,
-                    Username = 7,
-                    Id=0
-                }
+                (
+                    accountCode : 4,
+                    accountName : -1,
+                    amount : 20,
+                    created : 31,
+                    description : 8,
+                    journalDate : 2,
+                    username : 7,
+                    id:0
+                )
             }, 1);
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the journals back");
@@ -65,16 +62,16 @@ namespace SystemTests
                     UseHeaderRow = true,
                 },
                 Lookups = new FieldLookups
-                {
-                    AccountCode = 3,
-                    AccountName = -1,
-                    Amount = 9,
-                    Created = -1,
-                    Description = 5,
-                    JournalDate = 6,
-                    Username = 19,
-                    Id=-1
-                }
+                (
+                    accountCode : 3,
+                    accountName : -1,
+                    amount : 9,
+                    created : -1,
+                    description : 5,
+                    journalDate : 6,
+                    username : 19,
+                    id:-1
+                )
             }, 7);
 
             Assert.AreEqual(new Journal("63", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
@@ -100,15 +97,16 @@ namespace SystemTests
                     UseHeaderRow = true,
                 },
                 Lookups = new FieldLookups
-                {
-                    AccountCode = 3,
-                    AccountName = -1,
-                    Amount = 9,
-                    Created = -1,
-                    Description = 5,
-                    JournalDate = 6,
-                    Username = 19
-                }
+                (
+                    accountCode : 3,
+                    accountName : -1,
+                    amount : 9,
+                    created : -1,
+                    description : 5,
+                    journalDate : 6,
+                    username : 19,
+                    id: -1
+                )
             }, 1);
 
         }
