@@ -6,7 +6,7 @@ namespace ExcelImport
     {
         public string GetColumnName(int columnNumber)
         {
-            return "Column "+ GetExcelColumnName(columnNumber + 1);
+            return GetExcelColumnName(columnNumber + 1);
         }
 
         private static string GetExcelColumnName(int columnNumber)

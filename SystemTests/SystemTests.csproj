@@ -980,6 +980,10 @@
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tests\Tests.csproj">
       <Project>{fdc54681-cb67-446f-ba2f-38dc63f4a112}</Project>
       <Name>Tests</Name>
