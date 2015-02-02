@@ -22,10 +22,10 @@ namespace Sage50
 
         public IEnumerable<Journal> GetJournals(DbConnection loginDetails)
         {
-                var nominalLookup = CreateNominalCodeLookup(loginDetails);
-
-                return  GetJournals(loginDetails, nominalLookup, "AUDIT_JOURNAL")
-                    .Concat(GetJournals(loginDetails, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
+            for (var i = 0; i < 10000000; i++)
+            {
+                yield return new Journal("1", new DateTimeOffset(),new DateTime(), "Steve", "a journal", Enumerable.Empty<JournalLine>() );
+            }
         }
 
         private IEnumerable<Journal> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
