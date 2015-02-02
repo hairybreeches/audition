@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 
 namespace SqlImport
 {
@@ -23,6 +24,12 @@ namespace SqlImport
         public IDataRecord CurrentRecord()
         {
             return innerReader;
+        }
+
+        public bool RowIsEmpty()
+        {
+            return Enumerable.Range(0, innerReader.FieldCount)
+                .All(innerReader.IsDBNull);
         }
     }
 }
