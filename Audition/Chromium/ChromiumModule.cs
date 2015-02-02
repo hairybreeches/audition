@@ -11,7 +11,13 @@ namespace Audition.Chromium
             builder.RegisterType<AppForm>();
             builder.RegisterType<ChromiumControl>();
 
-            builder.RegisterType<RequestHandler>().As<IRequestHandler>();                       
+            builder.RegisterType<SchemeHandler>().As<ISchemeHandler>();                       
+            builder.RegisterType<SchemeHandlerFactory>().As<ISchemeHandlerFactory>();
+            builder.Register(context => new CefCustomScheme
+            {
+                SchemeHandlerFactory = context.Resolve<ISchemeHandlerFactory>(),
+                SchemeName = "http"
+            });
         }
     }
 }
