@@ -31,7 +31,7 @@ namespace SqlImport.DataReaders
                 return DateTime.FromOADate((double) value);
             }
             
-            throw new SqlDataFormatUnexpectedException(String.Format("Could not interpret {0} as a date, column {1} row {2}", value, columnIndex, recordIndex));
+            throw new SqlDataFormatUnexpectedException(String.Format("Could not interpret value '{0}' from column {1} as a date", value, columnIndex));
         }
     }
 }
