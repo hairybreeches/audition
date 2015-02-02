@@ -8,16 +8,18 @@ namespace SqlImport
     public class SqlJournalReader
     {
         private readonly JournalLineParser journalLineParser;
+        private readonly JournalCreator journalCreator;
         private int recordIndex = 0;
 
-        public SqlJournalReader(JournalLineParser journalLineParser)
+        public SqlJournalReader(JournalLineParser journalLineParser, JournalCreator journalCreator)
         {
             this.journalLineParser = journalLineParser;
+            this.journalCreator = journalCreator;
         }
 
         public IEnumerable<Journal> GetJournals(DataReader reader, JournalDataReader dataReader)
         {
-            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
+            return journalCreator.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
         }
 
         private SqlJournalLine ConvertToLine(IDataRecord record, JournalDataReader dataReader)

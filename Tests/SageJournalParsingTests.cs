@@ -109,7 +109,7 @@ namespace Tests
 
         private static IEnumerable<Journal> ParseJournals(params object[][] dataRows)
         {
-            var reader = new SageJournalReader(new SageJournalSchema(), new SqlJournalReader(new JournalLineParser()));
+            var reader = new SageJournalReader(new SageJournalSchema(), new SqlJournalReader(new JournalLineParser(), new JournalCreator()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 

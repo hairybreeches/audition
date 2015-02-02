@@ -8,6 +8,7 @@ namespace SqlImport
         {
             builder.RegisterType<JournalLineParser>();
             builder.RegisterType<SqlJournalReader>();
+            builder.RegisterType<JournalCreator>();
         }
     }
 }
