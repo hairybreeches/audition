@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace SqlImport
+namespace Sage50.Parsing
 {
     public interface ISchemaColumn
     {
