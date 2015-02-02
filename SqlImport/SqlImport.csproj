@@ -44,19 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />
+    <Compile Include="DataReaders\SqlDataReader.cs" />
     <Compile Include="DataRecordExtensions.cs" />
-    <Compile Include="ISchemaColumn.cs" />
     <Compile Include="JournalLineParser.cs" />
-    <Compile Include="JournalParsing.cs" />
+    <Compile Include="JournalCreator.cs" />
     <Compile Include="JournalDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataReaders\ColumnNameVerifierDecorator.cs" />
     <Compile Include="DataReaders\DateTimeReader.cs" />
     <Compile Include="DataReaders\ISqlDataReader.cs" />
     <Compile Include="DataReaders\RecordNumberReader.cs" />
-    <Compile Include="DataReaders\SchemaColumn.cs" />
-    <Compile Include="DataReaders\ToStringDataColumn.cs" />
+    <Compile Include="DataReaders\ToStringDataReader.cs" />
     <Compile Include="DataReaders\NullDataReader.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />

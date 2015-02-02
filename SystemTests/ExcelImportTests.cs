@@ -7,6 +7,7 @@ using Model.Responses;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
+using SqlImport;
 using Tests;
 using Webapp.Controllers;
 using Webapp.Requests;
@@ -48,6 +49,34 @@ namespace SystemTests
                 new JournalLine("9998", null, JournalType.Dr, 0.05m), 
                 new JournalLine("2200", null, JournalType.Dr, 0)
             }), result.Journals[7], "A random journal should be correct");
+        }
+
+        [Test]
+        public void GetHelpfulErrorMessageWhenCannotParseDate()
+        {
+            var exception =
+                Assert.Throws<SqlDataFormatUnexpectedException>(() => GetAllJournalsFromSearch(new ExcelImportMapping
+                {
+                    SheetData = new SheetMetadata
+                    {
+                        Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
+                        Sheet = 0,
+                        UseHeaderRow = true,
+                    },
+                    Lookups = new FieldLookups
+                    (
+                        accountCode: 3,
+                        accountName: -1,
+                        amount: 9,
+                        created: 3,
+                        description: 5,
+                        journalDate: 6,
+                        username: 19,
+                        id: -1
+                    )
+                }, 1));
+
+            Assert.AreEqual("Could not read journal creation time of row 3: Could not interpret value '9998' from column D as a date", exception.Message);
         }      
         
         [Test]
@@ -72,13 +101,13 @@ namespace SystemTests
                     username : 19,
                     id:-1
                 )
-            }, 7);
+            }, 6);
 
-            Assert.AreEqual(new Journal("63", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Rent Prepayment",
+            Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
                     new[]
                     {
-                        new JournalLine("7100", null, JournalType.Dr, 450)
-                    }), results.Journals[3], "A random journal should be correct");
+                        new JournalLine("7502", null, JournalType.Dr, 50)
+                    }), results.Journals[9], "A random journal should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      
