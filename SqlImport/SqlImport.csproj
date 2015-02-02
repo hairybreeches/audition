@@ -47,7 +47,6 @@
     <Compile Include="DataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />
     <Compile Include="DataReaders\SqlDataReader.cs" />
-    <Compile Include="DataRecordExtensions.cs" />
     <Compile Include="JournalLineParser.cs" />
     <Compile Include="JournalCreator.cs" />
     <Compile Include="JournalDataReader.cs" />
