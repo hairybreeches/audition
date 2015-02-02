@@ -1,0 +1,29 @@
+﻿include forms
+
+
+
+mixin row-dropdown(field)
+	+form-field(field.label)
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}")
+			block
+			optgroup(data-bind="foreach: columnNames" label="Map this field to:")
+				option(data-bind="attr: { label: $data, value: $index}")
+
+mixin optional-row-dropdown(field)
+	+row-dropdown(field)
+		option(value="-1" label="Do not map this field")
+
+mixin excel-login()
+	.form-group
+		label.col-sm-2.col-sm-offset-2.control-label File location
+		.col-sm-6
+			input#excelFileLocation.form-control(type="text" data-bind="textInput: fileLocation" name="fileLocation")
+		.col-sm-2
+			button.btn.btn-default(type="button", data-bind="click: browseExcelFile") Browse...	
+	+form-field('Sheet')
+		select.form-control(name="sheet" data-bind="value: sheet, foreach: sheetNames")
+			option(data-bind="attr: { label: $data, value: $index}")
+	+checkbox('Header row', 'useHeaderRow')
+	+row-dropdown({label: 'Date', fieldName: 'JournalDate'})
+	each field in [	{label: 'Nominal code', fieldName: 'AccountCode'}, {label: 'Nominal name', fieldName: 'AccountName'}, {label: 'Amount', fieldName: 'Amount'}, {label: 'Created by', fieldName: 'Username'}, {label: 'Created date', fieldName: 'Created'}, {label: 'Description', fieldName: 'Description'}, {label: 'ID', fieldName: 'Id'}]
+		+optional-row-dropdown(field)
