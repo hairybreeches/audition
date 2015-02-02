@@ -55,7 +55,7 @@ namespace ExcelImport
 
         private ISqlDataReader<string> GetIdColumn()
         {
-            return IsSet(Id) ? (ISqlDataReader<string>) new ToStringDataColumn("Id", Id) : new RecordNumberReader();
+            return IsSet(Id) ? (ISqlDataReader<string>) new ToStringDataReader(Id) : new RecordNumberReader();
         }
 
         private static ISqlDataReader<DateTime> GetDateColumn(int columnIndex)
@@ -76,7 +76,7 @@ namespace ExcelImport
 
         private static ISqlDataReader<T> GetColumn<T>(int columnIndex, string columnName)
         {
-            return IsSet(columnIndex) ? new SchemaColumn<T>(columnName, columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
+            return IsSet(columnIndex) ? new SqlDataReader<T>(columnName, columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(DisplayField displayField)

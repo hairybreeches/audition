@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReaders\LookupConverter.cs" />
+    <Compile Include="DataReaders\SqlDataReader.cs" />
     <Compile Include="DataRecordExtensions.cs" />
     <Compile Include="ISchemaColumn.cs" />
     <Compile Include="JournalLineParser.cs" />
@@ -55,8 +56,7 @@
     <Compile Include="DataReaders\DateTimeReader.cs" />
     <Compile Include="DataReaders\ISqlDataReader.cs" />
     <Compile Include="DataReaders\RecordNumberReader.cs" />
-    <Compile Include="DataReaders\SchemaColumn.cs" />
-    <Compile Include="DataReaders\ToStringDataColumn.cs" />
+    <Compile Include="DataReaders\ToStringDataReader.cs" />
     <Compile Include="DataReaders\NullDataReader.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />
