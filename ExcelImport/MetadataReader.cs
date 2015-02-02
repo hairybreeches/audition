@@ -36,7 +36,7 @@ namespace ExcelImport
         private IEnumerable<string> GetExcelColumnNames(IEnumerable<DataColumn> dataColumns)
         {            
             return Enumerable.Range(0, dataColumns.Count())
-                .Select(x => columnNamer.GetColumnName(x));
+                .Select(x => "Column " + columnNamer.GetColumnName(x));
         }
 
      

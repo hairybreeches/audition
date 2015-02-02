@@ -7,6 +7,7 @@ using Model.Responses;
 using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
+using SqlImport;
 using Tests;
 using Webapp.Controllers;
 using Webapp.Requests;
@@ -48,6 +49,34 @@ namespace SystemTests
                 new JournalLine("9998", null, JournalType.Dr, 0.05m), 
                 new JournalLine("2200", null, JournalType.Dr, 0)
             }), result.Journals[7], "A random journal should be correct");
+        }
+
+        [Test]
+        public void GetHelpfulErrorMessageWhenCannotParseDate()
+        {
+            var exception =
+                Assert.Throws<SqlDataFormatUnexpectedException>(() => GetAllJournalsFromSearch(new ExcelImportMapping
+                {
+                    SheetData = new SheetMetadata
+                    {
+                        Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
+                        Sheet = 0,
+                        UseHeaderRow = true,
+                    },
+                    Lookups = new FieldLookups
+                    (
+                        accountCode: 3,
+                        accountName: -1,
+                        amount: 9,
+                        created: 3,
+                        description: 5,
+                        journalDate: 6,
+                        username: 19,
+                        id: -1
+                    )
+                }, 1));
+
+            Assert.AreEqual("Could not read journal creation time of row 3: Could not interpret value '9998' from column D as a date", exception.Message);
         }      
         
         [Test]
