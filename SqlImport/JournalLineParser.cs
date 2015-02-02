@@ -5,12 +5,12 @@ using Model.Accounting;
 namespace SqlImport
 {
     /// <summary>
-    /// Knows how to turn the raw IDataRecord from the db into a SqlJournalLine
+    /// Knows how to turn the raw IDataRecord into a SqlJournalLine with the help of a JournalDataReader 
     /// Don't use this directly, use a JournalReader.
     /// </summary>
     public class JournalLineParser
     {
-        public SqlJournalLine CreateJournalLine(IDataRecord record, JournalDataReader dataReader, int recordIndex)
+        internal SqlJournalLine CreateJournalLine(IDataRecord record, JournalDataReader dataReader, int recordIndex)
         {
             return CreateJournalLine(
                 dataReader.GetId(record, recordIndex),

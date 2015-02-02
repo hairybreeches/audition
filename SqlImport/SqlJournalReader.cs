@@ -8,32 +8,28 @@ namespace SqlImport
     public class SqlJournalReader
     {
         private readonly JournalLineParser journalLineParser;
-        private int recordIndex = 0;
+        private readonly JournalCreator journalCreator;
 
-        public SqlJournalReader(JournalLineParser journalLineParser)
+        public SqlJournalReader(JournalLineParser journalLineParser, JournalCreator journalCreator)
         {
             this.journalLineParser = journalLineParser;
+            this.journalCreator = journalCreator;
         }
 
-        public IEnumerable<Journal> GetJournals(IDataReader reader, JournalDataReader dataReader)
+        public IEnumerable<Journal> GetJournals(DataReader reader, JournalDataReader dataReader)
         {
-            return JournalParsing.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
+            return journalCreator.ReadJournals(GetLineRecords(reader, dataReader));
         }
 
-        private SqlJournalLine ConvertToLine(IDataRecord record, JournalDataReader dataReader)
+        private IEnumerable<SqlJournalLine> GetLineRecords(DataReader reader, JournalDataReader dataReader)
         {
-            var sqlJournalLine = journalLineParser.CreateJournalLine(record, dataReader, recordIndex);
-            recordIndex++;
-            return sqlJournalLine;
-        }
-
-        private static IEnumerable<IDataRecord> GetLineRecords(IDataReader reader)
-        {
-            do
+            while (reader.Read())
             {
-                yield return reader;
-            } while (reader.Read());
-
+                if (!reader.RowIsEmpty())
+                {
+                    yield return journalLineParser.CreateJournalLine(reader.CurrentRecord(), dataReader, reader.RowNumber);
+                }                
+            }
         }
     }
 }

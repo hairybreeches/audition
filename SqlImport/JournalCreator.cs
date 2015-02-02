@@ -10,15 +10,15 @@ namespace SqlImport
     /// Knows how to turn intermediate parsing step SqlJournalLine into Journals.
     /// Don't use this directly, use a JournalReader.
     /// </summary>
-    internal static class JournalParsing
+    public class JournalCreator
     {
-        public static IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
+        internal IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateJournal);
         }
 
-        private static Journal CreateJournal(IEnumerable<SqlJournalLine> linesEnumerable)
+        private Journal CreateJournal(IEnumerable<SqlJournalLine> linesEnumerable)
         {
             var journalLines = linesEnumerable.ToList();
             return new Journal(
