@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using Model;
 using Native;
-using NSubstitute;
 
 namespace Sage50
 {
@@ -24,7 +23,14 @@ namespace Sage50
 
         public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
         {
-            return Substitute.For<DbConnection>();
+            var drivers = driverDetector.FindSageDrivers();
+            var folder = GetFolder(loginDetails.DataDirectory);
+            return OpenConnection(new Sage50LoginDetails
+            {
+                DataDirectory = folder,
+                Password = loginDetails.Password,
+                Username = loginDetails.Username
+            }, drivers);
         }
 
         private string GetFolder(string dataDirectory)
