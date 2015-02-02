@@ -1,5 +1,0 @@
-﻿var searchModel = {
-    unavilableFields: {},
-
-    unavailableActions: {}
-}

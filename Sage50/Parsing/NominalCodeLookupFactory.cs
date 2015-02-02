@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using SqlImport;
 
 namespace Sage50.Parsing
 {
@@ -20,7 +21,7 @@ namespace Sage50.Parsing
             return new NominalCodeLookup(dictionary);
         }
 
-        public void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
+        private static void AddNominalCode(Dictionary<string, string> dictionary, string nominalCode, string nominalCodeName)
         {
             try
             {
@@ -28,7 +29,7 @@ namespace Sage50.Parsing
             }
             catch (ArgumentException e)
             {
-                throw new SageDataFormatUnexpectedException(String.Format("Error adding key: {0}. Existing keys: {1}",
+                throw new SqlDataFormatUnexpectedException(String.Format("Error adding key: {0}. Existing keys: {1}",
                     nominalCode, String.Join(", ", dictionary.Keys)), e);
             }
         }

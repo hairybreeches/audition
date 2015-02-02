@@ -9,5 +9,10 @@ namespace Webapp.Session
         {
             throw new NotLoggedInException();
         }
+
+        public SearchCapability GetSearchCapability()
+        {
+            throw new NotLoggedInException();
+        }
     }
 }

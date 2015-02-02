@@ -97,13 +97,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ExcelSessionController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\LicensingController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\Sage50SessionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\XeroSessionController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="OwinServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ExportRequest.cs" />
@@ -117,9 +119,13 @@
     <Compile Include="WebappModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Excel\Excel.csproj">
+    <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
-      <Name>Excel</Name>
+      <Name>CsvExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
     </ProjectReference>
     <ProjectReference Include="..\Licensing\Licensing.csproj">
       <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
@@ -144,10 +150,6 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xero\Xero.csproj">
-      <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
-      <Name>Xero</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -70,22 +70,21 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="XeroApi, Version=1.1.0.33, Culture=neutral, PublicKeyToken=3de03a85ae0f7251, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\XeroAPI.Net.1.1.0.33\lib\XeroApi.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelImportTests.cs" />
     <Compile Include="LicensingTests.cs" />
     <Compile Include="MockRequest.cs" />
     <Compile Include="MockResponse.cs" />
     <Compile Include="RequestExecution.cs" />
     <Compile Include="Sage50Tests.cs" />
-    <Compile Include="XeroTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ExcelSampleData.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Sage50SampleData\ACCDATA\1.COA">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -951,9 +950,9 @@
       <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
       <Name>Audition</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Excel\Excel.csproj">
-      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
-      <Name>Excel</Name>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
     </ProjectReference>
     <ProjectReference Include="..\Licensing\Licensing.csproj">
       <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
@@ -986,10 +985,6 @@
     <ProjectReference Include="..\Webapp\Webapp.csproj">
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
       <Name>Webapp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xero\Xero.csproj">
-      <Project>{BBE4B486-91FC-4250-AF0B-2B143780AC1E}</Project>
-      <Name>Xero</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

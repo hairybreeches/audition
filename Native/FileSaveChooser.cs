@@ -19,15 +19,15 @@ namespace Native
 
         private static string GetValue()
         {
-            var fbd = new SaveFileDialog
+            using (var dialog = new SaveFileDialog
             {
-                Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|PDF document|*.pdf|All files|*.*"
+                Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|All files|*.*"
 
-            };
-
-            fbd.ShowDialog();
-
-            return fbd.FileName;
+            })
+            {
+                dialog.ShowDialog();
+                return dialog.FileName;
+            }
         }
     }
 }

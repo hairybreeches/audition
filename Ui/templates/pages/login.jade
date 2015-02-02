@@ -1,29 +1,31 @@
 include ../components/template
-include ../components/xero-login
-include ../components/sage50-login
+include ../components/sage50Login
+include ../components/excelLogin
 include ../components/forms
 include ../components/message
 
 
 mixin login-form(system, url)
-	div(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
+	form.form-horizontal(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
 
-+page('Login', ['login'])
++page('Login', ['sage50Login', 'excelLogin', 'login'])
 	.container
 		legend.vertical-space Login to accounts system
-		form.form-horizontal.blockable(action="search", method="post")
+		.blockable(action="search", method="post")
 			.blockscreen.loadscreen(style="display: none;" data-bind="visible: blocked()")
-			fieldset
-				+form-field('Accounts system')
-					select.form-control(data-bind="value: system")
-							option(value="sage50") Sage Line 50
-			+login-form('xero', "/api/xero/login")
-				+xero-login()
+			form.form-horizontal
+				fieldset
+					+form-field('Accounts system')
+						select.form-control(data-bind="value: system")
+								option(value="sage50") Sage Line 50			
+								option(value="excel") Excel			
 			+login-form('sage50', "/api/sage50/login")
 				+sage50-login()
+			+login-form('excel', "/api/sage50/login")
+				+excel-login()
 		+errorMessage('error')
 		hr.vertical-space
 
