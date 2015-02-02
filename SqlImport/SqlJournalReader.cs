@@ -19,21 +19,14 @@ namespace SqlImport
 
         public IEnumerable<Journal> GetJournals(DataReader reader, JournalDataReader dataReader)
         {
-            return journalCreator.ReadJournals(GetLineRecords(reader).Select(record => ConvertToLine(record, dataReader)));
+            return journalCreator.ReadJournals(GetLineRecords(reader, dataReader));
         }
 
-        private SqlJournalLine ConvertToLine(IDataRecord record, JournalDataReader dataReader)
-        {
-            var sqlJournalLine = journalLineParser.CreateJournalLine(record, dataReader, recordIndex);
-            recordIndex++;
-            return sqlJournalLine;
-        }
-
-        private static IEnumerable<IDataRecord> GetLineRecords(DataReader reader)
+        private IEnumerable<SqlJournalLine> GetLineRecords(DataReader reader, JournalDataReader dataReader)
         {
             do
             {
-                yield return reader.CurrentRecord();
+                yield return journalLineParser.CreateJournalLine(reader.CurrentRecord(), dataReader, reader.RowNumber);
             } while (reader.Read());
 
         }
