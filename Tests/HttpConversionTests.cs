@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -35,7 +36,7 @@ namespace Tests
                 {
                     new KeyValuePair<string, string>("steve", "headerValue"),
                     new KeyValuePair<string, string>("Content-Type", "random/encoding; charset=utf-32"),
-                }, converted.Headers);
+                }, converted.Headers.ToDictionary());
                 Assert.AreEqual("random/encoding", converted.Mime);
                 Assert.AreEqual("I am some content", StreamToString(converted.Content, Encoding.UTF32));
                 Assert.AreEqual("Yay!", converted.ReasonPhrase);
@@ -63,7 +64,7 @@ namespace Tests
                 {
                     new KeyValuePair<string, string>("steve", "headerValue"),
                     new KeyValuePair<string, string>("Content-Type", "application/json; charset=us-ascii"),
-                }, converted.Headers);
+                }, converted.Headers.ToDictionary());
                 Assert.AreEqual("application/json", converted.Mime);
                 Assert.AreEqual("I am some other content", StreamToString(converted.Content, Encoding.ASCII));
                 Assert.AreEqual("Go elsewhere!", converted.ReasonPhrase);
@@ -76,11 +77,10 @@ namespace Tests
             var request = Substitute.For<IRequest>();
             request.Method.Returns("POST");
             request.Body.Returns("I am some content");
-            request.GetHeaders().Returns(new Dictionary<string, string>()
-            {
-                {"Content-Type", "application/json; charset=us-ascii"},
-                {"Accept", "text/html"}
-            });            
+            var headers = new NameValueCollection();
+            headers["Content-Type"] = "application/json; charset=us-ascii";
+            headers["Accept"] = "text/html";
+            request.Headers.Returns(headers);            
 
 
             var converted = HttpConversion.ToOwinHttpRequest(request);

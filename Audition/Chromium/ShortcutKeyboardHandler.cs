@@ -6,7 +6,7 @@ namespace Audition.Chromium
 {
     public class ShortcutKeyboardHandler : IKeyboardHandler
     {        
-        private const int ctrlshift = 1027;
+        private const int ctrlshift = 6;
         private const int w = 23;
         private const int e = 5;
         private const int r = 18;
@@ -18,10 +18,10 @@ namespace Audition.Chromium
             shortcuts.Add(e, browser => browser.Reload(true));
             shortcuts.Add(r, browser => browser.ShowDevTools());
         }
-
-        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, int modifiers, bool isSystemKey, bool isAfterJavaScript)
+        
+        public bool OnKeyEvent(IWebBrowser browser, KeyType type, int code, int modifiers, bool isSystemKey)
         {
-            if (type == KeyType.Char && isAfterJavaScript == false && modifiers == ctrlshift)
+            if (type == KeyType.Char && modifiers == ctrlshift)
             {
                 Action<IWebBrowser> action;
                 if (shortcuts.TryGetValue(code, out action))
@@ -35,6 +35,10 @@ namespace Audition.Chromium
             return false;
         }
 
-
+        public bool OnPreKeyEvent(IWebBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode, int modifiers,
+            bool isSystemKey, bool isKeyboardShortcut)
+        {
+            return false;
+        }
     }
 }
