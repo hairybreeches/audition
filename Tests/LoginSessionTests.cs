@@ -54,9 +54,8 @@ namespace Tests
 
         private static ContainerBuilder GetContainerBuilder()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<AuditionModule>();
-            builder.WithNoLicensing()
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
+                .WithNoLicensing()
                 .Sage50LoginReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
             return builder;
         }
