@@ -76,7 +76,7 @@ namespace ExcelImport
 
         private static ISqlDataReader<T> GetColumn<T>(int columnIndex, string columnName)
         {
-            return IsSet(columnIndex) ? new SqlDataReader<T>(columnName, columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
+            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex) : (ISqlDataReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(DisplayField displayField)

@@ -13,7 +13,7 @@ namespace Sage50.Parsing
 
 
         public SchemaColumn(string fieldName, int index)
-            :this(fieldName, index, (name, i) => new SqlDataReader<T>(name, i))
+            :this(fieldName, index, (name, i) => new SqlDataReader<T>(i))
         {
         }
 
