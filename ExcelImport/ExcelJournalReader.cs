@@ -28,7 +28,7 @@ namespace ExcelImport
                 }
             } while (sheetReader.RowIsEmpty());
 
-            return sqlJournalReader.GetJournals(sheetReader, excelDataMapper.ToJournalSchema());
+            return sqlJournalReader.GetJournals(sheetReader, excelDataMapper.GetDataReader());
         }
     }
 }
