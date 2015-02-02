@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Model;
+using SqlImport;
 
 namespace Sage50.Parsing
 {
-    public class NominalCodeLookup
+    public class NominalCodeLookup : IValueLookup<string, string>
     {
         private readonly IDictionary<string, string> lookup;
 
@@ -12,7 +14,7 @@ namespace Sage50.Parsing
             this.lookup = lookup;
         }
 
-        public string GetNominalCodeName(string nominalCode)
+        public string GetLookupValue(string nominalCode)
         {
             string nominalCodeName;
             if (lookup.TryGetValue(nominalCode, out nominalCodeName))
@@ -20,7 +22,7 @@ namespace Sage50.Parsing
                 return lookup[nominalCode];
             }
 
-            throw new SageDataFormatUnexpectedException(String.Format("Could not find lookup value for nominal code {0}, available nominal codes are {1}", nominalCode, String.Join(", ", lookup.Keys)));     
+            throw new SqlDataFormatUnexpectedException(String.Format("Could not find lookup value for nominal code {0}, available nominal codes are {1}", nominalCode, String.Join(", ", lookup.Keys)));     
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
-using Excel;
+using CsvExport;
 using Model;
 using Model.Accounting;
 using Model.SearchWindows;
@@ -26,7 +26,7 @@ namespace Tests.SearcherTests
                 .WithNoLicensing()
                 .SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
-            builder.Register(_ => exporter).As<IExcelExporter>();            
+            builder.Register(_ => exporter).As<ICsvExporter>();            
 
 
             var requestData =

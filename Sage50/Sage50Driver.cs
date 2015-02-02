@@ -23,14 +23,19 @@ namespace Sage50
             return new Sage50Driver(version, name, GetFriendlyName(name));
         }
 
+        public String GetDemoDataLocation()
+        {
+            return "%PROGRAMDATA%\\Sage\\Accounts\\" + FriendlyName + "\\DEMODATA";
+        }
+
         private static readonly IDictionary<string, string> knownFriendlyNames = new Dictionary<string, string>
         {
-            {"Sage Line 50 v21", "Sage 2015"},
-            {"Sage Line 50 v20", "Sage 2014"},
-            {"Sage Line 50 v19", "Sage 2013"},
-            {"Sage Line 50 v18", "Sage 2012"},
-            {"Sage Line 50 v17", "Sage 2011"},
-            {"Sage Line 50 v16", "Sage 2010"},
+            {"Sage Line 50 v21", "2015"},
+            {"Sage Line 50 v20", "2014"},
+            {"Sage Line 50 v19", "2013"},
+            {"Sage Line 50 v18", "2012"},
+            {"Sage Line 50 v17", "2011"},
+            {"Sage Line 50 v16", "2010"},
         };
 
         private static string GetFriendlyName(string name)

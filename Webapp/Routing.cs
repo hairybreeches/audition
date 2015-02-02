@@ -4,13 +4,13 @@ namespace Webapp
 {
     //todo: share these routes between js and c# using CEF
     public static class Routing
-    {        
-        public const string InitialiseXeroLogin = "api/xero/initialiselogin";
-        public const string XeroLogin = "api/xero/login";
-        public const string XeroLogout = "api/xero/logout";
+    {
+
+        public const string GetExcelSheets = "api/excel/getSheetNames";
+        public const string GetExcelHeaders = "api/excel/getHeaders";
+        public const string ExcelLogin = "api/excel/login";
 
         public const string Sage50Login = "api/sage50/login";
-        public const string Sage50Logout = "api/sage50/logout";
 
         public const string GetLicence = "api/licence/get";
         public const string UpdateLicence = "api/licence/update";
@@ -26,10 +26,17 @@ namespace Webapp
         public const string EndingSearch = "api/search/ending";
         public const string EndingExport = "api/export/ending";
 
+        public const string Sage50DataLocations = "api/userdata/sage50DataLocations";
+        public const string ExcelDataFiles = "api/userdata/excelDataFiles";
+
+        public const string SearchCapability = "api/session/searchCapability";
+        public const string Logout = "api/session/logout";
+
 
         public const string Openfile = "api/openfile";        
         public const string ShowDevTools = "api/devtools";
         public const string ChooseDirectory = "api/chooseDirectory";
+        public const string ChooseExcelFile = "api/chooseExcelFile";
 
         public const string InternalDomain = @"http://localhost:1337";        
 

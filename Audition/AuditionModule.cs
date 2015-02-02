@@ -1,13 +1,15 @@
 ﻿using Audition.Chromium;
 using Autofac;
-using Excel;
+using CsvExport;
+using ExcelImport;
 using Licensing;
 using Native;
 using Persistence;
 using Sage50;
+using SqlImport;
+using UserData;
 using Webapp;
 using Webapp.Session;
-using Xero;
 using Module = Autofac.Module;
 
 namespace Audition
@@ -16,15 +18,17 @@ namespace Audition
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<XeroModule>();
             builder.RegisterModule<Sage50Module>();
             builder.RegisterModule<NativeModule>();
             builder.RegisterModule<ChromiumModule>();
-            builder.RegisterModule<ExcelModule>();            
+            builder.RegisterModule<CsvExportModule>();            
             builder.RegisterModule<SessionModule>();            
             builder.RegisterModule<PersistenceModule>();
             builder.RegisterModule<WebappModule>();
             builder.RegisterModule<LicensingModule>();
+            builder.RegisterModule<UserDataModule>();
+            builder.RegisterModule<ExcelImportModule>();
+            builder.RegisterModule<SqlImportModule>();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Excel;
+using CsvExport;
 using Native;
 
 namespace Tests.Mocks
@@ -27,6 +27,21 @@ namespace Tests.Mocks
         }
 
         public bool DirectoryExists(string directoryName)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public void EnsureDirectoryExists(string directory)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public bool FileExists(string filename)
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
+        public Stream OpenFileStreamToRead(string filename)
         {
             throw new ShouldNotHappenInThisTestException();
         }

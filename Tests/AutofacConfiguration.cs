@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 using Audition;
 using Autofac;
@@ -9,10 +10,11 @@ using Native;
 using NSubstitute;
 using Persistence;
 using Sage50;
+using Searching;
 using Tests.Mocks;
+using UserData;
 using Webapp.Controllers;
 using Webapp.Session;
-using Xero;
 using IFileSystem = Microsoft.Owin.FileSystems.IFileSystem;
 
 namespace Tests
@@ -24,21 +26,12 @@ namespace Tests
             return container.BeginLifetimeScope("AutofacWebRequest");
         }
 
-        public static void LoginToXero(this IContainer lifetime, XeroVerificationCode verificationCode)
-        {
-            using (var requestScope = lifetime.BeginRequestScope())
-            {
-                var loginController = requestScope.Resolve<XeroSessionController>();
-                loginController.PostCompleteAuthenticationRequest(verificationCode).Wait();
-            }            
-        }
-
-        public static void LogoutFromXero(this IContainer container)
+        public static void Logout(this IContainer container)
         {
             using (var requestScope = container.BeginRequestScope())
             {
-                var loginController = requestScope.Resolve<XeroSessionController>();
-                loginController.Logout();
+                var sessionController = requestScope.Resolve<SessionController>();
+                sessionController.Logout();
             }
         }
 
@@ -57,7 +50,7 @@ namespace Tests
             using (var requestScope = lifetime.BeginRequestScope())
             {
                 requestScope.Resolve<IJournalRepository>().UpdateJournals(journals);
-                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = new Sage50SearcherFactory();
+                requestScope.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = JournalSearcherFactory.EverythingAvailable;
             }
             return lifetime;
         }
@@ -69,6 +62,7 @@ namespace Tests
 
             builder.Register(_ => new PhysicalFileSystem("."))
                 .As<IFileSystem>();
+            builder.RegisterType<MockUserDetailsStorage>().As<IUserDetailsStorage>();
 
             return builder;
         }
@@ -76,6 +70,15 @@ namespace Tests
         public static ContainerBuilder WithNoLicensing(this ContainerBuilder builder)
         {
             builder.RegisterType<PermissiveLicenceStorage>().As<ILicenceStorage>();
+            return builder;
+        }
+        
+        public static ContainerBuilder Sage50LoginReturns(this ContainerBuilder builder, params Journal[] journals)
+        {
+            builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
+            var journalGetter = Substitute.For<ISage50JournalGetter>();
+            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(journals);
+            builder.Register(_ => journalGetter);
             return builder;
         }
 
