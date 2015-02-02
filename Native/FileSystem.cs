@@ -45,13 +45,10 @@ namespace Native
 
         public void DeleteFile(string filename)
         {
-            try
+            if (FileExists(filename))
             {
                 File.Delete(filename);
             }
-            catch (FileNotFoundException)
-            {                                
-            }            
         }
     }
 }

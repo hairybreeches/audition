@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Audition.Chromium;
 using Autofac;
 using CefSharp;
@@ -10,9 +11,9 @@ namespace SystemTests
 {
     public static class RequestExecution
     {
-        public static T GetParsedResponseContent<T>(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static T GetParsedResponseContent<T>(this IContainer lifetime, IRequest request)
         {
-            var json = lifetime.GetResponseContent(requestResponse);
+            var json = lifetime.GetResponseContent(request);
             try
             {
                 return JsonConvert.DeserializeObject<T>(json);
@@ -24,20 +25,20 @@ namespace SystemTests
             
         }
 
-        public static string GetResponseContent(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static string GetResponseContent(this IContainer lifetime, IRequest request)
         {
-            var cefSharpResponse = lifetime.ExecuteRequest(requestResponse);            
-            using (var reader = new StreamReader(cefSharpResponse.Content))
+            var cefSharpResponse = lifetime.ExecuteRequest(request);            
+            using (var reader = new StreamReader(cefSharpResponse.ResponseStream))
             {
                 return reader.ReadToEnd();
             }
         }
 
-        public static CefSharpResponse ExecuteRequest(this IContainer lifetime, MockRequestResponse requestResponse)
+        public static ISchemeHandlerResponse ExecuteRequest(this IContainer lifetime, IRequest request)
         {
             var handler = lifetime.Resolve<IRequestHandler>();
-            handler.OnBeforeResourceLoad(null, requestResponse);
+            handler.ProcessRequestAsync(request, response, () => { });
             return requestResponse.Response;
+            }            
         }
     }
-}
