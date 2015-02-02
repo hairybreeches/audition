@@ -12,7 +12,7 @@ namespace SqlImport
     /// </summary>
     public class JournalCreator
     {
-        public IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
+        internal IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateJournal);

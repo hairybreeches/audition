@@ -3,7 +3,7 @@ using Model.Accounting;
 
 namespace SqlImport
 {
-    public class SqlJournalLine
+    internal class SqlJournalLine
     {
         public string TransactionId { get; private set; }
         public string Username { get; private set; }
