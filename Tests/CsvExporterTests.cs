@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CsvExport;
+using Model;
 using Model.Accounting;
 using NUnit.Framework;
 using Tests.Mocks;
@@ -30,7 +31,7 @@ namespace Tests
                     new JournalLine("8014", "Depreciation", JournalType.Cr, 12.4m),
                     new JournalLine("4001", "Fixed assets", JournalType.Dr, 12.4m)
                 }  )
-            }, "c:\\steve.csv");
+            }, "c:\\steve.csv", Enums.GetAllValues<DisplayField>());
 
             var expected =
 @"What we did to get these journals
