@@ -2,7 +2,7 @@ using System;
 
 namespace Model.SearchWindows
 {
-    public class YearEndParameters
+    public class YearEndParameters : ISearchParameters
     {
         public YearEndParameters(int daysBeforeYearEnd)
         {

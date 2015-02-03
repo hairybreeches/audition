@@ -107,7 +107,7 @@ namespace Tests.SearcherTests
 
 
 
-        public SearchRequest<T> CreateSearchRequest<T>(T searchParameters)
+        public SearchRequest<T> CreateSearchRequest<T>(T searchParameters) where T : ISearchParameters
         {
             return new SearchRequest<T>(new SearchWindow<T>(searchParameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)), 149);
         }

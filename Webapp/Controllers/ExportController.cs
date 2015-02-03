@@ -65,7 +65,7 @@ namespace Webapp.Controllers
             return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
-        private async Task<string> Export<T>(SearchWindow<T> searchWindow, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
+        private async Task<string> Export<T>(SearchWindow<T> searchWindow, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod) where T : ISearchParameters
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
             journalExporter.WriteJournals(searchWindow.Description, searchMethod(searchWindow).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);

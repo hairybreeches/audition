@@ -2,7 +2,7 @@ using System;
 
 namespace Model.SearchWindows
 {
-    public class EndingParameters
+    public class EndingParameters : ISearchParameters
     {
         public int MinimumZeroesToBeConsideredUnusual { get; private set; }
 

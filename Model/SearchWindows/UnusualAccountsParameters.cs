@@ -1,6 +1,6 @@
 namespace Model.SearchWindows
 {
-    public class UnusualAccountsParameters
+    public class UnusualAccountsParameters : ISearchParameters
     {
         public UnusualAccountsParameters(int minimumEntriesToBeConsideredNormal)
         {

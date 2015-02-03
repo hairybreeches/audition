@@ -6,7 +6,7 @@ using Model.SearchWindows;
 
 namespace Searching
 {
-    public class NotSupportedSearcher<T> : IJournalSearcher<T>
+    public class NotSupportedSearcher<T> : IJournalSearcher<T> where T : ISearchParameters
     {
         private readonly string errorMessage;
 

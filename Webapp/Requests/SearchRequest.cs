@@ -2,7 +2,7 @@
 
 namespace Webapp.Requests
 {
-    public class SearchRequest<T>
+    public class SearchRequest<T> where T : ISearchParameters
     {
         public SearchRequest(SearchWindow<T> searchWindow, int pageNumber)
         {
