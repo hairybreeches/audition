@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CsvHelper;
+using Model;
 using Model.Accounting;
 using Native;
 
@@ -14,7 +15,7 @@ namespace CsvExport
             this.fileSystem = fileSystem;
         }
 
-        public void WriteJournals(string description, IEnumerable<Journal> journals, string filename)
+        public void WriteJournals(string description, IEnumerable<Journal> journals, string filename, IEnumerable<DisplayField> availableFields)
         {
             using (var writer = CreateWriter(filename))
             {
