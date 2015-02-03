@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="DisplayField.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IncorrectLoginDetailsException.cs" />
     <Compile Include="IValueLookup.cs" />
@@ -63,7 +64,6 @@
     <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\WorkingHoursParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />
-    <Compile Include="SerialisationOptions.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Journal.cs" />
     <Compile Include="Accounting\JournalLine.cs" />

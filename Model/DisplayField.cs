@@ -1,4 +1,4 @@
-namespace Searching
+namespace Model
 {
     public enum DisplayField
     {
