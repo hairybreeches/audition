@@ -10,11 +10,11 @@ using Webapp;
 
 namespace Audition.Chromium
 {
-    public static class HttpConversion
+    public class HttpConverter
     {
         private const string InternalDomain = Routing.InternalDomain;
 
-        public static CefSharpResponse ToCefSharpResponse(HttpResponseMessage response)
+        public CefSharpResponse ToCefSharpResponse(HttpResponseMessage response)
         {
             var responseContent = GetResponseContent(response);
 
@@ -45,12 +45,12 @@ namespace Audition.Chromium
                 : "text/html";
         }
 
-        public static HttpRequestMessage ToOwinHttpRequest(IRequest request)
+        public HttpRequestMessage ToOwinHttpRequest(IRequest request)
         {
             return ToOwinHttpRequest(request.Url, request.Method, request.Body, request.Headers.ToDictionary());
         }
 
-        public static HttpRequestMessage ToOwinHttpRequest(string requestUrl, string requestMethod, string requestContent,
+        private static HttpRequestMessage ToOwinHttpRequest(string requestUrl, string requestMethod, string requestContent,
             IDictionary<string, string> headers)
         {
             var uri = requestUrl.Replace(InternalDomain, String.Empty);

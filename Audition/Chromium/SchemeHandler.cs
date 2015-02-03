@@ -10,11 +10,13 @@ namespace Audition.Chromium
 
         private readonly string internalDomain;
         private readonly OwinServer server;
+        private readonly HttpConverter httpConverter;
 
-        public SchemeHandler(OwinServer server)
+        public SchemeHandler(OwinServer server, HttpConverter httpConverter)
         {
             internalDomain = Routing.InternalDomain;
             this.server = server;
+            this.httpConverter = httpConverter;
         }
 
         public bool ProcessRequestAsync(IRequest request, ISchemeHandlerResponse response,
@@ -22,7 +24,7 @@ namespace Audition.Chromium
         {            
             if (request.Url.StartsWith(internalDomain))
             {
-                var httpRequestMessage = HttpConversion.ToOwinHttpRequest(request);
+                var httpRequestMessage = httpConverter.ToOwinHttpRequest(request);
                 GetResponse(httpRequestMessage).ContinueWith(requestTask =>
                 {
                     Respond(response, requestTask.Result);
@@ -34,11 +36,11 @@ namespace Audition.Chromium
             return false;
         }
 
-        private static void Respond(ISchemeHandlerResponse requestResponse, HttpResponseMessage response)
+        private void Respond(ISchemeHandlerResponse requestResponse, HttpResponseMessage response)
         {
             using (response)
             {
-                var cefSharpResponse = HttpConversion.ToCefSharpResponse(response);
+                var cefSharpResponse = httpConverter.ToCefSharpResponse(response);
 
                 requestResponse.CloseStream = true;
                 requestResponse.ResponseStream = cefSharpResponse.Content;
