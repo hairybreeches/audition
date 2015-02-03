@@ -8,7 +8,6 @@ using Model.SearchWindows;
 using Native;
 using Persistence;
 using Searching;
-using Webapp.Requests;
 using Webapp.Session;
 
 namespace Webapp.Controllers
@@ -33,43 +32,43 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.HoursExport)]
-        public async Task<string> HoursExport(ExportRequest<WorkingHoursParameters> saveRequest)
+        public async Task<string> HoursExport(SearchWindow<WorkingHoursParameters> searchWindow)
         {
-            return await Export(saveRequest, Searcher.FindJournalsWithin);
+            return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.AccountsExport)]
-        public async Task<string> AccountsExport(ExportRequest<UnusualAccountsParameters> saveRequest)
+        public async Task<string> AccountsExport(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            return await Export(saveRequest, Searcher.FindJournalsWithin);
+            return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.DateExport)]
-        public async Task<string> DateExport(ExportRequest<YearEndParameters> saveRequest)
+        public async Task<string> DateExport(SearchWindow<YearEndParameters> searchWindow)
         {
-            return await Export(saveRequest, Searcher.FindJournalsWithin);
+            return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.EndingExport)]
-        public async Task<string> EndingExport(ExportRequest<EndingParameters> saveRequest)
+        public async Task<string> EndingExport(SearchWindow<EndingParameters> searchWindow)
         {
-            return await Export(saveRequest, Searcher.FindJournalsWithin);
+            return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
         [HttpPost]
         [Route(Routing.UserExport)]
-        public async Task<string> UserExport(ExportRequest<UserParameters> saveRequest)
+        public async Task<string> UserExport(SearchWindow<UserParameters> searchWindow)
         {
-            return await Export(saveRequest, Searcher.FindJournalsWithin);
+            return await Export(searchWindow, Searcher.FindJournalsWithin);
         }
 
-        private async Task<string> Export<T>(ExportRequest<T> saveRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
+        private async Task<string> Export<T>(SearchWindow<T> searchWindow, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            csvExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation);
+            csvExporter.WriteJournals(searchWindow.Description, searchMethod(searchWindow).GetAllJournals(), saveLocation);
             return saveLocation;
         }
     }

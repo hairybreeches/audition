@@ -28,10 +28,8 @@ namespace Tests.SearcherTests
             builder.Register(_ => exporter).As<ICsvExporter>();            
 
 
-            var requestData =
-                new ExportRequest<EndingParameters>(
-                    new SearchWindow<EndingParameters>(new EndingParameters(0),
-                        new DateRange(DateTime.MinValue, DateTime.MaxValue)));
+            var requestData = new SearchWindow<EndingParameters>(new EndingParameters(0),
+                        new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
             using (var lifetime = builder.BuildSearchable(GetJournals()))
             {

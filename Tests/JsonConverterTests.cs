@@ -77,31 +77,6 @@ namespace Tests
         }
 
         [Test]
-        public void CanDeserializeExportRequest()
-        {
-            var result = Parse<ExportRequest<UserParameters>>(@"{
-            SearchWindow: {
-                Period: {
-                    From: '2012-4-5',
-                    To: '2013-4-4'
-                },
-
-                Parameters: {
-                    Users: 'steve
-                                alf'
-                }
-            },
-
-            SerialisationOptions:{
-                showUsername: true,
-                showDescription: false
-            }
-
-        }");
-            Assert.AreEqual(new ExportRequest<UserParameters>(new SearchWindow<UserParameters>(new UserParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4)))), result);
-        }          
-
-       [Test]
        public void CanDeserializeTimeFrame()
        {           
            var result = Parse<WorkingHoursParameters>(@"{
