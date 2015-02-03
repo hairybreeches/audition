@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="CsvExporter.cs" />
     <Compile Include="CsvExportModule.cs" />
-    <Compile Include="ICsvExporter.cs" />
+    <Compile Include="IJournalExporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

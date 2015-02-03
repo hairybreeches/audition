@@ -25,7 +25,7 @@ namespace Tests.SearcherTests
                 .WithNoLicensing()
                 .SaveExportedFilesTo("steve");
             var exporter = new MockExporter();
-            builder.Register(_ => exporter).As<ICsvExporter>();            
+            builder.Register(_ => exporter).As<IJournalExporter>();            
 
 
             var requestData = new SearchWindow<EndingParameters>(new EndingParameters(0),
