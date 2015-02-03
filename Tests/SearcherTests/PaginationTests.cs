@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using CsvExport;
-using Model;
 using Model.Accounting;
 using Model.SearchWindows;
 using Model.Time;
@@ -32,7 +31,7 @@ namespace Tests.SearcherTests
             var requestData =
                 new ExportRequest<EndingParameters>(
                     new SearchWindow<EndingParameters>(new EndingParameters(0),
-                        new DateRange(DateTime.MinValue, DateTime.MaxValue)), new SerialisationOptions(true, true));
+                        new DateRange(DateTime.MinValue, DateTime.MaxValue)));
 
             using (var lifetime = builder.BuildSearchable(GetJournals()))
             {

@@ -1,24 +1,21 @@
 using System;
-using Model;
 using Model.SearchWindows;
 
 namespace Webapp.Requests
 {
     public class ExportRequest<T>
     {
-        public ExportRequest(SearchWindow<T> searchWindow, SerialisationOptions serialisationOptions)
+        public ExportRequest(SearchWindow<T> searchWindow)
         {
-            SerialisationOptions = serialisationOptions;
             SearchWindow = searchWindow;
         }
 
 
-        public SerialisationOptions SerialisationOptions { get; private set; }
         public SearchWindow<T> SearchWindow { get; private set; }
 
         protected bool Equals(ExportRequest<T> other)
         {
-            return Equals(SerialisationOptions, other.SerialisationOptions) && Equals(SearchWindow, other.SearchWindow);
+            return Equals(SearchWindow, other.SearchWindow);
         }
 
         public override bool Equals(object obj)
@@ -33,13 +30,13 @@ namespace Webapp.Requests
         {
             unchecked
             {
-                return ((SerialisationOptions != null ? SerialisationOptions.GetHashCode() : 0)*397) ^ (SearchWindow != null ? SearchWindow.GetHashCode() : 0);
+                return (SearchWindow != null ? SearchWindow.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return String.Format("Search window: <{0}>, Serialisation options: <{1}>", SearchWindow, SerialisationOptions);
+            return String.Format("Search window: <{0}>", SearchWindow);
         }
     }
 }
