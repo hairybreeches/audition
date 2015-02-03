@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
+using Searching;
+using Searching.SearchWindows;
 
 namespace Tests.SearcherTests
 {

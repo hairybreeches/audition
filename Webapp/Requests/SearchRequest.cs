@@ -1,4 +1,5 @@
-﻿using Model.SearchWindows;
+﻿using Searching;
+using Searching.SearchWindows;
 
 namespace Webapp.Requests
 {

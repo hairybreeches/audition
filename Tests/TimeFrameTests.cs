@@ -1,8 +1,8 @@
 ﻿using System;
-using Model.SearchWindows;
 using Model.Time;
 using NodaTime;
 using NUnit.Framework;
+using Searching.SearchWindows;
 
 namespace Tests
 {

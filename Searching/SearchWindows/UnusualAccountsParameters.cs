@@ -1,4 +1,4 @@
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
     public class UnusualAccountsParameters : ISearchParameters
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using Autofac;
 using Model.Accounting;
 using Model.Responses;
-using Model.SearchWindows;
 using NUnit.Framework;
 using Persistence;
 using Searching;
+using Searching.SearchWindows;
 using Webapp.Controllers;
 using Webapp.Requests;
 

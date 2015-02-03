@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
     public class UserParameters : ISearchParameters
     {

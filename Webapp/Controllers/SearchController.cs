@@ -3,9 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using Model.Accounting;
 using Model.Responses;
-using Model.SearchWindows;
 using Persistence;
 using Searching;
+using Searching.SearchWindows;
 using Webapp.Requests;
 using Webapp.Session;
 

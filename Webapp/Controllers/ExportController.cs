@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using CsvExport;
 using Model.Accounting;
-using Model.SearchWindows;
 using Native;
 using Persistence;
 using Searching;
+using Searching.SearchWindows;
 using Webapp.Session;
 
 namespace Webapp.Controllers
