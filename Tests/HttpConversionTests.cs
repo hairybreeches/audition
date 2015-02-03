@@ -28,7 +28,7 @@ namespace Tests
                 response.Headers.Add("steve", "headerValue");
 
                 //when we convert it
-                var converted = HttpConversion.ToCefSharpResponse(response);
+                var converted = new HttpConverter().ToCefSharpResponse(response);
 
                 //then the fields are all transferred correctly
                 Assert.AreEqual(200, converted.StatusCode);
@@ -56,7 +56,7 @@ namespace Tests
                 response.Headers.Add("steve", "headerValue");
 
                 //when we convert it
-                var converted = HttpConversion.ToCefSharpResponse(response);
+                var converted = new HttpConverter().ToCefSharpResponse(response);
 
                 //then the fields are all transferred correctly
                 Assert.AreEqual(303, converted.StatusCode);
@@ -83,7 +83,7 @@ namespace Tests
             request.Headers.Returns(headers);            
 
 
-            var converted = HttpConversion.ToOwinHttpRequest(request);
+            var converted = new HttpConverter().ToOwinHttpRequest(request);
 
             Assert.AreEqual("I am some content", converted.Content.ReadAsStringAsync().Result);
             Assert.AreEqual(HttpMethod.Post, converted.Method);
