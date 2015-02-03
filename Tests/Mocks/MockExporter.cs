@@ -5,7 +5,7 @@ using Model.Accounting;
 
 namespace Tests.Mocks
 {
-    public class MockExporter : ICsvExporter
+    public class MockExporter : IJournalExporter
     {
         public IEnumerable<Journal> WrittenJournals { get; private set; }
 

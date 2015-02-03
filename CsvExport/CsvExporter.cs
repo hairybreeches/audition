@@ -5,7 +5,7 @@ using Native;
 
 namespace CsvExport
 {
-    public class CsvExporter : ICsvExporter
+    public class CsvExporter : IJournalExporter
     {
         private readonly IFileSystem fileSystem;
 
