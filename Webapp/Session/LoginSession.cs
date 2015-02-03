@@ -23,7 +23,7 @@ namespace Webapp.Session
         public JournalSearcher GetCurrentJournalSearcher()
         {            
             licenceStorage.EnsureUseAllowed();
-            return searcherFactoryStorage.CurrentSearcherFactory.CreateJournalSearcher(repository);
+            return SearcherFactory.CreateJournalSearcher(repository);
         }
 
         public void Login(IJournalSearcherFactory newSearcherFactory, IEnumerable<Journal> journals)
@@ -40,7 +40,12 @@ namespace Webapp.Session
 
         public SearchCapability GetCurrentSearchCapability()
         {
-            return searcherFactoryStorage.CurrentSearcherFactory.GetSearchCapability();
+            return SearcherFactory.GetSearchCapability();
+        }
+
+        private IJournalSearcherFactory SearcherFactory
+        {
+            get { return searcherFactoryStorage.CurrentSearcherFactory; }
         }
     }
 }
