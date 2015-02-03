@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model;
-using Model.SearchWindows;
 using Persistence;
+using Searching.SearchWindows;
 
 namespace Searching
 {

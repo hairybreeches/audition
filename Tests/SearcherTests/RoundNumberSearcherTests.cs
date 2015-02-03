@@ -1,8 +1,9 @@
 ﻿using System;
 using Model.Accounting;
-using Model.SearchWindows;
 using Model.Time;
 using NUnit.Framework;
+using Searching;
+using Searching.SearchWindows;
 
 namespace Tests.SearcherTests
 {

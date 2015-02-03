@@ -1,7 +1,8 @@
 ﻿
 using Model.Time;
+using Searching.SearchWindows;
 
-namespace Model.SearchWindows
+namespace Searching
 {    
     public class SearchWindow<T> where T: ISearchParameters
     {

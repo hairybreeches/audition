@@ -1,6 +1,6 @@
 using System;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
     public class YearEndParameters : ISearchParameters
     {

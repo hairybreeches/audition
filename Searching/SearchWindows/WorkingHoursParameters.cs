@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NodaTime;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
     public class WorkingHoursParameters : ISearchParameters
     {
@@ -64,7 +64,7 @@ namespace Model.SearchWindows
 
         public override string ToString()
         {
-            return String.Format("posted outside {0} to {1}, {2} to {3}", FromDay, ToDay, FromTime.ToShortString(), ToTime.ToShortString());
+            return String.Format("posted outside {0} to {1}, {2} to {3}", FromDay, ToDay, LocalTimeExtensions.ToShortString(FromTime), LocalTimeExtensions.ToShortString(ToTime));
         }
 
         protected bool Equals(WorkingHoursParameters other)
