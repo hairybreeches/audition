@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Model.SearchWindows
 {
-    public class UserParameters
+    public class UserParameters : ISearchParameters
     {
         public IList<string> Usernames { get; private set; }
 

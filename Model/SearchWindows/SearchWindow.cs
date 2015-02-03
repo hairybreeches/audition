@@ -3,7 +3,7 @@ using Model.Time;
 
 namespace Model.SearchWindows
 {    
-    public class SearchWindow<T>
+    public class SearchWindow<T> where T: ISearchParameters
     {
         public SearchWindow(T parameters, DateRange period)
         {

@@ -60,7 +60,7 @@ namespace Webapp.Controllers
             return Search(searchRequest, Searcher.FindJournalsWithin);
         }
 
-        private static SearchResponse Search<T>(SearchRequest<T> searchRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
+        private static SearchResponse Search<T>(SearchRequest<T> searchRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod) where T : ISearchParameters
         {
             return searchMethod(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
         }

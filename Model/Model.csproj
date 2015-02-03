@@ -60,6 +60,7 @@
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
+    <Compile Include="SearchWindows\ISearchParameters.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
     <Compile Include="SearchWindows\WorkingHoursParameters.cs" />

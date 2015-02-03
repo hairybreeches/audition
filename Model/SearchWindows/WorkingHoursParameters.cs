@@ -6,7 +6,7 @@ using NodaTime;
 
 namespace Model.SearchWindows
 {
-    public class WorkingHoursParameters
+    public class WorkingHoursParameters : ISearchParameters
     {
         public WorkingHoursParameters(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
         {
