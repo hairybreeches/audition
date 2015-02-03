@@ -1,7 +1,6 @@
 ﻿using System;
 using Audition.Chromium;
 using Autofac;
-using Model;
 using Model.SearchWindows;
 using Model.Time;
 using Newtonsoft.Json;
@@ -99,7 +98,7 @@ namespace Tests
             }
 
         }");
-            Assert.AreEqual(new ExportRequest<UserParameters>(new SearchWindow<UserParameters>(new UserParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), new SerialisationOptions(true, false)), result);
+            Assert.AreEqual(new ExportRequest<UserParameters>(new SearchWindow<UserParameters>(new UserParameters("steve\nalf"), new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4)))), result);
         }          
 
        [Test]

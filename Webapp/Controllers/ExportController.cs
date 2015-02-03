@@ -69,8 +69,7 @@ namespace Webapp.Controllers
         private async Task<string> Export<T>(ExportRequest<T> saveRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            csvExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation,
-                saveRequest.SerialisationOptions);
+            csvExporter.WriteJournals(saveRequest.SearchWindow.Description, searchMethod(saveRequest.SearchWindow).GetAllJournals(), saveLocation);
             return saveLocation;
         }
     }
