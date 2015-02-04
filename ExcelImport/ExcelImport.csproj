@@ -58,6 +58,7 @@
     <Compile Include="ExcelJournalReader.cs" />
     <Compile Include="ExcelImportMapping.cs" />
     <Compile Include="ExcelImportModule.cs" />
+    <Compile Include="ExcelMappingException.cs" />
     <Compile Include="ExcelSearcherFactoryFactory.cs" />
     <Compile Include="FieldLookups.cs" />
     <Compile Include="SheetMetadata.cs" />
