@@ -8,7 +8,7 @@ namespace Searching
 {
     public class JournalSearcherFactory : IJournalSearcherFactory
     {
-        private readonly ISet<DisplayField> availableFields;
+        private readonly IList<DisplayField> availableFields;
 
         public static IJournalSearcherFactory EverythingAvailable = new JournalSearcherFactory(
             new Dictionary<SearchAction, string>(),
@@ -19,7 +19,7 @@ namespace Searching
         public JournalSearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params DisplayField[] availableFields)
         {
             this.unvailableActionMessages = unvailableActionMessages;           
-            this.availableFields = new HashSet<DisplayField>(availableFields);
+            this.availableFields = availableFields;
         }
 
         public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
