@@ -9,11 +9,11 @@ using SqlImport.DataReaders;
 
 namespace ExcelImport
 {
-    public class ExcelDataMapper
+    public class FieldLookupInterpreter
     {
         private readonly ExcelColumnNamer namer;
 
-        public ExcelDataMapper(ExcelColumnNamer namer)
+        public FieldLookupInterpreter(ExcelColumnNamer namer)
         {
             this.namer = namer;
         }
@@ -29,6 +29,11 @@ namespace ExcelImport
                 GetColumn<double>(lookups.Amount),
                 GetColumn<string>(lookups.Description),
                 GetColumn<string>(lookups.AccountName));
+        }
+
+        public IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups)
+        {
+            return new JournalSearcherFactory(GetUnavailableSearchMessages(lookups), GetDisplayableFields(lookups));
         }
 
         private ISqlDataReader<string> GetIdColumn(int id)
