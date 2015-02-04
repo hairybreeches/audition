@@ -19,9 +19,9 @@ namespace Sage50.Parsing
             this.sqlJournalReader = sqlJournalReader;
         }
 
-        public IEnumerable<Journal> GetJournals(DataReader dataReader, NominalCodeLookup nominalLookup)
+        public IEnumerable<Journal> GetJournals(SqlDataReader sqlDataReader, NominalCodeLookup nominalLookup)
         {
-            return sqlJournalReader.GetJournals(dataReader, schema.CreateJournalReader(nominalLookup));
+            return sqlJournalReader.GetJournals(sqlDataReader, schema.CreateJournalReader(nominalLookup));
             
         }
     }

@@ -16,12 +16,12 @@ namespace SqlImport
             this.journalCreator = journalCreator;
         }
 
-        public IEnumerable<Journal> GetJournals(DataReader reader, JournalDataReader dataReader)
+        public IEnumerable<Journal> GetJournals(SqlDataReader reader, JournalDataReader dataReader)
         {
             return journalCreator.ReadJournals(GetLineRecords(reader, dataReader));
         }
 
-        private IEnumerable<SqlJournalLine> GetLineRecords(DataReader reader, JournalDataReader dataReader)
+        private IEnumerable<SqlJournalLine> GetLineRecords(SqlDataReader reader, JournalDataReader dataReader)
         {
             while (reader.Read())
             {

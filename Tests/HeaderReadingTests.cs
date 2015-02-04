@@ -78,7 +78,7 @@ namespace Tests
 
         private static MetadataReader CreateReader()
         {
-            return new MetadataReader(new ExcelColumnNamer(), new ExcelDataConverter(new FileSystem()));
+            return new MetadataReader(new ExcelColumnNamer(), new ExcelToSqlDataConverter(new FileSystem()));
         }
     }
 }

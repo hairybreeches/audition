@@ -7,11 +7,11 @@ using SqlImport;
 
 namespace ExcelImport
 {
-    public class ExcelDataConverter
+    public class ExcelToSqlDataConverter
     {
         private readonly IFileSystem fileSystem;
 
-        public ExcelDataConverter(IFileSystem fileSystem)
+        public ExcelToSqlDataConverter(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
         }
@@ -23,11 +23,11 @@ namespace ExcelImport
             return sheet;
         }
 
-        public DataReader ReadSheet(SheetMetadata data)
+        public SqlDataReader ReadSheet(SheetMetadata data)
         {
             var sheet = GetSheet(data);
             var firstRow = data.UseHeaderRow ? 2 : 1;
-            return new DataReader(sheet.CreateDataReader(), firstRow);
+            return new SqlDataReader(sheet.CreateDataReader(), firstRow);
         }
 
         public DataSet GetDataSet(string filename, bool headerRow = false)

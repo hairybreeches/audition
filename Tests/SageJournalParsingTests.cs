@@ -113,7 +113,7 @@ namespace Tests
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 
-        private static DataReader MockDataReader(IEnumerable<object[]> rows)
+        private static SqlDataReader MockDataReader(IEnumerable<object[]> rows)
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(GetSageColumns());
@@ -121,7 +121,7 @@ namespace Tests
             {
                 dataTable.Rows.Add(parameterArray);
             }
-            return new DataReader(dataTable.CreateDataReader());
+            return new SqlDataReader(dataTable.CreateDataReader());
         }
 
         private static DataColumn[] GetSageColumns()

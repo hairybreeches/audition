@@ -8,20 +8,20 @@ namespace ExcelImport
 {
     public class ExcelJournalReader
     {
-        private readonly ExcelDataConverter dataConverter;
+        private readonly ExcelToSqlDataConverter toSqlDataConverter;
         private readonly SqlJournalReader sqlJournalReader;
         private readonly IDataReaderFactory dataMapper;
 
-        public ExcelJournalReader(ExcelDataConverter dataConverter, SqlJournalReader sqlJournalReader, IDataReaderFactory dataMapper)
+        public ExcelJournalReader(ExcelToSqlDataConverter toSqlDataConverter, SqlJournalReader sqlJournalReader, IDataReaderFactory dataMapper)
         {
-            this.dataConverter = dataConverter;
+            this.toSqlDataConverter = toSqlDataConverter;
             this.sqlJournalReader = sqlJournalReader;
             this.dataMapper = dataMapper;
         }
 
         public IEnumerable<Journal> ReadJournals(ExcelImportMapping mapping)
         {
-            var sheetReader = dataConverter.ReadSheet(mapping.SheetData);            
+            var sheetReader = toSqlDataConverter.ReadSheet(mapping.SheetData);            
             return sqlJournalReader.GetJournals(sheetReader, dataMapper.GetDataReader(mapping.Lookups));
         }
     }

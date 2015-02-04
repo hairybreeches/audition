@@ -33,7 +33,7 @@ namespace Sage50
         {
             var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();
-            return sageJournalReader.GetJournals(new DataReader(odbcDataReader,0 ), nominalLookup);
+            return sageJournalReader.GetJournals(new SqlDataReader(odbcDataReader,0 ), nominalLookup);
         }
 
         private DbCommand CreateCommand(DbConnection connection, string commandText)
