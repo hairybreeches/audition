@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SqlImport.DataReaders
 {
-    public class DateTimeReader : ISqlDataReader<DateTime>
+    public class DateTimeReader : IFieldReader<DateTime>
     {
         private readonly int columnIndex;
         private readonly string userFriendlyColumnName;

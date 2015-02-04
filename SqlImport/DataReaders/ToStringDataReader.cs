@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SqlImport.DataReaders
 {
-    public class ToStringDataReader : ISqlDataReader<string>
+    public class ToStringDataReader : IFieldReader<string>
     {
         private readonly int index;
         private readonly string userFriendlyColumnName;

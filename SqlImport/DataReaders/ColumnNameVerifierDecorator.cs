@@ -3,13 +3,13 @@ using System.Data;
 
 namespace SqlImport.DataReaders
 {
-    public class ColumnNameVerifierDecorator<T> : ISqlDataReader<T>
+    public class ColumnNameVerifierDecorator<T> : IFieldReader<T>
     {
         private readonly string fieldName;
         private readonly int index;
-        private readonly ISqlDataReader<T> dataReader;
+        private readonly IFieldReader<T> dataReader;
 
-        public ColumnNameVerifierDecorator(string fieldName, int index, ISqlDataReader<T> dataReader)
+        public ColumnNameVerifierDecorator(string fieldName, int index, IFieldReader<T> dataReader)
         {
             this.fieldName = fieldName;
             this.index = index;

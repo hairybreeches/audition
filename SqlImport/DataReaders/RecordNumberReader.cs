@@ -2,7 +2,7 @@
 
 namespace SqlImport.DataReaders
 {
-    public class RecordNumberReader : ISqlDataReader<string>
+    public class RecordNumberReader : IFieldReader<string>
     {        
         public string GetField(IDataRecord record, int recordIndex)
         {

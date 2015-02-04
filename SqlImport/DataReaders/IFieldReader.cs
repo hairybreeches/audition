@@ -2,7 +2,7 @@ using System.Data;
 
 namespace SqlImport.DataReaders
 {
-    public interface ISqlDataReader<out T>
+    public interface IFieldReader<out T>
     {
         T GetField(IDataRecord record, int recordIndex);
     }
