@@ -12,42 +12,26 @@ namespace ExcelImport
     public class ExcelDataMapper
     {
         private readonly ExcelColumnNamer namer;
-        private readonly int description;
-        private readonly int username;
-        private readonly int created;
-        private readonly int journalDate;
-        private readonly int accountCode;
-        private readonly int accountName;
-        private readonly int amount;
-        private readonly int id;
 
-        public ExcelDataMapper(FieldLookups lookups, ExcelColumnNamer namer)
+        public ExcelDataMapper(ExcelColumnNamer namer)
         {
             this.namer = namer;
-            description = lookups.Description;
-            username = lookups.Username;
-            created = lookups.Created;
-            journalDate = lookups.JournalDate;
-            accountCode = lookups.AccountCode;
-            accountName = lookups.AccountName;
-            amount = lookups.Amount;
-            id = lookups.Id;
         }
 
-        public JournalDataReader GetDataReader()
+        public JournalDataReader GetDataReader(FieldLookups lookups)
         {
             return new JournalDataReader(
-                GetIdColumn(),
-                GetColumn<string>(username),
-                GetDateColumn(journalDate),
-                GetDateColumn(created),
-                GetColumn<string>(accountCode),
-                GetColumn<double>(amount),
-                GetColumn<string>(description),
-                GetColumn<string>(accountName));
+                GetIdColumn(lookups.Id),
+                GetColumn<string>(lookups.Username),
+                GetDateColumn(lookups.JournalDate),
+                GetDateColumn(lookups.Created),
+                GetColumn<string>(lookups.AccountCode),
+                GetColumn<double>(lookups.Amount),
+                GetColumn<string>(lookups.Description),
+                GetColumn<string>(lookups.AccountName));
         }
 
-        private ISqlDataReader<string> GetIdColumn()
+        private ISqlDataReader<string> GetIdColumn(int id)
         {
             return IsSet(id) ? (ISqlDataReader<string>) new ToStringDataReader(id, namer.GetColumnName(id)) : new RecordNumberReader();
         }
@@ -57,15 +41,10 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
         }
 
-        public IEnumerable<SearchAction> GetUnavailableActions()
-        {
-            return Enums.GetAllValues<SearchAction>()
-                .Where(x => !IsSearchable(x));
-        }
-        public DisplayField[] GetDisplayableFields()
+        public DisplayField[] GetDisplayableFields(FieldLookups lookups)
         {
             return Enums.GetAllValues<DisplayField>()
-                .Where(IsDisplayable).ToArray();
+                .Where(field => IsDisplayable(lookups, field)).ToArray();
         }
 
         private ISqlDataReader<T> GetColumn<T>(int columnIndex)
@@ -73,9 +52,9 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<T>) new NullDataReader<T>();
         }
 
-        private bool IsDisplayable(DisplayField displayField)
+        private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
         {
-            return IsSet(SetIndicator(displayField));
+            return IsSet(SetIndicator(lookups, displayField));
         }
 
         private static bool IsSet(int column)
@@ -83,50 +62,26 @@ namespace ExcelImport
             return column != -1;
         }
 
-        private bool IsSearchable(SearchAction searchAction)
-        {
-            return IsSet(SetIndicator(searchAction));
-        }
-
-        private int SetIndicator(SearchAction searchAction)
-        {
-            switch (searchAction)
-            {
-                case SearchAction.Accounts:
-                    return accountCode;
-                case SearchAction.Date:
-                    return created;
-                case SearchAction.Ending:
-                    return amount;
-                case SearchAction.Hours:
-                    return created;
-                case SearchAction.Users:
-                    return username;
-                default:
-                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
-            }
-        }
-
-        private int SetIndicator(DisplayField displayField)
+        private int SetIndicator(FieldLookups lookups, DisplayField displayField)
         {
             switch (displayField)
             {
                 case DisplayField.AccountCode:
-                    return accountCode;
+                    return lookups.AccountCode;
                 case DisplayField.AccountName:
-                    return accountName;
+                    return lookups.AccountName;
                 case DisplayField.Amount:
-                    return amount;
+                    return lookups.Amount;
                 case DisplayField.Created:
-                    return created;
+                    return lookups.Created;
                 case DisplayField.Description:
-                    return description;
+                    return lookups.Description;
                 case DisplayField.JournalDate:
-                    return journalDate;
+                    return lookups.JournalDate;
                 case DisplayField.Username:
-                    return username;
+                    return lookups.Username;
                 case DisplayField.JournalType:
-                    return amount;
+                    return lookups.Amount;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
 
