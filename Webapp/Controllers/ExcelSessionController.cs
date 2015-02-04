@@ -12,15 +12,15 @@ namespace Webapp.Controllers
         private readonly ExcelDataFileStorage dataFileStorage;
         private readonly ExcelJournalReader journalReader;
         private readonly LoginSession session;
-        private readonly ExcelSearcherFactoryFactory searcherFactoryFactory;
+        private readonly FieldLookupInterpreter lookupInterpreter;
 
-        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, ExcelSearcherFactoryFactory searcherFactoryFactory)
+        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, FieldLookupInterpreter lookupInterpreter)
         {
             this.metadataReader = metadataReader;
             this.dataFileStorage = dataFileStorage;
             this.journalReader = journalReader;
             this.session = session;
-            this.searcherFactoryFactory = searcherFactoryFactory;
+            this.lookupInterpreter = lookupInterpreter;
         }
 
         [Route(Routing.ExcelLogin)]
@@ -28,7 +28,7 @@ namespace Webapp.Controllers
         public void ExcelLogin(ExcelImportMapping importMapping)
         {
             dataFileStorage.StoreUsage(importMapping);            
-            session.Login(searcherFactoryFactory.CreateSearcherFactory(importMapping.Lookups), journalReader.ReadJournals(importMapping));
+            session.Login(lookupInterpreter.CreateSearcherFactory(importMapping.Lookups), journalReader.ReadJournals(importMapping));
         }    
         
         

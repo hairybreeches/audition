@@ -14,7 +14,7 @@ namespace Tests
         [TestCaseSource("AllOrNothing")]
         public SearchCapability GetSearchCapability(FieldLookups lookups)
         {
-            var factoryFactory = new ExcelSearcherFactoryFactory(new ExcelDataMapper(new ExcelColumnNamer()));
+            var factoryFactory = new FieldLookupInterpreter(new ExcelColumnNamer());
             var searcherFactory = factoryFactory.CreateSearcherFactory(lookups);
             return searcherFactory.GetSearchCapability();
         }
