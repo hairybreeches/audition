@@ -81,6 +81,7 @@
     <Compile Include="DescriptionTests.cs" />
     <Compile Include="DriverDetectorTests.cs" />
     <Compile Include="CsvExporterTests.cs" />
+    <Compile Include="ExcelCapabilityTests.cs" />
     <Compile Include="ExcelColumnNamerTests.cs" />
     <Compile Include="FileSystemTests.cs" />
     <Compile Include="HeaderReadingTests.cs" />
