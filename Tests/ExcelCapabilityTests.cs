@@ -11,6 +11,7 @@ namespace Tests
     {
         [TestCaseSource("SingleFieldMapped")]
         [TestCaseSource("SingleFieldUnmapped")]
+        [TestCaseSource("AllOrNothing")]
         public SearchCapability GetSearchCapability(FieldLookups lookups)
         {
             var factoryFactory = new ExcelSearcherFactoryFactory(new ExcelDataMapper(new ExcelColumnNamer()));
@@ -59,6 +60,23 @@ namespace Tests
             }
         }
 
+        public IEnumerable<TestCaseData> AllOrNothing
+        {
+            get
+            {
+                yield return CreateTestCase("All fields mapped",
+                    new FieldLookups(id: 18, accountCode: 18, accountName: 18, amount: 18, created: 18, description: 18,
+                        journalDate: 18, username: 18),
+                    new Dictionary<string, string>(),
+                    Enums.GetAllValues<DisplayField>());
+
+                yield return CreateTestCase("All fields unmapped",
+                    new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: -1),
+                    new Dictionary<string, string>().WithAllErrorMessages(),
+                    DisplayField.JournalDate);
+            }
+        }
+
         public IEnumerable<TestCaseData> SingleFieldUnmapped
         {
             get
@@ -101,7 +119,6 @@ namespace Tests
                     Enums.GetAllValues<DisplayField>().Without(DisplayField.Username));
             }
         }
-
 
         private static TestCaseData CreateTestCase(string name, FieldLookups fieldLookups, IDictionary<string, string> errorMessages, params DisplayField[] availableFields)
         {
