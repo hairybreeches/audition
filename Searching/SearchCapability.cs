@@ -21,7 +21,7 @@ namespace Searching
 
         protected bool Equals(SearchCapability other)
         {
-            return AvailableFields.SequenceEqual(other.AvailableFields) && UnvailableActionMessages.SequenceEqual(other.UnvailableActionMessages);
+            return AvailableFields.SequenceEqual(other.AvailableFields) && UnvailableActionMessages.OrderBy(x=>x.Key).SequenceEqual(other.UnvailableActionMessages.OrderBy(x=>x.Key));
         }
 
         public override bool Equals(object obj)
@@ -46,5 +46,5 @@ namespace Searching
             return UnvailableActionMessages.Aggregate(message, 
                 (currentMessage, pair) => currentMessage + "\r\n" + pair.Key + " unavailable: " + pair.Value);
         }
-    }
+    }    
 }

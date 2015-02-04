@@ -87,5 +87,64 @@ namespace ExcelImport
 
             }
         }
+
+        private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
+        {
+            return IsSet(SetIndicator(searchAction, lookups));
+        }
+
+        private int SetIndicator(SearchAction searchAction, FieldLookups lookups)
+        {
+            switch (searchAction)
+            {
+                case SearchAction.Accounts:
+                    return lookups.AccountCode;
+                case SearchAction.Date:
+                    return lookups.Created;
+                case SearchAction.Ending:
+                    return lookups.Amount;
+                case SearchAction.Hours:
+                    return lookups.Created;
+                case SearchAction.Users:
+                    return lookups.Username;
+                default:
+                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
+            }
+        }
+
+        private string GetErrorMessage(SearchAction action)
+        {
+            switch (action)
+            {
+                case SearchAction.Ending:
+                    return
+                        "In order to search for journals with round number endings, you must import journals with an amount value";
+                case SearchAction.Users:
+                    return
+                        "In order to search for journals posted by unexpected users, you must import journals with a username value";
+                case SearchAction.Date:
+                    return
+                        "In order to search for journals created near or after the year end, you must import journals with a creation time value";
+                case SearchAction.Hours:
+                    return
+                        "In order to search for journals posted outside of working hours, you must import journals with a creation time value";
+                case SearchAction.Accounts:
+                    return
+                        "In order to search for journals posted to unusual nomincal codes, you must import journals with a nominal code value";
+                default:
+                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", action));
+            }
+        }
+
+        public IDictionary<SearchAction, string> GetUnavailableSearchMessages(FieldLookups lookups)
+        {
+            return Enums.GetAllValues<SearchAction>()
+                .Where(action => !IsSearchable(action, lookups))
+                .Aggregate(new Dictionary<SearchAction, string>(), (dictionary, action) =>
+                {
+                    dictionary.Add(action, GetErrorMessage(action));
+                    return dictionary;
+                });
+        }
     }
 }
