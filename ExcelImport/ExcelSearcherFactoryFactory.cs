@@ -7,20 +7,21 @@ namespace ExcelImport
 {
     public class ExcelSearcherFactoryFactory
     {
-        public IJournalSearcherFactory CreateSearcherFactory(ExcelDataMapper excelDataMapper)
+        private readonly ExcelDataMapper mapper;
+
+        public ExcelSearcherFactoryFactory(ExcelDataMapper mapper)
         {
-            return new JournalSearcherFactory(UnvailableActionMessages(excelDataMapper), excelDataMapper.GetDisplayableFields());
+            this.mapper = mapper;
         }
 
-        private static IDictionary<SearchAction, string> UnvailableActionMessages(ExcelDataMapper lookups)
+        public IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups)
         {
-            return lookups.GetUnavailableActions()
-                .Aggregate(new Dictionary<SearchAction, string>(),
-                    (dictionary, action) =>
-                    {
-                        dictionary.Add(action, "search unavailable, please map field");
-                        return dictionary;
-                    });
+            return new JournalSearcherFactory(UnvailableActionMessages(), mapper.GetDisplayableFields(lookups));
+        }
+
+        private static IDictionary<SearchAction, string> UnvailableActionMessages()
+        {
+            return new Dictionary<SearchAction, string>();
         }
     }
 }
