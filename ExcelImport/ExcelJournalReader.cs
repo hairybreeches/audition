@@ -10,9 +10,9 @@ namespace ExcelImport
     {
         private readonly ExcelDataConverter dataConverter;
         private readonly SqlJournalReader sqlJournalReader;
-        private readonly FieldLookupInterpreter dataMapper;
+        private readonly IDataReaderFactory dataMapper;
 
-        public ExcelJournalReader(ExcelDataConverter dataConverter, SqlJournalReader sqlJournalReader, FieldLookupInterpreter dataMapper)
+        public ExcelJournalReader(ExcelDataConverter dataConverter, SqlJournalReader sqlJournalReader, IDataReaderFactory dataMapper)
         {
             this.dataConverter = dataConverter;
             this.sqlJournalReader = sqlJournalReader;

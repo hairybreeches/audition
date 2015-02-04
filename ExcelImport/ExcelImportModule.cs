@@ -11,7 +11,7 @@ namespace ExcelImport
             builder.RegisterType<ExcelDataFileStorage>();
             builder.RegisterType<ExcelDataConverter>();
             builder.RegisterType<ExcelJournalReader>();
-            builder.RegisterType<FieldLookupInterpreter>();
+            builder.RegisterType<FieldLookupInterpreter>().As<ISearcherFactoryFactory>().As<IDataReaderFactory>();
         }
     }
 }
