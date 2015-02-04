@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="CouldNotOpenExcelFileException.cs" />
     <Compile Include="ExcelColumnNamer.cs" />
-    <Compile Include="ExcelDataConverter.cs" />
+    <Compile Include="ExcelToSqlDataConverter.cs" />
     <Compile Include="ExcelDataFileStorage.cs" />
     <Compile Include="ExcelJournalReader.cs" />
     <Compile Include="ExcelImportMapping.cs" />

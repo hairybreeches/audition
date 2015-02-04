@@ -7,23 +7,23 @@ namespace ExcelImport
     public class MetadataReader
     {        
         private readonly ExcelColumnNamer columnNamer;
-        private readonly ExcelDataConverter dataConverter;
+        private readonly ExcelToSqlDataConverter toSqlDataConverter;
 
-        public MetadataReader(ExcelColumnNamer columnNamer, ExcelDataConverter dataConverter)
+        public MetadataReader(ExcelColumnNamer columnNamer, ExcelToSqlDataConverter toSqlDataConverter)
         {            
             this.columnNamer = columnNamer;
-            this.dataConverter = dataConverter;
+            this.toSqlDataConverter = toSqlDataConverter;
         }
 
         public IEnumerable<string> ReadSheets(string filename)
         {
-            var dataSet = dataConverter.GetDataSet(filename);
+            var dataSet = toSqlDataConverter.GetDataSet(filename);
             return dataSet.Tables.OfType<DataTable>().Select(x => x.TableName);
         }
 
         public IEnumerable<string> ReadHeaders(SheetMetadata data)
         {
-            var sheet = dataConverter.GetSheet(data);
+            var sheet = toSqlDataConverter.GetSheet(data);
             var dataColumns = sheet.Columns.OfType<DataColumn>();
             return data.UseHeaderRow ? GetHeaderRowColumnNames(dataColumns) : GetExcelColumnNames(dataColumns);
         }

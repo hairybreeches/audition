@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace SqlImport
 {
-    public class DataReader
+    public class SqlDataReader
     {
         private readonly IDataReader innerReader;
         public int RowNumber { get; private set; }
 
-        public DataReader(IDataReader innerReader, int firstRowNumber = 0)
+        public SqlDataReader(IDataReader innerReader, int firstRowNumber = 0)
         {
             this.innerReader = innerReader;
             //to get the first row, we will have to call Read, which will increment by one
