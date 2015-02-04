@@ -16,12 +16,7 @@ namespace ExcelImport
 
         public IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups)
         {
-            return new JournalSearcherFactory(UnvailableActionMessages(), mapper.GetDisplayableFields(lookups));
-        }
-
-        private static IDictionary<SearchAction, string> UnvailableActionMessages()
-        {
-            return new Dictionary<SearchAction, string>();
+            return new JournalSearcherFactory(mapper.GetUnavailableSearchMessages(lookups), mapper.GetDisplayableFields(lookups));
         }
     }
 }
