@@ -194,10 +194,6 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
 
     var exportSerialise = function() {
         return JSON.stringify({
-            SerialisationOptions: {
-                showUsername: model.showUsername(),
-                showDescription: model.showDescription(),
-            },
             searchWindow: getSearchWindow()
         });
     }
