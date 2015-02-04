@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Model;
 using Model.SearchWindows;
 using Persistence;
@@ -34,7 +35,12 @@ namespace Searching
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(availableFields, unvailableActionMessages);
+            return new SearchCapability(availableFields, unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
+                (dictionary, kvp) =>
+                {
+                    dictionary.Add(kvp.Key.ToString(), kvp.Value);
+                    return dictionary;
+                }));
         }
 
         private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository)

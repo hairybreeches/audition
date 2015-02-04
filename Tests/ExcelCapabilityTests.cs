@@ -9,45 +9,37 @@ namespace Tests
     [TestFixture]
     public class ExcelCapabilityTests
     {
-
-
-        [TestCaseSource("SingleFieldMapped")]
-        public IEnumerable<DisplayField> WhenSingleFieldMappedDisplayFieldsAvailable(FieldLookups lookups)
-        {
-            return GetSearchCapability(lookups).AvailableFields;
-        }
-
         public IEnumerable<TestCaseData> SingleFieldMapped
         {
             get
             {
                 yield return new TestCaseData(new FieldLookups(id: 1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: -1))
-                    .Returns(new[] { DisplayField.JournalDate })
-                    .SetName("Display fields: ID mapped");
+                    .Returns(new SearchCapability(new[] { DisplayField.JournalDate }, new Dictionary<string, string>().WithAllErrorMessages()))
+                    .SetName("ID mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: 12, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: -1))
-                    .Returns(new[] { DisplayField.JournalDate, DisplayField.AccountCode })
-                    .SetName("Display fields: Account Code mapped");
+                    .Returns(new SearchCapability(new[] { DisplayField.JournalDate, DisplayField.AccountCode }, new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Accounts)))
+                    .SetName("Account Code mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: -1, accountName: 3, amount: -1, created: -1, description: -1, journalDate: 18, username: -1))
-                        .Returns(new[] { DisplayField.JournalDate, DisplayField.AccountName })
-                        .SetName("Display fields: Account name mapped");
+                        .Returns(new SearchCapability(new[] { DisplayField.JournalDate, DisplayField.AccountName },new Dictionary<string, string>().WithAllErrorMessages()))
+                        .SetName("Account name mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: 5, created: -1, description: -1, journalDate: 18, username: -1))
-                        .Returns(new[] { DisplayField.JournalDate, DisplayField.JournalType, DisplayField.Amount })
-                        .SetName("Display fields: Amount mapped");
+                        .Returns(new SearchCapability(new[] { DisplayField.JournalDate, DisplayField.JournalType, DisplayField.Amount }, new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Ending)))
+                        .SetName("Amount mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: 7, description: -1, journalDate: 18, username: -1))
-                        .Returns(new[] { DisplayField.Created, DisplayField.JournalDate })
-                        .SetName("Display fields: Creation date mapped");
+                        .Returns(new SearchCapability(new[] { DisplayField.Created, DisplayField.JournalDate }, new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Date).Without(SearchAction.Hours)))
+                        .SetName("Creation date mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: 4, journalDate: 18, username: -1))
-                        .Returns(new[] { DisplayField.JournalDate, DisplayField.Description })
-                        .SetName("Display fields: Description mapped");
+                        .Returns(new SearchCapability(new[] { DisplayField.JournalDate, DisplayField.Description }, new Dictionary<string, string>().WithAllErrorMessages()))
+                        .SetName("Description mapped");
 
                 yield return new TestCaseData(new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: 319))
-                        .Returns(new[] { DisplayField.JournalDate, DisplayField.Username })
-                        .SetName("Display fields: Username mapped");
+                        .Returns(new SearchCapability(new[] { DisplayField.JournalDate, DisplayField.Username }, new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Users)))
+                        .SetName("Username mapped");
             }
         }
 
@@ -94,7 +86,7 @@ namespace Tests
 
 
         }
-
+        [TestCaseSource("SingleFieldMapped")]
         public SearchCapability GetSearchCapability(FieldLookups lookups)
         {
             var factoryFactory = new ExcelSearcherFactoryFactory(new ExcelDataMapper(new ExcelColumnNamer()));
@@ -137,6 +129,23 @@ namespace Tests
             dictionary.Add(SearchAction.Hours.ToString(), HoursUnavailableMessage);
             return dictionary;
         }
+
+        public static IDictionary<string, string> WithAllErrorMessages(this IDictionary<string, string> dictionary)
+        {
+            dictionary.WithAccountsErrorMessage()
+                .WithEndingErrorMessage()
+                .WithHoursErrorMessage()
+                .WithUsersErrorMessage()
+                .WithYearEndErrorMessage();
+
+            return dictionary;
+        } 
+
+        public static IDictionary<string, string> Without(this IDictionary<string, string> dictionary, SearchAction action)
+        {
+            dictionary.Remove(action.ToString());
+            return dictionary;
+        } 
     }
 
 
