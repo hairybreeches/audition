@@ -8,7 +8,7 @@ namespace Sage50.Parsing
     public class SchemaColumn<T> : ISchemaColumn
     {
         private readonly int index;
-        private readonly ISqlDataReader<T> dataReader;
+        private readonly IFieldReader<T> dataReader;
         private readonly string fieldName;
 
 
@@ -17,7 +17,7 @@ namespace Sage50.Parsing
         {
         }
 
-        public SchemaColumn(string fieldName, int index, Func<string, int, ISqlDataReader<T>> dataReaderFactory)
+        public SchemaColumn(string fieldName, int index, Func<string, int, IFieldReader<T>> dataReaderFactory)
         {
             this.fieldName = fieldName;
             this.index = index;
@@ -34,7 +34,7 @@ namespace Sage50.Parsing
             get { return fieldName; }
         }
 
-        public ISqlDataReader<T> DataReader
+        public IFieldReader<T> DataReader
         {
             get { return dataReader; }
         }

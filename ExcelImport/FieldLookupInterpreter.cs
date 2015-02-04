@@ -37,14 +37,14 @@ namespace ExcelImport
             return new JournalSearcherFactory(GetUnavailableSearchMessages(lookups), GetDisplayableFields(lookups));
         }
 
-        private ISqlDataReader<string> GetIdColumn(int id)
+        private IFieldReader<string> GetIdColumn(int id)
         {
-            return IsSet(id) ? (ISqlDataReader<string>) new ToStringDataReader(id, namer.GetColumnName(id)) : new RecordNumberReader();
+            return IsSet(id) ? (IFieldReader<string>) new ToStringDataReader(id, namer.GetColumnName(id)) : new RecordNumberReader();
         }
 
-        private ISqlDataReader<DateTime> GetDateColumn(int columnIndex)
+        private IFieldReader<DateTime> GetDateColumn(int columnIndex)
         {
-            return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
+            return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<DateTime>) new NullDataReader<DateTime>();
         }
 
         private DisplayField[] GetDisplayableFields(FieldLookups lookups)
@@ -53,9 +53,9 @@ namespace ExcelImport
                 .Where(field => IsDisplayable(lookups, field)).ToArray();
         }
 
-        private ISqlDataReader<T> GetColumn<T>(int columnIndex)
+        private IFieldReader<T> GetColumn<T>(int columnIndex)
         {
-            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<T>) new NullDataReader<T>();
+            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)

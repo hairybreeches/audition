@@ -6,24 +6,24 @@ namespace SqlImport
 {
     public class JournalDataReader
     {
-        private readonly ISqlDataReader<string> idColumn;
-        private readonly ISqlDataReader<string> usernameColumn;
-        private readonly ISqlDataReader<DateTime> dateColumn;
-        private readonly ISqlDataReader<DateTime> creationTimeColumn;
-        private readonly ISqlDataReader<string> nominalCodeColumn;
-        private readonly ISqlDataReader<double> amountColumn;
-        private readonly ISqlDataReader<string> detailsColumn;
-        private readonly ISqlDataReader<string> nominalCodeNameColumn;
+        private readonly IFieldReader<string> idColumn;
+        private readonly IFieldReader<string> usernameColumn;
+        private readonly IFieldReader<DateTime> dateColumn;
+        private readonly IFieldReader<DateTime> creationTimeColumn;
+        private readonly IFieldReader<string> nominalCodeColumn;
+        private readonly IFieldReader<double> amountColumn;
+        private readonly IFieldReader<string> detailsColumn;
+        private readonly IFieldReader<string> nominalCodeNameColumn;
 
         public JournalDataReader(
-            ISqlDataReader<string> idColumn, 
-            ISqlDataReader<string> usernameColumn, 
-            ISqlDataReader<DateTime> dateColumn, 
-            ISqlDataReader<DateTime> creationTimeColumn, 
-            ISqlDataReader<string> nominalCodeColumn, 
-            ISqlDataReader<double> amountColumn, 
-            ISqlDataReader<string> descriptionColumn, 
-            ISqlDataReader<string> nominalCodeNameColumn)
+            IFieldReader<string> idColumn, 
+            IFieldReader<string> usernameColumn, 
+            IFieldReader<DateTime> dateColumn, 
+            IFieldReader<DateTime> creationTimeColumn, 
+            IFieldReader<string> nominalCodeColumn, 
+            IFieldReader<double> amountColumn, 
+            IFieldReader<string> descriptionColumn, 
+            IFieldReader<string> nominalCodeNameColumn)
         {
             this.idColumn = idColumn;
             this.usernameColumn = usernameColumn;
@@ -77,7 +77,7 @@ namespace SqlImport
             return GetField(nominalCodeNameColumn, record, recordIndex, "nominal code name");
         }
 
-        private static T GetField<T>(ISqlDataReader<T> reader, IDataRecord record, int recordIndex, string userFriendlyFieldName)
+        private static T GetField<T>(IFieldReader<T> reader, IDataRecord record, int recordIndex, string userFriendlyFieldName)
         {
             try
             {
