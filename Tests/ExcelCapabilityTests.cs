@@ -25,37 +25,37 @@ namespace Tests
                 yield return CreateTestCase("ID mapped", 
                     new FieldLookups(id: 1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    new[] { DisplayField.JournalDate });
+                    DisplayField.JournalDate);
 
                 yield return CreateTestCase("Account Code mapped", 
                     new FieldLookups(id: -1, accountCode: 12, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Accounts), 
-                    new[] { DisplayField.JournalDate, DisplayField.AccountCode });
+                    DisplayField.JournalDate, DisplayField.AccountCode);
 
                 yield return CreateTestCase("Account name mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: 3, amount: -1, created: -1, description: -1, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    new[] { DisplayField.JournalDate, DisplayField.AccountName });
+                    DisplayField.JournalDate, DisplayField.AccountName);
 
                 yield return CreateTestCase("Amount mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: 5, created: -1, description: -1, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Ending), 
-                    new[] { DisplayField.JournalDate, DisplayField.JournalType, DisplayField.Amount });
+                    DisplayField.JournalDate, DisplayField.JournalType, DisplayField.Amount);
 
                 yield return CreateTestCase("Creation date mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: 7, description: -1, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Date).Without(SearchAction.Hours), 
-                    new[] { DisplayField.Created, DisplayField.JournalDate });
+                    DisplayField.Created, DisplayField.JournalDate);
 
                 yield return CreateTestCase("Description mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: 4, journalDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    new[] { DisplayField.JournalDate, DisplayField.Description });
+                    DisplayField.JournalDate, DisplayField.Description);
 
                 yield return CreateTestCase("Username mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, journalDate: 18, username: 319), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Users), 
-                    new[] { DisplayField.JournalDate, DisplayField.Username });
+                    DisplayField.JournalDate, DisplayField.Username);
             }
         }
 
@@ -103,7 +103,7 @@ namespace Tests
         }
 
 
-        private static TestCaseData CreateTestCase(string name, FieldLookups fieldLookups, IDictionary<string, string> errorMessages, IList<DisplayField> availableFields)
+        private static TestCaseData CreateTestCase(string name, FieldLookups fieldLookups, IDictionary<string, string> errorMessages, params DisplayField[] availableFields)
         {
             return new TestCaseData(fieldLookups)
                 .Returns(new SearchCapability(availableFields, errorMessages))
