@@ -60,6 +60,8 @@
     <Compile Include="ExcelImportModule.cs" />
     <Compile Include="ExcelMappingException.cs" />
     <Compile Include="FieldLookups.cs" />
+    <Compile Include="IDataReaderFactory.cs" />
+    <Compile Include="ISearcherFactoryFactory.cs" />
     <Compile Include="SheetMetadata.cs" />
     <Compile Include="MetadataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

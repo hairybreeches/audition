@@ -9,7 +9,7 @@ using SqlImport.DataReaders;
 
 namespace ExcelImport
 {
-    public class FieldLookupInterpreter
+    public class FieldLookupInterpreter : IDataReaderFactory, ISearcherFactoryFactory
     {
         private readonly ExcelColumnNamer namer;
 
@@ -46,7 +46,7 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (ISqlDataReader<DateTime>) new NullDataReader<DateTime>();
         }
 
-        public DisplayField[] GetDisplayableFields(FieldLookups lookups)
+        private DisplayField[] GetDisplayableFields(FieldLookups lookups)
         {
             return Enums.GetAllValues<DisplayField>()
                 .Where(field => IsDisplayable(lookups, field)).ToArray();

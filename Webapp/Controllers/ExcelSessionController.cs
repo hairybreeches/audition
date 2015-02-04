@@ -12,9 +12,9 @@ namespace Webapp.Controllers
         private readonly ExcelDataFileStorage dataFileStorage;
         private readonly ExcelJournalReader journalReader;
         private readonly LoginSession session;
-        private readonly FieldLookupInterpreter lookupInterpreter;
+        private readonly ISearcherFactoryFactory lookupInterpreter;
 
-        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, FieldLookupInterpreter lookupInterpreter)
+        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, ISearcherFactoryFactory lookupInterpreter)
         {
             this.metadataReader = metadataReader;
             this.dataFileStorage = dataFileStorage;
