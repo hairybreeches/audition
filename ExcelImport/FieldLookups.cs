@@ -13,6 +13,10 @@ namespace ExcelImport
             int amount,
             int id)
         {
+            if (journalDate < 0)
+            {
+                throw new ExcelMappingException("The journal date must be mapped");
+            }
             Description = description;
             Username = username;
             Created = created;
