@@ -1,14 +1,14 @@
 namespace Model
 {
     public enum DisplayField
-    {
-        Description,
-        Username,
+    {        
         Created,
         JournalDate,
-        AccountCode,
+        Description,
+        Username,
+        JournalType,
         AccountName,
         Amount,
-        JournalType
+        AccountCode
     }
 }
