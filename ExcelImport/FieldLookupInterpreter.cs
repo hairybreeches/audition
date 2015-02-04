@@ -141,7 +141,7 @@ namespace ExcelImport
             }
         }
 
-        public IDictionary<SearchAction, string> GetUnavailableSearchMessages(FieldLookups lookups)
+        private IDictionary<SearchAction, string> GetUnavailableSearchMessages(FieldLookups lookups)
         {
             return Enums.GetAllValues<SearchAction>()
                 .Where(action => !IsSearchable(action, lookups))
