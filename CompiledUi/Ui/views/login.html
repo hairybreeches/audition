@@ -80,7 +80,7 @@
                 <button type="button" data-bind="click: browseExcelFile" class="btn btn-default">Browse...	</button>
               </div>
             </div>
-            <div data-bind="visible: !sheets.showError()" style="display: none;">
+            <div data-bind="visible: sheets.showInput()" style="display: none;">
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
                 <div class="col-sm-6">
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-            <div data-bind="visible: !columns.showError()" style="display: none;">
+            <div data-bind="visible: columns.showInput()" style="display: none;">
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
                 <div class="col-sm-6">
