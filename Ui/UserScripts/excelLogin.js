@@ -3,16 +3,24 @@
     self.names = ko.observableArray([]);
     self.errorMessage = ko.observable('');
     self.showError = ko.observable(false);
+    self.showInput = ko.observable(false);
 
     self.update = function (data) {
         self.names(data);
         self.showError(false);
+        self.showInput(true);
         self.errorMessage(false);
     };
+
+    self.hideAll = function () {
+        self.showError(false);
+        self.showInput(false);
+    }
 
     self.updateError = function (message) {
         self.errorMessage(getErrorMessage(message));
         self.showError(true);
+        self.showInput(false);
     }
 }
 
@@ -21,7 +29,7 @@ var ExcelLoginModel = function () {
 
     self.fileLocation = ko.observable('');
     self.useHeaderRow = ko.observable(true);
-    self.sheet = ko.observable(0);
+    self.sheet = ko.observable("");
     var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'Id'];
     fields.forEach(
         function(fieldName) {
@@ -64,10 +72,6 @@ var ExcelLoginModel = function () {
     self.sheets = new ErrorMessageNamesList();
 
     var updateSheetNames = function (fileLocation) {
-        if (!fileLocation) {
-            return;
-        }
-
         $.ajax('/api/excel/getSheetNames', {
             type: "GET",            
             data: {
@@ -78,19 +82,26 @@ var ExcelLoginModel = function () {
         });
     }
 
-    self.fileLocation.subscribe(function (newFilename) {
-        return updateColumnNames(newFilename, self.useHeaderRow(), self.sheet());
-    });
+    var onNewFilename = function (newFilename) {
+        if (newFilename) {
+            updateSheetNames(newFilename);
+            updateColumnNames(newFilename, self.useHeaderRow(), self.sheet());            
+            return;
+        }
+
+        self.sheets.hideAll();
+        self.columns.hideAll();
+    }
+
+    self.fileLocation.subscribe(onNewFilename);
 
     self.useHeaderRow.subscribe(function (newUseHeaderRow) {
-        return updateColumnNames(self.fileLocation(), newUseHeaderRow, self.sheet());
+        updateColumnNames(self.fileLocation(), newUseHeaderRow, self.sheet());
     });
 
     self.sheet.subscribe(function (newSheet) {
-        return updateColumnNames(self.fileLocation(), self.useHeaderRow(), newSheet);
+        updateColumnNames(self.fileLocation(), self.useHeaderRow(), newSheet);
     });
-
-    self.fileLocation.subscribe(updateSheetNames);
 
     self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
 
@@ -109,7 +120,7 @@ var ExcelLoginModel = function () {
     }
 
     self.disabled = function () {
-        return self.errorMessage.visible();
+        return !(self.sheets.showInput() && self.columns.showInput());
     };
 
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
