@@ -6,3 +6,7 @@ mixin message(bindTo, alertClass)
 mixin errorMessage(bindTo)
 	+message(bindTo, 'alert-danger')
 		span(data-bind="text: message()")
+
+mixin successMessage(bindTo)
+	+message(bindTo, 'alert-success')
+		block
