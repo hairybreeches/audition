@@ -10,7 +10,7 @@ var ErrorMessageNamesList = function() {
         };
 
         self.updateError = function(message) {
-            self.errorMessage(message);
+            self.errorMessage(getErrorMessage(message));
             self.showError(true);
         }
 }
@@ -55,7 +55,8 @@ var ExcelLoginModel = function () {
                 UseHeaderRow: useHeaderRow,
                 Sheet: sheet
             }),
-            success: self.columns.update
+            success: self.columns.update,
+            error: self.columns.updateError
         });
     };
 
@@ -67,7 +68,8 @@ var ExcelLoginModel = function () {
             data: {
                 filename: fileLocation
             },
-            success: self.sheets.update            
+            success: self.sheets.update,
+            error: self.sheets.updateError
         });
     }
 
