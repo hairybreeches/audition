@@ -83,8 +83,10 @@
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
               <div class="col-sm-6">
-                <select name="sheet" data-bind="value: sheet, foreach: sheets.names" class="form-control">
+                <select name="sheet" data-bind="value: sheet, with: sheets" class="form-control">
+                  <!--ko foreach: names-->
                   <option data-bind="attr: { label: $data, value: $index}"></option>
+                  <!-- /ko-->
                 </select>
               </div>
             </div>
