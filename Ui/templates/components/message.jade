@@ -1,10 +1,11 @@
-mixin message(bindTo, alertClass)
+mixin message(bindTo, alertClass, unhideable)
 	div(data-bind="visible: #{bindTo}.visible(), with: #{bindTo}" style="display: none;" class="alert " + alertClass)
-		button.close(type="button" data-bind="click: hide") &#10006;
+		if !unhideable
+			button.close(type="button" data-bind="click: hide") &#10006;
 		block
 
-mixin errorMessage(bindTo)
-	+message(bindTo, 'alert-danger')
+mixin errorMessage(bindTo, unhideable)
+	+message(bindTo, 'alert-danger', unhideable)
 		span(data-bind="text: message()")
 
 mixin successMessage(bindTo)
