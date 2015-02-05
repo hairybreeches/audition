@@ -8,6 +8,8 @@ namespace Tests
     [TestFixture]
     public class MetadataReaderTests
     {
+        private string examplesage50export = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx";
+
         [Test]
         public void WithoutHeaderRowHeaderReaderReturnsLetteredListOfCorrectSize()
         {
@@ -37,7 +39,7 @@ namespace Tests
             },
                 reader.ReadHeaders(new SheetMetadata
                 {
-                    Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
+                    Filename = examplesage50export,
                     UseHeaderRow = false
                 }));
         }
@@ -71,9 +73,16 @@ namespace Tests
             },
                 reader.ReadHeaders(new SheetMetadata
                 {
-                    Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
+                    Filename = examplesage50export,
                     UseHeaderRow = true
                 }));
+        }
+
+        [Test]
+        public void CanReturnSheetNames()
+        {
+            var sheetNames = CreateReader().ReadSheets(examplesage50export);
+            CollectionAssert.AreEqual(new[] { "Sage 50 journals export", "Unrelated data" }, sheetNames);
         }
 
         private static MetadataReader CreateReader()
