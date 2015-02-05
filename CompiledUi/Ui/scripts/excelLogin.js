@@ -1,4 +1,21 @@
-var ExcelLoginModel = function() {
+var ErrorMessageNamesList = function() {
+        var self = this;
+        self.names = ko.observableArray([]);
+        self.errorMessage = ko.observable('');
+        self.showError = ko.observable(false);
+
+        self.update = function(data) {
+            self.names(data);
+            self.showError(false);
+        };
+
+        self.updateError = function(message) {
+            self.errorMessage(message);
+            self.showError(true);
+        }
+}
+
+var ExcelLoginModel = function () {
     var self = this;
 
     self.fileLocation = ko.observable('');
@@ -27,7 +44,7 @@ var ExcelLoginModel = function() {
         return data;
     }
 
-    self.columnNames = ko.observableArray([]);
+    self.columns = new ErrorMessageNamesList();
 
     var updateColumnNames = function(fileLocation, useHeaderRow, sheet) {
         $.ajax('/api/excel/getHeaders', {
@@ -38,13 +55,11 @@ var ExcelLoginModel = function() {
                 UseHeaderRow: useHeaderRow,
                 Sheet: sheet
             }),
-            success: function(data) {
-                self.columnNames(data);
-            }
+            success: self.columns.update
         });
     };
 
-    self.sheetNames = ko.observableArray([]);
+    self.sheets = new ErrorMessageNamesList();
 
     var updateSheetNames = function(fileLocation) {
         $.ajax('/api/excel/getSheetNames', {
@@ -52,9 +67,7 @@ var ExcelLoginModel = function() {
             data: {
                 filename: fileLocation
             },
-            success: function(data) {
-                self.sheetNames(data);
-            }
+            success: self.sheets.update            
         });
     }
 
