@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Tests
 {
     [TestFixture]
-    public class HeaderReadingTests
+    public class MetadataReaderTests
     {
         [Test]
         public void WithoutHeaderRowHeaderReaderReturnsLetteredListOfCorrectSize()
