@@ -108,5 +108,9 @@ var ExcelLoginModel = function () {
         }     
     }
 
+    self.disabled = function () {
+        return self.errorMessage.visible();
+    };
+
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
 };
