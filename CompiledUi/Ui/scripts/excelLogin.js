@@ -1,19 +1,19 @@
 var ErrorMessageNamesList = function() {
-        var self = this;
-        self.names = ko.observableArray([]);
-        self.errorMessage = ko.observable('');
-        self.showError = ko.observable(false);
+    var self = this;
+    self.names = ko.observableArray([]);
+    self.errorMessage = ko.observable('');
+    self.showError = ko.observable(false);
 
-        self.update = function(data) {
-            self.names(data);
-            self.showError(false);
-            self.errorMessage(false);
-        };
+    self.update = function (data) {
+        self.names(data);
+        self.showError(false);
+        self.errorMessage(false);
+    };
 
-        self.updateError = function(message) {
-            self.errorMessage(getErrorMessage(message));
-            self.showError(true);
-        }
+    self.updateError = function (message) {
+        self.errorMessage(getErrorMessage(message));
+        self.showError(true);
+    }
 }
 
 var ExcelLoginModel = function () {
