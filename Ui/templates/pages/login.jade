@@ -9,7 +9,7 @@ mixin login-form(system, url)
 	form.form-horizontal(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
-			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Login &raquo;
+			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit, css: { disabled: disabled()}") Login &raquo;
 
 +page('Login', ['sage50Login', 'excelLogin', 'login'])
 	.container

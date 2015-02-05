@@ -14,5 +14,9 @@ var Sage50LoginModel = function() {
         });
     }
 
+    self.disabled = function() {
+        return false;
+    };
+
     autocomplete("#sage50dataDirectory", "/api/userdata/sage50DataLocations");
 };
