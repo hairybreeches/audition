@@ -2,8 +2,9 @@
 
 mixin dropdown(field, rowSource)
 	+form-field(field.label)
-		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, with: #{rowSource}")
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, with: #{rowSource}, visible: !#{rowSource}.showError()")
 			block
+		input.form-control(disabled="" type="text" data-bind="attr: { placeholder: #{rowSource}.errorMessage }, visible: #{rowSource}.showError", style="display: none;")
 
 mixin sheets-dropdown()
 	+dropdown({label: 'Sheet', fieldName: 'sheet'}, 'sheets')
