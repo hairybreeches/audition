@@ -35,7 +35,7 @@ namespace Native
 
         public Stream OpenFileStreamToRead(string filename)
         {
-            return File.Open(filename, FileMode.Open, FileAccess.Read);
+            return File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
 
         private void CreateDirectory(string directory)
