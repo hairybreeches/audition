@@ -2,15 +2,15 @@
 
 
 
-mixin row-dropdown(field)
+mixin row-dropdown(field, rowSource)
 	+form-field(field.label)
-		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}")
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, with: #{rowSource}")
 			block
-			optgroup(data-bind="foreach: columnNames" label="Map this field to:")
+			optgroup(data-bind="foreach: names" label="Map this field to:")
 				option(data-bind="attr: { label: $data, value: $index}")
 
-mixin optional-row-dropdown(field)
-	+row-dropdown(field)
+mixin optional-row-dropdown(field, rowSource)
+	+row-dropdown(field, rowSource)
 		option(value="-1" label="No value")
 
 mixin excel-login()
@@ -21,9 +21,9 @@ mixin excel-login()
 		.col-sm-2
 			button.btn.btn-default(type="button", data-bind="click: browseExcelFile") Browse...	
 	+form-field('Sheet')
-		select.form-control(name="sheet" data-bind="value: sheet, foreach: sheetNames")
+		select.form-control(name="sheet" data-bind="value: sheet, foreach: sheets.names")
 			option(data-bind="attr: { label: $data, value: $index}")
 	+checkbox('Header row', 'useHeaderRow')
-	+row-dropdown({label: 'Date', fieldName: 'JournalDate'})
+	+row-dropdown({label: 'Date', fieldName: 'JournalDate'}, 'columns')
 	each field in [	{label: 'Nominal code', fieldName: 'AccountCode'}, {label: 'Nominal name', fieldName: 'AccountName'}, {label: 'Amount', fieldName: 'Amount'}, {label: 'Created by', fieldName: 'Username'}, {label: 'Created date', fieldName: 'Created'}, {label: 'Description', fieldName: 'Description'}, {label: 'ID', fieldName: 'Id'}]
-		+optional-row-dropdown(field)
+		+optional-row-dropdown(field, 'columns')
