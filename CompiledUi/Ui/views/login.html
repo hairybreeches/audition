@@ -80,120 +80,117 @@
                 <button type="button" data-bind="click: browseExcelFile" class="btn btn-default">Browse...	</button>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
-              <div class="col-sm-6">
-                <select name="sheet" data-bind="value: sheet, with: sheets, visible: !sheets.showError()" class="form-control">
-                  <!--ko foreach: names-->
-                  <option data-bind="attr: { label: $data, value: $index}"></option>
-                  <!-- /ko-->
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: sheets.errorMessage }, visible: sheets.showError" style="display: none;" class="form-control">
+            <div data-bind="visible: !sheets.showError()" style="display: none;">
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
+                <div class="col-sm-6">
+                  <select name="sheet" data-bind="value: sheet, with: sheets" class="form-control">
+                    <!--ko foreach: names-->
+                    <option data-bind="attr: { label: $data, value: $index}"></option>
+                    <!-- /ko-->
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-6 col-sm-offset-4">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" data-bind="checked: useHeaderRow">Header row
-                  </label>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-4">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" data-bind="checked: useHeaderRow">Header row
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
-              <div class="col-sm-6">
-                <select name="JournalDate" data-bind="value: JournalDate, with: columns, visible: !columns.showError()" class="form-control">
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
+            <div data-bind="visible: !columns.showError()" style="display: none;">
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
+                <div class="col-sm-6">
+                  <select name="JournalDate" data-bind="value: JournalDate, with: columns" class="form-control">
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Nominal code</label>
+                <div class="col-sm-6">
+                  <select name="AccountCode" data-bind="value: AccountCode, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Nominal name</label>
+                <div class="col-sm-6">
+                  <select name="AccountName" data-bind="value: AccountName, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
+                <div class="col-sm-6">
+                  <select name="Amount" data-bind="value: Amount, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Created by</label>
+                <div class="col-sm-6">
+                  <select name="Username" data-bind="value: Username, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Created date</label>
+                <div class="col-sm-6">
+                  <select name="Created" data-bind="value: Created, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
+                <div class="col-sm-6">
+                  <select name="Description" data-bind="value: Description, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">ID</label>
+                <div class="col-sm-6">
+                  <select name="Id" data-bind="value: Id, with: columns" class="form-control">
+                    <option value="-1" label="No value"></option>
+                    <optgroup data-bind="foreach: names" label="Map this field to:">
+                      <option data-bind="attr: { label: $data, value: $index}"></option>
+                    </optgroup>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Nominal code</label>
-              <div class="col-sm-6">
-                <select name="AccountCode" data-bind="value: AccountCode, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Nominal name</label>
-              <div class="col-sm-6">
-                <select name="AccountName" data-bind="value: AccountName, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
-              <div class="col-sm-6">
-                <select name="Amount" data-bind="value: Amount, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Created by</label>
-              <div class="col-sm-6">
-                <select name="Username" data-bind="value: Username, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Created date</label>
-              <div class="col-sm-6">
-                <select name="Created" data-bind="value: Created, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
-              <div class="col-sm-6">
-                <select name="Description" data-bind="value: Description, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-offset-2 control-label">ID</label>
-              <div class="col-sm-6">
-                <select name="Id" data-bind="value: Id, with: columns, visible: !columns.showError()" class="form-control">
-                  <option value="-1" label="No value"></option>
-                  <optgroup data-bind="foreach: names" label="Map this field to:">
-                    <option data-bind="attr: { label: $data, value: $index}"></option>
-                  </optgroup>
-                </select>
-                <input disabled="" type="text" data-bind="attr: { placeholder: columns.errorMessage }, visible: columns.showError" style="display: none;" class="form-control">
-              </div>
+            <div data-bind="visible: errorMessage.visible(), with: errorMessage" style="display: none;" class="alert alert-danger"><span data-bind="text: message()"></span>
             </div>
             <div class="form-group">
               <label class="col-sm-2 col-sm-offset-2 control-label"></label>
