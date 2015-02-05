@@ -7,6 +7,7 @@
         self.update = function(data) {
             self.names(data);
             self.showError(false);
+            self.errorMessage(false);
         };
 
         self.updateError = function(message) {
@@ -46,7 +47,7 @@ var ExcelLoginModel = function () {
 
     self.columns = new ErrorMessageNamesList();
 
-    var updateColumnNames = function(fileLocation, useHeaderRow, sheet) {
+    var updateColumnNames = function (fileLocation, useHeaderRow, sheet) {
         $.ajax('/api/excel/getHeaders', {
             type: "POST",
             contentType: 'application/json',
@@ -62,7 +63,11 @@ var ExcelLoginModel = function () {
 
     self.sheets = new ErrorMessageNamesList();
 
-    var updateSheetNames = function(fileLocation) {
+    var updateSheetNames = function (fileLocation) {
+        if (!fileLocation) {
+            return;
+        }
+
         $.ajax('/api/excel/getSheetNames', {
             type: "GET",            
             data: {
@@ -92,6 +97,16 @@ var ExcelLoginModel = function () {
     self.submit = function() {
         model.login('/api/excel/login', getData());
     };
+
+    self.errorMessage = {
+        visible: function() {
+            return self.sheets.showError() || self.columns.showError();
+        },
+
+        message: function() {
+            return self.sheets.errorMessage() || self.columns.errorMessage();
+        }     
+    }
 
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
 };
