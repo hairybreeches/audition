@@ -55,7 +55,7 @@ namespace ExcelImport
                 return ExcelReaderFactory.CreateOpenXmlReader(OpenFile(filename));
             }
 
-            throw new CouldNotOpenExcelFileException(String.Format("Could not recognise Excel file type: '{0}'", extension));
+            throw new CouldNotOpenExcelFileException(String.Format("Could not recognise Excel file extension: '{0}'", extension));
         }
 
         private Stream OpenFile(string filename)
