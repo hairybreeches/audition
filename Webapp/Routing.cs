@@ -6,7 +6,7 @@ namespace Webapp
     public static class Routing
     {
 
-        public const string GetExcelSheets = "api/excel/getSheetNames";
+        public const string GetExcelSheets = "api/excel/getSheets";
         public const string GetExcelHeaders = "api/excel/getHeaders";
         public const string ExcelLogin = "api/excel/login";
 
