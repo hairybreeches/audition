@@ -30,18 +30,10 @@ namespace Webapp.Controllers
             dataFileStorage.StoreUsage(importMapping);            
             session.Login(lookupInterpreter.CreateSearcherFactory(importMapping.Lookups), journalReader.ReadJournals(importMapping));
         }    
-        
-        
-        [Route(Routing.GetExcelHeaders)]
-        [HttpPost]
-        public IEnumerable<string> GetHeaders(SheetMetadata sheetMetadata)
-        {
-            return metadataReader.ReadHeaders(sheetMetadata);
-        }
 
         [Route(Routing.GetExcelSheets)]
         [HttpGet]
-        public IEnumerable<string> GetSheets(String filename)
+        public IEnumerable<SheetMetadata> GetSheets(String filename)
         {
             return metadataReader.ReadSheets(filename);
         }

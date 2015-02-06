@@ -22,7 +22,7 @@ namespace SystemTests
         {
             var result = GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                SheetData = new SheetMetadata
+                SheetDescription = new DataSet
                 {
                     Filename = "..\\..\\..\\ExcelImport\\ComplexSage50Export.xls",
                     Sheet = 0,
@@ -57,10 +57,11 @@ namespace SystemTests
             var exception =
                 Assert.Throws<SqlDataFormatUnexpectedException>(() => GetAllJournalsFromSearch(new ExcelImportMapping
                 {
-                    SheetData = new SheetMetadata
+                    SheetDescription = new DataSet()
                     {
                         Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
-                        Sheet = 0,
+                        
+                        Sheet= 0,
                         UseHeaderRow = true,
                     },
                     Lookups = new FieldLookups
@@ -84,7 +85,7 @@ namespace SystemTests
         {
             var results = GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                SheetData = new SheetMetadata
+                SheetDescription = new DataSet
                 {
                     Filename = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx",
                     Sheet = 0,
@@ -119,7 +120,7 @@ namespace SystemTests
         {
             GetAllJournalsFromSearch(new ExcelImportMapping
             {
-                SheetData = new SheetMetadata
+                SheetDescription = new DataSet
                 {
                     Filename = ".\\ExcelSampleData.xls",
                     Sheet = 0,

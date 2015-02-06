@@ -16,24 +16,24 @@ namespace ExcelImport
             this.fileSystem = fileSystem;
         }
 
-        public DataTable GetSheet(SheetMetadata data)
+        public DataTable GetSheet(DataSet sheetDescription)
         {
-            var dataSet = GetDataSet(data.Filename, data.UseHeaderRow);
-            var sheet = dataSet.Tables[data.Sheet];
+            var dataSet = GetDataSet(sheetDescription.Filename, sheetDescription.UseHeaderRow);
+            var sheet = dataSet.Tables[sheetDescription.Sheet];
             return sheet;
         }
 
-        public SqlDataReader ReadSheet(SheetMetadata data)
+        public SqlDataReader ReadSheet(DataSet sheetDescription)
         {
-            var sheet = GetSheet(data);
-            var firstRow = data.UseHeaderRow ? 2 : 1;
+            var sheet = GetSheet(sheetDescription);
+            var firstRow = sheetDescription.UseHeaderRow ? 2 : 1;
             return new SqlDataReader(sheet.CreateDataReader(), firstRow);
         }
 
-        public DataSet GetDataSet(string filename, bool headerRow = false)
+        public System.Data.DataSet GetDataSet(string filename, bool useHeaderRow)
         {
             var reader = GetReader(filename);
-            reader.IsFirstRowAsColumnNames = headerRow;
+            reader.IsFirstRowAsColumnNames = useHeaderRow;
             return reader.AsDataSet();
         }
 
