@@ -52,7 +52,10 @@ namespace Audition.Chromium
 
         private async Task<HttpResponseMessage> GetResponse(HttpRequestMessage httpRequest)
         {
-            return await server.ExecuteRequest(httpRequest);
+            using (httpRequest)
+            {
+                return await server.ExecuteRequest(httpRequest);
+            }            
         }
     }
 }
