@@ -4,7 +4,7 @@ namespace ExcelImport
 {
     public class ExcelImportMapping
     {
-        public SheetMetadata SheetData { get; set; }
+        public DataSet SheetDescription { get; set; }
         public FieldLookups Lookups { get; set; }       
     }
 }

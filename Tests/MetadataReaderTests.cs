@@ -1,4 +1,7 @@
-﻿using ExcelImport;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Autofac.Builder;
+using ExcelImport;
 using Model;
 using Native;
 using NUnit.Framework;
@@ -10,11 +13,16 @@ namespace Tests
     {
         private const string Examplesage50Export = "..\\..\\..\\ExcelImport\\ExampleSage50Export.xlsx";
 
+
         [Test]
-        public void WithoutHeaderRowHeaderReaderReturnsLetteredListOfCorrectSize()
+        public void CanReadMetadata()
         {
             var reader = CreateReader();
-            CollectionAssert.AreEqual(new[]
+            var metadata = reader.ReadSheets(Examplesage50Export);
+            CollectionAssert.AreEqual(new []
+            {
+                new SheetMetadata("Sage 50 journals export", 
+                    new[]
             {
                 "Column A",
                 "Column B",
@@ -36,19 +44,8 @@ namespace Tests
                 "Column R",
                 "Column S",
                 "Column T",
-            },
-                reader.ReadHeaders(new SheetMetadata
-                {
-                    Filename = Examplesage50Export,
-                    UseHeaderRow = false
-                }));
-        }
-        
-        [Test]
-        public void WitheaderRowHeaderReaderReturnsFirstCell()
-        {
-            var reader = CreateReader();
-            CollectionAssert.AreEqual(new[]
+            }, 
+            new[]
             {
                 "No",
                 "Type",
@@ -70,24 +67,18 @@ namespace Tests
                 "VAT Rtn No.",
                 "VAT Rec Date",
                 "User Name",
+            }),
+            new SheetMetadata("Unrelated data", 
+                new[]{"Column A","Column B","Column C","Column D","Column E"}, 
+                new[]{"Date", "Widgets bought", "Divisional output", "Widgets sold", "Overtime"}), 
             },
-                reader.ReadHeaders(new SheetMetadata
-                {
-                    Filename = Examplesage50Export,
-                    UseHeaderRow = true
-                }));
-        }
+            metadata);
+        }      
+  
+       private static MetadataReader CreateReader()
+       {
+           return new MetadataReader(new ExcelColumnNamer(), new ExcelToSqlDataConverter(new FileSystem()));
+       }       
 
-        [Test]
-        public void CanReturnSheetNames()
-        {
-            var sheetNames = CreateReader().ReadSheets(Examplesage50Export);
-            CollectionAssert.AreEqual(new[] { "Sage 50 journals export", "Unrelated data" }, sheetNames);
-        }
-
-        private static MetadataReader CreateReader()
-        {
-            return new MetadataReader(new ExcelColumnNamer(), new ExcelToSqlDataConverter(new FileSystem()));
-        }
-    }
+    }    
 }

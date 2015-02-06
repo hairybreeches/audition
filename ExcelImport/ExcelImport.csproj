@@ -62,6 +62,7 @@
     <Compile Include="FieldLookups.cs" />
     <Compile Include="IDataReaderFactory.cs" />
     <Compile Include="ISearcherFactoryFactory.cs" />
+    <Compile Include="DataSet.cs" />
     <Compile Include="SheetMetadata.cs" />
     <Compile Include="MetadataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

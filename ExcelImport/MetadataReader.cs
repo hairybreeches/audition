@@ -15,17 +15,16 @@ namespace ExcelImport
             this.toSqlDataConverter = toSqlDataConverter;
         }
 
-        public IEnumerable<string> ReadSheets(string filename)
+        public IEnumerable<SheetMetadata> ReadSheets(string filename)
         {
-            var dataSet = toSqlDataConverter.GetDataSet(filename);
-            return dataSet.Tables.OfType<DataTable>().Select(x => x.TableName);
+            var dataSet = toSqlDataConverter.GetDataSet(filename, true);
+            return dataSet.Tables.OfType<DataTable>().Select(GetMetadata);
         }
 
-        public IEnumerable<string> ReadHeaders(SheetMetadata data)
+        private SheetMetadata GetMetadata(DataTable table)
         {
-            var sheet = toSqlDataConverter.GetSheet(data);
-            var dataColumns = sheet.Columns.OfType<DataColumn>();
-            return data.UseHeaderRow ? GetHeaderRowColumnNames(dataColumns) : GetExcelColumnNames(dataColumns);
+            var dataColumns = table.Columns.OfType<DataColumn>().ToList();
+            return new SheetMetadata(table.TableName, GetExcelColumnNames(dataColumns), GetHeaderRowColumnNames(dataColumns));
         }
 
         private static IEnumerable<string> GetHeaderRowColumnNames(IEnumerable<DataColumn> dataColumns)

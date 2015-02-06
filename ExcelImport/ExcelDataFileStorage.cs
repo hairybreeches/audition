@@ -35,7 +35,7 @@ namespace ExcelImport
         public void StoreUsage(ExcelImportMapping mapping)
         {
             var details = GetUserDetails();
-            details.AddExcelFile(mapping.SheetData.Filename);
+            details.AddExcelFile(mapping.SheetDescription.Filename);
             userDetailsStorage.Save(details);
         }
 
