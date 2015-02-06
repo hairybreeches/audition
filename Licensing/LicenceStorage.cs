@@ -10,7 +10,7 @@ namespace Licensing
         private const string Location = "SOFTWARE\\Audition\\Audition";
         private const string LicenceKeyName = "LicenceKey";
         private const string TrialStartKeyName = "TrialStart";
-        private const int NumberOfDaysInTrial = 28;
+        private const int NumberOfDaysInTrial = 14;
 
 
         public LicenceStorage(ICurrentUserRegistry registry, LicenceVerifier licenceVerifier, IClock clock)
