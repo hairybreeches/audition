@@ -193,9 +193,7 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
     }   
 
     var exportSerialise = function() {
-        return JSON.stringify({
-            searchWindow: getSearchWindow()
-        });
+        return JSON.stringify(getSearchWindow());
     }
 
     self.submit = function(_, e) {
