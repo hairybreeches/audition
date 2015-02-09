@@ -21,14 +21,13 @@ namespace Searching
         {
             var periodJournals = repository.GetJournalsApplyingTo(dateRange);
 
-            var startOfSearchPeriod = GetCreationStartDate(parameters, dateRange);
+            var startOfSearchPeriod = GetCreationStartDate(parameters);
             return periodJournals.Where(x => x.Created >= startOfSearchPeriod);            
         }
 
-        private static DateTimeOffset GetCreationStartDate(YearEndParameters parameters, DateRange dateRange)
-        {
-            var periodEndDate = dateRange.To;
-            return periodEndDate.Subtract(TimeSpan.FromDays(parameters.DaysBeforeYearEnd));
+        private static DateTimeOffset GetCreationStartDate(YearEndParameters parameters)
+        {            
+            return parameters.YearEnd.Subtract(TimeSpan.FromDays(parameters.DaysBeforeYearEnd));
         }
     }
 }
