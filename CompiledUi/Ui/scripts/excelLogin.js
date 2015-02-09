@@ -9,8 +9,8 @@ var ExcelLoginModel = function () {
     var fields = ['JournalDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'Id'];
 
     fields.forEach(
-        function(fieldName) {
-            self[fieldName] = ko.observable('A');
+        function (fieldName) {
+            self[fieldName] = ko.observable('-1');
         });
 
     var getData = function() {
