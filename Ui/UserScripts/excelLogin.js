@@ -49,8 +49,8 @@
 
     var showError = function (jqxi) {
         self.showInput(false);
-        self.errorMessage.visible(true);
         self.errorMessage.message(getErrorMessage(jqxi));
+        self.errorMessage.visible(true);        
     }
 
     var updateSheets = function (fileLocation) {
