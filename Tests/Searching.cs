@@ -28,33 +28,7 @@ namespace Tests
             return searchWindow.Execute(searcher);
         }
 
-        //todo: so much duplication!
-        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<WorkingHoursParameters> searchRequest, IEnumerable<Journal> journals)
-        {
-            return ExecuteSearch(controller => controller.HoursSearch(searchRequest), journals);
-        }
-
-        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<UnusualAccountsParameters> searchRequest, IEnumerable<Journal> journals)
-        {
-            return ExecuteSearch(controller => controller.AccountsSearch(searchRequest), journals);
-        }
-
-        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<YearEndParameters> searchRequest, IEnumerable<Journal> journals)
-        {
-            return ExecuteSearch(controller => controller.DateSearch(searchRequest), journals);
-        }
-
-        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<UserParameters> searchRequest, IEnumerable<Journal> journals)
-        {
-            return ExecuteSearch(controller => controller.UserSearch(searchRequest), journals);
-        }
-
-        public static IEnumerable<Journal> ExecuteSearch(SearchRequest<EndingParameters> searchRequest, IEnumerable<Journal> journals)
-        {
-            return ExecuteSearch(controller => controller.EndingSearch(searchRequest), journals);
-        }
-
-        private static IEnumerable<Journal> ExecuteSearch(Func<SearchController, SearchResponse> searchAction, IEnumerable<Journal> journalsInRepository)
+        public static IEnumerable<Journal> ExecuteSearch(ISearchRequest request, IEnumerable<Journal> journalsInRepository)
         {
             CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
 
@@ -63,7 +37,7 @@ namespace Tests
                 .WithNoLicensing()
                 .BuildSearchable(journalsInRepository))
             {
-                return searchAction(lifetime.Resolve<SearchController>()).Journals.ToList();
+                return lifetime.Resolve<SearchController>().Search(request).Journals.ToList();
             }
         }
     }

@@ -60,7 +60,7 @@ namespace Webapp.Controllers
             return Search(searchRequest);
         }
 
-        private SearchResponse Search<T>(SearchRequest<T> searchRequest) where T : ISearchParameters
+        public SearchResponse Search(ISearchRequest searchRequest)
         {
             return searchRequest.SearchWindow.Execute(Searcher).GetPage(searchRequest.PageNumber);
         }
