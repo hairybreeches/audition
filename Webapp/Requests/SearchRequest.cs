@@ -3,7 +3,7 @@ using Searching.SearchWindows;
 
 namespace Webapp.Requests
 {
-    public class SearchRequest<T> where T : ISearchParameters
+    public class SearchRequest<T> : ISearchRequest where T : ISearchParameters
     {
         public SearchRequest(SearchWindow<T> searchWindow, int pageNumber)
         {
