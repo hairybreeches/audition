@@ -13,7 +13,7 @@ namespace Webapp.Requests
 
 
         public int PageNumber { get; private set; }
-        public SearchWindow<T> SearchWindow { get; private set; }
+        public ISearchWindow SearchWindow { get; private set; }
 
         protected bool Equals(SearchRequest<T> other)
         {

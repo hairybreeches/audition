@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Model.Accounting;
 using Model.Time;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -26,6 +28,12 @@ namespace Searching.SearchWindows
         public DayOfWeek ToDay { get; private set; }
         public LocalTime FromTime { get; private set; }
         public LocalTime ToTime { get; private set; }
+
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+        }
 
         public bool Contains(DateTimeOffset ukCreationTime)
         {            

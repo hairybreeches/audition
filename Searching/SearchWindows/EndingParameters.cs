@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using Model.Accounting;
+using Model.Time;
 
 namespace Searching.SearchWindows
 {
@@ -19,6 +22,11 @@ namespace Searching.SearchWindows
         public override string ToString()
         {
             return String.Format("Ending in at least {0} zeroes", MinimumZeroesToBeConsideredUnusual);
+        }
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
         }
     }
 }

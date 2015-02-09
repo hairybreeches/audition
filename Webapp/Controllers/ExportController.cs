@@ -34,41 +34,41 @@ namespace Webapp.Controllers
         [Route(Routing.HoursExport)]
         public async Task<string> HoursExport(SearchWindow<WorkingHoursParameters> searchWindow)
         {
-            return await Export(searchWindow, Searcher.FindJournalsWithin);
+            return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.AccountsExport)]
         public async Task<string> AccountsExport(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
-            return await Export(searchWindow, Searcher.FindJournalsWithin);
+            return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.DateExport)]
         public async Task<string> DateExport(SearchWindow<YearEndParameters> searchWindow)
         {
-            return await Export(searchWindow, Searcher.FindJournalsWithin);
+            return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.EndingExport)]
         public async Task<string> EndingExport(SearchWindow<EndingParameters> searchWindow)
         {
-            return await Export(searchWindow, Searcher.FindJournalsWithin);
+            return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.UserExport)]
         public async Task<string> UserExport(SearchWindow<UserParameters> searchWindow)
         {
-            return await Export(searchWindow, Searcher.FindJournalsWithin);
+            return await Export(searchWindow);
         }
 
-        private async Task<string> Export<T>(SearchWindow<T> searchWindow, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod) where T : ISearchParameters
+        private async Task<string> Export(ISearchWindow searchWindow)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            journalExporter.WriteJournals(searchWindow.Description, searchMethod(searchWindow).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
+            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
             return saveLocation;
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
+using Model.Time;
 using Persistence;
 using Searching.SearchWindows;
 
@@ -15,11 +16,11 @@ namespace Searching
             this.repository = repository;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
+            var periodJournals = repository.GetJournalsApplyingTo(dateRange);
 
-            return periodJournals.Where(x => Matches(x, searchWindow.Parameters));
+            return periodJournals.Where(x => Matches(x, parameters));
         }
 
         private static bool Matches(Journal x, WorkingHoursParameters workingHours)

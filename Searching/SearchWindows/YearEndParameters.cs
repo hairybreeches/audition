@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using Model.Accounting;
+using Model.Time;
 
 namespace Searching.SearchWindows
 {
@@ -10,6 +13,12 @@ namespace Searching.SearchWindows
         }
 
         public int DaysBeforeYearEnd { get; private set; }
+
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+        }
 
         public override string ToString()
         {
