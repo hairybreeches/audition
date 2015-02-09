@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
+using Model.Time;
+using Searching.SearchWindows;
 
 namespace Searching
 {
@@ -20,31 +21,31 @@ namespace Searching
             this.unusualAccountsSearcher = unusualAccountsSearcher;
             this.roundNumberSearcher = roundNumberSearcher;
             this.userSearcher = userSearcher;
-        }       
-        
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
-        {
-            return yearEndSearcher.FindJournalsWithin(searchWindow);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange)
         {
-            return roundNumberSearcher.FindJournalsWithin(searchWindow);
+            return yearEndSearcher.FindJournalsWithin(parameters, dateRange);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, DateRange dateRange)
         {
-            return unusualAccountsSearcher.FindJournalsWithin(searchWindow);
+            return roundNumberSearcher.FindJournalsWithin(parameters, dateRange);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, DateRange dateRange)
         {
-            return userSearcher.FindJournalsWithin(searchWindow);
+            return unusualAccountsSearcher.FindJournalsWithin(parameters, dateRange);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<WorkingHoursParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange)
         {
-            return hoursSearcher.FindJournalsWithin(searchWindow);
+            return userSearcher.FindJournalsWithin(parameters, dateRange);
+        }
+
+        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange)
+        {
+            return hoursSearcher.FindJournalsWithin(parameters, dateRange);
         }
     }
 }

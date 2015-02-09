@@ -1,11 +1,12 @@
 ﻿using System;
 using Audition.Chromium;
 using Autofac;
-using Model.SearchWindows;
 using Model.Time;
 using Newtonsoft.Json;
 using NodaTime;
 using NUnit.Framework;
+using Searching;
+using Searching.SearchWindows;
 using Webapp;
 using Webapp.Requests;
 

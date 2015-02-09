@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model;
-using Model.SearchWindows;
 using Persistence;
+using Searching.SearchWindows;
 
 namespace Searching
 {
@@ -43,7 +43,8 @@ namespace Searching
                 }));
         }
 
-        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository)
+        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository) 
+            where T : ISearchParameters
         {
             return SearchingSupported(action)? searchFactory(repository) : new NotSupportedSearcher<T>(unvailableActionMessages[action]);
             }

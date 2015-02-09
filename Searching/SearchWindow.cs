@@ -1,9 +1,12 @@
 ﻿
+using System.Linq;
+using Model.Accounting;
 using Model.Time;
+using Searching.SearchWindows;
 
-namespace Model.SearchWindows
+namespace Searching
 {    
-    public class SearchWindow<T>
+    public class SearchWindow<T> : ISearchWindow where T: ISearchParameters
     {
         public SearchWindow(T parameters, DateRange period)
         {
@@ -43,6 +46,11 @@ namespace Model.SearchWindows
             {
                 return ((Parameters != null ? Parameters.GetHashCode() : 0)*397) ^ (Period != null ? Period.GetHashCode() : 0);
             }
+        }
+
+        public IQueryable<Journal> Execute(JournalSearcher searcher)
+        {
+            return Parameters.GetSearchMethod(searcher)(Period);
         }
     }
 }

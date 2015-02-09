@@ -1,12 +1,14 @@
 using System;
+using System.Linq;
+using Model.Accounting;
 using Model.Time;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NodaTime;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
-    public class WorkingHoursParameters
+    public class WorkingHoursParameters : ISearchParameters
     {
         public WorkingHoursParameters(DayOfWeek fromDay, DayOfWeek toDay, LocalTime fromTime, LocalTime toTime)
         {
@@ -26,6 +28,12 @@ namespace Model.SearchWindows
         public DayOfWeek ToDay { get; private set; }
         public LocalTime FromTime { get; private set; }
         public LocalTime ToTime { get; private set; }
+
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+        }
 
         public bool Contains(DateTimeOffset ukCreationTime)
         {            
@@ -64,7 +72,7 @@ namespace Model.SearchWindows
 
         public override string ToString()
         {
-            return String.Format("posted outside {0} to {1}, {2} to {3}", FromDay, ToDay, FromTime.ToShortString(), ToTime.ToShortString());
+            return String.Format("posted outside {0} to {1}, {2} to {3}", FromDay, ToDay, LocalTimeExtensions.ToShortString(FromTime), LocalTimeExtensions.ToShortString(ToTime));
         }
 
         protected bool Equals(WorkingHoursParameters other)

@@ -1,6 +1,11 @@
-namespace Model.SearchWindows
+using System;
+using System.Linq;
+using Model.Accounting;
+using Model.Time;
+
+namespace Searching.SearchWindows
 {
-    public class UnusualAccountsParameters
+    public class UnusualAccountsParameters : ISearchParameters
     {
         public UnusualAccountsParameters(int minimumEntriesToBeConsideredNormal)
         {
@@ -8,6 +13,12 @@ namespace Model.SearchWindows
         }
         
         public int MinimumEntriesToBeConsideredNormal { get; private set; }
+
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+        }
         
         public override string ToString()
         {

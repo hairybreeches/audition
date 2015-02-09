@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
+using Model.Time;
 using Persistence;
+using Searching.SearchWindows;
 
 namespace Searching
 {
@@ -13,12 +14,12 @@ namespace Searching
         public RoundNumberSearcher(IJournalRepository repository)
         {
             this.repository = repository;
-        }  
+        }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<EndingParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, DateRange dateRange)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
-            var magnitude = searchWindow.Parameters.Magnitude();
+            var periodJournals = repository.GetJournalsApplyingTo(dateRange);
+            var magnitude = parameters.Magnitude();
             return periodJournals.Where(journal => HasRoundLine(journal, magnitude));
         }
 

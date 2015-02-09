@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
+using Model.Time;
 using Persistence;
+using Searching.SearchWindows;
 
 namespace Searching
 {
@@ -17,10 +18,10 @@ namespace Searching
             this.repository = repository;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<UserParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange)
         {
-            var lookup = new HashSet<string>(searchWindow.Parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
-            return repository.GetJournalsApplyingTo(searchWindow.Period).Where(x=> !lookup.Contains(x.Username));
+            var lookup = new HashSet<string>(parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
+            return repository.GetJournalsApplyingTo(dateRange).Where(x=> !lookup.Contains(x.Username));
         }
     }
 }

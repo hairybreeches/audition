@@ -1,8 +1,9 @@
-﻿using Model.SearchWindows;
+﻿using Searching;
+using Searching.SearchWindows;
 
 namespace Webapp.Requests
 {
-    public class SearchRequest<T>
+    public class SearchRequest<T> : ISearchRequest where T : ISearchParameters
     {
         public SearchRequest(SearchWindow<T> searchWindow, int pageNumber)
         {
@@ -12,7 +13,7 @@ namespace Webapp.Requests
 
 
         public int PageNumber { get; private set; }
-        public SearchWindow<T> SearchWindow { get; private set; }
+        public ISearchWindow SearchWindow { get; private set; }
 
         protected bool Equals(SearchRequest<T> other)
         {

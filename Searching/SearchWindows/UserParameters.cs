@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model.Accounting;
+using Model.Time;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
-    public class UserParameters
+    public class UserParameters : ISearchParameters
     {
         public IList<string> Usernames { get; private set; }
 
         public UserParameters(string users)
         {
             Usernames = InputParsing.ParseStringList(users);
+        }
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
         }
 
         protected bool Equals(UserParameters other)

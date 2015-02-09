@@ -58,19 +58,12 @@
     <Compile Include="IValueLookup.cs" />
     <Compile Include="NoJournalsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
-    <Compile Include="SearchWindows\EndingParameters.cs" />
-    <Compile Include="SearchWindows\InputParsing.cs" />
-    <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
-    <Compile Include="SearchWindows\UserParameters.cs" />
-    <Compile Include="SearchWindows\WorkingHoursParameters.cs" />
-    <Compile Include="SearchWindows\YearEndParameters.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Journal.cs" />
     <Compile Include="Accounting\JournalLine.cs" />
     <Compile Include="Accounting\JournalType.cs" />
     <Compile Include="Time\DateRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchWindows\SearchWindow.cs" />
     <Compile Include="Time\LocalTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

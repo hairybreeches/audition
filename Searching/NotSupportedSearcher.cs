@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
+using Model.Time;
+using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class NotSupportedSearcher<T> : IJournalSearcher<T>
+    public class NotSupportedSearcher<T> : IJournalSearcher<T> where T : ISearchParameters
     {
         private readonly string errorMessage;
 
@@ -15,8 +16,8 @@ namespace Searching
             this.errorMessage = errorMessage;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<T> searchWindow)
-        {            
+        public IQueryable<Journal> FindJournalsWithin(T parameters, DateRange dateRange)
+        {
             throw new NotSupportedException(errorMessage);
         }
     }

@@ -1,8 +1,11 @@
 using System;
+using System.Linq;
+using Model.Accounting;
+using Model.Time;
 
-namespace Model.SearchWindows
+namespace Searching.SearchWindows
 {
-    public class EndingParameters
+    public class EndingParameters : ISearchParameters
     {
         public int MinimumZeroesToBeConsideredUnusual { get; private set; }
 
@@ -19,6 +22,11 @@ namespace Model.SearchWindows
         public override string ToString()
         {
             return String.Format("Ending in at least {0} zeroes", MinimumZeroesToBeConsideredUnusual);
+        }
+
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        {
+            return dateRange => searcher.FindJournalsWithin(this, dateRange);
         }
     }
 }

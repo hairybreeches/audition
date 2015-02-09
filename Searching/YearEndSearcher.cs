@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
-using Model.SearchWindows;
+using Model.Time;
 using Persistence;
+using Searching.SearchWindows;
 
 namespace Searching
 {
@@ -14,20 +15,20 @@ namespace Searching
         public YearEndSearcher(IJournalRepository repository)
         {
             this.repository = repository;
-        }               
+        }
 
-        public IQueryable<Journal> FindJournalsWithin(SearchWindow<YearEndParameters> searchWindow)
+        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange)
         {
-            var periodJournals = repository.GetJournalsApplyingTo(searchWindow.Period);
+            var periodJournals = repository.GetJournalsApplyingTo(dateRange);
 
-            var startOfSearchPeriod = GetCreationStartDate(searchWindow);
+            var startOfSearchPeriod = GetCreationStartDate(parameters, dateRange);
             return periodJournals.Where(x => x.Created >= startOfSearchPeriod);            
         }
 
-        private static DateTimeOffset GetCreationStartDate(SearchWindow<YearEndParameters> searchWindow)
+        private static DateTimeOffset GetCreationStartDate(YearEndParameters parameters, DateRange dateRange)
         {
-            var periodEndDate = searchWindow.Period.To;
-            return periodEndDate.Subtract(TimeSpan.FromDays(searchWindow.Parameters.DaysBeforeYearEnd));
+            var periodEndDate = dateRange.To;
+            return periodEndDate.Subtract(TimeSpan.FromDays(parameters.DaysBeforeYearEnd));
         }
     }
 }
