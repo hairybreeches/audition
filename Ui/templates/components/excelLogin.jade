@@ -12,7 +12,7 @@ mixin dropdown(field)
 				.questionmarkicon(data-toggle="tooltip" data-placement="bottom" data-original-title="#{field.help}")
 
 mixin sheets-dropdown()
-	+dropdown({label: 'Sheet', fieldName: 'sheet'}, 'sheets')
+	+dropdown({label: 'Sheet', fieldName: 'sheet'})
 		//ko foreach: sheets
 		option(data-bind="attr: { label: Name, value: $index}")
 		// /ko
