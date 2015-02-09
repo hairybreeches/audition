@@ -218,6 +218,7 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
             success: function (fileName) {
                 exportSuccessMessage.show(fileName);
             },
+            error: output.searchFailure,
             type: 'POST'
         });
     };
