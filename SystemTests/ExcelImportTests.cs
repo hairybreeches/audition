@@ -52,6 +52,8 @@ namespace SystemTests
         }
 
         [Test]
+        //sage 50 exports dates as strings and our sample data has GB dates
+        [SetCulture("en-GB")]
         public void GetHelpfulErrorMessageWhenCannotParseDate()
         {
             var exception =
@@ -81,6 +83,8 @@ namespace SystemTests
         }      
         
         [Test]
+        //sage 50 exports dates as strings and our sample data has GB dates
+        [SetCulture("en-GB")]
         public void CanImportExcelData()
         {
             var results = GetAllJournalsFromSearch(new ExcelImportMapping
