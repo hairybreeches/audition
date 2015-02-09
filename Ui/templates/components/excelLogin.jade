@@ -30,6 +30,7 @@ mixin excel-login()
 	div(data-bind="visible: showInput()" style="display: none;")
 		+sheets-dropdown()
 		+checkbox('Header row', 'useHeaderRow')
+		legend Map columns
 		+row-dropdown({label: "Date", fieldName: "JournalDate", help: "The date the journal applies to. Used to determine whether the journal applies to the current period or not. This is required."})
 		each field in [	{label: "Creation time", fieldName: "Created", help: "The time the journal was created"}, {label: "Created by", fieldName: "Username", help: "The name or ID of the user who created the journal"}, {label: "Amount", fieldName: "Amount", help: "The value of the journal"}, {label: "Nominal code", fieldName: "AccountCode", help: "The nominal code which the journal has been posted to"}, {label: "Nominal name", fieldName: "AccountName", help: "The name or description of the nominal code"}, {label: "Description", fieldName: "Description", help: "A description of the journal"}, {label: "ID", fieldName: "Id", help: "The ID of the journal. Multiple rows with the same ID will be combined into one journal."}]
 			+optional-row-dropdown(field)
