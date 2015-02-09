@@ -84,10 +84,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
                 <div class="col-sm-6">
-                  <select name="sheet" data-bind="value: sheet" class="form-control">
-                    <!--ko foreach: sheets-->
-                    <option data-bind="attr: { label: Name, value: $index}"></option>
-                    <!-- /ko-->
+                  <select name="sheet" data-bind="value: sheet, options: sheetOptions, optionsText: 'label', optionsValue: 'index'" class="form-control">
                   </select>
                 </div>
               </div>
@@ -103,10 +100,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
                 <div class="col-sm-6">
-                  <select name="JournalDate" data-bind="value: JournalDate" class="form-control">
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="JournalDate" data-bind="value: JournalDate, options: columns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -116,11 +110,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Creation time</label>
                 <div class="col-sm-6">
-                  <select name="Created" data-bind="value: Created" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="Created" data-bind="value: Created, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -130,11 +120,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Created by</label>
                 <div class="col-sm-6">
-                  <select name="Username" data-bind="value: Username" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="Username" data-bind="value: Username, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -144,11 +130,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
                 <div class="col-sm-6">
-                  <select name="Amount" data-bind="value: Amount" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="Amount" data-bind="value: Amount, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -158,11 +140,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Nominal code</label>
                 <div class="col-sm-6">
-                  <select name="AccountCode" data-bind="value: AccountCode" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="AccountCode" data-bind="value: AccountCode, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -172,11 +150,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Nominal name</label>
                 <div class="col-sm-6">
-                  <select name="AccountName" data-bind="value: AccountName" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="AccountName" data-bind="value: AccountName, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -186,11 +160,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
                 <div class="col-sm-6">
-                  <select name="Description" data-bind="value: Description" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="Description" data-bind="value: Description, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -200,11 +170,7 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">ID</label>
                 <div class="col-sm-6">
-                  <select name="Id" data-bind="value: Id" class="form-control">
-                    <option value="-1" label="*** No value ***"></option>
-                    <optgroup data-bind="foreach: columns" label="Map this field to:">
-                      <option data-bind="attr: { label: $data, value: $index}"></option>
-                    </optgroup>
+                  <select name="Id" data-bind="value: Id, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">		
                   </select>
                 </div>
                 <div class="col-sm-2">
