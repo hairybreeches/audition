@@ -65,6 +65,8 @@
     <Content Include="Content\images\jqueryui\ui-icons_454545_256x240.png" />
     <Content Include="Content\images\jqueryui\ui-icons_888888_256x240.png" />
     <Content Include="Content\images\jqueryui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\images\questionmark-highlight.png" />
+    <Content Include="Content\images\questionmark.png" />
     <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
@@ -88,6 +90,9 @@
     <Content Include="UserScripts\login.js" />
     <Content Include="UserScripts\sage50Login.js" />
     <Content Include="UserScripts\search.js" />
+    <Content Include="UserScripts\tooltips.js" />
+    <None Include="style\icons.less" />
+    <None Include="style\tooltips.less" />
     <None Include="templates\components\excelLogin.jade" />
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />

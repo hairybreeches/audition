@@ -2,9 +2,14 @@
 include ../components/message
 
 mixin dropdown(field)
-	+form-field(field.label)
-		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}")
-			block
+	.form-group
+		label.col-sm-2.col-sm-offset-2.control-label #{field.label}
+		.col-sm-6
+			select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}")
+				block
+		if field.help
+			.col-sm-2
+				.questionmarkicon(data-toggle="tooltip" data-placement="bottom" data-original-title="#{field.help}")
 
 mixin sheets-dropdown()
 	+dropdown({label: 'Sheet', fieldName: 'sheet'}, 'sheets')
@@ -32,7 +37,7 @@ mixin excel-login()
 	div(data-bind="visible: showInput()" style="display: none;")
 		+sheets-dropdown()
 		+checkbox('Header row', 'useHeaderRow')
-		+row-dropdown({label: 'Date', fieldName: 'JournalDate'})
-		each field in [	{label: 'Nominal code', fieldName: 'AccountCode'}, {label: 'Nominal name', fieldName: 'AccountName'}, {label: 'Amount', fieldName: 'Amount'}, {label: 'Created by', fieldName: 'Username'}, {label: 'Created date', fieldName: 'Created'}, {label: 'Description', fieldName: 'Description'}, {label: 'ID', fieldName: 'Id'}]
+		+row-dropdown({label: "Date", fieldName: "JournalDate", help: "The date the journal applies to. Used to determine whether the journal applies to the current period or not. This is required."})
+		each field in [	{label: "Nominal code", fieldName: "AccountCode", help: "The nominal code which the journal has been posted to"}, {label: "Nominal name", fieldName: "AccountName", help: "The name or description of the nominal code"}, {label: "Amount", fieldName: "Amount", help: "The value of the journal"}, {label: "Created by", fieldName: "Username", help: "The name or ID of the user who created the journal"}, {label: "Creation time", fieldName: "Created", help: "The time the journal was created"}, {label: "Description", fieldName: "Description", help: "A description of the journal"}, {label: "ID", fieldName: "Id", help: "The ID of the journal. Multiple rows with the same ID will be combined into one journal."}]
 			+optional-row-dropdown(field)
 	+errorMessage('errorMessage', true)
