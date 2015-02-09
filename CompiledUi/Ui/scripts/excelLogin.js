@@ -71,7 +71,7 @@ var ExcelLoginModel = function () {
     }    
 
     self.disabled = function () {
-        return !self.showInput();
+        return !self.showInput() && self.columns().some();
     };
 
     var onNewFilename = function (newFilename) {
