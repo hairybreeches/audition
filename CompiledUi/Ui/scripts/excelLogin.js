@@ -12,7 +12,7 @@ var ExcelLoginModel = function () {
         function (fieldName) {
             self[fieldName] = ko.observable('-1');
         });
-
+    
     var getData = function () {
         var data = {
             SheetDescription: {
@@ -30,16 +30,39 @@ var ExcelLoginModel = function () {
         return data;
     }
 
-    self.sheets = ko.observableArray();
+    var sheets = ko.observableArray();
 
-    self.columns = ko.computed(function () {
+    var toSelectOptions = function (data) {
+        return data.map(function (label, index) {
+            return {
+                label: label,
+                index: index
+            }
+        });
+    };
 
-        var sheet = self.sheets()[parseInt(self.sheet())];
+    self.sheetOptions = ko.computed(function() {
+        return toSelectOptions(sheets().map(function(sheet) {
+            return sheet.Name;
+        }));
+    });
+
+    var getColumnNames = function() {
+        var sheet = sheets()[parseInt(self.sheet())];
         if (sheet) {
             var lookup = self.useHeaderRow ? "ColumnHeaders" : "ColumnNames";
             return sheet[lookup];
         }
         return [];
+    }
+
+    var getColumns = function() {
+        return toSelectOptions(getColumnNames());
+    };
+    self.columns = ko.computed(getColumns);
+
+    self.optionalColumns = ko.computed(function() {
+        return [{ label: '*** No value ***', index: -1 }].concat(getColumns());
     });
 
     self.errorMessage = {
@@ -61,7 +84,7 @@ var ExcelLoginModel = function () {
             },
 
             success: function (data) {
-                self.sheets(data);
+                sheets(data);
                 self.sheet("0");
                 self.showInput(true);
             },
