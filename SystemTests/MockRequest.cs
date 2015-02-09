@@ -26,10 +26,5 @@ namespace SystemTests
         public string Method { get; private set; }
         public string Body { get; private set; }
         public NameValueCollection Headers { get; set; }
-
-        public TransitionType TransitionType
-        {
-            get { return TransitionType.AutoSubFrame; }
-        }
     }
 }
