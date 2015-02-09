@@ -13,7 +13,7 @@
             self[fieldName] = ko.observable('-1');
         });
 
-    var getData = function() {
+    var getData = function () {
         var data = {
             SheetDescription: {
                 Filename: self.fileLocation(),
@@ -22,18 +22,18 @@
             }
         };
 
-        data.Lookups = fields.reduce(function(lookups, fieldName) {
+        data.Lookups = fields.reduce(function (lookups, fieldName) {
             lookups[fieldName] = self[fieldName]();
             return lookups;
         }, {});
 
         return data;
-    }      
+    }
 
     self.sheets = ko.observableArray();
 
-    self.columns = ko.computed(function() {
-        
+    self.columns = ko.computed(function () {
+
         var sheet = self.sheets()[parseInt(self.sheet())];
         if (sheet) {
             var lookup = self.useHeaderRow ? "ColumnHeaders" : "ColumnNames";
@@ -50,17 +50,17 @@
     var showError = function (jqxi) {
         self.showInput(false);
         self.errorMessage.message(getErrorMessage(jqxi));
-        self.errorMessage.visible(true);        
+        self.errorMessage.visible(true);
     }
 
     var updateSheets = function (fileLocation) {
         $.ajax('/api/excel/getSheets', {
-            type: "GET",            
+            type: "GET",
             data: {
                 filename: fileLocation
             },
 
-            success: function(data) {
+            success: function (data) {
                 self.sheets(data);
                 self.sheet("0");
                 self.showInput(true);
@@ -68,7 +68,7 @@
 
             error: showError
         });
-    }    
+    }
 
     self.disabled = function () {
         return !self.showInput() && self.columns().some();
@@ -76,7 +76,7 @@
 
     var onNewFilename = function (newFilename) {
         if (newFilename) {
-            updateSheets(newFilename);            
+            updateSheets(newFilename);
             return;
         }
 
@@ -84,13 +84,13 @@
         self.errorMessage.visible(false);
     }
 
-    self.fileLocation.subscribe(onNewFilename);   
+    self.fileLocation.subscribe(onNewFilename);
 
     self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
 
-    self.submit = function() {
+    self.submit = function () {
         model.login('/api/excel/login', getData());
-    };   
+    };
 
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
 };
