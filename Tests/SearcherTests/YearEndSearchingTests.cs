@@ -15,7 +15,7 @@ namespace Tests.SearcherTests
         private static readonly DateTime YearStart = YearEnd.Subtract(TimeSpan.FromDays(365));
         private static readonly DateRange FinancialPeriod = new DateRange(YearStart, YearEnd);
 
-        private static readonly SearchWindow<YearEndParameters> SearchParameters = new SearchWindow<YearEndParameters>(new YearEndParameters(5),
+        private static readonly SearchWindow<YearEndParameters> SearchParameters = new SearchWindow<YearEndParameters>(new YearEndParameters(5, FinancialPeriod.To),
                 FinancialPeriod);
 
         
@@ -40,7 +40,7 @@ namespace Tests.SearcherTests
         public void ReturnsJournalsPostedExactlyNumberOfDaysBeforeYearEnd()
         {            
             var nearYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
-            var result = Searching.ExecuteSearch(new SearchWindow<YearEndParameters>(new YearEndParameters(7), FinancialPeriod), nearYearEndJournal);        
+            var result = Searching.ExecuteSearch(new SearchWindow<YearEndParameters>(new YearEndParameters(7, YearEnd), FinancialPeriod), nearYearEndJournal);        
             CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
         }
 

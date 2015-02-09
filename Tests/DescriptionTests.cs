@@ -42,7 +42,7 @@ namespace Tests
         [Test]
         public void DescriptionCorrectForYearEndWindow()
         {
-            var window = new SearchWindow<YearEndParameters>(new YearEndParameters(5), new DateRange(new DateTime(2000,4,1), new DateTime(2001, 3, 31)));
+            var window = new SearchWindow<YearEndParameters>(new YearEndParameters(5, new DateTime(2001, 3, 31)), new DateRange(new DateTime(2000, 4, 1), new DateTime(2001, 3, 31)));
             StringAssert.AreEqualIgnoringCase(String.Format("Journals posted after the year end or within 5 days before, in the period {0} to {1}", new DateTime(2000, 4, 1).ToShortDateString(), new DateTime(2001, 3, 31).ToShortDateString()), window.Description);
         }
 
