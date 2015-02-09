@@ -143,7 +143,8 @@ namespace SystemTests
 
         private static SearchResponse GetAllJournalsFromSearch(ExcelImportMapping importMapping, int pageNumber)
         {
-            var builder = AutofacConfiguration.CreateDefaultContainerBuilder();
+            var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
+                .WithNoLicensing();
             SearchResponse results;
             using (var scope = builder.Build())
             {
