@@ -29,40 +29,40 @@ namespace Webapp.Controllers
         [Route(Routing.HoursSearch)]
         public SearchResponse HoursSearch(SearchRequest<WorkingHoursParameters> searchRequest)
         {
-            return Search(searchRequest, Searcher.FindJournalsWithin);
+            return Search(searchRequest);
         }        
 
         [HttpPost]
         [Route(Routing.AccountsSearch)]
         public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {
-            return Search(searchRequest, Searcher.FindJournalsWithin);
+            return Search(searchRequest);
         }
         
         [HttpPost]
         [Route(Routing.DateSearch)]
         public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
         {
-            return Search(searchRequest, Searcher.FindJournalsWithin);
+            return Search(searchRequest);
         }
 
         [HttpPost]
         [Route(Routing.UserSearch)]
         public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {
-            return Search(searchRequest, Searcher.FindJournalsWithin);
+            return Search(searchRequest);
         }
         
         [HttpPost]
         [Route(Routing.EndingSearch)]
         public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
-            return Search(searchRequest, Searcher.FindJournalsWithin);
+            return Search(searchRequest);
         }
 
-        private static SearchResponse Search<T>(SearchRequest<T> searchRequest, Func<SearchWindow<T>, IQueryable<Journal>> searchMethod) where T : ISearchParameters
+        private SearchResponse Search<T>(SearchRequest<T> searchRequest) where T : ISearchParameters
         {
-            return searchMethod(searchRequest.SearchWindow).GetPage(searchRequest.PageNumber);
+            return searchRequest.SearchWindow.Execute(Searcher).GetPage(searchRequest.PageNumber);
         }
     }
 }

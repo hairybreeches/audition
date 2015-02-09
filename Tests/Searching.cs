@@ -4,6 +4,8 @@ using System.Linq;
 using Autofac;
 using Model.Accounting;
 using Model.Responses;
+using Native;
+using NSubstitute;
 using NUnit.Framework;
 using Persistence;
 using Searching;
@@ -13,34 +15,20 @@ using Webapp.Requests;
 
 namespace Tests
 {
-    //todo: so much duplication!
+
     public static class Searching
     {
-        public static IEnumerable<Journal> ExecuteSearch(SearchWindow<WorkingHoursParameters> searchWindow, params Journal[] journalsInRepository)
+        public static IEnumerable<Journal> ExecuteSearch(ISearchWindow searchWindow, params Journal[] journalsInRepository)
         {
-            return ExecuteSearch(repo => new WorkingHoursSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
-        }     
-        
-        public static IEnumerable<Journal> ExecuteSearch(SearchWindow<UnusualAccountsParameters> searchWindow, params Journal[] journalsInRepository)
-        {
-            return ExecuteSearch(repo => new UnusualAccountsSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
-        }
-        
-        public static IEnumerable<Journal> ExecuteSearch(SearchWindow<YearEndParameters> searchWindow, params Journal[] journalsInRepository)
-        {
-            return ExecuteSearch(repo => new YearEndSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
-        }     
-        
-        public static IEnumerable<Journal> ExecuteSearch(SearchWindow<UserParameters> searchWindow, params Journal[] journalsInRepository)
-        {
-            return ExecuteSearch(repo => new UserSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
-        }     
-        
-        public static IEnumerable<Journal> ExecuteSearch(SearchWindow<EndingParameters> searchWindow, params Journal[] journalsInRepository)
-        {
-            return ExecuteSearch(repo => new RoundNumberSearcher(repo).FindJournalsWithin(searchWindow), journalsInRepository);
+            //todo: shouldn't have to use a filesystem here
+            var repo = new TempFileJournalRepository(new FileSystem());
+            repo.UpdateJournals(journalsInRepository);
+
+            var searcher = JournalSearcherFactory.EverythingAvailable.CreateJournalSearcher(repo);
+            return searchWindow.Execute(searcher);
         }
 
+        //todo: so much duplication!
         public static IEnumerable<Journal> ExecuteSearch(SearchRequest<WorkingHoursParameters> searchRequest, IEnumerable<Journal> journals)
         {
             return ExecuteSearch(controller => controller.HoursSearch(searchRequest), journals);
