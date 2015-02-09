@@ -1,7 +1,7 @@
 var ExcelLoginModel = function () {
     var self = this;
 
-    self.fileLocation = ko.observable('');
+    self.fileLocation = ko.observable('').extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });
     self.useHeaderRow = ko.observable(true);
     self.sheet = ko.observable("0");
     self.showInput = ko.observable(false);
