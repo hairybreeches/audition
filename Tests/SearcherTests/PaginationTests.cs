@@ -44,8 +44,21 @@ namespace Tests.SearcherTests
         public void CanTakeAPage(ISearchParameters parameters)
         {
             var searchRequest = CreateSearchRequest(parameters);
-            var journals = Searching.ExecuteSearch(searchRequest, GetJournals());
+            var journals = ExecuteSearch(searchRequest, GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
+        }
+
+        static IEnumerable<Journal> ExecuteSearch(ISearchRequest request, IEnumerable<Journal> journalsInRepository)
+        {
+            CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
+
+            using (var lifetime = AutofacConfiguration
+                .CreateDefaultContainerBuilder()
+                .WithNoLicensing()
+                .BuildSearchable(journalsInRepository))
+            {
+                return lifetime.Resolve<SearchController>().Search(request).Journals.ToList();
+            }
         }
 
         public ISearchRequest CreateSearchRequest<T>(T searchParameters) where T : ISearchParameters
