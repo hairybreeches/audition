@@ -56,16 +56,6 @@ namespace Tests
 
         private static IEnumerable<Journal> ExecuteSearch(Func<SearchController, SearchResponse> searchAction, IEnumerable<Journal> journalsInRepository)
         {
-            return ExecuteSearch(context => searchAction(context.Resolve<SearchController>()).Journals, journalsInRepository);
-        }
-
-        private static IEnumerable<Journal> ExecuteSearch(Func<IJournalRepository, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
-        {
-            return ExecuteSearch(context => searchAction(context.Resolve<IJournalRepository>()), journalsInRepository);
-        }
-
-        private static IEnumerable<Journal> ExecuteSearch(Func<IComponentContext, IEnumerable<Journal>> searchAction, IEnumerable<Journal> journalsInRepository)
-        {
             CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
 
             using (var lifetime = AutofacConfiguration
@@ -73,10 +63,8 @@ namespace Tests
                 .WithNoLicensing()
                 .BuildSearchable(journalsInRepository))
             {
-                return searchAction(lifetime).ToList();
+                return searchAction(lifetime.Resolve<SearchController>()).Journals.ToList();
             }
         }
-
-        
     }
 }
