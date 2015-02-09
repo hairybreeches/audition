@@ -71,7 +71,7 @@
     }
 
     self.disabled = function () {
-        return !self.showInput() && self.columns().some();
+        return !self.showInput() && self.columns().some(function () { return true; });
     };
 
     var onNewFilename = function (newFilename) {
