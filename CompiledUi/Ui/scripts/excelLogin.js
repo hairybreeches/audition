@@ -81,6 +81,7 @@ var ExcelLoginModel = function () {
         }
 
         self.showInput(false);
+        self.errorMessage.visible(false);
     }
 
     self.fileLocation.subscribe(onNewFilename);   
