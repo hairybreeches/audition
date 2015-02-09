@@ -40,43 +40,32 @@ namespace Tests.SearcherTests
             }
         }
 
-        //todo: surely these can somehow be done as test cases?
-        [Test]
-        public void PaginationWorksForEndingSearch()
+        [TestCaseSource("SearchParametersWhichReturnAllJournals")]
+        public void CanTakeAPage(ISearchParameters parameters)
         {
-            var journals = Searching.ExecuteSearch(CreateSearchRequest(new EndingParameters(0)), GetJournals());
+            var searchRequest = CreateSearchRequest(parameters);
+            var journals = Searching.ExecuteSearch(searchRequest, GetJournals());
             CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
-        
-        [Test]
-        public void PaginationWorksForAccountsSearch()
+
+        public ISearchRequest CreateSearchRequest<T>(T searchParameters) where T : ISearchParameters
         {
-            var journals = Searching.ExecuteSearch(CreateSearchRequest(new UnusualAccountsParameters(1000000000)), GetJournals());
-            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
+            return new SearchRequest<T>(new SearchWindow<T>(searchParameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)), 149);
         }
-        
-        [Test]
-        public void PaginationWorksForYearEndSearch()
+
+
+        public IEnumerable<ISearchParameters> SearchParametersWhichReturnAllJournals
         {
-            var journals = Searching.ExecuteSearch(CreateSearchRequest(new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days)), GetJournals());
-            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
+            get
+            {
+                yield return new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32));
+                yield return new UserParameters("a non-existent user");
+                yield return new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days);
+                yield return new UnusualAccountsParameters(1000000000);
+                yield return new EndingParameters(0);
+            }
         }
-        
-        [Test]
-        public void PaginationWorksForUserSearch()
-        {
-            var journals = Searching.ExecuteSearch(CreateSearchRequest(new UserParameters("a non-existent user")), GetJournals());
-            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
-        }
-        
-        [Test]
-        public void PaginationWorksForWorkingHoursSearch()
-        {
-            var journals = Searching.ExecuteSearch(CreateSearchRequest(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32))), GetJournals());
-            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
-        }    
-                
-        
+
         [TestCase(15, 0, true, true, "15", -1, 0, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number < 1 gives correct exception")]
         [TestCase(15, 3, true, true, "15", -1,0, ExpectedException = typeof(InvalidPageNumberException), TestName = "Requesting a page number too large gives correct exception")]
         [TestCase(6, 1, false, false, "6", 1,6, TestName = "Less than one page of results means the only page has no next or previous")]
@@ -104,14 +93,7 @@ namespace Tests.SearcherTests
             var expectedIds = Enumerable.Range(firstResult, numberOfResultsReturned).Select(x=>x.ToString());
             var actualIds = searchResponse.Journals.Select(x=>x.Id);
             Assert.AreEqual(expectedIds, actualIds, "Reponse should return correct results");
-        }
-
-
-
-        public SearchRequest<T> CreateSearchRequest<T>(T searchParameters) where T : ISearchParameters
-        {
-            return new SearchRequest<T>(new SearchWindow<T>(searchParameters, new DateRange(DateTime.MinValue, DateTime.MaxValue)), 149);
-        }
+        }        
 
         private static IEnumerable<Journal> GetJournals()
         {
