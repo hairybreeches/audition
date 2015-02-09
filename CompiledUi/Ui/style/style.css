@@ -8775,3 +8775,16 @@ input[type="text"].form-control:focus {
   background-position: center;
   background-repeat: no-repeat;
 }
+.questionmarkicon {
+  height: 23px;
+  width: 23px;
+  margin: 10px 0;
+  background-size: 100% 100%;
+  background-image: url('/Content/images/questionmark.png');
+}
+.questionmarkicon:hover {
+  background-image: url('/Content/images/questionmark-highlight.png');
+}
+.tooltip-arrow {
+  display: none;
+}

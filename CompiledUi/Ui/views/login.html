@@ -109,6 +109,9 @@
                     </optgroup>
                   </select>
                 </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The date the journal applies to. Used to determine whether the journal applies to the current period or not. This is required." class="questionmarkicon"></div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Nominal code</label>
@@ -119,6 +122,9 @@
                       <option data-bind="attr: { label: $data, value: $index}"></option>
                     </optgroup>
                   </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The nominal code which the journal has been posted to" class="questionmarkicon"></div>
                 </div>
               </div>
               <div class="form-group">
@@ -131,6 +137,9 @@
                     </optgroup>
                   </select>
                 </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The name or description of the nominal code" class="questionmarkicon"></div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
@@ -141,6 +150,9 @@
                       <option data-bind="attr: { label: $data, value: $index}"></option>
                     </optgroup>
                   </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The value of the journal" class="questionmarkicon"></div>
                 </div>
               </div>
               <div class="form-group">
@@ -153,9 +165,12 @@
                     </optgroup>
                   </select>
                 </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The name or ID of the user who created the journal" class="questionmarkicon"></div>
+                </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 col-sm-offset-2 control-label">Created date</label>
+                <label class="col-sm-2 col-sm-offset-2 control-label">Creation time</label>
                 <div class="col-sm-6">
                   <select name="Created" data-bind="value: Created" class="form-control">
                     <option value="-1" label="*** No value ***"></option>
@@ -163,6 +178,9 @@
                       <option data-bind="attr: { label: $data, value: $index}"></option>
                     </optgroup>
                   </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The time the journal was created" class="questionmarkicon"></div>
                 </div>
               </div>
               <div class="form-group">
@@ -175,6 +193,9 @@
                     </optgroup>
                   </select>
                 </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="A description of the journal" class="questionmarkicon"></div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-offset-2 control-label">ID</label>
@@ -185,6 +206,9 @@
                       <option data-bind="attr: { label: $data, value: $index}"></option>
                     </optgroup>
                   </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The ID of the journal. Multiple rows with the same ID will be combined into one journal." class="questionmarkicon"></div>
                 </div>
               </div>
             </div>
@@ -218,6 +242,7 @@
     <script src="/scripts/bootstrap3-typeahead.min.js"></script>
     <script src="/scripts/browse.js"></script>
     <script src="/scripts/autocomplete.js"></script>
+    <script src="/scripts/tooltips.js"></script>
     <script src="/scripts/sage50Login.js"></script>
     <script src="/scripts/excelLogin.js"></script>
     <script src="/scripts/login.js"></script>
