@@ -71,14 +71,14 @@ namespace Tests
             var licence = storage.GetLicence();
 
             //then there are 28 days left on the trial
-            Assert.AreEqual(28, licence.RemainingTrialDays);
+            Assert.AreEqual(14, licence.RemainingTrialDays);
             Assert.AreEqual(true, licence.TrialValid);
         }
 
-        [TestCase(0, 28, true)]
-        [TestCase(15, 13, true)]        
-        [TestCase(28, 0, true)]
-        [TestCase(29, 0, false)]
+        [TestCase(0, 14, true)]
+        [TestCase(6, 8, true)]        
+        [TestCase(14, 0, true)]
+        [TestCase(15, 0, false)]
         [TestCase(45, 0, false)]
         public void TrialRunsDownAsExpected(int daysAfterInitialisation, int expectedDaysRemaining, bool trialStillValid)
         {
