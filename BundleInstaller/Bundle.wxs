@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="Audition" Version="!(bind.packageVersion.Audition)" Manufacturer="Audition Software Ltd" UpgradeCode="264f6631-1c6f-4529-ac27-2bc92923dacb" IconSourceFile="../Audition/audition.ico">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" >
+      <bal:WixStandardBootstrapperApplication LicenseFile="../installer/auditionlicence.rtf" />
+    </BootstrapperApplicationRef>
+
+		<Chain>
+      <PackageGroupRef Id="NetFx45Web"/>
+			<MsiPackage SourceFile="../build/release/installer/installer.msi" Name="Audition"/>      
+		</Chain>
+	</Bundle>
+</Wix>

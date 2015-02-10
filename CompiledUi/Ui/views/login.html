@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+      <title>Audition Software | Login</title><!-- Bootstrap core CSS -->
+      <link href="/style/style.css" rel="stylesheet">
+    </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Login<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
+        </div>
+      </div>
+      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
+        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
+      </div>
+    </div>
+    <div id="pageElement">
+      <div class="container">
+        <legend class="vertical-space">Login to accounts system</legend>
+        <div action="search" method="post" class="blockable">
+          <div style="display: none;" data-bind="visible: blocked()" class="blockscreen loadscreen"></div>
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Accounts system</label>
+                <div class="col-sm-6">
+                  <select data-bind="value: system" class="form-control">
+                    <option value="sage50">Sage Line 50			</option>
+                    <option value="excel">Excel			</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+          <form style="display: none;" data-bind="visible: system() === 'sage50', with: sage50" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Data location</label>
+              <div class="col-sm-6">
+                <input id="sage50dataDirectory" type="text" data-bind="textInput: dataDirectory" name="dataDirectory" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" data-bind="click: browseDataDirectory" class="btn btn-default">Browse...</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">User ID</label>
+              <div class="col-sm-6">
+                <input type="text" name="username" data-bind="value: username" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">Password</label>
+              <div class="col-sm-6">
+                <input type="password" name="password" data-bind="value: password" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label"></label>
+              <div class="col-sm-6">
+                <div class="button-group pull-right">
+                  <button type="submit" data-bind="click: submit, css: { disabled: disabled()}" class="vertical-space btn btn-primary">Login &raquo;</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <form style="display: none;" data-bind="visible: system() === 'excel', with: excel" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label">File location</label>
+              <div class="col-sm-6">
+                <input id="excelFileLocation" type="text" data-bind="textInput: fileLocation" name="fileLocation" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" data-bind="click: browseExcelFile" class="btn btn-default">Browse...	</button>
+              </div>
+            </div>
+            <div data-bind="visible: showInput()" style="display: none;">
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Sheet</label>
+                <div class="col-sm-6">
+                  <select name="sheet" data-bind="value: sheet, options: sheetOptions, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-4">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" data-bind="checked: useHeaderRow">Header row
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <legend>Map columns</legend>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
+                <div class="col-sm-6">
+                  <select name="JournalDate" data-bind="value: JournalDate, options: columns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The date the journal applies to. Used to determine whether the journal applies to the current period or not. This is required." class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Creation time</label>
+                <div class="col-sm-6">
+                  <select name="Created" data-bind="value: Created, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The time the journal was created" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Created by</label>
+                <div class="col-sm-6">
+                  <select name="Username" data-bind="value: Username, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The name or ID of the user who created the journal" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Amount</label>
+                <div class="col-sm-6">
+                  <select name="Amount" data-bind="value: Amount, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The net/gross value of the journal" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Nominal code</label>
+                <div class="col-sm-6">
+                  <select name="AccountCode" data-bind="value: AccountCode, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The nominal code which the journal has been posted to" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Nominal name</label>
+                <div class="col-sm-6">
+                  <select name="AccountName" data-bind="value: AccountName, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The name or description of the nominal code" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">Description</label>
+                <div class="col-sm-6">
+                  <select name="Description" data-bind="value: Description, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="A description of the journal" class="questionmarkicon"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-offset-2 control-label">ID</label>
+                <div class="col-sm-6">
+                  <select name="Id" data-bind="value: Id, options: optionalColumns, optionsText: 'label', optionsValue: 'index'" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <div data-toggle="tooltip" data-placement="bottom" data-original-title="The ID of the journal. Multiple rows with the same ID will be combined into one journal." class="questionmarkicon"></div>
+                </div>
+              </div>
+            </div>
+            <div data-bind="visible: errorMessage.visible(), with: errorMessage" style="display: none;" class="alert alert-danger"><span data-bind="text: message()"></span>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-2 control-label"></label>
+              <div class="col-sm-6">
+                <div class="button-group pull-right">
+                  <button type="submit" data-bind="click: submit, css: { disabled: disabled()}" class="vertical-space btn btn-primary">Login &raquo;</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div data-bind="visible: error.visible(), with: error" style="display: none;" class="alert alert-danger">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
+        </div>
+        <hr class="vertical-space">
+      </div>
+    </div>
+    <script src="/scripts/jquery-2.1.1.min.js"></script>
+    <script src="/scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/knockout-3.2.0.js"></script>
+    <script src="/scripts/knockout.mapping-latest.js"></script>
+    <script src="/scripts/knockout-jqueryui.min.js"></script>
+    <script src="/scripts/message.js"></script>
+    <script src="/scripts/errors.js"></script>
+    <script src="/scripts/licensing.js"></script>
+    <script src="/scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="/scripts/browse.js"></script>
+    <script src="/scripts/autocomplete.js"></script>
+    <script src="/scripts/tooltips.js"></script>
+    <script src="/scripts/sage50Login.js"></script>
+    <script src="/scripts/excelLogin.js"></script>
+    <script src="/scripts/login.js"></script>
+  </body>
+</html>
