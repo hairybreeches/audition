@@ -24,7 +24,7 @@ namespace Audition
             builder.RegisterModule<CsvExportModule>();            
             builder.RegisterModule<SessionModule>();            
             builder.RegisterModule<PersistenceModule>();
-            builder.RegisterModule<WebappModule>();
+            builder.RegisterModule<HttpModule>();
             builder.RegisterModule<LicensingModule>();
             builder.RegisterModule<UserDataModule>();
             builder.RegisterModule<ExcelImportModule>();
