@@ -9,14 +9,7 @@ namespace Searching
 {
     public class RoundNumberSearcher : IJournalSearcher<EndingParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public RoundNumberSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, DateRange dateRange, IJournalRepository repository)
         {
             var periodJournals = repository.GetJournalsApplyingTo(dateRange);
             var magnitude = parameters.Magnitude();

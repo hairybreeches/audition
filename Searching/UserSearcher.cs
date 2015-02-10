@@ -11,14 +11,7 @@ namespace Searching
 {
     public class UserSearcher : IJournalSearcher<UserParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public UserSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange, IJournalRepository repository)
         {
             var lookup = new HashSet<string>(parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
             return repository.GetJournalsApplyingTo(dateRange).Where(x=> !lookup.Contains(x.Username));

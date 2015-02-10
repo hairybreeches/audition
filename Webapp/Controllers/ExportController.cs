@@ -21,6 +21,11 @@ namespace Webapp.Controllers
         private JournalSearcher Searcher
         {
             get { return session.GetCurrentJournalSearcher(); }
+        }    
+        
+        private IJournalRepository Repository
+        {
+            get { return session.Repository; }
         }
 
         public ExportController(IFileSaveChooser fileSaveChooser, IJournalExporter journalExporter, LoginSession session)
@@ -68,7 +73,7 @@ namespace Webapp.Controllers
         private async Task<string> Export(ISearchWindow searchWindow)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
+            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
             return saveLocation;
         }
     }

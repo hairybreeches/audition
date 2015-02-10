@@ -9,14 +9,7 @@ namespace Searching
 {
     public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public UnusualAccountsSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, DateRange dateRange, IJournalRepository repository)
         {
             var lookup = new AccountsLookup(repository.GetJournalsApplyingTo(dateRange));
             var unusualAccountCodes = lookup.UnusualAccountCodes(parameters.MinimumEntriesToBeConsideredNormal);

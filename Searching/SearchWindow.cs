@@ -2,6 +2,7 @@
 using System.Linq;
 using Model.Accounting;
 using Model.Time;
+using Persistence;
 using Searching.SearchWindows;
 
 namespace Searching
@@ -48,9 +49,9 @@ namespace Searching
             }
         }
 
-        public IQueryable<Journal> Execute(JournalSearcher searcher)
+        public IQueryable<Journal> Execute(JournalSearcher searcher, IJournalRepository repository)
         {
-            return Parameters.GetSearchMethod(searcher)(Period);
+            return Parameters.GetSearchMethod(searcher, repository)(Period);
         }
     }
 }

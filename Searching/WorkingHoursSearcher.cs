@@ -9,14 +9,7 @@ namespace Searching
 {
     public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public WorkingHoursSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange, IJournalRepository repository)
         {
             var periodJournals = repository.GetJournalsApplyingTo(dateRange);
 

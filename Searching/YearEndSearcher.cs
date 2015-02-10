@@ -10,14 +10,7 @@ namespace Searching
 {
     public class YearEndSearcher : IJournalSearcher<YearEndParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public YearEndSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange, IJournalRepository repository)
         {
             var periodJournals = repository.GetJournalsApplyingTo(dateRange);
 

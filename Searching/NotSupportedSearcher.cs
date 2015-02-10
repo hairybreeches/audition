@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
 using Model.Time;
+using Persistence;
 using Searching.SearchWindows;
 
 namespace Searching
@@ -16,7 +17,7 @@ namespace Searching
             this.errorMessage = errorMessage;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(T parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(T parameters, DateRange dateRange, IJournalRepository repository)
         {
             throw new NotSupportedException(errorMessage);
         }

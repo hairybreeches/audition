@@ -23,14 +23,14 @@ namespace Searching
             this.availableFields = availableFields;
         }
 
-        public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
+        public JournalSearcher CreateJournalSearcher()
         {
             return new JournalSearcher(
-                GetSearcher(repo => new WorkingHoursSearcher(repo), SearchAction.Hours, repository),
-                GetSearcher(repo => new YearEndSearcher(repo), SearchAction.Date, repository),
-                GetSearcher(repo => new UnusualAccountsSearcher(repo), SearchAction.Accounts, repository),
-                GetSearcher(repo => new RoundNumberSearcher(repo), SearchAction.Ending, repository),
-                GetSearcher(repo => new UserSearcher(repo), SearchAction.Users, repository));
+                GetSearcher(() => new WorkingHoursSearcher(), SearchAction.Hours),
+                GetSearcher(() => new YearEndSearcher(), SearchAction.Date),
+                GetSearcher(() => new UnusualAccountsSearcher(), SearchAction.Accounts),
+                GetSearcher(() => new RoundNumberSearcher(), SearchAction.Ending),
+                GetSearcher(() => new UserSearcher(), SearchAction.Users));
         }
 
         public SearchCapability GetSearchCapability()
@@ -43,10 +43,10 @@ namespace Searching
                 }));
         }
 
-        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository) 
+        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalSearcher<T>> searchFactory, SearchAction action) 
             where T : ISearchParameters
         {
-            return SearchingSupported(action)? searchFactory(repository) : new NotSupportedSearcher<T>(unvailableActionMessages[action]);
+            return SearchingSupported(action)? searchFactory() : new NotSupportedSearcher<T>(unvailableActionMessages[action]);
             }
 
         private bool SearchingSupported(SearchAction searchAction)
