@@ -16,9 +16,9 @@ namespace Searching.SearchWindows
         public int MinimumEntriesToBeConsideredNormal { get; private set; }
 
 
-        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher, IJournalRepository repository)
+        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
         {
-            return dateRange => searcher.FindJournalsWithin(this, dateRange, repository);
+            return searcher.FindJournalsWithin(this, journals);
         }
         
         public override string ToString()

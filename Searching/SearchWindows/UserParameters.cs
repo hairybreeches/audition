@@ -16,9 +16,9 @@ namespace Searching.SearchWindows
             Usernames = InputParsing.ParseStringList(users);
         }
 
-        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher, IJournalRepository repository)
+        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
         {
-            return dateRange => searcher.FindJournalsWithin(this, dateRange, repository);
+            return searcher.FindJournalsWithin(this, journals);
         }
 
         protected bool Equals(UserParameters other)

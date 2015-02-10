@@ -8,6 +8,6 @@ namespace Searching.SearchWindows
 {
     public interface ISearchParameters
     {
-        Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher, IJournalRepository repository);
+        IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals);
     }
 }

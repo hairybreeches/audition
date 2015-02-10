@@ -24,29 +24,29 @@ namespace Searching
             this.userSearcher = userSearcher;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, IQueryable<Journal> journals)
         {
-            return yearEndSearcher.FindJournalsWithin(parameters, dateRange, repository);
+            return yearEndSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, IQueryable<Journal> journals)
         {
-            return roundNumberSearcher.FindJournalsWithin(parameters, dateRange, repository);
+            return roundNumberSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, IQueryable<Journal> journals)
         {
-            return unusualAccountsSearcher.FindJournalsWithin(parameters, dateRange, repository);
+            return unusualAccountsSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, IQueryable<Journal> journals)
         {
-            return userSearcher.FindJournalsWithin(parameters, dateRange, repository);
+            return userSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, IQueryable<Journal> journals)
         {
-            return hoursSearcher.FindJournalsWithin(parameters, dateRange, repository);
+            return hoursSearcher.FindJournalsWithin(parameters, journals);
         }
     }
 }
