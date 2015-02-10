@@ -15,7 +15,7 @@ namespace Webapp
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<OwinServer>();
+            builder.RegisterType<OwinServerConfigurer>();
             builder.Register(_ => new PhysicalFileSystem("ui")).As<IFileSystem>();
             builder.RegisterType<AutofacWebApiDependencyResolver>().As<IDependencyResolver>();
             builder.Register(_ => JsonSettings());
