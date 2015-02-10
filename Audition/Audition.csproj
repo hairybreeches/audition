@@ -103,50 +103,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CompiledUi\CompiledUi.csproj">
-      <Project>{b7fe3453-bb5d-410d-86ef-c1274aff5a6e}</Project>
-      <Name>CompiledUi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CsvExport\CsvExport.csproj">
-      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
-      <Name>CsvExport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
-      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
-      <Name>ExcelImport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Licensing\Licensing.csproj">
-      <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
-      <Name>Licensing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native\Native.csproj">
-      <Project>{f42a124d-7365-4a8a-a909-651d1e877c5e}</Project>
-      <Name>Native</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Persistence\Persistence.csproj">
-      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
-      <Name>Persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sage50\Sage50.csproj">
-      <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
-      <Name>Sage50</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Searching\Searching.csproj">
-      <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
-      <Name>Searching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
-      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
-      <Name>SqlImport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserData\UserData.csproj">
-      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
-      <Name>UserData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Webapp\Webapp.csproj">
       <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
       <Name>Webapp</Name>

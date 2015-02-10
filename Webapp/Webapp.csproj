@@ -109,8 +109,13 @@
     <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
     <Compile Include="Session\SessionModule.cs" />
     <Compile Include="HttpModule.cs" />
+    <Compile Include="WebappModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CompiledUi\CompiledUi.csproj">
+      <Project>{b7fe3453-bb5d-410d-86ef-c1274aff5a6e}</Project>
+      <Name>CompiledUi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>CsvExport</Name>
@@ -142,6 +147,14 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
