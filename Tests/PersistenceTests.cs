@@ -13,8 +13,6 @@ namespace Tests
     [TestFixture]
     public class PersistenceTests
     {
-        private static readonly DateRange Forever = new DateRange(DateTime.MinValue, DateTime.MaxValue);
-
         [Test]
         public void JournalsPersistBetweenRequests()
         {
@@ -29,7 +27,7 @@ namespace Tests
                 saveRepository.UpdateJournals(JournalWithId("a single stored journal"));
                 //when we make a new request
                 var loadRepository = lifetime.Resolve<IJournalRepository>();
-                var journals = loadRepository.GetJournalsApplyingTo(Forever).ToList();
+                var journals = loadRepository.GetJournals().ToList();
                 //the journals should still be there
                 Assert.AreEqual(journals.Single().Id, "a single stored journal");
             }
@@ -49,7 +47,7 @@ namespace Tests
                 //when we update the contents of the repository
                 repository.UpdateJournals(JournalWithId("a new journal"));
 
-                var journals = repository.GetJournalsApplyingTo(Forever).ToList();
+                var journals = repository.GetJournals().ToList();
 
                 //the old contents should be blatted and only the new ones remain.
                 Assert.AreEqual(journals.Single().Id, "a new journal");

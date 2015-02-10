@@ -9,11 +9,11 @@ namespace Searching
 {
     public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
     {
-        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, DateRange dateRange, IJournalRepository repository)
+        public IQueryable<Journal> FindJournalsWithin(UnusualAccountsParameters parameters, IQueryable<Journal> journals)
         {
-            var lookup = new AccountsLookup(repository.GetJournalsApplyingTo(dateRange));
+            var lookup = new AccountsLookup(journals);
             var unusualAccountCodes = lookup.UnusualAccountCodes(parameters.MinimumEntriesToBeConsideredNormal);
-            return repository.GetJournalsApplyingTo(dateRange)
+            return journals
                 .Where(journal=>journal.Lines.Any(journalLine => unusualAccountCodes.Contains(journalLine.AccountCode)));
         }
     }

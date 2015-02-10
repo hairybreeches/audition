@@ -7,7 +7,7 @@ namespace Persistence
 {
     public interface IJournalRepository
     {
-        IQueryable<Journal> GetJournalsApplyingTo(DateRange period);
+        IQueryable<Journal> GetJournals();
         IJournalRepository UpdateJournals(IEnumerable<Journal> journals);
         void ClearJournals();
     }

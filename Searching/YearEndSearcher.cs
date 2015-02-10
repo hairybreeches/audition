@@ -10,12 +10,10 @@ namespace Searching
 {
     public class YearEndSearcher : IJournalSearcher<YearEndParameters>
     {
-        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, DateRange dateRange, IJournalRepository repository)
-        {
-            var periodJournals = repository.GetJournalsApplyingTo(dateRange);
-
+        public IQueryable<Journal> FindJournalsWithin(YearEndParameters parameters, IQueryable<Journal> journals)
+        {            
             var startOfSearchPeriod = GetCreationStartDate(parameters);
-            return periodJournals.Where(x => x.Created >= startOfSearchPeriod);            
+            return journals.Where(x => x.Created >= startOfSearchPeriod);            
         }
 
         private static DateTimeOffset GetCreationStartDate(YearEndParameters parameters)

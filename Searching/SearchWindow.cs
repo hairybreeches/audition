@@ -51,7 +51,12 @@ namespace Searching
 
         public IQueryable<Journal> Execute(JournalSearcher searcher, IJournalRepository repository)
         {
-            return Parameters.GetSearchMethod(searcher, repository)(Period);
+            return Parameters.ApplyFilter(searcher, GetJournalsApplyingToPeriod(repository));
+        }
+
+        private IQueryable<Journal> GetJournalsApplyingToPeriod(IJournalRepository repository)
+        {
+            return repository.GetJournals().Where(x => Period.Contains(x.JournalDate));
         }
     }
 }

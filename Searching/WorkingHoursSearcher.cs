@@ -9,11 +9,9 @@ namespace Searching
 {
     public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
     {
-        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, DateRange dateRange, IJournalRepository repository)
-        {
-            var periodJournals = repository.GetJournalsApplyingTo(dateRange);
-
-            return periodJournals.Where(x => Matches(x, parameters));
+        public IQueryable<Journal> FindJournalsWithin(WorkingHoursParameters parameters, IQueryable<Journal> journals)
+        {            
+            return journals.Where(x => Matches(x, parameters));
         }
 
         private static bool Matches(Journal x, WorkingHoursParameters workingHours)
