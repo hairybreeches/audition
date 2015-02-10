@@ -311,7 +311,7 @@ var SearchModel = function () {
 
         Date: new InputSection({
             daysBeforeYearEnd: ko.observable(10),
-            yearEnd: period.From
+            yearEnd: period.To
         }, period, exportSuccessMessage, searchCapabilities, 'Date'),
 
         Users: new InputSection({
