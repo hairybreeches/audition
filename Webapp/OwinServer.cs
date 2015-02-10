@@ -19,8 +19,6 @@ namespace Webapp
         public OwinServer(IFileSystem fileSystem, IDependencyResolver dependencyResolver, JsonSerializerSettings jsonSettings)
         {
             this.fileSystem = fileSystem;
-            if (fileSystem == null)
-                throw new ArgumentNullException("fileSystem");
 
             owinTestServer = TestServer.Create(app => app
                 .UseFileServer(GetFileOptions())
