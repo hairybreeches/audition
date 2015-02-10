@@ -11,17 +11,10 @@ namespace Searching
 {
     public class UserSearcher : IJournalSearcher<UserParameters>
     {
-        private readonly IJournalRepository repository;
-
-        public UserSearcher(IJournalRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, DateRange dateRange)
+        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, IQueryable<Journal> journals)
         {
             var lookup = new HashSet<string>(parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
-            return repository.GetJournalsApplyingTo(dateRange).Where(x=> !lookup.Contains(x.Username));
+            return journals.Where(x=> !lookup.Contains(x.Username));
         }
     }
 }

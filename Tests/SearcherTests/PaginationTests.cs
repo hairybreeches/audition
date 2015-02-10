@@ -73,7 +73,7 @@ namespace Tests.SearcherTests
             {
                 yield return new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Monday, new LocalTime(7, 32), new LocalTime(7, 32));
                 yield return new UserParameters("a non-existent user");
-                yield return new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days);
+                yield return new YearEndParameters((DateTime.MaxValue - DateTime.MinValue).Days, DateTime.MaxValue);
                 yield return new UnusualAccountsParameters(1000000000);
                 yield return new EndingParameters(0);
             }

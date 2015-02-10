@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
 using Model.Time;
+using Persistence;
 
 namespace Searching.SearchWindows
 {
@@ -15,9 +16,9 @@ namespace Searching.SearchWindows
             Usernames = InputParsing.ParseStringList(users);
         }
 
-        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
         {
-            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+            return searcher.FindJournalsWithin(this, journals);
         }
 
         protected bool Equals(UserParameters other)

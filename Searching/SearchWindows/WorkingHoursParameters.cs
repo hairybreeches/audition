@@ -5,6 +5,7 @@ using Model.Time;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NodaTime;
+using Persistence;
 
 namespace Searching.SearchWindows
 {
@@ -30,9 +31,9 @@ namespace Searching.SearchWindows
         public LocalTime ToTime { get; private set; }
 
 
-        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
         {
-            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+            return searcher.FindJournalsWithin(this, journals);
         }
 
         public bool Contains(DateTimeOffset ukCreationTime)

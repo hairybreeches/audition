@@ -23,14 +23,14 @@ namespace Searching
             this.availableFields = availableFields;
         }
 
-        public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
+        public JournalSearcher CreateJournalSearcher()
         {
             return new JournalSearcher(
-                GetSearcher(repo => new WorkingHoursSearcher(repo), SearchAction.Hours, repository),
-                GetSearcher(repo => new YearEndSearcher(repo), SearchAction.Date, repository),
-                GetSearcher(repo => new UnusualAccountsSearcher(repo), SearchAction.Accounts, repository),
-                GetSearcher(repo => new RoundNumberSearcher(repo), SearchAction.Ending, repository),
-                GetSearcher(repo => new UserSearcher(repo), SearchAction.Users, repository));
+                GetSearcher<WorkingHoursParameters, WorkingHoursSearcher>(SearchAction.Hours),
+                GetSearcher<YearEndParameters, YearEndSearcher>( SearchAction.Date),
+                GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchAction.Accounts),
+                GetSearcher<EndingParameters, RoundNumberSearcher>(SearchAction.Ending),
+                GetSearcher<UserParameters, UserSearcher>(SearchAction.Users));
         }
 
         public SearchCapability GetSearchCapability()
@@ -43,10 +43,11 @@ namespace Searching
                 }));
         }
 
-        private IJournalSearcher<T> GetSearcher<T>(Func<IJournalRepository, IJournalSearcher<T>> searchFactory, SearchAction action, IJournalRepository repository) 
-            where T : ISearchParameters
+        private IJournalSearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchAction action) 
+            where TParameters : ISearchParameters
+            where TSearcher : IJournalSearcher<TParameters>, new()
         {
-            return SearchingSupported(action)? searchFactory(repository) : new NotSupportedSearcher<T>(unvailableActionMessages[action]);
+            return SearchingSupported(action)? (IJournalSearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unvailableActionMessages[action]);
             }
 
         private bool SearchingSupported(SearchAction searchAction)

@@ -298,27 +298,28 @@ var SearchModel = function () {
     self.input = {
         Period: period,
 
-        Outside: new InputSection({
+        Outside: new InputSection(ko.mapping.fromJS({
             FromDay: "Monday",
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }, period, exportSuccessMessage, searchCapabilities, 'Hours'),
+        }), period, exportSuccessMessage, searchCapabilities, 'Hours'),
 
         Accounts: new InputSection({
-            minimumEntriesToBeConsideredNormal: 10
+            minimumEntriesToBeConsideredNormal: ko.observable(10)
         }, period, exportSuccessMessage, searchCapabilities, 'Accounts'),
 
         Date: new InputSection({
-            daysBeforeYearEnd: 10
+            daysBeforeYearEnd: ko.observable(10),
+            yearEnd: period.From
         }, period, exportSuccessMessage, searchCapabilities, 'Date'),
 
         Users: new InputSection({
-            users: ""
+            users: ko.observable("")
         }, period, exportSuccessMessage, searchCapabilities, 'Users'),
 
         Ending: new InputSection({
-            minimumZeroesToBeConsideredUnusual: 3
+            minimumZeroesToBeConsideredUnusual: ko.observable(3)
         }, period, exportSuccessMessage, searchCapabilities, 'Ending')
     };
     self.output = output;

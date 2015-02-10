@@ -17,6 +17,11 @@ namespace Webapp.Controllers
         {
             get { return session.GetCurrentJournalSearcher(); }
         }
+
+        private IJournalRepository Repository
+        {
+            get { return session.Repository; }
+        }
         
         private readonly LoginSession session;
 
@@ -62,7 +67,7 @@ namespace Webapp.Controllers
 
         public SearchResponse Search(ISearchRequest searchRequest)
         {
-            return searchRequest.SearchWindow.Execute(Searcher).GetPage(searchRequest.PageNumber);
+            return searchRequest.SearchWindow.Execute(Searcher, Repository).GetPage(searchRequest.PageNumber);
         }
     }
 }

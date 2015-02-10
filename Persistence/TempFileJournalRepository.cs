@@ -26,11 +26,9 @@ namespace Persistence
             filename = Path.GetTempFileName();
         }
 
-        //todo: this method belongs on a searcher class, not the repository (and is called in too many places)
-        public IQueryable<Journal> GetJournalsApplyingTo(DateRange period)
+        public IQueryable<Journal> GetJournals()
         {
-            return Journals.AsQueryable()
-                .Where(x => period.Contains(x.JournalDate));
+            return Journals.AsQueryable();
         }
 
         private IEnumerable<Journal> Journals
