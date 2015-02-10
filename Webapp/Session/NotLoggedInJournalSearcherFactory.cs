@@ -5,7 +5,7 @@ namespace Webapp.Session
 {
     public class NotLoggedInJournalSearcherFactory : IJournalSearcherFactory
     {
-        public JournalSearcher CreateJournalSearcher(IJournalRepository repository)
+        public JournalSearcher CreateJournalSearcher()
         {
             throw new NotLoggedInException();
         }

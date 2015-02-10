@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Model.Accounting;
 using Model.Time;
+using Persistence;
 
 namespace Searching.SearchWindows
 {
@@ -15,9 +16,9 @@ namespace Searching.SearchWindows
         public int MinimumEntriesToBeConsideredNormal { get; private set; }
 
 
-        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher)
+        public Func<DateRange, IQueryable<Journal>> GetSearchMethod(JournalSearcher searcher, IJournalRepository repository)
         {
-            return dateRange => searcher.FindJournalsWithin(this, dateRange);
+            return dateRange => searcher.FindJournalsWithin(this, dateRange, repository);
         }
         
         public override string ToString()
