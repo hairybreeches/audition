@@ -102,7 +102,7 @@ namespace Tests
         private static T Parse<T>(string value)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<WebappModule>();
+            builder.RegisterModule<HttpModule>();
             using (var scope = builder.Build())
             {
                 var settings = scope.Resolve<JsonSerializerSettings>();

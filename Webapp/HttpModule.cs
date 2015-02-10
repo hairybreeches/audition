@@ -11,7 +11,7 @@ using Module = Autofac.Module;
 
 namespace Webapp
 {
-    public class WebappModule : Module
+    public class HttpModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

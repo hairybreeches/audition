@@ -108,7 +108,7 @@
     <Compile Include="Session\NotLoggedInException.cs" />
     <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
     <Compile Include="Session\SessionModule.cs" />
-    <Compile Include="WebappModule.cs" />
+    <Compile Include="HttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CsvExport\CsvExport.csproj">
