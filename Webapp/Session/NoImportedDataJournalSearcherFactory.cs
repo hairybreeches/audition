@@ -3,7 +3,7 @@ using Searching;
 
 namespace Webapp.Session
 {
-    public class NotLoggedInJournalSearcherFactory : IJournalSearcherFactory
+    public class NoImportedDataJournalSearcherFactory : IJournalSearcherFactory
     {
         public JournalSearcher CreateJournalSearcher()
         {
