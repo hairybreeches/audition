@@ -7,13 +7,13 @@ using Webapp.Controllers;
 
 namespace Webapp.Session
 {
-    public class LoginSession
+    public class Session
     {
         private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
         private readonly IJournalRepository repository;
         private readonly ILicenceStorage licenceStorage;
 
-        public LoginSession(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository, ILicenceStorage licenceStorage)
+        public Session(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository, ILicenceStorage licenceStorage)
         {
             this.searcherFactoryStorage = searcherFactoryStorage;
             this.repository = repository;

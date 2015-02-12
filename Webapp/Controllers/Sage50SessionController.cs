@@ -7,12 +7,12 @@ namespace Webapp.Controllers
 {
     public class Sage50SessionController : RedirectController
     {
-        private readonly LoginSession session;
+        private readonly Session.Session session;
         private readonly ISage50JournalGetter journalGetter;
         private readonly ISage50ConnectionFactory connectionFactory;
         private readonly Sage50DataDirectoryStorage dataDirectoryStorage;
 
-        public Sage50SessionController(LoginSession session, ISage50JournalGetter journalGetter, ISage50ConnectionFactory connectionFactory, Sage50DataDirectoryStorage dataDirectoryStorage)
+        public Sage50SessionController(Session.Session session, ISage50JournalGetter journalGetter, ISage50ConnectionFactory connectionFactory, Sage50DataDirectoryStorage dataDirectoryStorage)
         {
             this.session = session;
             this.journalGetter = journalGetter;
