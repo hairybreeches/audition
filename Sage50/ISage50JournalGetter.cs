@@ -6,6 +6,6 @@ namespace Sage50
 {
     public interface ISage50JournalGetter
     {
-        IEnumerable<Journal> GetJournals(DbConnection loginDetails);
+        IEnumerable<Journal> GetJournals(DbConnection dbConnection);
     }
 }
