@@ -25,7 +25,7 @@ namespace Webapp.Controllers
         public IHttpActionResult Logout()
         {
             session.Logout();
-            return RedirectToView("login.html");
+            return RedirectToView("import.html");
         }
     }
 }

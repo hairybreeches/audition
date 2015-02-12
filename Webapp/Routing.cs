@@ -8,9 +8,9 @@ namespace Webapp
 
         public const string GetExcelSheets = "api/excel/getSheets";
         public const string GetExcelHeaders = "api/excel/getHeaders";
-        public const string ExcelLogin = "api/excel/login";
+        public const string ExcelLogin = "api/excel/import";
 
-        public const string Sage50Login = "api/sage50/login";
+        public const string Sage50Login = "api/sage50/import";
 
         public const string GetLicence = "api/licence/get";
         public const string UpdateLicence = "api/licence/update";

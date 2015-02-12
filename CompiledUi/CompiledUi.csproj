@@ -190,7 +190,7 @@
     <Content Include="Ui\views\enterLicence.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\views\login.html">
+    <Content Include="Ui\views\import.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\views\search.html">
