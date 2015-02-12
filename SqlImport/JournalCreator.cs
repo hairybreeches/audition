@@ -23,10 +23,10 @@ namespace SqlImport
             var journalLines = lines.ToList();
             return new Journal(
                 lines.Key,
-                GetJournalField(journalLines, x => x.CreationTime, "Creation time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetJournalField(journalLines, x => x.JournalDate, "Journal date"),
-                GetJournalField(journalLines, x => x.Username, "Username"),
-                GetJournalField(journalLines, x => x.Description, "Description"),
+                GetJournalField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
+                GetJournalField(journalLines, x => x.JournalDate, "journal date"),
+                GetJournalField(journalLines, x => x.Username, "username"),
+                GetJournalField(journalLines, x => x.Description, "description"),
                 journalLines.Select(ToModelLine));
 
 
