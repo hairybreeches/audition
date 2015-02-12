@@ -25,7 +25,7 @@ namespace Webapp.Controllers
 
         [Route(Routing.ExcelImport)]
         [HttpPost]
-        public void ExcelLogin(ExcelImportMapping importMapping)
+        public void ExcelImport(ExcelImportMapping importMapping)
         {
             dataFileStorage.StoreUsage(importMapping);            
             session.Login(lookupInterpreter.CreateSearcherFactory(importMapping.Lookups), journalReader.ReadJournals(importMapping));
