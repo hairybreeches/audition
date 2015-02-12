@@ -18,15 +18,15 @@ namespace SqlImport
             return grouped.Select(CreateJournal);
         }
 
-        private Journal CreateJournal(IEnumerable<SqlJournalLine> linesEnumerable)
+        private Journal CreateJournal(IGrouping<string, SqlJournalLine> lines)
         {
-            var journalLines = linesEnumerable.ToList();
+            var journalLines = lines.ToList();
             return new Journal(
-                GetJournalField(journalLines, x => x.TransactionId),
-                GetJournalField(journalLines, x => x.CreationTime).ToUkDateTimeOffsetFromUkLocalTime(),
-                GetJournalField(journalLines, x => x.JournalDate),
-                GetJournalField(journalLines, x => x.Username),
-                GetJournalField(journalLines, x => x.Description),
+                lines.Key,
+                GetJournalField(journalLines, x => x.CreationTime, "Creation time").ToUkDateTimeOffsetFromUkLocalTime(),
+                GetJournalField(journalLines, x => x.JournalDate, "Journal date"),
+                GetJournalField(journalLines, x => x.Username, "Username"),
+                GetJournalField(journalLines, x => x.Description, "Description"),
                 journalLines.Select(ToModelLine));
 
 
@@ -37,13 +37,13 @@ namespace SqlImport
             return new JournalLine(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
         }
 
-        private static T GetJournalField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter)
+        private static T GetJournalField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter, string fieldName)
         {
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for property per transaction. Actual values for journal {0}: {1}", 
-                    journalLines.First().TransactionId, String.Join(", ", values)));
+                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for journal {1}: {2}", 
+                    fieldName, journalLines.First().TransactionId, String.Join(", ", values)));
             }
             return values.Single();
         }
