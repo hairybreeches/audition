@@ -1,4 +1,4 @@
-var Sage50LoginModel = function() {
+var Sage50ImportModel = function() {
     var self = this;
     self.dataDirectory = ko.observable('');
     self.username = ko.observable('');

@@ -1,4 +1,4 @@
-﻿var ExcelLoginModel = function () {
+﻿var ExcelImportModel = function () {
     var self = this;
 
     self.fileLocation = ko.observable('').extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });
