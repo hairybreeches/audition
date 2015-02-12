@@ -7,7 +7,7 @@ var Sage50ImportModel = function() {
     self.browseDataDirectory = createBrowseFunction('/api/chooseDirectory', self.dataDirectory);
 
     self.submit = function() {
-        model.login('/api/sage50/login', {
+        model.import('/api/sage50/login', {
             username: self.username(),
             password: self.password(),
             dataDirectory: self.dataDirectory(),
