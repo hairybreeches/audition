@@ -5,7 +5,7 @@ include ../components/forms
 include ../components/message
 
 
-mixin import-form(system, url)
+mixin import-form(system)
 	form.form-horizontal(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
@@ -22,9 +22,9 @@ mixin import-form(system, url)
 						select.form-control(data-bind="value: system")
 								option(value="sage50") Sage Line 50			
 								option(value="excel") Excel			
-			+import-form('sage50', "/api/sage50/login")
+			+import-form('sage50')
 				+sage50-import()
-			+import-form('excel', "/api/sage50/login")
+			+import-form('excel')
 				+excel-import()
 		+errorMessage('error')
 		hr.vertical-space
