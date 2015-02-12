@@ -85,6 +85,7 @@
 
             success: function (data) {
                 sheets(data);
+                self.errorMessage.visible(false);
                 self.sheet("0");
                 self.showInput(true);
             },
