@@ -15,38 +15,38 @@ using Webapp.Session;
 namespace Tests
 {
     [TestFixture]
-    public class LoginSessionTests
+    public class SessionTests
     {
         [Test]
-        public void TryingToAccessSessionWhenNotLoggedInGivesANotLoggedInException()
+        public void TryingToAccessSessionWhenNoDataHasBeenImportedGivesANoDataImportedException()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                AssertSearchingGivesNotLoggedInException(container);
+                AssertSearchingGivesNoImportedDataException(container);
             }
         }        
 
         [Test]
-        public void OnceLoggedInCanAccessSession()
+        public void OnceDataImportedCanAccessSession()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                Login(container);
+                ImportData(container);
                 Assert.NotNull(container.Resolve<SearchController>());                    
             }
         }        
 
         [Test]
-        public void CannotAccessSessionAfterLogout()
+        public void CannotAccessSessionAfterClearingImport()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                Login(container);
-                container.Logout();
-                AssertSearchingGivesNotLoggedInException(container);
+                ImportData(container);
+                container.ClearImport();
+                AssertSearchingGivesNoImportedDataException(container);
             }
         }        
 
@@ -54,23 +54,23 @@ namespace Tests
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing()
-                .Sage50LoginReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
+                .Sage50ImportReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
             return builder;
         }
 
-        private static void AssertSearchingGivesNotLoggedInException(IContainer container)
+        private static void AssertSearchingGivesNoImportedDataException(IContainer container)
         {
             var searcher = container.Resolve<SearchController>();
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1),
                 new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
-            Assert.Throws<NotLoggedInException>(
+            Assert.Throws<NoImportedDataException>(
                 () => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
         }
 
-        private static void Login(IContainer container)
+        private static void ImportData(IContainer container)
         {
-            container.LoginToSage50(new Sage50LoginDetails());
+            container.ImportFromSage50(new Sage50ImportDetails());
         }
     }
 }

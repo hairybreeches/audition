@@ -133,7 +133,10 @@
     <Content Include="Ui\scripts\errors.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\excelLogin.js">
+    <Content Include="Ui\scripts\excelImport.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ui\scripts\import.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\scripts\jquery-2.1.1.intellisense.js">
@@ -169,13 +172,10 @@
     <Content Include="Ui\scripts\licensing.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\login.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Ui\scripts\message.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\scripts\sage50Login.js">
+    <Content Include="Ui\scripts\sage50Import.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\scripts\search.js">
@@ -190,7 +190,7 @@
     <Content Include="Ui\views\enterLicence.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ui\views\login.html">
+    <Content Include="Ui\views\import.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ui\views\search.html">

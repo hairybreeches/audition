@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IncorrectSage50CredentialsException.cs" />
     <Compile Include="ISage50ConnectionFactory.cs" />
     <Compile Include="ISage50JournalGetter.cs" />
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Sage50DataDirectoryStorage.cs" />
     <Compile Include="Sage50Driver.cs" />
     <Compile Include="Sage50DriverDetector.cs" />
-    <Compile Include="Sage50LoginDetails.cs" />
+    <Compile Include="Sage50ImportDetails.cs" />
     <Compile Include="Sage50Module.cs" />
     <Compile Include="Sage50JournalGetter.cs" />
     <Compile Include="SageNotInstalledException.cs" />

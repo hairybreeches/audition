@@ -6,9 +6,9 @@ namespace Webapp.Controllers
 {
     public class SessionController : RedirectController
     {
-        private readonly LoginSession session;
+        private readonly Session.Session session;
 
-        public SessionController(LoginSession session)
+        public SessionController(Session.Session session)
         {
             this.session = session;
         }
@@ -21,11 +21,11 @@ namespace Webapp.Controllers
         }
 
         [HttpGet]
-        [Route(Routing.Logout)]
-        public IHttpActionResult Logout()
+        [Route(Routing.ClearImport)]
+        public IHttpActionResult ClearImport()
         {
-            session.Logout();
-            return RedirectToView("login.html");
+            session.ClearImport();
+            return RedirectToView("import.html");
         }
     }
 }

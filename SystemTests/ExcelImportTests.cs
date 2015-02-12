@@ -154,7 +154,7 @@ namespace SystemTests
             using (var scope = builder.Build())
             {
                 var controller = scope.Resolve<ExcelSessionController>();
-                controller.ExcelLogin(importMapping);
+                controller.ExcelImport(importMapping);
 
                 var searchController = scope.Resolve<SearchController>();
                 results =

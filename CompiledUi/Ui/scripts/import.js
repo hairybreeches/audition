@@ -1,9 +1,9 @@
-var LoginModel = function() {
+var ImportModel = function() {
     var self = this;
     self.blocked = ko.observable(false);
     self.system = ko.observable('');
-    self.sage50 = new Sage50LoginModel();
-    self.excel = new ExcelLoginModel();
+    self.sage50 = new Sage50ImportModel();
+    self.excel = new ExcelImportModel();
     self.error = new ErrorMessage();
 
     var goToSearch = function() {
@@ -15,13 +15,13 @@ var LoginModel = function() {
         self.error.show(jqXHR);
     };
 
-    var startLogin = function() {
+    var startImport = function() {
         self.error.visible(false);
         self.blocked(true);
     }
 
-    self.login = function(url, data) {
-        startLogin();
+    self.import = function(url, data) {
+        startImport();
         $.ajax({
             contentType: 'application/json',
             type: "POST",
@@ -33,6 +33,6 @@ var LoginModel = function() {
     }
 }
 
-var model = new LoginModel();
+var model = new ImportModel();
 
 ko.applyBindings(model, document.getElementById('pageElement'));

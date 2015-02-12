@@ -84,16 +84,16 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="UserScripts\excelLogin.js" />
+    <Content Include="UserScripts\excelImport.js" />
     <Content Include="UserScripts\licensing.js" />
     <Content Include="UserScripts\message.js" />
-    <Content Include="UserScripts\login.js" />
-    <Content Include="UserScripts\sage50Login.js" />
+    <Content Include="UserScripts\import.js" />
+    <Content Include="UserScripts\sage50Import.js" />
     <Content Include="UserScripts\search.js" />
     <Content Include="UserScripts\tooltips.js" />
     <None Include="style\icons.less" />
     <None Include="style\tooltips.less" />
-    <None Include="templates\components\excelLogin.jade" />
+    <None Include="templates\components\excelImport.jade" />
     <None Include="templates\components\message.jade" />
     <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />
@@ -180,12 +180,12 @@
     <None Include="templates\components\forms.jade" />
     <None Include="templates\components\head.jade" />
     <None Include="templates\components\results.jade" />
-    <None Include="templates\components\sage50Login.jade" />
+    <None Include="templates\components\sage50Import.jade" />
     <None Include="templates\components\scripts.jade" />
     <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
     <None Include="templates\components\export.jade" />
-    <None Include="templates\pages\login.jade" />
+    <None Include="templates\pages\import.jade" />
     <None Include="templates\pages\search.jade" />
   </ItemGroup>
   <ItemGroup />

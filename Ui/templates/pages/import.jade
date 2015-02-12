@@ -1,19 +1,19 @@
 include ../components/template
-include ../components/sage50Login
-include ../components/excelLogin
+include ../components/sage50Import
+include ../components/excelImport
 include ../components/forms
 include ../components/message
 
 
-mixin login-form(system, url)
+mixin import-form(system)
 	form.form-horizontal(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
 		block
 		+button-group()
-			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit, css: { disabled: disabled()}") Login &raquo;
+			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit, css: { disabled: disabled()}") Import &raquo;
 
-+page('Login', ['sage50Login', 'excelLogin', 'login'])
++page('Import', ['sage50Import', 'excelImport', 'import'])
 	.container
-		legend.vertical-space Login to accounts system
+		legend.vertical-space Import data from accounts system
 		.blockable(action="search", method="post")
 			.blockscreen.loadscreen(style="display: none;" data-bind="visible: blocked()")
 			form.form-horizontal
@@ -22,10 +22,10 @@ mixin login-form(system, url)
 						select.form-control(data-bind="value: system")
 								option(value="sage50") Sage Line 50			
 								option(value="excel") Excel			
-			+login-form('sage50', "/api/sage50/login")
-				+sage50-login()
-			+login-form('excel', "/api/sage50/login")
-				+excel-login()
+			+import-form('sage50')
+				+sage50-import()
+			+import-form('excel')
+				+excel-import()
 		+errorMessage('error')
 		hr.vertical-space
 
