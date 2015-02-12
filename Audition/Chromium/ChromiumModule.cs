@@ -11,6 +11,7 @@ namespace Audition.Chromium
             builder.RegisterType<AppForm>();
             builder.RegisterType<ChromiumControl>();
             builder.RegisterType<HttpConverter>();
+            builder.RegisterType<OwinServer>();
 
             builder.RegisterType<SchemeHandler>().As<ISchemeHandler>();                       
             builder.RegisterType<SchemeHandlerFactory>().As<ISchemeHandlerFactory>();

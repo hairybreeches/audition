@@ -39,25 +39,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.WebApi2.3.3.3\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.FileSystems, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Owin.FileSystems, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.FileSystems.2.1.0\lib\net40\Microsoft.Owin.FileSystems.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Hosting, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.3.0.0\lib\net45\Microsoft.Owin.FileSystems.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.StaticFiles, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.StaticFiles.2.1.0\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Testing, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Testing.2.1.0\lib\net45\Microsoft.Owin.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,7 +98,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UserDataController.cs" />
-    <Compile Include="OwinServer.cs" />
+    <Compile Include="OwinServerConfigurer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ISearchRequest.cs" />
     <Compile Include="Requests\SearchRequest.cs" />
@@ -116,9 +108,14 @@
     <Compile Include="Session\NotLoggedInException.cs" />
     <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
     <Compile Include="Session\SessionModule.cs" />
+    <Compile Include="HttpModule.cs" />
     <Compile Include="WebappModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CompiledUi\CompiledUi.csproj">
+      <Project>{b7fe3453-bb5d-410d-86ef-c1274aff5a6e}</Project>
+      <Name>CompiledUi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>CsvExport</Name>
@@ -150,6 +147,14 @@
     <ProjectReference Include="..\Searching\Searching.csproj">
       <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
       <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
