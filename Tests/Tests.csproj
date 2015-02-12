@@ -88,7 +88,7 @@
     <Compile Include="HttpConversionTests.cs" />
     <Compile Include="JsonConverterTests.cs" />
     <Compile Include="LicensingTests.cs" />
-    <Compile Include="LoginSessionTests.cs" />
+    <Compile Include="SessionTests.cs" />
     <Compile Include="Mocks\MockExporter.cs" />
     <Compile Include="Mocks\MockFileSystem.cs" />
     <Compile Include="Mocks\MockRegistry.cs" />

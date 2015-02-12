@@ -11,10 +11,10 @@ namespace Webapp.Controllers
         private readonly MetadataReader metadataReader;
         private readonly ExcelDataFileStorage dataFileStorage;
         private readonly ExcelJournalReader journalReader;
-        private readonly LoginSession session;
+        private readonly Session.Session session;
         private readonly ISearcherFactoryFactory lookupInterpreter;
 
-        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, LoginSession session, ISearcherFactoryFactory lookupInterpreter)
+        public ExcelSessionController(MetadataReader metadataReader, ExcelDataFileStorage dataFileStorage, ExcelJournalReader journalReader, Session.Session session, ISearcherFactoryFactory lookupInterpreter)
         {
             this.metadataReader = metadataReader;
             this.dataFileStorage = dataFileStorage;

@@ -15,7 +15,7 @@ using Webapp.Session;
 namespace Tests
 {
     [TestFixture]
-    public class LoginSessionTests
+    public class SessionTests
     {
         [Test]
         public void TryingToAccessSessionWhenNotLoggedInGivesANotLoggedInException()

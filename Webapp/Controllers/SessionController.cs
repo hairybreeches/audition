@@ -6,9 +6,9 @@ namespace Webapp.Controllers
 {
     public class SessionController : RedirectController
     {
-        private readonly LoginSession session;
+        private readonly Session.Session session;
 
-        public SessionController(LoginSession session)
+        public SessionController(Session.Session session)
         {
             this.session = session;
         }

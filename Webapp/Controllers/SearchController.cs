@@ -23,9 +23,9 @@ namespace Webapp.Controllers
             get { return session.Repository; }
         }
         
-        private readonly LoginSession session;
+        private readonly Session.Session session;
 
-        public SearchController(LoginSession session)
+        public SearchController(Session.Session session)
         {
             this.session = session;
         }
