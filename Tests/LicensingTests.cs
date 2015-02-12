@@ -33,10 +33,11 @@ namespace Tests
             var licence = licenceReader.GetLicence();
             //then the licence will say it's been fully licensed
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
-        }                             
+        }
 
+        [TestCaseSource("LicenceTestCases")]
         [TestCase(ValidLicenceKey, TestName = "Basic success case")]
-        [TestCase("  " + ValidLicenceKey + "    ", TestName = "Key with leading and trailing whitespace")]
+        [TestCase("  " + ValidLicenceKey + "    ", TestName = "Key with leading and trailing whitespace")]        
         [TestCase("123456789012345", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with fewer than 16 digits fails")]
         [TestCase("12345678901234567", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with more than 16 digits fails")]
         [TestCase("1234567890123456", ExpectedException = typeof(InvalidLicenceKeyException), TestName = "Licence key with invalid checksum fails")]
@@ -51,7 +52,17 @@ namespace Tests
             Assert.AreEqual(true, licence.IsFullyLicensed, "When there is a licence key in the registry, the product should be fully licensed");
         }
 
-        [Test]
+        public IEnumerable<TestCaseData> LicenceTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(ValidLicenceKey.ToLower()).SetName("Can licence with lowercase valid key");
+                yield return new TestCaseData(ValidLicenceKey.ToUpper()).SetName("Can licence with uppercase valid key");
+            }
+        }
+            
+            
+            [Test]
         public void WhenInvalidLicenceStoredItIsIgnored()
         {
             //given a registry with an invalid licence key
