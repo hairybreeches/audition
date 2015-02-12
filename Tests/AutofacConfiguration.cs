@@ -31,7 +31,7 @@ namespace Tests
         public static void LoginToSage50(this IContainer lifetime, Sage50LoginDetails loginDetails)
         {
             var loginController = lifetime.Resolve<Sage50SessionController>();
-            loginController.Login(loginDetails);
+            loginController.Import(loginDetails);
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)

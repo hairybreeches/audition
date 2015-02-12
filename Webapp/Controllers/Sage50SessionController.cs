@@ -22,7 +22,7 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.Sage50Import)]
-        public IHttpActionResult Login(Sage50LoginDetails loginDetails)
+        public IHttpActionResult Import(Sage50LoginDetails loginDetails)
         {
             dataDirectoryStorage.AddSage50DataLocation(loginDetails.DataDirectory);
             using (var connection = connectionFactory.OpenConnection(loginDetails))
