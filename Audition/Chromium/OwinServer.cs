@@ -11,7 +11,7 @@ namespace Audition.Chromium
 
         public OwinServer(OwinServerConfigurer configurer)
         {
-            owinTestServer = TestServer.Create(configurer.ConfigurationAction());
+            owinTestServer = TestServer.Create(configurer.Configure);
         }        
 
         public async Task<HttpResponseMessage> ExecuteRequest(HttpRequestMessage message)

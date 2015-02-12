@@ -21,10 +21,9 @@ namespace Webapp
             this.jsonSettings = jsonSettings;
         }
 
-        public Action<IAppBuilder> ConfigurationAction()
+        public void Configure(IAppBuilder app)
         {
-            return app => app
-                .UseFileServer(GetFileOptions())
+            app.UseFileServer(GetFileOptions())
                 .UseWebApi(GetApiOptions());
         }
 
