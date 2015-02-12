@@ -4,7 +4,7 @@ include ../components/template
 +page('Search', ['search'])
 	.container
 		.row
-			.col-md-1.col-md-offset-11
+			.col-md-4.col-md-offset-8
 				a.pull-right.action-link(href="/api/session/clearImport") Start again
 	.container(data-bind="with: input")
 		include ../components/searchInput
