@@ -37,7 +37,7 @@ namespace Sage50
         {
             if (!fileSystem.DirectoryExists(dataDirectory))
             {
-                throw new IncorrectLoginDetailsException(String.Format("The directory {0} does not exist. Enter a directory which is a Sage 50 data directory and try again", dataDirectory));
+                throw new IncorrectSage50CredentialsException(String.Format("The directory {0} does not exist. Enter a directory which is a Sage 50 data directory and try again", dataDirectory));
             }
 
             var accdata = Path.Combine(dataDirectory, "ACCDATA");
@@ -57,7 +57,7 @@ namespace Sage50
                 }
             }
 
-            throw new IncorrectLoginDetailsException(
+            throw new IncorrectSage50CredentialsException(
                 "Could not open the specified folder with available versions of Sage 50.\n" +
                 "Check that the folder is a Sage 50 data directory and that the correct version of Sage is installed.\n" +
                 "The data directory can be found by logging in to Sage and clicking help->about from the menu.\n" +
@@ -87,7 +87,7 @@ namespace Sage50
                 }
                 if (error.SQLState == "28000")
                 {
-                    throw new IncorrectLoginDetailsException("Incorrect username or password");
+                    throw new IncorrectSage50CredentialsException("Incorrect username or password");
                 }
 
                 throw;

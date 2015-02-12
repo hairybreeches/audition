@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IncorrectSage50CredentialsException.cs" />
     <Compile Include="ISage50ConnectionFactory.cs" />
     <Compile Include="ISage50JournalGetter.cs" />
     <Compile Include="Parsing\INominalCodeLookupFactory.cs" />
