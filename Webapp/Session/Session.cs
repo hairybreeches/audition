@@ -34,7 +34,7 @@ namespace Webapp.Session
 
         public void Logout()
         {
-            searcherFactoryStorage.CurrentSearcherFactory = new NotLoggedInJournalSearcherFactory();
+            searcherFactoryStorage.CurrentSearcherFactory = new NoImportedDataJournalSearcherFactory();
             repository.ClearJournals();
         }
 
