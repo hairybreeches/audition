@@ -21,10 +21,10 @@ namespace Webapp.Controllers
         }
 
         [HttpGet]
-        [Route(Routing.Logout)]
-        public IHttpActionResult Logout()
+        [Route(Routing.ClearImport)]
+        public IHttpActionResult ClearImport()
         {
-            session.Logout();
+            session.ClearImport();
             return RedirectToView("import.html");
         }
     }

@@ -22,10 +22,10 @@ namespace Tests
     public static class AutofacConfiguration
     {
 
-        public static void Logout(this IContainer container)
+        public static void ClearImport(this IContainer container)
         {
             var sessionController = container.Resolve<SessionController>();
-            sessionController.Logout();
+            sessionController.ClearImport();
         }
 
         public static void ImportFromSage50(this IContainer lifetime, Sage50ImportDetails importDetails)

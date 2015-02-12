@@ -32,7 +32,7 @@ namespace Webapp.Session
             repository.UpdateJournals(journals);
         }
 
-        public void Logout()
+        public void ClearImport()
         {
             searcherFactoryStorage.CurrentSearcherFactory = new NoImportedDataJournalSearcherFactory();
             repository.ClearJournals();

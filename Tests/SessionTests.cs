@@ -39,13 +39,13 @@ namespace Tests
         }        
 
         [Test]
-        public void CannotAccessSessionAfterLogout()
+        public void CannotAccessSessionAfterClearingImport()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
                 ImportData(container);
-                container.Logout();
+                container.ClearImport();
                 AssertSearchingGivesNoImportedDataException(container);
             }
         }        
