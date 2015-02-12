@@ -15,6 +15,7 @@ namespace Searching.SearchWindows
         }
 
         public int DaysBeforeYearEnd { get; private set; }
+        //todo: this is duplicate information with its containing SearchWindow and they could get out of sync
         public DateTime YearEnd { get; private set; }
 
 
