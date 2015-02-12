@@ -30,7 +30,7 @@ namespace Webapp
         public const string ExcelDataFiles = "api/userdata/excelDataFiles";
 
         public const string SearchCapability = "api/session/searchCapability";
-        public const string ClearImport = "api/session/logout";
+        public const string ClearImport = "api/session/clearImport";
 
 
         public const string Openfile = "api/openfile";        
