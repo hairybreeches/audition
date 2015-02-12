@@ -30,8 +30,8 @@ namespace Tests
 
         public static void ImportFromSage50(this IContainer lifetime, Sage50ImportDetails importDetails)
         {
-            var loginController = lifetime.Resolve<Sage50SessionController>();
-            loginController.Import(importDetails);
+            var sage50Controller = lifetime.Resolve<Sage50SessionController>();
+            sage50Controller.Import(importDetails);
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
