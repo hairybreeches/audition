@@ -8,9 +8,9 @@ namespace Webapp
 
         public const string GetExcelSheets = "api/excel/getSheets";
         public const string GetExcelHeaders = "api/excel/getHeaders";
-        public const string ExcelLogin = "api/excel/login";
+        public const string ExcelImport = "api/excel/import";
 
-        public const string Sage50Login = "api/sage50/login";
+        public const string Sage50Import = "api/sage50/import";
 
         public const string GetLicence = "api/licence/get";
         public const string UpdateLicence = "api/licence/update";
@@ -30,7 +30,7 @@ namespace Webapp
         public const string ExcelDataFiles = "api/userdata/excelDataFiles";
 
         public const string SearchCapability = "api/session/searchCapability";
-        public const string Logout = "api/session/logout";
+        public const string ClearImport = "api/session/clearImport";
 
 
         public const string Openfile = "api/openfile";        

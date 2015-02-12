@@ -22,16 +22,16 @@ namespace Tests
     public static class AutofacConfiguration
     {
 
-        public static void Logout(this IContainer container)
+        public static void ClearImport(this IContainer container)
         {
             var sessionController = container.Resolve<SessionController>();
-            sessionController.Logout();
+            sessionController.ClearImport();
         }
 
-        public static void LoginToSage50(this IContainer lifetime, Sage50LoginDetails loginDetails)
+        public static void ImportFromSage50(this IContainer lifetime, Sage50ImportDetails importDetails)
         {
-            var loginController = lifetime.Resolve<Sage50SessionController>();
-            loginController.Login(loginDetails);
+            var sage50Controller = lifetime.Resolve<Sage50SessionController>();
+            sage50Controller.Import(importDetails);
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
@@ -60,7 +60,7 @@ namespace Tests
             return builder;
         }
         
-        public static ContainerBuilder Sage50LoginReturns(this ContainerBuilder builder, params Journal[] journals)
+        public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Journal[] journals)
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
             var journalGetter = Substitute.For<ISage50JournalGetter>();

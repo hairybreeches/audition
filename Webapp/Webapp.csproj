@@ -104,9 +104,9 @@
     <Compile Include="Requests\SearchRequest.cs" />
     <Compile Include="Routing.cs" />
     <Compile Include="Session\JournalSearcherFactoryStorage.cs" />
-    <Compile Include="Session\LoginSession.cs" />
-    <Compile Include="Session\NotLoggedInException.cs" />
-    <Compile Include="Session\NotLoggedInJournalSearcherFactory.cs" />
+    <Compile Include="Session\Session.cs" />
+    <Compile Include="Session\NoImportedDataException.cs" />
+    <Compile Include="Session\NoImportedDataJournalSearcherFactory.cs" />
     <Compile Include="Session\SessionModule.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="WebappModule.cs" />

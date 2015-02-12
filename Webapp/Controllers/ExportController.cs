@@ -14,7 +14,7 @@ namespace Webapp.Controllers
 {
     public class ExportController : ApiController
     {
-        private readonly LoginSession session;
+        private readonly Session.Session session;
         private readonly IJournalExporter journalExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
@@ -28,7 +28,7 @@ namespace Webapp.Controllers
             get { return session.Repository; }
         }
 
-        public ExportController(IFileSaveChooser fileSaveChooser, IJournalExporter journalExporter, LoginSession session)
+        public ExportController(IFileSaveChooser fileSaveChooser, IJournalExporter journalExporter, Session.Session session)
         {
             this.fileSaveChooser = fileSaveChooser;
             this.journalExporter = journalExporter;

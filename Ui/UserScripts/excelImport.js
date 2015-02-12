@@ -1,4 +1,4 @@
-var ExcelLoginModel = function () {
+﻿var ExcelImportModel = function () {
     var self = this;
 
     self.fileLocation = ko.observable('').extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });
@@ -112,7 +112,7 @@ var ExcelLoginModel = function () {
     self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
 
     self.submit = function () {
-        model.login('/api/excel/login', getData());
+        model.import('/api/excel/import', getData());
     };
 
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');
