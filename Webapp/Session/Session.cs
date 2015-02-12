@@ -26,7 +26,7 @@ namespace Webapp.Session
             return SearcherFactory.CreateJournalSearcher();
         }
 
-        public void Login(IJournalSearcherFactory newSearcherFactory, IEnumerable<Journal> journals)
+        public void ImportData(IJournalSearcherFactory newSearcherFactory, IEnumerable<Journal> journals)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
             repository.UpdateJournals(journals);
