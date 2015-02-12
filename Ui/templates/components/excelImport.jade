@@ -32,7 +32,7 @@ mixin excel-import()
 		+checkbox('Header row', 'useHeaderRow')
 		legend Map columns
 		+row-dropdown({label: "Date", fieldName: "JournalDate", help: "The date the journal applies to. Used to determine whether the journal applies to the current period or not. This is required."})
-		+optional-row-dropdown({label: "Creation time", fieldName: "Created", help: "The time the journal was created"})
+		+optional-row-dropdown({label: "Creation time", fieldName: "Created", help: "The time and date the journal was created. Used to search for journals posted outside of working hours and year-end journals"})
 		+optional-row-dropdown({label: "Created by", fieldName: "Username", help: "The name or ID of the user who created the journal"})
 		+optional-row-dropdown({label: "Amount", fieldName: "Amount", help: "The net/gross value of the journal"})
 		+optional-row-dropdown({label: "Nominal code", fieldName: "AccountCode", help: "The nominal code which the journal has been posted to"})
