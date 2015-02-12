@@ -7,12 +7,12 @@ namespace Webapp.Session
     {
         public JournalSearcher CreateJournalSearcher()
         {
-            throw new NotLoggedInException();
+            throw new NoImportedDataException();
         }
 
         public SearchCapability GetSearchCapability()
         {
-            throw new NotLoggedInException();
+            throw new NoImportedDataException();
         }
     }
 }

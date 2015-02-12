@@ -64,7 +64,7 @@ namespace Tests
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1),
                 new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
-            Assert.Throws<NotLoggedInException>(
+            Assert.Throws<NoImportedDataException>(
                 () => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
         }
 
