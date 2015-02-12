@@ -84,11 +84,11 @@
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="UserScripts\excelLogin.js" />
+    <Content Include="UserScripts\excelImport.js" />
     <Content Include="UserScripts\licensing.js" />
     <Content Include="UserScripts\message.js" />
-    <Content Include="UserScripts\login.js" />
-    <Content Include="UserScripts\sage50Login.js" />
+    <Content Include="UserScripts\import.js" />
+    <Content Include="UserScripts\sage50Import.js" />
     <Content Include="UserScripts\search.js" />
     <Content Include="UserScripts\tooltips.js" />
     <None Include="style\icons.less" />

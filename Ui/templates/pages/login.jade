@@ -11,7 +11,7 @@ mixin import-form(system, url)
 		+button-group()
 			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit, css: { disabled: disabled()}") Login &raquo;
 
-+page('Login', ['sage50Login', 'excelLogin', 'login'])
++page('Login', ['sage50Import', 'excelImport', 'import'])
 	.container
 		legend.vertical-space Login to accounts system
 		.blockable(action="search", method="post")
