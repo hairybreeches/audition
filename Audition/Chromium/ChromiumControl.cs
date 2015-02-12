@@ -16,7 +16,7 @@ namespace Audition.Chromium
 
         public ChromiumControl(IEnumerable<CefCustomScheme> schemes)
         {
-            var address = Routing.GetViewUrl("login.html");
+            var address = Routing.GetViewUrl("import.html");
             var cefSettings = new CefSettings();
             foreach (var scheme in schemes)
             {

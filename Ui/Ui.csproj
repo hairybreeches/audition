@@ -185,7 +185,7 @@
     <None Include="templates\components\searchInput.jade" />
     <None Include="templates\components\template.jade" />
     <None Include="templates\components\export.jade" />
-    <None Include="templates\pages\login.jade" />
+    <None Include="templates\pages\import.jade" />
     <None Include="templates\pages\search.jade" />
   </ItemGroup>
   <ItemGroup />
