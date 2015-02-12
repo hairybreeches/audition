@@ -42,7 +42,7 @@ namespace SqlImport
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for journal {1}: {2}.", 
+                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for journal with id {1}: {2}. This can happen if you assign the 'ID' column incorrectly when importing data from Excel.", 
                     fieldName, journalLines.First().TransactionId, ValuesString(values)));
             }
             return values.Single();
