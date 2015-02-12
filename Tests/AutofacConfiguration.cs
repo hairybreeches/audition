@@ -28,7 +28,7 @@ namespace Tests
             sessionController.Logout();
         }
 
-        public static void LoginToSage50(this IContainer lifetime, Sage50ImportDetails importDetails)
+        public static void ImportFromSage50(this IContainer lifetime, Sage50ImportDetails importDetails)
         {
             var loginController = lifetime.Resolve<Sage50SessionController>();
             loginController.Import(importDetails);
@@ -60,7 +60,7 @@ namespace Tests
             return builder;
         }
         
-        public static ContainerBuilder Sage50LoginReturns(this ContainerBuilder builder, params Journal[] journals)
+        public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Journal[] journals)
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
             var journalGetter = Substitute.For<ISage50JournalGetter>();

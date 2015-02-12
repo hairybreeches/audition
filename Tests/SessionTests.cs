@@ -18,22 +18,22 @@ namespace Tests
     public class SessionTests
     {
         [Test]
-        public void TryingToAccessSessionWhenNotLoggedInGivesANotLoggedInException()
+        public void TryingToAccessSessionWhenNoDataHasBeenImportedGivesANoDataImportedException()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                AssertSearchingGivesNotLoggedInException(container);
+                AssertSearchingGivesNoImportedDataException(container);
             }
         }        
 
         [Test]
-        public void OnceLoggedInCanAccessSession()
+        public void OnceDataImportedCanAccessSession()
         {
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                Login(container);
+                ImportData(container);
                 Assert.NotNull(container.Resolve<SearchController>());                    
             }
         }        
@@ -44,9 +44,9 @@ namespace Tests
             var builder = GetContainerBuilder();
             using (var container = builder.Build())
             {
-                Login(container);
+                ImportData(container);
                 container.Logout();
-                AssertSearchingGivesNotLoggedInException(container);
+                AssertSearchingGivesNoImportedDataException(container);
             }
         }        
 
@@ -54,11 +54,11 @@ namespace Tests
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing()
-                .Sage50LoginReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
+                .Sage50ImportReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
             return builder;
         }
 
-        private static void AssertSearchingGivesNotLoggedInException(IContainer container)
+        private static void AssertSearchingGivesNoImportedDataException(IContainer container)
         {
             var searcher = container.Resolve<SearchController>();
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1),
@@ -68,9 +68,9 @@ namespace Tests
                 () => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
         }
 
-        private static void Login(IContainer container)
+        private static void ImportData(IContainer container)
         {
-            container.LoginToSage50(new Sage50ImportDetails());
+            container.ImportFromSage50(new Sage50ImportDetails());
         }
     }
 }
