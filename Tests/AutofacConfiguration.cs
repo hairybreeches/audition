@@ -28,10 +28,10 @@ namespace Tests
             sessionController.Logout();
         }
 
-        public static void LoginToSage50(this IContainer lifetime, Sage50LoginDetails loginDetails)
+        public static void LoginToSage50(this IContainer lifetime, Sage50ImportDetails importDetails)
         {
             var loginController = lifetime.Resolve<Sage50SessionController>();
-            loginController.Import(loginDetails);
+            loginController.Import(importDetails);
         }
 
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)

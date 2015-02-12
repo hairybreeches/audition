@@ -70,7 +70,7 @@ namespace Tests
 
         private static void Login(IContainer container)
         {
-            container.LoginToSage50(new Sage50LoginDetails());
+            container.LoginToSage50(new Sage50ImportDetails());
         }
     }
 }

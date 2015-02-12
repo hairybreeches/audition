@@ -4,6 +4,6 @@ namespace Sage50
 {
     public interface ISage50ConnectionFactory
     {
-        DbConnection OpenConnection(Sage50LoginDetails loginDetails);
+        DbConnection OpenConnection(Sage50ImportDetails importDetails);
     }
 }

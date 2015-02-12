@@ -22,10 +22,10 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.Sage50Import)]
-        public IHttpActionResult Import(Sage50LoginDetails loginDetails)
+        public IHttpActionResult Import(Sage50ImportDetails importDetails)
         {
-            dataDirectoryStorage.AddSage50DataLocation(loginDetails.DataDirectory);
-            using (var connection = connectionFactory.OpenConnection(loginDetails))
+            dataDirectoryStorage.AddSage50DataLocation(importDetails.DataDirectory);
+            using (var connection = connectionFactory.OpenConnection(importDetails))
             {
                 var journals = journalGetter.GetJournals(connection);
                 session.Login(JournalSearcherFactory.EverythingAvailable, journals);
