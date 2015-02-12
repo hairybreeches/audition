@@ -23,7 +23,7 @@ namespace Webapp.Controllers
             this.lookupInterpreter = lookupInterpreter;
         }
 
-        [Route(Routing.ExcelLogin)]
+        [Route(Routing.ExcelImport)]
         [HttpPost]
         public void ExcelLogin(ExcelImportMapping importMapping)
         {

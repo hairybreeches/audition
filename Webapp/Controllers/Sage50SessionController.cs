@@ -21,7 +21,7 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.Sage50Login)]
+        [Route(Routing.Sage50Import)]
         public IHttpActionResult Login(Sage50LoginDetails loginDetails)
         {
             dataDirectoryStorage.AddSage50DataLocation(loginDetails.DataDirectory);
