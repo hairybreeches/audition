@@ -42,10 +42,22 @@ namespace SqlImport
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for journal {1}: {2}", 
-                    fieldName, journalLines.First().TransactionId, String.Join(", ", values)));
+                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for journal {1}: {2}.", 
+                    fieldName, journalLines.First().TransactionId, ValuesString(values)));
             }
             return values.Single();
+        }
+
+        private static string ValuesString<T>(IList<T> values)
+        {
+            const int maxListLength = 5;
+
+            var valuesString = String.Join(", ", values.Take(maxListLength));
+            if (values.Count > maxListLength)
+            {
+                valuesString += String.Format("and {0} more", values.Count - maxListLength);
+            }
+            return valuesString;
         }
     }
 }
