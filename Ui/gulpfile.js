@@ -5,9 +5,7 @@ var gulp = require('gulp'),
     jade = require('gulp-jade'),
     less = require('gulp-less'),
     path = require('path'),
-		yargs = require('yargs'),
-		express = require('express'),		
-		app = express();		
+    yargs = require('yargs');
 		
 		
 var args   = yargs.argv;
@@ -43,14 +41,6 @@ gulp.task('userScripts', function () {
         .pipe(gulp.dest(targetDir + '/scripts'));
 });
 
-gulp.task('express', function() {
-
-	var servePath = path.resolve(targetDir);
-  app.use(express.static(servePath));
-	gutil.log('serving directory: ' + servePath);	
-  app.listen(1337);  
-});
-
 gulp.task('watch', function () {
   gulp.watch('style/**/*.less', ['less']);
   gulp.watch('Scripts/*.js', ['js']);
@@ -61,4 +51,4 @@ gulp.task('watch', function () {
 
 // Default Task
 gulp.task('build', ['templates', 'less', 'content', 'js', 'userScripts']);
-gulp.task('default', ['build', 'express', 'watch']);
+gulp.task('default', ['build', 'watch']);
