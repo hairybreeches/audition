@@ -21,15 +21,15 @@ namespace Sage50
             this.fileSystem = fileSystem;
         }
 
-        public DbConnection OpenConnection(Sage50LoginDetails loginDetails)
+        public DbConnection OpenConnection(Sage50ImportDetails importDetails)
         {
             var drivers = driverDetector.FindSageDrivers();
-            var folder = GetFolder(loginDetails.DataDirectory);
-            return OpenConnection(new Sage50LoginDetails
+            var folder = GetFolder(importDetails.DataDirectory);
+            return OpenConnection(new Sage50ImportDetails
             {
                 DataDirectory = folder,
-                Password = loginDetails.Password,
-                Username = loginDetails.Username
+                Password = importDetails.Password,
+                Username = importDetails.Username
             }, drivers);
         }
 
@@ -44,13 +44,13 @@ namespace Sage50
             return fileSystem.DirectoryExists(accdata) ? accdata : dataDirectory;
         }
 
-        private DbConnection OpenConnection(Sage50LoginDetails loginDetails, IEnumerable<Sage50Driver> drivers)
+        private DbConnection OpenConnection(Sage50ImportDetails importDetails, IEnumerable<Sage50Driver> drivers)
         {
             foreach (var driver in drivers)
             {
                 try
                 {
-                    return OpenConnection(loginDetails, driver);
+                    return OpenConnection(importDetails, driver);
                 }
                 catch (CannotOpenDataDirectoryException)
                 {
@@ -64,9 +64,9 @@ namespace Sage50
                 "Available versions of Sage 50: " + String.Join(", ", drivers.Select(x => x.FriendlyName)));
         }
 
-        private DbConnection OpenConnection(Sage50LoginDetails loginDetails, Sage50Driver sage50Driver)
+        private DbConnection OpenConnection(Sage50ImportDetails importDetails, Sage50Driver sage50Driver)
         {
-            var connectionString = CreateConnectionString(loginDetails, sage50Driver);
+            var connectionString = CreateConnectionString(importDetails, sage50Driver);
             var conn = new OdbcConnection(connectionString);
             OpenConnection(conn);
             return conn;
@@ -94,19 +94,19 @@ namespace Sage50
             }
         }
 
-        private static string CreateConnectionString(Sage50LoginDetails loginDetails, Sage50Driver driver)
+        private static string CreateConnectionString(Sage50ImportDetails importDetails, Sage50Driver driver)
         {
             var builder = new OdbcConnectionStringBuilder
             {
                 Driver = driver.Name
             };
 
-            builder["uid"] = loginDetails.Username;
-            builder["dir"] = loginDetails.DataDirectory;
+            builder["uid"] = importDetails.Username;
+            builder["dir"] = importDetails.DataDirectory;
 
-            if (!string.IsNullOrEmpty(loginDetails.Password))
+            if (!string.IsNullOrEmpty(importDetails.Password))
             {
-                builder["pwd"] = loginDetails.Password;
+                builder["pwd"] = importDetails.Password;
             }
 
             var connectionString = builder.ConnectionString;

@@ -2,7 +2,7 @@
 
 namespace Sage50
 {
-    public class Sage50LoginDetails
+    public class Sage50ImportDetails
     {        
         [Required]
         public string Username { get; set; }

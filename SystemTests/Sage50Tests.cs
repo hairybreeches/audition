@@ -26,7 +26,7 @@ namespace SystemTests
                 .WithNoLicensing()
                 .Build())
             {
-                lifetime.LoginToSage50(new Sage50LoginDetails
+                lifetime.LoginToSage50(new Sage50ImportDetails
                 {                    
                     DataDirectory = @"Sage50SampleData",
                     Username = "Manager"
