@@ -112,7 +112,7 @@ var ExcelImportModel = function () {
     self.browseExcelFile = createBrowseFunction('/api/chooseExcelFile', self.fileLocation);
 
     self.submit = function () {
-        model.login('/api/excel/login', getData());
+        model.import('/api/excel/login', getData());
     };
 
     autocomplete('#excelFileLocation', '/api/userdata/excelDataFiles');

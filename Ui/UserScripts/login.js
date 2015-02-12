@@ -15,13 +15,13 @@
         self.error.show(jqXHR);
     };
 
-    var startLogin = function() {
+    var startImport = function() {
         self.error.visible(false);
         self.blocked(true);
     }
 
-    self.login = function(url, data) {
-        startLogin();
+    self.import = function(url, data) {
+        startImport();
         $.ajax({
             contentType: 'application/json',
             type: "POST",
