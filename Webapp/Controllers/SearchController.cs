@@ -19,7 +19,7 @@ namespace Webapp.Controllers
             get { return session.GetCurrentJournalSearcher(); }
         }
 
-        private IJournalRepository Repository
+        private ITransactionRepository Repository
         {
             get { return session.Repository; }
         }

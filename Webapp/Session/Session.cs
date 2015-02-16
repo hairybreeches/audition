@@ -10,10 +10,10 @@ namespace Webapp.Session
     public class Session
     {
         private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
-        private readonly IJournalRepository repository;
+        private readonly ITransactionRepository repository;
         private readonly ILicenceStorage licenceStorage;
 
-        public Session(JournalSearcherFactoryStorage searcherFactoryStorage, IJournalRepository repository, ILicenceStorage licenceStorage)
+        public Session(JournalSearcherFactoryStorage searcherFactoryStorage, ITransactionRepository repository, ILicenceStorage licenceStorage)
         {
             this.searcherFactoryStorage = searcherFactoryStorage;
             this.repository = repository;
@@ -29,16 +29,16 @@ namespace Webapp.Session
         public void ImportData(ISearcherFactory newSearcherFactory, IEnumerable<Transaction> journals)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
-            repository.UpdateJournals(journals);
+            repository.UpdateTransactions(journals);
         }
 
         public void ClearImport()
         {
             searcherFactoryStorage.CurrentSearcherFactory = new NoImportedDataSearcherFactory();
-            repository.ClearJournals();
+            repository.ClearTransactions();
         }
 
-        public IJournalRepository Repository { get {  return repository; } }
+        public ITransactionRepository Repository { get {  return repository; } }
 
         public SearchCapability GetCurrentSearchCapability()
         {

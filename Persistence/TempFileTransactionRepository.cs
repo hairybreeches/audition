@@ -10,12 +10,12 @@ using Newtonsoft.Json;
 
 namespace Persistence
 {
-    public class TempFileJournalRepository : IJournalRepository, IDisposable
+    public class TempFileTransactionRepository : ITransactionRepository, IDisposable
     {
         private readonly IFileSystem fileSystem;
         private string filename;
 
-        public TempFileJournalRepository(IFileSystem fileSystem)
+        public TempFileTransactionRepository(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
             GenerateNewTempFile();
@@ -26,12 +26,12 @@ namespace Persistence
             filename = Path.GetTempFileName();
         }
 
-        public IQueryable<Transaction> GetJournals()
+        public IQueryable<Transaction> GetTransactions()
         {
-            return Journals.AsQueryable();
+            return Transactions.AsQueryable();
         }
 
-        private IEnumerable<Transaction> Journals
+        private IEnumerable<Transaction> Transactions
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Persistence
             }
         } 
         
-        public IJournalRepository UpdateJournals(IEnumerable<Transaction> journals)
+        public ITransactionRepository UpdateTransactions(IEnumerable<Transaction> journals)
         {
             var importedJournal = false;
             using(var writer = fileSystem.OpenFileToWrite(filename))
@@ -62,7 +62,7 @@ namespace Persistence
             return this;
         }
 
-        public void ClearJournals()
+        public void ClearTransactions()
         {
             DeleteTempFile();
             GenerateNewTempFile();

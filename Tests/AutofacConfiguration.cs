@@ -37,7 +37,7 @@ namespace Tests
         public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Transaction> journals)
         {
             var lifetime = builder.Build();
-            lifetime.Resolve<IJournalRepository>().UpdateJournals(journals);
+            lifetime.Resolve<ITransactionRepository>().UpdateTransactions(journals);
             lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = SearcherFactory.EverythingAvailable;
             return lifetime;
         }
