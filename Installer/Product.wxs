@@ -51,7 +51,7 @@
         <Component Id="ApplicationShortcutDesktop" Guid="a3b9513f-e2d1-4f8c-8551-de3eabb0bf48">
           <Shortcut Id="ApplicationDesktopShortcut"
              Name="Audition"
-             Description="Audition journal auditing software"
+             Description="Audition transaction auditing software"
              Target="[INSTALLFOLDER]Audition.exe"
              WorkingDirectory="INSTALLFOLDER"/>
           <RegistryValue
@@ -69,7 +69,7 @@
           <Component Id="ApplicationShortcut" Guid="dc1c4287-ea54-489f-a4ad-c36ecb3f05b2">
             <Shortcut Id="ApplicationStartMenuShortcut"
                       Name="Audition"
-                      Description="Audition journal auditing software"
+                      Description="Audition transaction auditing software"
                       Target="[INSTALLFOLDER]Audition.exe"
                       WorkingDirectory="INSTALLFOLDER"/>
             <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
