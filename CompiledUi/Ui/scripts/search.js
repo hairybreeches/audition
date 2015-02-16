@@ -15,7 +15,7 @@ $.ajax("/api/session/searchCapability", {
     }
 });
 
-var Journal = function(json) {
+var Transaction = function(json) {
 
     var self = this;
 
@@ -38,12 +38,12 @@ var Journal = function(json) {
     self.description = json.Description;
     self.username = json.Username;
     self.lines = json.Lines.map(function(json) {
-        return new JournalLine(json);
+        return new LedgerEntry(json);
     });
 }
 
 
-var JournalLine = function(json) {
+var LedgerEntry = function (json) {
     var self = this;
 
     var formatCurrency = function (decimal) {
@@ -106,7 +106,7 @@ var Output = function () {
     self.searchSuccess = function(results) {
         self.state('results');
         self.results(results.Journals.map(function(json) {
-            return new Journal(json);
+            return new Transaction(json);
         }));
 
 
