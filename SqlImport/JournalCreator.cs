@@ -12,21 +12,21 @@ namespace SqlImport
     /// </summary>
     public class JournalCreator
     {
-        internal IEnumerable<Transaction> ReadJournals(IEnumerable<SqlJournalLine> lines)
+        internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlJournalLine> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
-            return grouped.Select(CreateJournal);
+            return grouped.Select(CreateTransaction);
         }
 
-        private Transaction CreateJournal(IGrouping<string, SqlJournalLine> lines)
+        private Transaction CreateTransaction(IGrouping<string, SqlJournalLine> lines)
         {
             var journalLines = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetJournalField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetJournalField(journalLines, x => x.JournalDate, "journal date"),
-                GetJournalField(journalLines, x => x.Username, "username"),
-                GetJournalField(journalLines, x => x.Description, "description"),
+                GetField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
+                GetField(journalLines, x => x.JournalDate, "journal date"),
+                GetField(journalLines, x => x.Username, "username"),
+                GetField(journalLines, x => x.Description, "description"),
                 journalLines.Select(ToModelLine));
 
 
@@ -37,7 +37,7 @@ namespace SqlImport
             return new JournalLine(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
         }
 
-        private static T GetJournalField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter, string fieldName)
+        private static T GetField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter, string fieldName)
         {
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
