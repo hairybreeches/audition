@@ -13,80 +13,80 @@ namespace Tests.SearcherTests
     public class UnusualAccountsSearcherTests
     {
         [Test]
-        public void ReturnsOnlyJournalsPostedToLessUsedAccounts()
+        public void ReturnsOnlyTransactionsPostedToLessUsedAccounts()
         {
-            //given one journal which includes a line to a rare account (one posting)
-            var journalPostedToUncommonAccount = PostedTo("b", "e");
+            //given one transaction which includes a line to a rare account (one posting)
+            var transactionPostedToUncommonAccount = PostedTo("b", "e");
 
-            //and a search window for the period "all time", for journals to accounts with <2 postings
+            //and a search window for the period "all time", for transactions to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
-            //when we do the journal search
-            var journals = Searching.ExecuteSearch(searchWindow, PostedTo("a", "b"), PostedTo("b", "a"), journalPostedToUncommonAccount);
+            //when we do the transaction search
+            var transactions = Searching.ExecuteSearch(searchWindow, PostedTo("a", "b"), PostedTo("b", "a"), transactionPostedToUncommonAccount);
 
-            //we end up with only the journal to the rare account
-            CollectionAssert.AreEquivalent(new []{journalPostedToUncommonAccount}, journals);
+            //we end up with only the transaction to the rare account
+            CollectionAssert.AreEquivalent(new []{transactionPostedToUncommonAccount}, transactions);
         }        
 
         [Test]
-        public void DoesNotReturnDuplicatesWhenJournalsPostedToTwoUnusualAccounts()
+        public void DoesNotReturnDuplicatesWhenTransactionsPostedToTwoUnusualAccounts()
         {
-            //given one journal which includes a line to two rare accounts (just one posting each)
-            var journalPostedToUncommonAccount = PostedTo("d", "e");
+            //given one transaction which includes a line to two rare accounts (just one posting each)
+            var transactionPostedToUncommonAccount = PostedTo("d", "e");
 
-            //and a search window for the period "all time", for journals to accounts with <2 postings
+            //and a search window for the period "all time", for transactions to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
-            //when we do the journal search
-            var journals = Searching.ExecuteSearch(searchWindow, PostedTo("a", "b"), PostedTo("b", "a"), journalPostedToUncommonAccount).ToList();
+            //when we do the transaction search
+            var transactions = Searching.ExecuteSearch(searchWindow, PostedTo("a", "b"), PostedTo("b", "a"), transactionPostedToUncommonAccount).ToList();
 
-            //we end up with only one copy of the expected journal - it's not repeated for each rare account it's been posted to.
-            CollectionAssert.AreEquivalent(new []{journalPostedToUncommonAccount}, journals);
+            //we end up with only one copy of the expected transaction - it's not repeated for each rare account it's been posted to.
+            CollectionAssert.AreEquivalent(new []{transactionPostedToUncommonAccount}, transactions);
         }
         
         [Test]
-        public void DoesNotReturnJournalsOutsideThePeriod()
+        public void DoesNotReturnTransactionsOutsideThePeriod()
         {
-            //given one journal which includes a line to two rare accounts, but does not apply to the period
-            var journal = PostedTo("d", "e", new DateTime(2000, 4, 5));                
+            //given one transaction which includes a line to two rare accounts, but does not apply to the period
+            var transaction = PostedTo("d", "e", new DateTime(2000, 4, 5));                
 
-            //and a search window for journals to accounts with <2 postings
+            //and a search window for transactions to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
-            //when we do the journal search
-            var journals = Searching.ExecuteSearch(searchWindow, journal).ToList();
+            //when we do the transaction search
+            var transactions = Searching.ExecuteSearch(searchWindow, transaction).ToList();
 
-            //we don't end up with any journals returned
-            CollectionAssert.IsEmpty(journals);
+            //we don't end up with any transactions returned
+            CollectionAssert.IsEmpty(transactions);
         }   
         
         
         [Test]
-        public void JournalsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
+        public void TransactionsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
         {
-            //given one journal inside the period to an account
-            var journal = PostedTo("a", "b", new DateTime(1999, 1, 1));
+            //given one transaction inside the period to an account
+            var transaction = PostedTo("a", "b", new DateTime(1999, 1, 1));
 
-            //and a search window for journals to accounts with <2 postings
+            //and a search window for transactions to accounts with <2 postings
             var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
-            //when we do the journal search            
-            var journals = Searching.ExecuteSearch(searchWindow, journal,
+            //when we do the transaction search            
+            var transactions = Searching.ExecuteSearch(searchWindow, transaction,
                 PostedTo("a", "b", new DateTime(2000, 1, 1)),
                 PostedTo("a", "b", new DateTime(1998, 12, 31)),
                 PostedTo("a", "b", new DateTime(2000, 1, 1))).ToList();
 
-            //those journals posted to the account in other periods don't make the account any less unusual.
-            CollectionAssert.AreEquivalent(new[]{journal}, journals);
+            //those transactions posted to the account in other periods don't make the account any less unusual.
+            CollectionAssert.AreEquivalent(new[]{transaction}, transactions);
         }
 
-        public static Transaction PostedTo(string accountCode1, string accountCode2, DateTime journalDate)
+        public static Transaction PostedTo(string accountCode1, string accountCode2, DateTime transactionDate)
         {
-            return new Transaction(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
+            return new Transaction(Guid.NewGuid(), new DateTime(1999, 12, 1), transactionDate,
                 new[]
                 {
                     new LedgerEntry(accountCode1, accountCode1, LedgerEntryType.Cr, 2.2m),

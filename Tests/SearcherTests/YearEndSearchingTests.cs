@@ -21,46 +21,46 @@ namespace Tests.SearcherTests
         
 
         [Test]
-        public void ReturnsJournalsPostedAfterYearEnd()
+        public void ReturnsTransactionsPostedAfterYearEnd()
         {            
-            var postYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.AddDays(1), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
-            var result = Searching.ExecuteSearch(SearchParameters, postYearEndJournal);
-            CollectionAssert.AreEquivalent(new []{postYearEndJournal}, result);
+            var postYearEndTransaction = new Transaction(Guid.NewGuid(), YearEnd.AddDays(1), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
+            var result = Searching.ExecuteSearch(SearchParameters, postYearEndTransaction);
+            CollectionAssert.AreEquivalent(new []{postYearEndTransaction}, result);
         }
         
         [Test]
-        public void ReturnsJournalsPostedNearYearEnd()
+        public void ReturnsTransactionsPostedNearYearEnd()
         {            
-            var nearYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
-            var result = Searching.ExecuteSearch(SearchParameters, nearYearEndJournal);
-            CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
+            var nearYearEndTransaction = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
+            var result = Searching.ExecuteSearch(SearchParameters, nearYearEndTransaction);
+            CollectionAssert.AreEquivalent(new []{nearYearEndTransaction}, result);
         }
         
         [Test]
-        public void ReturnsJournalsPostedExactlyNumberOfDaysBeforeYearEnd()
+        public void ReturnsTransactionsPostedExactlyNumberOfDaysBeforeYearEnd()
         {            
-            var nearYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
-            var result = Searching.ExecuteSearch(new SearchWindow<YearEndParameters>(new YearEndParameters(7, YearEnd), FinancialPeriod), nearYearEndJournal);        
-            CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
+            var nearYearEndTransaction = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<LedgerEntry>() );
+            var result = Searching.ExecuteSearch(new SearchWindow<YearEndParameters>(new YearEndParameters(7, YearEnd), FinancialPeriod), nearYearEndTransaction);        
+            CollectionAssert.AreEquivalent(new []{nearYearEndTransaction}, result);
         }
 
         [Test]
-        public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
+        public void DoesNotReturnTransactionsWhichDoNotApplyToTheFinancialPeriod()
         {
             var timeInsideTheFinancialPeriod = YearEnd.Subtract(TimeSpan.FromDays(2));
-            var journalApplyingToPostYearEnd = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<LedgerEntry>());
-            var journalApplyingToPreYearstart = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<LedgerEntry>());
+            var transactionApplyingToPostYearEnd = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<LedgerEntry>());
+            var transactionApplyingToPreYearstart = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<LedgerEntry>());
 
-            var result = Searching.ExecuteSearch(SearchParameters, journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
+            var result = Searching.ExecuteSearch(SearchParameters, transactionApplyingToPostYearEnd, transactionApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result);
         }
         
         [Test]
-        public void DoesNotReturnJournalsWhichAreInThePeriodAndNotCloseToYearEnd()
+        public void DoesNotReturnTransactionsWhichAreInThePeriodAndNotCloseToYearEnd()
         {
-            var journalNotNearEnoughToYearEnd = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(6)), YearEnd.Subtract(TimeSpan.FromDays(60)), Enumerable.Empty<LedgerEntry>());
+            var transactionNotNearEnoughToYearEnd = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(6)), YearEnd.Subtract(TimeSpan.FromDays(60)), Enumerable.Empty<LedgerEntry>());
 
-            var result = Searching.ExecuteSearch(SearchParameters, journalNotNearEnoughToYearEnd);
+            var result = Searching.ExecuteSearch(SearchParameters, transactionNotNearEnoughToYearEnd);
             CollectionAssert.IsEmpty(result);
         }
     }
