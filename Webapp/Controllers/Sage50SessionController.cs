@@ -8,14 +8,14 @@ namespace Webapp.Controllers
     public class Sage50SessionController : RedirectController
     {
         private readonly Session.Session session;
-        private readonly ISage50JournalGetter journalGetter;
+        private readonly ISage50TransactionGetter transactionGetter;
         private readonly ISage50ConnectionFactory connectionFactory;
         private readonly Sage50DataDirectoryStorage dataDirectoryStorage;
 
-        public Sage50SessionController(Session.Session session, ISage50JournalGetter journalGetter, ISage50ConnectionFactory connectionFactory, Sage50DataDirectoryStorage dataDirectoryStorage)
+        public Sage50SessionController(Session.Session session, ISage50TransactionGetter transactionGetter, ISage50ConnectionFactory connectionFactory, Sage50DataDirectoryStorage dataDirectoryStorage)
         {
             this.session = session;
-            this.journalGetter = journalGetter;
+            this.transactionGetter = transactionGetter;
             this.connectionFactory = connectionFactory;
             this.dataDirectoryStorage = dataDirectoryStorage;
         }
@@ -27,7 +27,7 @@ namespace Webapp.Controllers
             dataDirectoryStorage.AddSage50DataLocation(importDetails.DataDirectory);
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
-                var journals = journalGetter.GetJournals(connection);
+                var journals = transactionGetter.GetJournals(connection);
                 session.ImportData(SearcherFactory.EverythingAvailable, journals);
             }
 

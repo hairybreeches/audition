@@ -8,13 +8,13 @@ using SqlImport;
 
 namespace Sage50
 {
-    public class Sage50JournalGetter : ISage50JournalGetter
+    public class Sage50TransactionGetter : ISage50TransactionGetter
     {
         private readonly SageJournalReader sageJournalReader;        
         private readonly SageJournalSchema schema;
         private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50JournalGetter(SageJournalReader sageJournalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
+        public Sage50TransactionGetter(SageJournalReader sageJournalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
         {
             this.sageJournalReader = sageJournalReader;            
             this.schema = schema;

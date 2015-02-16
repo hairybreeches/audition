@@ -63,7 +63,7 @@ namespace Tests
         public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Transaction[] transactions)
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
-            var journalGetter = Substitute.For<ISage50JournalGetter>();
+            var journalGetter = Substitute.For<ISage50TransactionGetter>();
             journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(transactions);
             builder.Register(_ => journalGetter);
             return builder;
