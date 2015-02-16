@@ -103,7 +103,7 @@
     <Compile Include="Requests\ISearchRequest.cs" />
     <Compile Include="Requests\SearchRequest.cs" />
     <Compile Include="Routing.cs" />
-    <Compile Include="Session\JournalSearcherFactoryStorage.cs" />
+    <Compile Include="Session\SearcherFactoryStorage.cs" />
     <Compile Include="Session\Session.cs" />
     <Compile Include="Session\NoImportedDataException.cs" />
     <Compile Include="Session\NoImportedDataSearcherFactory.cs" />
