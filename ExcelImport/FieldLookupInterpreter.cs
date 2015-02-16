@@ -120,6 +120,7 @@ namespace ExcelImport
 
         private string GetErrorMessage(SearchAction action)
         {
+            //todo: this should use MappingFields
             switch (action)
             {
                 case SearchAction.Ending:
