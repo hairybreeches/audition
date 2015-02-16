@@ -205,7 +205,7 @@
                 <th data-bind="visible: $root.showTransactionDate()">Date of journal</th>
                 <th data-bind="visible: $root.showDescription()">Description</th>
                 <th data-bind="visible: $root.showUsername()">Username</th>
-                <th data-bind="visible: $root.showJournalType()">Dr/Cr				</th>
+                <th data-bind="visible: $root.showLedgerEntryType()">Dr/Cr				</th>
                 <th data-bind="visible: $root.showAccountName()">Account Name</th>
                 <th data-bind="visible: $root.showAmount()">Amount</th>
                 <th data-bind="visible: $root.showAccountCode()">Account Code</th>
@@ -218,7 +218,7 @@
                 <td data-bind="text: transactionDate, visible: $root.showTransactionDate()"></td>
                 <td data-bind="text: description, visible: $root.showDescription()"></td>
                 <td data-bind="text: username, visible: $root.showUsername()"></td>
-                <td data-bind="text: lines[0].journalType, visible: $root.showJournalType()"></td>
+                <td data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()"></td>
                 <td data-bind="text: lines[0].accountName, visible: $root.showAccountName()"></td>
                 <td data-bind="text: lines[0].amount, visible: $root.showAmount()"></td>
                 <td data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()"></td>
@@ -229,7 +229,7 @@
                 <td data-bind="visible: $root.showTransactionDate()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>
                 <td data-bind="visible: $root.showUsername()"></td>
-                <td data-bind="text: journalType, visible: $root.showJournalType()"></td>
+                <td data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()"></td>
                 <td data-bind="text: accountName, visible: $root.showAccountName()"></td>
                 <td data-bind="text: amount, visible: $root.showAmount()"></td>
                 <td data-bind="text: accountCode, visible: $root.showAccountCode()"></td>

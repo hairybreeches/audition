@@ -15,7 +15,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 				th(data-bind="visible: $root.showTransactionDate()") Date of journal
 				th(data-bind="visible: $root.showDescription()") Description
 				th(data-bind="visible: $root.showUsername()") Username
-				th(data-bind="visible: $root.showJournalType()") Dr/Cr				
+				th(data-bind="visible: $root.showLedgerEntryType()") Dr/Cr				
 				th(data-bind="visible: $root.showAccountName()") Account Name
 				th(data-bind="visible: $root.showAmount()") Amount
 				th(data-bind="visible: $root.showAccountCode()") Account Code
@@ -26,7 +26,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 					td(data-bind="text: transactionDate, visible: $root.showTransactionDate()")
 					td(data-bind="text: description, visible: $root.showDescription()")
 					td(data-bind="text: username, visible: $root.showUsername()")
-					td(data-bind="text: lines[0].journalType, visible: $root.showJournalType()")
+					td(data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()")
 					td(data-bind="text: lines[0].accountName, visible: $root.showAccountName()")
 					td(data-bind="text: lines[0].amount, visible: $root.showAmount()")
 					td(data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()")
@@ -36,7 +36,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 					td(data-bind="visible: $root.showTransactionDate()")
 					td(data-bind="visible: $root.showDescription()")
 					td(data-bind="visible: $root.showUsername()")
-					td(data-bind="text: journalType, visible: $root.showJournalType()")
+					td(data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()")
 					td(data-bind="text: accountName, visible: $root.showAccountName()")
 					td(data-bind="text: amount, visible: $root.showAmount()")
 					td(data-bind="text: accountCode, visible: $root.showAccountCode()")

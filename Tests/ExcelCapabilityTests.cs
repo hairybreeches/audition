@@ -41,7 +41,7 @@ namespace Tests
                 yield return CreateTestCase("Amount mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: 5, created: -1, description: -1, transactionDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Ending), 
-                    DisplayField.TransactionDate, DisplayField.JournalType, DisplayField.Amount);
+                    DisplayField.TransactionDate, DisplayField.LedgerEntryType, DisplayField.Amount);
 
                 yield return CreateTestCase("Creation date mapped", 
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: 7, description: -1, transactionDate: 18, username: -1), 
@@ -99,7 +99,7 @@ namespace Tests
                 yield return CreateTestCase("Amount unmapped", 
                     new FieldLookups(id: 18, accountCode: 18, accountName: 18, amount: -1, created: 18, description: 18, transactionDate: 18, username: 18), 
                     new Dictionary<string, string>().WithEndingErrorMessage(), 
-                    Enums.GetAllValues<DisplayField>().Without(DisplayField.Amount).Without(DisplayField.JournalType));
+                    Enums.GetAllValues<DisplayField>().Without(DisplayField.Amount).Without(DisplayField.LedgerEntryType));
 
                 yield return CreateTestCase("Transaction creation time unmapped", 
                     new FieldLookups(id: 18, accountCode: 18, accountName: 18, amount: 18, created: -1, description: 18, transactionDate: 18, username: 18), 

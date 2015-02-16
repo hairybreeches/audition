@@ -60,7 +60,7 @@ Created,Date,Username,Description
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);
-            exporter.WriteJournals("An illuminating comment", journals, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.JournalType, DisplayField.AccountCode });
+            exporter.WriteJournals("An illuminating comment", journals, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
 
             var expected =
 @"An illuminating comment

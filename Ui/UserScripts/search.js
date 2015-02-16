@@ -50,7 +50,7 @@ var JournalLine = function(json) {
         return '£' + decimal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
-    self.journalType = json.JournalType;
+    self.ledgerEntryType = json.LedgerEntryType;
     self.accountName = json.AccountName;
     self.amount = formatCurrency(json.Amount);
     self.accountCode = json.AccountCode;    
@@ -282,8 +282,8 @@ var SearchModel = function () {
     self.showTransactionDate = function () {
         return showField('TransactionDate');
     };
-    self.showJournalType = function () {
-        return showField('JournalType');
+    self.showLedgerEntryType = function () {
+        return showField('LedgerEntryType');
     };
     self.showDescription = function() {
         return showField('Description');
@@ -292,7 +292,7 @@ var SearchModel = function () {
         return showField('Username');
     }
     self.showJournalLine = function() {
-        return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showJournalType();
+        return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showLedgerEntryType();
     }
 
     self.input = {
