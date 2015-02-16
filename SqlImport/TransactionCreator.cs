@@ -23,10 +23,10 @@ namespace SqlImport
             var ledgerEntries = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetField(ledgerEntries, x => x.CreationTime, "transaction entry time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetField(ledgerEntries, x => x.TransactionDate, "transaction date"),
-                GetField(ledgerEntries, x => x.Username, "username"),
-                GetField(ledgerEntries, x => x.Description, "description"),
+                GetField(ledgerEntries, x => x.CreationTime, MappingField.EntryTime).ToUkDateTimeOffsetFromUkLocalTime(),
+                GetField(ledgerEntries, x => x.TransactionDate, MappingField.TransactionDate),
+                GetField(ledgerEntries, x => x.Username, MappingField.Username),
+                GetField(ledgerEntries, x => x.Description, MappingField.Description),
                 ledgerEntries.Select(ToModelLine));
 
 
@@ -37,13 +37,13 @@ namespace SqlImport
             return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.LedgerEntryType, arg.Amount);
         }
 
-        private static T GetField<T>(IList<SqlLedgerEntry> ledgerEntries, Func<SqlLedgerEntry, T> getter, string fieldName)
+        private static T GetField<T>(IList<SqlLedgerEntry> ledgerEntries, Func<SqlLedgerEntry, T> getter, MappingField mappingField)
         {
             var values = ledgerEntries.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for transaction with id {1}: {2}. This can happen if you assign the 'ID' column incorrectly when importing data from Excel.", 
-                    fieldName, ledgerEntries.First().TransactionId, ValuesString(values)));
+                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for transaction with id {1}: {2}. This can happen if you assign the 'ID' column incorrectly when importing data from Excel.",
+                    mappingField, ledgerEntries.First().TransactionId, ValuesString(values)));
             }
             return values.Single();
         }
