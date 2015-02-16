@@ -7,11 +7,11 @@ namespace Tests
 {
     static class SearchCapabilityExtensions
     {
-        private const string EndingSearchUnavailableMessage = "In order to search for journals with round number endings, you must import journals with an amount value";
-        private const string UserSearchUnavailableMessage = "In order to search for journals posted by unexpected users, you must import journals with a username value";
-        private const string DateUnavailableMessage = "In order to search for journals created near or after the year end, you must import journals with a creation time value";
-        private const string HoursUnavailableMessage = "In order to search for journals posted outside of working hours, you must import journals with a creation time value";
-        private const string AccountSearchUnavailableMessage = "In order to search for journals posted to unusual nomincal codes, you must import journals with a nominal code value";
+        private const string EndingSearchUnavailableMessage = "In order to search for transactions with round number endings, you must import transactions with an amount value";
+        private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a username value";
+        private const string DateUnavailableMessage = "In order to search for transactions created near or after the year end, you must import transactions with an entry time value";
+        private const string HoursUnavailableMessage = "In order to search for transactions posted outside of working hours, you must import transactions with an entry time value";
+        private const string AccountSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";
 
         public static IDictionary<string, string> WithAccountsErrorMessage(this IDictionary<string, string> dictionary)
         {
