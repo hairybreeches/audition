@@ -24,27 +24,27 @@ namespace Searching
             this.userSearcher = userSearcher;
         }
 
-        public IQueryable<Transaction> FindJournalsWithin(YearEndParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(YearEndParameters parameters, IQueryable<Transaction> journals)
         {
             return yearEndSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Transaction> FindJournalsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
         {
             return roundNumberSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Transaction> FindJournalsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
         {
             return unusualAccountsSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Transaction> FindJournalsWithin(UserParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> journals)
         {
             return userSearcher.FindJournalsWithin(parameters, journals);
         }
 
-        public IQueryable<Transaction> FindJournalsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
         {
             return hoursSearcher.FindJournalsWithin(parameters, journals);
         }
