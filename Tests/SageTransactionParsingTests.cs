@@ -10,7 +10,7 @@ using SqlImport;
 namespace Tests
 {
     [TestFixture]
-    public class SageJournalParsingTests
+    public class SageTransactionParsingTests
     {
         private static readonly IDictionary<string, string> nominalCodeLookup = new Dictionary<string, string>
         {
