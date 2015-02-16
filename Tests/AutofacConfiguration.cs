@@ -64,7 +64,7 @@ namespace Tests
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
             var transactionGetter = Substitute.For<ISage50TransactionGetter>();
-            transactionGetter.GetJournals(Arg.Any<DbConnection>()).Returns(transactions);
+            transactionGetter.GetTransactions(Arg.Any<DbConnection>()).Returns(transactions);
             builder.Register(_ => transactionGetter);
             return builder;
         }

@@ -6,6 +6,6 @@ namespace Sage50
 {
     public interface ISage50TransactionGetter
     {
-        IEnumerable<Transaction> GetJournals(DbConnection dbConnection);
+        IEnumerable<Transaction> GetTransactions(DbConnection dbConnection);
     }
 }

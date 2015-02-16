@@ -21,7 +21,7 @@ namespace Sage50
             this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
 
-        public IEnumerable<Transaction> GetJournals(DbConnection dbConnection)
+        public IEnumerable<Transaction> GetTransactions(DbConnection dbConnection)
         {
                 var nominalLookup = CreateNominalCodeLookup(dbConnection);
 
