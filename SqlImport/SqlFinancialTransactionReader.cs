@@ -7,12 +7,12 @@ namespace SqlImport
 {
     public class SqlFinancialTransactionReader
     {
-        private readonly JournalLineParser journalLineParser;
+        private readonly LedgerEntryParser ledgerEntryParser;
         private readonly TransactionCreator transactionCreator;
 
-        public SqlFinancialTransactionReader(JournalLineParser journalLineParser, TransactionCreator transactionCreator)
+        public SqlFinancialTransactionReader(LedgerEntryParser ledgerEntryParser, TransactionCreator transactionCreator)
         {
-            this.journalLineParser = journalLineParser;
+            this.ledgerEntryParser = ledgerEntryParser;
             this.transactionCreator = transactionCreator;
         }
 
@@ -21,13 +21,13 @@ namespace SqlImport
             return transactionCreator.ReadTransactions(GetLineRecords(reader, dataReader));
         }
 
-        private IEnumerable<SqlJournalLine> GetLineRecords(SqlDataReader reader, TransactionFieldReader dataReader)
+        private IEnumerable<SqlLedgerEntry> GetLineRecords(SqlDataReader reader, TransactionFieldReader dataReader)
         {
             while (reader.Read())
             {
                 if (!reader.RowIsEmpty())
                 {
-                    yield return journalLineParser.CreateJournalLine(reader.CurrentRecord(), dataReader, reader.RowNumber);
+                    yield return ledgerEntryParser.CreateJournalLine(reader.CurrentRecord(), dataReader, reader.RowNumber);
                 }                
             }
         }

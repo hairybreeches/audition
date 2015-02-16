@@ -12,13 +12,13 @@ namespace SqlImport
     /// </summary>
     public class TransactionCreator
     {
-        internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlJournalLine> lines)
+        internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlLedgerEntry> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateTransaction);
         }
 
-        private Transaction CreateTransaction(IGrouping<string, SqlJournalLine> lines)
+        private Transaction CreateTransaction(IGrouping<string, SqlLedgerEntry> lines)
         {
             var journalLines = lines.ToList();
             return new Transaction(
@@ -32,12 +32,12 @@ namespace SqlImport
 
         }
 
-        private static LedgerEntry ToModelLine(SqlJournalLine arg)
+        private static LedgerEntry ToModelLine(SqlLedgerEntry arg)
         {
             return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.LedgerEntryType, arg.Amount);
         }
 
-        private static T GetField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter, string fieldName)
+        private static T GetField<T>(IList<SqlLedgerEntry> journalLines, Func<SqlLedgerEntry, T> getter, string fieldName)
         {
             var values = journalLines.Select(getter).Distinct().ToList();
             if (values.Count > 1)
