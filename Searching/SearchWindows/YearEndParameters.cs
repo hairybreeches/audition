@@ -19,9 +19,9 @@ namespace Searching.SearchWindows
         public DateTime YearEnd { get; private set; }
 
 
-        public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> transactions)
         {
-            return searcher.FindJournalsWithin(this, journals);
+            return searcher.FindTransactionsWithin(this, transactions);
         }
 
         public override string ToString()

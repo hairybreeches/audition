@@ -16,9 +16,9 @@ namespace Searching.SearchWindows
             Usernames = InputParsing.ParseStringList(users);
         }
 
-        public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> transactions)
         {
-            return searcher.FindJournalsWithin(this, journals);
+            return searcher.FindTransactionsWithin(this, transactions);
         }
 
         protected bool Equals(UserParameters other)
