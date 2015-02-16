@@ -10,12 +10,12 @@ namespace SqlImport
         public DateTime JournalDate { get; private set; }
         public DateTime CreationTime { get; private set; }
         public string NominalCode { get; private set; }
-        public JournalType JournalType { get; private set; }
+        public LedgerEntryType JournalType { get; private set; }
         public decimal Amount { get; private set; }
         public string Description { get; private set; }
         public string NominalCodeName { get; set; }
 
-        public SqlJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, JournalType type, String description, string nominalCodeName)
+        public SqlJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;

@@ -6,7 +6,7 @@ namespace Model.Accounting
 {
     public class LedgerEntry
     {
-        public LedgerEntry(string accountCode, string accountName, JournalType journalType, decimal amount)
+        public LedgerEntry(string accountCode, string accountName, LedgerEntryType journalType, decimal amount)
         {
             AccountCode = accountCode;
             AccountName = accountName;
@@ -18,7 +18,7 @@ namespace Model.Accounting
         public string AccountName { get; private set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public JournalType JournalType { get; private set; }
+        public LedgerEntryType JournalType { get; private set; }
         public decimal Amount { get; private set; }
 
         public override string ToString()

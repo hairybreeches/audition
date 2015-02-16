@@ -17,16 +17,16 @@ namespace Tests
             new Transaction("id 1", new DateTimeOffset(new DateTime(2012, 3, 4), TimeSpan.Zero), new DateTime(2012, 3, 4), "alf",
                 "very interesting journal", new List<LedgerEntry>
                 {
-                    new LedgerEntry("9012", "Expenses", JournalType.Cr, 23.4m),
-                    new LedgerEntry("3001", "Cash", JournalType.Dr, 23.4m)
+                    new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
+                    new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
                 }),
 
             //and one outside
             new Transaction("id 2", new DateTimeOffset(new DateTime(2012, 6, 5), TimeSpan.FromHours(1)),
                 new DateTime(2012, 6, 5), "steve", "perfectly normal journal", new List<LedgerEntry>
                 {
-                    new LedgerEntry("8014", "Depreciation", JournalType.Cr, 12.4m),
-                    new LedgerEntry("4001", "Fixed assets", JournalType.Dr, 12.4m)
+                    new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
+                    new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
                 })
         };
 

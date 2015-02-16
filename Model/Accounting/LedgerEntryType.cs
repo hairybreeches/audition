@@ -1,6 +1,6 @@
 ﻿namespace Model.Accounting
 {
-    public enum JournalType
+    public enum LedgerEntryType
     {
         Dr,
         Cr

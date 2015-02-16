@@ -89,8 +89,8 @@ namespace Tests.SearcherTests
             return new Transaction(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
                 new[]
                 {
-                    new LedgerEntry(accountCode1, accountCode1, JournalType.Cr, 2.2m),
-                    new LedgerEntry(accountCode2, accountCode2, JournalType.Dr, 2.2m)
+                    new LedgerEntry(accountCode1, accountCode1, LedgerEntryType.Cr, 2.2m),
+                    new LedgerEntry(accountCode2, accountCode2, LedgerEntryType.Dr, 2.2m)
                 });
         }
 

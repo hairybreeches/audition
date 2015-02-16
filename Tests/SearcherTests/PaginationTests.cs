@@ -115,7 +115,7 @@ namespace Tests.SearcherTests
             {
                 yield return new Transaction(i.ToString(), startDate.AddMinutes(5 * i), new DateTime(), "steve", "description", new[]
                 {
-                    new LedgerEntry("steve", "steve", JournalType.Dr, 20)                    
+                    new LedgerEntry("steve", "steve", LedgerEntryType.Dr, 20)                    
                 });
             }
         }

@@ -25,17 +25,17 @@ namespace SqlImport
 
         private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
-            JournalType type;
+            LedgerEntryType type;
             decimal amount;
 
             if (rawAmount < 0)
             {
-                type = JournalType.Cr;
+                type = LedgerEntryType.Cr;
                 amount = -1 * (Decimal)rawAmount;
             }
             else
             {
-                type = JournalType.Dr;
+                type = LedgerEntryType.Dr;
                 amount = (Decimal)rawAmount;
             }
 
