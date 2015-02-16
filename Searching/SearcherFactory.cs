@@ -7,25 +7,25 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class JournalSearcherFactory : IJournalSearcherFactory
+    public class SearcherFactory : ISearcherFactory
     {
         private readonly IList<DisplayField> availableFields;
 
-        public static IJournalSearcherFactory EverythingAvailable = new JournalSearcherFactory(
+        public static ISearcherFactory EverythingAvailable = new SearcherFactory(
             new Dictionary<SearchAction, string>(),
             Enums.GetAllValues<DisplayField>());
 
         private readonly IDictionary<SearchAction, string> unvailableActionMessages;
 
-        public JournalSearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params DisplayField[] availableFields)
+        public SearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params DisplayField[] availableFields)
         {
             this.unvailableActionMessages = unvailableActionMessages;           
             this.availableFields = availableFields;
         }
 
-        public JournalSearcher CreateJournalSearcher()
+        public Searcher CreateSearcher()
         {
-            return new JournalSearcher(
+            return new Searcher(
                 GetSearcher<WorkingHoursParameters, WorkingHoursSearcher>(SearchAction.Hours),
                 GetSearcher<YearEndParameters, YearEndSearcher>( SearchAction.Date),
                 GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchAction.Accounts),
@@ -43,11 +43,11 @@ namespace Searching
                 }));
         }
 
-        private IJournalSearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchAction action) 
+        private ISearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchAction action) 
             where TParameters : ISearchParameters
-            where TSearcher : IJournalSearcher<TParameters>, new()
+            where TSearcher : ISearcher<TParameters>, new()
         {
-            return SearchingSupported(action)? (IJournalSearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unvailableActionMessages[action]);
+            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unvailableActionMessages[action]);
             }
 
         private bool SearchingSupported(SearchAction searchAction)

@@ -4,6 +4,6 @@ namespace ExcelImport
 {
     public interface ISearcherFactoryFactory
     {
-        IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups);
+        ISearcherFactory CreateSearcherFactory(FieldLookups lookups);
     }
 }

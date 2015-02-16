@@ -8,7 +8,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class NotSupportedSearcher<T> : IJournalSearcher<T> where T : ISearchParameters
+    public class NotSupportedSearcher<T> : ISearcher<T> where T : ISearchParameters
     {
         private readonly string errorMessage;
 

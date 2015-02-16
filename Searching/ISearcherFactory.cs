@@ -2,9 +2,9 @@
 
 namespace Searching
 {
-    public interface IJournalSearcherFactory
+    public interface ISearcherFactory
     {
-        JournalSearcher CreateJournalSearcher();
+        Searcher CreateSearcher();
         SearchCapability GetSearchCapability();
     }
 }

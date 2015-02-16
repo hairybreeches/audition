@@ -7,15 +7,15 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class JournalSearcher
+    public class Searcher
     {
-        private readonly IJournalSearcher<WorkingHoursParameters> hoursSearcher;
-        private readonly IJournalSearcher<YearEndParameters> yearEndSearcher;
-        private readonly IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher;
-        private readonly IJournalSearcher<EndingParameters> roundNumberSearcher;
-        private readonly IJournalSearcher<UserParameters> userSearcher;
+        private readonly ISearcher<WorkingHoursParameters> hoursSearcher;
+        private readonly ISearcher<YearEndParameters> yearEndSearcher;
+        private readonly ISearcher<UnusualAccountsParameters> unusualAccountsSearcher;
+        private readonly ISearcher<EndingParameters> roundNumberSearcher;
+        private readonly ISearcher<UserParameters> userSearcher;
 
-        public JournalSearcher(IJournalSearcher<WorkingHoursParameters> hoursSearcher, IJournalSearcher<YearEndParameters> yearEndSearcher, IJournalSearcher<UnusualAccountsParameters> unusualAccountsSearcher, IJournalSearcher<EndingParameters> roundNumberSearcher, IJournalSearcher<UserParameters> userSearcher)
+        public Searcher(ISearcher<WorkingHoursParameters> hoursSearcher, ISearcher<YearEndParameters> yearEndSearcher, ISearcher<UnusualAccountsParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher)
         {
             this.hoursSearcher = hoursSearcher;
             this.yearEndSearcher = yearEndSearcher;

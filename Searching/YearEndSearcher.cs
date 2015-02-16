@@ -8,7 +8,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class YearEndSearcher : IJournalSearcher<YearEndParameters>
+    public class YearEndSearcher : ISearcher<YearEndParameters>
     {
         public IQueryable<Transaction> FindJournalsWithin(YearEndParameters parameters, IQueryable<Transaction> journals)
         {            

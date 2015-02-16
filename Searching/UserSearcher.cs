@@ -9,7 +9,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class UserSearcher : IJournalSearcher<UserParameters>
+    public class UserSearcher : ISearcher<UserParameters>
     {
         public IQueryable<Transaction> FindJournalsWithin(UserParameters parameters, IQueryable<Transaction> journals)
         {

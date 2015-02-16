@@ -7,7 +7,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class UnusualAccountsSearcher : IJournalSearcher<UnusualAccountsParameters>
+    public class UnusualAccountsSearcher : ISearcher<UnusualAccountsParameters>
     {
         public IQueryable<Transaction> FindJournalsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
         {

@@ -6,9 +6,9 @@ namespace Webapp.Session
     {
         public JournalSearcherFactoryStorage()
         {
-            CurrentSearcherFactory = new NoImportedDataJournalSearcherFactory();
+            CurrentSearcherFactory = new NoImportedDataSearcherFactory();
         }
 
-        public IJournalSearcherFactory CurrentSearcherFactory { get; set; }
+        public ISearcherFactory CurrentSearcherFactory { get; set; }
     }
 }

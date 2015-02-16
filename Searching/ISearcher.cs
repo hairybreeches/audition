@@ -6,7 +6,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public interface IJournalSearcher<in T> where T : ISearchParameters
+    public interface ISearcher<in T> where T : ISearchParameters
     {
         IQueryable<Transaction> FindJournalsWithin(T parameters, IQueryable<Transaction> journals);
     }

@@ -18,7 +18,7 @@ namespace Webapp.Controllers
         private readonly IJournalExporter journalExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
-        private JournalSearcher Searcher
+        private Searcher Searcher
         {
             get { return session.GetCurrentJournalSearcher(); }
         }    
