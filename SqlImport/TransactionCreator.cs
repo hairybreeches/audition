@@ -7,8 +7,8 @@ using Model.Accounting;
 namespace SqlImport
 {
     /// <summary>
-    /// Knows how to turn intermediate parsing step SqlJournalLine into Journals.
-    /// Don't use this directly, use a JournalReader.
+    /// Knows how to turn intermediate parsing step SqlLedgerEntries into Transactions.
+    /// Don't use this directly. Use a SqlFinancialTransactionReader
     /// </summary>
     public class TransactionCreator
     {
@@ -20,14 +20,14 @@ namespace SqlImport
 
         private Transaction CreateTransaction(IGrouping<string, SqlLedgerEntry> lines)
         {
-            var journalLines = lines.ToList();
+            var ledgerEntries = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetField(journalLines, x => x.TransactionDate, "journal date"),
-                GetField(journalLines, x => x.Username, "username"),
-                GetField(journalLines, x => x.Description, "description"),
-                journalLines.Select(ToModelLine));
+                GetField(ledgerEntries, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
+                GetField(ledgerEntries, x => x.TransactionDate, "journal date"),
+                GetField(ledgerEntries, x => x.Username, "username"),
+                GetField(ledgerEntries, x => x.Description, "description"),
+                ledgerEntries.Select(ToModelLine));
 
 
         }
@@ -37,13 +37,13 @@ namespace SqlImport
             return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.LedgerEntryType, arg.Amount);
         }
 
-        private static T GetField<T>(IList<SqlLedgerEntry> journalLines, Func<SqlLedgerEntry, T> getter, string fieldName)
+        private static T GetField<T>(IList<SqlLedgerEntry> ledgerEntries, Func<SqlLedgerEntry, T> getter, string fieldName)
         {
-            var values = journalLines.Select(getter).Distinct().ToList();
+            var values = ledgerEntries.Select(getter).Distinct().ToList();
             if (values.Count > 1)
             {
-                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per journal. Actual values for journal with id {1}: {2}. This can happen if you assign the 'ID' column incorrectly when importing data from Excel.", 
-                    fieldName, journalLines.First().TransactionId, ValuesString(values)));
+                throw new SqlDataFormatUnexpectedException(String.Format("Expected only one value for {0} per transaction. Actual values for transaction with id {1}: {2}. This can happen if you assign the 'ID' column incorrectly when importing data from Excel.", 
+                    fieldName, ledgerEntries.First().TransactionId, ValuesString(values)));
             }
             return values.Single();
         }
