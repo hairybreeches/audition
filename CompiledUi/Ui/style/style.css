@@ -8662,9 +8662,6 @@ body {
 .ui-datepicker .ui-datepicker-header {
   color: #ffffff;
 }
-.action-link {
-  font-size: 16pt;
-}
 .grouped-table > tbody + tbody {
   border-top: none;
 }

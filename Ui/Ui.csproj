@@ -103,7 +103,6 @@
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
-    <None Include="style\actionlink.less" />
     <None Include="style\blockscreen.less" />
     <None Include="style\bootswatch.less" />
     <None Include="style\forms.less" />
