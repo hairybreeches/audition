@@ -24,29 +24,29 @@ namespace Searching
             this.userSearcher = userSearcher;
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(YearEndParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(YearEndParameters parameters, IQueryable<Transaction> transactions)
         {
-            return yearEndSearcher.FindTransactionsWithin(parameters, journals);
+            return yearEndSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> transactions)
         {
-            return roundNumberSearcher.FindTransactionsWithin(parameters, journals);
+            return roundNumberSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
         {
-            return unusualAccountsSearcher.FindTransactionsWithin(parameters, journals);
+            return unusualAccountsSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> transactions)
         {
-            return userSearcher.FindTransactionsWithin(parameters, journals);
+            return userSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> transactions)
         {
-            return hoursSearcher.FindTransactionsWithin(parameters, journals);
+            return hoursSearcher.FindTransactionsWithin(parameters, transactions);
         }
     }
 }
