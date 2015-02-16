@@ -11,17 +11,25 @@ mixin dateInput(bindTo)
 
 mixin search-tab(title, bindName)
 	form.form-horizontal.blockable(action="search", method="post" data-bind="with: #{bindName}")
-		.blockscreen(style="display: none;" data-bind="visible: blocked(), text: errorMessage")
-		legend.vertical-space #{title}
-		.form-group
-			.col-xs-12
-				.inline-block
-					.inline-block(data-bind="with: parameters")
-						block
-					br
-					.button-group.pull-right
-						button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
-						button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
+		div(style="display: none;" data-bind="visible: blocked()")
+			.row
+				.col-xs-10.col-xs-offset-1.vertical-space
+					legend(data-bind="text: errorMessage")
+			.row
+				.col-xs-2.col-xs-offset-5
+					a.btn.btn-default(href="/api/session/clearImport") Back to import &raquo;
+
+		div(style="display: none;" data-bind="visible: !blocked()")
+			legend.vertical-space #{title}
+			.form-group
+				.col-xs-12
+					.inline-block
+						.inline-block(data-bind="with: parameters")
+							block
+						br
+						.button-group.pull-right
+							button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
+							button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
 
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
