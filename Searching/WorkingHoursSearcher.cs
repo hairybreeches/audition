@@ -9,9 +9,9 @@ namespace Searching
 {
     public class WorkingHoursSearcher : ISearcher<WorkingHoursParameters>
     {
-        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> transactions)
         {            
-            return journals.Where(x => Matches(x, parameters));
+            return transactions.Where(x => Matches(x, parameters));
         }
 
         private static bool Matches(Transaction x, WorkingHoursParameters workingHours)

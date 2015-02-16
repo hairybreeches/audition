@@ -11,10 +11,10 @@ namespace Searching
 {
     public class UserSearcher : ISearcher<UserParameters>
     {
-        public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> transactions)
         {
             var lookup = new HashSet<string>(parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
-            return journals.Where(x=> !lookup.Contains(x.Username));
+            return transactions.Where(x=> !lookup.Contains(x.Username));
         }
     }
 }
