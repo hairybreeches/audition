@@ -20,7 +20,7 @@ namespace Tests.SearcherTests
     public class PaginationTests
     {
         [Test]
-        public void ExportsAllJournalsWhenRequested()
+        public void ExportsAllTransactionsWhenRequested()
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing()
@@ -32,7 +32,7 @@ namespace Tests.SearcherTests
             var requestData = new SearchWindow<EndingParameters>(new EndingParameters(0),
                         new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
-            using (var lifetime = builder.BuildSearchable(GetJournals()))
+            using (var lifetime = builder.BuildSearchable(GetTransactions()))
             {
                 lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
                 var ids = exporter.WrittenJournals.Select(x => x.Id);
@@ -40,22 +40,22 @@ namespace Tests.SearcherTests
             }
         }
 
-        [TestCaseSource("SearchParametersWhichReturnAllJournals")]
+        [TestCaseSource("SearchParametersWhichReturnAllTransactions")]
         public void CanTakeAPage(ISearchParameters parameters)
         {
             var searchRequest = CreateSearchRequest(parameters);
-            var journals = ExecuteSearch(searchRequest, GetJournals());
-            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
+            var transactions = ExecuteSearch(searchRequest, GetTransactions());
+            CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), transactions.Select(x=>x.Id));
         }
 
-        static IEnumerable<Transaction> ExecuteSearch(ISearchRequest request, IEnumerable<Transaction> journalsInRepository)
+        static IEnumerable<Transaction> ExecuteSearch(ISearchRequest request, IEnumerable<Transaction> transactionsInRepository)
         {
-            CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
+            CollectionAssert.IsNotEmpty(transactionsInRepository, "Searching an empty repository is not a useful test");
 
             using (var lifetime = AutofacConfiguration
                 .CreateDefaultContainerBuilder()
                 .WithNoLicensing()
-                .BuildSearchable(journalsInRepository))
+                .BuildSearchable(transactionsInRepository))
             {
                 return lifetime.Resolve<SearchController>().Search(request).Journals.ToList();
             }
@@ -67,7 +67,7 @@ namespace Tests.SearcherTests
         }
 
 
-        public IEnumerable<ISearchParameters> SearchParametersWhichReturnAllJournals
+        public IEnumerable<ISearchParameters> SearchParametersWhichReturnAllTransactions
         {
             get
             {
@@ -94,7 +94,7 @@ namespace Tests.SearcherTests
         public void NextAndPreviousButtonsAvailableWhenAppropriate(int numberOfResults, int pageNumber, bool previousPageShouldBeAvailable, bool nextPageShouldBeAvailable, string totalResults, int firstResult, int numberOfResultsReturned)
         {
             //given a search with some results
-            var searchResults = GetJournals().Take(numberOfResults).AsQueryable();
+            var searchResults = GetTransactions().Take(numberOfResults).AsQueryable();
             //when we send the pagination result back to the server
             var searchResponse = searchResults.GetPage(pageNumber);
 
@@ -108,7 +108,7 @@ namespace Tests.SearcherTests
             Assert.AreEqual(expectedIds, actualIds, "Reponse should return correct results");
         }        
 
-        private static IEnumerable<Transaction> GetJournals()
+        private static IEnumerable<Transaction> GetTransactions()
         {
             var startDate = new DateTimeOffset(new DateTime(1999, 1, 1), TimeSpan.Zero);
             for (var i = 1; i < 3001; i++)
