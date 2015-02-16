@@ -98,7 +98,7 @@ namespace Tests
         [Test]
         public void SchemaDefinitionIsValid()
         {
-            var schema = new SageJournalSchema();
+            var schema = new SageTransactionSchema();
 
             var definedColumnNumbers = schema.MappedColumns.Select(x => x.Index).ToList();
             var numberOfColumns = schema.MappedColumns.Count();
@@ -109,7 +109,7 @@ namespace Tests
 
         private static IEnumerable<Transaction> ParseJournals(params object[][] dataRows)
         {
-            var reader = new SageJournalReader(new SageJournalSchema(), new SqlJournalReader(new JournalLineParser(), new TransactionCreator()));
+            var reader = new SageJournalReader(new SageTransactionSchema(), new SqlJournalReader(new JournalLineParser(), new TransactionCreator()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 
@@ -126,7 +126,7 @@ namespace Tests
 
         private static DataColumn[] GetSageColumns()
         {
-            return new SageJournalSchema().MappedColumns.Select(x=>x.ToDataColumn()).ToArray();
+            return new SageTransactionSchema().MappedColumns.Select(x=>x.ToDataColumn()).ToArray();
         }
     }
 }

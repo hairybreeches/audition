@@ -7,7 +7,7 @@ namespace Sage50
     {
         protected override void Load(ContainerBuilder builder)
         {            
-            builder.RegisterType<SageJournalSchema>();
+            builder.RegisterType<SageTransactionSchema>();
             builder.RegisterType<SageJournalReader>();
             builder.RegisterType<Sage50TransactionGetter>().As<ISage50TransactionGetter>();
             builder.RegisterType<NominalCodeLookupFactory>().As<INominalCodeLookupFactory>();
