@@ -27,7 +27,7 @@ namespace SqlImport
             {
                 if (!reader.RowIsEmpty())
                 {
-                    yield return ledgerEntryParser.CreateJournalLine(reader.CurrentRecord(), dataReader, reader.RowNumber);
+                    yield return ledgerEntryParser.CreateLedgerEntry(reader.CurrentRecord(), dataReader, reader.RowNumber);
                 }                
             }
         }
