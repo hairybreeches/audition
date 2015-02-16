@@ -9,10 +9,10 @@ namespace Searching
 {
     public class RoundNumberSearcher : ISearcher<EndingParameters>
     {
-        public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> transactions)
         {           
             var magnitude = parameters.Magnitude();
-            return journals.Where(journal => HasRoundLine(journal, magnitude));
+            return transactions.Where(journal => HasRoundLine(journal, magnitude));
         }
 
         private bool HasRoundLine(Transaction transaction, int magnitude)
