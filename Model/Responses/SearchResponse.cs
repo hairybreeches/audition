@@ -7,16 +7,16 @@ namespace Model.Responses
 {
     public class SearchResponse
     {
-        public SearchResponse(IList<Transaction> journals, string totalResults, bool isPreviousPage, bool isNextPage, int firstResult)
+        public SearchResponse(IList<Transaction> transactions, string totalResults, bool isPreviousPage, bool isNextPage, int firstResult)
         {
             FirstResult = firstResult;
             IsNextPage = isNextPage;
             IsPreviousPage = isPreviousPage;
             TotalResults = totalResults;
-            Journals = journals;
+            Transactions = transactions;
         }
 
-        public IList<Transaction> Journals { get; private set; } 
+        public IList<Transaction> Transactions { get; private set; } 
         public string TotalResults { get; private set; }
         public bool IsPreviousPage { get; private set; }
         public bool IsNextPage { get; private set; }        
@@ -27,12 +27,12 @@ namespace Model.Responses
             return
                 String.Format(
                     "Total results: {0}, First Result of this page: {1}, previous page: {2}, next page: {3}, journals: {4}",
-                    TotalResults, FirstResult, IsPreviousPage, IsNextPage, String.Join(", ", Journals));
+                    TotalResults, FirstResult, IsPreviousPage, IsNextPage, String.Join(", ", Transactions));
         }
 
         protected bool Equals(SearchResponse other)
         {
-            return Journals.SequenceEqual(other.Journals) 
+            return Transactions.SequenceEqual(other.Transactions) 
                 && string.Equals(TotalResults, other.TotalResults) 
                 && IsPreviousPage.Equals(other.IsPreviousPage) 
                 && IsNextPage.Equals(other.IsNextPage) 
@@ -51,7 +51,7 @@ namespace Model.Responses
         {
             unchecked
             {
-                var hashCode = (Journals != null ? Journals.GetHashCode() : 0);
+                var hashCode = (Transactions != null ? Transactions.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (TotalResults != null ? TotalResults.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ IsPreviousPage.GetHashCode();
                 hashCode = (hashCode*397) ^ IsNextPage.GetHashCode();

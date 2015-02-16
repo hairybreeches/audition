@@ -105,7 +105,7 @@ var Output = function () {
 
     self.searchSuccess = function(results) {
         self.state('results');
-        self.results(results.Journals.map(function(json) {
+        self.results(results.Transactions.map(function(json) {
             return new Transaction(json);
         }));
 
