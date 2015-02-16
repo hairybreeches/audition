@@ -158,7 +158,7 @@ namespace Tests.SearcherTests
             var dayOfMonth = 6 + (int) day; //the 6th of July 2014 was a Sunday, Sunday is the 0th element of the enum.
             var journal = new Transaction(Guid.NewGuid(), 
                 new DateTime(2014, 7, dayOfMonth),
-                new DateTime(), Enumerable.Empty<JournalLine>());
+                new DateTime(), Enumerable.Empty<LedgerEntry>());
 
             Assert.AreEqual(day, journal.Created.DayOfWeek,
                 "PostedOn should return a journal posted on the right day of the week");
@@ -170,14 +170,14 @@ namespace Tests.SearcherTests
         {
             return new Transaction(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
-                new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
+                new DateTime(2012,1,3), Enumerable.Empty<LedgerEntry>());
         }
 
         private static Transaction Affecting(DateTime dateTime)
         {
             return new Transaction(Guid.NewGuid(),
                 new DateTime(2014, 7, 1),
-                dateTime, Enumerable.Empty<JournalLine>());
+                dateTime, Enumerable.Empty<LedgerEntry>());
         }
     }
 }

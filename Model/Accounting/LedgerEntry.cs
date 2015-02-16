@@ -4,9 +4,9 @@ using Newtonsoft.Json.Converters;
 
 namespace Model.Accounting
 {
-    public class JournalLine
+    public class LedgerEntry
     {
-        public JournalLine(string accountCode, string accountName, JournalType journalType, decimal amount)
+        public LedgerEntry(string accountCode, string accountName, JournalType journalType, decimal amount)
         {
             AccountCode = accountCode;
             AccountName = accountName;
@@ -26,7 +26,7 @@ namespace Model.Accounting
             return String.Join(" ", JournalType, AccountCode, AccountName, Amount);
         }
 
-        protected bool Equals(JournalLine other)
+        protected bool Equals(LedgerEntry other)
         {
             return string.Equals(AccountCode, other.AccountCode) && string.Equals(AccountName, other.AccountName) && JournalType == other.JournalType && Amount == other.Amount;
         }
@@ -36,7 +36,7 @@ namespace Model.Accounting
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((JournalLine) obj);
+            return Equals((LedgerEntry) obj);
         }
 
         public override int GetHashCode()

@@ -35,15 +35,15 @@ namespace Tests
                 new Transaction("26", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55),
-                        new JournalLine("9998", "Suspense Account", JournalType.Cr, 55),
-                        new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
+                        new LedgerEntry("1200", "Bank Current Account", JournalType.Dr, 55),
+                        new LedgerEntry("9998", "Suspense Account", JournalType.Cr, 55),
+                        new LedgerEntry("2200", "Sales Tax Control Account", JournalType.Dr, 0)
                     }),
                 new Transaction("12", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 13),
-                        new JournalLine("9998", "Suspense Account", JournalType.Cr, 13)
+                        new LedgerEntry("1200", "Bank Current Account", JournalType.Dr, 13),
+                        new LedgerEntry("9998", "Suspense Account", JournalType.Cr, 13)
                     })
             };
 
@@ -61,7 +61,7 @@ namespace Tests
                 new Transaction("26", new DateTimeOffset(2010,4,27,17,16,0, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
-                        new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55)
+                        new LedgerEntry("1200", "Bank Current Account", JournalType.Dr, 55)
                     })};
 
             CollectionAssert.AreEqual(expected, journals, "Sage parsing needs to be able to parse journals which don't balance, because for reasons known only to its devs, Sage supports them");

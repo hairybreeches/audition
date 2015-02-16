@@ -64,7 +64,7 @@ namespace Tests.SearcherTests
         private static Transaction ForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
-            return new Transaction(Guid.NewGuid(), creationDate, journalDate, new []{ new JournalLine("a", "a", JournalType.Cr, amountOfPounds), new JournalLine("b", "b", JournalType.Dr, amountOfPounds)});
+            return new Transaction(Guid.NewGuid(), creationDate, journalDate, new []{ new LedgerEntry("a", "a", JournalType.Cr, amountOfPounds), new LedgerEntry("b", "b", JournalType.Dr, amountOfPounds)});
         }
     }
 }
