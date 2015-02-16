@@ -27,8 +27,8 @@ namespace Webapp.Controllers
             dataDirectoryStorage.AddSage50DataLocation(importDetails.DataDirectory);
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
-                var journals = transactionGetter.GetTransactions(connection);
-                session.ImportData(SearcherFactory.EverythingAvailable, journals);
+                var transactions = transactionGetter.GetTransactions(connection);
+                session.ImportData(SearcherFactory.EverythingAvailable, transactions);
             }
 
             return Ok();
