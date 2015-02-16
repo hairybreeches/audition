@@ -49,7 +49,7 @@ Created,Date,Username,Description
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);
-            exporter.WriteJournals(description, transactions, "c:\\steve.csv", fields);
+            exporter.WriteTransactions(description, transactions, "c:\\steve.csv", fields);
 
             var actual = fileSystem.GetFileValue("c:\\steve.csv");
             return actual;
@@ -60,7 +60,7 @@ Created,Date,Username,Description
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);
-            exporter.WriteJournals("An illuminating comment", transactions, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
+            exporter.WriteTransactions("An illuminating comment", transactions, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
 
             var expected =
 @"An illuminating comment

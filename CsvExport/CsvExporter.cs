@@ -8,19 +8,19 @@ using Native;
 
 namespace CsvExport
 {
-    public class CsvExporter : IJournalExporter
+    public class CsvExporter : ITransactionExporter
     {
         private readonly IFileSystem fileSystem;
 
-        private readonly IEnumerable<ColumnFactory<Transaction>> journalColumnFactories = new[]
+        private readonly IEnumerable<ColumnFactory<Transaction>> transactionColumnFactories = new[]
         {
-            new ColumnFactory<Transaction>("Created", DisplayField.Created, journal => journal.Created),
-            new ColumnFactory<Transaction>("Date", DisplayField.TransactionDate, journal => journal.TransactionDate.ToShortDateString()),
-            new ColumnFactory<Transaction>("Username", DisplayField.Username, journal => journal.Username),
-            new ColumnFactory<Transaction>("Description", DisplayField.Description, journal => journal.Description)
+            new ColumnFactory<Transaction>("Created", DisplayField.Created, transaction => transaction.Created),
+            new ColumnFactory<Transaction>("Date", DisplayField.TransactionDate, transaction => transaction.TransactionDate.ToShortDateString()),
+            new ColumnFactory<Transaction>("Username", DisplayField.Username, transaction => transaction.Username),
+            new ColumnFactory<Transaction>("Description", DisplayField.Description, transaction => transaction.Description)
         };
         
-        private readonly IEnumerable<ColumnFactory<LedgerEntry>> journalLineColumnFactories = new[]
+        private readonly IEnumerable<ColumnFactory<LedgerEntry>> ledgerEntryColumnFactories = new[]
         {
             new ColumnFactory<LedgerEntry>("", DisplayField.LedgerEntryType, line => line.LedgerEntryType),
             new ColumnFactory<LedgerEntry>("", DisplayField.AccountCode, line => line.AccountCode),
@@ -35,10 +35,10 @@ namespace CsvExport
             this.fileSystem = fileSystem;
         }
 
-        public void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IEnumerable<DisplayField> availableFields)
+        public void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
         {
             var fields = new HashSet<DisplayField>(availableFields);
-            WriteJournals(description, journals, filename, GetColumns(fields, journalColumnFactories), GetColumns(fields, journalLineColumnFactories));
+            WriteTransactions(description, transactions, filename, GetColumns(fields, transactionColumnFactories), GetColumns(fields, ledgerEntryColumnFactories));
         }
 
         private IList<ICsvColumn<T>> GetColumns<T>(ICollection<DisplayField> fields, IEnumerable<ColumnFactory<T>> columnFactories)
@@ -46,15 +46,15 @@ namespace CsvExport
             return columnFactories.Select(x => x.GetColumn(fields)).ToList();
         }
 
-        private void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IList<ICsvColumn<Transaction>> journalColumns, IList<ICsvColumn<LedgerEntry>> journalLineColumns)
+        private void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IList<ICsvColumn<Transaction>> transactionColumns, IList<ICsvColumn<LedgerEntry>> ledgerEntryColumns)
         {
             using (var writer = CreateWriter(filename))
             {
                 WriteDescriptionRow(writer, description);
-                WriteHeaderRow(writer, journalColumns);
-                foreach (var journal in journals)
+                WriteHeaderRow(writer, transactionColumns);
+                foreach (var transaction in transactions)
                 {
-                    WriteJournal(writer, journal, journalColumns, journalLineColumns);
+                    WriteTransaction(writer, transaction, transactionColumns, ledgerEntryColumns);
                 }
             }
         }
@@ -65,34 +65,34 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteHeaderRow(ICsvWriter writer, IEnumerable<ICsvColumn<Transaction>> journalColumns)
+        private static void WriteHeaderRow(ICsvWriter writer, IEnumerable<ICsvColumn<Transaction>> transactionColumns)
         {
-            foreach (var journalColumn in journalColumns)
+            foreach (var column in transactionColumns)
             {
-                journalColumn.WriteHeader(writer);
+                column.WriteHeader(writer);
             }
             writer.NextRecord();
         }
 
-        private static void WriteJournal(ICsvWriter writer, Transaction transaction, IEnumerable<ICsvColumn<Transaction>> journalColumns, IEnumerable<ICsvColumn<LedgerEntry>> journalLineColumns)
+        private static void WriteTransaction(ICsvWriter writer, Transaction transaction, IEnumerable<ICsvColumn<Transaction>> transactionColumns, IEnumerable<ICsvColumn<LedgerEntry>> ledgerEntryColumns)
         {
-            foreach (var journalColumn in journalColumns)
+            foreach (var column in transactionColumns)
             {
-                journalColumn.WriteField(writer, transaction);
+                column.WriteField(writer, transaction);
             }
 
             foreach (var line in transaction.Lines)
             {
-                WriteLine(writer, journalLineColumns, line);
+                WriteLedgerEntry(writer, ledgerEntryColumns, line);
             }
             writer.NextRecord();
         }
 
-        private static void WriteLine(ICsvWriter writer, IEnumerable<ICsvColumn<LedgerEntry>> journalLineColumns, LedgerEntry line)
+        private static void WriteLedgerEntry(ICsvWriter writer, IEnumerable<ICsvColumn<LedgerEntry>> ledgerEntryColumns, LedgerEntry line)
         {
-            foreach (var journalLineColumn in journalLineColumns)
+            foreach (var column in ledgerEntryColumns)
             {
-                journalLineColumn.WriteField(writer, line);
+                column.WriteField(writer, line);
             }
         }
 
