@@ -21,7 +21,7 @@ namespace Tests
             var metadata = reader.ReadSheets(Examplesage50Export);
             CollectionAssert.AreEqual(new []
             {
-                new SheetMetadata("Sage 50 journals export", 
+                new SheetMetadata("Sage 50 transactions export", 
                     new[]
             {
                 "Column A",
