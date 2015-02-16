@@ -47,15 +47,15 @@ namespace Persistence
         
         public ITransactionRepository UpdateTransactions(IEnumerable<Transaction> transactions)
         {
-            var importedJournal = false;
+            var imported = false;
             using(var writer = fileSystem.OpenFileToWrite(filename))
-            foreach (var journal in transactions)
+            foreach (var transaction in transactions)
             {
-                importedJournal = true;
-                writer.WriteLine(JsonConvert.SerializeObject(journal));
+                imported = true;
+                writer.WriteLine(JsonConvert.SerializeObject(transaction));
             }
 
-            if (!importedJournal)
+            if (!imported)
             {
                 throw new NoTransactionsException("Successfully opened accounts, but there seemed to be no journal entries");
             }

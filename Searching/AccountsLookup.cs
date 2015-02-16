@@ -8,18 +8,18 @@ namespace Searching
     {
         private readonly IDictionary<string, int> lookup = new Dictionary<string, int>();
 
-        public AccountsLookup(IEnumerable<Transaction> journals)
+        public AccountsLookup(IEnumerable<Transaction> transactions)
         {
-            Add(journals);
+            Add(transactions);
         }
 
 
 
-        private void Add(IEnumerable<Transaction> journals)
+        private void Add(IEnumerable<Transaction> transactions)
         {
-            foreach (var journal in journals)
+            foreach (var transaction in transactions)
             {
-                Add(journal);
+                Add(transaction);
             }
         }
 

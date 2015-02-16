@@ -12,7 +12,7 @@ namespace Searching
         public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> transactions)
         {           
             var magnitude = parameters.Magnitude();
-            return transactions.Where(journal => HasRoundLine(journal, magnitude));
+            return transactions.Where(transaction => HasRoundLine(transaction, magnitude));
         }
 
         private bool HasRoundLine(Transaction transaction, int magnitude)
