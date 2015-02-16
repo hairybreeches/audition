@@ -224,7 +224,7 @@
                 <td data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()"></td>
               </tr>
               <!-- ko foreach: lines.slice(1)-->
-              <tr data-bind="visible: $root.showJournalLine()">
+              <tr data-bind="visible: $root.showEntries()">
                 <td data-bind="visible: $root.showCreated()"></td>
                 <td data-bind="visible: $root.showTransactionDate()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>
