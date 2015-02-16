@@ -15,7 +15,7 @@ namespace ExcelImport
         {
             if (transactionDate < 0)
             {
-                throw new ExcelMappingException("The journal date must be mapped");
+                throw new ExcelMappingException("The transaction date must be mapped");
             }
             Description = description;
             Username = username;
