@@ -9,7 +9,7 @@ namespace Searching
 {
     public class UnusualAccountsSearcher : ISearcher<UnusualAccountsParameters>
     {
-        public IQueryable<Transaction> FindJournalsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> journals)
         {
             var lookup = new AccountsLookup(journals);
             var unusualAccountCodes = lookup.UnusualAccountCodes(parameters.MinimumEntriesToBeConsideredNormal);

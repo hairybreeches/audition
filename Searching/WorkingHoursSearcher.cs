@@ -9,7 +9,7 @@ namespace Searching
 {
     public class WorkingHoursSearcher : ISearcher<WorkingHoursParameters>
     {
-        public IQueryable<Transaction> FindJournalsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> FindTransactionsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
         {            
             return journals.Where(x => Matches(x, parameters));
         }
