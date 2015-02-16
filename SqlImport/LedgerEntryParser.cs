@@ -10,9 +10,9 @@ namespace SqlImport
     /// </summary>
     public class LedgerEntryParser
     {
-        internal SqlLedgerEntry CreateJournalLine(IDataRecord record, TransactionFieldReader dataReader, int recordIndex)
+        internal SqlLedgerEntry CreateLedgerEntry(IDataRecord record, TransactionFieldReader dataReader, int recordIndex)
         {
-            return CreateJournalLine(
+            return CreateLedgerEntry(
                 dataReader.GetId(record, recordIndex),
                 dataReader.GetUsername(record, recordIndex),
                 dataReader.GetTransactionDate(record, recordIndex),
@@ -23,7 +23,7 @@ namespace SqlImport
                 dataReader.GetNominalCodeName(record, recordIndex));
         }
 
-        private static SqlLedgerEntry CreateJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlLedgerEntry CreateLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             LedgerEntryType type;
             decimal amount;
