@@ -26,7 +26,7 @@ namespace Model.Responses
         {
             return
                 String.Format(
-                    "Total results: {0}, First Result of this page: {1}, previous page: {2}, next page: {3}, journals: {4}",
+                    "Total results: {0}, First Result of this page: {1}, previous page: {2}, next page: {3}, transactions: {4}",
                     TotalResults, FirstResult, IsPreviousPage, IsNextPage, String.Join(", ", Transactions));
         }
 
