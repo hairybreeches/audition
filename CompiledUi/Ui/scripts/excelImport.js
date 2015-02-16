@@ -95,7 +95,7 @@ var ExcelImportModel = function () {
     }
 
     self.disabled = function () {
-        return !self.showInput() && self.columns().some(function () { return true; });
+        return !(self.showInput() && self.columns().some(function () { return true; }));
     };
 
     var onNewFilename = function (newFilename) {
