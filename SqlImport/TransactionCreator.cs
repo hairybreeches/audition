@@ -10,7 +10,7 @@ namespace SqlImport
     /// Knows how to turn intermediate parsing step SqlJournalLine into Journals.
     /// Don't use this directly, use a JournalReader.
     /// </summary>
-    public class JournalCreator
+    public class TransactionCreator
     {
         internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlJournalLine> lines)
         {
