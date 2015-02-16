@@ -49,12 +49,12 @@ namespace SqlImport
         
         public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
         {
-            return GetField(dateColumn, record, recordIndex, "journal date");
+            return GetField(dateColumn, record, recordIndex, "transaction date");
         }
         
         public DateTime GetCreationTime(IDataRecord record, int recordIndex)
         {
-            return GetField(creationTimeColumn, record, recordIndex, "journal creation time");
+            return GetField(creationTimeColumn, record, recordIndex, "transaction entry time");
         }
         
         public string GetNominalCode(IDataRecord record, int recordIndex)

@@ -80,7 +80,7 @@ namespace SystemTests
                     )
                 }, 1));
 
-            Assert.AreEqual("Could not read journal creation time of row 3: Could not interpret value '9998' from column D as a date", exception.Message);
+            Assert.AreEqual("Could not read transaction entry time of row 3: Could not interpret value '9998' from column D as a date", exception.Message);
         }      
         
         [Test]
