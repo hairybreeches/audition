@@ -17,5 +17,10 @@ namespace SqlImport
         }
 
         public string UserFriendlyName { get; private set; }
+
+        public override string ToString()
+        {
+            return UserFriendlyName;
+        }
     }
 }
