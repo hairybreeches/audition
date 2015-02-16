@@ -21,9 +21,9 @@ namespace Tests
 
 
         [Test]
-        public void CanConvertJournals()
+        public void CanConvertTransactions()
         {
-            var journals = ParseJournals(
+            var transactions = ParseTransactions(
                 new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" },
                 new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-55", "Unpresented Cheque" },
                 new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "2200", "0", "Unpresented Cheque" },
@@ -47,14 +47,14 @@ namespace Tests
                     })
             };
 
-            CollectionAssert.AreEqual(expected, journals);
+            CollectionAssert.AreEqual(expected, transactions);
         }      
         
         
         [Test]
-        public void CanParseUnbalancedJournals()
+        public void CanParseUnbalancedTransactions()
         {
-            var journals = ParseJournals(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" });
+            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" });
 
             var expected = new[]
             {
@@ -64,17 +64,17 @@ namespace Tests
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
                     })};
 
-            CollectionAssert.AreEqual(expected, journals, "Sage parsing needs to be able to parse journals which don't balance, because for reasons known only to its devs, Sage supports them");
+            CollectionAssert.AreEqual(expected, transactions, "Sage parsing needs to be able to parse transactions which don't balance, because for reasons known only to its devs, Sage supports them");
         }
 
         [Test]
         public void GetRightExceptionWhenUsernamesMismatched()
         {
-            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseTransactions(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010,4,27,17,16,0), "1200", "13", "Unpresented Cheque" },
                 new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" }));
 
-            StringAssert.Contains("12", exception.Message, "If two fields conflict, user should be told what journal id is affected");
+            StringAssert.Contains("12", exception.Message, "If two fields conflict, user should be told what transaction id is affected");
             foreach (var conflictingUsername in new[]{"Betty, Steve"})
             {
                 StringAssert.Contains(conflictingUsername, exception.Message, "If two fields conflict, user should be told what the conflicting values are");
@@ -84,7 +84,7 @@ namespace Tests
         [Test]
         public void GetFriendlyExceptionWhenNominalCodeNotDefined()
         {
-            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseJournals(
+            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseTransactions(
                 new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "bizarre nominal code", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
@@ -107,7 +107,7 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
-        private static IEnumerable<Transaction> ParseJournals(params object[][] dataRows)
+        private static IEnumerable<Transaction> ParseTransactions(params object[][] dataRows)
         {
             var reader = new SageTransactionReader(new SageTransactionSchema(), new SqlFinancialTransactionReader(new LedgerEntryParser(), new TransactionCreator()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
