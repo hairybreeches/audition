@@ -45,11 +45,11 @@ namespace Persistence
             }
         } 
         
-        public ITransactionRepository UpdateTransactions(IEnumerable<Transaction> journals)
+        public ITransactionRepository UpdateTransactions(IEnumerable<Transaction> transactions)
         {
             var importedJournal = false;
             using(var writer = fileSystem.OpenFileToWrite(filename))
-            foreach (var journal in journals)
+            foreach (var journal in transactions)
             {
                 importedJournal = true;
                 writer.WriteLine(JsonConvert.SerializeObject(journal));
