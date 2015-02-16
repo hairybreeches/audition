@@ -16,55 +16,55 @@ namespace Tests.SearcherTests
         private static readonly DateRange FinancialPeriod = new DateRange(YearStart, YearEnd);
 
         [Test]
-        public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
+        public void DoesNotReturnTransactionsWhichDoNotApplyToTheFinancialPeriod()
         {
-            var journalApplyingToPostYearEnd = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
-            var journalApplyingToPreYearstart = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
+            var transactionApplyingToPostYearEnd = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
+            var transactionApplyingToPreYearstart = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
 
-            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1), FinancialPeriod), journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1), FinancialPeriod), transactionApplyingToPostYearEnd, transactionApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result);
         }     
         
         
         [Test]
-        public void DoesNotReturnJournalsWithALineOfZeroValue()
+        public void DoesNotReturnTransactionsWithALineOfZeroValue()
         {
-            var journalForZero = ForAmount(InPeriod, InPeriod, 0);
-            var result = Searching.ExecuteSearch((new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod )), journalForZero);
+            var transactionForZero = ForAmount(InPeriod, InPeriod, 0);
+            var result = Searching.ExecuteSearch((new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod )), transactionForZero);
             CollectionAssert.IsEmpty(result);
         }  
         
         
         [Test]
-        public void ReturnsJournalForRoundAmount()
+        public void ReturnsTransactionForRoundAmount()
         {
-            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
-            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ), journalForRoundAmount);
-            CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
+            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ), transactionForRoundAmount);
+            CollectionAssert.AreEquivalent(new[]{transactionForRoundAmount}, result);
         }        
         
         [Test]
-        public void ReturnsJournalWithExactlyTheRightAmountOfZeroes()
+        public void ReturnsTransactionWithExactlyTheRightAmountOfZeroes()
         {
-            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
-            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ), journalForRoundAmount);
-            CollectionAssert.AreEquivalent(new[]{journalForRoundAmount}, result);
+            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ), transactionForRoundAmount);
+            CollectionAssert.AreEquivalent(new[]{transactionForRoundAmount}, result);
         }    
         
         
         [Test]
-        public void DoesNotReturnJournalWithOneTooFewZeroes()
+        public void DoesNotReturnTransactionWithOneTooFewZeroes()
         {
-            var journalForRoundAmount = ForAmount(InPeriod, InPeriod, 10000);
-            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ), journalForRoundAmount);
+            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 10000);
+            var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ), transactionForRoundAmount);
             CollectionAssert.IsEmpty(result);
         }
 
 
-        private static Transaction ForAmount(DateTime creationDate, DateTime journalDate, int amountOfPence)
+        private static Transaction ForAmount(DateTime creationDate, DateTime transactionDate, int amountOfPence)
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
-            return new Transaction(Guid.NewGuid(), creationDate, journalDate, new []{ new LedgerEntry("a", "a", JournalType.Cr, amountOfPounds), new LedgerEntry("b", "b", JournalType.Dr, amountOfPounds)});
+            return new Transaction(Guid.NewGuid(), creationDate, transactionDate, new []{ new LedgerEntry("a", "a", JournalType.Cr, amountOfPounds), new LedgerEntry("b", "b", JournalType.Dr, amountOfPounds)});
         }
     }
 }
