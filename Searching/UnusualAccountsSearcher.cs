@@ -14,7 +14,7 @@ namespace Searching
             var lookup = new AccountsLookup(transactions);
             var unusualAccountCodes = lookup.UnusualAccountCodes(parameters.MinimumEntriesToBeConsideredNormal);
             return transactions
-                .Where(journal=>journal.Lines.Any(journalLine => unusualAccountCodes.Contains(journalLine.AccountCode)));
+                .Where(transaction=>transaction.Lines.Any(line => unusualAccountCodes.Contains(line.AccountCode)));
         }
     }
 }

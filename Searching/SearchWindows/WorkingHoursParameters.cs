@@ -43,10 +43,10 @@ namespace Searching.SearchWindows
 
         private bool TimeWithinRange(DateTimeOffset ukCreationTime)
         {
-            var journalCreationTime = new LocalTime(ukCreationTime.Hour, ukCreationTime.Minute, ukCreationTime.Second);
+            var creationTime = new LocalTime(ukCreationTime.Hour, ukCreationTime.Minute, ukCreationTime.Second);
 
-            return journalCreationTime <= ToTime
-                   && journalCreationTime >= FromTime;
+            return creationTime <= ToTime
+                   && creationTime >= FromTime;
         }
 
         private static bool DayWithinRange(WorkingHoursParameters workingHours, DateTimeOffset date)
