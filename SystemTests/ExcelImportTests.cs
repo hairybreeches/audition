@@ -21,7 +21,7 @@ namespace SystemTests
         [Test]
         public void CanImportDataFromExcelCombiningOnId()
         {
-            var result = GetAllJournalsFromSearch(new ExcelImportMapping
+            var result = GetAllTransactionsFromSearch(new ExcelImportMapping
             {
                 SheetDescription = new DataSet
                 {
@@ -42,14 +42,14 @@ namespace SystemTests
                 )
             }, 1);
 
-            Assert.AreEqual("1217", result.TotalResults, "We should get all the journals back");
+            Assert.AreEqual("1217", result.TotalResults, "We should get all the transactions back");
 
             Assert.AreEqual(new Transaction("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)
-            }), result.Transactions[7], "A random journal should be correct");
+            }), result.Transactions[7], "A random transaction should be correct");
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace SystemTests
         public void GetHelpfulErrorMessageWhenCannotParseDate()
         {
             var exception =
-                Assert.Throws<SqlDataFormatUnexpectedException>(() => GetAllJournalsFromSearch(new ExcelImportMapping
+                Assert.Throws<SqlDataFormatUnexpectedException>(() => GetAllTransactionsFromSearch(new ExcelImportMapping
                 {
                     SheetDescription = new DataSet()
                     {
@@ -88,7 +88,7 @@ namespace SystemTests
         [SetCulture("en-GB")]
         public void CanImportExcelData()
         {
-            var results = GetAllJournalsFromSearch(new ExcelImportMapping
+            var results = GetAllTransactionsFromSearch(new ExcelImportMapping
             {
                 SheetDescription = new DataSet
                 {
@@ -113,7 +113,7 @@ namespace SystemTests
                     new[]
                     {
                         new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
-                    }), results.Transactions[9], "A random journal should be correct");
+                    }), results.Transactions[9], "A random transaction should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      
@@ -121,9 +121,9 @@ namespace SystemTests
         
         [Test]
         [ExpectedException(typeof(NoTransactionsException))]
-        public void EmptySpreadsheetThrowsNoJournalsException()
+        public void EmptySpreadsheetThrowsNoTransactionsException()
         {
-            GetAllJournalsFromSearch(new ExcelImportMapping
+            GetAllTransactionsFromSearch(new ExcelImportMapping
             {
                 SheetDescription = new DataSet
                 {
@@ -146,7 +146,7 @@ namespace SystemTests
 
         }
 
-        private static SearchResponse GetAllJournalsFromSearch(ExcelImportMapping importMapping, int pageNumber)
+        private static SearchResponse GetAllTransactionsFromSearch(ExcelImportMapping importMapping, int pageNumber)
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing();
