@@ -17,7 +17,7 @@ namespace Searching
             this.errorMessage = errorMessage;
         }
 
-        public IQueryable<Journal> FindJournalsWithin(T parameters, IQueryable<Journal> journals)
+        public IQueryable<Transaction> FindJournalsWithin(T parameters, IQueryable<Transaction> journals)
         {
             throw new NotSupportedException(errorMessage);
         }

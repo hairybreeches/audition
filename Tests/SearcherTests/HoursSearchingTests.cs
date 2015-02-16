@@ -153,10 +153,10 @@ namespace Tests.SearcherTests
             return new SearchWindow<WorkingHoursParameters>(workingHours, new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
         }
 
-        private static Journal PostedOn(DayOfWeek day)
+        private static Transaction PostedOn(DayOfWeek day)
         {
             var dayOfMonth = 6 + (int) day; //the 6th of July 2014 was a Sunday, Sunday is the 0th element of the enum.
-            var journal = new Journal(Guid.NewGuid(), 
+            var journal = new Transaction(Guid.NewGuid(), 
                 new DateTime(2014, 7, dayOfMonth),
                 new DateTime(), Enumerable.Empty<JournalLine>());
 
@@ -166,16 +166,16 @@ namespace Tests.SearcherTests
             return journal;
         }
 
-        private static Journal PostedAt(LocalTime journalTime)
+        private static Transaction PostedAt(LocalTime journalTime)
         {
-            return new Journal(Guid.NewGuid(),
+            return new Transaction(Guid.NewGuid(),
                 new DateTime(2014, 7, 23, journalTime.Hour, journalTime.Minute, journalTime.Second),
                 new DateTime(2012,1,3), Enumerable.Empty<JournalLine>());
         }
 
-        private static Journal Affecting(DateTime dateTime)
+        private static Transaction Affecting(DateTime dateTime)
         {
-            return new Journal(Guid.NewGuid(),
+            return new Transaction(Guid.NewGuid(),
                 new DateTime(2014, 7, 1),
                 dateTime, Enumerable.Empty<JournalLine>());
         }

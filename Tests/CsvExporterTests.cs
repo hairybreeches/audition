@@ -11,10 +11,10 @@ namespace Tests
     [TestFixture]
     public class CsvExporterTests
     {
-        private readonly List<Journal> journals = new List<Journal>
+        private readonly List<Transaction> journals = new List<Transaction>
         {
             //one inside daylight savings
-            new Journal("id 1", new DateTimeOffset(new DateTime(2012, 3, 4), TimeSpan.Zero), new DateTime(2012, 3, 4), "alf",
+            new Transaction("id 1", new DateTimeOffset(new DateTime(2012, 3, 4), TimeSpan.Zero), new DateTime(2012, 3, 4), "alf",
                 "very interesting journal", new List<JournalLine>
                 {
                     new JournalLine("9012", "Expenses", JournalType.Cr, 23.4m),
@@ -22,7 +22,7 @@ namespace Tests
                 }),
 
             //and one outside
-            new Journal("id 2", new DateTimeOffset(new DateTime(2012, 6, 5), TimeSpan.FromHours(1)),
+            new Transaction("id 2", new DateTimeOffset(new DateTime(2012, 6, 5), TimeSpan.FromHours(1)),
                 new DateTime(2012, 6, 5), "steve", "perfectly normal journal", new List<JournalLine>
                 {
                     new JournalLine("8014", "Depreciation", JournalType.Cr, 12.4m),
@@ -45,7 +45,7 @@ Created,Date,Username,Description
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Journal> journals, IEnumerable<DisplayField> fields)
+        private static string GetExportedText(string description, IEnumerable<Transaction> journals, IEnumerable<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);

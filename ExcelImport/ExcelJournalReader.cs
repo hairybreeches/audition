@@ -19,7 +19,7 @@ namespace ExcelImport
             this.readerFactory = readerFactory;
         }
 
-        public IEnumerable<Journal> ReadJournals(ExcelImportMapping mapping)
+        public IEnumerable<Transaction> ReadJournals(ExcelImportMapping mapping)
         {
             var sheetReader = toSqlDataConverter.ReadSheet(mapping.SheetDescription);            
             return sqlJournalReader.GetJournals(sheetReader, readerFactory.GetDataReader(mapping.Lookups));

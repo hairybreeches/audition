@@ -48,7 +48,7 @@ namespace Tests.SearcherTests
             CollectionAssert.AreEqual(Enumerable.Range(1481, 10).Select(x => x.ToString()), journals.Select(x=>x.Id));
         }
 
-        static IEnumerable<Journal> ExecuteSearch(ISearchRequest request, IEnumerable<Journal> journalsInRepository)
+        static IEnumerable<Transaction> ExecuteSearch(ISearchRequest request, IEnumerable<Transaction> journalsInRepository)
         {
             CollectionAssert.IsNotEmpty(journalsInRepository, "Searching an empty repository is not a useful test");
 
@@ -108,12 +108,12 @@ namespace Tests.SearcherTests
             Assert.AreEqual(expectedIds, actualIds, "Reponse should return correct results");
         }        
 
-        private static IEnumerable<Journal> GetJournals()
+        private static IEnumerable<Transaction> GetJournals()
         {
             var startDate = new DateTimeOffset(new DateTime(1999, 1, 1), TimeSpan.Zero);
             for (var i = 1; i < 3001; i++)
             {
-                yield return new Journal(i.ToString(), startDate.AddMinutes(5 * i), new DateTime(), "steve", "description", new[]
+                yield return new Transaction(i.ToString(), startDate.AddMinutes(5 * i), new DateTime(), "steve", "description", new[]
                 {
                     new JournalLine("steve", "steve", JournalType.Dr, 20)                    
                 });

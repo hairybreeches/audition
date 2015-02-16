@@ -9,15 +9,15 @@ namespace Searching
 {
     public class RoundNumberSearcher : IJournalSearcher<EndingParameters>
     {
-        public IQueryable<Journal> FindJournalsWithin(EndingParameters parameters, IQueryable<Journal> journals)
+        public IQueryable<Transaction> FindJournalsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
         {           
             var magnitude = parameters.Magnitude();
             return journals.Where(journal => HasRoundLine(journal, magnitude));
         }
 
-        private bool HasRoundLine(Journal journal, int magnitude)
+        private bool HasRoundLine(Transaction transaction, int magnitude)
         {
-            return journal.Lines.Any(line => ContainsRoundValue(line, magnitude));
+            return transaction.Lines.Any(line => ContainsRoundValue(line, magnitude));
         }
 
         private bool ContainsRoundValue(JournalLine line, int magnitude)

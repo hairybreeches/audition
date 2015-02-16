@@ -21,7 +21,7 @@ namespace Sage50
             this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
 
-        public IEnumerable<Journal> GetJournals(DbConnection dbConnection)
+        public IEnumerable<Transaction> GetJournals(DbConnection dbConnection)
         {
                 var nominalLookup = CreateNominalCodeLookup(dbConnection);
 
@@ -29,7 +29,7 @@ namespace Sage50
                     .Concat(GetJournals(dbConnection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
         }
 
-        private IEnumerable<Journal> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
+        private IEnumerable<Transaction> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
         {
             var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();

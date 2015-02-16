@@ -8,14 +8,14 @@ namespace Searching
     {
         private readonly IDictionary<string, int> lookup = new Dictionary<string, int>();
 
-        public AccountsLookup(IEnumerable<Journal> journals)
+        public AccountsLookup(IEnumerable<Transaction> journals)
         {
             Add(journals);
         }
 
 
 
-        private void Add(IEnumerable<Journal> journals)
+        private void Add(IEnumerable<Transaction> journals)
         {
             foreach (var journal in journals)
             {
@@ -23,9 +23,9 @@ namespace Searching
             }
         }
 
-        private void Add(Journal journal)
+        private void Add(Transaction transaction)
         {
-            foreach (var line in journal.Lines)
+            foreach (var line in transaction.Lines)
             {
                 Add(line.AccountCode);
             }

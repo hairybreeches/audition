@@ -6,6 +6,6 @@ namespace CsvExport
 {
     public interface IJournalExporter
     {
-        void WriteJournals(string description, IEnumerable<Journal> journals, string filename, IEnumerable<DisplayField> availableFields);
+        void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IEnumerable<DisplayField> availableFields);
     }
 }

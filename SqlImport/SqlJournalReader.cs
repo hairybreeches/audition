@@ -16,7 +16,7 @@ namespace SqlImport
             this.journalCreator = journalCreator;
         }
 
-        public IEnumerable<Journal> GetJournals(SqlDataReader reader, JournalDataReader dataReader)
+        public IEnumerable<Transaction> GetJournals(SqlDataReader reader, JournalDataReader dataReader)
         {
             return journalCreator.ReadJournals(GetLineRecords(reader, dataReader));
         }

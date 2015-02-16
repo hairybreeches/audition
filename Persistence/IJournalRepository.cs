@@ -7,8 +7,8 @@ namespace Persistence
 {
     public interface IJournalRepository
     {
-        IQueryable<Journal> GetJournals();
-        IJournalRepository UpdateJournals(IEnumerable<Journal> journals);
+        IQueryable<Transaction> GetJournals();
+        IJournalRepository UpdateJournals(IEnumerable<Transaction> journals);
         void ClearJournals();
     }
 }

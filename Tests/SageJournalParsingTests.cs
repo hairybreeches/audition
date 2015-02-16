@@ -32,14 +32,14 @@ namespace Tests
 
             var expected = new[]
             {
-                new Journal("26", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER",
+                new Transaction("26", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55),
                         new JournalLine("9998", "Suspense Account", JournalType.Cr, 55),
                         new JournalLine("2200", "Sales Tax Control Account", JournalType.Dr, 0)
                     }),
-                new Journal("12", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "Steve",
+                new Transaction("12", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 13),
@@ -58,7 +58,7 @@ namespace Tests
 
             var expected = new[]
             {
-                new Journal("26", new DateTimeOffset(2010,4,27,17,16,0, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER",
+                new Transaction("26", new DateTimeOffset(2010,4,27,17,16,0, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new JournalLine("1200", "Bank Current Account", JournalType.Dr, 55)
@@ -107,7 +107,7 @@ namespace Tests
             CollectionAssert.AreEqual(expectedDefinedColumnNumbers, definedColumnNumbers, "Column numbers should be consecutive, starting from 0, and schema should return them in order");
         }
 
-        private static IEnumerable<Journal> ParseJournals(params object[][] dataRows)
+        private static IEnumerable<Transaction> ParseJournals(params object[][] dataRows)
         {
             var reader = new SageJournalReader(new SageJournalSchema(), new SqlJournalReader(new JournalLineParser(), new JournalCreator()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();

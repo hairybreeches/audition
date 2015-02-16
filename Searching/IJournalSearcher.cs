@@ -8,6 +8,6 @@ namespace Searching
 {
     public interface IJournalSearcher<in T> where T : ISearchParameters
     {
-        IQueryable<Journal> FindJournalsWithin(T parameters, IQueryable<Journal> journals);
+        IQueryable<Transaction> FindJournalsWithin(T parameters, IQueryable<Transaction> journals);
     }
 }

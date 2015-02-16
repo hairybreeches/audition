@@ -27,11 +27,11 @@ namespace SystemTests
             get
             {
                 yield return new TestCaseData(new DateTime(1999, 1, 1), new DateTime(1999, 1, 4), null)
-                    .Returns(Enumerable.Empty<Journal>())
+                    .Returns(Enumerable.Empty<Transaction>())
                     .SetName("When the trial is still valid the search succeeds");
 
                 yield return new TestCaseData(new DateTime(1999, 1, 1), new DateTime(1999, 1, 4), "steve")
-                    .Returns(Enumerable.Empty<Journal>())
+                    .Returns(Enumerable.Empty<Transaction>())
                     .SetName("When the trial is not valid but there is a licence key the search succeeds");
 
                 yield return new TestCaseData(new DateTime(1999, 1, 1), new DateTime(1999, 1, 31), null)
@@ -42,7 +42,7 @@ namespace SystemTests
 
 
         [TestCaseSource("LicensingTestCases")]
-        public IList<Journal> CanExecuteSearchOnlyWhenLicenceValid(DateTime trialStartDate, DateTime currentDate, string licenceKey)
+        public IList<Transaction> CanExecuteSearchOnlyWhenLicenceValid(DateTime trialStartDate, DateTime currentDate, string licenceKey)
         {
             var mockRegistry = CreateRegistry(licenceKey, trialStartDate);
             return ExecuteSearch(currentDate, mockRegistry).Journals;
@@ -51,7 +51,7 @@ namespace SystemTests
         private static SearchResponse ExecuteSearch(DateTime currentDate, ICurrentUserRegistry registry)
         {
             var containerBuilder = CreateContainerBuilder(currentDate, registry);
-            using (var lifetime = containerBuilder.BuildSearchable(new[]{new Journal(null, new DateTimeOffset(),new DateTime(), null,null, Enumerable.Empty<JournalLine>())}))
+            using (var lifetime = containerBuilder.BuildSearchable(new[]{new Transaction(null, new DateTimeOffset(),new DateTime(), null,null, Enumerable.Empty<JournalLine>())}))
             {
                 var controller = lifetime.Resolve<SearchController>();
                 return controller.AccountsSearch(CreateSearchRequest());

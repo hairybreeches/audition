@@ -54,11 +54,11 @@ namespace Tests
             }
         }
 
-        private static IEnumerable<Journal> JournalWithId(string id)
+        private static IEnumerable<Transaction> JournalWithId(string id)
         {
             return new[]
             {
-                new Journal(id, DateTimeOffset.MinValue, DateTime.MaxValue, null, null,
+                new Transaction(id, DateTimeOffset.MinValue, DateTime.MaxValue, null, null,
                     Enumerable.Empty<JournalLine>()),
             };
         }

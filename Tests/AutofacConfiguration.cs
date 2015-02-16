@@ -34,7 +34,7 @@ namespace Tests
             sage50Controller.Import(importDetails);
         }
 
-        public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Journal> journals)
+        public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Transaction> journals)
         {
             var lifetime = builder.Build();
             lifetime.Resolve<IJournalRepository>().UpdateJournals(journals);
@@ -60,11 +60,11 @@ namespace Tests
             return builder;
         }
         
-        public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Journal[] journals)
+        public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Transaction[] transactions)
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
             var journalGetter = Substitute.For<ISage50JournalGetter>();
-            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(journals);
+            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(transactions);
             builder.Register(_ => journalGetter);
             return builder;
         }

@@ -7,7 +7,7 @@ namespace Model.Responses
 {
     public class SearchResponse
     {
-        public SearchResponse(IList<Journal> journals, string totalResults, bool isPreviousPage, bool isNextPage, int firstResult)
+        public SearchResponse(IList<Transaction> journals, string totalResults, bool isPreviousPage, bool isNextPage, int firstResult)
         {
             FirstResult = firstResult;
             IsNextPage = isNextPage;
@@ -16,7 +16,7 @@ namespace Model.Responses
             Journals = journals;
         }
 
-        public IList<Journal> Journals { get; private set; } 
+        public IList<Transaction> Journals { get; private set; } 
         public string TotalResults { get; private set; }
         public bool IsPreviousPage { get; private set; }
         public bool IsNextPage { get; private set; }        

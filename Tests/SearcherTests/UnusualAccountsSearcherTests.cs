@@ -84,9 +84,9 @@ namespace Tests.SearcherTests
             CollectionAssert.AreEquivalent(new[]{journal}, journals);
         }
 
-        public static Journal PostedTo(string accountCode1, string accountCode2, DateTime journalDate)
+        public static Transaction PostedTo(string accountCode1, string accountCode2, DateTime journalDate)
         {
-            return new Journal(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
+            return new Transaction(Guid.NewGuid(), new DateTime(1999, 12, 1), journalDate,
                 new[]
                 {
                     new JournalLine(accountCode1, accountCode1, JournalType.Cr, 2.2m),
@@ -94,7 +94,7 @@ namespace Tests.SearcherTests
                 });
         }
 
-        private static Journal PostedTo(string accountCode1, string accountCode2)
+        private static Transaction PostedTo(string accountCode1, string accountCode2)
         {
             return PostedTo(accountCode1, accountCode2, new DateTime(1999, 12, 1));
         }

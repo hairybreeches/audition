@@ -23,7 +23,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalsPostedAfterYearEnd()
         {            
-            var postYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.AddDays(1), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
+            var postYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.AddDays(1), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
             var result = Searching.ExecuteSearch(SearchParameters, postYearEndJournal);
             CollectionAssert.AreEquivalent(new []{postYearEndJournal}, result);
         }
@@ -31,7 +31,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalsPostedNearYearEnd()
         {            
-            var nearYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
+            var nearYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
             var result = Searching.ExecuteSearch(SearchParameters, nearYearEndJournal);
             CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
         }
@@ -39,7 +39,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsJournalsPostedExactlyNumberOfDaysBeforeYearEnd()
         {            
-            var nearYearEndJournal = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
+            var nearYearEndJournal = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(7)), YearEnd.Subtract(TimeSpan.FromDays(60)),Enumerable.Empty<JournalLine>() );
             var result = Searching.ExecuteSearch(new SearchWindow<YearEndParameters>(new YearEndParameters(7, YearEnd), FinancialPeriod), nearYearEndJournal);        
             CollectionAssert.AreEquivalent(new []{nearYearEndJournal}, result);
         }
@@ -48,8 +48,8 @@ namespace Tests.SearcherTests
         public void DoesNotReturnJournalsWhichDoNotApplyToTheFinancialPeriod()
         {
             var timeInsideTheFinancialPeriod = YearEnd.Subtract(TimeSpan.FromDays(2));
-            var journalApplyingToPostYearEnd = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<JournalLine>());
-            var journalApplyingToPreYearstart = new Journal(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<JournalLine>());
+            var journalApplyingToPostYearEnd = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearEnd.AddDays(1), Enumerable.Empty<JournalLine>());
+            var journalApplyingToPreYearstart = new Transaction(Guid.NewGuid(), timeInsideTheFinancialPeriod, YearStart.Subtract(TimeSpan.FromDays(1)), Enumerable.Empty<JournalLine>());
 
             var result = Searching.ExecuteSearch(SearchParameters, journalApplyingToPostYearEnd, journalApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result);
@@ -58,7 +58,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnJournalsWhichAreInThePeriodAndNotCloseToYearEnd()
         {
-            var journalNotNearEnoughToYearEnd = new Journal(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(6)), YearEnd.Subtract(TimeSpan.FromDays(60)), Enumerable.Empty<JournalLine>());
+            var journalNotNearEnoughToYearEnd = new Transaction(Guid.NewGuid(), YearEnd.Subtract(TimeSpan.FromDays(6)), YearEnd.Subtract(TimeSpan.FromDays(60)), Enumerable.Empty<JournalLine>());
 
             var result = Searching.ExecuteSearch(SearchParameters, journalNotNearEnoughToYearEnd);
             CollectionAssert.IsEmpty(result);

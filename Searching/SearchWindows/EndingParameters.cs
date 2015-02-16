@@ -25,7 +25,7 @@ namespace Searching.SearchWindows
             return String.Format("Ending in at least {0} zeroes", MinimumZeroesToBeConsideredUnusual);
         }
 
-        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
+        public IQueryable<Transaction> ApplyFilter(JournalSearcher searcher, IQueryable<Transaction> journals)
         {
             return searcher.FindJournalsWithin(this, journals);
         }

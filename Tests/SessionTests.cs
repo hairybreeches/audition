@@ -54,7 +54,7 @@ namespace Tests
         {
             var builder = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing()
-                .Sage50ImportReturns(new Journal(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
+                .Sage50ImportReturns(new Transaction(null, new DateTimeOffset(), new DateTime(), null, null, Enumerable.Empty<JournalLine>()));            
             return builder;
         }
 

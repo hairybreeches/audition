@@ -26,12 +26,12 @@ namespace Persistence
             filename = Path.GetTempFileName();
         }
 
-        public IQueryable<Journal> GetJournals()
+        public IQueryable<Transaction> GetJournals()
         {
             return Journals.AsQueryable();
         }
 
-        private IEnumerable<Journal> Journals
+        private IEnumerable<Transaction> Journals
         {
             get
             {
@@ -39,13 +39,13 @@ namespace Persistence
                 {
                     while (!reader.EndOfStream)
                     {
-                        yield return JsonConvert.DeserializeObject<Journal>(reader.ReadLine());
+                        yield return JsonConvert.DeserializeObject<Transaction>(reader.ReadLine());
                     }
                 }
             }
         } 
         
-        public IJournalRepository UpdateJournals(IEnumerable<Journal> journals)
+        public IJournalRepository UpdateJournals(IEnumerable<Transaction> journals)
         {
             var importedJournal = false;
             using(var writer = fileSystem.OpenFileToWrite(filename))

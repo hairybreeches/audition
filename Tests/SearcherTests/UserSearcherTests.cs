@@ -72,14 +72,14 @@ namespace Tests.SearcherTests
             CollectionAssert.IsEmpty(result, "The journal should not be returned since it's by an expected user");
         }
 
-        private static Journal CreateJournalInPeriodByUser(string user)
+        private static Transaction CreateJournalInPeriodByUser(string user)
         {
             return CreateJournalByUser(user, InPeriod);
         }
 
-        private static Journal CreateJournalByUser(string user, DateTime journalDate)
+        private static Transaction CreateJournalByUser(string user, DateTime journalDate)
         {
-            return new Journal(Guid.NewGuid().ToString(), new DateTimeOffset(), journalDate, user, String.Empty, Enumerable.Empty<JournalLine>());
+            return new Transaction(Guid.NewGuid().ToString(), new DateTimeOffset(), journalDate, user, String.Empty, Enumerable.Empty<JournalLine>());
         }
     }
 }

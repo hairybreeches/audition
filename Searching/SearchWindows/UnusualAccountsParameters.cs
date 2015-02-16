@@ -16,7 +16,7 @@ namespace Searching.SearchWindows
         public int MinimumEntriesToBeConsideredNormal { get; private set; }
 
 
-        public IQueryable<Journal> ApplyFilter(JournalSearcher searcher, IQueryable<Journal> journals)
+        public IQueryable<Transaction> ApplyFilter(JournalSearcher searcher, IQueryable<Transaction> journals)
         {
             return searcher.FindJournalsWithin(this, journals);
         }

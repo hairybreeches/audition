@@ -12,12 +12,12 @@ namespace CsvExport
     {
         private readonly IFileSystem fileSystem;
 
-        private readonly IEnumerable<ColumnFactory<Journal>> journalColumnFactories = new[]
+        private readonly IEnumerable<ColumnFactory<Transaction>> journalColumnFactories = new[]
         {
-            new ColumnFactory<Journal>("Created", DisplayField.Created, journal => journal.Created),
-            new ColumnFactory<Journal>("Date", DisplayField.JournalDate, journal => journal.JournalDate.ToShortDateString()),
-            new ColumnFactory<Journal>("Username", DisplayField.Username, journal => journal.Username),
-            new ColumnFactory<Journal>("Description", DisplayField.Description, journal => journal.Description)
+            new ColumnFactory<Transaction>("Created", DisplayField.Created, journal => journal.Created),
+            new ColumnFactory<Transaction>("Date", DisplayField.JournalDate, journal => journal.JournalDate.ToShortDateString()),
+            new ColumnFactory<Transaction>("Username", DisplayField.Username, journal => journal.Username),
+            new ColumnFactory<Transaction>("Description", DisplayField.Description, journal => journal.Description)
         };
         
         private readonly IEnumerable<ColumnFactory<JournalLine>> journalLineColumnFactories = new[]
@@ -35,7 +35,7 @@ namespace CsvExport
             this.fileSystem = fileSystem;
         }
 
-        public void WriteJournals(string description, IEnumerable<Journal> journals, string filename, IEnumerable<DisplayField> availableFields)
+        public void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IEnumerable<DisplayField> availableFields)
         {
             var fields = new HashSet<DisplayField>(availableFields);
             WriteJournals(description, journals, filename, GetColumns(fields, journalColumnFactories), GetColumns(fields, journalLineColumnFactories));
@@ -46,7 +46,7 @@ namespace CsvExport
             return columnFactories.Select(x => x.GetColumn(fields)).ToList();
         }
 
-        private void WriteJournals(string description, IEnumerable<Journal> journals, string filename, IList<ICsvColumn<Journal>> journalColumns, IList<ICsvColumn<JournalLine>> journalLineColumns)
+        private void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IList<ICsvColumn<Transaction>> journalColumns, IList<ICsvColumn<JournalLine>> journalLineColumns)
         {
             using (var writer = CreateWriter(filename))
             {
@@ -65,7 +65,7 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteHeaderRow(ICsvWriter writer, IEnumerable<ICsvColumn<Journal>> journalColumns)
+        private static void WriteHeaderRow(ICsvWriter writer, IEnumerable<ICsvColumn<Transaction>> journalColumns)
         {
             foreach (var journalColumn in journalColumns)
             {
@@ -74,14 +74,14 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteJournal(ICsvWriter writer, Journal journal, IEnumerable<ICsvColumn<Journal>> journalColumns, IEnumerable<ICsvColumn<JournalLine>> journalLineColumns)
+        private static void WriteJournal(ICsvWriter writer, Transaction transaction, IEnumerable<ICsvColumn<Transaction>> journalColumns, IEnumerable<ICsvColumn<JournalLine>> journalLineColumns)
         {
             foreach (var journalColumn in journalColumns)
             {
-                journalColumn.WriteField(writer, journal);
+                journalColumn.WriteField(writer, transaction);
             }
 
-            foreach (var line in journal.Lines)
+            foreach (var line in transaction.Lines)
             {
                 WriteLine(writer, journalLineColumns, line);
             }

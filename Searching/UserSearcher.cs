@@ -11,7 +11,7 @@ namespace Searching
 {
     public class UserSearcher : IJournalSearcher<UserParameters>
     {
-        public IQueryable<Journal> FindJournalsWithin(UserParameters parameters, IQueryable<Journal> journals)
+        public IQueryable<Transaction> FindJournalsWithin(UserParameters parameters, IQueryable<Transaction> journals)
         {
             var lookup = new HashSet<string>(parameters.Usernames, StringComparer.Create(CultureInfo.CurrentCulture, true));
             return journals.Where(x=> !lookup.Contains(x.Username));

@@ -44,7 +44,7 @@ namespace SystemTests
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the journals back");
 
-            Assert.AreEqual(new Journal("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
+            Assert.AreEqual(new Transaction("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
                 new JournalLine("1100", null, JournalType.Cr, 0.05m), 
                 new JournalLine("9998", null, JournalType.Dr, 0.05m), 
@@ -109,7 +109,7 @@ namespace SystemTests
                 )
             }, 6);
 
-            Assert.AreEqual(new Journal("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
+            Assert.AreEqual(new Transaction("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
                     new[]
                     {
                         new JournalLine("7502", null, JournalType.Dr, 50)

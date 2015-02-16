@@ -12,7 +12,7 @@ namespace Persistence
         private const int MaxTotal = 2000;
         private const int Pagesize = 10;
 
-        public static SearchResponse GetPage(this IQueryable<Journal> journals, int pageNumber)
+        public static SearchResponse GetPage(this IQueryable<Transaction> journals, int pageNumber)
         {
             var numberOfResultsToSkip = (pageNumber - 1) * Pagesize;
 
@@ -32,13 +32,13 @@ namespace Persistence
             return new SearchResponse(journalsToReturn, totalResults,  isPreviousPage, isNextPage, firstResult);
         }
 
-        private static string TotalResults(IEnumerable<Journal> resultsSet, int skipped)
+        private static string TotalResults(IEnumerable<Transaction> resultsSet, int skipped)
         {
             var minimumResults = resultsSet.Count() + skipped;
             return minimumResults > MaxTotal? String.Format("more than {0}", MaxTotal) : minimumResults.ToString();
         }
 
-        private static void ValidatePageNumber(int pageNumber, IEnumerable<Journal> listOfAllJournals)
+        private static void ValidatePageNumber(int pageNumber, IEnumerable<Transaction> listOfAllJournals)
         {
             ValidatePageNumberNotTooBig(pageNumber, listOfAllJournals);
             ValidatePageNumberNotTooSmall(pageNumber);
@@ -52,7 +52,7 @@ namespace Persistence
             }
         }
 
-        private static void ValidatePageNumberNotTooBig(int pageNumber, IEnumerable<Journal> resultsSet)
+        private static void ValidatePageNumberNotTooBig(int pageNumber, IEnumerable<Transaction> resultsSet)
         {
             if (!resultsSet.Any() && pageNumber > 1)
             {
@@ -60,7 +60,7 @@ namespace Persistence
             }            
         }
 
-        public static IEnumerable<Journal> GetAllJournals(this IQueryable<Journal> journals)
+        public static IEnumerable<Transaction> GetAllJournals(this IQueryable<Transaction> journals)
         {
             return journals;
         }        

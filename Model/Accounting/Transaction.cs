@@ -5,18 +5,18 @@ using Newtonsoft.Json;
 
 namespace Model.Accounting
 {
-    public class Journal
+    public class Transaction
     {
         private readonly IList<JournalLine> lines;
 
-        public Journal(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
+        public Transaction(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
             :this(id.ToString(), created, journalDate, String.Empty, String.Empty, lines)
         {
             
         }
 
         [JsonConstructor]
-        public Journal(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
+        public Transaction(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
         {
             JournalDate = journalDate;
             Username = username;
@@ -43,7 +43,7 @@ namespace Model.Accounting
             get { return lines; }            
         }
 
-        protected bool Equals(Journal other)
+        protected bool Equals(Transaction other)
         {
             return lines.SequenceEqual(other.lines) && Id.Equals(other.Id) && Created.Equals(other.Created) && JournalDate.Equals(other.JournalDate) && Description.Equals(other.Description)
                 && Username.Equals(other.Username);
@@ -54,7 +54,7 @@ namespace Model.Accounting
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Journal) obj);
+            return Equals((Transaction) obj);
         }
 
         public override int GetHashCode()

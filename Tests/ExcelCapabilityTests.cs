@@ -101,7 +101,7 @@ namespace Tests
                     new Dictionary<string, string>().WithEndingErrorMessage(), 
                     Enums.GetAllValues<DisplayField>().Without(DisplayField.Amount).Without(DisplayField.JournalType));
 
-                yield return CreateTestCase("Journal creation time unmapped", 
+                yield return CreateTestCase("Transaction creation time unmapped", 
                     new FieldLookups(id: 18, accountCode: 18, accountName: 18, amount: 18, created: -1, description: 18, journalDate: 18, username: 18), 
                     new Dictionary<string, string>()
                         .WithHoursErrorMessage()

@@ -12,16 +12,16 @@ namespace SqlImport
     /// </summary>
     public class JournalCreator
     {
-        internal IEnumerable<Journal> ReadJournals(IEnumerable<SqlJournalLine> lines)
+        internal IEnumerable<Transaction> ReadJournals(IEnumerable<SqlJournalLine> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateJournal);
         }
 
-        private Journal CreateJournal(IGrouping<string, SqlJournalLine> lines)
+        private Transaction CreateJournal(IGrouping<string, SqlJournalLine> lines)
         {
             var journalLines = lines.ToList();
-            return new Journal(
+            return new Transaction(
                 lines.Key,
                 GetJournalField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
                 GetJournalField(journalLines, x => x.JournalDate, "journal date"),
