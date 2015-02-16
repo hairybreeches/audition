@@ -1,0 +1,15 @@
+include ../components/template
+   
+
++page('Search', ['search'])
+	.container
+		.row
+			.col-md-4.col-md-offset-8
+				a.pull-right.action-link(href="/api/session/clearImport") Start again
+	.container(data-bind="with: input")
+		include ../components/searchInput
+		hr.vertical-space
+	.container(data-bind="with: exportSuccessMessage")
+		include ../components/export
+	.container(data-bind="with: output")
+		include ../components/results

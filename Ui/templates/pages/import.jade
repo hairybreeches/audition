@@ -1,0 +1,32 @@
+include ../components/template
+include ../components/sage50Import
+include ../components/excelImport
+include ../components/forms
+include ../components/message
+
+
+mixin import-form(system)
+	form.form-horizontal(style="display: none;", data-bind="visible: system() === '#{system}', with: #{system}")
+		block
+		+button-group()
+			button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit, css: { disabled: disabled()}") Import &raquo;
+
++page('Import', ['sage50Import', 'excelImport', 'import'])
+	.container
+		legend.vertical-space Import data from accounts system
+		.blockable(action="search", method="post")
+			.blockscreen.loadscreen(style="display: none;" data-bind="visible: blocked()")
+			form.form-horizontal
+				fieldset
+					+form-field('Accounts system')
+						select.form-control(data-bind="value: system")
+								option(value="sage50") Sage Line 50			
+								option(value="excel") Excel			
+			+import-form('sage50')
+				+sage50-import()
+			+import-form('excel')
+				+excel-import()
+		+errorMessage('error')
+		hr.vertical-space
+
+				
