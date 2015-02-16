@@ -54,6 +54,7 @@
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DisplayField.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="ExportResult.cs" />
     <Compile Include="IValueLookup.cs" />
     <Compile Include="NoTransactionsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />

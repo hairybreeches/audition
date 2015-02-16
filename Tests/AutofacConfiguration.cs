@@ -5,6 +5,7 @@ using Audition;
 using Autofac;
 using Licensing;
 using Microsoft.Owin.FileSystems;
+using Model;
 using Model.Accounting;
 using Native;
 using NSubstitute;
@@ -72,7 +73,7 @@ namespace Tests
         public static ContainerBuilder SaveExportedFilesTo(this ContainerBuilder builder, string fileName)
         {
             var fileChooser = Substitute.For<IFileSaveChooser>();
-            fileChooser.GetFileSaveLocation().Returns(Task.FromResult(fileName));
+            fileChooser.GetFileSaveLocation().Returns(Task.FromResult(ExportResult.Success(fileName)));
             builder.Register(_ => fileChooser).As<IFileSaveChooser>();
             return builder;
         }

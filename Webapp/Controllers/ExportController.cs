@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CsvExport;
+using Model;
 using Model.Accounting;
 using Native;
 using Persistence;
@@ -37,44 +38,47 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.HoursExport)]
-        public async Task<string> HoursExport(SearchWindow<WorkingHoursParameters> searchWindow)
+        public async Task<ExportResult> HoursExport(SearchWindow<WorkingHoursParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.AccountsExport)]
-        public async Task<string> AccountsExport(SearchWindow<UnusualAccountsParameters> searchWindow)
+        public async Task<ExportResult> AccountsExport(SearchWindow<UnusualAccountsParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.DateExport)]
-        public async Task<string> DateExport(SearchWindow<YearEndParameters> searchWindow)
+        public async Task<ExportResult> DateExport(SearchWindow<YearEndParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.EndingExport)]
-        public async Task<string> EndingExport(SearchWindow<EndingParameters> searchWindow)
+        public async Task<ExportResult> EndingExport(SearchWindow<EndingParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
 
         [HttpPost]
         [Route(Routing.UserExport)]
-        public async Task<string> UserExport(SearchWindow<UserParameters> searchWindow)
+        public async Task<ExportResult> UserExport(SearchWindow<UserParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
 
-        private async Task<string> Export(ISearchWindow searchWindow)
+        private async Task<ExportResult> Export(ISearchWindow searchWindow)
         {
-            var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            transactionExporter.WriteTransactions(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
-            return saveLocation;
+            var exportResult = await fileSaveChooser.GetFileSaveLocation();
+            if (exportResult.Completed)
+            {
+                transactionExporter.WriteTransactions(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), exportResult.Filename, session.GetCurrentSearchCapability().AvailableFields);
+            }
+            return exportResult;
         }
     }
 }
