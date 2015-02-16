@@ -291,7 +291,7 @@ var SearchModel = function () {
     self.showUsername = function() {
         return showField('Username');
     }
-    self.showJournalLine = function() {
+    self.showEntries = function() {
         return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showLedgerEntryType();
     }
 
