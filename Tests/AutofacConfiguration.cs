@@ -34,10 +34,10 @@ namespace Tests
             sage50Controller.Import(importDetails);
         }
 
-        public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Transaction> journals)
+        public static IContainer BuildSearchable(this ContainerBuilder builder, IEnumerable<Transaction> transactions)
         {
             var lifetime = builder.Build();
-            lifetime.Resolve<ITransactionRepository>().UpdateTransactions(journals);
+            lifetime.Resolve<ITransactionRepository>().UpdateTransactions(transactions);
             lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = SearcherFactory.EverythingAvailable;
             return lifetime;
         }
@@ -63,9 +63,9 @@ namespace Tests
         public static ContainerBuilder Sage50ImportReturns(this ContainerBuilder builder, params Transaction[] transactions)
         {
             builder.Register(_ => Substitute.For<ISage50ConnectionFactory>());
-            var journalGetter = Substitute.For<ISage50TransactionGetter>();
-            journalGetter.GetJournals(Arg.Any<DbConnection>()).Returns(transactions);
-            builder.Register(_ => journalGetter);
+            var transactionGetter = Substitute.For<ISage50TransactionGetter>();
+            transactionGetter.GetJournals(Arg.Any<DbConnection>()).Returns(transactions);
+            builder.Register(_ => transactionGetter);
             return builder;
         }
 

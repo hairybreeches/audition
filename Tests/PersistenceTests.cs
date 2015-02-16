@@ -14,47 +14,47 @@ namespace Tests
     public class PersistenceTests
     {
         [Test]
-        public void JournalsPersistBetweenRequests()
+        public void TransactionsPersistBetweenRequests()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
 
             using (var lifetime = builder.Build())
             {
-                //given some journals saved in one request
+                //given some transactions saved in one request
 
                 var saveRepository = lifetime.Resolve<ITransactionRepository>();
-                saveRepository.UpdateTransactions(JournalWithId("a single stored journal"));
+                saveRepository.UpdateTransactions(TransactionWithId("a single stored transaction"));
                 //when we make a new request
                 var loadRepository = lifetime.Resolve<ITransactionRepository>();
-                var journals = loadRepository.GetTransactions().ToList();
-                //the journals should still be there
-                Assert.AreEqual(journals.Single().Id, "a single stored journal");
+                var transactions = loadRepository.GetTransactions().ToList();
+                //the transactions should still be there
+                Assert.AreEqual(transactions.Single().Id, "a single stored transaction");
             }
         }
 
         [Test]
-        public void JournalsClearedOnUpdate()
+        public void TransactionsClearedOnUpdate()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<AuditionModule>();
             using (var lifetime = builder.Build())
             {
-                //given a repository with some journals in
+                //given a repository with some transactions in
                 var repository = lifetime.Resolve<ITransactionRepository>();
-                repository.UpdateTransactions(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
+                repository.UpdateTransactions(TransactionWithId("an old transaction").Concat(TransactionWithId("another old transaction")));
 
                 //when we update the contents of the repository
-                repository.UpdateTransactions(JournalWithId("a new journal"));
+                repository.UpdateTransactions(TransactionWithId("a new transaction"));
 
-                var journals = repository.GetTransactions().ToList();
+                var transactions = repository.GetTransactions().ToList();
 
                 //the old contents should be blatted and only the new ones remain.
-                Assert.AreEqual(journals.Single().Id, "a new journal");
+                Assert.AreEqual(transactions.Single().Id, "a new transaction");
             }
         }
 
-        private static IEnumerable<Transaction> JournalWithId(string id)
+        private static IEnumerable<Transaction> TransactionWithId(string id)
         {
             return new[]
             {

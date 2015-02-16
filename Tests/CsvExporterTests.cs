@@ -11,11 +11,11 @@ namespace Tests
     [TestFixture]
     public class CsvExporterTests
     {
-        private readonly List<Transaction> journals = new List<Transaction>
+        private readonly List<Transaction> transactions = new List<Transaction>
         {
             //one inside daylight savings
             new Transaction("id 1", new DateTimeOffset(new DateTime(2012, 3, 4), TimeSpan.Zero), new DateTime(2012, 3, 4), "alf",
-                "very interesting journal", new List<LedgerEntry>
+                "very interesting transaction", new List<LedgerEntry>
                 {
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
@@ -23,7 +23,7 @@ namespace Tests
 
             //and one outside
             new Transaction("id 2", new DateTimeOffset(new DateTime(2012, 6, 5), TimeSpan.FromHours(1)),
-                new DateTime(2012, 6, 5), "steve", "perfectly normal journal", new List<LedgerEntry>
+                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", new List<LedgerEntry>
                 {
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
@@ -33,23 +33,23 @@ namespace Tests
         [Test]
         public void CanOutputAllFieldsSuccessfully()
         {
-            var actual = GetExportedText("What we did to get these journals", journals, Enums.GetAllValues<DisplayField>());
+            var actual = GetExportedText("What we did to get these transactions", transactions, Enums.GetAllValues<DisplayField>());
 
             var expected =
-@"What we did to get these journals
+@"What we did to get these transactions
 Created,Date,Username,Description
-" + new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.FromHours(0)) +","+ new DateTime(2012,3,4).ToShortDateString() + @",alf,very interesting journal,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-" + new DateTimeOffset(new DateTime(2012,6,5), TimeSpan.FromHours(1)) +"," + new DateTime(2012,6,5).ToShortDateString() + @",steve,perfectly normal journal,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+" + new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.FromHours(0)) +","+ new DateTime(2012,3,4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+" + new DateTimeOffset(new DateTime(2012,6,5), TimeSpan.FromHours(1)) +"," + new DateTime(2012,6,5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
             
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Transaction> journals, IEnumerable<DisplayField> fields)
+        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);
-            exporter.WriteJournals(description, journals, "c:\\steve.csv", fields);
+            exporter.WriteJournals(description, transactions, "c:\\steve.csv", fields);
 
             var actual = fileSystem.GetFileValue("c:\\steve.csv");
             return actual;
@@ -60,7 +60,7 @@ Created,Date,Username,Description
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem);
-            exporter.WriteJournals("An illuminating comment", journals, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
+            exporter.WriteJournals("An illuminating comment", transactions, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
 
             var expected =
 @"An illuminating comment

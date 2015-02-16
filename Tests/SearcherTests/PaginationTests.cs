@@ -35,7 +35,7 @@ namespace Tests.SearcherTests
             using (var lifetime = builder.BuildSearchable(GetTransactions()))
             {
                 lifetime.Resolve<ExportController>().EndingExport(requestData).Wait();
-                var ids = exporter.WrittenJournals.Select(x => x.Id);
+                var ids = exporter.WrittenTransactions.Select(x => x.Id);
                 CollectionAssert.AreEqual(Enumerable.Range(1, 3000).Select(x => x.ToString()), ids);
             }
         }
