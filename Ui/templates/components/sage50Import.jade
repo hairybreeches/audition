@@ -1,9 +1,9 @@
 ﻿include forms
 
 mixin sage50-import()
-	+form-field-with-extras({label: "Data location", button: {label: "Browse...", onClick: "browseDataDirectory"}})
+	+form-field({label: "Data location", button: {label: "Browse...", onClick: "browseDataDirectory"}})
 		input#sage50dataDirectory.form-control(type="text" data-bind="textInput: dataDirectory" name="dataDirectory")
-	+form-field('User ID')
+	+form-field({label: 'User ID'})
 		input.form-control(type="text" name="username" data-bind="value: username")
-	+form-field('Password')
+	+form-field({label: 'Password'})
 		input.form-control(type="password" name="password" data-bind="value: password")

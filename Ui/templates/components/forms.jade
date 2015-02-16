@@ -1,11 +1,5 @@
-﻿mixin form-field(label)
-	.form-group
-		label.col-sm-2.col-sm-offset-2.control-label #{label}
-		.col-sm-6
-			block
-
-mixin button-group()
-	+form-field('')
+﻿mixin button-group()
+	+form-field({})
 		.button-group.pull-right
 			block
 
@@ -25,7 +19,7 @@ mixin button(buttonOptions)
 	.col-sm-2
 		button.btn.btn-default(type="button", data-bind="click: #{buttonOptions.onClick}") #{buttonOptions.label}
 
-mixin form-field-with-extras(field)
+mixin form-field(field)
 	.form-group
 		label.col-sm-2.col-sm-offset-2.control-label #{field.label}
 		.col-sm-6
@@ -36,5 +30,5 @@ mixin form-field-with-extras(field)
 			+help(field.help)
 
 mixin dropdown(field, options)
-	+form-field-with-extras(field)
+	+form-field(field)
 		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, options: #{options}, optionsText: 'label', optionsValue: 'index'")
