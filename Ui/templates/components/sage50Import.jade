@@ -1,12 +1,8 @@
 ﻿include forms
 
 mixin sage50-import()
-	.form-group
-		label.col-sm-2.col-sm-offset-2.control-label Data location
-		.col-sm-6
-			input#sage50dataDirectory.form-control(type="text" data-bind="textInput: dataDirectory" name="dataDirectory")
-		.col-sm-2
-			button.btn.btn-default(type="button", data-bind="click: browseDataDirectory") Browse...
+	+form-field-with-button({label: "Data location", button: {label: "Browse...", onClick: "browseDataDirectory"}})
+		input#sage50dataDirectory.form-control(type="text" data-bind="textInput: dataDirectory" name="dataDirectory")
 	+form-field('User ID')
 		input.form-control(type="text" name="username" data-bind="value: username")
 	+form-field('Password')
