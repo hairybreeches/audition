@@ -59,7 +59,7 @@
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Transaction.cs" />
-    <Compile Include="Accounting\JournalLine.cs" />
+    <Compile Include="Accounting\LedgerEntry.cs" />
     <Compile Include="Accounting\JournalType.cs" />
     <Compile Include="Time\DateRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

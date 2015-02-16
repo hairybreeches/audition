@@ -79,7 +79,7 @@ namespace Tests.SearcherTests
 
         private static Transaction CreateJournalByUser(string user, DateTime journalDate)
         {
-            return new Transaction(Guid.NewGuid().ToString(), new DateTimeOffset(), journalDate, user, String.Empty, Enumerable.Empty<JournalLine>());
+            return new Transaction(Guid.NewGuid().ToString(), new DateTimeOffset(), journalDate, user, String.Empty, Enumerable.Empty<LedgerEntry>());
         }
     }
 }

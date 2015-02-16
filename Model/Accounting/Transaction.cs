@@ -7,16 +7,16 @@ namespace Model.Accounting
 {
     public class Transaction
     {
-        private readonly IList<JournalLine> lines;
+        private readonly IList<LedgerEntry> lines;
 
-        public Transaction(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<JournalLine> lines)
+        public Transaction(Guid id, DateTimeOffset created, DateTime journalDate, IEnumerable<LedgerEntry> lines)
             :this(id.ToString(), created, journalDate, String.Empty, String.Empty, lines)
         {
             
         }
 
         [JsonConstructor]
-        public Transaction(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<JournalLine> lines)
+        public Transaction(string id, DateTimeOffset created, DateTime journalDate, string username, string description, IEnumerable<LedgerEntry> lines)
         {
             JournalDate = journalDate;
             Username = username;
@@ -38,7 +38,7 @@ namespace Model.Accounting
                 Created, JournalDate, Username, Description, String.Join("\n", Lines));
         }
 
-        public IEnumerable<JournalLine> Lines
+        public IEnumerable<LedgerEntry> Lines
         {
             get { return lines; }            
         }

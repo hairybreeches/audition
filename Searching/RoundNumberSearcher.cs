@@ -20,7 +20,7 @@ namespace Searching
             return transaction.Lines.Any(line => ContainsRoundValue(line, magnitude));
         }
 
-        private bool ContainsRoundValue(JournalLine line, int magnitude)
+        private bool ContainsRoundValue(LedgerEntry line, int magnitude)
         {
             return IsRound(line.Amount, magnitude)
                    || IsRound(line.Amount, magnitude)

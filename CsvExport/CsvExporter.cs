@@ -20,12 +20,12 @@ namespace CsvExport
             new ColumnFactory<Transaction>("Description", DisplayField.Description, journal => journal.Description)
         };
         
-        private readonly IEnumerable<ColumnFactory<JournalLine>> journalLineColumnFactories = new[]
+        private readonly IEnumerable<ColumnFactory<LedgerEntry>> journalLineColumnFactories = new[]
         {
-            new ColumnFactory<JournalLine>("", DisplayField.JournalType, line => line.JournalType),
-            new ColumnFactory<JournalLine>("", DisplayField.AccountCode, line => line.AccountCode),
-            new ColumnFactory<JournalLine>("", DisplayField.AccountName, line => line.AccountName),
-            new ColumnFactory<JournalLine>("", DisplayField.Amount, line => line.Amount)
+            new ColumnFactory<LedgerEntry>("", DisplayField.JournalType, line => line.JournalType),
+            new ColumnFactory<LedgerEntry>("", DisplayField.AccountCode, line => line.AccountCode),
+            new ColumnFactory<LedgerEntry>("", DisplayField.AccountName, line => line.AccountName),
+            new ColumnFactory<LedgerEntry>("", DisplayField.Amount, line => line.Amount)
         };
 
 
@@ -46,7 +46,7 @@ namespace CsvExport
             return columnFactories.Select(x => x.GetColumn(fields)).ToList();
         }
 
-        private void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IList<ICsvColumn<Transaction>> journalColumns, IList<ICsvColumn<JournalLine>> journalLineColumns)
+        private void WriteJournals(string description, IEnumerable<Transaction> journals, string filename, IList<ICsvColumn<Transaction>> journalColumns, IList<ICsvColumn<LedgerEntry>> journalLineColumns)
         {
             using (var writer = CreateWriter(filename))
             {
@@ -74,7 +74,7 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteJournal(ICsvWriter writer, Transaction transaction, IEnumerable<ICsvColumn<Transaction>> journalColumns, IEnumerable<ICsvColumn<JournalLine>> journalLineColumns)
+        private static void WriteJournal(ICsvWriter writer, Transaction transaction, IEnumerable<ICsvColumn<Transaction>> journalColumns, IEnumerable<ICsvColumn<LedgerEntry>> journalLineColumns)
         {
             foreach (var journalColumn in journalColumns)
             {
@@ -88,7 +88,7 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteLine(ICsvWriter writer, IEnumerable<ICsvColumn<JournalLine>> journalLineColumns, JournalLine line)
+        private static void WriteLine(ICsvWriter writer, IEnumerable<ICsvColumn<LedgerEntry>> journalLineColumns, LedgerEntry line)
         {
             foreach (var journalLineColumn in journalLineColumns)
             {
