@@ -46,9 +46,9 @@ namespace SystemTests
 
             Assert.AreEqual(new Transaction("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
-                new LedgerEntry("1100", null, JournalType.Cr, 0.05m), 
-                new LedgerEntry("9998", null, JournalType.Dr, 0.05m), 
-                new LedgerEntry("2200", null, JournalType.Dr, 0)
+                new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
+                new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
+                new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)
             }), result.Journals[7], "A random journal should be correct");
         }
 
@@ -112,7 +112,7 @@ namespace SystemTests
             Assert.AreEqual(new Transaction("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
                     new[]
                     {
-                        new LedgerEntry("7502", null, JournalType.Dr, 50)
+                        new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
                     }), results.Journals[9], "A random journal should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
