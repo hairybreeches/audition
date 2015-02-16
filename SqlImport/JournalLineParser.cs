@@ -15,7 +15,7 @@ namespace SqlImport
             return CreateJournalLine(
                 dataReader.GetId(record, recordIndex),
                 dataReader.GetUsername(record, recordIndex),
-                dataReader.GetJournalDate(record, recordIndex),
+                dataReader.GetTransactionDate(record, recordIndex),
                 dataReader.GetCreationTime(record, recordIndex),
                 dataReader.GetNominalCode(record, recordIndex),
                 dataReader.GetAmount(record, recordIndex),
@@ -23,7 +23,7 @@ namespace SqlImport
                 dataReader.GetNominalCodeName(record, recordIndex));
         }
 
-        private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             LedgerEntryType type;
             decimal amount;
@@ -39,7 +39,7 @@ namespace SqlImport
                 amount = (Decimal)rawAmount;
             }
 
-            return new SqlJournalLine(transactionId, username, journalDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
+            return new SqlJournalLine(transactionId, username, transactionDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
         }        
     }
 }

@@ -7,7 +7,7 @@ namespace SqlImport
     {
         public string TransactionId { get; private set; }
         public string Username { get; private set; }
-        public DateTime JournalDate { get; private set; }
+        public DateTime TransactionDate { get; private set; }
         public DateTime CreationTime { get; private set; }
         public string NominalCode { get; private set; }
         public LedgerEntryType JournalType { get; private set; }
@@ -15,11 +15,11 @@ namespace SqlImport
         public string Description { get; private set; }
         public string NominalCodeName { get; set; }
 
-        public SqlJournalLine(string transactionId, string username, DateTime journalDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
+        public SqlJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;
-            JournalDate = journalDate;
+            TransactionDate = transactionDate;
             CreationTime = creationTime;
             NominalCode = nominalCode;
             Amount = amount;
@@ -33,7 +33,7 @@ namespace SqlImport
             return
                 String.Format(
                     "<Transaction number: {0}, username: {1}, date: {2} creation date: {3}, nominal code: {4}, Amount: {5} {6}>",
-                    TransactionId, Username, JournalDate, CreationTime, NominalCode, Amount, JournalType);
+                    TransactionId, Username, TransactionDate, CreationTime, NominalCode, Amount, JournalType);
         }
     }
 }

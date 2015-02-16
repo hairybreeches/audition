@@ -39,11 +39,11 @@ namespace Model.Time
             }
         }
 
-        public bool Contains(DateTime journalDateTime)
+        public bool Contains(DateTime transactionDateTime)
         {
-            var journalDate = journalDateTime.Date;
-            return journalDate >= From
-                   && journalDate <= To;
+            var transactionDate = transactionDateTime.Date;
+            return transactionDate >= From
+                   && transactionDate <= To;
         }
     }
 }
