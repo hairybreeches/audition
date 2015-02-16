@@ -26,10 +26,10 @@ namespace Webapp.Session
             return SearcherFactory.CreateSearcher();
         }
 
-        public void ImportData(ISearcherFactory newSearcherFactory, IEnumerable<Transaction> journals)
+        public void ImportData(ISearcherFactory newSearcherFactory, IEnumerable<Transaction> transactions)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
-            repository.UpdateTransactions(journals);
+            repository.UpdateTransactions(transactions);
         }
 
         public void ClearImport()

@@ -57,7 +57,7 @@ namespace Persistence
 
             if (!imported)
             {
-                throw new NoTransactionsException("Successfully opened accounts, but there seemed to be no journal entries");
+                throw new NoTransactionsException("Successfully opened accounts, but there seemed to be no transactions");
             }
             return this;
         }
