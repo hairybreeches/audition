@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="ITransactionRepository.cs" />
     <Compile Include="InvalidPageNumberException.cs" />
-    <Compile Include="JournalQueryableExtensions.cs" />
+    <Compile Include="TransactionQueryableExtensions.cs" />
     <Compile Include="PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempFileTransactionRepository.cs" />

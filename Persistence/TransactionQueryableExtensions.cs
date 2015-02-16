@@ -7,29 +7,29 @@ using Model.Responses;
 
 namespace Persistence
 {
-    public static class JournalQueryableExtensions
+    public static class TransactionQueryableExtensions
     {
         private const int MaxTotal = 2000;
         private const int Pagesize = 10;
 
-        public static SearchResponse GetPage(this IQueryable<Transaction> journals, int pageNumber)
+        public static SearchResponse GetPage(this IQueryable<Transaction> transactions, int pageNumber)
         {
             var numberOfResultsToSkip = (pageNumber - 1) * Pagesize;
 
-            var resultsSet = journals.Skip(numberOfResultsToSkip).Take(MaxTotal + 1).ToList();
+            var resultsSet = transactions.Skip(numberOfResultsToSkip).Take(MaxTotal + 1).ToList();
 
             ValidatePageNumber(pageNumber, resultsSet);
 
 
             var firstResult = numberOfResultsToSkip + 1;
 
-            var journalsToReturn = resultsSet.Take(Pagesize).ToList();
+            var toReturn = resultsSet.Take(Pagesize).ToList();
             var isNextPage = resultsSet.Count > Pagesize;
             var isPreviousPage = pageNumber > 1;
 
             var totalResults = TotalResults(resultsSet, numberOfResultsToSkip);
 
-            return new SearchResponse(journalsToReturn, totalResults,  isPreviousPage, isNextPage, firstResult);
+            return new SearchResponse(toReturn, totalResults,  isPreviousPage, isNextPage, firstResult);
         }
 
         private static string TotalResults(IEnumerable<Transaction> resultsSet, int skipped)
@@ -38,9 +38,9 @@ namespace Persistence
             return minimumResults > MaxTotal? String.Format("more than {0}", MaxTotal) : minimumResults.ToString();
         }
 
-        private static void ValidatePageNumber(int pageNumber, IEnumerable<Transaction> listOfAllJournals)
+        private static void ValidatePageNumber(int pageNumber, IEnumerable<Transaction> allTransactions)
         {
-            ValidatePageNumberNotTooBig(pageNumber, listOfAllJournals);
+            ValidatePageNumberNotTooBig(pageNumber, allTransactions);
             ValidatePageNumberNotTooSmall(pageNumber);
         }
 
@@ -60,9 +60,9 @@ namespace Persistence
             }            
         }
 
-        public static IEnumerable<Transaction> GetAllJournals(this IQueryable<Transaction> journals)
+        public static IEnumerable<Transaction> GetAllTransactions(this IQueryable<Transaction> transactions)
         {
-            return journals;
+            return transactions;
         }        
     }
 }

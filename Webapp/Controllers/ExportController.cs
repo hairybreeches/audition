@@ -73,7 +73,7 @@ namespace Webapp.Controllers
         private async Task<string> Export(ISearchWindow searchWindow)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllJournals(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
+            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
             return saveLocation;
         }
     }
