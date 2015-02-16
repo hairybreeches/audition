@@ -8,7 +8,7 @@ namespace Persistence
     public interface ITransactionRepository
     {
         IQueryable<Transaction> GetTransactions();
-        ITransactionRepository UpdateTransactions(IEnumerable<Transaction> journals);
+        ITransactionRepository UpdateTransactions(IEnumerable<Transaction> transactions);
         void ClearTransactions();
     }
 }
