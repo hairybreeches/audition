@@ -35,9 +35,9 @@ namespace Sage50.Parsing
             }
         }
 
-        public JournalDataReader CreateJournalReader(IValueLookup<string, string> nominalCodeNameLookup)
+        public TransactionFieldReader CreateJournalReader(IValueLookup<string, string> nominalCodeNameLookup)
         {
-            return new JournalDataReader(
+            return new TransactionFieldReader(
                 idColumn.DataReader, 
                 usernameColumn.DataReader, 
                 dateColumn.DataReader,

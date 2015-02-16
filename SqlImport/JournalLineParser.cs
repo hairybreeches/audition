@@ -10,7 +10,7 @@ namespace SqlImport
     /// </summary>
     public class JournalLineParser
     {
-        internal SqlJournalLine CreateJournalLine(IDataRecord record, JournalDataReader dataReader, int recordIndex)
+        internal SqlJournalLine CreateJournalLine(IDataRecord record, TransactionFieldReader dataReader, int recordIndex)
         {
             return CreateJournalLine(
                 dataReader.GetId(record, recordIndex),

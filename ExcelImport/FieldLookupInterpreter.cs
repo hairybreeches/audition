@@ -19,9 +19,9 @@ namespace ExcelImport
             this.namer = namer;
         }
 
-        public JournalDataReader GetDataReader(FieldLookups lookups)
+        public TransactionFieldReader GetDataReader(FieldLookups lookups)
         {
-            return new JournalDataReader(
+            return new TransactionFieldReader(
                 GetIdColumn(lookups.Id),
                 GetColumn<string>(lookups.Username),
                 GetDateColumn(lookups.TransactionDate),

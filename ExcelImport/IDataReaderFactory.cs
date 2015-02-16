@@ -4,6 +4,6 @@ namespace ExcelImport
 {
     public interface IDataReaderFactory
     {
-        JournalDataReader GetDataReader(FieldLookups lookups);
+        TransactionFieldReader GetDataReader(FieldLookups lookups);
     }
 }

@@ -49,7 +49,7 @@
     <Compile Include="DataReaders\SqlDataReader.cs" />
     <Compile Include="JournalLineParser.cs" />
     <Compile Include="TransactionCreator.cs" />
-    <Compile Include="JournalDataReader.cs" />
+    <Compile Include="TransactionFieldReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataReaders\ColumnNameVerifierDecorator.cs" />
     <Compile Include="DataReaders\DateTimeReader.cs" />
