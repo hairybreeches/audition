@@ -6,7 +6,7 @@ include ../components/message
 	.container
 		legend.vertical-space Enter your Audition licence key
 		form.form-horizontal
-			+form-field('Licence Key')
+			+form-field({label: 'Licence Key'})
 				input.form-control(data-bind="value: licenceKey")
 			+button-group()
 				button.vertical-space.btn.btn-default(type="button" data-bind="click: goBack") Cancel
