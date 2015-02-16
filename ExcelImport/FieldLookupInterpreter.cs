@@ -32,9 +32,9 @@ namespace ExcelImport
                 GetColumn<string>(lookups.AccountName));
         }
 
-        public IJournalSearcherFactory CreateSearcherFactory(FieldLookups lookups)
+        public ISearcherFactory CreateSearcherFactory(FieldLookups lookups)
         {
-            return new JournalSearcherFactory(GetUnavailableSearchMessages(lookups), GetDisplayableFields(lookups));
+            return new SearcherFactory(GetUnavailableSearchMessages(lookups), GetDisplayableFields(lookups));
         }
 
         private IFieldReader<string> GetIdColumn(int id)

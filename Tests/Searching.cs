@@ -19,7 +19,7 @@ namespace Tests
             var repo = new TempFileJournalRepository(new FileSystem());
             repo.UpdateJournals(transactionsInRepository);
 
-            var searcher = JournalSearcherFactory.EverythingAvailable.CreateJournalSearcher();
+            var searcher = SearcherFactory.EverythingAvailable.CreateSearcher();
             return searchWindow.Execute(searcher, repo);
         }        
     }

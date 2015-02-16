@@ -38,7 +38,7 @@ namespace Tests
         {
             var lifetime = builder.Build();
             lifetime.Resolve<IJournalRepository>().UpdateJournals(journals);
-            lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = JournalSearcherFactory.EverythingAvailable;
+            lifetime.Resolve<JournalSearcherFactoryStorage>().CurrentSearcherFactory = SearcherFactory.EverythingAvailable;
             return lifetime;
         }
 

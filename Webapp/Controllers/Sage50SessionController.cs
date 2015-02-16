@@ -28,7 +28,7 @@ namespace Webapp.Controllers
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
                 var journals = journalGetter.GetJournals(connection);
-                session.ImportData(JournalSearcherFactory.EverythingAvailable, journals);
+                session.ImportData(SearcherFactory.EverythingAvailable, journals);
             }
 
             return Ok();

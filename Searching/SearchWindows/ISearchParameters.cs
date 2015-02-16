@@ -8,6 +8,6 @@ namespace Searching.SearchWindows
 {
     public interface ISearchParameters
     {
-        IQueryable<Transaction> ApplyFilter(JournalSearcher searcher, IQueryable<Transaction> journals);
+        IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> journals);
     }
 }

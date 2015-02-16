@@ -14,7 +14,7 @@ namespace Webapp.Controllers
     //todo: add "notnull" attributes to all data classes
     public class SearchController : ApiController
     {
-        private JournalSearcher Searcher
+        private Searcher Searcher
         {
             get { return session.GetCurrentJournalSearcher(); }
         }

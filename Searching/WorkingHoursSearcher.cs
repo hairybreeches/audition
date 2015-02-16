@@ -7,7 +7,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class WorkingHoursSearcher : IJournalSearcher<WorkingHoursParameters>
+    public class WorkingHoursSearcher : ISearcher<WorkingHoursParameters>
     {
         public IQueryable<Transaction> FindJournalsWithin(WorkingHoursParameters parameters, IQueryable<Transaction> journals)
         {            

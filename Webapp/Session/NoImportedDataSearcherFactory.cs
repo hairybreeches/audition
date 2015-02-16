@@ -3,9 +3,9 @@ using Searching;
 
 namespace Webapp.Session
 {
-    public class NoImportedDataJournalSearcherFactory : IJournalSearcherFactory
+    public class NoImportedDataSearcherFactory : ISearcherFactory
     {
-        public JournalSearcher CreateJournalSearcher()
+        public Searcher CreateSearcher()
         {
             throw new NoImportedDataException();
         }

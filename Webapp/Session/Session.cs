@@ -20,13 +20,13 @@ namespace Webapp.Session
             this.licenceStorage = licenceStorage;
         }
 
-        public JournalSearcher GetCurrentJournalSearcher()
+        public Searcher GetCurrentJournalSearcher()
         {            
             licenceStorage.EnsureUseAllowed();
-            return SearcherFactory.CreateJournalSearcher();
+            return SearcherFactory.CreateSearcher();
         }
 
-        public void ImportData(IJournalSearcherFactory newSearcherFactory, IEnumerable<Transaction> journals)
+        public void ImportData(ISearcherFactory newSearcherFactory, IEnumerable<Transaction> journals)
         {
             searcherFactoryStorage.CurrentSearcherFactory = newSearcherFactory;
             repository.UpdateJournals(journals);
@@ -34,7 +34,7 @@ namespace Webapp.Session
 
         public void ClearImport()
         {
-            searcherFactoryStorage.CurrentSearcherFactory = new NoImportedDataJournalSearcherFactory();
+            searcherFactoryStorage.CurrentSearcherFactory = new NoImportedDataSearcherFactory();
             repository.ClearJournals();
         }
 
@@ -45,7 +45,7 @@ namespace Webapp.Session
             return SearcherFactory.GetSearchCapability();
         }
 
-        private IJournalSearcherFactory SearcherFactory
+        private ISearcherFactory SearcherFactory
         {
             get { return searcherFactoryStorage.CurrentSearcherFactory; }
         }

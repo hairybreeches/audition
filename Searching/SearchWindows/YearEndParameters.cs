@@ -19,7 +19,7 @@ namespace Searching.SearchWindows
         public DateTime YearEnd { get; private set; }
 
 
-        public IQueryable<Transaction> ApplyFilter(JournalSearcher searcher, IQueryable<Transaction> journals)
+        public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> journals)
         {
             return searcher.FindJournalsWithin(this, journals);
         }

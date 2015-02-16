@@ -7,7 +7,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class RoundNumberSearcher : IJournalSearcher<EndingParameters>
+    public class RoundNumberSearcher : ISearcher<EndingParameters>
     {
         public IQueryable<Transaction> FindJournalsWithin(EndingParameters parameters, IQueryable<Transaction> journals)
         {           
