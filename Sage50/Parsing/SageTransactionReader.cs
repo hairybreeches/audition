@@ -10,18 +10,18 @@ namespace Sage50.Parsing
     public class SageTransactionReader
     {
         
-        private readonly SqlJournalReader sqlJournalReader;
+        private readonly SqlFinancialTransactionReader sqlFinancialTransactionReader;
         private readonly SageTransactionSchema schema;
 
-        public SageTransactionReader(SageTransactionSchema schema, SqlJournalReader sqlJournalReader)
+        public SageTransactionReader(SageTransactionSchema schema, SqlFinancialTransactionReader sqlFinancialTransactionReader)
         {
             this.schema = schema;
-            this.sqlJournalReader = sqlJournalReader;
+            this.sqlFinancialTransactionReader = sqlFinancialTransactionReader;
         }
 
         public IEnumerable<Transaction> GetJournals(SqlDataReader sqlDataReader, NominalCodeLookup nominalLookup)
         {
-            return sqlJournalReader.GetJournals(sqlDataReader, schema.CreateJournalReader(nominalLookup));
+            return sqlFinancialTransactionReader.GetJournals(sqlDataReader, schema.CreateJournalReader(nominalLookup));
             
         }
     }

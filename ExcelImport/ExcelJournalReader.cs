@@ -9,20 +9,20 @@ namespace ExcelImport
     public class ExcelJournalReader
     {
         private readonly ExcelToSqlDataConverter toSqlDataConverter;
-        private readonly SqlJournalReader sqlJournalReader;
+        private readonly SqlFinancialTransactionReader sqlFinancialTransactionReader;
         private readonly IDataReaderFactory readerFactory;
 
-        public ExcelJournalReader(ExcelToSqlDataConverter toSqlDataConverter, SqlJournalReader sqlJournalReader, IDataReaderFactory readerFactory)
+        public ExcelJournalReader(ExcelToSqlDataConverter toSqlDataConverter, SqlFinancialTransactionReader sqlFinancialTransactionReader, IDataReaderFactory readerFactory)
         {
             this.toSqlDataConverter = toSqlDataConverter;
-            this.sqlJournalReader = sqlJournalReader;
+            this.sqlFinancialTransactionReader = sqlFinancialTransactionReader;
             this.readerFactory = readerFactory;
         }
 
         public IEnumerable<Transaction> ReadJournals(ExcelImportMapping mapping)
         {
             var sheetReader = toSqlDataConverter.ReadSheet(mapping.SheetDescription);            
-            return sqlJournalReader.GetJournals(sheetReader, readerFactory.GetDataReader(mapping.Lookups));
+            return sqlFinancialTransactionReader.GetJournals(sheetReader, readerFactory.GetDataReader(mapping.Lookups));
         }
     }
 }

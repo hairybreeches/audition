@@ -5,12 +5,12 @@ using Model.Accounting;
 
 namespace SqlImport
 {
-    public class SqlJournalReader
+    public class SqlFinancialTransactionReader
     {
         private readonly JournalLineParser journalLineParser;
         private readonly TransactionCreator transactionCreator;
 
-        public SqlJournalReader(JournalLineParser journalLineParser, TransactionCreator transactionCreator)
+        public SqlFinancialTransactionReader(JournalLineParser journalLineParser, TransactionCreator transactionCreator)
         {
             this.journalLineParser = journalLineParser;
             this.transactionCreator = transactionCreator;

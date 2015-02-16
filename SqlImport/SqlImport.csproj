@@ -60,7 +60,7 @@
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />
     <Compile Include="SqlJournalLine.cs" />
-    <Compile Include="SqlJournalReader.cs" />
+    <Compile Include="SqlFinancialTransactionReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
