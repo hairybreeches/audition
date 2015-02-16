@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Model;
 using SqlImport.DataReaders;
 
 namespace SqlImport
@@ -39,45 +40,45 @@ namespace SqlImport
 
         public string GetId(IDataRecord record, int recordIndex)
         {
-            return GetField(idColumn, record, recordIndex, "ID");
+            return GetField(idColumn, record, recordIndex, MappingField.Id);
         }        
 
         public string GetUsername(IDataRecord record, int recordIndex)
         {
-            return GetField(usernameColumn, record, recordIndex, "username");
+            return GetField(usernameColumn, record, recordIndex, MappingField.Username);
         }
         
         public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
         {
-            return GetField(dateColumn, record, recordIndex, "transaction date");
+            return GetField(dateColumn, record, recordIndex, MappingField.TransactionDate);
         }
         
         public DateTime GetCreationTime(IDataRecord record, int recordIndex)
         {
-            return GetField(creationTimeColumn, record, recordIndex, "transaction entry time");
+            return GetField(creationTimeColumn, record, recordIndex, MappingField.EntryTime);
         }
         
         public string GetNominalCode(IDataRecord record, int recordIndex)
         {
-            return GetField(nominalCodeColumn, record, recordIndex, "nominal code");
+            return GetField(nominalCodeColumn, record, recordIndex, MappingField.NominalCode);
         }
         
         public double GetAmount(IDataRecord record, int recordIndex)
         {
-            return GetField(amountColumn, record, recordIndex, "amount");
+            return GetField(amountColumn, record, recordIndex, MappingField.Amount);
         }
         
         public string GetDescription(IDataRecord record, int recordIndex)
         {
-            return GetField(detailsColumn, record, recordIndex, "description");
+            return GetField(detailsColumn, record, recordIndex, MappingField.Description);
         }
 
         public string GetNominalCodeName(IDataRecord record, int recordIndex)
         {
-            return GetField(nominalCodeNameColumn, record, recordIndex, "nominal code name");
+            return GetField(nominalCodeNameColumn, record, recordIndex, MappingField.NominalName);
         }
 
-        private static T GetField<T>(IFieldReader<T> reader, IDataRecord record, int recordIndex, string userFriendlyFieldName)
+        private static T GetField<T>(IFieldReader<T> reader, IDataRecord record, int recordIndex, MappingField mappingField)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace SqlImport
             catch (Exception e)
             {
                 var message = String.Format("Could not read {0} of row {1}: {2}", 
-                    userFriendlyFieldName, recordIndex, e.Message);
+                    mappingField.UserFriendlyName, recordIndex, e.Message);
                 throw new SqlDataFormatUnexpectedException(message, e);
             }
             
