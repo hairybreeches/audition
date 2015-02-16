@@ -246,6 +246,11 @@
           </div>
         </div>
       </div>
+      <div class="container">
+        <div data-bind="visible: exportErrorMessage.visible(), with: exportErrorMessage" style="display: none;" class="alert alert-danger">
+          <button type="button" data-bind="click: hide" class="close">&#10006;</button><span data-bind="text: message()"></span>
+        </div>
+      </div>
       <div data-bind="with: output" class="container">
         <div data-bind="visible: showResults()" style="display: none;">
             <h4 data-bind="text: resultsComment()" class="text-center"></h4>

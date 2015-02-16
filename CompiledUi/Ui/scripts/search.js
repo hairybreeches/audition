@@ -246,6 +246,7 @@ var SearchModel = function () {
 
     self.search = function(search) {
         self.searching(true);
+        self.exportErrorMessage.hide();
         $.ajax(search.searchUrl, {
             data: searchSerialise(search.searchWindow, search.pageNumber),
             contentType: 'application/json',
@@ -260,12 +261,13 @@ var SearchModel = function () {
 
     self.export = function(exportOptions) {
         self.exportSuccessMessage.hide();
+        self.exportErrorMessage.hide();
         $.ajax(exportOptions.url, {
             data: exportOptions.data,
 
             contentType: 'application/json',
             success: self.exportSuccessMessage.show,            
-            error: output.searchFailure,
+            error: self.exportErrorMessage.show,
             type: 'POST'
         });
     }    
@@ -297,6 +299,8 @@ var SearchModel = function () {
     self.showEntries = function() {
         return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showLedgerEntryType();
     }
+
+    self.exportErrorMessage = new ErrorMessage();
 
     self.input = {
         Period: period,
