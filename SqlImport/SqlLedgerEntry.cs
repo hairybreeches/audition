@@ -3,7 +3,7 @@ using Model.Accounting;
 
 namespace SqlImport
 {
-    internal class SqlJournalLine
+    internal class SqlLedgerEntry
     {
         public string TransactionId { get; private set; }
         public string Username { get; private set; }
@@ -15,7 +15,7 @@ namespace SqlImport
         public string Description { get; private set; }
         public string NominalCodeName { get; set; }
 
-        public SqlJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
+        public SqlLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
         {
             TransactionId = transactionId;
             Username = username;

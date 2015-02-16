@@ -8,9 +8,9 @@ namespace SqlImport
     /// Knows how to turn the raw IDataRecord into a SqlJournalLine with the help of a JournalDataReader 
     /// Don't use this directly, use a JournalReader.
     /// </summary>
-    public class JournalLineParser
+    public class LedgerEntryParser
     {
-        internal SqlJournalLine CreateJournalLine(IDataRecord record, TransactionFieldReader dataReader, int recordIndex)
+        internal SqlLedgerEntry CreateJournalLine(IDataRecord record, TransactionFieldReader dataReader, int recordIndex)
         {
             return CreateJournalLine(
                 dataReader.GetId(record, recordIndex),
@@ -23,7 +23,7 @@ namespace SqlImport
                 dataReader.GetNominalCodeName(record, recordIndex));
         }
 
-        private static SqlJournalLine CreateJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlLedgerEntry CreateJournalLine(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
         {
             LedgerEntryType type;
             decimal amount;
@@ -39,7 +39,7 @@ namespace SqlImport
                 amount = (Decimal)rawAmount;
             }
 
-            return new SqlJournalLine(transactionId, username, transactionDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
+            return new SqlLedgerEntry(transactionId, username, transactionDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
         }        
     }
 }

@@ -47,7 +47,7 @@
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />
     <Compile Include="DataReaders\SqlDataReader.cs" />
-    <Compile Include="JournalLineParser.cs" />
+    <Compile Include="LedgerEntryParser.cs" />
     <Compile Include="TransactionCreator.cs" />
     <Compile Include="TransactionFieldReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="DataReaders\NullDataReader.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />
-    <Compile Include="SqlJournalLine.cs" />
+    <Compile Include="SqlLedgerEntry.cs" />
     <Compile Include="SqlFinancialTransactionReader.cs" />
   </ItemGroup>
   <ItemGroup>
