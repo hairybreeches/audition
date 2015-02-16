@@ -9,7 +9,7 @@ namespace Sage50
         {            
             builder.RegisterType<SageJournalSchema>();
             builder.RegisterType<SageJournalReader>();
-            builder.RegisterType<Sage50JournalGetter>().As<ISage50JournalGetter>();
+            builder.RegisterType<Sage50TransactionGetter>().As<ISage50TransactionGetter>();
             builder.RegisterType<NominalCodeLookupFactory>().As<INominalCodeLookupFactory>();
             builder.RegisterType<Sage50ConnectionFactory>().As<ISage50ConnectionFactory>();
             builder.RegisterType<Sage50DriverDetector>();
