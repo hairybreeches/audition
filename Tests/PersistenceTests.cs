@@ -23,11 +23,11 @@ namespace Tests
             {
                 //given some journals saved in one request
 
-                var saveRepository = lifetime.Resolve<IJournalRepository>();
-                saveRepository.UpdateJournals(JournalWithId("a single stored journal"));
+                var saveRepository = lifetime.Resolve<ITransactionRepository>();
+                saveRepository.UpdateTransactions(JournalWithId("a single stored journal"));
                 //when we make a new request
-                var loadRepository = lifetime.Resolve<IJournalRepository>();
-                var journals = loadRepository.GetJournals().ToList();
+                var loadRepository = lifetime.Resolve<ITransactionRepository>();
+                var journals = loadRepository.GetTransactions().ToList();
                 //the journals should still be there
                 Assert.AreEqual(journals.Single().Id, "a single stored journal");
             }
@@ -41,13 +41,13 @@ namespace Tests
             using (var lifetime = builder.Build())
             {
                 //given a repository with some journals in
-                var repository = lifetime.Resolve<IJournalRepository>();
-                repository.UpdateJournals(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
+                var repository = lifetime.Resolve<ITransactionRepository>();
+                repository.UpdateTransactions(JournalWithId("an old journal").Concat(JournalWithId("another old journal")));
 
                 //when we update the contents of the repository
-                repository.UpdateJournals(JournalWithId("a new journal"));
+                repository.UpdateTransactions(JournalWithId("a new journal"));
 
-                var journals = repository.GetJournals().ToList();
+                var journals = repository.GetTransactions().ToList();
 
                 //the old contents should be blatted and only the new ones remain.
                 Assert.AreEqual(journals.Single().Id, "a new journal");

@@ -49,12 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IJournalRepository.cs" />
+    <Compile Include="ITransactionRepository.cs" />
     <Compile Include="InvalidPageNumberException.cs" />
     <Compile Include="JournalQueryableExtensions.cs" />
     <Compile Include="PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TempFileJournalRepository.cs" />
+    <Compile Include="TempFileTransactionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

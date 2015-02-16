@@ -16,8 +16,8 @@ namespace Tests
             //that makes sure the way we parse the transactions is compatible with the way the repository delivers them 
             //(eg no multiple enumeration of IEnumerables)
             //and these tests are not currently slow enough to warrant sacrificing assurance
-            var repo = new TempFileJournalRepository(new FileSystem());
-            repo.UpdateJournals(transactionsInRepository);
+            var repo = new TempFileTransactionRepository(new FileSystem());
+            repo.UpdateTransactions(transactionsInRepository);
 
             var searcher = SearcherFactory.EverythingAvailable.CreateSearcher();
             return searchWindow.Execute(searcher, repo);

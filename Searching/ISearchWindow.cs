@@ -6,7 +6,7 @@ namespace Searching
 {
     public interface ISearchWindow
     {
-        IQueryable<Transaction> Execute(Searcher searcher, IJournalRepository repository);
+        IQueryable<Transaction> Execute(Searcher searcher, ITransactionRepository repository);
         string Description { get; }
     }
 }

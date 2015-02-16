@@ -49,14 +49,14 @@ namespace Searching
             }
         }
 
-        public IQueryable<Transaction> Execute(Searcher searcher, IJournalRepository repository)
+        public IQueryable<Transaction> Execute(Searcher searcher, ITransactionRepository repository)
         {
             return Parameters.ApplyFilter(searcher, GetJournalsApplyingToPeriod(repository));
         }
 
-        private IQueryable<Transaction> GetJournalsApplyingToPeriod(IJournalRepository repository)
+        private IQueryable<Transaction> GetJournalsApplyingToPeriod(ITransactionRepository repository)
         {
-            return repository.GetJournals().Where(x => Period.Contains(x.JournalDate));
+            return repository.GetTransactions().Where(x => Period.Contains(x.JournalDate));
         }
     }
 }
