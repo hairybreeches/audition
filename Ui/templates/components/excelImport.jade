@@ -11,7 +11,7 @@ mixin optional-row-dropdown(field)
 	+dropdown(field, 'optionalColumns')
 
 mixin excel-import()
-	+form-field-with-button({label: "File", button: {label: "Browse...", onClick: "browseExcelFile"}})
+	+form-field-with-extras({label: "File", button: {label: "Browse...", onClick: "browseExcelFile"}})
 		input#excelFileLocation.form-control(type="text" data-bind="textInput: fileLocation" name="fileLocation")
 	div(data-bind="visible: showInput()" style="display: none;")
 		+sheets-dropdown()
