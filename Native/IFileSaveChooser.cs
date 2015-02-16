@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using Model;
 
 namespace Native
 {
     public interface IFileSaveChooser
     {
-        Task<string> GetFileSaveLocation();
+        Task<ExportResult> GetFileSaveLocation();
     }
 }

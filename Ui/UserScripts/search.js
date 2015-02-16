@@ -266,7 +266,11 @@ var SearchModel = function () {
             data: exportOptions.data,
 
             contentType: 'application/json',
-            success: self.exportSuccessMessage.show,            
+            success: function (exportResult) {
+                if (exportResult.Completed) {
+                    self.exportSuccessMessage.show(exportResult.Filename);
+                }                
+            },                
             error: self.exportErrorMessage.show,
             type: 'POST'
         });

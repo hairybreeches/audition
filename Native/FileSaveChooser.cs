@@ -1,23 +1,25 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
 
 namespace Native
 {
     public class FileSaveChooser : IFileSaveChooser
     {
-        private readonly TaskFactory<string> taskFactory;
+        private readonly TaskFactory<ExportResult> taskFactory;
 
-        public FileSaveChooser(TaskFactory<string> taskFactory)
+        public FileSaveChooser(TaskFactory<ExportResult> taskFactory)
         {
             this.taskFactory = taskFactory;
         }
 
-        public async Task<string> GetFileSaveLocation()
+        public async Task<ExportResult> GetFileSaveLocation()
         {
             return await taskFactory.StartNew(GetValue);
         }
 
-        private static string GetValue()
+        private static ExportResult GetValue()
         {
             using (var dialog = new SaveFileDialog
             {
@@ -26,7 +28,14 @@ namespace Native
             })
             {
                 dialog.ShowDialog();
-                return dialog.FileName;
+
+                if (!String.IsNullOrWhiteSpace(dialog.FileName))
+                {
+                    return ExportResult.Success(dialog.FileName);
+                }
+
+                return ExportResult.Incomplete();
+                
             }
         }
     }

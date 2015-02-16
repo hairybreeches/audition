@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
 using Autofac;
 using Microsoft.Win32;
+using Model;
 
 namespace Native
 {
@@ -10,6 +11,7 @@ namespace Native
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(_ => new StaTaskScheduler(1)).SingleInstance();
+            builder.Register(_ => new TaskFactory<ExportResult>(_.Resolve<StaTaskScheduler>()));
             builder.Register(_ => new TaskFactory<string>(_.Resolve<StaTaskScheduler>()));
             builder.RegisterType<FileSaveChooser>().As<IFileSaveChooser>();
             builder.RegisterType<ExcelFileChooser>().As<IExcelFileChooser>();
