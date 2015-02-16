@@ -5,6 +5,7 @@ var ImportModel = function() {
     self.sage50 = new Sage50ImportModel();
     self.excel = new ExcelImportModel();
     self.error = new ErrorMessage();
+    self.system.subscribe(self.error.hide);
 
     var goToSearch = function() {
         location.href = '/views/search.html';
