@@ -22,7 +22,7 @@ namespace CsvExport
         
         private readonly IEnumerable<ColumnFactory<LedgerEntry>> journalLineColumnFactories = new[]
         {
-            new ColumnFactory<LedgerEntry>("", DisplayField.JournalType, line => line.JournalType),
+            new ColumnFactory<LedgerEntry>("", DisplayField.LedgerEntryType, line => line.LedgerEntryType),
             new ColumnFactory<LedgerEntry>("", DisplayField.AccountCode, line => line.AccountCode),
             new ColumnFactory<LedgerEntry>("", DisplayField.AccountName, line => line.AccountName),
             new ColumnFactory<LedgerEntry>("", DisplayField.Amount, line => line.Amount)

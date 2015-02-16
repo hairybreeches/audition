@@ -10,7 +10,7 @@ namespace SqlImport
         public DateTime TransactionDate { get; private set; }
         public DateTime CreationTime { get; private set; }
         public string NominalCode { get; private set; }
-        public LedgerEntryType JournalType { get; private set; }
+        public LedgerEntryType LedgerEntryType { get; private set; }
         public decimal Amount { get; private set; }
         public string Description { get; private set; }
         public string NominalCodeName { get; set; }
@@ -23,7 +23,7 @@ namespace SqlImport
             CreationTime = creationTime;
             NominalCode = nominalCode;
             Amount = amount;
-            JournalType = type;
+            LedgerEntryType = type;
             Description = description;
             NominalCodeName = nominalCodeName;
         }
@@ -33,7 +33,7 @@ namespace SqlImport
             return
                 String.Format(
                     "<Transaction number: {0}, username: {1}, date: {2} creation date: {3}, nominal code: {4}, Amount: {5} {6}>",
-                    TransactionId, Username, TransactionDate, CreationTime, NominalCode, Amount, JournalType);
+                    TransactionId, Username, TransactionDate, CreationTime, NominalCode, Amount, LedgerEntryType);
         }
     }
 }

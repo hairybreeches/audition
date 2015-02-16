@@ -6,7 +6,7 @@ namespace Model
         TransactionDate,
         Description,
         Username,
-        JournalType,
+        LedgerEntryType,
         AccountName,
         Amount,
         AccountCode

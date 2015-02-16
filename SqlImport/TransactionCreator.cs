@@ -34,7 +34,7 @@ namespace SqlImport
 
         private static LedgerEntry ToModelLine(SqlJournalLine arg)
         {
-            return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.JournalType, arg.Amount);
+            return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.LedgerEntryType, arg.Amount);
         }
 
         private static T GetField<T>(IList<SqlJournalLine> journalLines, Func<SqlJournalLine, T> getter, string fieldName)

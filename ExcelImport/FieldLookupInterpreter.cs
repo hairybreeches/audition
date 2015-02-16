@@ -86,7 +86,7 @@ namespace ExcelImport
                     return lookups.TransactionDate;
                 case DisplayField.Username:
                     return lookups.Username;
-                case DisplayField.JournalType:
+                case DisplayField.LedgerEntryType:
                     return lookups.Amount;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
