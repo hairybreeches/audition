@@ -23,8 +23,8 @@ namespace SqlImport
             var ledgerEntries = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetField(ledgerEntries, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetField(ledgerEntries, x => x.TransactionDate, "journal date"),
+                GetField(ledgerEntries, x => x.CreationTime, "transaction entry time").ToUkDateTimeOffsetFromUkLocalTime(),
+                GetField(ledgerEntries, x => x.TransactionDate, "transaction date"),
                 GetField(ledgerEntries, x => x.Username, "username"),
                 GetField(ledgerEntries, x => x.Description, "description"),
                 ledgerEntries.Select(ToModelLine));
