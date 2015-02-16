@@ -52,7 +52,7 @@
     <Compile Include="Parsing\ISchemaColumn.cs" />
     <Compile Include="Parsing\NominalCodeLookup.cs" />
     <Compile Include="Parsing\NominalCodeLookupFactory.cs" />
-    <Compile Include="Parsing\SageJournalReader.cs" />
+    <Compile Include="Parsing\SageTransactionReader.cs" />
     <Compile Include="Parsing\SageTransactionSchema.cs" />
     <Compile Include="Parsing\SchemaColumn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,13 +7,13 @@ using SqlImport;
 
 namespace Sage50.Parsing
 {
-    public class SageJournalReader
+    public class SageTransactionReader
     {
         
         private readonly SqlJournalReader sqlJournalReader;
         private readonly SageTransactionSchema schema;
 
-        public SageJournalReader(SageTransactionSchema schema, SqlJournalReader sqlJournalReader)
+        public SageTransactionReader(SageTransactionSchema schema, SqlJournalReader sqlJournalReader)
         {
             this.schema = schema;
             this.sqlJournalReader = sqlJournalReader;
