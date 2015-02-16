@@ -15,7 +15,7 @@ namespace Webapp.Controllers
     public class ExportController : ApiController
     {
         private readonly Session.Session session;
-        private readonly IJournalExporter journalExporter;
+        private readonly ITransactionExporter transactionExporter;
         private readonly IFileSaveChooser fileSaveChooser;
 
         private Searcher Searcher
@@ -28,10 +28,10 @@ namespace Webapp.Controllers
             get { return session.Repository; }
         }
 
-        public ExportController(IFileSaveChooser fileSaveChooser, IJournalExporter journalExporter, Session.Session session)
+        public ExportController(IFileSaveChooser fileSaveChooser, ITransactionExporter transactionExporter, Session.Session session)
         {
             this.fileSaveChooser = fileSaveChooser;
-            this.journalExporter = journalExporter;
+            this.transactionExporter = transactionExporter;
             this.session = session;
         }
 
@@ -73,7 +73,7 @@ namespace Webapp.Controllers
         private async Task<string> Export(ISearchWindow searchWindow)
         {
             var saveLocation = await fileSaveChooser.GetFileSaveLocation();
-            journalExporter.WriteJournals(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
+            transactionExporter.WriteTransactions(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), saveLocation, session.GetCurrentSearchCapability().AvailableFields);
             return saveLocation;
         }
     }

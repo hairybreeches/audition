@@ -51,7 +51,7 @@
     <Compile Include="CsvExporter.cs" />
     <Compile Include="CsvExportModule.cs" />
     <Compile Include="ICsvColumn.cs" />
-    <Compile Include="IJournalExporter.cs" />
+    <Compile Include="ITransactionExporter.cs" />
     <Compile Include="NullCsvColumn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
