@@ -124,19 +124,19 @@ namespace ExcelImport
             {
                 case SearchAction.Ending:
                     return
-                        "In order to search for journals with round number endings, you must import journals with an amount value";
+                        "In order to search for transactions with round number endings, you must import transactions with an amount value";
                 case SearchAction.Users:
                     return
-                        "In order to search for journals posted by unexpected users, you must import journals with a username value";
+                        "In order to search for transactions posted by unexpected users, you must import transactions with a username value";
                 case SearchAction.Date:
                     return
-                        "In order to search for journals created near or after the year end, you must import journals with a creation time value";
+                        "In order to search for transactions created near or after the year end, you must import transactions with an entry time value";
                 case SearchAction.Hours:
                     return
-                        "In order to search for journals posted outside of working hours, you must import journals with a creation time value";
+                        "In order to search for transactions posted outside of working hours, you must import transactions with an entry time value";
                 case SearchAction.Accounts:
                     return
-                        "In order to search for journals posted to unusual nomincal codes, you must import journals with a nominal code value";
+                        "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", action));
             }
