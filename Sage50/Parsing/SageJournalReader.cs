@@ -11,9 +11,9 @@ namespace Sage50.Parsing
     {
         
         private readonly SqlJournalReader sqlJournalReader;
-        private readonly SageJournalSchema schema;
+        private readonly SageTransactionSchema schema;
 
-        public SageJournalReader(SageJournalSchema schema, SqlJournalReader sqlJournalReader)
+        public SageJournalReader(SageTransactionSchema schema, SqlJournalReader sqlJournalReader)
         {
             this.schema = schema;
             this.sqlJournalReader = sqlJournalReader;

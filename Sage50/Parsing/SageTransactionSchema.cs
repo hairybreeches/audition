@@ -7,7 +7,7 @@ using SqlImport.DataReaders;
 
 namespace Sage50.Parsing
 {
-    public class SageJournalSchema
+    public class SageTransactionSchema
     {
         private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index, name));
         private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);

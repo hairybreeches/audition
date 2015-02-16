@@ -11,10 +11,10 @@ namespace Sage50
     public class Sage50TransactionGetter : ISage50TransactionGetter
     {
         private readonly SageJournalReader sageJournalReader;        
-        private readonly SageJournalSchema schema;
+        private readonly SageTransactionSchema schema;
         private readonly INominalCodeLookupFactory nominalCodeLookupFactory;
 
-        public Sage50TransactionGetter(SageJournalReader sageJournalReader, SageJournalSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
+        public Sage50TransactionGetter(SageJournalReader sageJournalReader, SageTransactionSchema schema, INominalCodeLookupFactory nominalCodeLookupFactory)
         {
             this.sageJournalReader = sageJournalReader;            
             this.schema = schema;
