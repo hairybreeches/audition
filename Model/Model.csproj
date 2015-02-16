@@ -55,7 +55,7 @@
     <Compile Include="DisplayField.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IValueLookup.cs" />
-    <Compile Include="NoJournalsException.cs" />
+    <Compile Include="NoTransactionsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Transaction.cs" />

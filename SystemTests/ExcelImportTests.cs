@@ -120,7 +120,7 @@ namespace SystemTests
         
         
         [Test]
-        [ExpectedException(typeof(NoJournalsException))]
+        [ExpectedException(typeof(NoTransactionsException))]
         public void EmptySpreadsheetThrowsNoJournalsException()
         {
             GetAllJournalsFromSearch(new ExcelImportMapping
