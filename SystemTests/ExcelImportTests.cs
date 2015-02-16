@@ -49,7 +49,7 @@ namespace SystemTests
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)
-            }), result.Journals[7], "A random journal should be correct");
+            }), result.Transactions[7], "A random journal should be correct");
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace SystemTests
                     new[]
                     {
                         new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
-                    }), results.Journals[9], "A random journal should be correct");
+                    }), results.Transactions[9], "A random journal should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      

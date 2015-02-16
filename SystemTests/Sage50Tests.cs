@@ -40,7 +40,7 @@ namespace SystemTests
                 new LedgerEntry("1100", "Debtors Control Account", LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
-            }), result.Journals[7], "A random journal should be correct");
+            }), result.Transactions[7], "A random journal should be correct");
             }
 
 

@@ -57,7 +57,7 @@ namespace Tests.SearcherTests
                 .WithNoLicensing()
                 .BuildSearchable(transactionsInRepository))
             {
-                return lifetime.Resolve<SearchController>().Search(request).Journals.ToList();
+                return lifetime.Resolve<SearchController>().Search(request).Transactions.ToList();
             }
         }
 
@@ -104,7 +104,7 @@ namespace Tests.SearcherTests
             Assert.AreEqual(totalResults, searchResponse.TotalResults, "Response should display the correct total number of results");
             Assert.AreEqual(firstResult, searchResponse.FirstResult, "Response should display correct index of first result");
             var expectedIds = Enumerable.Range(firstResult, numberOfResultsReturned).Select(x=>x.ToString());
-            var actualIds = searchResponse.Journals.Select(x=>x.Id);
+            var actualIds = searchResponse.Transactions.Select(x=>x.Id);
             Assert.AreEqual(expectedIds, actualIds, "Reponse should return correct results");
         }        
 

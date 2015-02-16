@@ -45,7 +45,7 @@ namespace SystemTests
         public IList<Transaction> CanExecuteSearchOnlyWhenLicenceValid(DateTime trialStartDate, DateTime currentDate, string licenceKey)
         {
             var mockRegistry = CreateRegistry(licenceKey, trialStartDate);
-            return ExecuteSearch(currentDate, mockRegistry).Journals;
+            return ExecuteSearch(currentDate, mockRegistry).Transactions;
         }
 
         private static SearchResponse ExecuteSearch(DateTime currentDate, ICurrentUserRegistry registry)
