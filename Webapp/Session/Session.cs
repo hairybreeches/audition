@@ -9,11 +9,11 @@ namespace Webapp.Session
 {
     public class Session
     {
-        private readonly JournalSearcherFactoryStorage searcherFactoryStorage;
+        private readonly SearcherFactoryStorage searcherFactoryStorage;
         private readonly ITransactionRepository repository;
         private readonly ILicenceStorage licenceStorage;
 
-        public Session(JournalSearcherFactoryStorage searcherFactoryStorage, ITransactionRepository repository, ILicenceStorage licenceStorage)
+        public Session(SearcherFactoryStorage searcherFactoryStorage, ITransactionRepository repository, ILicenceStorage licenceStorage)
         {
             this.searcherFactoryStorage = searcherFactoryStorage;
             this.repository = repository;

@@ -8,7 +8,7 @@ namespace Webapp.Session
         {
             builder.RegisterType<Session>();
             //this needs to be single instance since it stores the current available searching functionality
-            builder.RegisterType<JournalSearcherFactoryStorage>().SingleInstance();
+            builder.RegisterType<SearcherFactoryStorage>().SingleInstance();
         }
     }
 }

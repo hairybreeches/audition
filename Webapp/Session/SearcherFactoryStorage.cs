@@ -2,9 +2,9 @@
 
 namespace Webapp.Session
 {
-    public class JournalSearcherFactoryStorage
+    public class SearcherFactoryStorage
     {
-        public JournalSearcherFactoryStorage()
+        public SearcherFactoryStorage()
         {
             CurrentSearcherFactory = new NoImportedDataSearcherFactory();
         }
