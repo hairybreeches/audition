@@ -22,6 +22,17 @@ mixin help(helpText)
 		.col-sm-2
 			.questionmarkicon(data-toggle="tooltip" data-placement="bottom" data-original-title="#{helpText}")
 
+mixin button(buttonOptions)
+	.col-sm-2
+		button.btn.btn-default(type="button", data-bind="click: #{buttonOptions.onClick}") #{buttonOptions.label}
+
+mixin form-field-with-button(field)
+	.form-group
+		label.col-sm-2.col-sm-offset-2.control-label #{field.label}
+		.col-sm-6
+			block
+		if field.button
+			+button(field.button)
 
 mixin form-field-with-help(field)
 	.form-group
