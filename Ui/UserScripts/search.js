@@ -168,7 +168,7 @@ var ExportSuccessMessage = function () {
 };
 
 
-var InputSection = function (parameters, period, exportSuccessMessage, searchCapabilities, name) {
+var InputSection = function (parameters, period, searchCapabilities, name) {
 
     var self = this;
     var exportUrl = '/api/export/' + name;
@@ -207,24 +207,14 @@ var InputSection = function (parameters, period, exportSuccessMessage, searchCap
 
     self.save = function (_, e) {
         e.preventDefault();
-        exportSuccessMessage.hide();
-
-        $.ajax(exportUrl, {
-            data: exportSerialise(),
-
-            contentType: 'application/json',
-            success: function (fileName) {
-                exportSuccessMessage.show(fileName);
-            },
-            error: output.searchFailure,
-            type: 'POST'
+        model.export({
+            url: exportUrl,
+            data: exportSerialise()
         });
     };
 }
 
 var output = new Output();
-
-var exportSuccessMessage = new ExportSuccessMessage();
 
 var period = ko.mapping.fromJS({
     From: '2013-4-1',
@@ -233,13 +223,14 @@ var period = ko.mapping.fromJS({
 
 var SearchModel = function () {
 
+    var self = this;
+
+    self.exportSuccessMessage = new ExportSuccessMessage();
+    self.searching = ko.observable(false);
+
     var showField = function (fieldName) {
         return searchCapabilities.AvailableFields.indexOf(fieldName) !== -1;
     }
-
-    var self = this;
-
-    self.searching = ko.observable(false);
 
     var searchSerialise = function (searchWindow, pageNumber) {
         return JSON.stringify({
@@ -265,7 +256,19 @@ var SearchModel = function () {
             },
             type: 'POST'
         });
-    };    
+    };
+
+    self.export = function(exportOptions) {
+        self.exportSuccessMessage.hide();
+        $.ajax(exportOptions.url, {
+            data: exportOptions.data,
+
+            contentType: 'application/json',
+            success: self.exportSuccessMessage.show,            
+            error: output.searchFailure,
+            type: 'POST'
+        });
+    }    
 
     self.showAccountCode = function () {
         return showField('AccountCode');
@@ -303,27 +306,27 @@ var SearchModel = function () {
             ToDay: "Friday",
             FromTime: "08:00",
             ToTime: "18:00"
-        }), period, exportSuccessMessage, searchCapabilities, 'Hours'),
+        }), period, searchCapabilities, 'Hours'),
 
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: ko.observable(10)
-        }, period, exportSuccessMessage, searchCapabilities, 'Accounts'),
+        }, period, searchCapabilities, 'Accounts'),
 
         Date: new InputSection({
             daysBeforeYearEnd: ko.observable(10),
             yearEnd: period.To
-        }, period, exportSuccessMessage, searchCapabilities, 'Date'),
+        }, period, searchCapabilities, 'Date'),
 
         Users: new InputSection({
             users: ko.observable("")
-        }, period, exportSuccessMessage, searchCapabilities, 'Users'),
+        }, period, searchCapabilities, 'Users'),
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: ko.observable(3)
-        }, period, exportSuccessMessage, searchCapabilities, 'Ending')
+        }, period, searchCapabilities, 'Ending')
     };
-    self.output = output;
-    self.exportSuccessMessage = exportSuccessMessage;
+
+    self.output = output;    
 };
 
 
