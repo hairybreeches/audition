@@ -31,7 +31,7 @@ mixin excel-import()
 		+sheets-dropdown()
 		+checkbox('Header row', 'useHeaderRow')
 		legend Map columns
-		+row-dropdown({label: "Date", fieldName: "JournalDate", help: "The date the transaction happened. Used to determine whether the transaction applies to the current period or not. This is required."})
+		+row-dropdown({label: "Date", fieldName: "TransactionDate", help: "The date the transaction happened. Used to determine whether the transaction applies to the current period or not. This is required."})
 		+optional-row-dropdown({label: "Creation time", fieldName: "Created", help: "The time and date the transaction was created. Used to search for transactions posted outside of working hours and year-end entries"})
 		+optional-row-dropdown({label: "Created by", fieldName: "Username", help: "The name or ID of the user who entered the transaction"})
 		+optional-row-dropdown({label: "Amount", fieldName: "Amount", help: "The net/gross value of the transaction"})

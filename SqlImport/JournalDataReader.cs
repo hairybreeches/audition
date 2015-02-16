@@ -47,7 +47,7 @@ namespace SqlImport
             return GetField(usernameColumn, record, recordIndex, "username");
         }
         
-        public DateTime GetJournalDate(IDataRecord record, int recordIndex)
+        public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
         {
             return GetField(dateColumn, record, recordIndex, "journal date");
         }

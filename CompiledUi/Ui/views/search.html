@@ -202,7 +202,7 @@
             <thead>
               <tr>
                 <th data-bind="visible: $root.showCreated()">Date created</th>
-                <th data-bind="visible: $root.showJournalDate()">Date of journal</th>
+                <th data-bind="visible: $root.showTransactionDate()">Date of journal</th>
                 <th data-bind="visible: $root.showDescription()">Description</th>
                 <th data-bind="visible: $root.showUsername()">Username</th>
                 <th data-bind="visible: $root.showJournalType()">Dr/Cr				</th>
@@ -215,7 +215,7 @@
             <tbody>
               <tr>
                 <td data-bind="text: created, visible: $root.showCreated()"></td>
-                <td data-bind="text: journalDate, visible: $root.showJournalDate()"></td>
+                <td data-bind="text: transactionDate, visible: $root.showTransactionDate()"></td>
                 <td data-bind="text: description, visible: $root.showDescription()"></td>
                 <td data-bind="text: username, visible: $root.showUsername()"></td>
                 <td data-bind="text: lines[0].journalType, visible: $root.showJournalType()"></td>
@@ -226,7 +226,7 @@
               <!-- ko foreach: lines.slice(1)-->
               <tr data-bind="visible: $root.showJournalLine()">
                 <td data-bind="visible: $root.showCreated()"></td>
-                <td data-bind="visible: $root.showJournalDate()"></td>
+                <td data-bind="visible: $root.showTransactionDate()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>
                 <td data-bind="visible: $root.showUsername()"></td>
                 <td data-bind="text: journalType, visible: $root.showJournalType()"></td>

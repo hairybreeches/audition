@@ -34,7 +34,7 @@ var Journal = function(json) {
     }
 
     self.created = userFriendlyDateTime(json.Created);
-    self.journalDate = userFriendlyDate(json.JournalDate);
+    self.transactionDate = userFriendlyDate(json.TransactionDate);
     self.description = json.Description;
     self.username = json.Username;
     self.lines = json.Lines.map(function(json) {
@@ -279,8 +279,8 @@ var SearchModel = function () {
     self.showCreated = function () {
         return showField('Created');
     };
-    self.showJournalDate = function () {
-        return showField('JournalDate');
+    self.showTransactionDate = function () {
+        return showField('TransactionDate');
     };
     self.showJournalType = function () {
         return showField('JournalType');

@@ -24,7 +24,7 @@ namespace ExcelImport
             return new JournalDataReader(
                 GetIdColumn(lookups.Id),
                 GetColumn<string>(lookups.Username),
-                GetDateColumn(lookups.JournalDate),
+                GetDateColumn(lookups.TransactionDate),
                 GetDateColumn(lookups.Created),
                 GetColumn<string>(lookups.AccountCode),
                 GetColumn<double>(lookups.Amount),
@@ -82,8 +82,8 @@ namespace ExcelImport
                     return lookups.Created;
                 case DisplayField.Description:
                     return lookups.Description;
-                case DisplayField.JournalDate:
-                    return lookups.JournalDate;
+                case DisplayField.TransactionDate:
+                    return lookups.TransactionDate;
                 case DisplayField.Username:
                     return lookups.Username;
                 case DisplayField.JournalType:

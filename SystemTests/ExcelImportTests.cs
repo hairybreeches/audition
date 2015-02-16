@@ -36,7 +36,7 @@ namespace SystemTests
                     amount : 20,
                     created : 31,
                     description : 8,
-                    journalDate : 2,
+                    transactionDate : 2,
                     username : 7,
                     id:0
                 )
@@ -74,7 +74,7 @@ namespace SystemTests
                         amount: 9,
                         created: 3,
                         description: 5,
-                        journalDate: 6,
+                        transactionDate: 6,
                         username: 19,
                         id: -1
                     )
@@ -103,7 +103,7 @@ namespace SystemTests
                     amount : 9,
                     created : -1,
                     description : 5,
-                    journalDate : 6,
+                    transactionDate : 6,
                     username : 19,
                     id:-1
                 )
@@ -138,7 +138,7 @@ namespace SystemTests
                     amount : 9,
                     created : -1,
                     description : 5,
-                    journalDate : 6,
+                    transactionDate : 6,
                     username : 19,
                     id: -1
                 )

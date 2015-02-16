@@ -56,7 +56,7 @@ namespace Searching
 
         private IQueryable<Transaction> GetJournalsApplyingToPeriod(ITransactionRepository repository)
         {
-            return repository.GetTransactions().Where(x => Period.Contains(x.JournalDate));
+            return repository.GetTransactions().Where(x => Period.Contains(x.TransactionDate));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace SqlImport
             return new Transaction(
                 lines.Key,
                 GetField(journalLines, x => x.CreationTime, "creation time").ToUkDateTimeOffsetFromUkLocalTime(),
-                GetField(journalLines, x => x.JournalDate, "journal date"),
+                GetField(journalLines, x => x.TransactionDate, "journal date"),
                 GetField(journalLines, x => x.Username, "username"),
                 GetField(journalLines, x => x.Description, "description"),
                 journalLines.Select(ToModelLine));

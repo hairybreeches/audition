@@ -3,7 +3,7 @@ namespace Model
     public enum DisplayField
     {        
         Created,
-        JournalDate,
+        TransactionDate,
         Description,
         Username,
         JournalType,
