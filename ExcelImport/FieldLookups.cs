@@ -1,3 +1,6 @@
+using System;
+using SqlImport;
+
 namespace ExcelImport
 {
 
@@ -15,7 +18,7 @@ namespace ExcelImport
         {
             if (transactionDate < 0)
             {
-                throw new ExcelMappingException("The transaction date must be mapped");
+                throw new ExcelMappingException(String.Format("The {0} must be mapped", MappingField.TransactionDate));
             }
             Description = description;
             Username = username;
