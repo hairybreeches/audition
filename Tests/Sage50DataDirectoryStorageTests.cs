@@ -21,6 +21,9 @@ namespace Tests
             {
                 yield return new TestCaseData(new string[0], new[] { "Sage Line 50 v20" }, new string[0], new string[0])
                     .SetName("Does Not Return Non-existent DemoData Directories");
+
+                yield return new TestCaseData(new string[0], new[] { "Sage Line 50 v20" }, new[] { "", null, "c:\\directory" }, new[] { "c:\\directory" })
+                    .SetName("Does not return empty strings or null values");
                 
                 yield return new TestCaseData(
                         new[] {"C:\\programdata\\sage\\accounts\\2014\\demodata"},
