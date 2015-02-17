@@ -2,11 +2,7 @@ include ../components/template
 include ../components/message
    
 
-+page('Search', ['search'])
-	.container
-		.row
-			.col-md-4.col-md-offset-8
-				a.pull-right.btn.btn-default(href="/api/session/clearImport") Start again
++page('Search', ['search'], true)
 	.container(data-bind="with: input")
 		include ../components/searchInput
 		hr.vertical-space
