@@ -19,14 +19,14 @@ namespace Native
 
         private static string GetValue(string startFolder)
         {
-            var dialog = new FolderBrowserDialog
+            using (var dialog = new FolderBrowserDialog
             {
                 SelectedPath = startFolder
-            };
-
-            dialog.ShowDialog();
-
-            return dialog.SelectedPath;
+            })
+            {
+                dialog.ShowDialog();
+                return dialog.SelectedPath;
+            }            
         }
     }
 }
