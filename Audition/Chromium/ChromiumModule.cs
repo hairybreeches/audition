@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Windows.Forms;
+using Autofac;
 using CefSharp;
 
 
@@ -8,7 +9,7 @@ namespace Audition.Chromium
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<AppForm>();
+            builder.RegisterType<AppForm>().AsSelf().As<Form>().SingleInstance();
             builder.RegisterType<ChromiumControl>();
             builder.RegisterType<HttpConverter>();
             builder.RegisterType<OwinServer>();

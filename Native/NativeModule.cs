@@ -23,6 +23,7 @@ namespace Native
             builder.RegisterType<FolderChooser>().As<IFolderChooser>();
             builder.RegisterType<Clock>().As<IClock>();
             builder.RegisterType<FileSystem>().As<IFileSystem>();
+            builder.RegisterType<DialogShower>();
             builder.Register(_=> new Registry(RegistryHive.CurrentUser)).As<ICurrentUserRegistry>();
             builder.Register(_=> new Registry(RegistryHive.LocalMachine)).As<ILocalMachineRegistry>();
         }

@@ -7,10 +7,12 @@ namespace Native.Dialogs
     public class ExcelFileChooser : IExcelFileChooser
     {
         private readonly TaskFactory<string> taskFactory;
+        private readonly DialogShower shower;
 
-        public ExcelFileChooser(TaskFactory<string> taskFactory)
+        public ExcelFileChooser(TaskFactory<string> taskFactory, DialogShower shower)
         {
             this.taskFactory = taskFactory;
+            this.shower = shower;
         }
 
         public async Task<string> GetExcelFile(string startLocation)
@@ -18,7 +20,7 @@ namespace Native.Dialogs
             return await taskFactory.StartNew(() => GetValue(startLocation));
         }
 
-        private static string GetValue(string startLocation)
+        private string GetValue(string startLocation)
         {
             using (var dialog = new OpenFileDialog
             {
@@ -27,7 +29,7 @@ namespace Native.Dialogs
                 Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|All files|*.*"
             })
             {
-                dialog.ShowDialog();                
+                shower.ShowDialog(dialog);
                 return dialog.FileName;
             }            
         }
