@@ -6,10 +6,12 @@ namespace Native.Dialogs
     public class FolderChooser : IFolderChooser
     {
         private readonly TaskFactory<string> taskFactory;
+        private readonly DialogShower shower;
 
-        public FolderChooser(TaskFactory<string> taskFactory)
+        public FolderChooser(TaskFactory<string> taskFactory, DialogShower shower)
         {
             this.taskFactory = taskFactory;
+            this.shower = shower;
         }
 
         public async Task<string> GetFolder(string startFolder)
@@ -17,16 +19,17 @@ namespace Native.Dialogs
             return await taskFactory.StartNew(() =>GetValue(startFolder));
         }
 
-        private static string GetValue(string startFolder)
+        private string GetValue(string startFolder)
         {
             using (var dialog = new FolderBrowserDialog
             {
                 SelectedPath = startFolder
             })
             {
-                dialog.ShowDialog();
+                shower.ShowDialog(dialog);
+
                 return dialog.SelectedPath;
-            }            
+            }
         }
     }
 }

@@ -8,10 +8,12 @@ namespace Native.Dialogs
     public class FileSaveChooser : IFileSaveChooser
     {
         private readonly TaskFactory<ExportResult> taskFactory;
+        private readonly DialogShower shower;
 
-        public FileSaveChooser(TaskFactory<ExportResult> taskFactory)
+        public FileSaveChooser(TaskFactory<ExportResult> taskFactory, DialogShower shower)
         {
             this.taskFactory = taskFactory;
+            this.shower = shower;
         }
 
         public async Task<ExportResult> GetFileSaveLocation()
@@ -19,7 +21,7 @@ namespace Native.Dialogs
             return await taskFactory.StartNew(GetValue);
         }
 
-        private static ExportResult GetValue()
+        private ExportResult GetValue()
         {
             using (var dialog = new SaveFileDialog
             {
@@ -27,7 +29,7 @@ namespace Native.Dialogs
 
             })
             {
-                dialog.ShowDialog();
+                shower.ShowDialog(dialog);
 
                 if (!String.IsNullOrWhiteSpace(dialog.FileName))
                 {
