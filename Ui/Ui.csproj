@@ -95,7 +95,6 @@
     <None Include="style\tooltips.less" />
     <None Include="templates\components\excelImport.jade" />
     <None Include="templates\components\message.jade" />
-    <None Include="templates\components\licensing.jade" />
     <None Include="templates\pages\enterLicence.jade" />
   </ItemGroup>
   <ItemGroup>

@@ -8691,7 +8691,7 @@ textarea.form-control {
 .inline-block {
   display: inline-block;
 }
-.button-group .btn {
+.button-group * {
   margin-left: 20px;
 }
 .margin-right {

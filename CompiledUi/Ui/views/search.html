@@ -14,19 +14,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1>Search<img src="/Content/images/A.svg" class="brand-logo pull-right"></h1>
+          <h1>Search
+            <div class="pull-right button-group">
+              <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="inline-block"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="btn btn-danger"></a></div><a href="/api/session/clearImport" class="btn btn-default">Start again</a><img src="/Content/images/A.svg" class="brand-logo">
+            </div></h1>
         </div>
-      </div>
-      <div id="licensingElement" data-bind="visible: showLicensingInfo" style="display: none;" class="row">
-        <div class="col-md-12"><a data-bind="text: licenceText" href="/views/enterLicence.html" class="pull-right btn btn-danger"></a></div>
       </div>
     </div>
     <div id="pageElement">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-md-offset-8"><a href="/api/session/clearImport" class="pull-right btn btn-default">Start again</a></div>
-        </div>
-      </div>
       <div data-bind="with: input" class="container">
         <div class="form-horizontal blockable">
           <div style="display: none;" data-bind="visible: $root.searching" class="blockscreen loadscreen"></div>
