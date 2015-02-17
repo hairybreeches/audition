@@ -13,7 +13,7 @@ mixin import-form(system)
 
 +page('Import', ['sage50Import', 'excelImport', 'import'])
 	.container
-		legend.vertical-space Import data from accounts system
+		legend Import data from accounts system
 		.blockable(action="search", method="post")
 			.blockscreen.loadscreen(style="display: none;" data-bind="visible: blocked()")
 			form.form-horizontal
