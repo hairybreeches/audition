@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Native
+namespace Native.Dialogs
 {
     public interface IExcelFileChooser
     {

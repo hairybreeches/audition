@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Native
+namespace Native.Dialogs
 {
     public class FolderChooser : IFolderChooser
     {

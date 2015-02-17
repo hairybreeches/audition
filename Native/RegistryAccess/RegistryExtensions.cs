@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Native
+namespace Native.RegistryAccess
 {
     public static class RegistryExtensions
     {

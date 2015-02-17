@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Win32;
 
-namespace Native
+namespace Native.RegistryAccess
 {
     public class Registry : ILocalMachineRegistry, ICurrentUserRegistry, IDisposable
     {

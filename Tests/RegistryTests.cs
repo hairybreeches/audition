@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using Native;
+using Native.RegistryAccess;
 using NUnit.Framework;
-using Registry = Native.Registry;
+using Registry = Native.RegistryAccess.Registry;
 
 namespace Tests
 {

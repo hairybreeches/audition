@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Native;
+using Native.Disk;
 using Newtonsoft.Json;
 
 namespace UserData

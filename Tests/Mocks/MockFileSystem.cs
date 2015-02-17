@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CsvExport;
 using Native;
+using Native.Disk;
 
 namespace Tests.Mocks
 {

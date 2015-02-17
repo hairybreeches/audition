@@ -1,6 +1,6 @@
 using System;
 
-namespace Native
+namespace Native.Time
 {
     public interface IClock
     {

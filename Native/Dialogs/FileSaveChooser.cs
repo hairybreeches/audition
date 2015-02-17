@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
-namespace Native
+namespace Native.Dialogs
 {
     public class FileSaveChooser : IFileSaveChooser
     {

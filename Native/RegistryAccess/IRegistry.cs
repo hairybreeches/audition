@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Native
+namespace Native.RegistryAccess
 {
     public interface IRegistry
     {
