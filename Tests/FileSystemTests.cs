@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using CsvExport;
 using Native;
+using Native.Disk;
 using NUnit.Framework;
 
 namespace Tests

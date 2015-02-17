@@ -3,6 +3,11 @@ using System.Threading.Tasks.Schedulers;
 using Autofac;
 using Microsoft.Win32;
 using Model;
+using Native.Dialogs;
+using Native.Disk;
+using Native.RegistryAccess;
+using Native.Time;
+using Registry = Native.RegistryAccess.Registry;
 
 namespace Native
 {

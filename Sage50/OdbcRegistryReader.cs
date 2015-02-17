@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Native;
+using Native.RegistryAccess;
 
 namespace Sage50
 {

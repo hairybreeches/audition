@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using Excel;
 using Native;
+using Native.Disk;
 using SqlImport;
 
 namespace ExcelImport

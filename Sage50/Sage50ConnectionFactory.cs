@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Model;
 using Native;
+using Native.Disk;
 
 namespace Sage50
 {

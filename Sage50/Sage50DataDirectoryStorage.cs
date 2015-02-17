@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Native;
+using Native.Disk;
 using UserData;
 
 namespace Sage50

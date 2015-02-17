@@ -4,6 +4,7 @@ using Autofac.Builder;
 using ExcelImport;
 using Model;
 using Native;
+using Native.Disk;
 using NUnit.Framework;
 
 namespace Tests

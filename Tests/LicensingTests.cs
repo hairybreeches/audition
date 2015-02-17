@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Licensing;
 using Native;
+using Native.RegistryAccess;
+using Native.Time;
 using NSubstitute;
 using NUnit.Framework;
 using Tests.Mocks;

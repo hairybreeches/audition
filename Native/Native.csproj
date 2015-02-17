@@ -49,21 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clock.cs" />
-    <Compile Include="ExcelFileChooser.cs" />
-    <Compile Include="FileSaveChooser.cs" />
-    <Compile Include="FileSystem.cs" />
-    <Compile Include="FolderChooser.cs" />
-    <Compile Include="IClock.cs" />
-    <Compile Include="IExcelFileChooser.cs" />
-    <Compile Include="IFileSaveChooser.cs" />
-    <Compile Include="IFileSystem.cs" />
-    <Compile Include="IFolderChooser.cs" />
-    <Compile Include="IRegistry.cs" />
+    <Compile Include="Time\Clock.cs" />
+    <Compile Include="Dialogs\ExcelFileChooser.cs" />
+    <Compile Include="Dialogs\FileSaveChooser.cs" />
+    <Compile Include="Disk\FileSystem.cs" />
+    <Compile Include="Dialogs\FolderChooser.cs" />
+    <Compile Include="Time\IClock.cs" />
+    <Compile Include="Dialogs\IExcelFileChooser.cs" />
+    <Compile Include="Dialogs\IFileSaveChooser.cs" />
+    <Compile Include="Disk\IFileSystem.cs" />
+    <Compile Include="Dialogs\IFolderChooser.cs" />
+    <Compile Include="RegistryAccess\IRegistry.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registry.cs" />
-    <Compile Include="RegistryExtensions.cs" />
+    <Compile Include="RegistryAccess\Registry.cs" />
+    <Compile Include="RegistryAccess\RegistryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,6 +74,7 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,6 +8,7 @@ using Microsoft.Owin.FileSystems;
 using Model;
 using Model.Accounting;
 using Native;
+using Native.Dialogs;
 using NSubstitute;
 using Persistence;
 using Sage50;

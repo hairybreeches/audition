@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Native;
+using Native.Disk;
 using NUnit.Framework;
 using UserData;
 

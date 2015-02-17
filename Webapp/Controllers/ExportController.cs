@@ -6,6 +6,7 @@ using CsvExport;
 using Model;
 using Model.Accounting;
 using Native;
+using Native.Dialogs;
 using Persistence;
 using Searching;
 using Searching.SearchWindows;

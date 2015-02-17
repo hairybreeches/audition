@@ -1,4 +1,6 @@
 ﻿using Native;
+using Native.RegistryAccess;
+using Native.Time;
 
 namespace Licensing
 {

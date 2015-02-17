@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
-namespace Native
+namespace Native.Disk
 {
     public interface IFileSystem
     {

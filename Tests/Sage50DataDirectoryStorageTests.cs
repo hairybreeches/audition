@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Native;
+using Native.Disk;
+using Native.RegistryAccess;
 using NSubstitute;
 using NUnit.Framework;
 using Sage50;

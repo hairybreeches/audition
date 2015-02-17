@@ -7,6 +7,8 @@ using Model.Accounting;
 using Model.Responses;
 using Model.Time;
 using Native;
+using Native.RegistryAccess;
+using Native.Time;
 using NSubstitute;
 using NUnit.Framework;
 using Searching;
