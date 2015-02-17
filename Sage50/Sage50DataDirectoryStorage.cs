@@ -23,7 +23,9 @@ namespace Sage50
 
         public IEnumerable<string> GetSageDataDirectories()
         {
-            return GetUserDetails().Sage50DataLocations.Concat(GetExistingDemoDataLocations()).Distinct(StringComparer.InvariantCultureIgnoreCase);
+            return GetUserDetails().Sage50DataLocations.Concat(GetExistingDemoDataLocations())
+                .Where(x => !String.IsNullOrEmpty(x))
+                .Distinct(StringComparer.InvariantCultureIgnoreCase);
         }
 
         public UserDetails GetUserDetails()
