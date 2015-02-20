@@ -80,7 +80,7 @@ namespace SystemTests
                     )
                 }, 1));
 
-            Assert.AreEqual("Could not read transaction entry time of row 3: Could not interpret value '9998' from column D as a date", exception.Message);
+            Assert.AreEqual("Could not read transaction entry time of row 3: Could not interpret value '9998' from column D as a date. It looks like the data for the transaction entry time is incorrect. If you are importing data from Excel, please check the mapping for this column and try again.", exception.Message);
         }      
         
         [Test]
