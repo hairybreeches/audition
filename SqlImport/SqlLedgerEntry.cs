@@ -8,7 +8,7 @@ namespace SqlImport
     /// It's also the format we use to output data to Excel
     /// It seems like the format accountants expect when viewing entries in a tabular format
     /// </summary>
-    internal class SqlLedgerEntry
+    public class SqlLedgerEntry
     {
         public string TransactionId { get; private set; }
         public string Username { get; private set; }
