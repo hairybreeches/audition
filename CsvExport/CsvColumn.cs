@@ -1,5 +1,4 @@
 ﻿using System;
-using CsvHelper;
 
 namespace CsvExport
 {
@@ -14,12 +13,12 @@ namespace CsvExport
             this.fieldSelector = fieldSelector;
         }
 
-        public void WriteField(ICsvWriter writer, TOutput record)
+        public void WriteField(ISpreadsheetWriter writer, TOutput record)
         {
             writer.WriteField(fieldSelector(record));
         }
 
-        public void WriteHeader(ICsvWriter writer)
+        public void WriteHeader(ISpreadsheetWriter writer)
         {
             writer.WriteField(header);
         }

@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CsvHelper;
 using Model;
 using Model.Accounting;
-using Native;
-using Native.Disk;
 using SqlImport;
 
 namespace CsvExport
 {
-    public class CsvExporter : ITransactionExporter
+    public class SpreadsheetExporter : ITransactionExporter
     {
-        private readonly IFileSystem fileSystem;
-
         private readonly IEnumerable<ColumnFactory<SqlLedgerEntry>> columnFactories = new[]
         {
             new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
@@ -27,18 +22,19 @@ namespace CsvExport
         };
 
         private readonly TabularFormatConverter converter;
+        private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public CsvExporter(IFileSystem fileSystem, TabularFormatConverter converter)
+        public SpreadsheetExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
         {
-            this.fileSystem = fileSystem;
             this.converter = converter;
+            this.writerFactory = writerFactory;
         }
 
-        public void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
         {
             var fields = new HashSet<DisplayField>(availableFields);
-            WriteTransactions(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(fields));
+            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(fields));
         }
 
         private List<ICsvColumn<SqlLedgerEntry>> GetColumns(ICollection<DisplayField> fields)
@@ -46,26 +42,31 @@ namespace CsvExport
             return columnFactories.Select(x => x.GetColumn(fields)).ToList();
         }
 
-        private void WriteTransactions(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn<SqlLedgerEntry>> columns)
+        private void Export(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn<SqlLedgerEntry>> columns)
         {
-            using (var writer = CreateWriter(filename))
+            using (var writer = writerFactory.CreateWriter(filename))
             {
                 WriteDescriptionRow(writer, description);
                 WriteHeaderRow(writer, columns);
-                foreach (var transaction in transactions)
-                {
-                    WriteTransaction(writer, transaction, columns);
-                }
+                WriteTransactions(transactions, columns, writer);
             }
         }
 
-        private static void WriteDescriptionRow(ICsvWriter writer, string description)
+        private static void WriteTransactions(IEnumerable<SqlLedgerEntry> transactions, IList<ICsvColumn<SqlLedgerEntry>> columns, ISpreadsheetWriter writer)
+        {
+            foreach (var transaction in transactions)
+            {
+                WriteTransaction(writer, transaction, columns);
+            }
+        }
+
+        private static void WriteDescriptionRow(ISpreadsheetWriter writer, string description)
         {
             writer.WriteField(description);
             writer.NextRecord();
         }
 
-        private static void WriteHeaderRow(ICsvWriter writer, IList<ICsvColumn<SqlLedgerEntry>> transactionColumns)
+        private static void WriteHeaderRow(ISpreadsheetWriter writer, IList<ICsvColumn<SqlLedgerEntry>> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {
@@ -74,18 +75,13 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteTransaction(ICsvWriter writer, SqlLedgerEntry transaction, IEnumerable<ICsvColumn<SqlLedgerEntry>> transactionColumns)
+        private static void WriteTransaction(ISpreadsheetWriter writer, SqlLedgerEntry transaction, IEnumerable<ICsvColumn<SqlLedgerEntry>> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {
                 column.WriteField(writer, transaction);
             }
             writer.NextRecord();
-        }       
-
-        private ICsvWriter CreateWriter(string filename)
-        {
-            return new CsvWriter(fileSystem.OpenFileToWrite(filename));
-        }        
+        }             
     }
 }

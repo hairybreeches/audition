@@ -49,9 +49,13 @@
   <ItemGroup>
     <Compile Include="ColumnFactory.cs" />
     <Compile Include="CsvColumn.cs" />
-    <Compile Include="CsvExporter.cs" />
+    <Compile Include="SpreadsheetExporter.cs" />
     <Compile Include="CsvExportModule.cs" />
+    <Compile Include="CsvWriterFactory.cs" />
+    <Compile Include="CsvWriterWrapper.cs" />
     <Compile Include="ICsvColumn.cs" />
+    <Compile Include="ISpreadsheetWriter.cs" />
+    <Compile Include="ISpreadsheetWriterFactory.cs" />
     <Compile Include="ITransactionExporter.cs" />
     <Compile Include="NullCsvColumn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
