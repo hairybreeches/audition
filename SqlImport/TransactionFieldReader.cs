@@ -86,7 +86,7 @@ namespace SqlImport
             }
             catch (Exception e)
             {
-                var message = String.Format("Could not read {0} of row {1}: {2}", 
+                var message = String.Format("Could not read {0} of row {1}: {2}. It looks like the data for the {0} is incorrect. If you are importing data from Excel, please check the mapping for this column and try again.", 
                     mappingField.UserFriendlyName, recordIndex, e.Message);
                 throw new SqlDataFormatUnexpectedException(message, e);
             }
