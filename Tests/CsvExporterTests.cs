@@ -67,7 +67,7 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
         private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
-            var exporter = new CsvExporter(new TabularFormatConverter(), new CsvWriterFactory(fileSystem));
+            var exporter = new SpreadsheetExporter(new TabularFormatConverter(), new CsvWriterFactory(fileSystem));
             var filename = "c:\\steve.csv";
             exporter.WriteTransactions(description, transactions, filename, fields);
 
