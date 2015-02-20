@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
 using Model.Accounting;
 
 namespace SqlImport
@@ -23,7 +22,7 @@ namespace SqlImport
             var ledgerEntries = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetField(ledgerEntries, x => x.CreationTime, MappingField.EntryTime).ToUkDateTimeOffsetFromUkLocalTime(),
+                GetField(ledgerEntries, x => x.CreationTime, MappingField.EntryTime),
                 GetField(ledgerEntries, x => x.TransactionDate, MappingField.TransactionDate),
                 GetField(ledgerEntries, x => x.Username, MappingField.Username),
                 GetField(ledgerEntries, x => x.Description, MappingField.Description),

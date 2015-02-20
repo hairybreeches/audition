@@ -32,14 +32,14 @@ namespace Tests
 
             var expected = new[]
             {
-                new Transaction("26", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "MANAGER",
+                new Transaction("26", new DateTime(2010,4,27,17,16, 0), new DateTime(2013,12,31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
                     }),
-                new Transaction("12", new DateTimeOffset(2010,4,27,17,16, 0, TimeSpan.FromHours(1)), new DateTime(2013,12,31), "Steve",
+                new Transaction("12", new DateTime(2010,4,27,17,16, 0), new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
@@ -58,7 +58,7 @@ namespace Tests
 
             var expected = new[]
             {
-                new Transaction("26", new DateTimeOffset(2010,4,27,17,16,0, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER",
+                new Transaction("26", new DateTime(2010,4,27,17,16,0), new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
