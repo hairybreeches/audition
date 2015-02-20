@@ -51,10 +51,15 @@ namespace CsvExport
             {
                 WriteDescriptionRow(writer, description);
                 WriteHeaderRow(writer, columns);
-                foreach (var transaction in transactions)
-                {
-                    WriteTransaction(writer, transaction, columns);
-                }
+                WriteTransactions(transactions, columns, writer);
+            }
+        }
+
+        private static void WriteTransactions(IEnumerable<SqlLedgerEntry> transactions, IList<ICsvColumn<SqlLedgerEntry>> columns, ISpreadsheetWriter writer)
+        {
+            foreach (var transaction in transactions)
+            {
+                WriteTransaction(writer, transaction, columns);
             }
         }
 
