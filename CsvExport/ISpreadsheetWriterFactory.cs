@@ -4,6 +4,6 @@ namespace CsvExport
 {
     public interface ISpreadsheetWriterFactory
     {
-        ICsvWriter CreateWriter(string filename);
+        ISpreadsheetWriter CreateWriter(string filename);
     }
 }

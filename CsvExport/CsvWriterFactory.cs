@@ -12,9 +12,9 @@ namespace CsvExport
             this.fileSystem = fileSystem;
         }
 
-        public ICsvWriter CreateWriter(string filename)
+        public ISpreadsheetWriter CreateWriter(string filename)
         {
-            return new CsvWriter(fileSystem.OpenFileToWrite(filename));
+            return new CsvWriterWrapper(new CsvWriter(fileSystem.OpenFileToWrite(filename)));
         }        
     }
 }

@@ -4,11 +4,11 @@ namespace CsvExport
 {
     internal class NullCsvColumn<TRecord> : ICsvColumn<TRecord>
     {
-        public void WriteField(ICsvWriter writer, TRecord record)
+        public void WriteField(ISpreadsheetWriter writer, TRecord record)
         {            
         }
 
-        public void WriteHeader(ICsvWriter writer)
+        public void WriteHeader(ISpreadsheetWriter writer)
         {            
         }
     }

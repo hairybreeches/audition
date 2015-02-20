@@ -58,13 +58,13 @@ namespace CsvExport
             }
         }
 
-        private static void WriteDescriptionRow(ICsvWriter writer, string description)
+        private static void WriteDescriptionRow(ISpreadsheetWriter writer, string description)
         {
             writer.WriteField(description);
             writer.NextRecord();
         }
 
-        private static void WriteHeaderRow(ICsvWriter writer, IList<ICsvColumn<SqlLedgerEntry>> transactionColumns)
+        private static void WriteHeaderRow(ISpreadsheetWriter writer, IList<ICsvColumn<SqlLedgerEntry>> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {
@@ -73,7 +73,7 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteTransaction(ICsvWriter writer, SqlLedgerEntry transaction, IEnumerable<ICsvColumn<SqlLedgerEntry>> transactionColumns)
+        private static void WriteTransaction(ISpreadsheetWriter writer, SqlLedgerEntry transaction, IEnumerable<ICsvColumn<SqlLedgerEntry>> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {

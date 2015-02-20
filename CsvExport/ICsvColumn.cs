@@ -4,7 +4,7 @@ namespace CsvExport
 {
     internal interface ICsvColumn<in TRecord>
     {
-        void WriteField(ICsvWriter writer, TRecord record);
-        void WriteHeader(ICsvWriter writer);
+        void WriteField(ISpreadsheetWriter writer, TRecord record);
+        void WriteHeader(ISpreadsheetWriter writer);
     }
 }
