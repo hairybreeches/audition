@@ -44,7 +44,7 @@ namespace SystemTests
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the transactions back");
 
-            Assert.AreEqual(new Transaction("8", new DateTimeOffset(2010, 4, 27, 17, 16, 57, TimeSpan.FromHours(1)), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
+            Assert.AreEqual(new Transaction("8", new DateTime(2010, 4, 27, 17, 16, 57), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 

@@ -14,7 +14,7 @@ namespace Tests
         private readonly List<Transaction> transactions = new List<Transaction>
         {
             //one inside daylight savings
-            new Transaction("id 1", new DateTimeOffset(new DateTime(2012, 3, 4), TimeSpan.Zero), new DateTime(2012, 3, 4), "alf",
+            new Transaction("id 1", new DateTime(2012, 3, 4), new DateTime(2012, 3, 4), "alf",
                 "very interesting transaction", new List<LedgerEntry>
                 {
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
@@ -22,7 +22,7 @@ namespace Tests
                 }),
 
             //and one outside
-            new Transaction("id 2", new DateTimeOffset(new DateTime(2012, 6, 5), TimeSpan.FromHours(1)),
+            new Transaction("id 2", new DateTime(2012, 6, 5),
                 new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", new List<LedgerEntry>
                 {
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
@@ -38,8 +38,8 @@ namespace Tests
             var expected =
 @"What we did to get these transactions
 Entry time,Transaction date,Username,Description
-" + new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.FromHours(0)) +","+ new DateTime(2012,3,4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
-" + new DateTimeOffset(new DateTime(2012,6,5), TimeSpan.FromHours(1)) +"," + new DateTime(2012,6,5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
+" + new DateTime(2012,3,4) +","+ new DateTime(2012,3,4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
+" + new DateTime(2012,6,5) +"," + new DateTime(2012,6,5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
             
             Assert.AreEqual(expected, actual);

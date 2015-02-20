@@ -9,14 +9,14 @@ namespace Model.Accounting
     {
         private readonly IList<LedgerEntry> lines;
 
-        public Transaction(Guid id, DateTimeOffset created, DateTime transactionDate, IEnumerable<LedgerEntry> lines)
+        public Transaction(Guid id, DateTime created, DateTime transactionDate, IEnumerable<LedgerEntry> lines)
             :this(id.ToString(), created, transactionDate, String.Empty, String.Empty, lines)
         {
             
         }
 
         [JsonConstructor]
-        public Transaction(string id, DateTimeOffset created, DateTime transactionDate, string username, string description, IEnumerable<LedgerEntry> lines)
+        public Transaction(string id, DateTime created, DateTime transactionDate, string username, string description, IEnumerable<LedgerEntry> lines)
         {
             TransactionDate = transactionDate;
             Username = username;
@@ -27,7 +27,7 @@ namespace Model.Accounting
         }        
 
         public string Id { get; private set; }
-        public DateTimeOffset Created { get; private set; }
+        public DateTime Created { get; private set; }
         public DateTime TransactionDate { get; private set; }
         public string Username { get; private set; }
         public string Description { get; private set; }
