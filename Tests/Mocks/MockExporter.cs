@@ -10,7 +10,7 @@ namespace Tests.Mocks
     {
         public IEnumerable<Transaction> WrittenTransactions { get; private set; }
 
-        public void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
         {
             //evaluate the IEnumerable here in case things go out of scope when we want to access the data
             WrittenTransactions = transactions.ToList();

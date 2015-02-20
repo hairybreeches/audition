@@ -34,10 +34,10 @@ namespace CsvExport
             this.writerFactory = writerFactory;
         }
 
-        public void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
         {
             var fields = new HashSet<DisplayField>(availableFields);
-            WriteTransactions(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(fields));
+            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(fields));
         }
 
         private List<ICsvColumn<SqlLedgerEntry>> GetColumns(ICollection<DisplayField> fields)
@@ -45,7 +45,7 @@ namespace CsvExport
             return columnFactories.Select(x => x.GetColumn(fields)).ToList();
         }
 
-        private void WriteTransactions(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn<SqlLedgerEntry>> columns)
+        private void Export(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn<SqlLedgerEntry>> columns)
         {
             using (var writer = writerFactory.CreateWriter(filename))
             {
