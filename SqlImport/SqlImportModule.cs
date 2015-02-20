@@ -8,7 +8,7 @@ namespace SqlImport
         {
             builder.RegisterType<LedgerEntryParser>();
             builder.RegisterType<SqlFinancialTransactionReader>();
-            builder.RegisterType<TransactionCreator>();
+            builder.RegisterType<TabularFormatConverter>();
         }
     }
 }

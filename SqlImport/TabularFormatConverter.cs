@@ -6,15 +6,29 @@ using Model.Accounting;
 namespace SqlImport
 {
     /// <summary>
-    /// Knows how to turn intermediate parsing step SqlLedgerEntries into Transactions.
-    /// Don't use this directly. Use a SqlFinancialTransactionReader
+    /// Knows how to turn tabular data format SqlLedgerEntries into Transactions and back again    
     /// </summary>
-    public class TransactionCreator
+    public class TabularFormatConverter
     {
         internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlLedgerEntry> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateTransaction);
+        }
+
+        public IEnumerable<SqlLedgerEntry> ConvertToTabularFormat(IEnumerable<Transaction> transactions)
+        {
+            return transactions.SelectMany(ConvertToTabularFormat);
+        }
+
+        public IEnumerable<SqlLedgerEntry> ConvertToTabularFormat(Transaction transaction)
+        {
+            return transaction.Lines.Select(ledgerEntry => ConvertToTabularFormat(transaction, ledgerEntry));
+        }
+
+        private static SqlLedgerEntry ConvertToTabularFormat(Transaction transaction, LedgerEntry ledgerEntry)
+        {
+            return new SqlLedgerEntry(transaction.Id, transaction.Username, transaction.TransactionDate, transaction.Created, ledgerEntry.AccountCode, ledgerEntry.Amount, ledgerEntry.LedgerEntryType, transaction.Description, ledgerEntry.AccountName);
         }
 
         private Transaction CreateTransaction(IGrouping<string, SqlLedgerEntry> lines)
