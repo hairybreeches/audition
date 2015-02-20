@@ -109,7 +109,7 @@ namespace Tests
 
         private static IEnumerable<Transaction> ParseTransactions(params object[][] dataRows)
         {
-            var reader = new SageTransactionReader(new SageTransactionSchema(), new SqlFinancialTransactionReader(new LedgerEntryParser(), new TransactionCreator()));
+            var reader = new SageTransactionReader(new SageTransactionSchema(), new SqlFinancialTransactionReader(new LedgerEntryParser(), new TabularFormatConverter()));
             return reader.GetJournals(MockDataReader(dataRows), new NominalCodeLookup(nominalCodeLookup)).ToList();
         }       
 

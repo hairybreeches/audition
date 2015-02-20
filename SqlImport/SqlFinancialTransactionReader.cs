@@ -8,9 +8,9 @@ namespace SqlImport
     public class SqlFinancialTransactionReader
     {
         private readonly LedgerEntryParser ledgerEntryParser;
-        private readonly TransactionCreator transactionCreator;
+        private readonly TabularFormatConverter transactionCreator;
 
-        public SqlFinancialTransactionReader(LedgerEntryParser ledgerEntryParser, TransactionCreator transactionCreator)
+        public SqlFinancialTransactionReader(LedgerEntryParser ledgerEntryParser, TabularFormatConverter transactionCreator)
         {
             this.ledgerEntryParser = ledgerEntryParser;
             this.transactionCreator = transactionCreator;
