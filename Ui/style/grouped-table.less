@@ -1,0 +1,22 @@
+@import "_flatstrap\variables.less";
+
+.grouped-table > tbody + tbody{
+		border-top: none;
+}
+
+.grouped-striped-table > tbody:nth-child(even) {
+	tr{
+		> td,
+		> th {
+			background-color: @table-bg-accent;
+		}
+	}
+}
+
+
+.grouped-hover-table > tbody:hover > tr {
+    > td,
+    > th {
+      background-color: @table-bg-hover;
+    }
+}

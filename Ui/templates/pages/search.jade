@@ -1,0 +1,14 @@
+include ../components/template
+include ../components/message
+   
+
++page('Search', ['search'], true)
+	.container(data-bind="with: input")
+		include ../components/searchInput
+		hr.vertical-space
+	.container(data-bind="with: exportSuccessMessage")
+		include ../components/export
+	.container
+		+errorMessage('exportErrorMessage')
+	.container(data-bind="with: output")
+		include ../components/results
