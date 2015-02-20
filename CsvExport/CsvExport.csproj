@@ -51,6 +51,7 @@
     <Compile Include="CsvColumn.cs" />
     <Compile Include="CsvExporter.cs" />
     <Compile Include="CsvExportModule.cs" />
+    <Compile Include="CsvWriterFactory.cs" />
     <Compile Include="ICsvColumn.cs" />
     <Compile Include="ITransactionExporter.cs" />
     <Compile Include="NullCsvColumn.cs" />

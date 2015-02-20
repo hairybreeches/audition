@@ -7,6 +7,7 @@ namespace CsvExport
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CsvExporter>().As<ITransactionExporter>();            
+            builder.RegisterType<CsvWriterFactory>();            
         }
     }
 }

@@ -11,8 +11,6 @@ namespace CsvExport
 {
     public class CsvExporter : ITransactionExporter
     {
-        private readonly IFileSystem fileSystem;
-
         private readonly IEnumerable<ColumnFactory<SqlLedgerEntry>> columnFactories = new[]
         {
             new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
@@ -27,12 +25,13 @@ namespace CsvExport
         };
 
         private readonly TabularFormatConverter converter;
+        private readonly CsvWriterFactory writerFactory;
 
 
-        public CsvExporter(IFileSystem fileSystem, TabularFormatConverter converter)
+        public CsvExporter(TabularFormatConverter converter, CsvWriterFactory writerFactory)
         {
-            this.fileSystem = fileSystem;
             this.converter = converter;
+            this.writerFactory = writerFactory;
         }
 
         public void WriteTransactions(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
@@ -48,7 +47,7 @@ namespace CsvExport
 
         private void WriteTransactions(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn<SqlLedgerEntry>> columns)
         {
-            using (var writer = CreateWriter(filename))
+            using (var writer = writerFactory.CreateWriter(filename))
             {
                 WriteDescriptionRow(writer, description);
                 WriteHeaderRow(writer, columns);
@@ -81,11 +80,6 @@ namespace CsvExport
                 column.WriteField(writer, transaction);
             }
             writer.NextRecord();
-        }       
-
-        private ICsvWriter CreateWriter(string filename)
-        {
-            return new CsvWriter(fileSystem.OpenFileToWrite(filename));
-        }        
+        }             
     }
 }
