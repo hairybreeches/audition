@@ -15,8 +15,8 @@ namespace Sage50.Parsing
         private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
         private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
         private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);        
-        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 7);        
+        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);
+        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 7, (name, index) => new ToStringDataReader(index, name));        
 
         public IEnumerable<ISchemaColumn> MappedColumns
         {
