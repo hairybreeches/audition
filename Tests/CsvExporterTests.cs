@@ -20,7 +20,7 @@ namespace Tests
                 {
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
-                }),
+                }, "SI"),
 
             //and one outside
             new Transaction("id 2", new DateTime(2012, 6, 5),
@@ -28,7 +28,7 @@ namespace Tests
                 {
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
-                })
+                }, "UJ")
         };
 
         [Test]

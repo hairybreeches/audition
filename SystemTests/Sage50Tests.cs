@@ -36,11 +36,11 @@ namespace SystemTests
 
                 Assert.AreEqual("1278", result.TotalResults, "We should get all the transactions back");
                 Assert.AreEqual(new Transaction("8", new DateTime(2010,4,27,17,16,57), new DateTime(2013,12,31), "MANAGER", "Opening Balance", new[]
-            {
-                new LedgerEntry("1100", "Debtors Control Account", LedgerEntryType.Cr, 0.05m), 
-                new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Dr, 0.05m), 
-                new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
-            }), result.Transactions[7], "A random transaction should be correct");
+                {
+                    new LedgerEntry("1100", "Debtors Control Account", LedgerEntryType.Cr, 0.05m), 
+                    new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Dr, 0.05m), 
+                    new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
+                }, "SC"), result.Transactions[7], "A random transaction should be correct");
             }
 
 
