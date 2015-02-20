@@ -38,11 +38,11 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Entry time,Transaction date,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
-" + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4
-" + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Dr,3001,Cash,23.4
-" + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
-" + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
+Transaction ID,Entry time,Transaction date,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
+id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4
+id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Dr,3001,Cash,23.4
+id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
+id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
 ";
             
             Assert.AreEqual(expected, actual);

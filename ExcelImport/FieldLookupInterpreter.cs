@@ -88,6 +88,8 @@ namespace ExcelImport
                     return lookups.Username;
                 case DisplayField.LedgerEntryType:
                     return lookups.Amount;
+                case DisplayField.Id:
+                    return lookups.Id;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
 

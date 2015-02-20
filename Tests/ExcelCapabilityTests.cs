@@ -26,7 +26,7 @@ namespace Tests
                 yield return CreateTestCase("ID mapped", 
                     new FieldLookups(id: 1, accountCode: -1, accountName: -1, amount: -1, created: -1, description: -1, transactionDate: 18, username: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    DisplayField.TransactionDate);
+                    DisplayField.TransactionDate, DisplayField.Id);
 
                 yield return CreateTestCase("Account Code mapped", 
                     new FieldLookups(id: -1, accountCode: 12, accountName: -1, amount: -1, created: -1, description: -1, transactionDate: 18, username: -1), 
@@ -84,7 +84,7 @@ namespace Tests
                 yield return CreateTestCase("ID unmapped", 
                     new FieldLookups(id: -1, accountCode: 18, accountName: 18, amount: 18, created: 18, description: 18, transactionDate: 18, username: 18), 
                     new Dictionary<string, string>(), 
-                    Enums.GetAllValues<DisplayField>());
+                    Enums.GetAllValues<DisplayField>().Without(DisplayField.Id));
 
                 yield return CreateTestCase("Account Code unmapped", 
                     new FieldLookups(id: 18, accountCode: -1, accountName: 18, amount: 18, created: 18, description: 18, transactionDate: 18, username: 18), 
