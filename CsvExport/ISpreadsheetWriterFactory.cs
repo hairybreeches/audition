@@ -1,6 +1,4 @@
-﻿using CsvHelper;
-
-namespace CsvExport
+﻿namespace CsvExport
 {
     public interface ISpreadsheetWriterFactory
     {
