@@ -10,13 +10,14 @@ namespace SqlImport
         public static MappingField Amount { get { return new MappingField("amount"); } }
         public static MappingField Description { get { return new MappingField("description"); } }
         public static MappingField NominalName { get { return new MappingField("nominal code name"); } }
+        public static MappingField Type { get { return new MappingField("transaction type"); } }
 
         private MappingField(string userFriendlyName)
         {
             UserFriendlyName = userFriendlyName;
         }
 
-        public string UserFriendlyName { get; private set; }
+        public string UserFriendlyName { get; private set; }        
 
         public override string ToString()
         {

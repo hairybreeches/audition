@@ -38,7 +38,8 @@ namespace SystemTests
                     description : 8,
                     transactionDate : 2,
                     username : 7,
-                    id:0
+                    id:0,
+                    type: 1
                 )
             }, 1);
 
@@ -76,7 +77,8 @@ namespace SystemTests
                         description: 5,
                         transactionDate: 6,
                         username: 19,
-                        id: -1
+                        id: -1,
+                        type: 1
                     )
                 }, 1));
 
@@ -105,7 +107,8 @@ namespace SystemTests
                     description : 5,
                     transactionDate : 6,
                     username : 19,
-                    id:-1
+                    id:-1,
+                    type: 1
                 )
             }, 6);
 
@@ -140,7 +143,8 @@ namespace SystemTests
                     description : 5,
                     transactionDate : 6,
                     username : 19,
-                    id: -1
+                    id: -1,
+                    type: 1
                 )
             }, 1);
 
