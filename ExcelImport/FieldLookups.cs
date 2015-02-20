@@ -14,7 +14,8 @@ namespace ExcelImport
             int accountCode,
             int accountName,
             int amount,
-            int id)
+            int id, 
+            int type)
         {
             if (transactionDate < 0)
             {
@@ -28,6 +29,7 @@ namespace ExcelImport
             AccountName = accountName;
             Amount = amount;
             Id = id;
+            Type = type;
         }
 
         public int Description { get; private set; }
@@ -38,5 +40,6 @@ namespace ExcelImport
         public int AccountName { get; private set; }
         public int Amount { get; private set; }
         public int Id { get; private set; }
+        public int Type { get; private set; }
     }
 }
