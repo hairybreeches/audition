@@ -1,6 +1,4 @@
-﻿using CsvHelper;
-
-namespace CsvExport
+﻿namespace CsvExport
 {
     internal class NullCsvColumn<TRecord> : ICsvColumn<TRecord>
     {
