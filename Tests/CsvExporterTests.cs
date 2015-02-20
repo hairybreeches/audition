@@ -48,22 +48,10 @@ id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateSt
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
-        {
-            var fileSystem = new MockFileSystem();
-            var exporter = new CsvExporter(fileSystem, new TabularFormatConverter());
-            exporter.WriteTransactions(description, transactions, "c:\\steve.csv", fields);
-
-            var actual = fileSystem.GetFileValue("c:\\steve.csv");
-            return actual;
-        }
-
         [Test]
         public void OnlyShowsSpecifiedFields()
         {
-            var fileSystem = new MockFileSystem();
-            var exporter = new CsvExporter(fileSystem, new TabularFormatConverter());
-            exporter.WriteTransactions("An illuminating comment", transactions, "c:\\steve.csv", new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
+            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
 
             var expected =
 @"An illuminating comment
@@ -73,7 +61,17 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
 " + new DateTime(2012,6,5).ToShortDateString() + @",steve,Cr,8014,12.4
 " + new DateTime(2012,6,5).ToShortDateString() + @",steve,Dr,4001,12.4
 ";
-            Assert.AreEqual(expected, fileSystem.GetFileValue("c:\\steve.csv"));
+            Assert.AreEqual(expected, actual);
+        }
+
+        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
+        {
+            var fileSystem = new MockFileSystem();
+            var exporter = new CsvExporter(fileSystem, new TabularFormatConverter());
+            exporter.WriteTransactions(description, transactions, "c:\\steve.csv", fields);
+
+            var actual = fileSystem.GetFileValue("c:\\steve.csv");
+            return actual;
         }
     }
 }
