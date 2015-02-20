@@ -15,6 +15,7 @@ namespace CsvExport
 
         private readonly IEnumerable<ColumnFactory<SqlLedgerEntry>> columnFactories = new[]
         {
+            new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
             new ColumnFactory<SqlLedgerEntry>("Entry time", DisplayField.Created, line => line.CreationTime),
             new ColumnFactory<SqlLedgerEntry>("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToShortDateString()),
             new ColumnFactory<SqlLedgerEntry>("Username", DisplayField.Username, line => line.Username),

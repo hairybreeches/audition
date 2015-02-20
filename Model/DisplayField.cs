@@ -9,6 +9,7 @@ namespace Model
         LedgerEntryType,
         AccountName,
         Amount,
-        AccountCode
+        AccountCode,
+        Id
     }
 }
