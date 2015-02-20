@@ -15,8 +15,8 @@ namespace CsvExport
 
         private readonly IEnumerable<ColumnFactory<Transaction>> transactionColumnFactories = new[]
         {
-            new ColumnFactory<Transaction>("Created", DisplayField.Created, transaction => transaction.Created),
-            new ColumnFactory<Transaction>("Date", DisplayField.TransactionDate, transaction => transaction.TransactionDate.ToShortDateString()),
+            new ColumnFactory<Transaction>("Entry time", DisplayField.Created, transaction => transaction.Created),
+            new ColumnFactory<Transaction>("Transaction date", DisplayField.TransactionDate, transaction => transaction.TransactionDate.ToShortDateString()),
             new ColumnFactory<Transaction>("Username", DisplayField.Username, transaction => transaction.Username),
             new ColumnFactory<Transaction>("Description", DisplayField.Description, transaction => transaction.Description)
         };
