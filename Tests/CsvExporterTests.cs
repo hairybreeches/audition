@@ -68,9 +68,10 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
         {
             var fileSystem = new MockFileSystem();
             var exporter = new CsvExporter(fileSystem, new TabularFormatConverter());
-            exporter.WriteTransactions(description, transactions, "c:\\steve.csv", fields);
+            var filename = "c:\\steve.csv";
+            exporter.WriteTransactions(description, transactions, filename, fields);
 
-            var actual = fileSystem.GetFileValue("c:\\steve.csv");
+            var actual = fileSystem.GetFileValue(filename);
             return actual;
         }
     }
