@@ -25,10 +25,10 @@ namespace CsvExport
         };
 
         private readonly TabularFormatConverter converter;
-        private readonly CsvWriterFactory writerFactory;
+        private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public CsvExporter(TabularFormatConverter converter, CsvWriterFactory writerFactory)
+        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
         {
             this.converter = converter;
             this.writerFactory = writerFactory;

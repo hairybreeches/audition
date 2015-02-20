@@ -3,7 +3,7 @@ using Native.Disk;
 
 namespace CsvExport
 {
-    public class CsvWriterFactory
+    public class CsvWriterFactory : ISpreadsheetWriterFactory
     {
         private readonly IFileSystem fileSystem;
 
