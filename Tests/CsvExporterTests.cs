@@ -37,7 +37,7 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Created,Date,Username,Description
+Entry time,Transaction date,Username,Description
 " + new DateTimeOffset(new DateTime(2012,3,4), TimeSpan.FromHours(0)) +","+ new DateTime(2012,3,4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4,Dr,3001,Cash,23.4
 " + new DateTimeOffset(new DateTime(2012,6,5), TimeSpan.FromHours(1)) +"," + new DateTime(2012,6,5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4,Dr,4001,Fixed assets,12.4
 ";
@@ -64,7 +64,7 @@ Created,Date,Username,Description
 
             var expected =
 @"An illuminating comment
-Date,Username
+Transaction date,Username
 " + new DateTime(2012,3,4).ToShortDateString() + @",alf,Cr,9012,23.4,Dr,3001,23.4
 " + new DateTime(2012,6,5).ToShortDateString() + @",steve,Cr,8014,12.4,Dr,4001,12.4
 ";
