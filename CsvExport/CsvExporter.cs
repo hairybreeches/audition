@@ -6,7 +6,7 @@ using SqlImport;
 
 namespace CsvExport
 {
-    public class SpreadsheetExporter : ITransactionExporter
+    public class CsvExporter : ITransactionExporter
     {
         private readonly IEnumerable<ColumnFactory<SqlLedgerEntry>> columnFactories = new[]
         {
@@ -26,7 +26,7 @@ namespace CsvExport
         private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public SpreadsheetExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
+        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
         {
             this.converter = converter;
             this.writerFactory = writerFactory;
