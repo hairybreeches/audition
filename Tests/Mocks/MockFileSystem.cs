@@ -47,7 +47,7 @@ namespace Tests.Mocks
             throw new ShouldNotHappenInThisTestException();
         }
 
-        public TempFile GetTempFile()
+        public TempFile GetTempFile(string extension = "tmp")
         {
             throw new ShouldNotHappenInThisTestException();
         }
