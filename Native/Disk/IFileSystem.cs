@@ -11,5 +11,6 @@ namespace Native.Disk
         void EnsureDirectoryExists(string directory);
         bool FileExists(string filename);
         Stream OpenFileStreamToRead(string filename);
+        TempFile GetTempFile();
     }
 }
