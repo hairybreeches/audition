@@ -49,5 +49,10 @@ namespace Native.Disk
                 File.Delete(filename);
             }
         }
+
+        public TempFile GetTempFile()
+        {
+            return new TempFile(this, Path.GetTempFileName());
+        }
     }
 }

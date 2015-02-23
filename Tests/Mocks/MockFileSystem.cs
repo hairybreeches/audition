@@ -47,6 +47,11 @@ namespace Tests.Mocks
             throw new ShouldNotHappenInThisTestException();
         }
 
+        public TempFile GetTempFile()
+        {
+            throw new ShouldNotHappenInThisTestException();
+        }
+
         public string GetFileValue(string filename)
         {
             return files[filename];

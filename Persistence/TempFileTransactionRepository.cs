@@ -14,7 +14,7 @@ namespace Persistence
     public class TempFileTransactionRepository : ITransactionRepository, IDisposable
     {
         private readonly IFileSystem fileSystem;
-        private string filename;
+        private TempFile file;
 
         public TempFileTransactionRepository(IFileSystem fileSystem)
         {
@@ -24,7 +24,7 @@ namespace Persistence
 
         private void GenerateNewTempFile()
         {
-            filename = Path.GetTempFileName();
+            file = fileSystem.GetTempFile();
         }
 
         public IQueryable<Transaction> GetTransactions()
@@ -36,7 +36,7 @@ namespace Persistence
         {
             get
             {
-                using (var reader = fileSystem.OpenFileToRead(filename))
+                using (var reader = file.OpenFileToRead())
                 {
                     while (!reader.EndOfStream)
                     {
@@ -49,7 +49,7 @@ namespace Persistence
         public ITransactionRepository UpdateTransactions(IEnumerable<Transaction> transactions)
         {
             var imported = false;
-            using(var writer = fileSystem.OpenFileToWrite(filename))
+            using(var writer = file.OpenFileToWrite())
             foreach (var transaction in transactions)
             {
                 imported = true;
@@ -71,7 +71,7 @@ namespace Persistence
 
         private void DeleteTempFile()
         {
-            fileSystem.DeleteFile(filename);
+           using(file){}
         }
 
         public void Dispose()
@@ -79,4 +79,6 @@ namespace Persistence
             DeleteTempFile();
         }
     }
+
+   
 }
