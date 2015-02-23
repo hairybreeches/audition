@@ -14,6 +14,11 @@ namespace Native.Disk
             this.filename = filename;
         }
 
+        public string Filename
+        {
+            get { return filename; }
+        }
+
         public StreamReader OpenFileToRead()
         {
             return fileSystem.OpenFileToRead(filename);

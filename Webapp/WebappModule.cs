@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using CsvExport;
+using ExcelExport;
 using ExcelImport;
 using Licensing;
 using Native;
@@ -17,6 +18,7 @@ namespace Webapp
         {
             builder.RegisterModule<Sage50Module>();
             builder.RegisterModule<NativeModule>();
+            builder.RegisterModule<ExcelExportModule>();
             builder.RegisterModule<CsvExportModule>();
             builder.RegisterModule<SessionModule>();
             builder.RegisterModule<PersistenceModule>();
