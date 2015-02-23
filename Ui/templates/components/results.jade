@@ -13,6 +13,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 			tr
 				th(data-bind="visible: $root.showCreated()") Entry time
 				th(data-bind="visible: $root.showTransactionDate()") Transaction Date
+				th(data-bind="visible: $root.showType()") Transaction Type
 				th(data-bind="visible: $root.showDescription()") Description
 				th(data-bind="visible: $root.showUsername()") Username
 				th(data-bind="visible: $root.showLedgerEntryType()") Dr/Cr				
@@ -24,6 +25,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 				tr
 					td(data-bind="text: created, visible: $root.showCreated()")
 					td(data-bind="text: transactionDate, visible: $root.showTransactionDate()")
+					td(data-bind="text: type, visible: $root.showType()")
 					td(data-bind="text: description, visible: $root.showDescription()")
 					td(data-bind="text: username, visible: $root.showUsername()")
 					td(data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()")
@@ -34,6 +36,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 				tr(data-bind="visible: $root.showEntries()")
 					td(data-bind="visible: $root.showCreated()")
 					td(data-bind="visible: $root.showTransactionDate()")
+					td(data-bind="visible: $root.showType()")
 					td(data-bind="visible: $root.showDescription()")
 					td(data-bind="visible: $root.showUsername()")
 					td(data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()")
