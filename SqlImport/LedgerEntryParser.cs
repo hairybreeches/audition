@@ -20,10 +20,11 @@ namespace SqlImport
                 dataReader.GetNominalCode(record, recordIndex),
                 dataReader.GetAmount(record, recordIndex),
                 dataReader.GetDescription(record, recordIndex),
-                dataReader.GetNominalCodeName(record, recordIndex));
+                dataReader.GetNominalCodeName(record, recordIndex),
+                dataReader.GetType(record, recordIndex));
         }
 
-        private static SqlLedgerEntry CreateLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName)
+        private static SqlLedgerEntry CreateLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, double rawAmount, string description, string nominalCodeName, string transactionType)
         {
             LedgerEntryType type;
             decimal amount;
@@ -39,7 +40,7 @@ namespace SqlImport
                 amount = (Decimal)rawAmount;
             }
 
-            return new SqlLedgerEntry(transactionId, username, transactionDate, creationTime, nominalCode, amount, type, description, nominalCodeName);
+            return new SqlLedgerEntry(transactionId, username, transactionDate, creationTime, nominalCode, amount, type, description, nominalCodeName, transactionType);
         }        
     }
 }

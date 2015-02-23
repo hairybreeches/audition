@@ -38,7 +38,8 @@ namespace SystemTests
                     description : 8,
                     transactionDate : 2,
                     username : 7,
-                    id:0
+                    id:0,
+                    type: 1
                 )
             }, 1);
 
@@ -49,7 +50,7 @@ namespace SystemTests
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)
-            }), result.Transactions[7], "A random transaction should be correct");
+            }, "SC"), result.Transactions[7], "A random transaction should be correct");
         }
 
         [Test]
@@ -76,7 +77,8 @@ namespace SystemTests
                         description: 5,
                         transactionDate: 6,
                         username: 19,
-                        id: -1
+                        id: -1,
+                        type: 1
                     )
                 }, 1));
 
@@ -105,7 +107,8 @@ namespace SystemTests
                     description : 5,
                     transactionDate : 6,
                     username : 19,
-                    id:-1
+                    id:-1,
+                    type: 1
                 )
             }, 6);
 
@@ -113,7 +116,7 @@ namespace SystemTests
                     new[]
                     {
                         new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
-                    }), results.Transactions[9], "A random transaction should be correct");
+                    }, "JD"), results.Transactions[9], "A random transaction should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      
@@ -140,7 +143,8 @@ namespace SystemTests
                     description : 5,
                     transactionDate : 6,
                     username : 19,
-                    id: -1
+                    id: -1,
+                    type: 1
                 )
             }, 1);
 

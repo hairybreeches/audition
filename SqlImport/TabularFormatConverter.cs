@@ -28,7 +28,7 @@ namespace SqlImport
 
         private static SqlLedgerEntry ConvertToTabularFormat(Transaction transaction, LedgerEntry ledgerEntry)
         {
-            return new SqlLedgerEntry(transaction.Id, transaction.Username, transaction.TransactionDate, transaction.Created, ledgerEntry.AccountCode, ledgerEntry.Amount, ledgerEntry.LedgerEntryType, transaction.Description, ledgerEntry.AccountName);
+            return new SqlLedgerEntry(transaction.Id, transaction.Username, transaction.TransactionDate, transaction.Created, ledgerEntry.AccountCode, ledgerEntry.Amount, ledgerEntry.LedgerEntryType, transaction.Description, ledgerEntry.AccountName, transaction.TransactionType);
         }
 
         private Transaction CreateTransaction(IGrouping<string, SqlLedgerEntry> lines)
@@ -40,7 +40,8 @@ namespace SqlImport
                 GetField(ledgerEntries, x => x.TransactionDate, MappingField.TransactionDate),
                 GetField(ledgerEntries, x => x.Username, MappingField.Username),
                 GetField(ledgerEntries, x => x.Description, MappingField.Description),
-                ledgerEntries.Select(ToModelLine));
+                ledgerEntries.Select(ToModelLine),
+                GetField(ledgerEntries, x => x.TransactionType, MappingField.Type));
 
 
         }

@@ -18,9 +18,10 @@ namespace SqlImport
         public LedgerEntryType LedgerEntryType { get; private set; }
         public decimal Amount { get; private set; }
         public string Description { get; private set; }
-        public string NominalCodeName { get; set; }
+        public string NominalCodeName { get; private set; }
+        public string TransactionType { get; private set; }
 
-        public SqlLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, String description, string nominalCodeName)
+        public SqlLedgerEntry(string transactionId, string username, DateTime transactionDate, DateTime creationTime, string nominalCode, decimal amount, LedgerEntryType type, string description, string nominalCodeName, string transactionType)
         {
             TransactionId = transactionId;
             Username = username;
@@ -31,6 +32,7 @@ namespace SqlImport
             LedgerEntryType = type;
             Description = description;
             NominalCodeName = nominalCodeName;
+            TransactionType = transactionType;
         }
 
         public override string ToString()

@@ -22,7 +22,7 @@ namespace Searching.SearchWindows
 
         public override string ToString()
         {
-            return String.Format("Ending in at least {0} zeroes", MinimumZeroesToBeConsideredUnusual);
+            return String.Format("ending in at least {0} zeroes", MinimumZeroesToBeConsideredUnusual);
         }
 
         public IQueryable<Transaction> ApplyFilter(Searcher searcher, IQueryable<Transaction> transactions)
