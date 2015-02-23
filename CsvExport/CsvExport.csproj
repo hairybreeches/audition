@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="ColumnFactory.cs" />
     <Compile Include="CsvColumn.cs" />
-    <Compile Include="SpreadsheetExporter.cs" />
+    <Compile Include="CsvExporter.cs" />
     <Compile Include="CsvExportModule.cs" />
     <Compile Include="CsvWriterFactory.cs" />
     <Compile Include="CsvWriterWrapper.cs" />

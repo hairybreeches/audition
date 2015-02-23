@@ -6,13 +6,14 @@ using SqlImport;
 
 namespace CsvExport
 {
-    public class SpreadsheetExporter : ITransactionExporter
+    public class CsvExporter : ITransactionExporter
     {
         private readonly IEnumerable<ColumnFactory<SqlLedgerEntry>> columnFactories = new[]
         {
             new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
             new ColumnFactory<SqlLedgerEntry>("Entry time", DisplayField.Created, line => line.CreationTime),
             new ColumnFactory<SqlLedgerEntry>("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToShortDateString()),
+            new ColumnFactory<SqlLedgerEntry>("Transaction type", DisplayField.Type, line => line.TransactionType),
             new ColumnFactory<SqlLedgerEntry>("Username", DisplayField.Username, line => line.Username),
             new ColumnFactory<SqlLedgerEntry>("Description", DisplayField.Description, line => line.Description),  
             new ColumnFactory<SqlLedgerEntry>("Dr/Cr", DisplayField.LedgerEntryType, line => line.LedgerEntryType),
@@ -25,7 +26,7 @@ namespace CsvExport
         private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public SpreadsheetExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
+        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
         {
             this.converter = converter;
             this.writerFactory = writerFactory;

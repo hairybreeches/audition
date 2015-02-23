@@ -24,11 +24,11 @@ namespace Tests
         public void CanConvertTransactions()
         {
             var transactions = ParseTransactions(
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-55", "Unpresented Cheque" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "2200", "0", "Unpresented Cheque" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-13", "Unpresented Cheque" });
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque", "CI" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-55", "Unpresented Cheque", "CI" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "2200", "0", "Unpresented Cheque", "CI" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque", "UJ" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-13", "Unpresented Cheque", "UJ" });
 
             var expected = new[]
             {
@@ -38,13 +38,13 @@ namespace Tests
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
-                    }),
+                    }, "CI"),
                 new Transaction("12", new DateTime(2010,4,27,17,16, 0), new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13)
-                    })
+                    }, "UJ")
             };
 
             CollectionAssert.AreEqual(expected, transactions);
@@ -54,7 +54,7 @@ namespace Tests
         [Test]
         public void CanParseUnbalancedTransactions()
         {
-            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque" });
+            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque", "AF" });
 
             var expected = new[]
             {
@@ -62,7 +62,7 @@ namespace Tests
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
-                    })};
+                    }, "AF")};
 
             CollectionAssert.AreEqual(expected, transactions, "Sage parsing needs to be able to parse transactions which don't balance, because for reasons known only to its devs, Sage supports them");
         }

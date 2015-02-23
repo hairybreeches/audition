@@ -15,7 +15,8 @@ namespace Sage50.Parsing
         private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
         private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
         private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);        
+        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);
+        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 7, (name, index) => new LookupConverter<string,string>(new ToStringDataReader(index, name), new Sage50TransactionTypeLookup()));        
 
         public IEnumerable<ISchemaColumn> MappedColumns
         {
@@ -29,7 +30,8 @@ namespace Sage50.Parsing
                     creationTimeColumn,
                     nominalCodeColumn,
                     amountColumn,
-                    detailsColumn                    
+                    detailsColumn,
+                    typeColumn
                 }
                 .OrderBy(x => x.Index);
             }
@@ -45,6 +47,7 @@ namespace Sage50.Parsing
                 nominalCodeColumn.DataReader, 
                 amountColumn.DataReader, 
                 detailsColumn.DataReader, 
+                typeColumn.DataReader,
                 new LookupConverter<string, string>(nominalCodeColumn.DataReader, nominalCodeNameLookup));
         }
 

@@ -29,6 +29,7 @@ namespace ExcelImport
                 GetColumn<string>(lookups.AccountCode),
                 GetColumn<double>(lookups.Amount),
                 GetColumn<string>(lookups.Description),
+                GetColumn<string>(lookups.Type),
                 GetColumn<string>(lookups.AccountName));
         }
 
@@ -89,7 +90,9 @@ namespace ExcelImport
                 case DisplayField.LedgerEntryType:
                     return lookups.Amount;
                 case DisplayField.Id:
-                    return lookups.Id;
+                    return lookups.Id;   
+                case DisplayField.Type:
+                    return lookups.Type;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
 
