@@ -13,6 +13,7 @@ namespace CsvExport
             new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
             new ColumnFactory<SqlLedgerEntry>("Entry time", DisplayField.Created, line => line.CreationTime),
             new ColumnFactory<SqlLedgerEntry>("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToShortDateString()),
+            new ColumnFactory<SqlLedgerEntry>("Transaction type", DisplayField.Type, line => line.TransactionType),
             new ColumnFactory<SqlLedgerEntry>("Username", DisplayField.Username, line => line.Username),
             new ColumnFactory<SqlLedgerEntry>("Description", DisplayField.Description, line => line.Description),  
             new ColumnFactory<SqlLedgerEntry>("Dr/Cr", DisplayField.LedgerEntryType, line => line.LedgerEntryType),

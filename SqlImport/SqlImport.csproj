@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingField.cs" />
+    <Compile Include="Sage50TransactionTypeLookup.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />
     <Compile Include="DataReaders\SqlDataReader.cs" />

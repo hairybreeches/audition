@@ -20,7 +20,7 @@ namespace Tests
                 {
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
-                }),
+                }, "SI"),
 
             //and one outside
             new Transaction("id 2", new DateTime(2012, 6, 5),
@@ -28,7 +28,7 @@ namespace Tests
                 {
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
-                })
+                }, "UJ")
         };
 
         [Test]
@@ -38,11 +38,11 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Transaction ID,Entry time,Transaction date,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
-id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Cr,9012,Expenses,23.4
-id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",alf,very interesting transaction,Dr,3001,Cash,23.4
-id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
-id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
+Transaction ID,Entry time,Transaction date,Transaction type,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
+id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",SI,alf,very interesting transaction,Cr,9012,Expenses,23.4
+id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",SI,alf,very interesting transaction,Dr,3001,Cash,23.4
+id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",UJ,steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
+id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
 ";
             
             Assert.AreEqual(expected, actual);

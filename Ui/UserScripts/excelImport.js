@@ -6,7 +6,7 @@
     self.sheet = ko.observable("0");
     self.showInput = ko.observable(false);
 
-    var fields = ['TransactionDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'Id'];
+    var fields = ['TransactionDate', 'Description', 'Username', 'Created', 'AccountCode', 'AccountName', 'Amount', 'Id', 'Type'];
 
     fields.forEach(
         function (fieldName) {

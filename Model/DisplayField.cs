@@ -10,6 +10,7 @@ namespace Model
         AccountName,
         Amount,
         AccountCode,
-        Id
+        Id,
+        Type
     }
 }

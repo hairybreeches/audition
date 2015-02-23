@@ -258,6 +258,7 @@
               <tr>
                 <th data-bind="visible: $root.showCreated()">Entry time</th>
                 <th data-bind="visible: $root.showTransactionDate()">Transaction Date</th>
+                <th data-bind="visible: $root.showType()">Transaction Type</th>
                 <th data-bind="visible: $root.showDescription()">Description</th>
                 <th data-bind="visible: $root.showUsername()">Username</th>
                 <th data-bind="visible: $root.showLedgerEntryType()">Dr/Cr				</th>
@@ -271,6 +272,7 @@
               <tr>
                 <td data-bind="text: created, visible: $root.showCreated()"></td>
                 <td data-bind="text: transactionDate, visible: $root.showTransactionDate()"></td>
+                <td data-bind="text: type, visible: $root.showType()"></td>
                 <td data-bind="text: description, visible: $root.showDescription()"></td>
                 <td data-bind="text: username, visible: $root.showUsername()"></td>
                 <td data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()"></td>
@@ -282,6 +284,7 @@
               <tr data-bind="visible: $root.showEntries()">
                 <td data-bind="visible: $root.showCreated()"></td>
                 <td data-bind="visible: $root.showTransactionDate()"></td>
+                <td data-bind="visible: $root.showType()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>
                 <td data-bind="visible: $root.showUsername()"></td>
                 <td data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()"></td>

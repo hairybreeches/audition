@@ -14,6 +14,7 @@ namespace SqlImport
         private readonly IFieldReader<string> nominalCodeColumn;
         private readonly IFieldReader<double> amountColumn;
         private readonly IFieldReader<string> detailsColumn;
+        private readonly IFieldReader<string> typeColumn;
         private readonly IFieldReader<string> nominalCodeNameColumn;
 
         public TransactionFieldReader(
@@ -24,6 +25,7 @@ namespace SqlImport
             IFieldReader<string> nominalCodeColumn, 
             IFieldReader<double> amountColumn, 
             IFieldReader<string> descriptionColumn, 
+            IFieldReader<string> typeColumn, 
             IFieldReader<string> nominalCodeNameColumn)
         {
             this.idColumn = idColumn;
@@ -33,6 +35,7 @@ namespace SqlImport
             this.nominalCodeColumn = nominalCodeColumn;
             this.amountColumn = amountColumn;
             detailsColumn = descriptionColumn;
+            this.typeColumn = typeColumn;
             this.nominalCodeNameColumn = nominalCodeNameColumn;
         }                
 
@@ -46,6 +49,11 @@ namespace SqlImport
         public string GetUsername(IDataRecord record, int recordIndex)
         {
             return GetField(usernameColumn, record, recordIndex, MappingField.Username);
+        }
+        
+        public string GetType(IDataRecord record, int recordIndex)
+        {
+            return GetField(typeColumn, record, recordIndex, MappingField.Type);
         }
         
         public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
