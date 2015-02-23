@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dev", "Dev", "{B1E5685A-ED8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevServer", "DevServer\DevServer.csproj", "{B504B880-5D3D-4CA5-9256-6282ADA2378B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelExport", "ExcelExport\ExcelExport.csproj", "{BA499B39-57AC-4334-B2E3-4C0829A50E29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -251,6 +253,16 @@ Global
 		{B504B880-5D3D-4CA5-9256-6282ADA2378B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B504B880-5D3D-4CA5-9256-6282ADA2378B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B504B880-5D3D-4CA5-9256-6282ADA2378B}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -275,5 +287,6 @@ Global
 		{72962866-1C2B-4D47-AA4B-CEB504E8E02A} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 		{6C1369E7-1D57-42EA-B004-1B17218E71BF} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 		{B504B880-5D3D-4CA5-9256-6282ADA2378B} = {B1E5685A-ED8B-4A14-B9B8-9B7FD281F114}
+		{BA499B39-57AC-4334-B2E3-4C0829A50E29} = {1E91FE7C-8651-489C-A6B9-00FB49AC3722}
 	EndGlobalSection
 EndGlobal

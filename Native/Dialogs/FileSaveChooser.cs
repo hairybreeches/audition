@@ -25,7 +25,7 @@ namespace Native.Dialogs
         {
             using (var dialog = new SaveFileDialog
             {
-                Filter = "Excel spreadsheet|*.csv;*.xlsx;*.xls|All files|*.*"
+                Filter = "Excel spreadsheet|*.xlsx;*.xls;|All files|*.*"
 
             })
             {
