@@ -37,6 +37,7 @@ var Transaction = function(json) {
     self.transactionDate = userFriendlyDate(json.TransactionDate);
     self.description = json.Description;
     self.username = json.Username;
+    self.type = json.TransactionType;
     self.lines = json.Lines.map(function(json) {
         return new LedgerEntry(json);
     });
@@ -278,6 +279,9 @@ var SearchModel = function () {
 
     self.showAccountCode = function () {
         return showField('AccountCode');
+    };
+    self.showType = function () {
+        return showField('Type');
     };
     self.showAccountName = function () {
         return showField('AccountName');
