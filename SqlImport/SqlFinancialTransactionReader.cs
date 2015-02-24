@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Model;
 using Model.Accounting;
 
 namespace SqlImport

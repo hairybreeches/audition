@@ -57,6 +57,7 @@
     <Compile Include="IValueLookup.cs" />
     <Compile Include="NoTransactionsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
+    <Compile Include="SqlLedgerEntry.cs" />
     <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Transaction.cs" />
     <Compile Include="Accounting\LedgerEntry.cs" />

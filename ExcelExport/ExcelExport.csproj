@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</ProjectGuid>
+    <ProjectGuid>{BA499B39-57AC-4334-B2E3-4C0829A50E29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CsvExport</RootNamespace>
-    <AssemblyName>CsvExport</AssemblyName>
+    <RootNamespace>ExcelExport</RootNamespace>
+    <AssemblyName>ExcelExport</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AllowedReferenceRelatedFileExtensions Condition=" '$(Configuration)' == 'Release' ">.allowedextension</AllowedReferenceRelatedFileExtensions>
@@ -31,12 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="CsvHelper">
-      <HintPath>..\packages\CsvHelper.2.7.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,35 +43,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsvColumn.cs" />
-    <Compile Include="CsvExporter.cs" />
-    <Compile Include="CsvExportModule.cs" />
-    <Compile Include="CsvWriterFactory.cs" />
-    <Compile Include="CsvWriterWrapper.cs" />
-    <Compile Include="IColumnFactory.cs" />
-    <Compile Include="ICsvColumn.cs" />
-    <Compile Include="ISpreadsheetWriter.cs" />
-    <Compile Include="ISpreadsheetWriterFactory.cs" />
-    <Compile Include="ITransactionExporter.cs" />
-    <Compile Include="NullCsvColumn.cs" />
+    <Compile Include="ColumnDoesNotExistsFormatter.cs" />
+    <Compile Include="ColumnFactory.cs" />
+    <Compile Include="DateColumnFormatter.cs" />
+    <Compile Include="ExcelExporter.cs" />
+    <Compile Include="ExcelExportModule.cs" />
+    <Compile Include="ExcelInteropException.cs" />
+    <Compile Include="ExcelFormatter.cs" />
+    <Compile Include="ExcelWriterFactory.cs" />
+    <Compile Include="IExcelColumnFormatter.cs" />
+    <Compile Include="IFormatterFactory.cs" />
+    <Compile Include="NoFormattingRequiredFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsvExport\CsvExport.csproj">
+      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
+      <Name>CsvExport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native\Native.csproj">
-      <Project>{f42a124d-7365-4a8a-a909-651d1e877c5e}</Project>
+      <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
       <Name>Native</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
-      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
-      <Name>SqlImport</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
