@@ -9,7 +9,8 @@ namespace ExcelExport
         {
             var xlApp = new Application
             {
-                Visible = false
+                Visible = false,
+                DisplayAlerts = false
             };
 
             return new ExcelFormatter(xlApp.Workbooks.Open(filename));
