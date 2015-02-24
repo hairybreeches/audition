@@ -42,10 +42,10 @@ namespace Tests
             var expected =
 @"What we did to get these transactions
 Transaction ID,Entry time,Transaction date,Transaction type,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
-id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",SI,alf,very interesting transaction,Cr,9012,Expenses,23.4
-id 1," + new DateTime(2012, 3, 4) + "," + new DateTime(2012, 3, 4).ToShortDateString() + @",SI,alf,very interesting transaction,Dr,3001,Cash,23.4
-id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",UJ,steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
-id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateString() + @",UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
+id 1," + new DateTime(2012, 3, 4) + @",2012-03-04,SI,alf,very interesting transaction,Cr,9012,Expenses,23.4
+id 1," + new DateTime(2012, 3, 4) + @",2012-03-04,SI,alf,very interesting transaction,Dr,3001,Cash,23.4
+id 2," + new DateTime(2012, 6, 5) + @",2012-06-05,UJ,steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
+id 2," + new DateTime(2012, 6, 5) + @",2012-06-05,UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
 ";
             
             Assert.AreEqual(expected, actual);
@@ -59,10 +59,10 @@ id 2," + new DateTime(2012, 6, 5) + "," + new DateTime(2012, 6, 5).ToShortDateSt
             var expected =
 @"An illuminating comment
 Transaction date,Username,Dr/Cr,Nominal Account,Amount
-" + new DateTime(2012,3,4).ToShortDateString() + @",alf,Cr,9012,23.4
-" + new DateTime(2012,3,4).ToShortDateString() + @",alf,Dr,3001,23.4
-" + new DateTime(2012,6,5).ToShortDateString() + @",steve,Cr,8014,12.4
-" + new DateTime(2012,6,5).ToShortDateString() + @",steve,Dr,4001,12.4
+2012-03-04,alf,Cr,9012,23.4
+2012-03-04,alf,Dr,3001,23.4
+2012-06-05,steve,Cr,8014,12.4
+2012-06-05,steve,Dr,4001,12.4
 ";
             Assert.AreEqual(expected, actual);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
 
 namespace ExcelExport
@@ -69,6 +70,17 @@ namespace ExcelExport
         public void NameSheet(string name)
         {
             Sheet.Name = name;
+        }
+
+        public void FormatColumns(IEnumerable<IExcelColumnFormatter> excelColumnFormatters, int headerRows)
+        {
+            var columnIndex = 1;
+            //yes, we could use LINQ here, but these are not side-effect free functions,
+            //their whole point is the side effect, the result is just keeping count
+            foreach (var excelColumnFormatter in excelColumnFormatters)
+            {
+                columnIndex = excelColumnFormatter.FormatColumn(Sheet, columnIndex);
+            }
         }
     }
 }
