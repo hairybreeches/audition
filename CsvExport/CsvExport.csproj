@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColumnFactory.cs" />
     <Compile Include="CsvColumn.cs" />
     <Compile Include="CsvExporter.cs" />
     <Compile Include="CsvExportModule.cs" />

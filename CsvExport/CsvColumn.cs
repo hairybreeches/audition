@@ -1,9 +1,10 @@
 ﻿using System;
+using Model;
 using SqlImport;
 
 namespace CsvExport
 {
-    internal class CsvColumn : ICsvColumn
+    public class CsvColumn : ICsvColumn
     {
         private readonly string header;
         private readonly Func<SqlLedgerEntry, object> fieldSelector;

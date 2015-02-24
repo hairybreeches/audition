@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnFactory.cs" />
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="ExcelExportModule.cs" />
     <Compile Include="ExcelInteropException.cs" />

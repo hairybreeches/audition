@@ -1,4 +1,5 @@
-﻿using SqlImport;
+﻿using Model;
+using SqlImport;
 
 namespace CsvExport
 {

@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Model;
 using Model.Accounting;
 
 namespace SqlImport

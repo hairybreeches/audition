@@ -61,7 +61,6 @@
     <Compile Include="DataReaders\NullDataReader.cs" />
     <Compile Include="SqlDataFormatUnexpectedException.cs" />
     <Compile Include="SqlImportModule.cs" />
-    <Compile Include="SqlLedgerEntry.cs" />
     <Compile Include="SqlFinancialTransactionReader.cs" />
   </ItemGroup>
   <ItemGroup>
