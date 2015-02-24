@@ -15,7 +15,7 @@ namespace ExcelExport
             {
                 new ColumnFactory("Transaction ID", DisplayField.Id, line => line.TransactionId),
                 new ColumnFactory("Entry time", DisplayField.Created, line => line.CreationTime),
-                new ColumnFactory("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToShortDateString()),
+                new ColumnFactory("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToString("yyyy-MM-dd"), new DateColumnFormatter()),
                 new ColumnFactory("Transaction type", DisplayField.Type, line => line.TransactionType),
                 new ColumnFactory("Username", DisplayField.Username, line => line.Username),
                 new ColumnFactory("Description", DisplayField.Description, line => line.Description),
@@ -23,7 +23,7 @@ namespace ExcelExport
                 new ColumnFactory("Nominal Account", DisplayField.AccountCode, line => line.NominalCode),
                 new ColumnFactory("Account name", DisplayField.AccountName, line => line.NominalCodeName),
                 new ColumnFactory("Amount", DisplayField.Amount, line => line.Amount)
-            }).As<IEnumerable<IColumnFactory>>();
+            }).As<IEnumerable<IColumnFactory>>().As<IEnumerable<IFormatterFactory>>();
         }
     }
 }

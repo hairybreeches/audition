@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CsvExport;
 using Model;
 using Model.Accounting;
@@ -11,12 +12,14 @@ namespace ExcelExport
         private readonly CsvExporter csvExporter;
         private readonly IFileSystem fileSystem;
         private readonly ExcelFileOpener fileOpener;
+        private readonly IEnumerable<IFormatterFactory> formatterFactories;
 
-        public ExcelExporter(CsvExporter csvExporter, IFileSystem fileSystem, ExcelFileOpener fileOpener)
+        public ExcelExporter(CsvExporter csvExporter, IFileSystem fileSystem, ExcelFileOpener fileOpener, IEnumerable<IFormatterFactory> formatterFactories)
         {
             this.csvExporter = csvExporter;
             this.fileSystem = fileSystem;
             this.fileOpener = fileOpener;
+            this.formatterFactories = formatterFactories;
         }
 
         public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
@@ -27,7 +30,9 @@ namespace ExcelExport
                 using (var excelWriter = fileOpener.OpenFile(tempFile.Filename))
                 {
                     excelWriter.MergeRow(1);
-                    excelWriter.ApplyFiltersToRow(2);
+                    var displayFields = new HashSet<DisplayField>(availableFields);
+                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(displayFields)), 2);
+                    excelWriter.ApplyFiltersToRow(2);                    
                     excelWriter.AutosizeColumns();
                     excelWriter.NameSheet("Audition search");
                     excelWriter.SaveAs(filename);

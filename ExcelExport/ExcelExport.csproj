@@ -43,12 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnDoesNotExistsFormatter.cs" />
     <Compile Include="ColumnFactory.cs" />
+    <Compile Include="DateColumnFormatter.cs" />
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="ExcelExportModule.cs" />
     <Compile Include="ExcelInteropException.cs" />
     <Compile Include="ExcelFormatter.cs" />
     <Compile Include="ExcelWriterFactory.cs" />
+    <Compile Include="IExcelColumnFormatter.cs" />
+    <Compile Include="IFormatterFactory.cs" />
+    <Compile Include="NoFormattingRequiredFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
