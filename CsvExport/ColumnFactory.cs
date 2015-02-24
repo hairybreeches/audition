@@ -5,7 +5,7 @@ using SqlImport;
 
 namespace CsvExport
 {
-    public class ColumnFactory
+    public class ColumnFactory : IColumnFactory
     {
         private readonly DisplayField displayField;
         private readonly string header;
@@ -18,7 +18,7 @@ namespace CsvExport
             this.fieldSelector = fieldSelector;
         }
 
-        internal ICsvColumn GetColumn(ICollection<DisplayField> availableFields)
+        public ICsvColumn GetColumn(ICollection<DisplayField> availableFields)
         {
             if (OutputColumn(availableFields))
             {

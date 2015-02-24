@@ -53,6 +53,7 @@
     <Compile Include="CsvExportModule.cs" />
     <Compile Include="CsvWriterFactory.cs" />
     <Compile Include="CsvWriterWrapper.cs" />
+    <Compile Include="IColumnFactory.cs" />
     <Compile Include="ICsvColumn.cs" />
     <Compile Include="ISpreadsheetWriter.cs" />
     <Compile Include="ISpreadsheetWriterFactory.cs" />

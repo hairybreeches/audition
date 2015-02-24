@@ -8,13 +8,13 @@ namespace CsvExport
 {
     public class CsvExporter : ITransactionExporter
     {
-        private readonly IEnumerable<ColumnFactory> columnFactories;
+        private readonly IEnumerable<IColumnFactory> columnFactories;
 
         private readonly TabularFormatConverter converter;
         private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory, IEnumerable<ColumnFactory> columnFactories)
+        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory, IEnumerable<IColumnFactory> columnFactories)
         {
             this.converter = converter;
             this.writerFactory = writerFactory;
