@@ -67,7 +67,7 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
+        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, ICollection<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
             using (var lifetime = GetLifetime(fileSystem))

@@ -22,16 +22,15 @@ namespace ExcelExport
             this.formatterFactories = formatterFactories;
         }
 
-        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayField> availableFields)
         {
             using (var tempFile = fileSystem.GetTempFile("csv"))
             {
                 csvExporter.Export(description, transactions, tempFile.Filename, availableFields);
                 using (var excelWriter = fileOpener.OpenFile(tempFile.Filename))
                 {
-                    excelWriter.MergeRow(1);
-                    var displayFields = new HashSet<DisplayField>(availableFields);
-                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(displayFields)), 2);
+                    excelWriter.MergeRow(1);                    
+                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(availableFields)), 2);
                     excelWriter.ApplyFiltersToRow(2);                    
                     excelWriter.AutosizeColumns();
                     excelWriter.NameSheet("Audition search");
