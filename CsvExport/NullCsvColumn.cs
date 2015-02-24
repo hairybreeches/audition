@@ -1,8 +1,9 @@
-﻿using SqlImport;
+﻿using Model;
+using SqlImport;
 
 namespace CsvExport
 {
-    internal class NullCsvColumn : ICsvColumn
+    public class NullCsvColumn : ICsvColumn
     {
         public void WriteField(ISpreadsheetWriter writer, SqlLedgerEntry record)
         {            
