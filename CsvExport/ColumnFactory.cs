@@ -1,31 +1,32 @@
 using System;
 using System.Collections.Generic;
 using Model;
+using SqlImport;
 
 namespace CsvExport
 {
-    public class ColumnFactory<TRecord>
+    public class ColumnFactory
     {
         private readonly DisplayField displayField;
         private readonly string header;
-        private readonly Func<TRecord, object> fieldSelector;
+        private readonly Func<SqlLedgerEntry, object> fieldSelector;
 
-        public ColumnFactory(string header, DisplayField displayField, Func<TRecord, object> fieldSelector)
+        public ColumnFactory(string header, DisplayField displayField, Func<SqlLedgerEntry, object> fieldSelector)
         {
             this.header = header;
             this.displayField = displayField;
             this.fieldSelector = fieldSelector;
         }
 
-        internal ICsvColumn<TRecord> GetColumn(ICollection<DisplayField> availableFields)
+        internal ICsvColumn GetColumn(ICollection<DisplayField> availableFields)
         {
             if (OutputColumn(availableFields))
             {
-                return new CsvColumn<TRecord>(header, fieldSelector);
+                return new CsvColumn(header, fieldSelector);
             }
             else
             {
-                return new NullCsvColumn<TRecord>();
+                return new NullCsvColumn();
             }
         }       
 
