@@ -21,10 +21,9 @@ namespace CsvExport
             this.columnFactories = columnFactories;
         }
 
-        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IEnumerable<DisplayField> availableFields)
-        {
-            var fields = new HashSet<DisplayField>(availableFields);
-            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(fields));
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayField> availableFields)
+        {            
+            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(availableFields));
         }
 
         private List<ICsvColumn> GetColumns(ICollection<DisplayField> fields)
