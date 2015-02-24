@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac;
 using CsvExport;
 using Model;
 using Model.Accounting;
+using Native.Disk;
 using NUnit.Framework;
 using SqlImport;
 using Tests.Mocks;
+using Webapp;
 
 namespace Tests
 {
@@ -67,12 +70,23 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
         private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IEnumerable<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
-            var exporter = new CsvExporter(new TabularFormatConverter(), new CsvWriterFactory(fileSystem));
-            var filename = "c:\\steve.csv";
-            exporter.Export(description, transactions, filename, fields);
+            using (var lifetime = GetLifetime(fileSystem))
+            {
+                var exporter = lifetime.Resolve<CsvExporter>();
+                var filename = "c:\\steve.csv";
+                exporter.Export(description, transactions, filename, fields);
 
-            var actual = fileSystem.GetFileValue(filename);
-            return actual;
+                var actual = fileSystem.GetFileValue(filename);
+                return actual;
+            }                        
+        }
+
+        private static IContainer GetLifetime(MockFileSystem fileSystem)
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<WebappModule>();
+            builder.Register(_ => fileSystem).As<IFileSystem>();
+            return builder.Build();
         }
     }
 }
