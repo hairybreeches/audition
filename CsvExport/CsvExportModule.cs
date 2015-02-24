@@ -15,8 +15,7 @@ namespace CsvExport
             {
                 new ColumnFactory("Transaction ID", DisplayField.Id, line => line.TransactionId),
                 new ColumnFactory("Entry time", DisplayField.Created, line => line.CreationTime),
-                new ColumnFactory("Transaction date", DisplayField.TransactionDate,
-                    line => line.TransactionDate.ToShortDateString()),
+                new ColumnFactory("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToShortDateString()),
                 new ColumnFactory("Transaction type", DisplayField.Type, line => line.TransactionType),
                 new ColumnFactory("Username", DisplayField.Username, line => line.Username),
                 new ColumnFactory("Description", DisplayField.Description, line => line.Description),
