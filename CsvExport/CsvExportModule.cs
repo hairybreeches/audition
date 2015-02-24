@@ -13,18 +13,18 @@ namespace CsvExport
             builder.RegisterType<CsvWriterFactory>().As<ISpreadsheetWriterFactory>();
             builder.Register(_ => new[]
             {
-                new ColumnFactory<SqlLedgerEntry>("Transaction ID", DisplayField.Id, line => line.TransactionId),
-                new ColumnFactory<SqlLedgerEntry>("Entry time", DisplayField.Created, line => line.CreationTime),
-                new ColumnFactory<SqlLedgerEntry>("Transaction date", DisplayField.TransactionDate,
+                new ColumnFactory("Transaction ID", DisplayField.Id, line => line.TransactionId),
+                new ColumnFactory("Entry time", DisplayField.Created, line => line.CreationTime),
+                new ColumnFactory("Transaction date", DisplayField.TransactionDate,
                     line => line.TransactionDate.ToShortDateString()),
-                new ColumnFactory<SqlLedgerEntry>("Transaction type", DisplayField.Type, line => line.TransactionType),
-                new ColumnFactory<SqlLedgerEntry>("Username", DisplayField.Username, line => line.Username),
-                new ColumnFactory<SqlLedgerEntry>("Description", DisplayField.Description, line => line.Description),
-                new ColumnFactory<SqlLedgerEntry>("Dr/Cr", DisplayField.LedgerEntryType, line => line.LedgerEntryType),
-                new ColumnFactory<SqlLedgerEntry>("Nominal Account", DisplayField.AccountCode, line => line.NominalCode),
-                new ColumnFactory<SqlLedgerEntry>("Account name", DisplayField.AccountName, line => line.NominalCodeName),
-                new ColumnFactory<SqlLedgerEntry>("Amount", DisplayField.Amount, line => line.Amount)
-            }).As<IEnumerable<ColumnFactory<SqlLedgerEntry>>>();
+                new ColumnFactory("Transaction type", DisplayField.Type, line => line.TransactionType),
+                new ColumnFactory("Username", DisplayField.Username, line => line.Username),
+                new ColumnFactory("Description", DisplayField.Description, line => line.Description),
+                new ColumnFactory("Dr/Cr", DisplayField.LedgerEntryType, line => line.LedgerEntryType),
+                new ColumnFactory("Nominal Account", DisplayField.AccountCode, line => line.NominalCode),
+                new ColumnFactory("Account name", DisplayField.AccountName, line => line.NominalCodeName),
+                new ColumnFactory("Amount", DisplayField.Amount, line => line.Amount)
+            }).As<IEnumerable<ColumnFactory>>();
         }
     }
 }

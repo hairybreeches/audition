@@ -1,19 +1,20 @@
 ﻿using System;
+using SqlImport;
 
 namespace CsvExport
 {
-    internal class CsvColumn<TOutput> : ICsvColumn<TOutput>
+    internal class CsvColumn : ICsvColumn
     {
         private readonly string header;
-        private readonly Func<TOutput, object> fieldSelector;
+        private readonly Func<SqlLedgerEntry, object> fieldSelector;
 
-        public CsvColumn(string header, Func<TOutput, object> fieldSelector)
+        public CsvColumn(string header, Func<SqlLedgerEntry, object> fieldSelector)
         {
             this.header = header;
             this.fieldSelector = fieldSelector;
         }
 
-        public void WriteField(ISpreadsheetWriter writer, TOutput record)
+        public void WriteField(ISpreadsheetWriter writer, SqlLedgerEntry record)
         {
             writer.WriteField(fieldSelector(record));
         }
