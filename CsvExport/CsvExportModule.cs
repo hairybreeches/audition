@@ -24,7 +24,7 @@ namespace CsvExport
                 new ColumnFactory("Nominal Account", DisplayField.AccountCode, line => line.NominalCode),
                 new ColumnFactory("Account name", DisplayField.AccountName, line => line.NominalCodeName),
                 new ColumnFactory("Amount", DisplayField.Amount, line => line.Amount)
-            }).As<IEnumerable<ColumnFactory>>();
+            }).As<IEnumerable<IColumnFactory>>();
         }
     }
 }

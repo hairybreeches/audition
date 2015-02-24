@@ -2,7 +2,7 @@
 
 namespace CsvExport
 {
-    internal interface ICsvColumn
+    public interface ICsvColumn
     {
         void WriteField(ISpreadsheetWriter writer, SqlLedgerEntry record);
         void WriteHeader(ISpreadsheetWriter writer);
