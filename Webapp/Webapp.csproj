@@ -120,6 +120,10 @@
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>CsvExport</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExcelExport\ExcelExport.csproj">
+      <Project>{BA499B39-57AC-4334-B2E3-4C0829A50E29}</Project>
+      <Name>ExcelExport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
       <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
       <Name>ExcelImport</Name>

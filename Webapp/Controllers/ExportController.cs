@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -77,7 +78,7 @@ namespace Webapp.Controllers
             var exportResult = await fileSaveChooser.GetFileSaveLocation();
             if (exportResult.Completed)
             {
-                transactionExporter.Export(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), exportResult.Filename, session.GetCurrentSearchCapability().AvailableFields);
+                transactionExporter.Export(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), exportResult.Filename, new HashSet<DisplayField>(session.GetCurrentSearchCapability().AvailableFields));
             }
             return exportResult;
         }

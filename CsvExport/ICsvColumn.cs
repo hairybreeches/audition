@@ -1,8 +1,11 @@
-﻿namespace CsvExport
+﻿using Model;
+using SqlImport;
+
+namespace CsvExport
 {
-    internal interface ICsvColumn<in TRecord>
+    public interface ICsvColumn
     {
-        void WriteField(ISpreadsheetWriter writer, TRecord record);
+        void WriteField(ISpreadsheetWriter writer, SqlLedgerEntry record);
         void WriteHeader(ISpreadsheetWriter writer);
     }
 }

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialogs\DialogShower.cs" />
+    <Compile Include="Disk\TempFile.cs" />
     <Compile Include="Time\Clock.cs" />
     <Compile Include="Dialogs\ExcelFileChooser.cs" />
     <Compile Include="Dialogs\FileSaveChooser.cs" />

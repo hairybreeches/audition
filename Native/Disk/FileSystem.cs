@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace Native.Disk
@@ -48,6 +49,17 @@ namespace Native.Disk
             {
                 File.Delete(filename);
             }
+        }
+        public static string GetTempFilePathWithExtension(string extension)
+        {
+            var path = Path.GetTempPath();
+            var fileName = Guid.NewGuid() + "." + extension;
+            return Path.Combine(path, fileName);
+        }
+
+        public TempFile GetTempFile(string extension = "tmp")
+        {
+            return new TempFile(this, GetTempFilePathWithExtension(extension));
         }
     }
 }

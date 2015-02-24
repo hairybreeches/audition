@@ -1,7 +1,7 @@
 using System;
 using Model.Accounting;
 
-namespace SqlImport
+namespace Model
 {
     /// <summary>
     /// This is the format Sage stores the data in, and outputs it to Excel.
