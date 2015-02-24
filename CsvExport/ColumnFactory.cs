@@ -19,7 +19,7 @@ namespace CsvExport
 
         internal ICsvColumn<TRecord> GetColumn(ICollection<DisplayField> availableFields)
         {
-            if (availableFields.Contains(displayField))
+            if (OutputColumn(availableFields))
             {
                 return new CsvColumn<TRecord>(header, fieldSelector);
             }
@@ -27,8 +27,11 @@ namespace CsvExport
             {
                 return new NullCsvColumn<TRecord>();
             }
+        }       
+
+        private bool OutputColumn(ICollection<DisplayField> availableFields)
+        {
+            return availableFields.Contains(displayField);
         }
-
-
     }
 }
