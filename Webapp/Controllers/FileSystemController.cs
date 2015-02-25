@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Native;
 using Native.Dialogs;
+using Webapp.Requests;
 
 namespace Webapp.Controllers
 {
@@ -17,11 +18,11 @@ namespace Webapp.Controllers
             this.excelFileChooser = excelFileChooser;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route(Routing.Openfile)]
-        public IHttpActionResult OpenFile(string fileName)
+        public IHttpActionResult OpenFile(OpenFileRequest request)
         {
-            Process.Start(fileName);
+            Process.Start(request.FileName);
             return Ok();
         }
         
