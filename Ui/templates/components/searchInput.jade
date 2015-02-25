@@ -3,6 +3,10 @@
 		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
 			option= day
 
+mixin input-well()
+	.well.well-sm.inline-block.vertical-space.margin-right
+		block
+
 mixin timeInput(bindTo)
 	input.form-control.scaled-input(type="time", data-bind="value: " + bindTo)
 	
@@ -55,31 +59,31 @@ mixin search-tab(title, bindName)
 		.tab-content
 			.tab-pane.fade.active.in#time
 				+search-tab('posted outside', 'Outside')
-					.well.well-sm.inline-block.vertical-space.margin-right
+					+input-well()
 						+dayOfWeekSelector('FromDay')
 						label.control-label.between-label to
 						+dayOfWeekSelector('ToDay')
-					.well.well-sm.inline-block.vertical-space
+					+input-well()
 						+timeInput('FromTime')
 						label.control-label.between-label to
 						+timeInput('ToTime')
 			.tab-pane.fade#accounts
 				+search-tab('posted to accounts with fewer than', 'Accounts')
-					.well.well-sm.inline-block.vertical-space.margin-right
+					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
 					span.vertical-space.search-text entries
 			.tab-pane.fade#users
 				+search-tab('posted by people other than', 'Users')
-					.well.well-sm.inline-block.vertical-space
+					+input-well()
 						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
 			.tab-pane.fade#date
 				+search-tab('posted after the year end or within', 'Date')
-					.well.well-sm.inline-block.vertical-space.margin-right
+					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: daysBeforeYearEnd")
 					span.vertical-space.search-text days before year end
 			.tab-pane.fade#endings
 				+search-tab('ending in at least', 'Ending')
-					.well.well-sm.inline-block.vertical-space.margin-right
+					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
 					span.vertical-space.search-text zeroes
 						
