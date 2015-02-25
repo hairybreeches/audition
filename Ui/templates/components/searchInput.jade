@@ -4,7 +4,7 @@
 			option= day
 
 mixin input-well()
-	.well.well-sm.inline-block.vertical-space.margin-right
+	.well.well-sm.inline-block.vertical-space-sm.margin-right
 		block
 
 mixin timeInput(bindTo)
@@ -31,8 +31,8 @@ mixin search-tab(title, bindName)
 						block
 					br
 					.button-group.pull-right
-						button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
-						button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
+						button.btn.btn-default.vertical-space-sm(type="button" data-bind="click: save") Export &raquo;
+						button.btn.btn-primary.vertical-space-sm(type="submit" data-bind="click: submit") Search &raquo;
 
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
