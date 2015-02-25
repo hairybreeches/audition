@@ -8647,6 +8647,9 @@ html {
 .vertical-space {
   margin-top: 30px;
 }
+.vertical-space-sm {
+  margin-top: 15px;
+}
 legend {
   margin-bottom: 10px;
 }
