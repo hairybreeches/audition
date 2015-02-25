@@ -101,6 +101,7 @@
     <Compile Include="OwinServerConfigurer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ISearchRequest.cs" />
+    <Compile Include="Requests\OpenFileRequest.cs" />
     <Compile Include="Requests\SearchRequest.cs" />
     <Compile Include="Routing.cs" />
     <Compile Include="Session\SearcherFactoryStorage.cs" />

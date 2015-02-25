@@ -155,10 +155,11 @@ var ExportSuccessMessage = function () {
     self.openFile = function (_, e) {
         e.preventDefault();
         $.ajax('/api/openfile', {
-            data: {
+            data: JSON.stringify({
                 fileName: self.fileName()
-            },
-            type: 'GET'
+            }),
+            type: 'POST',
+            contentType: 'application/json'
         });
     };
 
