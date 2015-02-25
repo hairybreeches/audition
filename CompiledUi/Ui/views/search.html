@@ -25,9 +25,9 @@
       <div data-bind="with: input" class="container">
         <div class="form-horizontal blockable">
           <div style="display: none;" data-bind="visible: $root.searching" class="blockscreen loadscreen"></div>
-          <fieldset><span class="search-form-text vertical-space">Find transactions for the period</span>
+          <fieldset>		
             <div data-bind="with: Period" class="form-group">
-              <div class="col-sm-12">
+              <div class="col-sm-12"><span class="search-form-text vertical-space margin-right">Find transactions for the period</span>
                 <div class="well well-sm inline-block">
                     <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: From" class="form-control small-input">
                   <label class="control-label between-label">to</label>

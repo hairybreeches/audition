@@ -33,10 +33,10 @@ mixin search-tab(title, bindName)
 
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
-	fieldset
-		span.search-form-text.vertical-space Find transactions for the period
+	fieldset		
 		.form-group(data-bind="with: Period")
 			.col-sm-12
+				span.search-form-text.vertical-space.margin-right Find transactions for the period
 				.well.well-sm.inline-block
 					+dateInput('From')
 					label.control-label.between-label to
