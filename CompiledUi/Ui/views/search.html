@@ -28,7 +28,7 @@
           <fieldset><span class="search-form-text vertical-space">Find transactions for the period</span>
             <div data-bind="with: Period" class="form-group">
               <div class="col-sm-12">
-                <div class="well inline-block">
+                <div class="well well-sm inline-block">
                     <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: From" class="form-control small-input">
                   <label class="control-label between-label">to</label>
                     <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: To" class="form-control small-input">
@@ -58,7 +58,7 @@
                         <div class="col-xs-12">
                           <div class="inline-block">
                             <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
+                              <div class="well well-sm inline-block vertical-space margin-right">
                                   <select data-bind="value: FromDay" class="form-control scaled-input">
                                     <option>Monday</option>
                                     <option>Tuesday</option>
@@ -79,7 +79,7 @@
                                     <option>Sunday</option>
                                   </select>
                               </div>
-                              <div class="well inline-block vertical-space">
+                              <div class="well well-sm inline-block vertical-space">
                                   <input type="time" data-bind="value: FromTime" class="form-control scaled-input">
                                 <label class="control-label between-label">to</label>
                                   <input type="time" data-bind="value: ToTime" class="form-control scaled-input">
@@ -110,7 +110,7 @@
                         <div class="col-xs-12">
                           <div class="inline-block">
                             <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
+                              <div class="well well-sm inline-block vertical-space margin-right">
                                 <input type="number" data-bind="value: minimumEntriesToBeConsideredNormal" class="form-control small-input">
                               </div><span class="vertical-space search-text">entries</span>
                             </div><br>
@@ -139,7 +139,7 @@
                         <div class="col-xs-12">
                           <div class="inline-block">
                             <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space">
+                              <div class="well well-sm inline-block vertical-space">
                                 <textarea data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line" class="form-control"></textarea>
                               </div>
                             </div><br>
@@ -168,7 +168,7 @@
                         <div class="col-xs-12">
                           <div class="inline-block">
                             <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
+                              <div class="well well-sm inline-block vertical-space margin-right">
                                 <input type="number" data-bind="value: daysBeforeYearEnd" class="form-control small-input">
                               </div><span class="vertical-space search-text">days before year end</span>
                             </div><br>
@@ -197,7 +197,7 @@
                         <div class="col-xs-12">
                           <div class="inline-block">
                             <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
+                              <div class="well well-sm inline-block vertical-space margin-right">
                                 <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control small-input">
                               </div><span class="vertical-space search-text">zeroes.</span>
                             </div><br>
