@@ -14,13 +14,13 @@ mixin search-tab(title, bindName)
 		div(style="display: none;" data-bind="visible: blocked()")
 			.row
 				.col-xs-10.col-xs-offset-1.vertical-space
-					legend(data-bind="text: errorMessage")
+					span.search-form-text(data-bind="text: errorMessage")
 			.row
 				.col-xs-2.col-xs-offset-5
 					a.btn.btn-default(href="/api/session/clearImport") &laquo; Back to import
 
 		div(style="display: none;" data-bind="visible: !blocked()")
-			legend.vertical-space #{title}
+			span.search-form-text.vertical-space #{title}
 			.form-group
 				.col-xs-12
 					.inline-block
@@ -34,7 +34,7 @@ mixin search-tab(title, bindName)
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
 	fieldset
-		legend.vertical-space Find transactions for the period...
+		span.search-form-text.vertical-space Find transactions for the period...
 		.form-group(data-bind="with: Period")
 			.col-sm-12
 				.well.inline-block
