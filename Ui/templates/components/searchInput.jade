@@ -22,14 +22,13 @@ mixin search-tab(title, bindName)
 		div(style="display: none;" data-bind="visible: !blocked()")
 			span.search-form-text.vertical-space #{title}
 			.form-group
-				.col-xs-12
-					.inline-block
-						.inline-block(data-bind="with: parameters")
-							block
-						br
-						.button-group.pull-right
-							button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
-							button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
+				.col-xs-12					
+					.inline-block(data-bind="with: parameters")
+						block
+					br
+					.button-group.pull-right
+						button.btn.btn-default.vertical-space(type="button" data-bind="click: save") Export &raquo;
+						button.btn.btn-primary.vertical-space(type="submit" data-bind="click: submit") Search &raquo;
 
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
