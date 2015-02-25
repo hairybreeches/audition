@@ -34,7 +34,7 @@ mixin search-tab(title, bindName)
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
 	fieldset
-		span.search-form-text.vertical-space Find transactions for the period...
+		span.search-form-text.vertical-space Find transactions for the period
 		.form-group(data-bind="with: Period")
 			.col-sm-12
 				.well.inline-block
@@ -55,7 +55,7 @@ mixin search-tab(title, bindName)
 
 		.tab-content
 			.tab-pane.fade.active.in#time
-				+search-tab('posted outside...', 'Outside')
+				+search-tab('posted outside', 'Outside')
 					.well.inline-block.vertical-space.margin-right
 						+dayOfWeekSelector('FromDay')
 						label.control-label.between-label to
@@ -65,21 +65,21 @@ mixin search-tab(title, bindName)
 						label.control-label.between-label to
 						+timeInput('ToTime')
 			.tab-pane.fade#accounts
-				+search-tab('posted to accounts with fewer than...', 'Accounts')
+				+search-tab('posted to accounts with fewer than', 'Accounts')
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
 					span.vertical-space.search-text entries
 			.tab-pane.fade#users
-				+search-tab('posted by people other than...', 'Users')
+				+search-tab('posted by people other than', 'Users')
 					.well.inline-block.vertical-space
 						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
 			.tab-pane.fade#date
-				+search-tab('posted after the year end or within...', 'Date')
+				+search-tab('posted after the year end or within', 'Date')
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: daysBeforeYearEnd")
 					span.vertical-space.search-text days before year end
 			.tab-pane.fade#endings
-				+search-tab('ending in at least...', 'Ending')
+				+search-tab('ending in at least', 'Ending')
 					.well.inline-block.vertical-space.margin-right
 						input.form-control.scaled-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
 					span.vertical-space.search-text zeroes.
