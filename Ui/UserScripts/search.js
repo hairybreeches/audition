@@ -314,13 +314,6 @@ var SearchModel = function () {
     self.input = {
         Period: period,
 
-        Outside: new InputSection(ko.mapping.fromJS({
-            FromDay: "Monday",
-            ToDay: "Friday",
-            FromTime: "08:00",
-            ToTime: "18:00"
-        }), period, searchCapabilities, 'Hours'),
-
         Accounts: new InputSection({
             minimumEntriesToBeConsideredNormal: ko.observable(10)
         }, period, searchCapabilities, 'Accounts'),

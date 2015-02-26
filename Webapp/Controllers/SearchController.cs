@@ -32,13 +32,6 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.HoursSearch)]
-        public SearchResponse HoursSearch(SearchRequest<WorkingHoursParameters> searchRequest)
-        {
-            return Search(searchRequest);
-        }        
-
-        [HttpPost]
         [Route(Routing.AccountsSearch)]
         public SearchResponse AccountsSearch(SearchRequest<UnusualAccountsParameters> searchRequest)
         {

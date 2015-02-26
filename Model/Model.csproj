@@ -58,13 +58,11 @@
     <Compile Include="NoTransactionsException.cs" />
     <Compile Include="Responses\SearchResponse.cs" />
     <Compile Include="SqlLedgerEntry.cs" />
-    <Compile Include="Time\InvalidTimeFrameException.cs" />
     <Compile Include="Accounting\Transaction.cs" />
     <Compile Include="Accounting\LedgerEntry.cs" />
     <Compile Include="Accounting\LedgerEntryType.cs" />
     <Compile Include="Time\DateRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Time\LocalTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

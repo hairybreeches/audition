@@ -114,8 +114,6 @@ namespace ExcelImport
                     return lookups.Created;
                 case SearchAction.Ending:
                     return lookups.Amount;
-                case SearchAction.Hours:
-                    return lookups.Created;
                 case SearchAction.Users:
                     return lookups.Username;
                 default:
@@ -137,9 +135,6 @@ namespace ExcelImport
                 case SearchAction.Date:
                     return
                         "In order to search for transactions created near or after the year end, you must import transactions with an entry time value";
-                case SearchAction.Hours:
-                    return
-                        "In order to search for transactions posted outside of working hours, you must import transactions with an entry time value";
                 case SearchAction.Accounts:
                     return
                         "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";

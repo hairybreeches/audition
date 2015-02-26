@@ -46,8 +46,6 @@ mixin search-tab(title, bindName)
 					+dateInput('To')
 		ul.nav.nav-tabs
 			li.active
-				a(href="#time" data-toggle="tab") Outside working hours
-			li
 				a(href="#accounts" data-toggle="tab") Unusual accounts
 			li
 				a(href="#users" data-toggle="tab") Unexpected users
@@ -57,17 +55,7 @@ mixin search-tab(title, bindName)
 				a(href="#endings" data-toggle="tab") Round number
 
 		.tab-content
-			.tab-pane.fade.active.in#time
-				+search-tab('posted outside', 'Outside')
-					+input-well()
-						+dayOfWeekSelector('FromDay')
-						label.control-label.between-label to
-						+dayOfWeekSelector('ToDay')
-					+input-well()
-						+timeInput('FromTime')
-						label.control-label.between-label to
-						+timeInput('ToTime')
-			.tab-pane.fade#accounts
+			.tab-pane.fade.active.in#accounts
 				+search-tab('posted to accounts with fewer than', 'Accounts')
 					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")

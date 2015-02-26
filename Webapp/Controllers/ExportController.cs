@@ -39,13 +39,6 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.HoursExport)]
-        public async Task<ExportResult> HoursExport(SearchWindow<WorkingHoursParameters> searchWindow)
-        {
-            return await Export(searchWindow);
-        }
-
-        [HttpPost]
         [Route(Routing.AccountsExport)]
         public async Task<ExportResult> AccountsExport(SearchWindow<UnusualAccountsParameters> searchWindow)
         {

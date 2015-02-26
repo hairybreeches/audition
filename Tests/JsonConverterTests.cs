@@ -14,29 +14,7 @@ namespace Tests
 {
     [TestFixture]
     public class JsonConverterTests
-    {
-        [Test]
-        public void CanDeserializeSearchWindow()
-        {
-            var result = Parse<SearchWindow<WorkingHoursParameters>>(@"{
-            Period: {
-                From: '2012-4-5',
-                To: '2013-4-4'
-            },
-
-            Parameters: {
-                FromDay: 'Monday',
-                ToDay: 'Friday',
-                FromTime: '08:00',
-                ToTime: '18:00'
-            }
-        }");
-
-            Assert.AreEqual(new SearchWindow<WorkingHoursParameters>(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8, 0), new LocalTime(18, 0)),
-                new DateRange(new DateTime(2012,4,5),new DateTime(2013,4,4) )), 
-                result);
-        }      
-        
+    {        
         [Test]
         public void CanDeserializeAccountsSearchWindow()
         {
@@ -77,18 +55,6 @@ namespace Tests
                 result);
         }
 
-        [Test]
-       public void CanDeserializeTimeFrame()
-       {           
-           var result = Parse<WorkingHoursParameters>(@"{
-               FromDay: 'Monday',
-               ToDay: 'Friday',
-               FromTime: '08:00',
-               ToTime: '18:00'
-           }");
-           Assert.AreEqual(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Friday, new LocalTime(8,0),new LocalTime(18,0)), result);
-       }      
-        
        [Test]
        public void CanDeserializePeriod()
        {           
