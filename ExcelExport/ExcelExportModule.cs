@@ -14,7 +14,6 @@ namespace ExcelExport
             builder.Register(_ => new[]
             {
                 new ColumnFactory("Transaction ID", DisplayField.Id, line => line.TransactionId),
-                new ColumnFactory("Entry time", DisplayField.Created, line => line.CreationTime),
                 new ColumnFactory("Transaction date", DisplayField.TransactionDate, line => line.TransactionDate.ToString("yyyy-MM-dd"), new DateColumnFormatter()),
                 new ColumnFactory("Transaction type", DisplayField.Type, line => line.TransactionType),
                 new ColumnFactory("Username", DisplayField.Username, line => line.Username),

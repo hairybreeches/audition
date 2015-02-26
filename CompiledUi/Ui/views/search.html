@@ -151,7 +151,6 @@
           <table class="table grouped-table grouped-hover-table grouped-striped-table vertical-space">
             <thead>
               <tr>
-                <th data-bind="visible: $root.showCreated()">Entry time</th>
                 <th data-bind="visible: $root.showTransactionDate()">Transaction Date</th>
                 <th data-bind="visible: $root.showType()">Transaction Type</th>
                 <th data-bind="visible: $root.showDescription()">Description</th>
@@ -165,7 +164,6 @@
             <!--ko foreach: results-->
             <tbody>
               <tr>
-                <td data-bind="text: created, visible: $root.showCreated()"></td>
                 <td data-bind="text: transactionDate, visible: $root.showTransactionDate()"></td>
                 <td data-bind="text: type, visible: $root.showType()"></td>
                 <td data-bind="text: description, visible: $root.showDescription()"></td>
@@ -177,7 +175,6 @@
               </tr>
               <!-- ko foreach: lines.slice(1)-->
               <tr data-bind="visible: $root.showEntries()">
-                <td data-bind="visible: $root.showCreated()"></td>
                 <td data-bind="visible: $root.showTransactionDate()"></td>
                 <td data-bind="visible: $root.showType()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>

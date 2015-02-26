@@ -33,7 +33,6 @@ var Transaction = function(json) {
         return date.toLocaleTimeString("en-UK", { hour: '2-digit', minute: '2-digit', hour12: false });
     }
 
-    self.created = userFriendlyDateTime(json.Created);
     self.transactionDate = userFriendlyDate(json.TransactionDate);
     self.description = json.Description;
     self.username = json.Username;
@@ -289,9 +288,6 @@ var SearchModel = function () {
     };
     self.showAmount = function () {
         return showField('Amount');
-    };
-    self.showCreated = function () {
-        return showField('Created');
     };
     self.showTransactionDate = function () {
         return showField('TransactionDate');

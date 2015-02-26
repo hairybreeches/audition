@@ -12,11 +12,10 @@ namespace Sage50.Parsing
         private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index, name));
         private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
         private readonly SchemaColumn<DateTime> dateColumn = new SchemaColumn<DateTime>("DATE", 2);
-        private readonly SchemaColumn<DateTime> creationTimeColumn = new SchemaColumn<DateTime>("RECORD_CREATE_DATE", 3);
-        private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 4);
-        private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 5);
-        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 6);
-        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 7, (name, index) => new LookupConverter<string,string>(new ToStringDataReader(index, name), new Sage50TransactionTypeLookup()));        
+        private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 3);
+        private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 4);
+        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 5);
+        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 6, (name, index) => new LookupConverter<string,string>(new ToStringDataReader(index, name), new Sage50TransactionTypeLookup()));        
 
         public IEnumerable<ISchemaColumn> MappedColumns
         {
@@ -27,7 +26,6 @@ namespace Sage50.Parsing
                     idColumn,
                     usernameColumn,
                     dateColumn,
-                    creationTimeColumn,
                     nominalCodeColumn,
                     amountColumn,
                     detailsColumn,
@@ -42,8 +40,7 @@ namespace Sage50.Parsing
             return new TransactionFieldReader(
                 idColumn.DataReader, 
                 usernameColumn.DataReader, 
-                dateColumn.DataReader,
-                creationTimeColumn.DataReader, 
+                dateColumn.DataReader,                 
                 nominalCodeColumn.DataReader, 
                 amountColumn.DataReader, 
                 detailsColumn.DataReader, 

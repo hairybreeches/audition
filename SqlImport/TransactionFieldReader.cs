@@ -10,7 +10,6 @@ namespace SqlImport
         private readonly IFieldReader<string> idColumn;
         private readonly IFieldReader<string> usernameColumn;
         private readonly IFieldReader<DateTime> dateColumn;
-        private readonly IFieldReader<DateTime> creationTimeColumn;
         private readonly IFieldReader<string> nominalCodeColumn;
         private readonly IFieldReader<double> amountColumn;
         private readonly IFieldReader<string> detailsColumn;
@@ -20,8 +19,7 @@ namespace SqlImport
         public TransactionFieldReader(
             IFieldReader<string> idColumn, 
             IFieldReader<string> usernameColumn, 
-            IFieldReader<DateTime> dateColumn, 
-            IFieldReader<DateTime> creationTimeColumn, 
+            IFieldReader<DateTime> dateColumn,              
             IFieldReader<string> nominalCodeColumn, 
             IFieldReader<double> amountColumn, 
             IFieldReader<string> descriptionColumn, 
@@ -31,7 +29,6 @@ namespace SqlImport
             this.idColumn = idColumn;
             this.usernameColumn = usernameColumn;
             this.dateColumn = dateColumn;
-            this.creationTimeColumn = creationTimeColumn;
             this.nominalCodeColumn = nominalCodeColumn;
             this.amountColumn = amountColumn;
             detailsColumn = descriptionColumn;
@@ -59,11 +56,6 @@ namespace SqlImport
         public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
         {
             return GetField(dateColumn, record, recordIndex, MappingField.TransactionDate);
-        }
-        
-        public DateTime GetCreationTime(IDataRecord record, int recordIndex)
-        {
-            return GetField(creationTimeColumn, record, recordIndex, MappingField.EntryTime);
         }
         
         public string GetNominalCode(IDataRecord record, int recordIndex)

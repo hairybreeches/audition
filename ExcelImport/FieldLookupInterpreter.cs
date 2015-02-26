@@ -24,8 +24,7 @@ namespace ExcelImport
             return new TransactionFieldReader(
                 GetIdColumn(lookups.Id),
                 GetColumn<string>(lookups.Username),
-                GetDateColumn(lookups.TransactionDate),
-                GetDateColumn(lookups.Created),
+                GetDateColumn(lookups.TransactionDate),                
                 GetColumn<string>(lookups.AccountCode),
                 GetColumn<double>(lookups.Amount),
                 GetColumn<string>(lookups.Description),
@@ -79,8 +78,6 @@ namespace ExcelImport
                     return lookups.AccountName;
                 case DisplayField.Amount:
                     return lookups.Amount;
-                case DisplayField.Created:
-                    return lookups.Created;
                 case DisplayField.Description:
                     return lookups.Description;
                 case DisplayField.TransactionDate:

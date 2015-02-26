@@ -18,8 +18,8 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnTransactionsWhichDoNotApplyToTheFinancialPeriod()
         {
-            var transactionApplyingToPostYearEnd = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearEnd.AddDays(1), 1000);
-            var transactionApplyingToPreYearstart = ForAmount(YearEnd.Subtract(TimeSpan.FromDays(2)), YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
+            var transactionApplyingToPostYearEnd = ForAmount(YearEnd.AddDays(1), 1000);
+            var transactionApplyingToPreYearstart = ForAmount(YearStart.Subtract(TimeSpan.FromDays(1)), 1000);
 
             var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1), FinancialPeriod), transactionApplyingToPostYearEnd, transactionApplyingToPreYearstart);
             CollectionAssert.IsEmpty(result);
@@ -29,7 +29,7 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnTransactionsWithALineOfZeroValue()
         {
-            var transactionForZero = ForAmount(InPeriod, InPeriod, 0);
+            var transactionForZero = ForAmount(InPeriod, 0);
             var result = Searching.ExecuteSearch((new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod )), transactionForZero);
             CollectionAssert.IsEmpty(result);
         }  
@@ -38,7 +38,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsTransactionForRoundAmount()
         {
-            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
+            var transactionForRoundAmount = ForAmount(InPeriod, 1000);
             var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(1),FinancialPeriod ), transactionForRoundAmount);
             CollectionAssert.AreEquivalent(new[]{transactionForRoundAmount}, result);
         }        
@@ -46,7 +46,7 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsTransactionWithExactlyTheRightAmountOfZeroes()
         {
-            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 1000);
+            var transactionForRoundAmount = ForAmount(InPeriod, 1000);
             var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(3),FinancialPeriod ), transactionForRoundAmount);
             CollectionAssert.AreEquivalent(new[]{transactionForRoundAmount}, result);
         }    
@@ -55,16 +55,16 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnTransactionWithOneTooFewZeroes()
         {
-            var transactionForRoundAmount = ForAmount(InPeriod, InPeriod, 10000);
+            var transactionForRoundAmount = ForAmount(InPeriod, 10000);
             var result = Searching.ExecuteSearch(new SearchWindow<EndingParameters>(new EndingParameters(5),FinancialPeriod ), transactionForRoundAmount);
             CollectionAssert.IsEmpty(result);
         }
 
 
-        private static Transaction ForAmount(DateTime creationDate, DateTime transactionDate, int amountOfPence)
+        private static Transaction ForAmount(DateTime transactionDate, int amountOfPence)
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
-            return new Transaction(Guid.NewGuid(), creationDate, transactionDate, new []{ new LedgerEntry("a", "a", LedgerEntryType.Cr, amountOfPounds), new LedgerEntry("b", "b", LedgerEntryType.Dr, amountOfPounds)});
+            return new Transaction(Guid.NewGuid(), transactionDate, new []{ new LedgerEntry("a", "a", LedgerEntryType.Cr, amountOfPounds), new LedgerEntry("b", "b", LedgerEntryType.Dr, amountOfPounds)});
         }
     }
 }
