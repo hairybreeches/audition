@@ -3,12 +3,12 @@ using System.Data;
 
 namespace SqlImport.DataReaders
 {
-    public class SqlDataReader<T> : IFieldReader<T>
+    public class TypedDataReader<T> : IFieldReader<T>
     {
         private readonly int index;
         private readonly string userFriendlyColumnName;
 
-        public SqlDataReader(int index, string userFriendlyColumnName)
+        public TypedDataReader(int index, string userFriendlyColumnName)
         {
             this.index = index;
             this.userFriendlyColumnName = userFriendlyColumnName;

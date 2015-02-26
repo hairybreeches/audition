@@ -48,7 +48,7 @@
     <Compile Include="Sage50TransactionTypeLookup.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />
-    <Compile Include="DataReaders\SqlDataReader.cs" />
+    <Compile Include="DataReaders\TypedDataReader.cs" />
     <Compile Include="LedgerEntryParser.cs" />
     <Compile Include="TabularFormatConverter.cs" />
     <Compile Include="TransactionFieldReader.cs" />

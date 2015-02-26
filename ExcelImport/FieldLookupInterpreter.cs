@@ -55,7 +55,7 @@ namespace ExcelImport
 
         private IFieldReader<T> GetColumn<T>(int columnIndex)
         {
-            return IsSet(columnIndex) ? new SqlDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<T>) new NullDataReader<T>();
+            return IsSet(columnIndex) ? new TypedDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<T>) new NullDataReader<T>();
         }
 
         private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
