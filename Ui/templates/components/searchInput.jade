@@ -1,0 +1,89 @@
+﻿mixin dayOfWeekSelector(bindTo)
+	select.form-control.scaled-input(data-bind="value: " + bindTo)
+		for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']						
+			option= day
+
+mixin input-well()
+	.well.well-sm.inline-block.vertical-space-sm.margin-right
+		block
+
+mixin timeInput(bindTo)
+	input.form-control.scaled-input(type="time", data-bind="value: " + bindTo)
+	
+mixin dateInput(bindTo)
+	input.form-control.small-input(data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: " + bindTo)
+
+mixin search-tab(title, bindName)
+	form.form-horizontal.blockable(action="search", method="post" data-bind="with: #{bindName}")
+		div(style="display: none;" data-bind="visible: blocked()")
+			.row
+				.col-xs-10.col-xs-offset-1.vertical-space
+					span.search-form-text(data-bind="text: errorMessage")
+			.row
+				.col-xs-2.col-xs-offset-5
+					a.btn.btn-default(href="/api/session/clearImport") &laquo; Back to import
+
+		div(style="display: none;" data-bind="visible: !blocked()")
+			span.search-form-text.vertical-space #{title}
+			.form-group
+				.col-xs-12					
+					.inline-block(data-bind="with: parameters")
+						block
+					br
+					.button-group.pull-right
+						button.btn.btn-default.vertical-space-sm(type="button" data-bind="click: save") Export &raquo;
+						button.btn.btn-primary.vertical-space-sm(type="submit" data-bind="click: submit") Search &raquo;
+
+.form-horizontal.blockable
+	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
+	fieldset		
+		.form-group(data-bind="with: Period")
+			.col-sm-12
+				span.search-form-text.vertical-space.margin-right Find transactions for the period
+				.well.well-sm.inline-block
+					+dateInput('From')
+					label.control-label.between-label to
+					+dateInput('To')
+		ul.nav.nav-tabs
+			li.active
+				a(href="#time" data-toggle="tab") Outside working hours
+			li
+				a(href="#accounts" data-toggle="tab") Unusual accounts
+			li
+				a(href="#users" data-toggle="tab") Unexpected users
+			li
+				a(href="#date" data-toggle="tab") Year end
+			li
+				a(href="#endings" data-toggle="tab") Round number
+
+		.tab-content
+			.tab-pane.fade.active.in#time
+				+search-tab('posted outside', 'Outside')
+					+input-well()
+						+dayOfWeekSelector('FromDay')
+						label.control-label.between-label to
+						+dayOfWeekSelector('ToDay')
+					+input-well()
+						+timeInput('FromTime')
+						label.control-label.between-label to
+						+timeInput('ToTime')
+			.tab-pane.fade#accounts
+				+search-tab('posted to accounts with fewer than', 'Accounts')
+					+input-well()
+						input.form-control.small-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
+					span.vertical-space.search-text entries
+			.tab-pane.fade#users
+				+search-tab('posted by people other than', 'Users')
+					+input-well()
+						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
+			.tab-pane.fade#date
+				+search-tab('posted after the year end or within', 'Date')
+					+input-well()
+						input.form-control.small-input(type="number", data-bind="value: daysBeforeYearEnd")
+					span.vertical-space.search-text days before year end
+			.tab-pane.fade#endings
+				+search-tab('ending in at least', 'Ending')
+					+input-well()
+						input.form-control.small-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
+					span.vertical-space.search-text zeroes
+						

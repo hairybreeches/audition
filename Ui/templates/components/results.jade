@@ -1,0 +1,54 @@
+﻿mixin pager()
+	h4.text-center(data-bind = "text: resultsComment()")
+	ul.pager
+		li.previous(data-bind="visible: isPreviousPage()")
+			a(href="#" data-bind="click: goToPreviousPage") ← Previous
+		li.next(data-bind="visible: isNextPage()")
+			a(href="#" data-bind="click: goToNextPage") Next →
+
+div(data-bind="visible: showResults()" style="display: none;")
+	+pager()
+	table.table.grouped-table.grouped-hover-table.grouped-striped-table.vertical-space
+		thead
+			tr
+				th(data-bind="visible: $root.showCreated()") Entry time
+				th(data-bind="visible: $root.showTransactionDate()") Transaction Date
+				th(data-bind="visible: $root.showType()") Transaction Type
+				th(data-bind="visible: $root.showDescription()") Description
+				th(data-bind="visible: $root.showUsername()") Username
+				th(data-bind="visible: $root.showLedgerEntryType()") Dr/Cr				
+				th(data-bind="visible: $root.showAccountName()") Account Name
+				th(data-bind="visible: $root.showAmount()") Amount
+				th(data-bind="visible: $root.showAccountCode()") Account Code
+		//ko foreach: results
+		tbody
+				tr
+					td(data-bind="text: created, visible: $root.showCreated()")
+					td(data-bind="text: transactionDate, visible: $root.showTransactionDate()")
+					td(data-bind="text: type, visible: $root.showType()")
+					td(data-bind="text: description, visible: $root.showDescription()")
+					td(data-bind="text: username, visible: $root.showUsername()")
+					td(data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()")
+					td(data-bind="text: lines[0].accountName, visible: $root.showAccountName()")
+					td(data-bind="text: lines[0].amount, visible: $root.showAmount()")
+					td(data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()")
+				// ko foreach: lines.slice(1)
+				tr(data-bind="visible: $root.showEntries()")
+					td(data-bind="visible: $root.showCreated()")
+					td(data-bind="visible: $root.showTransactionDate()")
+					td(data-bind="visible: $root.showType()")
+					td(data-bind="visible: $root.showDescription()")
+					td(data-bind="visible: $root.showUsername()")
+					td(data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()")
+					td(data-bind="text: accountName, visible: $root.showAccountName()")
+					td(data-bind="text: amount, visible: $root.showAmount()")
+					td(data-bind="text: accountCode, visible: $root.showAccountCode()")
+				// /ko
+		// /ko
+	+pager()
+div(data-bind="visible: showApology()" style="display: none;")
+	h2 No results
+
+div(data-bind="visible: showError()" style="display: none;")
+	h2 Error
+	span(data-bind="text: lastError")
