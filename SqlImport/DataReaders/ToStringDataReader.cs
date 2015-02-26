@@ -5,12 +5,12 @@ namespace SqlImport.DataReaders
 {
     public class ToStringDataReader : IFieldReader<string>
     {
-        private readonly int index;
         private readonly string userFriendlyColumnName;
+        private readonly IFieldReader<object> inner;
 
         public ToStringDataReader(int index, string userFriendlyColumnName)
         {
-            this.index = index;
+            this.inner = new FieldReader(index);
             this.userFriendlyColumnName = userFriendlyColumnName;
         }
 
@@ -18,7 +18,7 @@ namespace SqlImport.DataReaders
         {
             try
             {
-                return record.GetValue(index).ToString();
+                return inner.GetField(record, recordIndex).ToString();
             }
             catch (Exception e)
             {

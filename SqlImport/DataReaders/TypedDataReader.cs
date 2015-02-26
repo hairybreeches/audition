@@ -5,18 +5,18 @@ namespace SqlImport.DataReaders
 {
     public class TypedDataReader<T> : IFieldReader<T>
     {
-        private readonly int index;
         private readonly string userFriendlyColumnName;
+        private readonly IFieldReader<object> inner;
 
         public TypedDataReader(int index, string userFriendlyColumnName)
         {
-            this.index = index;
+            inner = new FieldReader(index);
             this.userFriendlyColumnName = userFriendlyColumnName;
         }
 
         public T GetField(IDataRecord record, int recordIndex)
         {
-            var fieldValue = record[index];
+            var fieldValue = inner.GetField(record, recordIndex);
 
             if (!(fieldValue is T))
             {
