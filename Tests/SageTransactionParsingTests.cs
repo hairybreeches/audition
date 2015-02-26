@@ -112,16 +112,13 @@ namespace Tests
         }
 
         [Test]
-        public void GetFriendlyExceptionWhenNominalCodeNotDefined()
+        public void GetDefaultValueWhenNominalCodeNotDefined()
         {
-            var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseTransactions(
-                new object[] { "12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque" }));
-
-            StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
-            foreach (var availableCode in nominalCodeLookup.Keys)
-            {
-                StringAssert.Contains(availableCode, exception.Message, "When a nominal code doesn't exist, the error message should let you know what nominal codes *were* defined");
-            }
+            var transaction = ParseTransactions(
+                new object[]
+                {"12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque", "JC"})
+                .Single();
+            Assert.AreEqual(new Transaction("12", new DateTime(2013,12,31),"Betty", "Unpresented Cheque", new []{new LedgerEntry("bizarre nominal code", "<none>", LedgerEntryType.Dr, 13)}, "Journal Credit" ), transaction);
             
         }
 

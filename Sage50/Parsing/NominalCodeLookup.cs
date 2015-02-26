@@ -17,12 +17,7 @@ namespace Sage50.Parsing
         public string GetLookupValue(string nominalCode)
         {
             string nominalCodeName;
-            if (lookup.TryGetValue(nominalCode, out nominalCodeName))
-            {
-                return lookup[nominalCode];
-            }
-
-            throw new SqlDataFormatUnexpectedException(String.Format("Could not find lookup value for nominal code {0}, available nominal codes are {1}", nominalCode, String.Join(", ", lookup.Keys)));     
+            return lookup.TryGetValue(nominalCode, out nominalCodeName) ? lookup[nominalCode] : "<none>";
         }
     }
 }
