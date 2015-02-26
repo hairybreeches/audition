@@ -4,7 +4,6 @@ namespace Searching
     {
         Users,
         Accounts,
-        Date,
         Ending
     }
 }

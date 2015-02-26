@@ -318,11 +318,6 @@ var SearchModel = function () {
             minimumEntriesToBeConsideredNormal: ko.observable(10)
         }, period, searchCapabilities, 'Accounts'),
 
-        Date: new InputSection({
-            daysBeforeYearEnd: ko.observable(10),
-            yearEnd: period.To
-        }, period, searchCapabilities, 'Date'),
-
         Users: new InputSection({
             users: ko.observable("")
         }, period, searchCapabilities, 'Users'),

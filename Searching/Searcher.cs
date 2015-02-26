@@ -9,22 +9,15 @@ namespace Searching
 {
     public class Searcher
     {
-        private readonly ISearcher<YearEndParameters> yearEndSearcher;
         private readonly ISearcher<UnusualAccountsParameters> unusualAccountsSearcher;
         private readonly ISearcher<EndingParameters> roundNumberSearcher;
         private readonly ISearcher<UserParameters> userSearcher;
 
-        public Searcher(ISearcher<YearEndParameters> yearEndSearcher, ISearcher<UnusualAccountsParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher)
+        public Searcher(ISearcher<UnusualAccountsParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher)
         {
-            this.yearEndSearcher = yearEndSearcher;
             this.unusualAccountsSearcher = unusualAccountsSearcher;
             this.roundNumberSearcher = roundNumberSearcher;
             this.userSearcher = userSearcher;
-        }
-
-        public IQueryable<Transaction> FindTransactionsWithin(YearEndParameters parameters, IQueryable<Transaction> transactions)
-        {
-            return yearEndSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
         public IQueryable<Transaction> FindTransactionsWithin(EndingParameters parameters, IQueryable<Transaction> transactions)

@@ -46,13 +46,6 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        [Route(Routing.DateExport)]
-        public async Task<ExportResult> DateExport(SearchWindow<YearEndParameters> searchWindow)
-        {
-            return await Export(searchWindow);
-        }
-
-        [HttpPost]
         [Route(Routing.EndingExport)]
         public async Task<ExportResult> EndingExport(SearchWindow<EndingParameters> searchWindow)
         {

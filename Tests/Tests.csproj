@@ -103,7 +103,6 @@
     <Compile Include="SearcherTests\PaginationTests.cs" />
     <Compile Include="SearcherTests\UnusualAccountsSearcherTests.cs" />
     <Compile Include="SearcherTests\UserSearcherTests.cs" />
-    <Compile Include="SearcherTests\YearEndSearchingTests.cs" />
     <Compile Include="SearcherTests\RoundNumberSearcherTests.cs" />
     <Compile Include="Searching.cs" />
     <Compile Include="ShouldNotHappenInThisTestException.cs" />

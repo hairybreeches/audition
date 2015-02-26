@@ -39,13 +39,6 @@ namespace Webapp.Controllers
         }
         
         [HttpPost]
-        [Route(Routing.DateSearch)]
-        public SearchResponse DateSearch(SearchRequest<YearEndParameters> searchRequest)
-        {
-            return Search(searchRequest);
-        }
-
-        [HttpPost]
         [Route(Routing.UserSearch)]
         public SearchResponse UserSearch(SearchRequest<UserParameters> searchRequest)
         {

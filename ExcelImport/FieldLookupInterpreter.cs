@@ -110,8 +110,6 @@ namespace ExcelImport
             {
                 case SearchAction.Accounts:
                     return lookups.AccountCode;
-                case SearchAction.Date:
-                    return lookups.Created;
                 case SearchAction.Ending:
                     return lookups.Amount;
                 case SearchAction.Users:
@@ -132,9 +130,6 @@ namespace ExcelImport
                 case SearchAction.Users:
                     return
                         "In order to search for transactions posted by unexpected users, you must import transactions with a username value";
-                case SearchAction.Date:
-                    return
-                        "In order to search for transactions created near or after the year end, you must import transactions with an entry time value";
                 case SearchAction.Accounts:
                     return
                         "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";
