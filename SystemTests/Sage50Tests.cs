@@ -15,12 +15,12 @@ namespace SystemTests
         public void Sage50JournalSearchReturnsJournals()
         {
             //vagues search window ever, to return all transactions in the searcher
-            const string searchWindow = "{'Period':{'From':'1649-01-30', 'To':'4789-7-14'},'Parameters':{'FromDay':'Monday','ToDay':'Friday','FromTime':'00:00','ToTime':'00:00'}}";
+            const string searchWindow = "{'Period':{'From':'1649-01-30', 'To':'4789-7-14'},'Parameters':{'users':'steve\r\nBarry'}";
             const string searchRequest = "{pageNumber: 1, searchWindow: " + searchWindow + "}";
 
             var requestResponse = new MockRequest("POST",
                 searchRequest,
-                "application/json", "http://localhost:1337/api/search/hours");
+                "application/json", "http://localhost:1337/api/search/users");
 
             using (var lifetime = AutofacConfiguration.CreateDefaultContainerBuilder()
                 .WithNoLicensing()

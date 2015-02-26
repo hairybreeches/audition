@@ -19,13 +19,6 @@ namespace Tests
         }
         
         [Test]
-        public void DescriptionCorrectForWorkingHoursSearchWindow()
-        {
-            var window = new SearchWindow<WorkingHoursParameters>(new WorkingHoursParameters(DayOfWeek.Monday, DayOfWeek.Thursday, new LocalTime(9, 30),new LocalTime(18,0)), new DateRange(new DateTime(2000,4,1), new DateTime(2001, 3, 31)));
-            StringAssert.AreEqualIgnoringCase(String.Format("Transactions posted outside Monday to Thursday, 9:30 to 18:00, in the period {0} to {1}", new DateTime(2000, 4, 1).ToShortDateString(), new DateTime(2001, 3, 31).ToShortDateString()), window.Description);
-        }    
-        
-        [Test]
         public void DescriptionCorrectForUnusualAccountsSearchWindow()
         {
             var window = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(4), new DateRange(new DateTime(2000,4,1), new DateTime(2001, 3, 31)));

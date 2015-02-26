@@ -65,11 +65,9 @@
     <Compile Include="SearchWindows\ISearchParameters.cs" />
     <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
-    <Compile Include="SearchWindows\WorkingHoursParameters.cs" />
     <Compile Include="SearchWindows\YearEndParameters.cs" />
     <Compile Include="UnusualAccountsSearcher.cs" />
     <Compile Include="UserSearcher.cs" />
-    <Compile Include="WorkingHoursSearcher.cs" />
     <Compile Include="YearEndSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
