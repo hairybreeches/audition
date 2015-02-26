@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataReaders\DefaultValueSupplier.cs" />
     <Compile Include="DataReaders\FieldReader.cs" />
     <Compile Include="MappingField.cs" />
     <Compile Include="Sage50TransactionTypeLookup.cs" />

@@ -48,6 +48,36 @@ namespace Tests
             };
 
             CollectionAssert.AreEqual(expected, transactions);
+        }    
+        
+        [Test]
+        public void IfOptionalValuesNullThenDefaultIsProvided()
+        {
+            var transactions = ParseTransactions(
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "1200", "55", DBNull.Value, "CI" },
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-55", DBNull.Value, "CI" },
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "2200", "0", DBNull.Value, "CI" },
+                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "1200", "13", DBNull.Value, "UJ" },
+                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-13", DBNull.Value, "UJ" });
+
+            var expected = new[]
+            {
+                new Transaction("26", new DateTime(2013,12,31), "<none>",
+                    "<none>", new[]
+                    {
+                        new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
+                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
+                        new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
+                    }, "CI"),
+                new Transaction("12", new DateTime(2013,12,31), "<none>",
+                    "<none>", new[]
+                    {
+                        new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
+                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13)
+                    }, "UJ")
+            };
+
+            CollectionAssert.AreEqual(expected, transactions);
         }      
         
         

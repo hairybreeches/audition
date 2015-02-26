@@ -9,8 +9,13 @@ namespace SqlImport.DataReaders
         private readonly IFieldReader<object> inner;
 
         public TypedDataReader(int index, string userFriendlyColumnName)
+            : this(new FieldReader(index), userFriendlyColumnName)
+        {            
+        }
+
+        public TypedDataReader(IFieldReader<object> untypedReader, string userFriendlyColumnName)
         {
-            inner = new FieldReader(index);
+            inner = untypedReader;
             this.userFriendlyColumnName = userFriendlyColumnName;
         }
 
