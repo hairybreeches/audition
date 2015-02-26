@@ -9,7 +9,6 @@ namespace ExcelImport
         public FieldLookups(
             int description,
             int username,
-            int created,
             int transactionDate,
             int accountCode,
             int accountName,
@@ -23,7 +22,6 @@ namespace ExcelImport
             }
             Description = description;
             Username = username;
-            Created = created;
             TransactionDate = transactionDate;
             AccountCode = accountCode;
             AccountName = accountName;
@@ -34,7 +32,6 @@ namespace ExcelImport
 
         public int Description { get; private set; }
         public int Username { get; private set; }
-        public int Created { get; private set; }
         public int TransactionDate { get; private set; }
         public int AccountCode { get; private set; }
         public int AccountName { get; private set; }

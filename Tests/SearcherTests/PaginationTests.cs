@@ -108,10 +108,9 @@ namespace Tests.SearcherTests
 
         private static IEnumerable<Transaction> GetTransactions()
         {
-            var startDate = new DateTime(1999, 1, 1);
             for (var i = 1; i < 3001; i++)
             {
-                yield return new Transaction(i.ToString(), startDate.AddMinutes(5 * i), new DateTime(), "steve", "description", new[]
+                yield return new Transaction(i.ToString(), new DateTime(), "steve", "description", new[]
                 {
                     new LedgerEntry("steve", "steve", LedgerEntryType.Dr, 20)                    
                 }, "AJ");

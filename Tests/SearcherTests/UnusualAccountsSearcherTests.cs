@@ -86,7 +86,7 @@ namespace Tests.SearcherTests
 
         public static Transaction PostedTo(string accountCode1, string accountCode2, DateTime transactionDate)
         {
-            return new Transaction(Guid.NewGuid(), new DateTime(1999, 12, 1), transactionDate,
+            return new Transaction(Guid.NewGuid(), transactionDate,
                 new[]
                 {
                     new LedgerEntry(accountCode1, accountCode1, LedgerEntryType.Cr, 2.2m),

@@ -79,7 +79,7 @@ namespace Tests.SearcherTests
 
         private static Transaction CreateTransactionByUser(string user, DateTime transactionDate)
         {
-            return new Transaction(Guid.NewGuid().ToString(), new DateTime(), transactionDate, user, String.Empty, Enumerable.Empty<LedgerEntry>(), String.Empty);
+            return new Transaction(Guid.NewGuid().ToString(), transactionDate, user, String.Empty, Enumerable.Empty<LedgerEntry>(), String.Empty);
         }
     }
 }

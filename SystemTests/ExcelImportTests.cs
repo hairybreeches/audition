@@ -33,8 +33,7 @@ namespace SystemTests
                 (
                     accountCode : 4,
                     accountName : -1,
-                    amount : 20,
-                    created : 31,
+                    amount : 20,                    
                     description : 8,
                     transactionDate : 2,
                     username : 7,
@@ -45,7 +44,7 @@ namespace SystemTests
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the transactions back");
 
-            Assert.AreEqual(new Transaction("8", new DateTime(2010, 4, 27, 17, 16, 57), new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
+            Assert.AreEqual(new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
             {
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
@@ -72,17 +71,16 @@ namespace SystemTests
                     (
                         accountCode: 3,
                         accountName: -1,
-                        amount: 9,
-                        created: 3,
+                        amount: 9,                        
                         description: 5,
-                        transactionDate: 6,
+                        transactionDate: 3,
                         username: 19,
                         id: -1,
                         type: 1
                     )
                 }, 1));
 
-            Assert.AreEqual("Could not read transaction entry time of row 3: Could not interpret value '9998' from column D as a date. It looks like the data for the transaction entry time is incorrect. If you are importing data from Excel, please check the mapping for this column and try again.", exception.Message);
+            Assert.AreEqual("Could not read transaction date of row 3: Could not interpret value '9998' from column D as a date. It looks like the data for the transaction date is incorrect. If you are importing data from Excel, please check the mapping for this column and try again.", exception.Message);
         }      
         
         [Test]
@@ -102,8 +100,7 @@ namespace SystemTests
                 (
                     accountCode : 3,
                     accountName : -1,
-                    amount : 9,
-                    created : -1,
+                    amount : 9,                    
                     description : 5,
                     transactionDate : 6,
                     username : 19,
@@ -112,7 +109,7 @@ namespace SystemTests
                 )
             }, 6);
 
-            Assert.AreEqual(new Transaction("62", default(DateTime), new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
+            Assert.AreEqual(new Transaction("62", new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
                     new[]
                     {
                         new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
@@ -138,8 +135,7 @@ namespace SystemTests
                 (
                     accountCode : 3,
                     accountName : -1,
-                    amount : 9,
-                    created : -1,
+                    amount : 9,                    
                     description : 5,
                     transactionDate : 6,
                     username : 19,

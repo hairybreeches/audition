@@ -24,22 +24,22 @@ namespace Tests
         public void CanConvertTransactions()
         {
             var transactions = ParseTransactions(
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque", "CI" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-55", "Unpresented Cheque", "CI" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "2200", "0", "Unpresented Cheque", "CI" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque", "UJ" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "9998", "-13", "Unpresented Cheque", "UJ" });
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "CI" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "9998", "-55", "Unpresented Cheque", "CI" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "2200", "0", "Unpresented Cheque", "CI" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "1200", "13", "Unpresented Cheque", "UJ" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "9998", "-13", "Unpresented Cheque", "UJ" });
 
             var expected = new[]
             {
-                new Transaction("26", new DateTime(2010,4,27,17,16, 0), new DateTime(2013,12,31), "MANAGER",
+                new Transaction("26", new DateTime(2013,12,31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
                     }, "CI"),
-                new Transaction("12", new DateTime(2010,4,27,17,16, 0), new DateTime(2013,12,31), "Steve",
+                new Transaction("12", new DateTime(2013,12,31), "Steve",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
@@ -54,11 +54,11 @@ namespace Tests
         [Test]
         public void CanParseUnbalancedTransactions()
         {
-            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "55", "Unpresented Cheque", "AF" });
+            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "AF" });
 
             var expected = new[]
             {
-                new Transaction("26", new DateTime(2010,4,27,17,16,0), new DateTime(2013, 12, 31), "MANAGER",
+                new Transaction("26", new DateTime(2013, 12, 31), "MANAGER",
                     "Unpresented Cheque", new[]
                     {
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
@@ -71,8 +71,8 @@ namespace Tests
         public void GetRightExceptionWhenUsernamesMismatched()
         {
             var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseTransactions(
-                new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010,4,27,17,16,0), "1200", "13", "Unpresented Cheque" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "1200", "13", "Unpresented Cheque" }));
+                new object[] { "12", "Betty", new DateTime(2013, 12, 31), "1200", "13", "Unpresented Cheque" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "1200", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("12", exception.Message, "If two fields conflict, user should be told what transaction id is affected");
             foreach (var conflictingUsername in new[]{"Betty, Steve"})
@@ -85,7 +85,7 @@ namespace Tests
         public void GetFriendlyExceptionWhenNominalCodeNotDefined()
         {
             var exception = Assert.Throws<SqlDataFormatUnexpectedException>(() => ParseTransactions(
-                new object[] { "12", "Betty", new DateTime(2013, 12, 31), new DateTime(2010, 4, 27, 17, 16, 0), "bizarre nominal code", "13", "Unpresented Cheque" }));
+                new object[] { "12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque" }));
 
             StringAssert.Contains("bizarre nominal code", exception.Message, "When a nominal code doesn't exist, the error message should tell you what code is causing the problem");
             foreach (var availableCode in nominalCodeLookup.Keys)
