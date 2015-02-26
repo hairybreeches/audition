@@ -25,11 +25,10 @@
       <div data-bind="with: input" class="container">
         <div class="form-horizontal blockable">
           <div style="display: none;" data-bind="visible: $root.searching" class="blockscreen loadscreen"></div>
-          <fieldset>
-            <legend class="vertical-space">Find transactions for the period...</legend>
+          <fieldset>		
             <div data-bind="with: Period" class="form-group">
-              <div class="col-sm-12">
-                <div class="well inline-block">
+              <div class="col-sm-12"><span class="search-form-text vertical-space margin-right">Find transactions for the period</span>
+                <div class="well well-sm inline-block">
                     <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: From" class="form-control small-input">
                   <label class="control-label between-label">to</label>
                     <input data-bind="datepicker: {dateFormat: 'yy-m-d'}, value: To" class="form-control small-input">
@@ -48,21 +47,17 @@
                   <form action="search" method="post" data-bind="with: Outside" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 vertical-space">
-                          <legend data-bind="text: errorMessage"></legend>
-                        </div>
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
                       </div>
                       <div class="row">
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()">
-                      <legend class="vertical-space">posted outside...</legend>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted outside</span>
                       <div class="form-group">
-                        <div class="col-xs-12">
-                          <div class="inline-block">
-                            <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
+                        <div class="col-xs-12">					
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
                                   <select data-bind="value: FromDay" class="form-control scaled-input">
                                     <option>Monday</option>
                                     <option>Tuesday</option>
@@ -83,16 +78,15 @@
                                     <option>Sunday</option>
                                   </select>
                               </div>
-                              <div class="well inline-block vertical-space">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
                                   <input type="time" data-bind="value: FromTime" class="form-control scaled-input">
                                 <label class="control-label between-label">to</label>
                                   <input type="time" data-bind="value: ToTime" class="form-control scaled-input">
                               </div>
-                            </div><br>
-                            <div class="button-group pull-right">
-                              <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
-                              <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
-                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
                           </div>
                         </div>
                       </div>
@@ -103,28 +97,23 @@
                   <form action="search" method="post" data-bind="with: Accounts" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 vertical-space">
-                          <legend data-bind="text: errorMessage"></legend>
-                        </div>
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
                       </div>
                       <div class="row">
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()">
-                      <legend class="vertical-space">posted to accounts with fewer than...</legend>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted to accounts with fewer than</span>
                       <div class="form-group">
-                        <div class="col-xs-12">
-                          <div class="inline-block">
-                            <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
-                                <input type="number" data-bind="value: minimumEntriesToBeConsideredNormal" class="form-control scaled-input">
+                        <div class="col-xs-12">					
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
+                                <input type="number" data-bind="value: minimumEntriesToBeConsideredNormal" class="form-control small-input">
                               </div><span class="vertical-space search-text">entries</span>
-                            </div><br>
-                            <div class="button-group pull-right">
-                              <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
-                              <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
-                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
                           </div>
                         </div>
                       </div>
@@ -135,28 +124,23 @@
                   <form action="search" method="post" data-bind="with: Users" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 vertical-space">
-                          <legend data-bind="text: errorMessage"></legend>
-                        </div>
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
                       </div>
                       <div class="row">
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()">
-                      <legend class="vertical-space">posted by people other than...</legend>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted by people other than</span>
                       <div class="form-group">
-                        <div class="col-xs-12">
-                          <div class="inline-block">
-                            <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space">
+                        <div class="col-xs-12">					
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
                                 <textarea data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line" class="form-control"></textarea>
                               </div>
-                            </div><br>
-                            <div class="button-group pull-right">
-                              <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
-                              <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
-                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
                           </div>
                         </div>
                       </div>
@@ -167,28 +151,23 @@
                   <form action="search" method="post" data-bind="with: Date" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 vertical-space">
-                          <legend data-bind="text: errorMessage"></legend>
-                        </div>
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
                       </div>
                       <div class="row">
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()">
-                      <legend class="vertical-space">posted after the year end or within...</legend>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted after the year end or within</span>
                       <div class="form-group">
-                        <div class="col-xs-12">
-                          <div class="inline-block">
-                            <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
-                                <input type="number" data-bind="value: daysBeforeYearEnd" class="form-control scaled-input">
+                        <div class="col-xs-12">					
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
+                                <input type="number" data-bind="value: daysBeforeYearEnd" class="form-control small-input">
                               </div><span class="vertical-space search-text">days before year end</span>
-                            </div><br>
-                            <div class="button-group pull-right">
-                              <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
-                              <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
-                            </div>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
                           </div>
                         </div>
                       </div>
@@ -199,28 +178,23 @@
                   <form action="search" method="post" data-bind="with: Ending" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 vertical-space">
-                          <legend data-bind="text: errorMessage"></legend>
-                        </div>
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
                       </div>
                       <div class="row">
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()">
-                      <legend class="vertical-space">ending in at least...</legend>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">ending in at least</span>
                       <div class="form-group">
-                        <div class="col-xs-12">
-                          <div class="inline-block">
-                            <div data-bind="with: parameters" class="inline-block">
-                              <div class="well inline-block vertical-space margin-right">
-                                <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control scaled-input">
-                              </div><span class="vertical-space search-text">zeroes.</span>
-                            </div><br>
-                            <div class="button-group pull-right">
-                              <button type="button" data-bind="click: save" class="btn btn-default vertical-space">Export &raquo;</button>
-                              <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space">Search &raquo;</button>
-                            </div>
+                        <div class="col-xs-12">					
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
+                                <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control small-input">
+                              </div><span class="vertical-space search-text">zeroes</span>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
                           </div>
                         </div>
                       </div>
@@ -230,7 +204,7 @@
             </div>
           </fieldset>
         </div>
-        <hr class="vertical-space">
+        <hr class="vertical-space-sm">
       </div>
       <div data-bind="with: exportSuccessMessage" class="container">
         <div class="row">
