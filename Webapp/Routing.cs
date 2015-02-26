@@ -15,8 +15,6 @@ namespace Webapp
         public const string GetLicence = "api/licence/get";
         public const string UpdateLicence = "api/licence/update";
 
-        public const string HoursSearch = "api/search/hours";
-        public const string HoursExport = "api/export/hours";
         public const string AccountsSearch = "api/search/accounts";
         public const string AccountsExport = "api/export/accounts";
         public const string DateSearch = "api/search/date";
