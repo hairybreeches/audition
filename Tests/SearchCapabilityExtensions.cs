@@ -27,18 +27,12 @@ namespace Tests
             dictionary.Add(SearchAction.Ending.ToString(), EndingSearchUnavailableMessage);
             return dictionary;
         }
-        public static IDictionary<string, string> WithYearEndErrorMessage(this IDictionary<string, string> dictionary)
-        {
-            dictionary.Add(SearchAction.Date.ToString(), DateUnavailableMessage);
-            return dictionary;
-        }
 
         public static IDictionary<string, string> WithAllErrorMessages(this IDictionary<string, string> dictionary)
         {
             dictionary.WithAccountsErrorMessage()
                 .WithEndingErrorMessage()
-                .WithUsersErrorMessage()
-                .WithYearEndErrorMessage();
+                .WithUsersErrorMessage();
 
             return dictionary;
         } 

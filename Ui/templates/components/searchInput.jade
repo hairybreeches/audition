@@ -50,8 +50,6 @@ mixin search-tab(title, bindName)
 			li
 				a(href="#users" data-toggle="tab") Unexpected users
 			li
-				a(href="#date" data-toggle="tab") Year end
-			li
 				a(href="#endings" data-toggle="tab") Round number
 
 		.tab-content
@@ -64,11 +62,6 @@ mixin search-tab(title, bindName)
 				+search-tab('posted by people other than', 'Users')
 					+input-well()
 						textarea.form-control(data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line")
-			.tab-pane.fade#date
-				+search-tab('posted after the year end or within', 'Date')
-					+input-well()
-						input.form-control.small-input(type="number", data-bind="value: daysBeforeYearEnd")
-					span.vertical-space.search-text days before year end
 			.tab-pane.fade#endings
 				+search-tab('ending in at least', 'Ending')
 					+input-well()

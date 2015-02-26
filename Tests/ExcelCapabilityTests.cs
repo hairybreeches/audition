@@ -45,7 +45,7 @@ namespace Tests
 
                 yield return CreateTestCase("Creation date mapped",
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1, created: 7, description: -1, transactionDate: 18, username: -1, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Date), 
+                    new Dictionary<string, string>().WithAllErrorMessages(), 
                     DisplayField.Created, DisplayField.TransactionDate);
 
                 yield return CreateTestCase("Description mapped",
@@ -108,8 +108,7 @@ namespace Tests
 
                 yield return CreateTestCase("Transaction creation time unmapped",
                     new FieldLookups(id: 18, accountCode: 18, accountName: 18, amount: 18, created: -1, description: 18, transactionDate: 18, username: 18, type: 18), 
-                    new Dictionary<string, string>()
-                        .WithYearEndErrorMessage(), 
+                    new Dictionary<string, string>(),
                     Enums.GetAllValues<DisplayField>().Without(DisplayField.Created));
 
                 yield return CreateTestCase("Description unmapped",
