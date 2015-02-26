@@ -9,13 +9,29 @@ namespace Sage50.Parsing
 {
     public class SageTransactionSchema
     {
-        private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, (name, index) => new ToStringDataReader(index, name));
-        private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1);
+        private readonly SchemaColumn<string> idColumn = new SchemaColumn<string>("TRAN_NUMBER", 0, CreateToStringDataReader);
+        private readonly SchemaColumn<string> usernameColumn = new SchemaColumn<string>("USER_NAME", 1, CreateOptionalStringColumnReader);
         private readonly SchemaColumn<DateTime> dateColumn = new SchemaColumn<DateTime>("DATE", 2);
         private readonly SchemaColumn<string> nominalCodeColumn = new SchemaColumn<string>("NOMINAL_CODE", 3);
         private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 4);
-        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 5);
-        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 6, (name, index) => new LookupConverter<string,string>(new ToStringDataReader(index, name), new Sage50TransactionTypeLookup()));        
+        private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 5, CreateOptionalStringColumnReader);
+        private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 6, CreateNominalLookupReader);
+        private const string DefaultString = "<none>";
+
+        private static IFieldReader<string> CreateToStringDataReader(string name, int index)
+        {
+            return new ToStringDataReader(index, name);
+        }
+        private static IFieldReader<string> CreateNominalLookupReader(string name, int index)
+        {
+            return new LookupConverter<string,string>(new ToStringDataReader(index, name), new Sage50TransactionTypeLookup());
+        }
+
+        private static IFieldReader<string> CreateOptionalStringColumnReader(string columnName, int columnIndex)
+        {
+
+            return new TypedDataReader<string>(new DefaultValueSupplier(new FieldReader(columnIndex), DefaultString), columnName);
+        }
 
         public IEnumerable<ISchemaColumn> MappedColumns
         {
