@@ -26,7 +26,7 @@ mixin search-tab(title, bindName)
 		div(style="display: none;" data-bind="visible: !blocked()")
 			span.search-form-text.vertical-space #{title}
 			.form-group
-				.col-xs-12					
+				.col-xs-12
 					.inline-block(data-bind="with: parameters")
 						block
 					br
@@ -36,7 +36,7 @@ mixin search-tab(title, bindName)
 
 .form-horizontal.blockable
 	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
-	fieldset		
+	fieldset
 		.form-group(data-bind="with: Period")
 			.col-sm-12
 				span.search-form-text.vertical-space.margin-right Find transactions for the period
