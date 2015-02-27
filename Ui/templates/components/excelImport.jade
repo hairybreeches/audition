@@ -1,0 +1,28 @@
+﻿include forms
+include ../components/message
+
+mixin sheets-dropdown()
+	+dropdown({label: 'Sheet', fieldName: 'sheet'}, 'sheetOptions')
+
+mixin row-dropdown(field)
+	+dropdown(field, 'columns')
+		
+mixin optional-row-dropdown(field)
+	+dropdown(field, 'optionalColumns')
+
+mixin excel-import()
+	+form-field({label: "File", button: {label: "Browse...", onClick: "browseExcelFile"}})
+		input#excelFileLocation.form-control(type="text" data-bind="textInput: fileLocation" name="fileLocation")
+	div(data-bind="visible: showInput()" style="display: none;")
+		+sheets-dropdown()
+		+checkbox({label: 'Header row', fieldName: 'useHeaderRow'})
+		legend Map columns
+		+row-dropdown({label: "Transaction date", fieldName: "TransactionDate", help: "The date the transaction occurred. Used to determine whether the transaction applies to the current period or not. This is required."})
+		+optional-row-dropdown({label: "Username", fieldName: "Username", help: "The name or ID of the user who entered the transaction"})
+		+optional-row-dropdown({label: "Transaction type", fieldName: "Type", help: "The transaction type, for example purchase invoice or user-raised journal"})
+		+optional-row-dropdown({label: "Amount", fieldName: "Amount", help: "The net/gross value of the transaction"})
+		+optional-row-dropdown({label: "Nominal code", fieldName: "AccountCode", help: "The nominal code which the transaction has been posted to"})
+		+optional-row-dropdown({label: "Nominal name", fieldName: "AccountName", help: "The name or description of the nominal code"})
+		+optional-row-dropdown({label: "Description", fieldName: "Description", help: "A comment or details entered which describe the nature of the transaction"})
+		+optional-row-dropdown({label: "ID", fieldName: "Id", help: "The ID of the transaction. Multiple rows with the same ID will be combined into one transaction."})
+	+errorMessage('errorMessage', true)

@@ -1,0 +1,52 @@
+﻿@import "_flatstrap\variables.less";
+
+.small-input{
+	width: 8em;
+	display: inline-block;
+}
+
+textarea.form-control{
+    width: 40em;
+}
+
+.scaled-input{
+	width: auto;
+	display: inline-block;
+}
+
+.between-label{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.inline-block{
+	display: inline-block;
+}
+
+.button-group *{
+	margin-left: 20px;
+}
+
+.margin-right{    
+    margin-right: 20px;
+}
+
+.search-text{
+    font-size: @chunkytextsize;
+}
+
+//hack to make form control class override type box styling
+input[type="text"].form-control{
+    .form-control
+}
+
+.search-form-text{
+    padding: 0;
+    font-size: 22.5px;
+    line-height: inherit;
+    color: @text-color;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    margin-bottom: 10px;
+    display: inline-block;
+}
