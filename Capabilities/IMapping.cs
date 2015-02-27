@@ -1,6 +1,6 @@
 namespace Capabilities
 {
-    public interface IMappingVisitor<out T>
+    public interface IMapping<out T>
     {
         T Description { get; }
         T Username { get; }

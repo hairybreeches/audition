@@ -5,7 +5,7 @@ using SqlImport;
 namespace ExcelImport
 {
 
-    public class FieldLookups : IMappingVisitor<int>
+    public class FieldLookups : IMapping<int>
     {
         public FieldLookups(
             int description,

@@ -18,7 +18,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Id;
             }
@@ -30,7 +30,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Username;
             }
@@ -42,7 +42,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.TransactionDate;
             }
@@ -54,7 +54,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.AccountCode;
             }
@@ -66,7 +66,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Amount;
             }
@@ -78,7 +78,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Description;
             }
@@ -90,7 +90,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.AccountName;
             }
@@ -102,7 +102,7 @@ namespace Capabilities
             {
 
             }
-            public override T GetValue<T>(IMappingVisitor<T> visitor)
+            public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Type;
             }
@@ -122,7 +122,7 @@ namespace Capabilities
                 return UserFriendlyName;
             }
 
-            public abstract T GetValue<T>(IMappingVisitor<T> visitor);
+            public abstract T GetValue<T>(IMapping<T> visitor);
         }
 
     }
