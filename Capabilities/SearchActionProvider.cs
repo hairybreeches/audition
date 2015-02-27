@@ -8,9 +8,9 @@ namespace Capabilities
         {
             get
             {
-                yield return new SearchAction("with round number endings", MappingFields.Amount, SearchActionName.Ending);
-                yield return new SearchAction("posted by unexpected users", MappingFields.Username, SearchActionName.Users);
-                yield return new SearchAction("posted to unusual nominal codes", MappingFields.NominalCode, SearchActionName.Accounts);
+                yield return new SearchAction("with round number endings", SearchActionName.Ending, MappingFields.Amount);
+                yield return new SearchAction("posted by unexpected users", SearchActionName.Users, MappingFields.Username);
+                yield return new SearchAction("posted to unusual nominal codes", SearchActionName.Accounts, MappingFields.NominalCode);
             }
         }
     }
