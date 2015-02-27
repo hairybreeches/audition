@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapabilitiesModule.cs" />
+    <Compile Include="DisplayField.cs" />
     <Compile Include="DisplayFieldName.cs" />
+    <Compile Include="DisplayFieldProvider.cs" />
     <Compile Include="IMappingField.cs" />
     <Compile Include="IMapping.cs" />
     <Compile Include="MappingFields.cs" />

@@ -7,6 +7,7 @@ namespace Capabilities
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SearchActionProvider>();
+            builder.RegisterType<DisplayFieldProvider>();
         }
     }
 }
