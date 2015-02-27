@@ -102,52 +102,18 @@ namespace ExcelImport
             }
         }
 
-        private bool IsSearchable(SearchActionName searchAction, FieldLookups lookups)
+        private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
         {
-            return IsSet(RequiredField(searchAction), lookups);
-        }
-
-        private IMappingField RequiredField(SearchActionName searchAction)
-        {
-            switch (searchAction)
-            {
-                case SearchActionName.Accounts:
-                    return MappingFields.NominalCode;
-                case SearchActionName.Ending:
-                    return MappingFields.Amount;
-                case SearchActionName.Users:
-                    return MappingFields.Username;
-                default:
-                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
-            }
-        }
-
-        private string GetErrorMessage(SearchActionName action)
-        {
-            //todo: this should use MappingFields
-            switch (action)
-            {
-                case SearchActionName.Ending:
-                    return
-                        "In order to search for transactions with round number endings, you must import transactions with an amount value";
-                case SearchActionName.Users:
-                    return
-                        "In order to search for transactions posted by unexpected users, you must import transactions with a username value";
-                case SearchActionName.Accounts:
-                    return
-                        "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";
-                default:
-                    throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", action));
-            }
-        }
+            return IsSet(searchAction.RequiredField, lookups);
+        }       
 
         private IDictionary<SearchActionName, string> GetUnavailableSearchMessages(FieldLookups lookups)
         {
-            return Enums.GetAllValues<SearchActionName>()
+            return SearchAction.All
                 .Where(action => !IsSearchable(action, lookups))
                 .Aggregate(new Dictionary<SearchActionName, string>(), (dictionary, action) =>
                 {
-                    dictionary.Add(action, GetErrorMessage(action));
+                    dictionary.Add(action.Name, action.ErrorMessage);
                     return dictionary;
                 });
         }
