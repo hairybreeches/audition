@@ -113,6 +113,10 @@
     <Compile Include="WebappModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Capabilities\Capabilities.csproj">
+      <Project>{C5FA7B6A-8579-42EE-8BFF-804E156D6031}</Project>
+      <Name>Capabilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CompiledUi\CompiledUi.csproj">
       <Project>{b7fe3453-bb5d-410d-86ef-c1274aff5a6e}</Project>
       <Name>CompiledUi</Name>

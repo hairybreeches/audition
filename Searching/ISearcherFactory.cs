@@ -1,4 +1,5 @@
-﻿using Persistence;
+﻿using Capabilities;
+using Persistence;
 
 namespace Searching
 {

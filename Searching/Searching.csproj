@@ -57,8 +57,6 @@
     <Compile Include="Searcher.cs" />
     <Compile Include="NotSupportedSearcher.cs" />
     <Compile Include="RoundNumberSearcher.cs" />
-    <Compile Include="SearchActionName.cs" />
-    <Compile Include="SearchCapability.cs" />
     <Compile Include="SearchWindow.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
@@ -69,6 +67,10 @@
     <Compile Include="UserSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Capabilities\Capabilities.csproj">
+      <Project>{C5FA7B6A-8579-42EE-8BFF-804E156D6031}</Project>
+      <Name>Capabilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>

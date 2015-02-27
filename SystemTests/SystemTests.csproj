@@ -951,6 +951,10 @@
       <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
       <Name>Audition</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Capabilities\Capabilities.csproj">
+      <Project>{C5FA7B6A-8579-42EE-8BFF-804E156D6031}</Project>
+      <Name>Capabilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
       <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
       <Name>ExcelImport</Name>

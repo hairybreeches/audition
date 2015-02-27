@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Capabilities;
 using ExcelImport;
 using Model;
 using NUnit.Framework;

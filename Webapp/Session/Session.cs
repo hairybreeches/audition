@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Capabilities;
 using Licensing;
 using Model.Accounting;
 using Persistence;
