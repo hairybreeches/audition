@@ -60,7 +60,13 @@ namespace ExcelImport
 
         private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
         {
-            return IsSet(SetIndicator(lookups, displayField));
+            return IsSet(RequiredField(displayField), lookups);
+        }
+
+        private bool IsSet(IMappingField requiredField, FieldLookups lookups)
+        {
+            var mapping = requiredField.GetValue(lookups);
+            return IsSet(mapping);
         }
 
         private static bool IsSet(int column)
@@ -68,28 +74,28 @@ namespace ExcelImport
             return column != -1;
         }
 
-        private int SetIndicator(FieldLookups lookups, DisplayField displayField)
+        private IMappingField RequiredField(DisplayField displayField)
         {
             switch (displayField)
             {
                 case DisplayField.AccountCode:
-                    return lookups.AccountCode;
+                    return MappingFields.NominalCode;
                 case DisplayField.AccountName:
-                    return lookups.AccountName;
+                    return MappingFields.NominalName;
                 case DisplayField.Amount:
-                    return lookups.Amount;
+                    return MappingFields.Amount;
                 case DisplayField.Description:
-                    return lookups.Description;
+                    return MappingFields.Description;
                 case DisplayField.TransactionDate:
-                    return lookups.TransactionDate;
+                    return MappingFields.TransactionDate;
                 case DisplayField.Username:
-                    return lookups.Username;
+                    return MappingFields.Username;
                 case DisplayField.LedgerEntryType:
-                    return lookups.Amount;
+                    return MappingFields.Amount;
                 case DisplayField.Id:
-                    return lookups.Id;   
+                    return MappingFields.Id;   
                 case DisplayField.Type:
-                    return lookups.Type;
+                    return MappingFields.Type;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
 
@@ -98,19 +104,19 @@ namespace ExcelImport
 
         private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
         {
-            return IsSet(SetIndicator(searchAction, lookups));
+            return IsSet(RequiredField(searchAction), lookups);
         }
 
-        private int SetIndicator(SearchAction searchAction, FieldLookups lookups)
+        private IMappingField RequiredField(SearchAction searchAction)
         {
             switch (searchAction)
             {
                 case SearchAction.Accounts:
-                    return lookups.AccountCode;
+                    return MappingFields.NominalCode;
                 case SearchAction.Ending:
-                    return lookups.Amount;
+                    return MappingFields.Amount;
                 case SearchAction.Users:
-                    return lookups.Username;
+                    return MappingFields.Username;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
             }
