@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Searching;
 using SqlImport;
@@ -6,11 +7,9 @@ namespace ExcelImport
 {
     public class SearchAction
     {
-        public static readonly SearchAction Ending = new SearchAction("In order to search for transactions with round number endings, you must import transactions with a value for the amount", MappingFields.Amount, SearchActionName.Ending);
-
-        public static readonly SearchAction Users = new SearchAction("In order to search for transactions posted by unexpected users, you must import transactions with a value for the username", MappingFields.Username, SearchActionName.Users);
-
-        public static readonly SearchAction Accounts = new SearchAction("In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code", MappingFields.NominalCode, SearchActionName.Accounts);
+        public static readonly SearchAction Ending = new SearchAction("with round number endings", MappingFields.Amount, SearchActionName.Ending);
+        public static readonly SearchAction Users = new SearchAction("posted by unexpected users", MappingFields.Username, SearchActionName.Users);
+        public static readonly SearchAction Accounts = new SearchAction("posted to unusual nominal codes", MappingFields.NominalCode, SearchActionName.Accounts);
 
         public static IEnumerable<SearchAction> All
         {
@@ -22,9 +21,9 @@ namespace ExcelImport
             }
         }
 
-        public SearchAction(string errorMessage, IMappingField requiredField, SearchActionName name)
+        public SearchAction(string userFriendlyDescription, IMappingField requiredField, SearchActionName name)
         {
-            ErrorMessage = errorMessage;
+            ErrorMessage = String.Format("In order to search for transactions {0}, you must import transactions with a value for the {1}", userFriendlyDescription, requiredField);
             RequiredField = requiredField;
             Name = name;
         }
