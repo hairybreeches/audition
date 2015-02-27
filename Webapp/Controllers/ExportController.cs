@@ -65,7 +65,7 @@ namespace Webapp.Controllers
             var exportResult = await fileSaveChooser.GetFileSaveLocation();
             if (exportResult.Completed)
             {
-                transactionExporter.Export(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), exportResult.Filename, new HashSet<DisplayField>(session.GetCurrentSearchCapability().AvailableFields));
+                transactionExporter.Export(searchWindow.Description, searchWindow.Execute(Searcher, Repository).GetAllTransactions(), exportResult.Filename, new HashSet<DisplayFieldName>(session.GetCurrentSearchCapability().AvailableFields));
             }
             return exportResult;
         }

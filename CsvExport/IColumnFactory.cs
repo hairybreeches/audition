@@ -6,6 +6,6 @@ namespace CsvExport
 {
     public interface IColumnFactory
     {
-        ICsvColumn GetColumn(ICollection<DisplayField> availableFields);
+        ICsvColumn GetColumn(ICollection<DisplayFieldName> availableFields);
     }
 }

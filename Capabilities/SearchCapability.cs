@@ -9,10 +9,10 @@ namespace Capabilities
     public class SearchCapability
     {       
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public IList<DisplayField> AvailableFields { get; private set; }
+        public IList<DisplayFieldName> AvailableFields { get; private set; }
         public IDictionary<string, string> UnvailableActionMessages { get; private set; }        
         
-        public SearchCapability(IList<DisplayField> availableFields, IDictionary<string, string> unvailableActionMessages)
+        public SearchCapability(IList<DisplayFieldName> availableFields, IDictionary<string, string> unvailableActionMessages)
         {
             AvailableFields = availableFields;
             UnvailableActionMessages = unvailableActionMessages;

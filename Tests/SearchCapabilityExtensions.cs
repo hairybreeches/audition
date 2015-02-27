@@ -43,7 +43,7 @@ namespace Tests
             return dictionary;
         }
 
-        public static DisplayField[] Without(this IList<DisplayField> fields, DisplayField toRemove)
+        public static DisplayFieldName[] Without(this IList<DisplayFieldName> fields, DisplayFieldName toRemove)
         {
             return fields.Where(x => x != toRemove).ToArray();
         }
