@@ -4,7 +4,7 @@ using SqlImport;
 namespace ExcelImport
 {
 
-    public class FieldLookups
+    public class FieldLookups : IMappingVisitor<int>
     {
         public FieldLookups(
             int description,
@@ -18,7 +18,7 @@ namespace ExcelImport
         {
             if (transactionDate < 0)
             {
-                throw new ExcelMappingException(String.Format("The {0} must be mapped", MappingField.TransactionDate));
+                throw new ExcelMappingException(String.Format("The {0} must be mapped", MappingFields.TransactionDate));
             }
             Description = description;
             Username = username;

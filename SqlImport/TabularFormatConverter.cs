@@ -37,11 +37,11 @@ namespace SqlImport
             var ledgerEntries = lines.ToList();
             return new Transaction(
                 lines.Key,
-                GetField(ledgerEntries, x => x.TransactionDate, MappingField.TransactionDate),
-                GetField(ledgerEntries, x => x.Username, MappingField.Username),
-                GetField(ledgerEntries, x => x.Description, MappingField.Description),
+                GetField(ledgerEntries, x => x.TransactionDate, MappingFields.TransactionDate),
+                GetField(ledgerEntries, x => x.Username, MappingFields.Username),
+                GetField(ledgerEntries, x => x.Description, MappingFields.Description),
                 ledgerEntries.Select(ToModelLine),
-                GetField(ledgerEntries, x => x.TransactionType, MappingField.Type));
+                GetField(ledgerEntries, x => x.TransactionType, MappingFields.Type));
 
 
         }
@@ -51,7 +51,7 @@ namespace SqlImport
             return new LedgerEntry(arg.NominalCode, arg.NominalCodeName, arg.LedgerEntryType, arg.Amount);
         }
 
-        private static T GetField<T>(IList<SqlLedgerEntry> ledgerEntries, Func<SqlLedgerEntry, T> getter, MappingField mappingField)
+        private static T GetField<T>(IList<SqlLedgerEntry> ledgerEntries, Func<SqlLedgerEntry, T> getter, IMappingField mappingField)
         {
             var values = ledgerEntries.Select(getter).Distinct().ToList();
             if (values.Count > 1)
