@@ -8,21 +8,19 @@ namespace ExcelExport
 {
     public class ColumnFactory : IColumnFactory, IFormatterFactory
     {
-        private readonly DisplayFieldName displayField;
+        private readonly DisplayField displayField;
         private readonly string header;
-        private readonly Func<SqlLedgerEntry, object> fieldSelector;
         private readonly IExcelColumnFormatter formatter;
 
-        public ColumnFactory(string header, DisplayFieldName displayField, Func<SqlLedgerEntry, object> fieldSelector)
-            :this(header, displayField, fieldSelector, new NoFormattingRequiredFormatter())
+        public ColumnFactory(string header, DisplayField displayField)
+            :this(header, displayField, new NoFormattingRequiredFormatter())
         {
         }
 
-        public ColumnFactory(string header, DisplayFieldName displayField, Func<SqlLedgerEntry, object> fieldSelector, IExcelColumnFormatter formatter)
+        public ColumnFactory(string header, DisplayField displayField, IExcelColumnFormatter formatter)
         {
             this.header = header;
             this.displayField = displayField;
-            this.fieldSelector = fieldSelector;
             this.formatter = formatter;
         }
 
@@ -30,7 +28,7 @@ namespace ExcelExport
         {
             if (OutputColumn(availableFields))
             {
-                return new CsvColumn(header, fieldSelector);
+                return new CsvColumn(header, displayField.GetDisplayValue);
             }
             else
             {
@@ -45,7 +43,7 @@ namespace ExcelExport
 
         private bool OutputColumn(ICollection<DisplayFieldName> availableFields)
         {
-            return availableFields.Contains(displayField);
+            return availableFields.Contains(displayField.Name);
         }
     }
 }

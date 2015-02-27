@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Autofac;
 using Capabilities;
 using CsvExport;
@@ -12,18 +13,25 @@ namespace ExcelExport
         {
             builder.RegisterType<ExcelExporter>().As<ITransactionExporter>(); 
             builder.RegisterType<ExcelFileOpener>();
-            builder.Register(_ => new[]
+            builder.Register(CreateColumns).As<IEnumerable<IColumnFactory>>().As<IEnumerable<IFormatterFactory>>();
+        }
+
+        private static ColumnFactory[] CreateColumns(IComponentContext context)
+        {
+            var fieldProvider = context.Resolve<DisplayFieldProvider>();
+
+            return new[]
             {
-                new ColumnFactory("Transaction ID", DisplayFieldName.Id, line => line.TransactionId),
-                new ColumnFactory("Transaction date", DisplayFieldName.TransactionDate, line => line.TransactionDate.ToString("yyyy-MM-dd"), new DateColumnFormatter()),
-                new ColumnFactory("Transaction type", DisplayFieldName.Type, line => line.TransactionType),
-                new ColumnFactory("Username", DisplayFieldName.Username, line => line.Username),
-                new ColumnFactory("Description", DisplayFieldName.Description, line => line.Description),
-                new ColumnFactory("Dr/Cr", DisplayFieldName.LedgerEntryType, line => line.LedgerEntryType),
-                new ColumnFactory("Nominal Account", DisplayFieldName.AccountCode, line => line.NominalCode),
-                new ColumnFactory("Account name", DisplayFieldName.AccountName, line => line.NominalCodeName),
-                new ColumnFactory("Amount", DisplayFieldName.Amount, line => line.Amount)
-            }).As<IEnumerable<IColumnFactory>>().As<IEnumerable<IFormatterFactory>>();
+                new ColumnFactory("Transaction ID", fieldProvider.Id),
+                new ColumnFactory("Transaction date", fieldProvider.TransactionDate, new DateColumnFormatter()),
+                new ColumnFactory("Transaction type", fieldProvider.TransactionType),
+                new ColumnFactory("Username", fieldProvider.Username),
+                new ColumnFactory("Description", fieldProvider.Description),
+                new ColumnFactory("Dr/Cr", fieldProvider.LedgerEntryType),
+                new ColumnFactory("Nominal Account", fieldProvider.AccountCode),
+                new ColumnFactory("Account name", fieldProvider.AccountName),
+                new ColumnFactory("Amount", fieldProvider.Amount)
+            };
         }
     }
 }
