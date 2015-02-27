@@ -1,6 +1,6 @@
 namespace Searching
 {
-    public enum SearchAction
+    public enum SearchActionName
     {
         Users,
         Accounts,

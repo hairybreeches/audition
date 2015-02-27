@@ -30,7 +30,7 @@ namespace Tests
 
                 yield return CreateTestCase("Account Code mapped",
                     new FieldLookups(id: -1, accountCode: 12, accountName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Accounts), 
+                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Accounts), 
                     DisplayField.TransactionDate, DisplayField.AccountCode);
 
                 yield return CreateTestCase("Account name mapped",
@@ -40,7 +40,7 @@ namespace Tests
 
                 yield return CreateTestCase("Amount mapped",
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: 5, description: -1, transactionDate: 18, username: -1, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Ending), 
+                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Ending), 
                     DisplayField.TransactionDate, DisplayField.LedgerEntryType, DisplayField.Amount);
 
                 yield return CreateTestCase("Description mapped",
@@ -50,7 +50,7 @@ namespace Tests
 
                 yield return CreateTestCase("Username mapped",
                     new FieldLookups(id: -1, accountCode: -1, accountName: -1, amount: -1,  description: -1, transactionDate: 18, username: 319, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchAction.Users), 
+                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Users), 
                     DisplayField.TransactionDate, DisplayField.Username);
                 
                 yield return CreateTestCase("Transaction type mapped",

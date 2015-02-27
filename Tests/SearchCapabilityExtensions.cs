@@ -14,17 +14,17 @@ namespace Tests
 
         public static IDictionary<string, string> WithAccountsErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchAction.Accounts.ToString(), AccountSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.Accounts.ToString(), AccountSearchUnavailableMessage);
             return dictionary;
         }
         public static IDictionary<string, string> WithUsersErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchAction.Users.ToString(), UserSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.Users.ToString(), UserSearchUnavailableMessage);
             return dictionary;
         }
         public static IDictionary<string, string> WithEndingErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchAction.Ending.ToString(), EndingSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.Ending.ToString(), EndingSearchUnavailableMessage);
             return dictionary;
         }
 
@@ -37,7 +37,7 @@ namespace Tests
             return dictionary;
         } 
 
-        public static IDictionary<string, string> Without(this IDictionary<string, string> dictionary, SearchAction action)
+        public static IDictionary<string, string> Without(this IDictionary<string, string> dictionary, SearchActionName action)
         {
             dictionary.Remove(action.ToString());
             return dictionary;
