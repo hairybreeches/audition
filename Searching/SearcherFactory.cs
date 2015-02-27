@@ -10,15 +10,10 @@ namespace Searching
 {
     public class SearcherFactory : ISearcherFactory
     {
-        private readonly IList<DisplayFieldName> availableFields;
-
-        public static ISearcherFactory EverythingAvailable = new SearcherFactory(
-            new Dictionary<SearchActionName, string>(),
-            Enums.GetAllValues<DisplayFieldName>());
-
+        private readonly DisplayField[] availableFields;
         private readonly IDictionary<SearchActionName, string> unvailableActionMessages;
 
-        public SearcherFactory(IDictionary<SearchActionName, string> unvailableActionMessages, params DisplayFieldName[] availableFields)
+        public SearcherFactory(IDictionary<SearchActionName, string> unvailableActionMessages, params DisplayField[] availableFields)
         {
             this.unvailableActionMessages = unvailableActionMessages;           
             this.availableFields = availableFields;
@@ -33,7 +28,7 @@ namespace Searching
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(availableFields, unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
+            return new SearchCapability(availableFields.Select(x => x.Name).ToArray(), unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
                 (dictionary, kvp) =>
                 {
                     dictionary.Add(kvp.Key.ToString(), kvp.Value);

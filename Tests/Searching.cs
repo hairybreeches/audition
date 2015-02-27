@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Capabilities;
 using Model.Accounting;
 using Native;
 using Native.Disk;
@@ -20,7 +22,7 @@ namespace Tests
             var repo = new TempFileTransactionRepository(new FileSystem());
             repo.UpdateTransactions(transactionsInRepository);
 
-            var searcher = SearcherFactory.EverythingAvailable.CreateSearcher();
+            var searcher = new SearcherFactory(new Dictionary<SearchActionName, string>(), new DisplayFieldProvider().GetAll.ToArray()).CreateSearcher();
             return searchWindow.Execute(searcher, repo);
         }        
     }
