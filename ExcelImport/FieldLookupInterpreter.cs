@@ -14,10 +14,12 @@ namespace ExcelImport
     public class FieldLookupInterpreter : IDataReaderFactory, ISearcherFactoryFactory
     {
         private readonly ExcelColumnNamer namer;
+        private readonly SearchActionProvider actionProvider;
 
-        public FieldLookupInterpreter(ExcelColumnNamer namer)
+        public FieldLookupInterpreter(ExcelColumnNamer namer, SearchActionProvider actionProvider)
         {
             this.namer = namer;
+            this.actionProvider = actionProvider;
         }
 
         public TransactionFieldReader GetDataReader(FieldLookups lookups)
@@ -110,7 +112,7 @@ namespace ExcelImport
 
         private IDictionary<SearchActionName, string> GetUnavailableSearchMessages(FieldLookups lookups)
         {
-            return SearchAction.All
+            return actionProvider.AllSearchActions
                 .Where(action => !IsSearchable(action, lookups))
                 .Aggregate(new Dictionary<SearchActionName, string>(), (dictionary, action) =>
                 {

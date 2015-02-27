@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Capabilities;
 using CsvExport;
 using ExcelExport;
 using ExcelImport;
@@ -27,6 +28,7 @@ namespace Webapp
             builder.RegisterModule<UserDataModule>();
             builder.RegisterModule<ExcelImportModule>();
             builder.RegisterModule<SqlImportModule>();
+            builder.RegisterModule<CapabilitiesModule>();
         }
     }
 }
