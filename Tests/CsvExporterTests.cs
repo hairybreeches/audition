@@ -38,7 +38,7 @@ namespace Tests
         [Test]
         public void CanOutputAllFieldsSuccessfully()
         {
-            var actual = GetExportedText("What we did to get these transactions", transactions, Enums.GetAllValues<DisplayField>());
+            var actual = GetExportedText("What we did to get these transactions", transactions, Enums.GetAllValues<DisplayFieldName>());
 
             var expected =
 @"What we did to get these transactions
@@ -55,7 +55,7 @@ id 2,2012-06-05,UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
         [Test]
         public void OnlyShowsSpecifiedFields()
         {
-            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayField.TransactionDate, DisplayField.Username,DisplayField.Amount, DisplayField.LedgerEntryType, DisplayField.AccountCode });
+            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.AccountCode });
 
             var expected =
 @"An illuminating comment
@@ -68,7 +68,7 @@ Transaction date,Username,Dr/Cr,Nominal Account,Amount
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, ICollection<DisplayField> fields)
+        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, ICollection<DisplayFieldName> fields)
         {
             var fileSystem = new MockFileSystem();
             using (var lifetime = GetLifetime(fileSystem))

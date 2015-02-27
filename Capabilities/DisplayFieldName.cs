@@ -1,6 +1,6 @@
 namespace Capabilities
 {
-    public enum DisplayField
+    public enum DisplayFieldName
     {        
         TransactionDate,
         Description,

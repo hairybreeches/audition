@@ -23,7 +23,7 @@ namespace ExcelExport
             this.formatterFactories = formatterFactories;
         }
 
-        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayField> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayFieldName> availableFields)
         {
             using (var tempFile = fileSystem.GetTempFile("csv"))
             {

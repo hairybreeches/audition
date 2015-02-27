@@ -6,6 +6,6 @@ namespace ExcelExport
 {
     public interface IFormatterFactory
     {
-        IExcelColumnFormatter GetFormatter(ICollection<DisplayField> availableFields);
+        IExcelColumnFormatter GetFormatter(ICollection<DisplayFieldName> availableFields);
     }
 }

@@ -50,9 +50,9 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<DateTime>) new NullDataReader<DateTime>();
         }
 
-        private DisplayField[] GetDisplayableFields(FieldLookups lookups)
+        private DisplayFieldName[] GetDisplayableFields(FieldLookups lookups)
         {
-            return Enums.GetAllValues<DisplayField>()
+            return Enums.GetAllValues<DisplayFieldName>()
                 .Where(field => IsDisplayable(lookups, field)).ToArray();
         }
 
@@ -61,7 +61,7 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new TypedDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<T>) new NullDataReader<T>();
         }
 
-        private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
+        private bool IsDisplayable(FieldLookups lookups, DisplayFieldName displayField)
         {
             return IsSet(RequiredField(displayField), lookups);
         }
@@ -77,27 +77,27 @@ namespace ExcelImport
             return column != -1;
         }
 
-        private IMappingField RequiredField(DisplayField displayField)
+        private IMappingField RequiredField(DisplayFieldName displayField)
         {
             switch (displayField)
             {
-                case DisplayField.AccountCode:
+                case DisplayFieldName.AccountCode:
                     return MappingFields.NominalCode;
-                case DisplayField.AccountName:
+                case DisplayFieldName.AccountName:
                     return MappingFields.NominalName;
-                case DisplayField.Amount:
+                case DisplayFieldName.Amount:
                     return MappingFields.Amount;
-                case DisplayField.Description:
+                case DisplayFieldName.Description:
                     return MappingFields.Description;
-                case DisplayField.TransactionDate:
+                case DisplayFieldName.TransactionDate:
                     return MappingFields.TransactionDate;
-                case DisplayField.Username:
+                case DisplayFieldName.Username:
                     return MappingFields.Username;
-                case DisplayField.LedgerEntryType:
+                case DisplayFieldName.LedgerEntryType:
                     return MappingFields.Amount;
-                case DisplayField.Id:
+                case DisplayFieldName.Id:
                     return MappingFields.Id;   
-                case DisplayField.Type:
+                case DisplayFieldName.Type:
                     return MappingFields.Type;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
