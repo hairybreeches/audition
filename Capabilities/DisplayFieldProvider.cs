@@ -14,7 +14,7 @@ namespace Capabilities
         public DisplayField Id = new DisplayField(DisplayFieldName.Id, MappingFields.Id, entry => entry.TransactionId);
         public DisplayField TransactionType = new DisplayField(DisplayFieldName.Type, MappingFields.Type, entry => entry.TransactionType);
 
-        public IEnumerable<DisplayField> GetAll
+        public IEnumerable<DisplayField> AllFields
         {
             get
             {
