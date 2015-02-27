@@ -23,7 +23,8 @@ namespace Searching
         {
             return new Searcher(GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchActionName.Accounts),
                 GetSearcher<EndingParameters, RoundNumberSearcher>(SearchActionName.Ending),
-                GetSearcher<UserParameters, UserSearcher>(SearchActionName.Users));
+                GetSearcher<UserParameters, UserSearcher>(SearchActionName.Users), 
+                GetSearcher<DuplicatePaymentsParameters, DuplicatePaymentsSearcher>(SearchActionName.Duplicates));
         }
 
         public SearchCapability GetSearchCapability()
