@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="DataReaders\DefaultValueSupplier.cs" />
     <Compile Include="DataReaders\FieldReader.cs" />
-    <Compile Include="MappingField.cs" />
+    <Compile Include="IMappingField.cs" />
+    <Compile Include="IMappingVisitor.cs" />
+    <Compile Include="MappingFields.cs" />
     <Compile Include="Sage50TransactionTypeLookup.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="DataReaders\LookupConverter.cs" />

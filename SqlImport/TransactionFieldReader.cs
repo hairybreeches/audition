@@ -40,45 +40,45 @@ namespace SqlImport
 
         public string GetId(IDataRecord record, int recordIndex)
         {
-            return GetField(idColumn, record, recordIndex, MappingField.Id);
+            return GetField(idColumn, record, recordIndex, MappingFields.Id);
         }        
 
         public string GetUsername(IDataRecord record, int recordIndex)
         {
-            return GetField(usernameColumn, record, recordIndex, MappingField.Username);
+            return GetField(usernameColumn, record, recordIndex, MappingFields.Username);
         }
         
         public string GetType(IDataRecord record, int recordIndex)
         {
-            return GetField(typeColumn, record, recordIndex, MappingField.Type);
+            return GetField(typeColumn, record, recordIndex, MappingFields.Type);
         }
         
         public DateTime GetTransactionDate(IDataRecord record, int recordIndex)
         {
-            return GetField(dateColumn, record, recordIndex, MappingField.TransactionDate);
+            return GetField(dateColumn, record, recordIndex, MappingFields.TransactionDate);
         }
         
         public string GetNominalCode(IDataRecord record, int recordIndex)
         {
-            return GetField(nominalCodeColumn, record, recordIndex, MappingField.NominalCode);
+            return GetField(nominalCodeColumn, record, recordIndex, MappingFields.NominalCode);
         }
         
         public double GetAmount(IDataRecord record, int recordIndex)
         {
-            return GetField(amountColumn, record, recordIndex, MappingField.Amount);
+            return GetField(amountColumn, record, recordIndex, MappingFields.Amount);
         }
         
         public string GetDescription(IDataRecord record, int recordIndex)
         {
-            return GetField(detailsColumn, record, recordIndex, MappingField.Description);
+            return GetField(detailsColumn, record, recordIndex, MappingFields.Description);
         }
 
         public string GetNominalCodeName(IDataRecord record, int recordIndex)
         {
-            return GetField(nominalCodeNameColumn, record, recordIndex, MappingField.NominalName);
+            return GetField(nominalCodeNameColumn, record, recordIndex, MappingFields.NominalName);
         }
 
-        private static T GetField<T>(IFieldReader<T> reader, IDataRecord record, int recordIndex, MappingField mappingField)
+        private static T GetField<T>(IFieldReader<T> reader, IDataRecord record, int recordIndex, IMappingField mappingField)
         {
             try
             {
