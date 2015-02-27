@@ -1,4 +1,5 @@
 using System;
+using Capabilities;
 using SqlImport;
 
 namespace ExcelImport

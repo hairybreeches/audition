@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autofac;
+using Capabilities;
 using CsvExport;
 using Model;
 using Model.Accounting;

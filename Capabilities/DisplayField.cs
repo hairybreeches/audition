@@ -1,4 +1,4 @@
-namespace Model
+namespace Capabilities
 {
     public enum DisplayField
     {        

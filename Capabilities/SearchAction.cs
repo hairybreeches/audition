@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Searching;
-using SqlImport;
 
-namespace ExcelImport
+namespace Capabilities
 {
     public class SearchAction
     {

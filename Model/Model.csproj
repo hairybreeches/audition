@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayField.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ExportResult.cs" />
     <Compile Include="IValueLookup.cs" />

@@ -1,4 +1,4 @@
-namespace SqlImport
+namespace Capabilities
 {
     public interface IMappingField
     {

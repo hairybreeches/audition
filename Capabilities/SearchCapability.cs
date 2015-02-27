@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Searching
+namespace Capabilities
 {
     public class SearchCapability
     {       

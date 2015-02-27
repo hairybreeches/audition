@@ -78,6 +78,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Capabilities\Capabilities.csproj">
+      <Project>{C5FA7B6A-8579-42EE-8BFF-804E156D6031}</Project>
+      <Name>Capabilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsvExport\CsvExport.csproj">
       <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
       <Name>CsvExport</Name>

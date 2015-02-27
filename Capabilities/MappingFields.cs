@@ -1,6 +1,4 @@
-using System;
-
-namespace SqlImport
+namespace Capabilities
 {
     public class MappingFields
     {

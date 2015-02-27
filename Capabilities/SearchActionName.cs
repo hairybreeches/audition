@@ -1,4 +1,4 @@
-namespace Searching
+namespace Capabilities
 {
     public enum SearchActionName
     {

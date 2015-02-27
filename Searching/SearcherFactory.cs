@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Capabilities;
 using Model;
 using Persistence;
 using Searching.SearchWindows;
