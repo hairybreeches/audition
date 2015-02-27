@@ -6,11 +6,11 @@ namespace ExcelImport
 {
     public class SearchAction
     {
-        public static readonly SearchAction Ending = new SearchAction("In order to search for transactions with round number endings, you must import transactions with an amount value", MappingFields.Amount, SearchActionName.Ending);
+        public static readonly SearchAction Ending = new SearchAction("In order to search for transactions with round number endings, you must import transactions with a value for the amount", MappingFields.Amount, SearchActionName.Ending);
 
-        public static readonly SearchAction Users = new SearchAction("In order to search for transactions posted by unexpected users, you must import transactions with a username value", MappingFields.Username, SearchActionName.Users);
+        public static readonly SearchAction Users = new SearchAction("In order to search for transactions posted by unexpected users, you must import transactions with a value for the username", MappingFields.Username, SearchActionName.Users);
 
-        public static readonly SearchAction Accounts = new SearchAction("In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value", MappingFields.NominalCode, SearchActionName.Accounts);
+        public static readonly SearchAction Accounts = new SearchAction("In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code", MappingFields.NominalCode, SearchActionName.Accounts);
 
         public static IEnumerable<SearchAction> All
         {
