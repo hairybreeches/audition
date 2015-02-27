@@ -15,11 +15,13 @@ namespace ExcelImport
     {
         private readonly ExcelColumnNamer namer;
         private readonly SearchActionProvider actionProvider;
+        private readonly DisplayFieldProvider displayFieldProvider;
 
-        public FieldLookupInterpreter(ExcelColumnNamer namer, SearchActionProvider actionProvider)
+        public FieldLookupInterpreter(ExcelColumnNamer namer, SearchActionProvider actionProvider, DisplayFieldProvider displayFieldProvider)
         {
             this.namer = namer;
             this.actionProvider = actionProvider;
+            this.displayFieldProvider = displayFieldProvider;
         }
 
         public TransactionFieldReader GetDataReader(FieldLookups lookups)
@@ -52,8 +54,9 @@ namespace ExcelImport
 
         private DisplayFieldName[] GetDisplayableFields(FieldLookups lookups)
         {
-            return Enums.GetAllValues<DisplayFieldName>()
-                .Where(field => IsDisplayable(lookups, field)).ToArray();
+            return displayFieldProvider.GetAll
+                .Where(field => IsDisplayable(lookups, field))
+                .Select(x=>x.Name).ToArray();
         }
 
         private IFieldReader<T> GetColumn<T>(int columnIndex)
@@ -61,9 +64,9 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new TypedDataReader<T>(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<T>) new NullDataReader<T>();
         }
 
-        private bool IsDisplayable(FieldLookups lookups, DisplayFieldName displayField)
+        private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
         {
-            return IsSet(RequiredField(displayField), lookups);
+            return IsSet(displayField.RequiredField, lookups);
         }
 
         private bool IsSet(IMappingField requiredField, FieldLookups lookups)
@@ -75,35 +78,7 @@ namespace ExcelImport
         private static bool IsSet(int column)
         {
             return column != -1;
-        }
-
-        private IMappingField RequiredField(DisplayFieldName displayField)
-        {
-            switch (displayField)
-            {
-                case DisplayFieldName.AccountCode:
-                    return MappingFields.NominalCode;
-                case DisplayFieldName.AccountName:
-                    return MappingFields.NominalName;
-                case DisplayFieldName.Amount:
-                    return MappingFields.Amount;
-                case DisplayFieldName.Description:
-                    return MappingFields.Description;
-                case DisplayFieldName.TransactionDate:
-                    return MappingFields.TransactionDate;
-                case DisplayFieldName.Username:
-                    return MappingFields.Username;
-                case DisplayFieldName.LedgerEntryType:
-                    return MappingFields.Amount;
-                case DisplayFieldName.Id:
-                    return MappingFields.Id;   
-                case DisplayFieldName.Type:
-                    return MappingFields.Type;
-                default:
-                    throw new InvalidEnumArgumentException(String.Format("Unrecognised field name: {0}", displayField));
-
-            }
-        }
+        }       
 
         private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
         {
