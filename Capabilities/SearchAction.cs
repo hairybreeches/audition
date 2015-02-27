@@ -17,19 +17,17 @@ namespace Capabilities
 
         public IList<IMappingField> RequiredFields { get; private set; }
 
-        public string ErrorMessage
+        public string GetErrorMessage()
         {
-            get
+            if (RequiredFields.Count == 0)
             {
-                if (RequiredFields.Count == 0)
-                {
-                    return String.Format("It is not possible to search for transactions {0}.", userFriendlyDescription);
-                }
-                
-                return  String.Format("In order to search for transactions {0}, you must import transactions with a value for the {1}",
-                userFriendlyDescription,GetRequiredFieldsList()
-                );
-            }           
+                return String.Format("It is not possible to search for transactions {0}.", userFriendlyDescription);
+            }
+
+            return
+                String.Format("In order to search for transactions {0}, you must import transactions with a value for the {1}",
+                    userFriendlyDescription, GetRequiredFieldsList()
+                    );
         }
 
         private string GetRequiredFieldsList()

@@ -32,7 +32,7 @@ namespace Searching
             return new SearchCapability(availableFields.Select(x => x.Name).ToArray(),
                 unavailableActions.Aggregate(new Dictionary<string, string>(), (dictionary, action) =>
                 {
-                    dictionary.Add(action.Key.ToString(), action.Value.ErrorMessage);
+                    dictionary.Add(action.Key.ToString(), action.Value.GetErrorMessage());
                     return dictionary;
                 }));
         }
@@ -41,7 +41,7 @@ namespace Searching
             where TParameters : ISearchParameters
             where TSearcher : ISearcher<TParameters>, new()
         {
-            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unavailableActions[action].ErrorMessage);
+            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unavailableActions[action].GetErrorMessage());
             }
 
         private bool SearchingSupported(SearchActionName searchAction)
