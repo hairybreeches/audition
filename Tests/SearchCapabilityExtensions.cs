@@ -11,7 +11,7 @@ namespace Tests
         private const string EndingSearchUnavailableMessage = "In order to search for transactions with round number endings, you must import transactions with a value for the amount";
         private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a value for the username";
         private const string AccountSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
-        private const string DuplicatesUnavailableMessage = "In order to search for transactions which are possible duplicates, you must import transactions with a value for the nominal code, the amount";
+        private const string DuplicatesUnavailableMessage = "In order to search for transactions which are possible duplicates, you must import transactions with a value for the nominal code and for the amount";
 
         public static IDictionary<string, string> WithAccountsErrorMessage(this IDictionary<string, string> dictionary)
         {
