@@ -42,7 +42,7 @@ namespace Tests
         {
             var lifetime = builder.Build();
             lifetime.Resolve<ITransactionRepository>().UpdateTransactions(transactions);
-            lifetime.Resolve<SearcherFactoryStorage>().CurrentSearcherFactory = new SearcherFactory(Enumerable.Empty<SearchAction>(), new DisplayFieldProvider().GetAll.ToArray());
+            lifetime.Resolve<SearcherFactoryStorage>().CurrentSearcherFactory = new SearcherFactory(Enumerable.Empty<SearchAction>(), new DisplayFieldProvider().AllFields.ToArray());
             return lifetime;
         }
 

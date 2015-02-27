@@ -54,7 +54,7 @@ namespace ExcelImport
 
         private DisplayField[] GetDisplayableFields(FieldLookups lookups)
         {
-            return displayFieldProvider.GetAll
+            return displayFieldProvider.AllFields
                 .Where(field => IsDisplayable(lookups, field))
                 .ToArray();
         }
