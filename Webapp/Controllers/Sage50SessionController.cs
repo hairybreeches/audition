@@ -33,7 +33,7 @@ namespace Webapp.Controllers
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
                 var transactions = transactionGetter.GetTransactions(connection);
-                session.ImportData(new SearcherFactory(new Dictionary<SearchActionName, string>(), displayFieldProvider.GetAll.ToArray()), transactions);
+                session.ImportData(new SearcherFactory(Enumerable.Empty<SearchAction>(), displayFieldProvider.GetAll.ToArray()), transactions);
             }
 
             return Ok();

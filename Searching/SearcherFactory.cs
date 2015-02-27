@@ -11,11 +11,11 @@ namespace Searching
     public class SearcherFactory : ISearcherFactory
     {
         private readonly DisplayField[] availableFields;
-        private readonly IDictionary<SearchActionName, string> unvailableActionMessages;
+        private readonly Dictionary<SearchActionName, SearchAction> unavailableActions;
 
-        public SearcherFactory(IDictionary<SearchActionName, string> unvailableActionMessages, params DisplayField[] availableFields)
+        public SearcherFactory(IEnumerable<SearchAction> unavailableActions, params DisplayField[] availableFields)
         {
-            this.unvailableActionMessages = unvailableActionMessages;           
+            this.unavailableActions = unavailableActions.ToDictionary(x=>x.Name);           
             this.availableFields = availableFields;
         }
 
@@ -28,10 +28,10 @@ namespace Searching
 
         public SearchCapability GetSearchCapability()
         {
-            return new SearchCapability(availableFields.Select(x => x.Name).ToArray(), unvailableActionMessages.Aggregate(new Dictionary<string, string>(),
-                (dictionary, kvp) =>
+            return new SearchCapability(availableFields.Select(x => x.Name).ToArray(),
+                unavailableActions.Aggregate(new Dictionary<string, string>(), (dictionary, action) =>
                 {
-                    dictionary.Add(kvp.Key.ToString(), kvp.Value);
+                    dictionary.Add(action.Key.ToString(), action.Value.ErrorMessage);
                     return dictionary;
                 }));
         }
@@ -40,12 +40,12 @@ namespace Searching
             where TParameters : ISearchParameters
             where TSearcher : ISearcher<TParameters>, new()
         {
-            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unvailableActionMessages[action]);
+            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unavailableActions[action].ErrorMessage);
             }
 
         private bool SearchingSupported(SearchActionName searchAction)
             {
-            return !unvailableActionMessages.ContainsKey(searchAction);
+            return !unavailableActions.Keys.Contains(searchAction);
         }
     }
 }
