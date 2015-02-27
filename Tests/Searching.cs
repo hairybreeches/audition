@@ -22,7 +22,7 @@ namespace Tests
             var repo = new TempFileTransactionRepository(new FileSystem());
             repo.UpdateTransactions(transactionsInRepository);
 
-            var searcher = new SearcherFactory(new Dictionary<SearchActionName, string>(), new DisplayFieldProvider().GetAll.ToArray()).CreateSearcher();
+            var searcher = new SearcherFactory(Enumerable.Empty<SearchAction>(), new DisplayFieldProvider().GetAll.ToArray()).CreateSearcher();
             return searchWindow.Execute(searcher, repo);
         }        
     }

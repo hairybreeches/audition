@@ -39,7 +39,7 @@ namespace ExcelImport
 
         public ISearcherFactory CreateSearcherFactory(FieldLookups lookups)
         {
-            return new SearcherFactory(GetUnavailableSearchMessages(lookups), GetDisplayableFields(lookups));
+            return new SearcherFactory(GetUnavailableSearchActions(lookups), GetDisplayableFields(lookups));
         }
 
         private IFieldReader<string> GetIdColumn(int id)
@@ -85,15 +85,10 @@ namespace ExcelImport
             return IsSet(searchAction.RequiredField, lookups);
         }       
 
-        private IDictionary<SearchActionName, string> GetUnavailableSearchMessages(FieldLookups lookups)
+        private IEnumerable<SearchAction> GetUnavailableSearchActions(FieldLookups lookups)
         {
             return actionProvider.AllSearchActions
-                .Where(action => !IsSearchable(action, lookups))
-                .Aggregate(new Dictionary<SearchActionName, string>(), (dictionary, action) =>
-                {
-                    dictionary.Add(action.Name, action.ErrorMessage);
-                    return dictionary;
-                });
+                .Where(action => !IsSearchable(action, lookups));
         }
     }
 }
