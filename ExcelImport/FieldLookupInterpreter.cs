@@ -52,11 +52,11 @@ namespace ExcelImport
             return IsSet(columnIndex) ? new DateTimeReader(columnIndex, namer.GetColumnName(columnIndex)) : (IFieldReader<DateTime>) new NullDataReader<DateTime>();
         }
 
-        private DisplayFieldName[] GetDisplayableFields(FieldLookups lookups)
+        private DisplayField[] GetDisplayableFields(FieldLookups lookups)
         {
             return displayFieldProvider.GetAll
                 .Where(field => IsDisplayable(lookups, field))
-                .Select(x=>x.Name).ToArray();
+                .ToArray();
         }
 
         private IFieldReader<T> GetColumn<T>(int columnIndex)

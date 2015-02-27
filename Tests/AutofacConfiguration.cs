@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Threading.Tasks;
 using Audition;
 using Autofac;
+using Capabilities;
 using Licensing;
 using Microsoft.Owin.FileSystems;
 using Model;
@@ -40,7 +42,7 @@ namespace Tests
         {
             var lifetime = builder.Build();
             lifetime.Resolve<ITransactionRepository>().UpdateTransactions(transactions);
-            lifetime.Resolve<SearcherFactoryStorage>().CurrentSearcherFactory = SearcherFactory.EverythingAvailable;
+            lifetime.Resolve<SearcherFactoryStorage>().CurrentSearcherFactory = new SearcherFactory(new Dictionary<SearchActionName, string>(), new DisplayFieldProvider().GetAll.ToArray());
             return lifetime;
         }
 
