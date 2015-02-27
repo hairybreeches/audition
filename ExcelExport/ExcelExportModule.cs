@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using Autofac;
+using Capabilities;
+using CsvExport;
+using Model;
+
+namespace ExcelExport
+{
+    public class ExcelExportModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<ExcelExporter>().As<ITransactionExporter>(); 
+            builder.RegisterType<ExcelFileOpener>();
+            builder.Register(CreateColumns).As<IEnumerable<IColumnFactory>>().As<IEnumerable<IFormatterFactory>>();
+        }
+
+        private static ColumnFactory[] CreateColumns(IComponentContext context)
+        {
+            var fieldProvider = context.Resolve<DisplayFieldProvider>();
+
+            return new[]
+            {
+                new ColumnFactory("Transaction ID", fieldProvider.Id),
+                new ColumnFactory("Transaction date", fieldProvider.TransactionDate, new DateColumnFormatter()),
+                new ColumnFactory("Transaction type", fieldProvider.TransactionType),
+                new ColumnFactory("Username", fieldProvider.Username),
+                new ColumnFactory("Description", fieldProvider.Description),
+                new ColumnFactory("Dr/Cr", fieldProvider.LedgerEntryType),
+                new ColumnFactory("Nominal Account", fieldProvider.AccountCode),
+                new ColumnFactory("Account name", fieldProvider.AccountName),
+                new ColumnFactory("Amount", fieldProvider.Amount)
+            };
+        }
+    }
+}
