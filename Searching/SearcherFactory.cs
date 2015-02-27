@@ -12,12 +12,12 @@ namespace Searching
         private readonly IList<DisplayField> availableFields;
 
         public static ISearcherFactory EverythingAvailable = new SearcherFactory(
-            new Dictionary<SearchAction, string>(),
+            new Dictionary<SearchActionName, string>(),
             Enums.GetAllValues<DisplayField>());
 
-        private readonly IDictionary<SearchAction, string> unvailableActionMessages;
+        private readonly IDictionary<SearchActionName, string> unvailableActionMessages;
 
-        public SearcherFactory(IDictionary<SearchAction, string> unvailableActionMessages, params DisplayField[] availableFields)
+        public SearcherFactory(IDictionary<SearchActionName, string> unvailableActionMessages, params DisplayField[] availableFields)
         {
             this.unvailableActionMessages = unvailableActionMessages;           
             this.availableFields = availableFields;
@@ -25,9 +25,9 @@ namespace Searching
 
         public Searcher CreateSearcher()
         {
-            return new Searcher(GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchAction.Accounts),
-                GetSearcher<EndingParameters, RoundNumberSearcher>(SearchAction.Ending),
-                GetSearcher<UserParameters, UserSearcher>(SearchAction.Users));
+            return new Searcher(GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchActionName.Accounts),
+                GetSearcher<EndingParameters, RoundNumberSearcher>(SearchActionName.Ending),
+                GetSearcher<UserParameters, UserSearcher>(SearchActionName.Users));
         }
 
         public SearchCapability GetSearchCapability()
@@ -40,14 +40,14 @@ namespace Searching
                 }));
         }
 
-        private ISearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchAction action) 
+        private ISearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchActionName action) 
             where TParameters : ISearchParameters
             where TSearcher : ISearcher<TParameters>, new()
         {
             return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unvailableActionMessages[action]);
             }
 
-        private bool SearchingSupported(SearchAction searchAction)
+        private bool SearchingSupported(SearchActionName searchAction)
             {
             return !unvailableActionMessages.ContainsKey(searchAction);
         }

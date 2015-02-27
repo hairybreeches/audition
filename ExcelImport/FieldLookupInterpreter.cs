@@ -102,38 +102,38 @@ namespace ExcelImport
             }
         }
 
-        private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
+        private bool IsSearchable(SearchActionName searchAction, FieldLookups lookups)
         {
             return IsSet(RequiredField(searchAction), lookups);
         }
 
-        private IMappingField RequiredField(SearchAction searchAction)
+        private IMappingField RequiredField(SearchActionName searchAction)
         {
             switch (searchAction)
             {
-                case SearchAction.Accounts:
+                case SearchActionName.Accounts:
                     return MappingFields.NominalCode;
-                case SearchAction.Ending:
+                case SearchActionName.Ending:
                     return MappingFields.Amount;
-                case SearchAction.Users:
+                case SearchActionName.Users:
                     return MappingFields.Username;
                 default:
                     throw new InvalidEnumArgumentException(String.Format("Unrecognised search action: {0}", searchAction));
             }
         }
 
-        private string GetErrorMessage(SearchAction action)
+        private string GetErrorMessage(SearchActionName action)
         {
             //todo: this should use MappingFields
             switch (action)
             {
-                case SearchAction.Ending:
+                case SearchActionName.Ending:
                     return
                         "In order to search for transactions with round number endings, you must import transactions with an amount value";
-                case SearchAction.Users:
+                case SearchActionName.Users:
                     return
                         "In order to search for transactions posted by unexpected users, you must import transactions with a username value";
-                case SearchAction.Accounts:
+                case SearchActionName.Accounts:
                     return
                         "In order to search for transactions posted to unusual nominal codes, you must import transactions with a nominal code value";
                 default:
@@ -141,11 +141,11 @@ namespace ExcelImport
             }
         }
 
-        private IDictionary<SearchAction, string> GetUnavailableSearchMessages(FieldLookups lookups)
+        private IDictionary<SearchActionName, string> GetUnavailableSearchMessages(FieldLookups lookups)
         {
-            return Enums.GetAllValues<SearchAction>()
+            return Enums.GetAllValues<SearchActionName>()
                 .Where(action => !IsSearchable(action, lookups))
-                .Aggregate(new Dictionary<SearchAction, string>(), (dictionary, action) =>
+                .Aggregate(new Dictionary<SearchActionName, string>(), (dictionary, action) =>
                 {
                     dictionary.Add(action, GetErrorMessage(action));
                     return dictionary;

@@ -57,7 +57,7 @@
     <Compile Include="Searcher.cs" />
     <Compile Include="NotSupportedSearcher.cs" />
     <Compile Include="RoundNumberSearcher.cs" />
-    <Compile Include="SearchAction.cs" />
+    <Compile Include="SearchActionName.cs" />
     <Compile Include="SearchCapability.cs" />
     <Compile Include="SearchWindow.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
