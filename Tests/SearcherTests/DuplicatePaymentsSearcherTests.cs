@@ -27,7 +27,50 @@ namespace Tests.SearcherTests
             var results = ExecuteSearch(31, transactionsInRepository);
 
             CollectionAssert.AreEquivalent(transactionsInRepository, results);
-        }     
+        }   
+        
+        
+        [Test]
+        public void ReturnsTransactionsWhenAMixtureOfDistancesBetween()
+        {
+            //note this includes all the possible cases apart from first with following outside and last with previous outside - this is covered by DoesNotReturnTransactionsOutsideDaysAllowed
+            var noneBeforeWithinAfter = CreateTransaction(YearStart, 250, "code");
+            var withinBeforeWithinAfter = CreateTransaction(YearStart.AddDays(2), 250, "code");
+            var withinBeforeOutsideAfter = CreateTransaction(YearStart.AddDays(7), 250, "code");
+            var outsideBeforeOutsideAfter = CreateTransaction(YearStart.AddDays(14), 250, "code");
+            var outsideBeforeWithinAfter = CreateTransaction(YearStart.AddDays(20), 250, "code");
+            var withinBeforeNoneAfter = CreateTransaction(YearStart.AddDays(23), 250, "code");  
+          
+            var results = new HashSet<Transaction>(ExecuteSearch(5, noneBeforeWithinAfter, withinBeforeWithinAfter, withinBeforeNoneAfter, outsideBeforeWithinAfter, outsideBeforeOutsideAfter, withinBeforeOutsideAfter));
+
+            CollectionAssert.Contains(results, noneBeforeWithinAfter, "Search should return the first value when the second value is within range");
+            CollectionAssert.Contains(results, withinBeforeWithinAfter, "Search should return a value when the previous and following values are within range");
+            CollectionAssert.Contains(results, withinBeforeOutsideAfter, "Search should return a value when the previous value is within range even if the following value is not");
+            CollectionAssert.Contains(results, outsideBeforeWithinAfter, "Search should return a value when the following value is within range even if the previous value is not");
+            CollectionAssert.Contains(results, withinBeforeNoneAfter, "Search should return the last value when the previous value is within range");
+            CollectionAssert.AreEqual(results, new[]{noneBeforeWithinAfter, withinBeforeWithinAfter, withinBeforeOutsideAfter, outsideBeforeWithinAfter, withinBeforeNoneAfter}, "No duplicates should be returned and the results should be returned in date order");
+        }
+
+        [Test]
+        public void ReturnsAllLinesOfTransactions()
+        {
+            
+        }
+
+        [Test]
+        public void DoesNotReturnTransactionsOutsideDaysAllowed()
+        {
+            //note this is the case not covered by ReturnsTransactionsWhenAMixtureOfDistancesBetween
+            var daysApart = 13;
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, 125, "code1"),
+                CreateTransaction(InPeriod.AddDays(daysApart), 125, "code1")
+            };
+            var results = ExecuteSearch(daysApart - 1, transactionsInRepository);
+
+            CollectionAssert.IsEmpty(results);
+        }  
         
         [Test]
         public void DoesNotReturnTransactionsForDifferentAmounts()
@@ -67,21 +110,7 @@ namespace Tests.SearcherTests
             var results = ExecuteSearch(daysApart, transactionsInRepository);
 
             CollectionAssert.AreEquivalent(transactionsInRepository, results);
-        }      
-        
-        [Test]
-        public void DoesNotReturnTransactionsOutsideDaysAllowed()
-        {
-            var daysApart = 13;
-            var transactionsInRepository = new[]
-            {
-                CreateTransaction(InPeriod, 125, "code1"),
-                CreateTransaction(InPeriod.AddDays(daysApart), 125, "code1")
-            };
-            var results = ExecuteSearch(daysApart - 1, transactionsInRepository);
-
-            CollectionAssert.IsEmpty(results);
-        }  
+        }                     
         
         
         [Test]
