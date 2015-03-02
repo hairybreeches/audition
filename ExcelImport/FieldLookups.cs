@@ -16,11 +16,7 @@ namespace ExcelImport
             int amount,
             int id, 
             int type)
-        {
-            if (transactionDate < 0)
-            {
-                throw new ExcelMappingException(String.Format("The {0} must be mapped", MappingFields.TransactionDate));
-            }
+        {            
             Description = description;
             Username = username;
             TransactionDate = transactionDate;
