@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Model.Accounting;
 using Model.Time;
 using NUnit.Framework;
@@ -64,6 +65,24 @@ namespace Tests.SearcherTests
             var results = ExecuteSearch(23, transactionsInRepository);
 
             CollectionAssert.AreEqual(transactionsInRepository, results);
+        }      
+        
+        [Test]
+        public void ReturnsDuplicatesWhenCoincidesWithTwoGroups()
+        {
+            var transaction1 = CreateTransaction(InPeriod, CreateLedgerEntry(125, "code1"), CreateLedgerEntry(36, "code2"));
+            var transaction2 = CreateTransaction(InPeriod, CreateLedgerEntry(74, "code3"), CreateLedgerEntry(125, "code1"));
+            var transaction3 = CreateTransaction(InPeriod, CreateLedgerEntry(36, "code2"), CreateLedgerEntry(250, "code4"));
+
+            var results = ExecuteSearch(23, transaction1, transaction2, transaction3).ToList();
+
+            CollectionAssert.AreEqual(new[]
+            {
+                transaction1,
+                transaction2,                
+                transaction1,
+                transaction3
+            }, results);
         }
 
         [Test]
