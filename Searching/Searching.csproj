@@ -81,6 +81,10 @@
       <Project>{37ae0c8d-54f3-4311-92a8-8b099b526211}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -12,7 +12,7 @@ namespace SqlImport
     /// </summary>
     public class TabularFormatConverter
     {
-        internal IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlLedgerEntry> lines)
+        public IEnumerable<Transaction> ReadTransactions(IEnumerable<SqlLedgerEntry> lines)
         {
             var grouped = lines.GroupBy(x => x.TransactionId);
             return grouped.Select(CreateTransaction);
