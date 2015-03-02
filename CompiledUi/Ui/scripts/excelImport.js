@@ -59,10 +59,15 @@ var ExcelImportModel = function () {
     var getColumns = function() {
         return toSelectOptions(getColumnNames());
     };
-    self.columns = ko.computed(getColumns);
+
+    var columns = ko.computed(getColumns);
 
     self.optionalColumns = ko.computed(function() {
         return [{ label: '*** No value ***', index: -1 }].concat(getColumns());
+    });
+
+    self.requiredColumns = ko.computed(function () {
+        return [{ label: 'Choose...', index: -1 }].concat(getColumns());
     });
 
     self.errorMessage = {
@@ -95,7 +100,7 @@ var ExcelImportModel = function () {
     }
 
     self.disabled = function () {
-        return !(self.showInput() && self.columns().some(function () { return true; }));
+        return !(self.showInput() && columns().some(function () { return true; }));
     };
 
     var onNewFilename = function (newFilename) {

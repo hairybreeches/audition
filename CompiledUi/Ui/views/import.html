@@ -104,9 +104,9 @@
               </div>
               <legend>Map columns</legend>
               <div class="form-group">
-                <label class="col-sm-4 control-label">Transaction date</label>
+                <label class="col-sm-4 control-label">Transaction date *</label>
                 <div class="col-sm-6">
-                  <select name="TransactionDate" data-bind="value: TransactionDate, options: columns, optionsText: 'label', optionsValue: 'index'" class="form-control"></select>
+                  <select name="TransactionDate" data-bind="value: TransactionDate, options: requiredColumns, optionsText: 'label', optionsValue: 'index'" class="form-control"></select>
                 </div>
                 <div class="col-sm-2">
                   <div data-toggle="tooltip" data-placement="bottom" data-original-title="The date the transaction occurred. Used to determine whether the transaction applies to the current period or not. This is required." class="questionmarkicon"></div>

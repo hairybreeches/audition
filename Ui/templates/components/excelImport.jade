@@ -5,7 +5,8 @@ mixin sheets-dropdown()
 	+dropdown({label: 'Sheet', fieldName: 'sheet'}, 'sheetOptions')
 
 mixin row-dropdown(field)
-	+dropdown(field, 'columns')
+	- field.label = field.label + ' *'
+	+dropdown(field, 'requiredColumns')
 		
 mixin optional-row-dropdown(field)
 	+dropdown(field, 'optionalColumns')
