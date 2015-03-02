@@ -54,7 +54,7 @@
                     <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted to accounts with fewer than</span>
                       <div class="form-group">
                         <div class="col-xs-12">
-                          <div data-bind="with: parameters" class="inline-block">
+                          <div data-bind="with: parameters">
                               <div class="well well-sm inline-block vertical-space-sm margin-right">
                                 <input type="number" data-bind="value: minimumEntriesToBeConsideredNormal" class="form-control small-input">
                               </div><span class="vertical-space search-text">entries</span>
@@ -81,10 +81,10 @@
                     <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted by people other than</span>
                       <div class="form-group">
                         <div class="col-xs-12">
-                          <div data-bind="with: parameters" class="inline-block">
-                              <div class="well well-sm inline-block vertical-space-sm margin-right">
-                                <textarea data-bind="value: users" rows="8" placeholder="Enter usernames of expected accounts posters here, each on a new line" class="form-control"></textarea>
-                              </div>
+                          <div data-bind="with: parameters">
+                            <div class="well well-sm vertical-space-sm">
+                              <input type="text" data-bind="value: users" placeholder="Enter usernames of expected accounts posters here, separated by a comma" class="form-control">
+                            </div>
                           </div><br>
                           <div class="button-group pull-right">
                             <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
@@ -108,7 +108,7 @@
                     <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">ending in at least</span>
                       <div class="form-group">
                         <div class="col-xs-12">
-                          <div data-bind="with: parameters" class="inline-block">
+                          <div data-bind="with: parameters">
                               <div class="well well-sm inline-block vertical-space-sm margin-right">
                                 <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control small-input">
                               </div><span class="vertical-space search-text">zeroes</span>
