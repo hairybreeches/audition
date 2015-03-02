@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Model;
 using UserData;
@@ -11,26 +10,18 @@ namespace ExcelImport
     {
 
         private readonly IUserDetailsStorage userDetailsStorage;
+        private readonly ExcelDemoDataSupplier demoDataSupplier;
 
-        public ExcelDataFileStorage(IUserDetailsStorage userDetailsStorage)
+        public ExcelDataFileStorage(IUserDetailsStorage userDetailsStorage, ExcelDemoDataSupplier demoDataSupplier)
         {
             this.userDetailsStorage = userDetailsStorage;
+            this.demoDataSupplier = demoDataSupplier;
         }
 
-        
         public UserDetails GetUserDetails()
         {
              return userDetailsStorage.Load();
-        }
-
-        private static IEnumerable<string> GetDemoDataLocations()
-        {
-            return new[]
-            {
-                Path.GetFullPath(".\\ExampleSage50Export.xlsx"),
-                Path.GetFullPath(".\\ComplexSage50Export.xls"),
-            };
-        }        
+        }                
 
         public void StoreUsage(ExcelImportMapping mapping)
         {
@@ -42,7 +33,7 @@ namespace ExcelImport
         public IEnumerable<string> GetExcelDataFiles()
         {
             return GetUserDetails().ExcelFiles
-                .Concat(GetDemoDataLocations())                
+                .Concat(demoDataSupplier.GetDemoDataLocations())                
                 .Distinct(StringComparer.CurrentCultureIgnoreCase);
         }
     }
