@@ -86,10 +86,10 @@ namespace Searching
                 Amount = entry.Amount;
             }
 
-            public string NominalCode { get; private set; }
-            public decimal Amount { get; private set; }
+            private string NominalCode { get; set; }
+            private decimal Amount { get; set; }
 
-            protected bool Equals(PaymentProperties other)
+            private bool Equals(PaymentProperties other)
             {
                 return string.Equals(NominalCode, other.NominalCode) && Amount == other.Amount;
             }
