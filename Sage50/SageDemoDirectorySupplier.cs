@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Native.Disk;
+using UserData;
 
 namespace Sage50
 {
-    public class SageDemoDirectorySupplier
+    public class SageDemoDirectorySupplier : IDemoDataSupplier
     {
         private readonly IFileSystem fileSystem;
         private readonly Sage50DriverDetector driverDetector;

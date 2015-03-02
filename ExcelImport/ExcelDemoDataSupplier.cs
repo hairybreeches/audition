@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using UserData;
 
 namespace ExcelImport
 {
-    public class ExcelDemoDataSupplier
+    public class ExcelDemoDataSupplier : IDemoDataSupplier
     {
         public IEnumerable<string> GetDemoDataLocations()
         {
