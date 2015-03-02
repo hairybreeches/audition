@@ -9,17 +9,22 @@ namespace Searching
 {
     class DuplicatePaymentsSearcher : ISearcher<DuplicatePaymentsParameters>
     {
+        private readonly TabularFormatConverter tabularFormatConverter;
+
+        public DuplicatePaymentsSearcher(TabularFormatConverter formatConverter)
+        {
+            tabularFormatConverter = formatConverter;
+        }
 
         public IQueryable<Transaction> FindTransactionsWithin(DuplicatePaymentsParameters parameters, IQueryable<Transaction> transactions)
         {
-            var converter = new TabularFormatConverter();
             var sqlLedgerEntries = transactions
-                .SelectMany(converter.ConvertToTabularFormat)
+                .SelectMany(tabularFormatConverter.ConvertToTabularFormat)
                 .Where(x=>x.Amount != 0)
                 .GroupBy(x=> new PaymentProperties(x))
                 .SelectMany(group => FindTransactionWithinDays(group, parameters.MaximumDaysBetweenTransactions));
 
-            return converter.ReadTransactions(
+            return tabularFormatConverter.ReadTransactions(
                 sqlLedgerEntries)
                 .AsQueryable();
         }
