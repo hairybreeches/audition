@@ -80,7 +80,7 @@ namespace Tests.SearcherTests
             };
             var results = ExecuteSearch(daysApart - 1, transactionsInRepository);
 
-            CollectionAssert.AreEquivalent(transactionsInRepository, results);
+            CollectionAssert.IsEmpty(results);
         }  
         
         
