@@ -39,6 +39,7 @@
               <li class="active"><a href="#accounts" data-toggle="tab">Unusual accounts</a></li>
               <li><a href="#users" data-toggle="tab">Unexpected users</a></li>
               <li><a href="#endings" data-toggle="tab">Round number</a></li>
+              <li><a href="#duplicates" data-toggle="tab">Duplicates</a></li>
             </ul>
             <div class="tab-content">
               <div id="accounts" class="tab-pane fade active in">
@@ -112,6 +113,33 @@
                               <div class="well well-sm inline-block vertical-space-sm margin-right">
                                 <input type="number" data-bind="value: minimumZeroesToBeConsideredUnusual" class="form-control small-input">
                               </div><span class="vertical-space search-text">zeroes</span>
+                          </div><br>
+                          <div class="button-group pull-right">
+                            <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>
+                            <button type="submit" data-bind="click: submit" class="btn btn-primary vertical-space-sm">Search &raquo;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+              <div id="duplicates" class="tab-pane fade">
+                  <form action="search" method="post" data-bind="with: Duplicates" class="form-horizontal blockable">
+                    <div style="display: none;" data-bind="visible: blocked()">
+                      <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
+                      </div>
+                    </div>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">of the same amount to the same code within</span>
+                      <div class="form-group">
+                        <div class="col-xs-12">
+                          <div data-bind="with: parameters" class="inline-block">
+                              <div class="well well-sm inline-block vertical-space-sm margin-right">
+                                <input type="number" data-bind="value: maximumDaysBetweenTransactions" class="form-control small-input">
+                              </div><span class="vertical-space search-text">days</span>
                           </div><br>
                           <div class="button-group pull-right">
                             <button type="button" data-bind="click: save" class="btn btn-default vertical-space-sm">Export &raquo;</button>

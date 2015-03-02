@@ -50,6 +50,13 @@ namespace Webapp.Controllers
         public SearchResponse EndingSearch(SearchRequest<EndingParameters> searchRequest)
         {
             return Search(searchRequest);
+        }    
+        
+        [HttpPost]
+        [Route(Routing.DuplicatesSearch)]
+        public SearchResponse DuplicatesSearch(SearchRequest<DuplicatePaymentsParameters> searchRequest)
+        {
+            return Search(searchRequest);
         }
 
         public SearchResponse Search(ISearchRequest searchRequest)
