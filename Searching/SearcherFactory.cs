@@ -21,10 +21,10 @@ namespace Searching
 
         public Searcher CreateSearcher()
         {
-            return new Searcher(GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchActionName.Accounts),
-                GetSearcher<EndingParameters, RoundNumberSearcher>(SearchActionName.Ending),
-                GetSearcher<UserParameters, UserSearcher>(SearchActionName.Users), 
-                GetSearcher<DuplicatePaymentsParameters, DuplicatePaymentsSearcher>(SearchActionName.Duplicates));
+            return new Searcher(GetSearcher(SearchActionName.Accounts, new UnusualAccountsSearcher()),
+                GetSearcher(SearchActionName.Ending, new RoundNumberSearcher()),
+                GetSearcher(SearchActionName.Users, new UserSearcher()), 
+                GetSearcher(SearchActionName.Duplicates, new DuplicatePaymentsSearcher()));
         }
 
         public SearchCapability GetSearchCapability()
@@ -37,11 +37,10 @@ namespace Searching
                 }));
         }
 
-        private ISearcher<TParameters> GetSearcher<TParameters, TSearcher>(SearchActionName action) 
+        private ISearcher<TParameters> GetSearcher<TParameters>(SearchActionName action, ISearcher<TParameters> functionalSearcher) 
             where TParameters : ISearchParameters
-            where TSearcher : ISearcher<TParameters>, new()
         {
-            return SearchingSupported(action)? (ISearcher<TParameters>) new TSearcher() : new NotSupportedSearcher<TParameters>(unavailableActions[action].GetErrorMessage());
+            return SearchingSupported(action)? functionalSearcher : new NotSupportedSearcher<TParameters>(unavailableActions[action].GetErrorMessage());
             }
 
         private bool SearchingSupported(SearchActionName searchAction)
