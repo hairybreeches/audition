@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model;
@@ -18,20 +19,24 @@ namespace Searching
 
         public IQueryable<Transaction> FindTransactionsWithin(DuplicatePaymentsParameters parameters, IQueryable<Transaction> transactions)
         {
-            var sqlLedgerEntries = transactions
-                .SelectMany(tabularFormatConverter.ConvertToTabularFormat)
-                .Where(x=>x.Amount != 0)
-                .GroupBy(x=> new PaymentProperties(x))
-                .SelectMany(group => FindTransactionWithinDays(group, parameters.MaximumDaysBetweenTransactions));
-
-            return tabularFormatConverter.ReadTransactions(
-                sqlLedgerEntries)
+            return transactions
+                .SelectMany(Project)
+                .Where(x=>x.ThisEntry.Amount != 0)
+                .GroupBy(x=> new PaymentProperties(x.ThisEntry))
+                .SelectMany(group => FindTransactionWithinDays(group, parameters.MaximumDaysBetweenTransactions))
+                .Select(x=>tabularFormatConverter.CreateTransaction(x.AllEntries))
                 .AsQueryable();
         }
 
-        private IEnumerable<SqlLedgerEntry> FindTransactionWithinDays(IEnumerable<SqlLedgerEntry> entries, int maximumDaysBetweenTransactions)
+        private IEnumerable<TransactionProjection> Project(Transaction transaction)
         {
-            var sortedEntries = entries.OrderBy(x => x.TransactionDate);
+            var lines = tabularFormatConverter.ConvertToTabularFormat(transaction).ToList();
+            return lines.Select(x=>new TransactionProjection(x, lines));
+        }
+
+        private IEnumerable<TransactionProjection> FindTransactionWithinDays(IEnumerable<TransactionProjection> entries, int maximumDaysBetweenTransactions)
+        {
+            var sortedEntries = entries.OrderBy(x => x.ThisEntry.TransactionDate);
             var previous = sortedEntries.First();
             var previousReturned = false;
             foreach (var sqlLedgerEntry in sortedEntries.Skip(1))
@@ -55,10 +60,22 @@ namespace Searching
             }
         }
 
-        private bool AreWithinDays(SqlLedgerEntry entry1, SqlLedgerEntry entry2, int numberOfDays)
+        private bool AreWithinDays(TransactionProjection entry1, TransactionProjection entry2, int numberOfDays)
         {
-            var difference = entry2.TransactionDate - entry1.TransactionDate;
+            var difference = entry2.ThisEntry.TransactionDate - entry1.ThisEntry.TransactionDate;
             return difference.TotalDays <= numberOfDays;
+        }
+
+        private class TransactionProjection
+        {
+            public TransactionProjection(SqlLedgerEntry thisEntry, IEnumerable<SqlLedgerEntry> allEntries)
+            {
+                ThisEntry = thisEntry;
+                AllEntries = allEntries;
+            }
+
+            public SqlLedgerEntry ThisEntry { get; private set; }
+            public IEnumerable<SqlLedgerEntry> AllEntries { get; private set; }
         }
 
         private class PaymentProperties
