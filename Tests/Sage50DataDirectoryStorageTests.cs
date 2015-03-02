@@ -89,7 +89,7 @@ namespace Tests
 
         private static Sage50DataDirectoryStorage CreateSage50DataDirectoryStorage(IFileSystem fileSystem, ILocalMachineRegistry registry, UserDetails userDetails)
         {
-            return new Sage50DataDirectoryStorage(new MockUserDetailsStorage(userDetails), fileSystem, new Sage50DriverDetector(new OdbcRegistryReader(registry)));
+            return new Sage50DataDirectoryStorage(new MockUserDetailsStorage(userDetails), new SageDemoDirectorySupplier(fileSystem, new Sage50DriverDetector(new OdbcRegistryReader(registry))));
         }
 
         private static UserDetails CreateUserDetails(IEnumerable<string> directoriesUsed)
