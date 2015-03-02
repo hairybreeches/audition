@@ -32,7 +32,7 @@ namespace Webapp.Controllers
             {
                 throw new ExcelMappingException(String.Format("The {0} must be mapped. Please select a column to map the {0} to and try again", MappingFields.TransactionDate));
             }
-            dataFileStorage.StoreUsage(importMapping);            
+            dataFileStorage.AddLocation(importMapping.SheetDescription.Filename);            
             session.ImportData(lookupInterpreter.CreateSearcherFactory(importMapping.Lookups), reader.ReadJournals(importMapping));
         }    
 

@@ -20,14 +20,14 @@ namespace Webapp.Controllers
         [Route(Routing.Sage50DataLocations)]        
         public IEnumerable<string> SageDataLocations()
         {            
-            return dataDirectoryStorage.GetSageDataDirectories();
+            return dataDirectoryStorage.GetLocations();
         }        
         
         [HttpGet]
         [Route(Routing.ExcelDataFiles)]        
         public IEnumerable<string> ExcelDataFiles()
         {            
-            return excelDataFileStorage.GetExcelDataFiles();
+            return excelDataFileStorage.GetLocations();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Webapp.Controllers
         [Route(Routing.Sage50Import)]
         public IHttpActionResult Import(Sage50ImportDetails importDetails)
         {
-            dataDirectoryStorage.AddSage50DataLocation(importDetails.DataDirectory);
+            dataDirectoryStorage.AddLocation(importDetails.DataDirectory);
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
                 var transactions = transactionGetter.GetTransactions(connection);

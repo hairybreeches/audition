@@ -84,7 +84,7 @@ namespace Tests
 
             var storage = CreateSage50DataDirectoryStorage(fileSystem, registry, userDetails);
 
-            return storage.GetSageDataDirectories();
+            return storage.GetLocations();
         }
 
         private static Sage50DataDirectoryStorage CreateSage50DataDirectoryStorage(IFileSystem fileSystem, ILocalMachineRegistry registry, UserDetails userDetails)
