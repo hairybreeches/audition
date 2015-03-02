@@ -22,16 +22,7 @@ var Transaction = function(json) {
     var userFriendlyDate = function (jsonDate) {
         var date = new Date(jsonDate);
         return date.toDateString();
-    }
-
-    var userFriendlyDateTime = function (jsonDate) {
-        var date = new Date(jsonDate);
-        return getTimeString(date) + ' ' + date.toDateString();
-    }
-
-    var getTimeString = function (date) {
-        return date.toLocaleTimeString("en-UK", { hour: '2-digit', minute: '2-digit', hour12: false });
-    }
+    }     
 
     self.transactionDate = userFriendlyDate(json.TransactionDate);
     self.description = json.Description;
