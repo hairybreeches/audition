@@ -5,7 +5,8 @@ var searchCapabilities = ko.mapping.fromJS({
         Accounts: false,
         Users: false,
         Date: false,
-        Ending: false
+        Ending: false,
+        Duplicates: false
     }
 });
 
@@ -311,7 +312,11 @@ var SearchModel = function () {
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: ko.observable(3)
-        }, period, searchCapabilities, 'Ending')
+        }, period, searchCapabilities, 'Ending'),
+
+        Duplicates: new InputSection({
+            maximumDaysBetweenTransactions: ko.observable(31)
+        }, period, searchCapabilities, 'Duplicates')
     };
 
     self.output = output;    
