@@ -50,7 +50,7 @@ var ExcelImportModel = function () {
     var getColumnNames = function() {
         var sheet = sheets()[parseInt(self.sheet())];
         if (sheet) {
-            var lookup = self.useHeaderRow ? "ColumnHeaders" : "ColumnNames";
+            var lookup = self.useHeaderRow() ? "ColumnHeaders" : "ColumnNames";
             return sheet[lookup];
         }
         return [];
