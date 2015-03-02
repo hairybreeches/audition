@@ -33,11 +33,11 @@ namespace SqlImport
             return new SqlLedgerEntry(transaction.Id, transaction.Username, transaction.TransactionDate, ledgerEntry.AccountCode, ledgerEntry.Amount, ledgerEntry.LedgerEntryType, transaction.Description, ledgerEntry.AccountName, transaction.TransactionType);
         }
 
-        private Transaction CreateTransaction(IGrouping<string, SqlLedgerEntry> lines)
+        public Transaction CreateTransaction(IEnumerable<SqlLedgerEntry> lines)
         {
             var ledgerEntries = lines.ToList();
             return new Transaction(
-                lines.Key,
+                GetField(ledgerEntries, x => x.TransactionId, MappingFields.Id),
                 GetField(ledgerEntries, x => x.TransactionDate, MappingFields.TransactionDate),
                 GetField(ledgerEntries, x => x.Username, MappingFields.Username),
                 GetField(ledgerEntries, x => x.Description, MappingFields.Description),
