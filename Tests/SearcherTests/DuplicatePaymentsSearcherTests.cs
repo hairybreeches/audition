@@ -54,7 +54,16 @@ namespace Tests.SearcherTests
         [Test]
         public void ReturnsAllLinesOfTransactions()
         {
-            
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, CreateLedgerEntry(250, "code1"), CreateLedgerEntry(250, "code2")),
+                CreateTransaction(InPeriod, CreateLedgerEntry(250, "code3"), CreateLedgerEntry(250, "code1"))
+
+            };
+
+            var results = ExecuteSearch(23, transactionsInRepository);
+
+            CollectionAssert.AreEqual(transactionsInRepository, results);
         }
 
         [Test]
