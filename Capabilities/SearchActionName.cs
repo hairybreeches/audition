@@ -4,6 +4,7 @@ namespace Capabilities
     {
         Users,
         Accounts,
-        Ending
+        Ending,
+        Duplicates
     }
 }

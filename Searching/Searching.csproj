@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DuplicatePaymentsSearcher.cs" />
     <Compile Include="ISearchWindow.cs" />
     <Compile Include="SearcherFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="NotSupportedSearcher.cs" />
     <Compile Include="RoundNumberSearcher.cs" />
     <Compile Include="SearchWindow.cs" />
+    <Compile Include="SearchWindows\DuplicatePaymentsParameters.cs" />
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\ISearchParameters.cs" />
