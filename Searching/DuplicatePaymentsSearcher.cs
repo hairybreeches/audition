@@ -1,42 +1,31 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
 using Model.Accounting;
 using Searching.SearchWindows;
-using SqlImport;
 
 namespace Searching
 {
     class DuplicatePaymentsSearcher : ISearcher<DuplicatePaymentsParameters>
     {
-        private readonly TabularFormatConverter tabularFormatConverter;
-
-        public DuplicatePaymentsSearcher(TabularFormatConverter formatConverter)
-        {
-            tabularFormatConverter = formatConverter;
-        }
-
         public IQueryable<Transaction> FindTransactionsWithin(DuplicatePaymentsParameters parameters, IQueryable<Transaction> transactions)
         {
             return transactions
                 .SelectMany(Project)
-                .Where(x=>x.ThisEntry.Amount != 0)
-                .GroupBy(x=> new PaymentProperties(x.ThisEntry))
+                .Where(x=>x.LineProperties.Amount != 0)
+                .GroupBy(x=> x.LineProperties)
                 .SelectMany(group => FindTransactionWithinDays(group, parameters.MaximumDaysBetweenTransactions))
-                .Select(x=>tabularFormatConverter.CreateTransaction(x.AllEntries))
+                .Select(x=>x.Transaction)
                 .AsQueryable();
         }
 
         private IEnumerable<TransactionProjection> Project(Transaction transaction)
         {
-            var lines = tabularFormatConverter.ConvertToTabularFormat(transaction).ToList();
-            return lines.Select(x=>new TransactionProjection(x, lines));
+            return transaction.Lines.Select(x=>new TransactionProjection(new PaymentProperties(x), transaction));
         }
 
         private IEnumerable<TransactionProjection> FindTransactionWithinDays(IEnumerable<TransactionProjection> entries, int maximumDaysBetweenTransactions)
         {
-            var sortedEntries = entries.OrderBy(x => x.ThisEntry.TransactionDate);
+            var sortedEntries = entries.OrderBy(x => x.Transaction.TransactionDate);
             var previous = sortedEntries.First();
             var previousReturned = false;
             foreach (var sqlLedgerEntry in sortedEntries.Skip(1))
@@ -62,32 +51,32 @@ namespace Searching
 
         private bool AreWithinDays(TransactionProjection entry1, TransactionProjection entry2, int numberOfDays)
         {
-            var difference = entry2.ThisEntry.TransactionDate - entry1.ThisEntry.TransactionDate;
+            var difference = entry2.Transaction.TransactionDate - entry1.Transaction.TransactionDate;
             return difference.TotalDays <= numberOfDays;
         }
 
         private class TransactionProjection
         {
-            public TransactionProjection(SqlLedgerEntry thisEntry, IEnumerable<SqlLedgerEntry> allEntries)
+            public TransactionProjection(PaymentProperties paymentProperties, Transaction transaction)
             {
-                ThisEntry = thisEntry;
-                AllEntries = allEntries;
+                LineProperties = paymentProperties;
+                Transaction = transaction;
             }
 
-            public SqlLedgerEntry ThisEntry { get; private set; }
-            public IEnumerable<SqlLedgerEntry> AllEntries { get; private set; }
+            public PaymentProperties LineProperties { get; private set; }
+            public Transaction Transaction { get; private set; }
         }
 
         private class PaymentProperties
         {
-            public PaymentProperties(SqlLedgerEntry entry)
+            public PaymentProperties(LedgerEntry entry)
             {
-                NominalCode = entry.NominalCode;
+                NominalCode = entry.AccountCode;
                 Amount = entry.Amount;
             }
 
             private string NominalCode { get; set; }
-            private decimal Amount { get; set; }
+            public decimal Amount { get; private set; }
 
             private bool Equals(PaymentProperties other)
             {
@@ -98,7 +87,7 @@ namespace Searching
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
+                if (obj.GetType() != GetType()) return false;
                 return Equals((PaymentProperties) obj);
             }
 

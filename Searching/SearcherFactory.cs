@@ -5,7 +5,6 @@ using Capabilities;
 using Model;
 using Persistence;
 using Searching.SearchWindows;
-using SqlImport;
 
 namespace Searching
 {
@@ -25,7 +24,7 @@ namespace Searching
             unusualAccountsSearcher = new UnusualAccountsSearcher();
             roundNumberSearcher = new RoundNumberSearcher();
             userSearcher = new UserSearcher();
-            duplicatePaymentsSearcher = new DuplicatePaymentsSearcher(new TabularFormatConverter());
+            duplicatePaymentsSearcher = new DuplicatePaymentsSearcher();
         }
 
         public Searcher CreateSearcher()
