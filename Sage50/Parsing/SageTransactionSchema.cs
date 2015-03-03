@@ -29,7 +29,6 @@ namespace Sage50.Parsing
 
         private static IFieldReader<string> CreateOptionalStringColumnReader(string columnName, int columnIndex)
         {
-
             return new TypedDataReader<string>(new DefaultValueSupplier(new FieldReader(columnIndex), DefaultString), columnName);
         }
 
