@@ -4,11 +4,11 @@ using Model.Accounting;
 
 namespace Searching
 {
-    public class AccountsLookup
+    public class NominalCodeLookup
     {
         private readonly IDictionary<string, int> lookup = new Dictionary<string, int>();
 
-        public AccountsLookup(IEnumerable<Transaction> transactions)
+        public NominalCodeLookup(IEnumerable<Transaction> transactions)
         {
             Add(transactions);
         }
@@ -27,21 +27,21 @@ namespace Searching
         {
             foreach (var line in transaction.Lines)
             {
-                Add(line.AccountCode);
+                Add(line.NominalCode);
             }
         }
 
-        private void Add(string accountCode)
+        private void Add(string nominalCode)
         {
-            if (!lookup.ContainsKey(accountCode))
+            if (!lookup.ContainsKey(nominalCode))
             {
-                lookup[accountCode] = 0;
+                lookup[nominalCode] = 0;
             }
 
-            lookup[accountCode] ++;
+            lookup[nominalCode] ++;
         }
 
-        public ISet<string> UnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
+        public ISet<string> UnusualNominalCodes(int minimumEntriesToBeConsideredNormal)
         {
             return new HashSet<string>(lookup.Where(x => x.Value < minimumEntriesToBeConsideredNormal).Select(x=>x.Key));
         }

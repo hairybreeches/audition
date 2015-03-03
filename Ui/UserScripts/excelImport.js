@@ -6,7 +6,7 @@
     self.sheet = ko.observable("0");
     self.showInput = ko.observable(false);
 
-    var fields = ['TransactionDate', 'Description', 'Username', 'AccountCode', 'AccountName', 'Amount', 'Id', 'Type'];
+    var fields = ['TransactionDate', 'Description', 'Username', 'NominalCode', 'NominalName', 'Amount', 'Id', 'Type'];
 
     fields.forEach(
         function (fieldName) {
@@ -50,7 +50,7 @@
     var getColumnNames = function() {
         var sheet = sheets()[parseInt(self.sheet())];
         if (sheet) {
-            var lookup = self.useHeaderRow ? "ColumnHeaders" : "ColumnNames";
+            var lookup = self.useHeaderRow() ? "ColumnHeaders" : "ColumnNames";
             return sheet[lookup];
         }
         return [];
@@ -59,10 +59,15 @@
     var getColumns = function() {
         return toSelectOptions(getColumnNames());
     };
-    self.columns = ko.computed(getColumns);
+
+    var columns = ko.computed(getColumns);
 
     self.optionalColumns = ko.computed(function() {
         return [{ label: '*** No value ***', index: -1 }].concat(getColumns());
+    });
+
+    self.requiredColumns = ko.computed(function () {
+        return [{ label: 'Choose...', index: -1 }].concat(getColumns());
     });
 
     self.errorMessage = {
@@ -95,7 +100,7 @@
     }
 
     self.disabled = function () {
-        return !(self.showInput() && self.columns().some(function () { return true; }));
+        return !(self.showInput() && columns().some(function () { return true; }));
     };
 
     var onNewFilename = function (newFilename) {

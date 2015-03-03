@@ -6,16 +6,16 @@ namespace Model.Accounting
 {
     public class LedgerEntry
     {
-        public LedgerEntry(string accountCode, string accountName, LedgerEntryType ledgerEntryType, decimal amount)
+        public LedgerEntry(string nominalCode, string nominalName, LedgerEntryType ledgerEntryType, decimal amount)
         {
-            AccountCode = accountCode;
-            AccountName = accountName;
+            NominalCode = nominalCode;
+            NominalName = nominalName;
             LedgerEntryType = ledgerEntryType;
             Amount = amount;
         }
 
-        public string AccountCode { get; private set; }
-        public string AccountName { get; private set; }
+        public string NominalCode { get; private set; }
+        public string NominalName { get; private set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public LedgerEntryType LedgerEntryType { get; private set; }
@@ -23,12 +23,12 @@ namespace Model.Accounting
 
         public override string ToString()
         {
-            return String.Join(" ", LedgerEntryType, AccountCode, AccountName, Amount);
+            return String.Join(" ", LedgerEntryType, NominalCode, NominalName, Amount);
         }
 
         protected bool Equals(LedgerEntry other)
         {
-            return string.Equals(AccountCode, other.AccountCode) && string.Equals(AccountName, other.AccountName) && LedgerEntryType == other.LedgerEntryType && Amount == other.Amount;
+            return string.Equals(NominalCode, other.NominalCode) && string.Equals(NominalName, other.NominalName) && LedgerEntryType == other.LedgerEntryType && Amount == other.Amount;
         }
 
         public override bool Equals(object obj)
@@ -43,8 +43,8 @@ namespace Model.Accounting
         {
             unchecked
             {
-                int hashCode = (AccountCode != null ? AccountCode.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (AccountName != null ? AccountName.GetHashCode() : 0);
+                int hashCode = (NominalCode != null ? NominalCode.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (NominalName != null ? NominalName.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (int) LedgerEntryType;
                 hashCode = (hashCode*397) ^ Amount.GetHashCode();
                 return hashCode;

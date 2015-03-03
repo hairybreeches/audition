@@ -10,12 +10,12 @@ namespace Tests
     {
         private const string EndingSearchUnavailableMessage = "In order to search for transactions with round number endings, you must import transactions with a value for the amount";
         private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a value for the username";
-        private const string AccountSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
-        private const string DuplicatesUnavailableMessage = "In order to search for transactions which are possible duplicates, you must import transactions with a value for the nominal code and for the amount";
+        private const string NominalCodeSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
+		private const string DuplicatesUnavailableMessage = "In order to search for transactions which are possible duplicates, you must import transactions with a value for the nominal code and for the amount";
 
-        public static IDictionary<string, string> WithAccountsErrorMessage(this IDictionary<string, string> dictionary)
+        public static IDictionary<string, string> WithNominalCodesErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchActionName.Accounts.ToString(), AccountSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.NominalCodes.ToString(), NominalCodeSearchUnavailableMessage);
             return dictionary;
         }
         public static IDictionary<string, string> WithUsersErrorMessage(this IDictionary<string, string> dictionary)
@@ -27,8 +27,8 @@ namespace Tests
         {
             dictionary.Add(SearchActionName.Ending.ToString(), EndingSearchUnavailableMessage);
             return dictionary;
-        }      
-        
+        }
+
         public static IDictionary<string, string> WithDuplicatesErrorMessage(this IDictionary<string, string> dictionary)
         {
             dictionary.Add(SearchActionName.Duplicates.ToString(), DuplicatesUnavailableMessage);
@@ -37,7 +37,7 @@ namespace Tests
 
         public static IDictionary<string, string> WithAllErrorMessages(this IDictionary<string, string> dictionary)
         {
-            dictionary.WithAccountsErrorMessage()
+            dictionary.WithNominalCodesErrorMessage()
                 .WithEndingErrorMessage()
                 .WithUsersErrorMessage()
                 .WithDuplicatesErrorMessage();

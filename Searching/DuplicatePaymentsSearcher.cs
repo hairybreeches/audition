@@ -71,7 +71,7 @@ namespace Searching
         {
             public PaymentProperties(LedgerEntry entry)
             {
-                NominalCode = entry.AccountCode;
+                NominalCode = entry.NominalCode;
                 Amount = entry.Amount;
                 LedgerEntryType = entry.LedgerEntryType;
             }

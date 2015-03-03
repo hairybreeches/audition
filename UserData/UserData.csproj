@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLocationStorage.cs" />
+    <Compile Include="IDemoDataSupplier.cs" />
     <Compile Include="IUserDetailsStorage.cs" />
     <Compile Include="MostRecentList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

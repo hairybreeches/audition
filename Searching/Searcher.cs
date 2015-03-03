@@ -9,14 +9,14 @@ namespace Searching
 {
     public class Searcher
     {
-        private readonly ISearcher<UnusualAccountsParameters> unusualAccountsSearcher;
+        private readonly ISearcher<UnusualNominalCodesParameters> unusualNominalCodesSearcher;
         private readonly ISearcher<EndingParameters> roundNumberSearcher;
         private readonly ISearcher<UserParameters> userSearcher;
         private readonly ISearcher<DuplicatePaymentsParameters> duplicatesSearcher;
 
-        public Searcher(ISearcher<UnusualAccountsParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher, ISearcher<DuplicatePaymentsParameters> duplicatesSearcher)
+        public Searcher(ISearcher<UnusualNominalCodesParameters> unusualNominalCodesSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher, ISearcher<DuplicatePaymentsParameters> duplicatesSearcher)
         {
-            this.unusualAccountsSearcher = unusualAccountsSearcher;
+            this.unusualNominalCodesSearcher = unusualNominalCodesSearcher;
             this.roundNumberSearcher = roundNumberSearcher;
             this.userSearcher = userSearcher;
             this.duplicatesSearcher = duplicatesSearcher;
@@ -27,9 +27,9 @@ namespace Searching
             return roundNumberSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualNominalCodesParameters parameters, IQueryable<Transaction> transactions)
         {
-            return unusualAccountsSearcher.FindTransactionsWithin(parameters, transactions);
+            return unusualNominalCodesSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
         public IQueryable<Transaction> FindTransactionsWithin(UserParameters parameters, IQueryable<Transaction> transactions)

@@ -52,7 +52,7 @@
     <Compile Include="ISearchWindow.cs" />
     <Compile Include="SearcherFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AccountsLookup.cs" />
+    <Compile Include="NominalCodeLookup.cs" />
     <Compile Include="ISearcher.cs" />
     <Compile Include="ISearcherFactory.cs" />
     <Compile Include="Searcher.cs" />
@@ -63,9 +63,9 @@
     <Compile Include="SearchWindows\EndingParameters.cs" />
     <Compile Include="SearchWindows\InputParsing.cs" />
     <Compile Include="SearchWindows\ISearchParameters.cs" />
-    <Compile Include="SearchWindows\UnusualAccountsParameters.cs" />
+    <Compile Include="SearchWindows\UnusualNominalCodesParameters.cs" />
     <Compile Include="SearchWindows\UserParameters.cs" />
-    <Compile Include="UnusualAccountsSearcher.cs" />
+    <Compile Include="UnusualNominalCodesSearcher.cs" />
     <Compile Include="UserSearcher.cs" />
   </ItemGroup>
   <ItemGroup>

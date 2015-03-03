@@ -2,7 +2,7 @@
     AvailableFields: [],
     UnvailableActionMessages: {
         Hours: false,
-        Accounts: false,
+        NominalCodes: false,
         Users: false,
         Date: false,
         Ending: false,
@@ -43,9 +43,9 @@ var LedgerEntry = function (json) {
     }
 
     self.ledgerEntryType = json.LedgerEntryType;
-    self.accountName = json.AccountName;
+    self.nominalName = json.NominalName;
     self.amount = formatCurrency(json.Amount);
-    self.accountCode = json.AccountCode;    
+    self.nominalCode = json.NominalCode;    
 }
 
 
@@ -269,14 +269,14 @@ var SearchModel = function () {
         });
     }    
 
-    self.showAccountCode = function () {
-        return showField('AccountCode');
+    self.showNominalCode = function () {
+        return showField('NominalCode');
     };
     self.showType = function () {
         return showField('Type');
     };
-    self.showAccountName = function () {
-        return showField('AccountName');
+    self.showNominalName = function () {
+        return showField('NominalName');
     };
     self.showAmount = function () {
         return showField('Amount');
@@ -294,7 +294,7 @@ var SearchModel = function () {
         return showField('Username');
     }
     self.showEntries = function() {
-        return self.showAccountCode() || self.showAccountName() || self.showAmount() || self.showLedgerEntryType();
+        return self.showNominalCode() || self.showNominalName() || self.showAmount() || self.showLedgerEntryType();
     }
 
     self.exportErrorMessage = new ErrorMessage();
@@ -302,9 +302,9 @@ var SearchModel = function () {
     self.input = {
         Period: period,
 
-        Accounts: new InputSection({
+        NominalCodes: new InputSection({
             minimumEntriesToBeConsideredNormal: ko.observable(10)
-        }, period, searchCapabilities, 'Accounts'),
+        }, period, searchCapabilities, 'NominalCodes'),
 
         Users: new InputSection({
             users: ko.observable("")

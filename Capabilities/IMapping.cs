@@ -5,8 +5,8 @@ namespace Capabilities
         T Description { get; }
         T Username { get; }
         T TransactionDate { get; }
-        T AccountCode { get; }
-        T AccountName { get; }
+        T NominalCode { get; }
+        T NominalName { get; }
         T Amount { get; }
         T Id { get; }
         T Type { get; }

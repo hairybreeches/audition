@@ -12,7 +12,7 @@ namespace Searching
     {
         private readonly DisplayField[] availableFields;
         private readonly Dictionary<SearchActionName, SearchAction> unavailableActions;
-        private readonly ISearcher<UnusualAccountsParameters> unusualAccountsSearcher;
+        private readonly ISearcher<UnusualNominalCodesParameters> unusualNominalCodesSearcher;
         private readonly ISearcher<EndingParameters> roundNumberSearcher;
         private readonly ISearcher<UserParameters> userSearcher;
         private readonly ISearcher<DuplicatePaymentsParameters> duplicatePaymentsSearcher;
@@ -21,7 +21,7 @@ namespace Searching
         {
             this.unavailableActions = unavailableActions.ToDictionary(x=>x.Name);           
             this.availableFields = availableFields;
-            unusualAccountsSearcher = new UnusualAccountsSearcher();
+            unusualNominalCodesSearcher = new UnusualNominalCodesSearcher();
             roundNumberSearcher = new RoundNumberSearcher();
             userSearcher = new UserSearcher();
             duplicatePaymentsSearcher = new DuplicatePaymentsSearcher();
@@ -29,10 +29,10 @@ namespace Searching
 
         public Searcher CreateSearcher()
         {
-            return new Searcher(GetSearcher(SearchActionName.Accounts, unusualAccountsSearcher),
+            return new Searcher(GetSearcher(SearchActionName.NominalCodes, unusualNominalCodesSearcher),
                 GetSearcher(SearchActionName.Ending, roundNumberSearcher),
-                GetSearcher(SearchActionName.Users, userSearcher), 
-                GetSearcher(SearchActionName.Duplicates, duplicatePaymentsSearcher));
+                GetSearcher(SearchActionName.Users, userSearcher),
+				GetSearcher(SearchActionName.Duplicates, duplicatePaymentsSearcher));
         }
 
         public SearchCapability GetSearchCapability()
