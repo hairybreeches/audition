@@ -40,7 +40,7 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Transaction ID,Transaction date,Transaction type,Description,Username,Account code,Nominal Code,Nominal name,Dr/Cr,Amount
+Transaction ID,Transaction date,Transaction type,Description,Username,Account code,Nominal code,Nominal name,Dr/Cr,Amount
 id 1,2012-03-04,SI,very interesting transaction,alf,C0001,9012,Expenses,Cr,23.4
 id 1,2012-03-04,SI,very interesting transaction,alf,C0001,3001,Cash,Dr,23.4
 id 2,2012-06-05,UJ,perfectly normal transaction,steve,MAC001,8014,Depreciation,Cr,12.4
@@ -57,7 +57,7 @@ id 2,2012-06-05,UJ,perfectly normal transaction,steve,MAC001,4001,Fixed assets,D
 
             var expected =
 @"An illuminating comment
-Transaction date,Username,Nominal Code,Dr/Cr,Amount
+Transaction date,Username,Nominal code,Dr/Cr,Amount
 2012-03-04,alf,9012,Cr,23.4
 2012-03-04,alf,3001,Dr,23.4
 2012-06-05,steve,8014,Cr,12.4
