@@ -58,6 +58,13 @@ namespace Webapp.Controllers
         public async Task<ExportResult> UserExport(SearchWindow<UserParameters> searchWindow)
         {
             return await Export(searchWindow);
+        }       
+        
+        [HttpPost]
+        [Route(Routing.DuplicatesExport)]
+        public async Task<ExportResult> DuplicatesExport(SearchWindow<DuplicatePaymentsParameters> searchWindow)
+        {
+            return await Export(searchWindow);
         }
 
         private async Task<ExportResult> Export(ISearchWindow searchWindow)

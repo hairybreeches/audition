@@ -4,6 +4,7 @@ namespace Capabilities
     {
         Users,
         NominalCodes,
-        Ending
+        Ending,
+        Duplicates
     }
 }
