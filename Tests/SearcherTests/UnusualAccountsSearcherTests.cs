@@ -84,19 +84,19 @@ namespace Tests.SearcherTests
             CollectionAssert.AreEquivalent(new[]{transaction}, transactions);
         }
 
-        public static Transaction PostedTo(string accountCode1, string accountCode2, DateTime transactionDate)
+        public static Transaction PostedTo(string nominalCode1, string nominalCode2, DateTime transactionDate)
         {
             return new Transaction(Guid.NewGuid(), transactionDate,
                 new[]
                 {
-                    new LedgerEntry(accountCode1, accountCode1, LedgerEntryType.Cr, 2.2m),
-                    new LedgerEntry(accountCode2, accountCode2, LedgerEntryType.Dr, 2.2m)
+                    new LedgerEntry(nominalCode1, nominalCode1, LedgerEntryType.Cr, 2.2m),
+                    new LedgerEntry(nominalCode2, nominalCode2, LedgerEntryType.Dr, 2.2m)
                 });
         }
 
-        private static Transaction PostedTo(string accountCode1, string accountCode2)
+        private static Transaction PostedTo(string nominalCode1, string nominalCode2)
         {
-            return PostedTo(accountCode1, accountCode2, new DateTime(1999, 12, 1));
+            return PostedTo(nominalCode1, nominalCode2, new DateTime(1999, 12, 1));
         }
     }
 }
