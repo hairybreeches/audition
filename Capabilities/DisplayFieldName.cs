@@ -10,6 +10,7 @@ namespace Capabilities
         Amount,
         NominalCode,
         Id,
-        Type
+        Type,
+        AccountCode
     }
 }

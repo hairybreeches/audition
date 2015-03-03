@@ -33,7 +33,8 @@ namespace ExcelImport
                 GetColumn<double>(lookups.Amount),
                 GetColumn<string>(lookups.Description),
                 GetColumn<string>(lookups.Type),
-                GetColumn<string>(lookups.NominalName));
+                GetColumn<string>(lookups.NominalName),
+                GetColumn<string>(lookups.AccountCode));
         }
 
         public ISearcherFactory CreateSearcherFactory(FieldLookups lookups)

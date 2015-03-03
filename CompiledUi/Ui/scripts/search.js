@@ -37,6 +37,7 @@ var Transaction = function(json) {
     self.description = json.Description;
     self.username = json.Username;
     self.type = json.TransactionType;
+    self.accountCode = json.AccountCode;
     self.lines = json.Lines.map(function(json) {
         return new LedgerEntry(json);
     });
@@ -300,7 +301,11 @@ var SearchModel = function () {
     };
     self.showUsername = function() {
         return showField('Username');
-    }
+    };
+    self.showAccountCode = function() {
+        return showField('AccountCode');
+    };
+
     self.showEntries = function() {
         return self.showNominalCode() || self.showNominalName() || self.showAmount() || self.showLedgerEntryType();
     }

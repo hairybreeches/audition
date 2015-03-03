@@ -10,6 +10,7 @@ namespace Capabilities
         public static readonly IMappingField NominalCode = new NominalCodeField();
         public static readonly IMappingField Amount = new AmountField();
         public static readonly IMappingField NominalName = new NominalNameField();
+        public static readonly IMappingField AccountCode = new AccountCodeField();
 
         private class IdField : MappingField
         {
@@ -21,6 +22,19 @@ namespace Capabilities
             public override T GetValue<T>(IMapping<T> visitor)
             {
                 return visitor.Id;
+            }
+        }    
+        
+        private class AccountCodeField : MappingField
+        {
+            public AccountCodeField()
+                : base("account code")
+            {
+
+            }
+            public override T GetValue<T>(IMapping<T> visitor)
+            {
+                return visitor.AccountCode;
             }
         }
         private class UsernameField : MappingField
