@@ -10,11 +10,11 @@ namespace Tests
     {
         private const string EndingSearchUnavailableMessage = "In order to search for transactions with round number endings, you must import transactions with a value for the amount";
         private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a value for the username";
-        private const string AccountSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
+        private const string NominalCodeSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
 
         public static IDictionary<string, string> WithNominalCodesErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchActionName.Accounts.ToString(), AccountSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.Accounts.ToString(), NominalCodeSearchUnavailableMessage);
             return dictionary;
         }
         public static IDictionary<string, string> WithUsersErrorMessage(this IDictionary<string, string> dictionary)
