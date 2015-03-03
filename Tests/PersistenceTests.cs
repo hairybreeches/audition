@@ -58,8 +58,7 @@ namespace Tests
         {
             return new[]
             {
-                new Transaction(id, DateTime.MinValue, null, null,
-                    Enumerable.Empty<LedgerEntry>(), String.Empty),
+                new Transaction(id, DateTime.MinValue, null, null, String.Empty, Enumerable.Empty<LedgerEntry>()),
             };
         }
     }

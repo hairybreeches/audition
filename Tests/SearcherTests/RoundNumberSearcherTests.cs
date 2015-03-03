@@ -64,12 +64,11 @@ namespace Tests.SearcherTests
         private static Transaction ForAmount(DateTime transactionDate, int amountOfPence)
         {
             var amountOfPounds = ((decimal) amountOfPence)/100;
-            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty,
-                new[]
-                {
-                    new LedgerEntry("a", "a", LedgerEntryType.Cr, amountOfPounds),
-                    new LedgerEntry("b", "b", LedgerEntryType.Dr, amountOfPounds)
-                }, String.Empty);
+            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty, String.Empty, new[]
+            {
+                new LedgerEntry("a", "a", LedgerEntryType.Cr, amountOfPounds),
+                new LedgerEntry("b", "b", LedgerEntryType.Dr, amountOfPounds)
+            });
         }
     }
 }

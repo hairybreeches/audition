@@ -53,7 +53,7 @@ namespace SystemTests
         private static SearchResponse ExecuteSearch(DateTime currentDate, ICurrentUserRegistry registry)
         {
             var containerBuilder = CreateContainerBuilder(currentDate, registry);
-            using (var lifetime = containerBuilder.BuildSearchable(new[] { new Transaction(null, new DateTime(), null, null, Enumerable.Empty<LedgerEntry>(), String.Empty) }))
+            using (var lifetime = containerBuilder.BuildSearchable(new[] { new Transaction(null, new DateTime(), null, null, String.Empty, Enumerable.Empty<LedgerEntry>()) }))
             {
                 var controller = lifetime.Resolve<SearchController>();
                 return controller.NominalCodesSearch(CreateSearchRequest());
