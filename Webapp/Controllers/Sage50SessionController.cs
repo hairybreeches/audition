@@ -32,7 +32,7 @@ namespace Webapp.Controllers
             dataDirectoryStorage.AddLocation(importDetails.DataDirectory);
             using (var connection = connectionFactory.OpenConnection(importDetails))
             {
-                var transactions = transactionGetter.GetTransactions(connection);
+                var transactions = transactionGetter.GetTransactions(connection, importDetails.IncludeArchived);
                 session.ImportData(new SearcherFactory(Enumerable.Empty<SearchAction>(), displayFieldProvider.AllFields.ToArray()), transactions);
             }
 
