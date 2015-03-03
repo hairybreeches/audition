@@ -12,7 +12,7 @@ namespace Searching
         public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
         {
             var lookup = new AccountsLookup(transactions);
-            var unusualAccountCodes = lookup.UnusualAccountCodes(parameters.MinimumEntriesToBeConsideredNormal);
+            var unusualAccountCodes = lookup.UnusualNominalCodes(parameters.MinimumEntriesToBeConsideredNormal);
             return transactions
                 .Where(transaction=>transaction.Lines.Any(line => unusualAccountCodes.Contains(line.NominalCode)));
         }
