@@ -17,7 +17,7 @@ namespace Tests
     public class JsonConverterTests
     {        
         [Test]
-        public void CanDeserializeAccountsSearchWindow()
+        public void CanDeserializeNominalCodesSearchWindow()
         {
             var result = Parse<SearchWindow<UnusualNominalCodesParameters>>(@"{
             Period: {
