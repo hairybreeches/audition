@@ -31,14 +31,14 @@ namespace Searching
             }
         }
 
-        private void Add(string accountCode)
+        private void Add(string nominalCode)
         {
-            if (!lookup.ContainsKey(accountCode))
+            if (!lookup.ContainsKey(nominalCode))
             {
-                lookup[accountCode] = 0;
+                lookup[nominalCode] = 0;
             }
 
-            lookup[accountCode] ++;
+            lookup[nominalCode] ++;
         }
 
         public ISet<string> UnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
