@@ -7,7 +7,7 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class UnusualAccountsSearcher : ISearcher<UnusualNominalCodesParameters>
+    public class UnusualNominalCodesSearcher : ISearcher<UnusualNominalCodesParameters>
     {
         public IQueryable<Transaction> FindTransactionsWithin(UnusualNominalCodesParameters parameters, IQueryable<Transaction> transactions)
         {
