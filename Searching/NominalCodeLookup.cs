@@ -4,11 +4,11 @@ using Model.Accounting;
 
 namespace Searching
 {
-    public class AccountsLookup
+    public class NominalCodeLookup
     {
         private readonly IDictionary<string, int> lookup = new Dictionary<string, int>();
 
-        public AccountsLookup(IEnumerable<Transaction> transactions)
+        public NominalCodeLookup(IEnumerable<Transaction> transactions)
         {
             Add(transactions);
         }
