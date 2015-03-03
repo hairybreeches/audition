@@ -13,12 +13,12 @@ namespace Tests.SearcherTests
     public class UnusualNominalCodesSearcherTests
     {
         [Test]
-        public void ReturnsOnlyTransactionsPostedToLessUsedAccounts()
+        public void ReturnsOnlyTransactionsPostedToLessUsedNominalCodes()
         {
             //given one transaction which includes a line to a rare account (one posting)
             var transactionPostedToUncommonAccount = PostedTo("b", "e");
 
-            //and a search window for the period "all time", for transactions to accounts with <2 postings
+            //and a search window for the period "all time", for transactions to nominal codes with <2 postings
             var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
@@ -32,27 +32,27 @@ namespace Tests.SearcherTests
         [Test]
         public void DoesNotReturnDuplicatesWhenTransactionsPostedToTwoUnusualNominalCodes()
         {
-            //given one transaction which includes a line to two rare accounts (just one posting each)
+            //given one transaction which includes a line to two rare nominal codes (just one posting each)
             var transactionPostedToUncommonAccount = PostedTo("d", "e");
 
-            //and a search window for the period "all time", for transactions to accounts with <2 postings
+            //and a search window for the period "all time", for transactions to nominal codes with <2 postings
             var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
             //when we do the transaction search
             var transactions = Searching.ExecuteSearch(searchWindow, PostedTo("a", "b"), PostedTo("b", "a"), transactionPostedToUncommonAccount).ToList();
 
-            //we end up with only one copy of the expected transaction - it's not repeated for each rare account it's been posted to.
+            //we end up with only one copy of the expected transaction - it's not repeated for each rare nominal code it's been posted to.
             CollectionAssert.AreEquivalent(new []{transactionPostedToUncommonAccount}, transactions);
         }
         
         [Test]
         public void DoesNotReturnTransactionsOutsideThePeriod()
         {
-            //given one transaction which includes a line to two rare accounts, but does not apply to the period
+            //given one transaction which includes a line to two rare nominal codes, but does not apply to the period
             var transaction = PostedTo("d", "e", new DateTime(2000, 4, 5));                
 
-            //and a search window for transactions to accounts with <2 postings
+            //and a search window for transactions to nominal codes with <2 postings
             var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
@@ -70,7 +70,7 @@ namespace Tests.SearcherTests
             //given one transaction inside the period to an account
             var transaction = PostedTo("a", "b", new DateTime(1999, 1, 1));
 
-            //and a search window for transactions to accounts with <2 postings
+            //and a search window for transactions to nominal codes with <2 postings
             var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
