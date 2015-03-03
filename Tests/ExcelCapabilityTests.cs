@@ -31,7 +31,7 @@ namespace Tests
 
                 yield return CreateTestCase("Nominal Code mapped",
                     new FieldLookups(id: -1, nominalCode: 12, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Accounts), 
+                    new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.NominalCodes), 
                     DisplayFieldName.TransactionDate, DisplayFieldName.NominalCode);
 
                 yield return CreateTestCase("Nominal name mapped",

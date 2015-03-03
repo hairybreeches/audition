@@ -2,7 +2,7 @@
     AvailableFields: [],
     UnvailableActionMessages: {
         Hours: false,
-        Accounts: false,
+        NominalCodes: false,
         Users: false,
         Date: false,
         Ending: false
@@ -310,9 +310,9 @@ var SearchModel = function () {
     self.input = {
         Period: period,
 
-        Accounts: new InputSection({
+        NominalCodes: new InputSection({
             minimumEntriesToBeConsideredNormal: ko.observable(10)
-        }, period, searchCapabilities, 'Accounts'),
+        }, period, searchCapabilities, 'NominalCodes'),
 
         Users: new InputSection({
             users: ko.observable("")
