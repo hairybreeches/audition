@@ -16,6 +16,8 @@ namespace Sage50.Parsing
         private readonly SchemaColumn<double> amountColumn = new SchemaColumn<double>("AMOUNT", 4);
         private readonly SchemaColumn<string> detailsColumn = new SchemaColumn<string>("DETAILS", 5, CreateOptionalStringColumnReader);
         private readonly SchemaColumn<string> typeColumn = new SchemaColumn<string>("TYPE", 6, CreateNominalLookupReader);
+        private readonly SchemaColumn<string> accountCodeColumn = new SchemaColumn<string>("ACCOUNT_REF", 7, CreateOptionalStringColumnReader);
+        
         private const string DefaultString = "<none>";
 
         private static IFieldReader<string> CreateToStringDataReader(string name, int index)
@@ -44,7 +46,8 @@ namespace Sage50.Parsing
                     nominalCodeColumn,
                     amountColumn,
                     detailsColumn,
-                    typeColumn
+                    typeColumn,
+                    accountCodeColumn
                 }
                 .OrderBy(x => x.Index);
             }
@@ -60,7 +63,8 @@ namespace Sage50.Parsing
                 amountColumn.DataReader, 
                 detailsColumn.DataReader, 
                 typeColumn.DataReader,
-                new LookupConverter<string, string>(nominalCodeColumn.DataReader, nominalCodeNameLookup));
+                new LookupConverter<string, string>(nominalCodeColumn.DataReader, nominalCodeNameLookup),
+                accountCodeColumn.DataReader);
         }
 
         public IEnumerable<string> ColumnNames

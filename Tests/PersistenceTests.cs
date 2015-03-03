@@ -58,7 +58,7 @@ namespace Tests
         {
             return new[]
             {
-                new Transaction(id, DateTime.MinValue, null, null, String.Empty)
+                new Transaction(id, DateTime.MinValue, null, null, String.Empty, String.Empty)
             };
         }
     }
