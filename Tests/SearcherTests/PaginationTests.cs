@@ -110,10 +110,9 @@ namespace Tests.SearcherTests
         {
             for (var i = 1; i < 3001; i++)
             {
-                yield return new Transaction(i.ToString(), new DateTime(), "steve", "description", "AJ", new[]
-                {
+                yield return new Transaction(i.ToString(), new DateTime(), "steve", "description", "AJ", 
                     new LedgerEntry("steve", "steve", LedgerEntryType.Dr, 20)                    
-                });
+                );
             }
         }
     }

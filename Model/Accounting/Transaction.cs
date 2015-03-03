@@ -10,13 +10,13 @@ namespace Model.Accounting
         private readonly IList<LedgerEntry> lines;
 
         [JsonConstructor]
-        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, IEnumerable<LedgerEntry> lines)
+        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, params LedgerEntry[] lines)
         {
             TransactionDate = transactionDate;
             Username = username;
             Description = description;
             TransactionType = transactionType;
-            this.lines = lines.ToList();
+            this.lines = lines;
             Id = id;            
         }        
 
