@@ -89,7 +89,7 @@ namespace Tests
 
                 yield return CreateTestCase("Nominal Code unmapped",
                     new FieldLookups(id: 18, nominalCode: -1, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
-                    new Dictionary<string, string>().WithAccountsErrorMessage(), 
+                    new Dictionary<string, string>().WithNominalCodesErrorMessage(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalCode));
 
                 yield return CreateTestCase("Nominal name unmapped",
