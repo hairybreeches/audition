@@ -30,11 +30,11 @@ namespace ExcelImport
                 GetIdColumn(lookups.Id),
                 GetColumn<string>(lookups.Username),
                 GetDateColumn(lookups.TransactionDate),                
-                GetColumn<string>(lookups.AccountCode),
+                GetColumn<string>(lookups.NominalCode),
                 GetColumn<double>(lookups.Amount),
                 GetColumn<string>(lookups.Description),
                 GetColumn<string>(lookups.Type),
-                GetColumn<string>(lookups.AccountName));
+                GetColumn<string>(lookups.NominalName));
         }
 
         public ISearcherFactory CreateSearcherFactory(FieldLookups lookups)
