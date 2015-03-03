@@ -33,18 +33,15 @@ namespace Tests
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013,12,31), "MANAGER",
-                    "Unpresented Cheque", "CI", new[]
-                    {
+                    "Unpresented Cheque", "CI", 
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
-                    }),
+                    ),
                 new Transaction("12", new DateTime(2013,12,31), "Steve",
-                    "Unpresented Cheque", "UJ", new[]
-                    {
+                    "Unpresented Cheque", "UJ", 
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
-                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13)
-                    })
+                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13))
             };
 
             CollectionAssert.AreEqual(expected, transactions);
@@ -63,18 +60,15 @@ namespace Tests
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013,12,31), "<none>",
-                    "<none>", "CI", new[]
-                    {
+                    "<none>", "CI", 
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
-                    }),
+                    ),
                 new Transaction("12", new DateTime(2013,12,31), "<none>",
-                    "<none>", "UJ", new[]
-                    {
+                    "<none>", "UJ",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
-                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13)
-                    })
+                        new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13))
             };
 
             CollectionAssert.AreEqual(expected, transactions);
@@ -89,10 +83,9 @@ namespace Tests
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013, 12, 31), "MANAGER",
-                    "Unpresented Cheque", "AF", new[]
-                    {
+                    "Unpresented Cheque", "AF", 
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
-                    })};
+                    )};
 
             CollectionAssert.AreEqual(expected, transactions, "Sage parsing needs to be able to parse transactions which don't balance, because for reasons known only to its devs, Sage supports them");
         }
@@ -118,7 +111,7 @@ namespace Tests
                 new object[]
                 {"12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque", "JC"})
                 .Single();
-            Assert.AreEqual(new Transaction("12", new DateTime(2013,12,31),"Betty", "Unpresented Cheque", "Journal Credit", new []{new LedgerEntry("bizarre nominal code", "<none>", LedgerEntryType.Dr, 13)}), transaction);
+            Assert.AreEqual(new Transaction("12", new DateTime(2013,12,31),"Betty", "Unpresented Cheque", "Journal Credit", new LedgerEntry("bizarre nominal code", "<none>", LedgerEntryType.Dr, 13)), transaction);
             
         }
 
