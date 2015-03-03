@@ -14,7 +14,7 @@ namespace Tests
 
         public static IDictionary<string, string> WithNominalCodesErrorMessage(this IDictionary<string, string> dictionary)
         {
-            dictionary.Add(SearchActionName.Accounts.ToString(), NominalCodeSearchUnavailableMessage);
+            dictionary.Add(SearchActionName.NominalCodes.ToString(), NominalCodeSearchUnavailableMessage);
             return dictionary;
         }
         public static IDictionary<string, string> WithUsersErrorMessage(this IDictionary<string, string> dictionary)

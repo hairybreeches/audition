@@ -46,15 +46,15 @@ mixin search-tab(title, bindName)
 					+dateInput('To')
 		ul.nav.nav-tabs
 			li.active
-				a(href="#accounts" data-toggle="tab") Unusual accounts
+				a(href="#nominal-codes" data-toggle="tab") Unusual nominal codes
 			li
 				a(href="#users" data-toggle="tab") Unexpected users
 			li
 				a(href="#endings" data-toggle="tab") Round number
 
 		.tab-content
-			.tab-pane.fade.active.in#accounts
-				+search-tab('posted to accounts with fewer than', 'Accounts')
+			.tab-pane.fade.active.in#nominal-codes
+				+search-tab('posted to nominal codes with fewer than', 'NominalCodes')
 					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: minimumEntriesToBeConsideredNormal")
 					span.vertical-space.search-text entries
