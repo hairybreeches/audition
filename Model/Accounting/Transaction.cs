@@ -9,20 +9,14 @@ namespace Model.Accounting
     {
         private readonly IList<LedgerEntry> lines;
 
-        public Transaction(Guid id, DateTime transactionDate, IEnumerable<LedgerEntry> lines)
-            :this(id.ToString(), transactionDate, String.Empty, String.Empty, lines, String.Empty)
-        {
-            
-        }
-
         [JsonConstructor]
-        public Transaction(string id, DateTime transactionDate, string username, string description, IEnumerable<LedgerEntry> lines, string transactionType)
+        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, params LedgerEntry[] lines)
         {
             TransactionDate = transactionDate;
             Username = username;
             Description = description;
             TransactionType = transactionType;
-            this.lines = lines.ToList();
+            this.lines = lines;
             Id = id;            
         }        
 

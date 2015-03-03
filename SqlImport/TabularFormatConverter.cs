@@ -41,8 +41,7 @@ namespace SqlImport
                 GetField(ledgerEntries, x => x.TransactionDate, MappingFields.TransactionDate),
                 GetField(ledgerEntries, x => x.Username, MappingFields.Username),
                 GetField(ledgerEntries, x => x.Description, MappingFields.Description),
-                ledgerEntries.Select(ToModelLine),
-                GetField(ledgerEntries, x => x.TransactionType, MappingFields.Type));
+                GetField(ledgerEntries, x => x.TransactionType, MappingFields.Type), ledgerEntries.Select(ToModelLine).ToArray());
 
 
         }

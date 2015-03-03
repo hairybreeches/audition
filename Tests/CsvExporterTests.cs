@@ -20,19 +20,17 @@ namespace Tests
         {
             //one inside daylight savings
             new Transaction("id 1", new DateTime(2012, 3, 4), "alf",
-                "very interesting transaction", new List<LedgerEntry>
-                {
+                "very interesting transaction", "SI", 
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
-                }, "SI"),
+                ),
 
             //and one outside
             new Transaction("id 2", 
-                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", new List<LedgerEntry>
-                {
+                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", "UJ", 
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
-                }, "UJ")
+                )
         };
 
         [Test]

@@ -86,12 +86,10 @@ namespace Tests.SearcherTests
 
         public static Transaction PostedTo(string nominalCode1, string nominalCode2, DateTime transactionDate)
         {
-            return new Transaction(Guid.NewGuid(), transactionDate,
-                new[]
-                {
-                    new LedgerEntry(nominalCode1, nominalCode1, LedgerEntryType.Cr, 2.2m),
-                    new LedgerEntry(nominalCode2, nominalCode2, LedgerEntryType.Dr, 2.2m)
-                });
+            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty, String.Empty, 
+                new LedgerEntry(nominalCode1, nominalCode1, LedgerEntryType.Cr, 2.2m),
+                new LedgerEntry(nominalCode2, nominalCode2, LedgerEntryType.Dr, 2.2m)
+            );
         }
 
         private static Transaction PostedTo(string nominalCode1, string nominalCode2)
