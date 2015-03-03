@@ -10,7 +10,7 @@ using Tests.Mocks;
 namespace Tests.SearcherTests
 {
     [TestFixture]
-    public class UnusualAccountsSearcherTests
+    public class UnusualNominalCodesSearcherTests
     {
         [Test]
         public void ReturnsOnlyTransactionsPostedToLessUsedAccounts()
@@ -30,7 +30,7 @@ namespace Tests.SearcherTests
         }        
 
         [Test]
-        public void DoesNotReturnDuplicatesWhenTransactionsPostedToTwoUnusualAccounts()
+        public void DoesNotReturnDuplicatesWhenTransactionsPostedToTwoUnusualNominalCodes()
         {
             //given one transaction which includes a line to two rare accounts (just one posting each)
             var transactionPostedToUncommonAccount = PostedTo("d", "e");

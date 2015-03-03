@@ -101,7 +101,7 @@
     <Compile Include="SageTransactionParsingTests.cs" />
     <Compile Include="SearchCapabilityExtensions.cs" />
     <Compile Include="SearcherTests\PaginationTests.cs" />
-    <Compile Include="SearcherTests\UnusualAccountsSearcherTests.cs" />
+    <Compile Include="SearcherTests\UnusualNominalCodesSearcherTests.cs" />
     <Compile Include="SearcherTests\UserSearcherTests.cs" />
     <Compile Include="SearcherTests\RoundNumberSearcherTests.cs" />
     <Compile Include="Searching.cs" />
