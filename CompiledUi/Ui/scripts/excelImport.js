@@ -6,7 +6,7 @@ var ExcelImportModel = function () {
     self.sheet = ko.observable("0");
     self.showInput = ko.observable(false);
 
-    var fields = ['TransactionDate', 'Description', 'Username', 'AccountCode', 'AccountName', 'Amount', 'Id', 'Type'];
+    var fields = ['TransactionDate', 'Description', 'Username', 'NominalCode', 'NominalName', 'Amount', 'Id', 'Type'];
 
     fields.forEach(
         function (fieldName) {
