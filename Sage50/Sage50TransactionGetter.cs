@@ -21,12 +21,19 @@ namespace Sage50
             this.nominalCodeLookupFactory = nominalCodeLookupFactory;
         }
 
-        public IEnumerable<Transaction> GetTransactions(DbConnection dbConnection)
+        public IEnumerable<Transaction> GetTransactions(DbConnection dbConnection, bool includeArchived)
         {
                 var nominalLookup = CreateNominalCodeLookup(dbConnection);
 
-                return  GetJournals(dbConnection, nominalLookup, "AUDIT_JOURNAL")
+            var unarchivedTransactions = GetJournals(dbConnection, nominalLookup, "AUDIT_JOURNAL");
+
+            if (includeArchived)
+            {
+                return unarchivedTransactions
                     .Concat(GetJournals(dbConnection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
+            }
+
+            return unarchivedTransactions;
         }
 
         private IEnumerable<Transaction> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)

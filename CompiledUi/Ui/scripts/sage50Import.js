@@ -3,7 +3,7 @@ var Sage50ImportModel = function() {
     self.dataDirectory = ko.observable('');
     self.username = ko.observable('');
     self.password = ko.observable('');
-
+    self.includeArchived = ko.observable(false);
     self.browseDataDirectory = createBrowseFunction('/api/chooseDirectory', self.dataDirectory);
 
     self.submit = function() {
@@ -11,12 +11,14 @@ var Sage50ImportModel = function() {
             username: self.username(),
             password: self.password(),
             dataDirectory: self.dataDirectory(),
-        });
+            includeArchived: self.includeArchived()
+    });
     }
 
     self.disabled = function() {
         return false;
     };
+    
 
     autocomplete("#sage50dataDirectory", "/api/userdata/sage50DataLocations");
 };

@@ -9,6 +9,8 @@ namespace Sage50
         [Required]
         public string Password { get; set; }
         [Required]
-        public string DataDirectory { get; set; }        
+        public string DataDirectory { get; set; }
+
+        public bool IncludeArchived { get; set; }
     }
 }
