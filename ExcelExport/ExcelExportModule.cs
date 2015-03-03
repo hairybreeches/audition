@@ -27,8 +27,8 @@ namespace ExcelExport
                 new ColumnFactory("Transaction type", fieldProvider.TransactionType),
                 new ColumnFactory("Description", fieldProvider.Description),
                 new ColumnFactory("Username", fieldProvider.Username),                               
-                new ColumnFactory("Nominal Code", fieldProvider.AccountCode),
-                new ColumnFactory("Nominal name", fieldProvider.AccountName),
+                new ColumnFactory("Nominal Code", fieldProvider.NominalCode),
+                new ColumnFactory("Nominal name", fieldProvider.NominalName),
                 new ColumnFactory("Dr/Cr", fieldProvider.LedgerEntryType),
                 new ColumnFactory("Amount", fieldProvider.Amount)
             };
