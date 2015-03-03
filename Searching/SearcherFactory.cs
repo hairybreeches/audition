@@ -21,7 +21,7 @@ namespace Searching
 
         public Searcher CreateSearcher()
         {
-            return new Searcher(GetSearcher<UnusualAccountsParameters, UnusualAccountsSearcher>(SearchActionName.Accounts),
+            return new Searcher(GetSearcher<UnusualNominalCodesParameters, UnusualAccountsSearcher>(SearchActionName.Accounts),
                 GetSearcher<EndingParameters, RoundNumberSearcher>(SearchActionName.Ending),
                 GetSearcher<UserParameters, UserSearcher>(SearchActionName.Users));
         }

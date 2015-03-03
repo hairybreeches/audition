@@ -72,7 +72,7 @@ namespace Tests.SearcherTests
             get
             {
                 yield return new UserParameters("a non-existent user");
-                yield return new UnusualAccountsParameters(1000000000);
+                yield return new UnusualNominalCodesParameters(1000000000);
                 yield return new EndingParameters(0);
             }
         }
