@@ -56,7 +56,7 @@ namespace SystemTests
             using (var lifetime = containerBuilder.BuildSearchable(new[] { new Transaction(null, new DateTime(), null, null, Enumerable.Empty<LedgerEntry>(), String.Empty) }))
             {
                 var controller = lifetime.Resolve<SearchController>();
-                return controller.AccountsSearch(CreateSearchRequest());
+                return controller.NominalCodesSearch(CreateSearchRequest());
             }
         }
 

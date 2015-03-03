@@ -33,7 +33,7 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.NominalCodesSearch)]
-        public SearchResponse AccountsSearch(SearchRequest<UnusualNominalCodesParameters> searchRequest)
+        public SearchResponse NominalCodesSearch(SearchRequest<UnusualNominalCodesParameters> searchRequest)
         {
             return Search(searchRequest);
         }

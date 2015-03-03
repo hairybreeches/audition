@@ -65,7 +65,7 @@ namespace Tests
                 new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
             Assert.Throws<NoImportedDataException>(
-                () => searcher.AccountsSearch(new SearchRequest<UnusualNominalCodesParameters>(searchWindow, 1)));
+                () => searcher.NominalCodesSearch(new SearchRequest<UnusualNominalCodesParameters>(searchWindow, 1)));
         }
 
         private static void ImportData(IContainer container)
