@@ -29,12 +29,12 @@ namespace Tests
                     new Dictionary<string, string>().WithAllErrorMessages(), 
                     DisplayFieldName.TransactionDate, DisplayFieldName.Id);
 
-                yield return CreateTestCase("Account Code mapped",
+                yield return CreateTestCase("Nominal Code mapped",
                     new FieldLookups(id: -1, nominalCode: 12, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Accounts), 
                     DisplayFieldName.TransactionDate, DisplayFieldName.NominalCode);
 
-                yield return CreateTestCase("Account name mapped",
+                yield return CreateTestCase("Nominal name mapped",
                     new FieldLookups(id: -1, nominalCode: -1, nominalName: 3, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
                     DisplayFieldName.TransactionDate, DisplayFieldName.NominalName);
@@ -87,12 +87,12 @@ namespace Tests
                     new Dictionary<string, string>(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Id));
 
-                yield return CreateTestCase("Account Code unmapped",
+                yield return CreateTestCase("Nominal Code unmapped",
                     new FieldLookups(id: 18, nominalCode: -1, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>().WithAccountsErrorMessage(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalCode));
 
-                yield return CreateTestCase("Account name unmapped",
+                yield return CreateTestCase("Nominal name unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: -1, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalName));
