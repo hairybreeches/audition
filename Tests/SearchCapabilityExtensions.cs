@@ -12,7 +12,7 @@ namespace Tests
         private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a value for the username";
         private const string AccountSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
 
-        public static IDictionary<string, string> WithAccountsErrorMessage(this IDictionary<string, string> dictionary)
+        public static IDictionary<string, string> WithNominalCodesErrorMessage(this IDictionary<string, string> dictionary)
         {
             dictionary.Add(SearchActionName.Accounts.ToString(), AccountSearchUnavailableMessage);
             return dictionary;
@@ -30,7 +30,7 @@ namespace Tests
 
         public static IDictionary<string, string> WithAllErrorMessages(this IDictionary<string, string> dictionary)
         {
-            dictionary.WithAccountsErrorMessage()
+            dictionary.WithNominalCodesErrorMessage()
                 .WithEndingErrorMessage()
                 .WithUsersErrorMessage();
 
