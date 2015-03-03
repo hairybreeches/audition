@@ -56,7 +56,7 @@ namespace Capabilities
             }
             public override T GetValue<T>(IMapping<T> visitor)
             {
-                return visitor.AccountCode;
+                return visitor.NominalCode;
             }
         }
         private class AmountField : MappingField
@@ -92,7 +92,7 @@ namespace Capabilities
             }
             public override T GetValue<T>(IMapping<T> visitor)
             {
-                return visitor.AccountName;
+                return visitor.NominalName;
             }
         }
         private class TypeField : MappingField

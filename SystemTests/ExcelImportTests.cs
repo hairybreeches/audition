@@ -31,8 +31,8 @@ namespace SystemTests
                 },
                 Lookups = new FieldLookups
                 (
-                    accountCode : 4,
-                    accountName : -1,
+                    nominalCode : 4,
+                    nominalName : -1,
                     amount : 20,                    
                     description : 8,
                     transactionDate : 2,
@@ -69,8 +69,8 @@ namespace SystemTests
                     },
                     Lookups = new FieldLookups
                     (
-                        accountCode: 3,
-                        accountName: -1,
+                        nominalCode: 3,
+                        nominalName: -1,
                         amount: 9,                        
                         description: 5,
                         transactionDate: 3,
@@ -98,8 +98,8 @@ namespace SystemTests
                 },
                 Lookups = new FieldLookups
                 (
-                    accountCode : 3,
-                    accountName : -1,
+                    nominalCode : 3,
+                    nominalName : -1,
                     amount : 9,                    
                     description : 5,
                     transactionDate : 6,
@@ -133,8 +133,8 @@ namespace SystemTests
                 },
                 Lookups = new FieldLookups
                 (
-                    accountCode : 3,
-                    accountName : -1,
+                    nominalCode : 3,
+                    nominalName : -1,
                     amount : 9,                    
                     description : 5,
                     transactionDate : 6,

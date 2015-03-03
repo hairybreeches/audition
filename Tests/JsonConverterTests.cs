@@ -69,8 +69,8 @@ namespace Tests
         'TransactionDate':2,
         'Description':4,
         'Username':8,
-        'AccountCode':16,
-        'AccountName':32,
+        'NominalCode':16,
+        'NominalName':32,
         'Amount':64,
         'Id':128,
         'Type':256}
@@ -78,8 +78,8 @@ namespace Tests
             var fieldLookups = new FieldLookups(transactionDate: 2,
                 description: 4,
                 username: 8,
-                accountCode: 16,
-                accountName: 32,
+                nominalCode: 16,
+                nominalName: 32,
                 amount: 64,
                 id: 128,
                 type: 256);
