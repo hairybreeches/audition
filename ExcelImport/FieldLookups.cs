@@ -45,7 +45,7 @@ namespace ExcelImport
         {
             return
                 String.Format(
-                    @"TransactionDate:{0}, Description:{1}, Username:{2}, AccountCode:{3}, AccountName:{4}, Amount:{5}, Id:{6} Type:{7}",
+                    @"TransactionDate:{0}, Description:{1}, Username:{2}, NominalCode:{3}, NominalName:{4}, Amount:{5}, Id:{6} Type:{7}",
                     TransactionDate, Description, Username, NominalCode, NominalName, Amount, Id, Type);
         }
 
