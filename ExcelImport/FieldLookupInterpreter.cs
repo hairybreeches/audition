@@ -10,7 +10,6 @@ using SqlImport.DataReaders;
 
 namespace ExcelImport
 {
-    //todo: this has too many switch statements, we are using enums when we should be using classes
     public class FieldLookupInterpreter : IDataReaderFactory, ISearcherFactoryFactory
     {
         private readonly ExcelColumnNamer namer;
