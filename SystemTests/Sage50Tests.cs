@@ -18,7 +18,7 @@ namespace SystemTests
 
             Assert.AreEqual("1278", result.TotalResults, "We should get all the transactions back");
             Assert.AreEqual(
-                new Transaction("1236", new DateTime(2013, 3, 31), "MANAGER", "", "Journal Credit",
+                new Transaction("1236", new DateTime(2013, 3, 31), "MANAGER", "", "Journal Credit","",
                     new LedgerEntry("1230", "Petty Cash", LedgerEntryType.Cr, 100)
                     ), result.Transactions[7], "A random transaction should be correct");
         }      
@@ -30,7 +30,7 @@ namespace SystemTests
 
             Assert.AreEqual("1217", result.TotalResults, "We should get only get the unarchived transactions back");
             Assert.AreEqual(
-                new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", "Sales Credit Note",
+                new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", "Sales Credit Note","MAC001",
                     new LedgerEntry("1100", "Debtors Control Account", LedgerEntryType.Cr, 0.05m),
                     new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Dr, 0.05m),
                     new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
@@ -53,7 +53,7 @@ namespace SystemTests
                 .Build())
             {
                 lifetime.ImportFromSage50(new Sage50ImportDetails
-                {
+                {                    
                     DataDirectory = @"Sage50SampleData",
                     Username = "Manager",
                     IncludeArchived = includeArchived
@@ -61,6 +61,6 @@ namespace SystemTests
 
                 return lifetime.GetParsedResponseContent<SearchResponse>(requestResponse).Result;                
             }
-        }
+        }       
     }
 }
