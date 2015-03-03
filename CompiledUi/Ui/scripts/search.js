@@ -5,7 +5,8 @@ var searchCapabilities = ko.mapping.fromJS({
         NominalCodes: false,
         Users: false,
         Date: false,
-        Ending: false
+        Ending: false,
+        Duplicates: false
     }
 });
 
@@ -22,16 +23,7 @@ var Transaction = function(json) {
     var userFriendlyDate = function (jsonDate) {
         var date = new Date(jsonDate);
         return date.toDateString();
-    }
-
-    var userFriendlyDateTime = function (jsonDate) {
-        var date = new Date(jsonDate);
-        return getTimeString(date) + ' ' + date.toDateString();
-    }
-
-    var getTimeString = function (date) {
-        return date.toLocaleTimeString("en-UK", { hour: '2-digit', minute: '2-digit', hour12: false });
-    }
+    }     
 
     self.transactionDate = userFriendlyDate(json.TransactionDate);
     self.description = json.Description;
@@ -320,7 +312,11 @@ var SearchModel = function () {
 
         Ending: new InputSection({
             minimumZeroesToBeConsideredUnusual: ko.observable(3)
-        }, period, searchCapabilities, 'Ending')
+        }, period, searchCapabilities, 'Ending'),
+
+        Duplicates: new InputSection({
+            maximumDaysBetweenTransactions: ko.observable(31)
+        }, period, searchCapabilities, 'Duplicates')
     };
 
     self.output = output;    

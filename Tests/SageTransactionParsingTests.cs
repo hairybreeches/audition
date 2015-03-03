@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Model;
 using Model.Accounting;
 using NUnit.Framework;
 using Sage50.Parsing;

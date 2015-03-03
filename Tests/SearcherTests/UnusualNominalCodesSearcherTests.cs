@@ -80,7 +80,7 @@ namespace Tests.SearcherTests
                 PostedTo("a", "b", new DateTime(1998, 12, 31)),
                 PostedTo("a", "b", new DateTime(2000, 1, 1))).ToList();
 
-            //those transactions posted to the nominal code in other periods don't make the account any less unusual.
+            //those transactions posted to the nominal code in other periods don't make the code any less unusual.
             CollectionAssert.AreEquivalent(new[]{transaction}, transactions);
         }
 
