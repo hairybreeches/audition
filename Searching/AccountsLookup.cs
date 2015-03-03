@@ -27,7 +27,7 @@ namespace Searching
         {
             foreach (var line in transaction.Lines)
             {
-                Add(line.AccountCode);
+                Add(line.NominalCode);
             }
         }
 
