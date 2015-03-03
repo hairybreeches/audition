@@ -32,12 +32,12 @@ namespace Tests
                 yield return CreateTestCase("Account Code mapped",
                     new FieldLookups(id: -1, nominalCode: 12, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages().Without(SearchActionName.Accounts), 
-                    DisplayFieldName.TransactionDate, DisplayFieldName.AccountCode);
+                    DisplayFieldName.TransactionDate, DisplayFieldName.NominalCode);
 
                 yield return CreateTestCase("Account name mapped",
                     new FieldLookups(id: -1, nominalCode: -1, nominalName: 3, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    DisplayFieldName.TransactionDate, DisplayFieldName.AccountName);
+                    DisplayFieldName.TransactionDate, DisplayFieldName.NominalName);
 
                 yield return CreateTestCase("Amount mapped",
                     new FieldLookups(id: -1, nominalCode: -1, nominalName: -1, amount: 5, description: -1, transactionDate: 18, username: -1, type: -1), 
@@ -90,12 +90,12 @@ namespace Tests
                 yield return CreateTestCase("Account Code unmapped",
                     new FieldLookups(id: 18, nominalCode: -1, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>().WithAccountsErrorMessage(), 
-                    Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.AccountCode));
+                    Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalCode));
 
                 yield return CreateTestCase("Account name unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: -1, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>(), 
-                    Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.AccountName));
+                    Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalName));
 
                 yield return CreateTestCase("Amount unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: -1, description: 18, transactionDate: 18, username: 18, type: 18), 

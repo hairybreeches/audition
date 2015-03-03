@@ -6,9 +6,9 @@ namespace Capabilities
         Description,
         Username,
         LedgerEntryType,
-        AccountName,
+        NominalName,
         Amount,
-        AccountCode,
+        NominalCode,
         Id,
         Type
     }

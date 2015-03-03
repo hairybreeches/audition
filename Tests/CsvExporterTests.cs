@@ -55,7 +55,7 @@ id 2,2012-06-05,UJ,perfectly normal transaction,steve,4001,Fixed assets,Dr,12.4
         [Test]
         public void OnlyShowsSpecifiedFields()
         {
-            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.AccountCode });
+            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.NominalCode });
 
             var expected =
 @"An illuminating comment
