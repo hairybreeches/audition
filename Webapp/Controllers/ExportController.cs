@@ -41,7 +41,7 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Route(Routing.NominalCodesExport)]
-        public async Task<ExportResult> AccountsExport(SearchWindow<UnusualNominalCodesParameters> searchWindow)
+        public async Task<ExportResult> NominalCodesExport(SearchWindow<UnusualNominalCodesParameters> searchWindow)
         {
             return await Export(searchWindow);
         }
