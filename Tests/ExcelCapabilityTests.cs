@@ -62,7 +62,7 @@ namespace Tests
                 yield return CreateTestCase("Account code mapped",
                     new FieldLookups(id: -1, nominalCode: -1, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1, accountCode: 45), 
                     new Dictionary<string, string>().WithAllErrorMessages(), 
-                    DisplayFieldName.TransactionDate);
+                    DisplayFieldName.TransactionDate, DisplayFieldName.AccountCode);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Tests
                 yield return CreateTestCase("Account code unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18, accountCode: -1), 
                     new Dictionary<string, string>(), 
-                    Enums.GetAllValues<DisplayFieldName>());
+                    Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.AccountCode));
             }
         }
 
