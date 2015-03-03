@@ -19,7 +19,7 @@ namespace Tests.SearcherTests
             var transactionPostedToUncommonAccount = PostedTo("b", "e");
 
             //and a search window for the period "all time", for transactions to accounts with <2 postings
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
             //when we do the transaction search
@@ -36,7 +36,7 @@ namespace Tests.SearcherTests
             var transactionPostedToUncommonAccount = PostedTo("d", "e");
 
             //and a search window for the period "all time", for transactions to accounts with <2 postings
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1, 1, 1), new DateTime(3000, 12, 31)));
 
             //when we do the transaction search
@@ -53,7 +53,7 @@ namespace Tests.SearcherTests
             var transaction = PostedTo("d", "e", new DateTime(2000, 4, 5));                
 
             //and a search window for transactions to accounts with <2 postings
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
             //when we do the transaction search
@@ -71,7 +71,7 @@ namespace Tests.SearcherTests
             var transaction = PostedTo("a", "b", new DateTime(1999, 1, 1));
 
             //and a search window for transactions to accounts with <2 postings
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(1999, 1, 1), new DateTime(1999, 12, 31)));
 
             //when we do the transaction search            

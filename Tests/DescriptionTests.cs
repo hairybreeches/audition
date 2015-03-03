@@ -21,7 +21,7 @@ namespace Tests
         [Test]
         public void DescriptionCorrectForUnusualNominalCodesSearchWindow()
         {
-            var window = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(4), new DateRange(new DateTime(2000,4,1), new DateTime(2001, 3, 31)));
+            var window = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(4), new DateRange(new DateTime(2000,4,1), new DateTime(2001, 3, 31)));
             StringAssert.AreEqualIgnoringCase(String.Format("Transactions posted to nominal codes with fewer than 4 entries, in the period {0} to {1}", new DateTime(2000, 4, 1).ToShortDateString(), new DateTime(2001, 3, 31).ToShortDateString()), window.Description);
         }
         

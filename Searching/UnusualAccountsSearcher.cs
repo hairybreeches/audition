@@ -7,9 +7,9 @@ using Searching.SearchWindows;
 
 namespace Searching
 {
-    public class UnusualAccountsSearcher : ISearcher<UnusualAccountsParameters>
+    public class UnusualAccountsSearcher : ISearcher<UnusualNominalCodesParameters>
     {
-        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualNominalCodesParameters parameters, IQueryable<Transaction> transactions)
         {
             var lookup = new NominalCodeLookup(transactions);
             var unusualNominalCodes = lookup.UnusualNominalCodes(parameters.MinimumEntriesToBeConsideredNormal);

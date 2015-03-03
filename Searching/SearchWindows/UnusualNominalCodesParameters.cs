@@ -6,9 +6,9 @@ using Persistence;
 
 namespace Searching.SearchWindows
 {
-    public class UnusualAccountsParameters : ISearchParameters
+    public class UnusualNominalCodesParameters : ISearchParameters
     {
-        public UnusualAccountsParameters(int minimumEntriesToBeConsideredNormal)
+        public UnusualNominalCodesParameters(int minimumEntriesToBeConsideredNormal)
         {
             MinimumEntriesToBeConsideredNormal = minimumEntriesToBeConsideredNormal;
         }
@@ -26,7 +26,7 @@ namespace Searching.SearchWindows
             return string.Format("posted to nominal codes with fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
         }
 
-        protected bool Equals(UnusualAccountsParameters other)
+        protected bool Equals(UnusualNominalCodesParameters other)
         {
             return MinimumEntriesToBeConsideredNormal == other.MinimumEntriesToBeConsideredNormal;
         }
@@ -36,7 +36,7 @@ namespace Searching.SearchWindows
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((UnusualAccountsParameters) obj);
+            return Equals((UnusualNominalCodesParameters) obj);
         }
 
         public override int GetHashCode()

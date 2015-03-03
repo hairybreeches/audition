@@ -9,11 +9,11 @@ namespace Searching
 {
     public class Searcher
     {
-        private readonly ISearcher<UnusualAccountsParameters> unusualAccountsSearcher;
+        private readonly ISearcher<UnusualNominalCodesParameters> unusualAccountsSearcher;
         private readonly ISearcher<EndingParameters> roundNumberSearcher;
         private readonly ISearcher<UserParameters> userSearcher;
 
-        public Searcher(ISearcher<UnusualAccountsParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher)
+        public Searcher(ISearcher<UnusualNominalCodesParameters> unusualAccountsSearcher, ISearcher<EndingParameters> roundNumberSearcher, ISearcher<UserParameters> userSearcher)
         {
             this.unusualAccountsSearcher = unusualAccountsSearcher;
             this.roundNumberSearcher = roundNumberSearcher;
@@ -25,7 +25,7 @@ namespace Searching
             return roundNumberSearcher.FindTransactionsWithin(parameters, transactions);
         }
 
-        public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
+        public IQueryable<Transaction> FindTransactionsWithin(UnusualNominalCodesParameters parameters, IQueryable<Transaction> transactions)
         {
             return unusualAccountsSearcher.FindTransactionsWithin(parameters, transactions);
         }

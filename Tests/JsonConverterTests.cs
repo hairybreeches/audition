@@ -19,7 +19,7 @@ namespace Tests
         [Test]
         public void CanDeserializeAccountsSearchWindow()
         {
-            var result = Parse<SearchWindow<UnusualAccountsParameters>>(@"{
+            var result = Parse<SearchWindow<UnusualNominalCodesParameters>>(@"{
             Period: {
                 From: '2012-4-5',
                 To: '2013-4-4'
@@ -30,7 +30,7 @@ namespace Tests
             }
         }");
 
-            Assert.AreEqual(new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            Assert.AreEqual(new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), 
                 result);
         } 
@@ -38,7 +38,7 @@ namespace Tests
         [Test]
         public void CanDeserializeSearchRequest()
         {
-            var result = Parse<SearchRequest<UnusualAccountsParameters>>(@"{
+            var result = Parse<SearchRequest<UnusualNominalCodesParameters>>(@"{
             pageNumber: 7,
             searchWindow: {
                 Period: {
@@ -51,7 +51,7 @@ namespace Tests
                 }
         }}");
 
-            Assert.AreEqual(new SearchRequest<UnusualAccountsParameters>(new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2),
+            Assert.AreEqual(new SearchRequest<UnusualNominalCodesParameters>(new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2),
                 new DateRange(new DateTime(2012, 4, 5), new DateTime(2013, 4, 4))), 7), 
                 result);
         }
