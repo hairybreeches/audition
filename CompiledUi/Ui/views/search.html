@@ -36,14 +36,14 @@
               </div>
             </div>
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#accounts" data-toggle="tab">Unusual accounts</a></li>
+              <li class="active"><a href="#nominal-codes" data-toggle="tab">Unusual nominal codes</a></li>
               <li><a href="#users" data-toggle="tab">Unexpected users</a></li>
               <li><a href="#endings" data-toggle="tab">Round number</a></li>
               <li><a href="#duplicates" data-toggle="tab">Duplicates</a></li>
             </ul>
             <div class="tab-content">
-              <div id="accounts" class="tab-pane fade active in">
-                  <form action="search" method="post" data-bind="with: Accounts" class="form-horizontal blockable">
+              <div id="nominal-codes" class="tab-pane fade active in">
+                  <form action="search" method="post" data-bind="with: NominalCodes" class="form-horizontal blockable">
                     <div style="display: none;" data-bind="visible: blocked()">
                       <div class="row">
                         <div class="col-xs-10 col-xs-offset-1 vertical-space"><span data-bind="text: errorMessage" class="search-form-text"></span></div>
@@ -52,7 +52,7 @@
                         <div class="col-xs-2 col-xs-offset-5"><a href="/api/session/clearImport" class="btn btn-default">&laquo; Back to import</a></div>
                       </div>
                     </div>
-                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted to accounts with fewer than</span>
+                    <div style="display: none;" data-bind="visible: !blocked()"><span class="search-form-text vertical-space">posted to nominal codes with fewer than</span>
                       <div class="form-group">
                         <div class="col-xs-12">
                           <div data-bind="with: parameters">
@@ -182,11 +182,11 @@
                 <th data-bind="visible: $root.showTransactionDate()">Transaction Date</th>
                 <th data-bind="visible: $root.showType()">Transaction Type</th>
                 <th data-bind="visible: $root.showDescription()">Description</th>
-                <th data-bind="visible: $root.showUsername()">Username</th>
-                <th data-bind="visible: $root.showLedgerEntryType()">Dr/Cr				</th>
-                <th data-bind="visible: $root.showAccountName()">Account Name</th>
+                <th data-bind="visible: $root.showUsername()">Username							</th>
+                <th data-bind="visible: $root.showNominalCode()">Nominal Code</th>
+                <th data-bind="visible: $root.showNominalName()">Nominal Name</th>
+                <th data-bind="visible: $root.showLedgerEntryType()">Dr/Cr	</th>
                 <th data-bind="visible: $root.showAmount()">Amount</th>
-                <th data-bind="visible: $root.showAccountCode()">Account Code</th>
               </tr>
             </thead>
             <!--ko foreach: results-->
@@ -196,10 +196,10 @@
                 <td data-bind="text: type, visible: $root.showType()"></td>
                 <td data-bind="text: description, visible: $root.showDescription()"></td>
                 <td data-bind="text: username, visible: $root.showUsername()"></td>
+                <td data-bind="text: lines[0].nominalCode, visible: $root.showNominalCode()"></td>
+                <td data-bind="text: lines[0].nominalName, visible: $root.showNominalName()"></td>
                 <td data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()"></td>
-                <td data-bind="text: lines[0].accountName, visible: $root.showAccountName()"></td>
                 <td data-bind="text: lines[0].amount, visible: $root.showAmount()"></td>
-                <td data-bind="text: lines[0].accountCode, visible: $root.showAccountCode()"></td>
               </tr>
               <!-- ko foreach: lines.slice(1)-->
               <tr data-bind="visible: $root.showEntries()">
@@ -207,10 +207,10 @@
                 <td data-bind="visible: $root.showType()"></td>
                 <td data-bind="visible: $root.showDescription()"></td>
                 <td data-bind="visible: $root.showUsername()"></td>
+                <td data-bind="text: nominalCode, visible: $root.showNominalCode()"></td>
+                <td data-bind="text: nominalName, visible: $root.showNominalName()"></td>
                 <td data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()"></td>
-                <td data-bind="text: accountName, visible: $root.showAccountName()"></td>
                 <td data-bind="text: amount, visible: $root.showAmount()"></td>
-                <td data-bind="text: accountCode, visible: $root.showAccountCode()"></td>
               </tr>
               <!-- /ko-->
             </tbody>

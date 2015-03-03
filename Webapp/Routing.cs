@@ -15,8 +15,8 @@ namespace Webapp
         public const string GetLicence = "api/licence/get";
         public const string UpdateLicence = "api/licence/update";
 
-        public const string AccountsSearch = "api/search/accounts";
-        public const string AccountsExport = "api/export/accounts";
+        public const string NominalCodesSearch = "api/search/nominalCodes";
+        public const string NominalCodesExport = "api/export/nominalCodes";
         public const string UserSearch = "api/search/users";
         public const string UserExport = "api/export/users";  
         public const string EndingSearch = "api/search/ending";

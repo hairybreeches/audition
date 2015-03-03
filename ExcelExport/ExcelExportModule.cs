@@ -25,11 +25,11 @@ namespace ExcelExport
                 new ColumnFactory("Transaction ID", fieldProvider.Id),
                 new ColumnFactory("Transaction date", fieldProvider.TransactionDate, new DateColumnFormatter()),
                 new ColumnFactory("Transaction type", fieldProvider.TransactionType),
-                new ColumnFactory("Username", fieldProvider.Username),
                 new ColumnFactory("Description", fieldProvider.Description),
+                new ColumnFactory("Username", fieldProvider.Username),                               
+                new ColumnFactory("Nominal Code", fieldProvider.NominalCode),
+                new ColumnFactory("Nominal name", fieldProvider.NominalName),
                 new ColumnFactory("Dr/Cr", fieldProvider.LedgerEntryType),
-                new ColumnFactory("Nominal Account", fieldProvider.AccountCode),
-                new ColumnFactory("Account name", fieldProvider.AccountName),
                 new ColumnFactory("Amount", fieldProvider.Amount)
             };
         }

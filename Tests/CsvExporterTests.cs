@@ -42,11 +42,11 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Transaction ID,Transaction date,Transaction type,Username,Description,Dr/Cr,Nominal Account,Account name,Amount
-id 1,2012-03-04,SI,alf,very interesting transaction,Cr,9012,Expenses,23.4
-id 1,2012-03-04,SI,alf,very interesting transaction,Dr,3001,Cash,23.4
-id 2,2012-06-05,UJ,steve,perfectly normal transaction,Cr,8014,Depreciation,12.4
-id 2,2012-06-05,UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
+Transaction ID,Transaction date,Transaction type,Description,Username,Nominal Code,Nominal name,Dr/Cr,Amount
+id 1,2012-03-04,SI,very interesting transaction,alf,9012,Expenses,Cr,23.4
+id 1,2012-03-04,SI,very interesting transaction,alf,3001,Cash,Dr,23.4
+id 2,2012-06-05,UJ,perfectly normal transaction,steve,8014,Depreciation,Cr,12.4
+id 2,2012-06-05,UJ,perfectly normal transaction,steve,4001,Fixed assets,Dr,12.4
 ";
             
             Assert.AreEqual(expected, actual);
@@ -55,15 +55,15 @@ id 2,2012-06-05,UJ,steve,perfectly normal transaction,Dr,4001,Fixed assets,12.4
         [Test]
         public void OnlyShowsSpecifiedFields()
         {
-            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.AccountCode });
+            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.NominalCode });
 
             var expected =
 @"An illuminating comment
-Transaction date,Username,Dr/Cr,Nominal Account,Amount
-2012-03-04,alf,Cr,9012,23.4
-2012-03-04,alf,Dr,3001,23.4
-2012-06-05,steve,Cr,8014,12.4
-2012-06-05,steve,Dr,4001,12.4
+Transaction date,Username,Nominal Code,Dr/Cr,Amount
+2012-03-04,alf,9012,Cr,23.4
+2012-03-04,alf,3001,Dr,23.4
+2012-06-05,steve,8014,Cr,12.4
+2012-06-05,steve,4001,Dr,12.4
 ";
             Assert.AreEqual(expected, actual);
         }

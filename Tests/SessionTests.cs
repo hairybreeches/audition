@@ -61,11 +61,11 @@ namespace Tests
         private static void AssertSearchingGivesNoImportedDataException(IContainer container)
         {
             var searcher = container.Resolve<SearchController>();
-            var searchWindow = new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(1),
+            var searchWindow = new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(1),
                 new DateRange(DateTime.MinValue, DateTime.MaxValue));
 
             Assert.Throws<NoImportedDataException>(
-                () => searcher.AccountsSearch(new SearchRequest<UnusualAccountsParameters>(searchWindow, 1)));
+                () => searcher.NominalCodesSearch(new SearchRequest<UnusualNominalCodesParameters>(searchWindow, 1)));
         }
 
         private static void ImportData(IContainer container)

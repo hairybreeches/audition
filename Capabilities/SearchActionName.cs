@@ -3,7 +3,7 @@ namespace Capabilities
     public enum SearchActionName
     {
         Users,
-        Accounts,
+        NominalCodes,
         Ending,
         Duplicates
     }

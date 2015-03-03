@@ -56,7 +56,7 @@ namespace SystemTests
             using (var lifetime = containerBuilder.BuildSearchable(new[] { new Transaction(null, new DateTime(), null, null, Enumerable.Empty<LedgerEntry>(), String.Empty) }))
             {
                 var controller = lifetime.Resolve<SearchController>();
-                return controller.AccountsSearch(CreateSearchRequest());
+                return controller.NominalCodesSearch(CreateSearchRequest());
             }
         }
 
@@ -88,9 +88,9 @@ namespace SystemTests
             return clock;
         }
 
-        private static SearchRequest<UnusualAccountsParameters> CreateSearchRequest()
+        private static SearchRequest<UnusualNominalCodesParameters> CreateSearchRequest()
         {
-            return new SearchRequest<UnusualAccountsParameters>(new SearchWindow<UnusualAccountsParameters>(new UnusualAccountsParameters(2), new DateRange(DateTime.MinValue, DateTime.MaxValue)),1);
+            return new SearchRequest<UnusualNominalCodesParameters>(new SearchWindow<UnusualNominalCodesParameters>(new UnusualNominalCodesParameters(2), new DateRange(DateTime.MinValue, DateTime.MaxValue)),1);
         }
     }
 }
