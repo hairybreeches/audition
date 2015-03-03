@@ -1,0 +1,25 @@
+mixin page(title, pagescript, loggedIn)
+	- pagescript = pagescript || []
+	-loggedIn = !! loggedIn
+	doctype html
+	html(lang="en")
+		include head
+		+head(title)
+		body
+			div.container
+				.row
+					.col-md-12
+						h1= title
+							.pull-right.button-group
+								#licensingElement.inline-block(data-bind="visible: showLicensingInfo" style="display: none;")
+									a.btn.btn-danger(data-bind="text: licenceText" href="/views/enterLicence.html")
+								if loggedIn
+									a.btn.btn-default(href="/api/session/clearImport") Start again
+								img.brand-logo(src="/Content/images/A.svg")
+
+			#pageElement.vertical-space
+				block
+
+			include scripts
+			each script in pagescript
+				script(src="/scripts/" + script + ".js")
