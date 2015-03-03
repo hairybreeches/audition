@@ -10,7 +10,7 @@ namespace Model.Accounting
         private readonly IList<LedgerEntry> lines;
 
         [JsonConstructor]
-        public Transaction(string id, DateTime transactionDate, string username, string description, IEnumerable<LedgerEntry> lines, string transactionType)
+        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, IEnumerable<LedgerEntry> lines)
         {
             TransactionDate = transactionDate;
             Username = username;

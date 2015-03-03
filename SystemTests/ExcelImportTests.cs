@@ -44,12 +44,12 @@ namespace SystemTests
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the transactions back");
 
-            Assert.AreEqual(new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", new[]
+            Assert.AreEqual(new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", "SC", new[]
             {
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)
-            }, "SC"), result.Transactions[7], "A random transaction should be correct");
+            }), result.Transactions[7], "A random transaction should be correct");
         }
 
         [Test]
@@ -109,11 +109,10 @@ namespace SystemTests
                 )
             }, 6);
 
-            Assert.AreEqual(new Transaction("62", new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual",
-                    new[]
-                    {
-                        new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
-                    }, "JD"), results.Transactions[9], "A random transaction should be correct");
+            Assert.AreEqual(new Transaction("62", new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual", "JD", new[]
+            {
+                new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)
+            }), results.Transactions[9], "A random transaction should be correct");
 
             Assert.AreEqual("1234", results.TotalResults);
         }      
