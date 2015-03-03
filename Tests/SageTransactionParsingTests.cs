@@ -24,22 +24,22 @@ namespace Tests
         public void CanConvertTransactions()
         {
             var transactions = ParseTransactions(
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "CI" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "9998", "-55", "Unpresented Cheque", "CI" },
-                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "2200", "0", "Unpresented Cheque", "CI" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "1200", "13", "Unpresented Cheque", "UJ" },
-                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "9998", "-13", "Unpresented Cheque", "UJ" });
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "CI", "Account code 1" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "9998", "-55", "Unpresented Cheque", "CI", "Account code 1" },
+                new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "2200", "0", "Unpresented Cheque", "CI", "Account code 1" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "1200", "13", "Unpresented Cheque", "UJ", "Account code 2" },
+                new object[] { "12", "Steve", new DateTime(2013, 12, 31), "9998", "-13", "Unpresented Cheque", "UJ", "Account code 2" });
 
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013,12,31), "MANAGER",
-                    "Unpresented Cheque", "CI", 
+                    "Unpresented Cheque", "CI","Account code 1",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
                     ),
                 new Transaction("12", new DateTime(2013,12,31), "Steve",
-                    "Unpresented Cheque", "UJ", 
+                    "Unpresented Cheque", "UJ", "Account code 2",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13))
             };
@@ -51,22 +51,22 @@ namespace Tests
         public void IfOptionalValuesNullThenDefaultIsProvided()
         {
             var transactions = ParseTransactions(
-                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "1200", "55", DBNull.Value, "CI" },
-                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-55", DBNull.Value, "CI" },
-                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "2200", "0", DBNull.Value, "CI" },
-                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "1200", "13", DBNull.Value, "UJ" },
-                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-13", DBNull.Value, "UJ" });
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "1200", "55", DBNull.Value, "CI", "COM0001" },
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-55", DBNull.Value, "CI", "COM0001" },
+                new object[] { "26", DBNull.Value, new DateTime(2013, 12, 31), "2200", "0", DBNull.Value, "CI", "COM0001" },
+                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "1200", "13", DBNull.Value, "UJ", "MAC001" },
+                new object[] { "12", DBNull.Value, new DateTime(2013, 12, 31), "9998", "-13", DBNull.Value, "UJ", "MAC001" });
 
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013,12,31), "<none>",
-                    "<none>", "CI", 
+                    "<none>", "CI", "COM0001",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 55),
                         new LedgerEntry("2200", "Sales Tax Control Account", LedgerEntryType.Dr, 0)
                     ),
                 new Transaction("12", new DateTime(2013,12,31), "<none>",
-                    "<none>", "UJ",
+                    "<none>", "UJ","MAC001",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 13),
                         new LedgerEntry("9998", "Suspense Account", LedgerEntryType.Cr, 13))
             };
@@ -78,12 +78,12 @@ namespace Tests
         [Test]
         public void CanParseUnbalancedTransactions()
         {
-            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "AF" });
+            var transactions = ParseTransactions(new object[] { "26", "MANAGER", new DateTime(2013, 12, 31), "1200", "55", "Unpresented Cheque", "AF", "COM0001" });
 
             var expected = new[]
             {
                 new Transaction("26", new DateTime(2013, 12, 31), "MANAGER",
-                    "Unpresented Cheque", "AF", 
+                    "Unpresented Cheque", "AF", "COM0001",
                         new LedgerEntry("1200", "Bank Current Account", LedgerEntryType.Dr, 55)
                     )};
 
@@ -108,10 +108,9 @@ namespace Tests
         public void GetDefaultValueWhenNominalCodeNotDefined()
         {
             var transaction = ParseTransactions(
-                new object[]
-                {"12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque", "JC"})
+                new object[] { "12", "Betty", new DateTime(2013, 12, 31), "bizarre nominal code", "13", "Unpresented Cheque", "JC", "COM0001" })
                 .Single();
-            Assert.AreEqual(new Transaction("12", new DateTime(2013,12,31),"Betty", "Unpresented Cheque", "Journal Credit", new LedgerEntry("bizarre nominal code", "<none>", LedgerEntryType.Dr, 13)), transaction);
+            Assert.AreEqual(new Transaction("12", new DateTime(2013, 12, 31), "Betty", "Unpresented Cheque", "Journal Credit", "COM0001", new LedgerEntry("bizarre nominal code", "<none>", LedgerEntryType.Dr, 13)), transaction);
             
         }
 

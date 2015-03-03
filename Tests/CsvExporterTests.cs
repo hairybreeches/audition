@@ -20,14 +20,14 @@ namespace Tests
         {
             //one inside daylight savings
             new Transaction("id 1", new DateTime(2012, 3, 4), "alf",
-                "very interesting transaction", "SI", 
+                "very interesting transaction", "SI","C0001",
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
                 ),
 
             //and one outside
             new Transaction("id 2", 
-                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", "UJ", 
+                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", "UJ","C0001", 
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
                 )

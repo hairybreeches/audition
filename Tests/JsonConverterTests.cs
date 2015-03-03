@@ -73,7 +73,8 @@ namespace Tests
         'NominalName':32,
         'Amount':64,
         'Id':128,
-        'Type':256}
+        'Type':256,
+        'AccountCode': 512}
 }");
             var fieldLookups = new FieldLookups(transactionDate: 2,
                 description: 4,
@@ -82,7 +83,8 @@ namespace Tests
                 nominalName: 32,
                 amount: 64,
                 id: 128,
-                type: 256);
+                type: 256,
+                accountCode:512);
 
             Assert.AreEqual(fieldLookups,result.Lookups);
             var sheetDescription = result.SheetDescription;
