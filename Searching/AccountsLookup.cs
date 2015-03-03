@@ -41,7 +41,7 @@ namespace Searching
             lookup[nominalCode] ++;
         }
 
-        public ISet<string> UnusualAccountCodes(int minimumEntriesToBeConsideredNormal)
+        public ISet<string> UnusualNominalCodes(int minimumEntriesToBeConsideredNormal)
         {
             return new HashSet<string>(lookup.Where(x => x.Value < minimumEntriesToBeConsideredNormal).Select(x=>x.Key));
         }
