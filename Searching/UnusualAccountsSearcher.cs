@@ -11,10 +11,10 @@ namespace Searching
     {
         public IQueryable<Transaction> FindTransactionsWithin(UnusualAccountsParameters parameters, IQueryable<Transaction> transactions)
         {
-            var lookup = new AccountsLookup(transactions);
-            var unusualAccountCodes = lookup.UnusualNominalCodes(parameters.MinimumEntriesToBeConsideredNormal);
+            var lookup = new NominalCodeLookup(transactions);
+            var unusualNominalCodes = lookup.UnusualNominalCodes(parameters.MinimumEntriesToBeConsideredNormal);
             return transactions
-                .Where(transaction=>transaction.Lines.Any(line => unusualAccountCodes.Contains(line.NominalCode)));
+                .Where(transaction=>transaction.Lines.Any(line => unusualNominalCodes.Contains(line.NominalCode)));
         }
     }
 }
