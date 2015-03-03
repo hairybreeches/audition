@@ -65,7 +65,7 @@ namespace Tests.SearcherTests
         
         
         [Test]
-        public void TransactionsOutsideThePeriodNotUsedToDetermineWhetherAccountCodeIsUnusual()
+        public void TransactionsOutsideThePeriodNotUsedToDetermineWhetherNominalCodeIsUnusual()
         {
             //given one transaction inside the period to an account
             var transaction = PostedTo("a", "b", new DateTime(1999, 1, 1));
