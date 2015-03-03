@@ -98,6 +98,19 @@ namespace Tests.SearcherTests
             var results = ExecuteSearch(daysApart - 1, transactionsInRepository);
 
             CollectionAssert.IsEmpty(results);
+        }     
+        
+        [Test]
+        public void DoesNotReturnTransactionsWhenSignDifferent()
+        {
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, new LedgerEntry("code1", "descrip", LedgerEntryType.Dr, 125)),
+                CreateTransaction(InPeriod, new LedgerEntry("code1", "descrip", LedgerEntryType.Cr, 125))
+            };
+            var results = ExecuteSearch(25, transactionsInRepository);
+
+            CollectionAssert.IsEmpty(results);
         }  
         
         [Test]

@@ -73,21 +73,23 @@ namespace Searching
             {
                 NominalCode = entry.AccountCode;
                 Amount = entry.Amount;
+                LedgerEntryType = entry.LedgerEntryType;
             }
 
             private string NominalCode { get; set; }
             public decimal Amount { get; private set; }
+            private LedgerEntryType LedgerEntryType { get; set; }
 
             private bool Equals(PaymentProperties other)
             {
-                return string.Equals(NominalCode, other.NominalCode) && Amount == other.Amount;
+                return string.Equals(NominalCode, other.NominalCode) && Amount == other.Amount && LedgerEntryType == other.LedgerEntryType;
             }
 
             public override bool Equals(object obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != GetType()) return false;
+                if (obj.GetType() != this.GetType()) return false;
                 return Equals((PaymentProperties) obj);
             }
 
@@ -95,7 +97,10 @@ namespace Searching
             {
                 unchecked
                 {
-                    return ((NominalCode != null ? NominalCode.GetHashCode() : 0)*397) ^ Amount.GetHashCode();
+                    var hashCode = (NominalCode != null ? NominalCode.GetHashCode() : 0);
+                    hashCode = (hashCode*397) ^ Amount.GetHashCode();
+                    hashCode = (hashCode*397) ^ (int) LedgerEntryType;
+                    return hashCode;
                 }
             }
         }
