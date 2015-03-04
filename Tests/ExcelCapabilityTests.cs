@@ -89,7 +89,7 @@ namespace Tests
 
                 yield return CreateTestCase("Nominal Code unmapped",
                     new FieldLookups(id: 18, nominalCode: -1, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
-                    new Dictionary<string, string>().WithNominalCodesErrorMessage(), 
+                    new Dictionary<string, string>().WithNominalCodesErrorMessage().WithDuplicatesErrorMessage(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalCode));
 
                 yield return CreateTestCase("Nominal name unmapped",
@@ -99,7 +99,7 @@ namespace Tests
 
                 yield return CreateTestCase("Amount unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: -1, description: 18, transactionDate: 18, username: 18, type: 18), 
-                    new Dictionary<string, string>().WithEndingErrorMessage(), 
+                    new Dictionary<string, string>().WithEndingErrorMessage().WithDuplicatesErrorMessage(), 
                     Enums.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Amount).Without(DisplayFieldName.LedgerEntryType));
 
                 yield return CreateTestCase("Description unmapped",
