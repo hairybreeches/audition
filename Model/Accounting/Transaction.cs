@@ -10,12 +10,13 @@ namespace Model.Accounting
         private readonly IList<LedgerEntry> lines;
 
         [JsonConstructor]
-        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, params LedgerEntry[] lines)
+        public Transaction(string id, DateTime transactionDate, string username, string description, string transactionType, string accountCode, params LedgerEntry[] lines)
         {
             TransactionDate = transactionDate;
             Username = username;
             Description = description;
             TransactionType = transactionType;
+            AccountCode = accountCode;
             this.lines = lines;
             Id = id;            
         }        
@@ -25,11 +26,12 @@ namespace Model.Accounting
         public string Username { get; private set; }
         public string Description { get; private set; }
         public string TransactionType { get; private set; }
+        public string AccountCode { get; private set; }
 
         public override string ToString()
         {
-            return String.Format("Id: {0}, Date:{1}, Username: {2}, Description: {3}, Type: {4}, Lines: \n{5}", Id,
-                TransactionDate, Username, Description, TransactionType, String.Join("\n", Lines));
+            return String.Format("Id: {0}, Date:{1}, Username: {2}, Description: {3}, Type: {4}, Account Code: {5} Lines: \n{6}", Id,
+                TransactionDate, Username, Description, TransactionType, AccountCode, String.Join("\n", Lines));
         }
 
         public IEnumerable<LedgerEntry> Lines
@@ -39,7 +41,7 @@ namespace Model.Accounting
 
         protected bool Equals(Transaction other)
         {
-            return lines.SequenceEqual(other.lines) && string.Equals(Id, other.Id) && TransactionDate.Equals(other.TransactionDate) && string.Equals(Username, other.Username) && string.Equals(Description, other.Description) && string.Equals(TransactionType, other.TransactionType);
+            return lines.SequenceEqual(other.lines) && string.Equals(Id, other.Id) && TransactionDate.Equals(other.TransactionDate) && string.Equals(Username, other.Username) && string.Equals(Description, other.Description) && string.Equals(TransactionType, other.TransactionType) && string.Equals(AccountCode, other.AccountCode);
         }
 
         public override bool Equals(object obj)
@@ -60,6 +62,7 @@ namespace Model.Accounting
                 hashCode = (hashCode*397) ^ (Username != null ? Username.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Description != null ? Description.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (TransactionType != null ? TransactionType.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (AccountCode != null ? AccountCode.GetHashCode() : 0);
                 return hashCode;
             }
         }

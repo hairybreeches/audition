@@ -23,20 +23,29 @@ namespace Sage50
 
         public IEnumerable<Transaction> GetTransactions(DbConnection dbConnection, bool includeArchived)
         {
-                var nominalLookup = CreateNominalCodeLookup(dbConnection);
+            var nominalLookup = CreateNominalCodeLookup(dbConnection);
 
-            var unarchivedTransactions = GetJournals(dbConnection, nominalLookup, "AUDIT_JOURNAL");
+            var unarchivedTransactions = GetUnarchivedTransactions(dbConnection, nominalLookup);
 
             if (includeArchived)
             {
-                return unarchivedTransactions
-                    .Concat(GetJournals(dbConnection, nominalLookup, "AUDIT_HISTORY_JOURNAL"));
+                return unarchivedTransactions.Concat(GetArchivedTransactions(dbConnection, nominalLookup));
             }
 
             return unarchivedTransactions;
         }
 
-        private IEnumerable<Transaction> GetJournals(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
+        private IEnumerable<Transaction> GetUnarchivedTransactions(DbConnection dbConnection, NominalCodeLookup nominalLookup)
+        {
+            return GetTransactions(dbConnection, nominalLookup, "AUDIT_JOURNAL");
+        }
+
+        private IEnumerable<Transaction> GetArchivedTransactions(DbConnection dbConnection, NominalCodeLookup nominalLookup)
+        {
+            return GetTransactions(dbConnection, nominalLookup, "AUDIT_HISTORY_JOURNAL");
+        }
+
+        private IEnumerable<Transaction> GetTransactions(DbConnection connection, NominalCodeLookup nominalLookup, string tableName)
         {
             var command = CreateCommand(connection, GetJournalsText(tableName));
             var odbcDataReader = command.ExecuteReader();

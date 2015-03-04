@@ -20,14 +20,14 @@ namespace Tests
         {
             //one inside daylight savings
             new Transaction("id 1", new DateTime(2012, 3, 4), "alf",
-                "very interesting transaction", "SI", 
+                "very interesting transaction", "SI","C0001",
                     new LedgerEntry("9012", "Expenses", LedgerEntryType.Cr, 23.4m),
                     new LedgerEntry("3001", "Cash", LedgerEntryType.Dr, 23.4m)
                 ),
 
             //and one outside
             new Transaction("id 2", 
-                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", "UJ", 
+                new DateTime(2012, 6, 5), "steve", "perfectly normal transaction", "UJ","MAC001", 
                     new LedgerEntry("8014", "Depreciation", LedgerEntryType.Cr, 12.4m),
                     new LedgerEntry("4001", "Fixed assets", LedgerEntryType.Dr, 12.4m)
                 )
@@ -40,11 +40,11 @@ namespace Tests
 
             var expected =
 @"What we did to get these transactions
-Transaction ID,Transaction date,Transaction type,Description,Username,Nominal Code,Nominal name,Dr/Cr,Amount
-id 1,2012-03-04,SI,very interesting transaction,alf,9012,Expenses,Cr,23.4
-id 1,2012-03-04,SI,very interesting transaction,alf,3001,Cash,Dr,23.4
-id 2,2012-06-05,UJ,perfectly normal transaction,steve,8014,Depreciation,Cr,12.4
-id 2,2012-06-05,UJ,perfectly normal transaction,steve,4001,Fixed assets,Dr,12.4
+Transaction ID,Transaction date,Transaction type,Description,Username,Account code,Nominal code,Nominal name,Dr/Cr,Amount
+id 1,2012-03-04,SI,very interesting transaction,alf,C0001,9012,Expenses,Cr,23.4
+id 1,2012-03-04,SI,very interesting transaction,alf,C0001,3001,Cash,Dr,23.4
+id 2,2012-06-05,UJ,perfectly normal transaction,steve,MAC001,8014,Depreciation,Cr,12.4
+id 2,2012-06-05,UJ,perfectly normal transaction,steve,MAC001,4001,Fixed assets,Dr,12.4
 ";
             
             Assert.AreEqual(expected, actual);
@@ -57,7 +57,7 @@ id 2,2012-06-05,UJ,perfectly normal transaction,steve,4001,Fixed assets,Dr,12.4
 
             var expected =
 @"An illuminating comment
-Transaction date,Username,Nominal Code,Dr/Cr,Amount
+Transaction date,Username,Nominal code,Dr/Cr,Amount
 2012-03-04,alf,9012,Cr,23.4
 2012-03-04,alf,3001,Dr,23.4
 2012-06-05,steve,8014,Cr,12.4
