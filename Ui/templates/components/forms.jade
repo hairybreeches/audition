@@ -10,6 +10,7 @@ mixin checkbox(field)
 				label
 					input(type="checkbox", data-bind="checked: #{field.fieldName}")
 					| #{field.label}
+		+optional-components(field)
 
 mixin help(helpText)
 	.col-sm-2
@@ -19,15 +20,18 @@ mixin button(buttonOptions)
 	.col-sm-2
 		button.btn.btn-default(type="button", data-bind="click: #{buttonOptions.onClick}") #{buttonOptions.label}
 
+mixin optional-components(field)
+	if field.button
+		+button(field.button)
+	if field.help
+		+help(field.help)
+
 mixin form-field(field)
 	.form-group
 		label.col-sm-4.control-label #{field.label}
 		.col-sm-6
 			block
-		if field.button
-			+button(field.button)
-		if field.help
-			+help(field.help)
+		+optional-components(field)
 
 mixin dropdown(field, options)
 	+form-field(field)
