@@ -8,12 +8,12 @@ namespace SqlImport
         private readonly IDictionary<string, string> lookup = new Dictionary<string, string>
         {
             {"SI", "Sales Invoice"},
-            {"SA", "Sales receipt on Account"},
+            {"SA", "Sales Receipt on Account"},
             {"SC", "Sales Credit Note"},
             {"SP", "Sales Refund"},
             {"SR", "Sales Receipt"},
             {"PI", "Purchase Invoice"},
-            {"PA", "Payment on Account"},
+            {"PA", "Purchase Payment on Account"},
             {"PC", "Purchase Credit Note"},
             {"PR", "Purchase Refund"},
             {"PP", "Purchase Payment"},
@@ -25,6 +25,13 @@ namespace SqlImport
             {"VR", "Visa Receipt"},
             {"CP", "Cash Payment"},
             {"CR", "Cash Receipt"},
+            {"PD", "Purchase Discount"},
+            {"SD", "Sales Discount"},
+            {"CC", "Project Cost Credit"},
+            {"CD", "Project Cost Debit - Charge"},
+            {"PAI", "Project Adjustment In"},
+            {"PAO", "Project Adjustment Out"},
+            {"CO", "Project Committed Cost"},
         };
 
         public string GetLookupValue(string key)
