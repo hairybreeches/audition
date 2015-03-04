@@ -206,7 +206,7 @@ namespace Tests.SearcherTests
 
         private static Transaction CreateTransaction(DateTime transactionDate, params LedgerEntry[] ledgerEntries)
         {
-            return new Transaction(Guid.NewGuid(), transactionDate, ledgerEntries);
+            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty, String.Empty, ledgerEntries);
         }
 
         private static LedgerEntry CreateLedgerEntry(int amountOfPence, string nominalCode)
