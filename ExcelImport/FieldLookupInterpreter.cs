@@ -65,13 +65,13 @@ namespace ExcelImport
 
         private bool IsDisplayable(FieldLookups lookups, DisplayField displayField)
         {
-            return IsSet(displayField.RequiredField, lookups);
+            return AreSet(lookups, displayField.RequiredField);
         }
 
-        private bool IsSet(IMappingField requiredField, FieldLookups lookups)
+        private bool AreSet(FieldLookups lookups, params IMappingField[] requiredFields)
         {
-            var mapping = requiredField.GetValue(lookups);
-            return IsSet(mapping);
+            var mappings = requiredFields.Select(field => field.GetValue(lookups));
+            return mappings.All(IsSet);
         }
 
         private static bool IsSet(int column)
@@ -81,7 +81,7 @@ namespace ExcelImport
 
         private bool IsSearchable(SearchAction searchAction, FieldLookups lookups)
         {
-            return IsSet(searchAction.RequiredField, lookups);
+            return AreSet(lookups, searchAction.RequiredFields.ToArray());
         }       
 
         private IEnumerable<SearchAction> GetUnavailableSearchActions(FieldLookups lookups)

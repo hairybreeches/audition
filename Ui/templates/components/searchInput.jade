@@ -51,6 +51,8 @@ mixin search-tab(title, bindName)
 				a(href="#users" data-toggle="tab") Unexpected users
 			li
 				a(href="#endings" data-toggle="tab") Round number
+			li
+				a(href="#duplicates" data-toggle="tab") Duplicates
 
 		.tab-content
 			.tab-pane.fade.active.in#nominal-codes
@@ -67,4 +69,9 @@ mixin search-tab(title, bindName)
 					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
 					span.vertical-space.search-text zeroes
+			.tab-pane.fade#duplicates
+				+search-tab('of the same amount to the same code within', 'Duplicates')
+					+input-well()
+						input.form-control.small-input(type="number", data-bind="value: maximumDaysBetweenTransactions")
+					span.vertical-space.search-text days
 						
