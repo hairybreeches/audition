@@ -315,7 +315,7 @@ var SearchModel = function () {
         }, period, searchCapabilities, 'Ending'),
 
         Duplicates: new InputSection({
-            maximumDaysBetweenTransactions: ko.observable(31)
+            maximumDaysBetweenTransactions: ko.observable(20)
         }, period, searchCapabilities, 'Duplicates')
     };
 

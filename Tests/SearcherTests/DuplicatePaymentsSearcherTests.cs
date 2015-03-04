@@ -140,6 +140,45 @@ namespace Tests.SearcherTests
         }     
         
         [Test]
+        public void DoesNotReturnTransactionsOfDifferentTypes()
+        {
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, 125, "code1", "JC"),
+                CreateTransaction(InPeriod, 125, "code1", "JD")
+            };
+            var results = ExecuteSearch(31, transactionsInRepository);
+
+            CollectionAssert.IsEmpty(results);
+        }    
+        
+        [Test]
+        public void TransactionTypeMatchingIsCaseInsensitive()
+        {
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, 125, "code1", "jc"),
+                CreateTransaction(InPeriod, 125, "code1", "JC")
+            };
+            var results = ExecuteSearch(31, transactionsInRepository);
+
+            CollectionAssert.AreEquivalent(transactionsInRepository, results);
+        }   
+        
+        [Test]
+        public void NominalCodeMatchingIsCaseInsensitive()
+        {
+            var transactionsInRepository = new[]
+            {
+                CreateTransaction(InPeriod, 125, "coDe1"),
+                CreateTransaction(InPeriod, 125, "code1")
+            };
+            var results = ExecuteSearch(31, transactionsInRepository);
+
+            CollectionAssert.AreEquivalent(transactionsInRepository, results);
+        }     
+        
+        [Test]
         public void ReturnsTransactionsOnEdgeOfDaysAllowed()
         {
             var daysApart = 25;
@@ -198,15 +237,19 @@ namespace Tests.SearcherTests
             return Searching.ExecuteSearch(new SearchWindow<DuplicatePaymentsParameters>(new DuplicatePaymentsParameters(maximumDaysBetweenTransactions), FinancialPeriod), transactionsInRepository);
         }
 
-        private static Transaction CreateTransaction(DateTime transactionDate, int amountOfPence, string nominalCode)
+        private static Transaction CreateTransaction(DateTime transactionDate, int amountOfPence, string nominalCode, string transactionType = "JD")
         {
             var ledgerEntry = CreateLedgerEntry(amountOfPence, nominalCode);
-            return CreateTransaction(transactionDate, ledgerEntry);
+            return CreateTransaction(transactionDate, transactionType, ledgerEntry);
         }
 
         private static Transaction CreateTransaction(DateTime transactionDate, params LedgerEntry[] ledgerEntries)
         {
-            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty, String.Empty, ledgerEntries);
+            return CreateTransaction(transactionDate, "JC", ledgerEntries);
+        }
+        private static Transaction CreateTransaction(DateTime transactionDate, string transactionType, params LedgerEntry[] ledgerEntries)
+        {
+            return new Transaction(Guid.NewGuid().ToString(), transactionDate, String.Empty, String.Empty, transactionType, ledgerEntries);
         }
 
         private static LedgerEntry CreateLedgerEntry(int amountOfPence, string nominalCode)

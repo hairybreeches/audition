@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Model.Accounting;
@@ -20,7 +21,7 @@ namespace Searching
 
         private IEnumerable<TransactionProjection> Project(Transaction transaction)
         {
-            return transaction.Lines.Select(x=>new TransactionProjection(new PaymentProperties(x), transaction));
+            return transaction.Lines.Select(x=>new TransactionProjection(new PaymentProperties(x, transaction), transaction));
         }
 
         private IEnumerable<TransactionProjection> FindTransactionWithinDays(IEnumerable<TransactionProjection> entries, int maximumDaysBetweenTransactions)
@@ -69,20 +70,25 @@ namespace Searching
 
         private class PaymentProperties
         {
-            public PaymentProperties(LedgerEntry entry)
+            public PaymentProperties(LedgerEntry entry, Transaction transaction)
             {
                 NominalCode = entry.NominalCode;
                 Amount = entry.Amount;
                 LedgerEntryType = entry.LedgerEntryType;
+                TransactionType = transaction.TransactionType;
             }
 
             private string NominalCode { get; set; }
             public decimal Amount { get; private set; }
             private LedgerEntryType LedgerEntryType { get; set; }
+            private string TransactionType { get; set; }
 
             private bool Equals(PaymentProperties other)
             {
-                return string.Equals(NominalCode, other.NominalCode) && Amount == other.Amount && LedgerEntryType == other.LedgerEntryType;
+                return string.Equals(NominalCode, other.NominalCode, StringComparison.InvariantCultureIgnoreCase) && 
+                    Amount == other.Amount && 
+                    LedgerEntryType == other.LedgerEntryType && 
+                    string.Equals(TransactionType, other.TransactionType, StringComparison.InvariantCultureIgnoreCase);
             }
 
             public override bool Equals(object obj)
@@ -97,9 +103,10 @@ namespace Searching
             {
                 unchecked
                 {
-                    var hashCode = (NominalCode != null ? NominalCode.GetHashCode() : 0);
+                    var hashCode = (NominalCode != null ? NominalCode.ToLowerInvariant().GetHashCode() : 0);
                     hashCode = (hashCode*397) ^ Amount.GetHashCode();
                     hashCode = (hashCode*397) ^ (int) LedgerEntryType;
+                    hashCode = (hashCode*397) ^ (TransactionType != null ? TransactionType.ToLowerInvariant().GetHashCode() : 0);
                     return hashCode;
                 }
             }
