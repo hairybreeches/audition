@@ -70,7 +70,7 @@ mixin search-tab(title, bindName)
 						input.form-control.small-input(type="number", data-bind="value: minimumZeroesToBeConsideredUnusual")
 					span.vertical-space.search-text zeroes
 			.tab-pane.fade#duplicates
-				+search-tab('of the same amount to the same code within', 'Duplicates')
+				+search-tab('of the same type and amount to the same nominal code within', 'Duplicates')
 					+input-well()
 						input.form-control.small-input(type="number", data-bind="value: maximumDaysBetweenTransactions")
 					span.vertical-space.search-text days
