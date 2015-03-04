@@ -9,6 +9,7 @@ namespace DevServer
 {
     class Program
     {
+        //todo: make this a windforms app, so we can show the native windows
         static void Main(string[] args)
         {
             using (var lifetime = ContainerBuilder())
