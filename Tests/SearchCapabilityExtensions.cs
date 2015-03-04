@@ -11,6 +11,7 @@ namespace Tests
         private const string EndingSearchUnavailableMessage = "In order to search for transactions with round number endings, you must import transactions with a value for the amount";
         private const string UserSearchUnavailableMessage = "In order to search for transactions posted by unexpected users, you must import transactions with a value for the username";
         private const string NominalCodeSearchUnavailableMessage = "In order to search for transactions posted to unusual nominal codes, you must import transactions with a value for the nominal code";
+		private const string DuplicatesUnavailableMessage = "In order to search for transactions which are possible duplicates, you must import transactions with a value for the nominal code and for the amount";
 
         public static IDictionary<string, string> WithNominalCodesErrorMessage(this IDictionary<string, string> dictionary)
         {
@@ -28,11 +29,18 @@ namespace Tests
             return dictionary;
         }
 
+        public static IDictionary<string, string> WithDuplicatesErrorMessage(this IDictionary<string, string> dictionary)
+        {
+            dictionary.Add(SearchActionName.Duplicates.ToString(), DuplicatesUnavailableMessage);
+            return dictionary;
+        }
+
         public static IDictionary<string, string> WithAllErrorMessages(this IDictionary<string, string> dictionary)
         {
             dictionary.WithNominalCodesErrorMessage()
                 .WithEndingErrorMessage()
-                .WithUsersErrorMessage();
+                .WithUsersErrorMessage()
+                .WithDuplicatesErrorMessage();
 
             return dictionary;
         } 
