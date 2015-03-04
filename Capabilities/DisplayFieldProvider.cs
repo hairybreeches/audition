@@ -13,6 +13,7 @@ namespace Capabilities
         public DisplayField NominalCode = new DisplayField(DisplayFieldName.NominalCode, MappingFields.NominalCode, entry => entry.NominalCode);
         public DisplayField Id = new DisplayField(DisplayFieldName.Id, MappingFields.Id, entry => entry.TransactionId);
         public DisplayField TransactionType = new DisplayField(DisplayFieldName.Type, MappingFields.Type, entry => entry.TransactionType);
+        public DisplayField AccountCode = new DisplayField(DisplayFieldName.AccountCode, MappingFields.AccountCode, entry => entry.AccountCode);
 
         public IEnumerable<DisplayField> AllFields
         {
@@ -27,6 +28,7 @@ namespace Capabilities
                 yield return NominalCode;
                 yield return Id;
                 yield return TransactionType;
+                yield return AccountCode;
             }
         }
     }

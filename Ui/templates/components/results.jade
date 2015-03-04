@@ -15,6 +15,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 				th(data-bind="visible: $root.showType()") Transaction Type
 				th(data-bind="visible: $root.showDescription()") Description
 				th(data-bind="visible: $root.showUsername()") Username							
+				th(data-bind="visible: $root.showAccountCode()") Account Code							
 				th(data-bind="visible: $root.showNominalCode()") Nominal Code
 				th(data-bind="visible: $root.showNominalName()") Nominal Name
 				th(data-bind="visible: $root.showLedgerEntryType()") Dr/Cr	
@@ -27,6 +28,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 					td(data-bind="text: type, visible: $root.showType()")
 					td(data-bind="text: description, visible: $root.showDescription()")
 					td(data-bind="text: username, visible: $root.showUsername()")
+					td(data-bind="text: accountCode, visible: $root.showAccountCode()")
 					td(data-bind="text: lines[0].nominalCode, visible: $root.showNominalCode()")
 					td(data-bind="text: lines[0].nominalName, visible: $root.showNominalName()")
 					td(data-bind="text: lines[0].ledgerEntryType, visible: $root.showLedgerEntryType()")
@@ -37,6 +39,7 @@ div(data-bind="visible: showResults()" style="display: none;")
 					td(data-bind="visible: $root.showType()")
 					td(data-bind="visible: $root.showDescription()")
 					td(data-bind="visible: $root.showUsername()")
+					td(data-bind="visible: $root.showAccountCode()")
 					td(data-bind="text: nominalCode, visible: $root.showNominalCode()")
 					td(data-bind="text: nominalName, visible: $root.showNominalName()")
 					td(data-bind="text: ledgerEntryType, visible: $root.showLedgerEntryType()")

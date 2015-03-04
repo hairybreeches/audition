@@ -16,6 +16,7 @@ namespace SqlImport
         private readonly IFieldReader<string> detailsColumn;
         private readonly IFieldReader<string> typeColumn;
         private readonly IFieldReader<string> nominalCodeNameColumn;
+        private readonly IFieldReader<string> accountCodeColumn;
 
         public TransactionFieldReader(
             IFieldReader<string> idColumn, 
@@ -25,7 +26,8 @@ namespace SqlImport
             IFieldReader<double> amountColumn, 
             IFieldReader<string> descriptionColumn, 
             IFieldReader<string> typeColumn, 
-            IFieldReader<string> nominalCodeNameColumn)
+            IFieldReader<string> nominalCodeNameColumn, 
+            IFieldReader<string> accountCodeColumn)
         {
             this.idColumn = idColumn;
             this.usernameColumn = usernameColumn;
@@ -35,6 +37,7 @@ namespace SqlImport
             detailsColumn = descriptionColumn;
             this.typeColumn = typeColumn;
             this.nominalCodeNameColumn = nominalCodeNameColumn;
+            this.accountCodeColumn = accountCodeColumn;
         }                
 
         
@@ -92,6 +95,11 @@ namespace SqlImport
                 throw new SqlDataFormatUnexpectedException(message, e);
             }
             
+        }
+
+        public string GetAccountCode(IDataRecord record, int recordIndex)
+        {
+            return GetField(accountCodeColumn, record, recordIndex, MappingFields.AccountCode);
         }
     }
 }

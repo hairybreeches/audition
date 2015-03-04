@@ -10,5 +10,6 @@ namespace Capabilities
         T Amount { get; }
         T Id { get; }
         T Type { get; }
+        T AccountCode { get; }
     }
 }

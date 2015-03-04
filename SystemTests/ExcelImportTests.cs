@@ -38,13 +38,14 @@ namespace SystemTests
                     transactionDate : 2,
                     username : 7,
                     id:0,
-                    type: 1
+                    type: 1,
+                    accountCode: 3
                 )
             }, 1);
 
             Assert.AreEqual("1217", result.TotalResults, "We should get all the transactions back");
 
-            Assert.AreEqual(new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", "SC", 
+            Assert.AreEqual(new Transaction("8", new DateTime(2013, 12, 31), "MANAGER", "Opening Balance", "SC", "MAC001", 
                 new LedgerEntry("1100", null, LedgerEntryType.Cr, 0.05m), 
                 new LedgerEntry("9998", null, LedgerEntryType.Dr, 0.05m), 
                 new LedgerEntry("2200", null, LedgerEntryType.Dr, 0)), result.Transactions[7], "A random transaction should be correct");
@@ -74,7 +75,8 @@ namespace SystemTests
                         transactionDate: 3,
                         username: 19,
                         id: -1,
-                        type: 1
+                        type: 1,
+                        accountCode: -1
                     )
                 }, 1));
 
@@ -103,11 +105,12 @@ namespace SystemTests
                     transactionDate : 6,
                     username : 19,
                     id:-1,
-                    type: 1
+                    type: 1,
+                    accountCode: 2
                 )
             }, 6);
 
-            Assert.AreEqual(new Transaction("62", new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual", "JD", 
+            Assert.AreEqual(new Transaction("62", new DateTime(2013, 1, 30), "MANAGER", "Telephone Accrual", "JD", "",
                 new LedgerEntry("7502", null, LedgerEntryType.Dr, 50)), 
                 results.Transactions[9], "A random transaction should be correct");
 
@@ -136,7 +139,8 @@ namespace SystemTests
                     transactionDate : 6,
                     username : 19,
                     id: -1,
-                    type: 1
+                    type: 1,
+                    accountCode: -1
                 )
             }, 1);
 

@@ -19,8 +19,9 @@ namespace Model
         public string Description { get; private set; }
         public string NominalCodeName { get; private set; }
         public string TransactionType { get; private set; }
+        public string AccountCode { get; private set; }
 
-        public SqlLedgerEntry(string transactionId, string username, DateTime transactionDate, string nominalCode, decimal amount, LedgerEntryType type, string description, string nominalCodeName, string transactionType)
+        public SqlLedgerEntry(string transactionId, string username, DateTime transactionDate, string nominalCode, decimal amount, LedgerEntryType type, string description, string nominalCodeName, string transactionType, string accountCode)
         {
             TransactionId = transactionId;
             Username = username;
@@ -31,14 +32,15 @@ namespace Model
             Description = description;
             NominalCodeName = nominalCodeName;
             TransactionType = transactionType;
+            AccountCode = accountCode;
         }
 
         public override string ToString()
         {
             return
                 String.Format(
-                    "<Transaction number: {0}, username: {1}, date: {2}, nominal code: {3}, Amount: {4} {5}>",
-                    TransactionId, Username, TransactionDate, NominalCode, Amount, LedgerEntryType);
+                    "<Transaction number: {0}, username: {1}, date: {2}, nominal code: {3}, account code: {4} Amount: {5} {6}>",
+                    TransactionId, Username, TransactionDate, NominalCode, AccountCode, Amount, LedgerEntryType);
         }
     }
 }

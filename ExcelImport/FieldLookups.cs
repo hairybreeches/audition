@@ -15,7 +15,7 @@ namespace ExcelImport
             int nominalName,
             int amount,
             int id, 
-            int type)
+            int type, int accountCode)
         {            
             Description = description;
             Username = username;
@@ -25,6 +25,7 @@ namespace ExcelImport
             Amount = amount;
             Id = id;
             Type = type;
+            AccountCode = accountCode;
         }
 
         public int Description { get; private set; }
@@ -35,6 +36,7 @@ namespace ExcelImport
         public int Amount { get; private set; }
         public int Id { get; private set; }
         public int Type { get; private set; }
+        public int AccountCode { get; private set; }       
 
         protected bool Equals(FieldLookups other)
         {
