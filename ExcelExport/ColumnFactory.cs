@@ -9,17 +9,15 @@ namespace ExcelExport
     public class ColumnFactory : IColumnFactory, IFormatterFactory
     {
         private readonly DisplayField displayField;
-        private readonly string header;
         private readonly IExcelColumnFormatter formatter;
 
-        public ColumnFactory(string header, DisplayField displayField)
-            :this(header, displayField, new NoFormattingRequiredFormatter())
+        public ColumnFactory(DisplayField displayField)
+            :this(displayField, new NoFormattingRequiredFormatter())
         {
         }
 
-        public ColumnFactory(string header, DisplayField displayField, IExcelColumnFormatter formatter)
+        public ColumnFactory(DisplayField displayField, IExcelColumnFormatter formatter)
         {
-            this.header = header;
             this.displayField = displayField;
             this.formatter = formatter;
         }
@@ -28,7 +26,7 @@ namespace ExcelExport
         {
             if (OutputColumn(availableFields))
             {
-                return new CsvColumn(header, displayField);
+                return new CsvColumn(displayField);
             }
             else
             {

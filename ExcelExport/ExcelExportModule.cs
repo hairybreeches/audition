@@ -22,15 +22,15 @@ namespace ExcelExport
 
             return new[]
             {
-                new ColumnFactory("Transaction ID", fieldProvider.Id),
-                new ColumnFactory("Transaction date", fieldProvider.TransactionDate, new DateColumnFormatter()),
-                new ColumnFactory("Transaction type", fieldProvider.TransactionType),
-                new ColumnFactory("Description", fieldProvider.Description),
-                new ColumnFactory("Username", fieldProvider.Username),                               
-                new ColumnFactory("Nominal Code", fieldProvider.NominalCode),
-                new ColumnFactory("Nominal name", fieldProvider.NominalName),
-                new ColumnFactory("Dr/Cr", fieldProvider.LedgerEntryType),
-                new ColumnFactory("Amount", fieldProvider.Amount)
+                new ColumnFactory(fieldProvider.Id),
+                new ColumnFactory(fieldProvider.TransactionDate, new DateColumnFormatter()),
+                new ColumnFactory(fieldProvider.TransactionType),
+                new ColumnFactory(fieldProvider.Description),
+                new ColumnFactory(fieldProvider.Username),                               
+                new ColumnFactory(fieldProvider.NominalCode),
+                new ColumnFactory(fieldProvider.NominalName),
+                new ColumnFactory(fieldProvider.LedgerEntryType),
+                new ColumnFactory(fieldProvider.Amount)
             };
         }
     }
