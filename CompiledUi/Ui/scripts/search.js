@@ -255,6 +255,7 @@ var SearchModel = function () {
     self.export = function(exportOptions) {
         self.exportSuccessMessage.hide();
         self.exportErrorMessage.hide();
+        self.busy(true);
         $.ajax(exportOptions.url, {
             data: exportOptions.data,
 
@@ -263,7 +264,10 @@ var SearchModel = function () {
                 if (exportResult.Completed) {
                     self.exportSuccessMessage.show(exportResult.Filename);
                 }                
-            },                
+            },
+            complete: function() {
+                self.busy(false);
+            },
             error: self.exportErrorMessage.show,
             type: 'POST'
         });
