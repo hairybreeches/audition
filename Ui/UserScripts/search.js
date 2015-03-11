@@ -219,7 +219,7 @@ var SearchModel = function () {
     var self = this;
 
     self.exportSuccessMessage = new ExportSuccessMessage();
-    self.searching = ko.observable(false);
+    self.busy = ko.observable(false);
 
     var showField = function (fieldName) {
         return searchCapabilities.AvailableFields.indexOf(fieldName) !== -1;
@@ -233,12 +233,12 @@ var SearchModel = function () {
     };
 
     var finishSearch = function (search) {
-        self.searching(false);
+        self.busy(false);
         output.setLastSearch(search);
     };
 
     self.search = function(search) {
-        self.searching(true);
+        self.busy(true);
         self.exportErrorMessage.hide();
         $.ajax(search.searchUrl, {
             data: searchSerialise(search.searchWindow, search.pageNumber),

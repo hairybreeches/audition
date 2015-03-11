@@ -35,7 +35,7 @@ mixin search-tab(title, bindName)
 						button.btn.btn-primary.vertical-space-sm(type="submit" data-bind="click: submit") Search &raquo;
 
 .form-horizontal.blockable
-	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.searching")
+	.blockscreen.loadscreen(style="display: none;" data-bind="visible: $root.busy")
 	fieldset
 		.form-group(data-bind="with: Period")
 			.col-sm-12
