@@ -1,0 +1,10 @@
+﻿include forms
+
+mixin sage50-import()
+	+form-field({label: "Data location", button: {label: "Browse...", onClick: "browseDataDirectory"}})
+		input#sage50dataDirectory.form-control(type="text" data-bind="textInput: dataDirectory" name="dataDirectory")
+	+form-field({label: 'Sage 50 user', help: "The Sage 50 username you use to access these accounts. The default Sage 50 account is called 'Manager'"})
+		input.form-control(type="text" name="username" data-bind="value: username")
+	+form-field({label: 'Password', help: "The password for the Sage 50 account. The password for the 'Manager' account is blank."})
+		input.form-control(type="password" name="password" data-bind="value: password")
+	+checkbox({label: 'Include archived data', fieldName: 'includeArchived', help: "Whether to import data which has been archived by the client. It is unlikely you will need to import archived data unless the client has already closed and archived the period being audited."})

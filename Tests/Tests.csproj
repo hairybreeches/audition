@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.33.0.2\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.33.0.2\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{FDC54681-CB67-446F-BA2F-38DC63F4A112}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>c26d59d3</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\Debug\Tests\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\build\Release\Tests\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.3.0.0\lib\net45\Microsoft.Owin.FileSystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NodaTime.2.0.0-alpha20140808\lib\net35-Client\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET45\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutofacConfiguration.cs" />
+    <Compile Include="DependencyInjectionTests.cs" />
+    <Compile Include="DescriptionTests.cs" />
+    <Compile Include="DriverDetectorTests.cs" />
+    <Compile Include="CsvExporterTests.cs" />
+    <Compile Include="ExcelCapabilityTests.cs" />
+    <Compile Include="ExcelColumnNamerTests.cs" />
+    <Compile Include="FileSystemTests.cs" />
+    <Compile Include="MetadataReaderTests.cs" />
+    <Compile Include="HttpConversionTests.cs" />
+    <Compile Include="JsonConverterTests.cs" />
+    <Compile Include="LicensingTests.cs" />
+    <Compile Include="SearcherTests\DuplicatePaymentsSearcherTests.cs" />
+    <Compile Include="SessionTests.cs" />
+    <Compile Include="Mocks\MockExporter.cs" />
+    <Compile Include="Mocks\MockFileSystem.cs" />
+    <Compile Include="Mocks\MockRegistry.cs" />
+    <Compile Include="Mocks\MockUserDetailsStorage.cs" />
+    <Compile Include="Mocks\PermissiveLicenceStorage.cs" />
+    <Compile Include="MostRecentListTests.cs" />
+    <Compile Include="PersistenceTests.cs" />
+    <Compile Include="RegistryTests.cs" />
+    <Compile Include="Sage50DataDirectoryStorageTests.cs" />
+    <Compile Include="SageTransactionParsingTests.cs" />
+    <Compile Include="SearchCapabilityExtensions.cs" />
+    <Compile Include="SearcherTests\PaginationTests.cs" />
+    <Compile Include="SearcherTests\UnusualNominalCodesSearcherTests.cs" />
+    <Compile Include="SearcherTests\UserSearcherTests.cs" />
+    <Compile Include="SearcherTests\RoundNumberSearcherTests.cs" />
+    <Compile Include="Searching.cs" />
+    <Compile Include="ShouldNotHappenInThisTestException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDetailsStorageTests.cs" />
+    <Compile Include="UserParametersTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Audition\Audition.csproj">
+      <Project>{D649603A-A3A6-48E5-A987-E5A011DC013F}</Project>
+      <Name>Audition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capabilities\Capabilities.csproj">
+      <Project>{C5FA7B6A-8579-42EE-8BFF-804E156D6031}</Project>
+      <Name>Capabilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CsvExport\CsvExport.csproj">
+      <Project>{EF713D5C-2E0C-496C-B521-3B475B2EDDC9}</Project>
+      <Name>CsvExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelImport\ExcelImport.csproj">
+      <Project>{72962866-1C2B-4D47-AA4B-CEB504E8E02A}</Project>
+      <Name>ExcelImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Licensing\Licensing.csproj">
+      <Project>{356EAAC1-1C70-42B8-A2AA-55995B86D9C1}</Project>
+      <Name>Licensing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native\Native.csproj">
+      <Project>{F42A124D-7365-4A8A-A909-651D1E877C5E}</Project>
+      <Name>Native</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{37AE0C8D-54F3-4311-92A8-8B099B526211}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sage50\Sage50.csproj">
+      <Project>{E1DAF23B-B961-4287-9977-B66035149FB6}</Project>
+      <Name>Sage50</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Searching\Searching.csproj">
+      <Project>{BAB5C73E-38E2-4D4A-8CAC-5F92041BD7BD}</Project>
+      <Name>Searching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlImport\SqlImport.csproj">
+      <Project>{6C1369E7-1D57-42EA-B004-1B17218E71BF}</Project>
+      <Name>SqlImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserData\UserData.csproj">
+      <Project>{726B204C-4FB4-47D7-AD3A-753F2E256DE4}</Project>
+      <Name>UserData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webapp\Webapp.csproj">
+      <Project>{E765DBD3-CADA-4EFC-8740-3EF81191EC24}</Project>
+      <Name>Webapp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\cef.redist.3.1750.1738\build\cef.redist.targets" Condition="Exists('..\packages\cef.redist.3.1750.1738\build\cef.redist.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.3.1750.1738\build\cef.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.3.1750.1738\build\cef.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.33.0.2\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.33.0.2\build\CefSharp.WinForms.props'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.33.0.2\build\CefSharp.Common.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

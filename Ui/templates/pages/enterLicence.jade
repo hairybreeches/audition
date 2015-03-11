@@ -1,0 +1,18 @@
+﻿include ../components/template
+include ../components/forms
+include ../components/message
+
++page('Enter Licence', ['enterLicence'])
+	.container
+		legend Enter your Audition licence key
+		form.form-horizontal
+			+form-field({label: 'Licence Key'})
+				input.form-control(data-bind="value: licenceKey")
+			+button-group()
+				button.vertical-space.btn.btn-default(type="button" data-bind="click: goBack") Cancel
+				button.vertical-space.btn.btn-primary(type="submit" data-bind="click: submit") Enter &raquo;
+		+errorMessage('errorMessage')
+		+successMessage('successMessage')
+			span Licence key validated. This product is now licensed.&nbsp;&nbsp;
+			a(data-bind="click: $root.goBack" href="#") 
+				b Click here to return.

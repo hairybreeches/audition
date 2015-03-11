@@ -1,0 +1,38 @@
+﻿mixin button-group()
+	+form-field({})
+		.button-group.pull-right
+			block
+
+mixin checkbox(field)
+	.form-group
+		.col-sm-6.col-sm-offset-4
+			.checkbox
+				label
+					input(type="checkbox", data-bind="checked: #{field.fieldName}")
+					| #{field.label}
+		+optional-components(field)
+
+mixin help(helpText)
+	.col-sm-2
+		.questionmarkicon(data-toggle="tooltip" data-placement="bottom" data-original-title="#{helpText}")
+
+mixin button(buttonOptions)
+	.col-sm-2
+		button.btn.btn-default(type="button", data-bind="click: #{buttonOptions.onClick}") #{buttonOptions.label}
+
+mixin optional-components(field)
+	if field.button
+		+button(field.button)
+	if field.help
+		+help(field.help)
+
+mixin form-field(field)
+	.form-group
+		label.col-sm-4.control-label #{field.label}
+		.col-sm-6
+			block
+		+optional-components(field)
+
+mixin dropdown(field, options)
+	+form-field(field)
+		select.form-control(name="#{field.fieldName}" data-bind="value: #{field.fieldName}, options: #{options}, optionsText: 'label', optionsValue: 'index'")
