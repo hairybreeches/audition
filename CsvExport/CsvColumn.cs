@@ -7,12 +7,10 @@ namespace CsvExport
 {
     public class CsvColumn : ICsvColumn
     {
-        private readonly string header;
         private readonly DisplayField field;
 
-        public CsvColumn(string header, DisplayField field)
+        public CsvColumn(DisplayField field)
         {
-            this.header = header;
             this.field = field;
         }
 
@@ -23,7 +21,7 @@ namespace CsvExport
 
         public void WriteHeader(ISpreadsheetWriter writer)
         {
-            writer.WriteField(header);
+            writer.WriteField(field.GetHeaderValue());
         }
     }
 }

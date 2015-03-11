@@ -6,11 +6,13 @@ namespace Capabilities
     public class DisplayField
     {
         private readonly Func<SqlLedgerEntry, object> getter;
+        private readonly string headerValue;
 
-        public DisplayField(DisplayFieldName name, IMappingField requiredField, Func<SqlLedgerEntry, object> getter)
+        public DisplayField(DisplayFieldName name, IMappingField requiredField, Func<SqlLedgerEntry, object> getter, string headerValue)
         {
             RequiredField = requiredField;
             this.getter = getter;
+            this.headerValue = headerValue;
             Name = name;
         }
 
@@ -20,6 +22,11 @@ namespace Capabilities
         public object GetDisplayValue(SqlLedgerEntry entry)
         {
             return getter(entry);
+        }
+
+        public string GetHeaderValue()
+        {
+            return headerValue;
         }
     }
 }
