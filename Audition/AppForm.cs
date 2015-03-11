@@ -16,6 +16,7 @@ namespace Audition
             MinimumSize = new Size(800,300);
             FormBorderStyle = FormBorderStyle.Sizable;
             StartPosition = FormStartPosition.CenterParent;
+            WindowState = FormWindowState.Maximized;
         }
 
     }
