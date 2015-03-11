@@ -315,7 +315,7 @@ var SearchModel = function () {
         }, period, searchCapabilities, 'Users'),
 
         Ending: new InputSection({
-            minimumZeroesToBeConsideredUnusual: ko.observable(3)
+            minimumZeroesToBeConsideredUnusual: ko.observable(4)
         }, period, searchCapabilities, 'Ending'),
 
         Duplicates: new InputSection({
