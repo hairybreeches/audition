@@ -28,7 +28,12 @@ namespace Searching.SearchWindows
 
         public override string ToString()
         {
-            return "posted by users other than " + GetUsersDescriptionString();
+            return Description;
+        }
+
+        public string Description
+        {
+            get { return "posted by users other than " + GetUsersDescriptionString(); }
         }
 
         private string GetUsersDescriptionString()
