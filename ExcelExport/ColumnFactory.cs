@@ -28,7 +28,7 @@ namespace ExcelExport
         {
             if (OutputColumn(availableFields))
             {
-                return new CsvColumn(header, displayField.GetDisplayValue);
+                return new CsvColumn(header, displayField);
             }
             else
             {
