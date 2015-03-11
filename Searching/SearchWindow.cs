@@ -25,7 +25,7 @@ namespace Searching
 
         public override string ToString()
         {
-            return string.Format("Transactions {0}, in the period {1}", Parameters, Period);
+            return string.Format("Transactions {0}, in the period {1}", Parameters.Description, Period);
         }
 
         protected bool Equals(SearchWindow<T> other)

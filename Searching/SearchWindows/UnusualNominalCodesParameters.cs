@@ -23,7 +23,15 @@ namespace Searching.SearchWindows
         
         public override string ToString()
         {
-            return string.Format("posted to nominal codes with fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
+            return Description;
+        }
+
+        public string Description
+        {
+            get
+            {
+                return string.Format("posted to nominal codes with fewer than {0} entries", MinimumEntriesToBeConsideredNormal);
+            }
         }
 
         protected bool Equals(UnusualNominalCodesParameters other)
