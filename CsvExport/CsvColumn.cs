@@ -1,4 +1,5 @@
 ﻿using System;
+using Capabilities;
 using Model;
 using SqlImport;
 
@@ -7,17 +8,17 @@ namespace CsvExport
     public class CsvColumn : ICsvColumn
     {
         private readonly string header;
-        private readonly Func<SqlLedgerEntry, object> fieldSelector;
+        private readonly DisplayField field;
 
-        public CsvColumn(string header, Func<SqlLedgerEntry, object> fieldSelector)
+        public CsvColumn(string header, DisplayField field)
         {
             this.header = header;
-            this.fieldSelector = fieldSelector;
+            this.field = field;
         }
 
         public void WriteField(ISpreadsheetWriter writer, SqlLedgerEntry record)
         {
-            writer.WriteField(fieldSelector(record));
+            writer.WriteField(field.GetDisplayValue(record));
         }
 
         public void WriteHeader(ISpreadsheetWriter writer)
