@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using Capabilities;
 using CsvExport;
@@ -36,7 +37,8 @@ namespace Tests
         [Test]
         public void CanOutputAllFieldsSuccessfully()
         {
-            var actual = GetExportedText("What we did to get these transactions", transactions, Enums.GetAllValues<DisplayFieldName>());
+            var provider = new DisplayFieldProvider();
+            var actual = GetExportedText("What we did to get these transactions", transactions, provider.AllFields.ToList());
 
             var expected =
 @"What we did to get these transactions
@@ -53,7 +55,8 @@ id 2,2012-06-05,UJ,perfectly normal transaction,steve,4001,Fixed assets,Dr,12.4
         [Test]
         public void OnlyShowsSpecifiedFields()
         {
-            var actual = GetExportedText("An illuminating comment", transactions, new[]{DisplayFieldName.TransactionDate, DisplayFieldName.Username,DisplayFieldName.Amount, DisplayFieldName.LedgerEntryType, DisplayFieldName.NominalCode });
+            var provider = new DisplayFieldProvider();
+            var actual = GetExportedText("An illuminating comment", transactions, new[]{provider.TransactionDate, provider.Username,provider.Amount, provider.LedgerEntryType, provider.NominalCode });
 
             var expected =
 @"An illuminating comment
@@ -66,7 +69,7 @@ Transaction date,Username,Nominal Code,Dr/Cr,Amount
             Assert.AreEqual(expected, actual);
         }
 
-        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, ICollection<DisplayFieldName> fields)
+        private static string GetExportedText(string description, IEnumerable<Transaction> transactions, IList<DisplayField> fields)
         {
             var fileSystem = new MockFileSystem();
             using (var lifetime = GetLifetime(fileSystem))

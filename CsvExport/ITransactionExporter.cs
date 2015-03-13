@@ -7,6 +7,6 @@ namespace CsvExport
 {
     public interface ITransactionExporter
     {
-        void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayFieldName> availableFields);
+        void Export(string description, IEnumerable<Transaction> transactions, string filename, IList<DisplayField> availableFields);
     }
 }
