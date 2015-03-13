@@ -69,7 +69,7 @@ namespace Tests
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: 18, description: 18,
                         transactionDate: 18, username: 18, type: 18),
                     new Dictionary<string, string>(),
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>());
+                    SearchCapabilityExtensions.GetAllValues());
 
                 yield return CreateTestCase("All fields unmapped",
                     new FieldLookups(id: -1, nominalCode: -1, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1),
@@ -85,37 +85,37 @@ namespace Tests
                 yield return CreateTestCase("ID unmapped", 
                     new FieldLookups(id: -1, nominalCode: 18, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Id));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.Id));
 
                 yield return CreateTestCase("Nominal Code unmapped",
                     new FieldLookups(id: 18, nominalCode: -1, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>().WithNominalCodesErrorMessage().WithDuplicatesErrorMessage(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalCode));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.NominalCode));
 
                 yield return CreateTestCase("Nominal name unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: -1, amount: 18, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.NominalName));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.NominalName));
 
                 yield return CreateTestCase("Amount unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: -1, description: 18, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>().WithEndingErrorMessage().WithDuplicatesErrorMessage(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Amount).Without(DisplayFieldName.LedgerEntryType));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.Amount).Without(DisplayFieldName.LedgerEntryType));
 
                 yield return CreateTestCase("Description unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: 18, description: -1, transactionDate: 18, username: 18, type: 18), 
                     new Dictionary<string, string>(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Description));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.Description));
 
                 yield return CreateTestCase("Username unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: -1, type: 18), 
                     new Dictionary<string, string>().WithUsersErrorMessage(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Username));       
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.Username));       
                 
                 yield return CreateTestCase("Type unmapped",
                     new FieldLookups(id: 18, nominalCode: 18, nominalName: 18, amount: 18, description: 18, transactionDate: 18, username: 18, type: -1), 
                     new Dictionary<string, string>(), 
-                    SearchCapabilityExtensions.GetAllValues<DisplayFieldName>().Without(DisplayFieldName.Type));
+                    SearchCapabilityExtensions.GetAllValues().Without(DisplayFieldName.Type));
             }
         }
 
