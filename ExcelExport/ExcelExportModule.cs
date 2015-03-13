@@ -13,7 +13,7 @@ namespace ExcelExport
         {
             builder.RegisterType<ExcelExporter>().As<ITransactionExporter>(); 
             builder.RegisterType<ExcelFileOpener>();
-            builder.Register(CreateColumns).As<IEnumerable<IColumnFactory>>().As<IEnumerable<IFormatterFactory>>();
+            builder.Register(CreateColumns).As<IEnumerable<IFormatterFactory>>();
         }
 
         private static ColumnFactory[] CreateColumns(IComponentContext context)

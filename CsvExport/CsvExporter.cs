@@ -9,30 +9,22 @@ namespace CsvExport
 {
     public class CsvExporter : ITransactionExporter
     {
-        private readonly IEnumerable<IColumnFactory> columnFactories;
-
         private readonly TabularFormatConverter converter;
         private readonly ISpreadsheetWriterFactory writerFactory;
 
 
-        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory, IEnumerable<IColumnFactory> columnFactories)
+        public CsvExporter(TabularFormatConverter converter, ISpreadsheetWriterFactory writerFactory)
         {
             this.converter = converter;
             this.writerFactory = writerFactory;
-            this.columnFactories = columnFactories;
         }
 
         public void Export(string description, IEnumerable<Transaction> transactions, string filename, IList<DisplayField> availableFields)
         {            
-            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(availableFields.Select(x=>x.Name).ToList()));
-        }
+            Export(description, converter.ConvertToTabularFormat(transactions), filename, availableFields);
+        }       
 
-        private List<ICsvColumn> GetColumns(ICollection<DisplayFieldName> fields)
-        {
-            return columnFactories.Select(x => x.GetColumn(fields)).ToList();
-        }
-
-        private void Export(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<ICsvColumn> columns)
+        private void Export(string description, IEnumerable<SqlLedgerEntry> transactions, string filename, IList<DisplayField> columns)
         {
             using (var writer = writerFactory.CreateWriter(filename))
             {
@@ -42,7 +34,7 @@ namespace CsvExport
             }
         }
 
-        private static void WriteTransactions(IEnumerable<SqlLedgerEntry> transactions, IList<ICsvColumn> columns, ISpreadsheetWriter writer)
+        private static void WriteTransactions(IEnumerable<SqlLedgerEntry> transactions, IList<DisplayField> columns, ISpreadsheetWriter writer)
         {
             foreach (var transaction in transactions)
             {
@@ -56,20 +48,20 @@ namespace CsvExport
             writer.NextRecord();
         }
 
-        private static void WriteHeaderRow(ISpreadsheetWriter writer, IList<ICsvColumn> transactionColumns)
+        private static void WriteHeaderRow(ISpreadsheetWriter writer, IList<DisplayField> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {
-                column.WriteHeader(writer);
+                writer.WriteField(column.GetHeaderValue());
             }
             writer.NextRecord();
         }
 
-        private static void WriteTransaction(ISpreadsheetWriter writer, SqlLedgerEntry transaction, IEnumerable<ICsvColumn> transactionColumns)
+        private static void WriteTransaction(ISpreadsheetWriter writer, SqlLedgerEntry transaction, IEnumerable<DisplayField> transactionColumns)
         {
             foreach (var column in transactionColumns)
             {
-                column.WriteField(writer, transaction);
+                writer.WriteField(column.GetDisplayValue(transaction));
             }
             writer.NextRecord();
         }             
