@@ -1,4 +1,5 @@
-﻿using Capabilities;
+﻿using System.Collections.Generic;
+using Capabilities;
 using Persistence;
 
 namespace Searching
@@ -7,5 +8,6 @@ namespace Searching
     {
         Searcher CreateSearcher();
         SearchCapability GetSearchCapability();
+        IEnumerable<DisplayField> GetAvailableFields();
     }
 }
