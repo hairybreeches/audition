@@ -23,7 +23,7 @@ namespace ExcelExport
             this.formatterFactories = formatterFactories;
         }
 
-        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayFieldName> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IList<DisplayField> availableFields)
         {
             using (var tempFile = fileSystem.GetTempFile("csv"))
             {
@@ -31,7 +31,7 @@ namespace ExcelExport
                 using (var excelWriter = fileOpener.OpenFile(tempFile.Filename))
                 {
                     excelWriter.MergeRow(1);                    
-                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(availableFields)), 2);
+                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(availableFields.Select(field=>field.Name).ToList())), 2);
                     excelWriter.ApplyFiltersToRow(2);                    
                     excelWriter.AutosizeColumns();
                     excelWriter.NameSheet("Audition search");

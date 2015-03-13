@@ -22,9 +22,9 @@ namespace CsvExport
             this.columnFactories = columnFactories;
         }
 
-        public void Export(string description, IEnumerable<Transaction> transactions, string filename, ICollection<DisplayFieldName> availableFields)
+        public void Export(string description, IEnumerable<Transaction> transactions, string filename, IList<DisplayField> availableFields)
         {            
-            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(availableFields));
+            Export(description, converter.ConvertToTabularFormat(transactions), filename, GetColumns(availableFields.Select(x=>x.Name).ToList()));
         }
 
         private List<ICsvColumn> GetColumns(ICollection<DisplayFieldName> fields)
