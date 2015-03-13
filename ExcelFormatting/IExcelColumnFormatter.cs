@@ -1,7 +1,6 @@
-﻿using System.Runtime.Remoting.Messaging;
-using Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Interop.Excel;
 
-namespace ExcelExport
+namespace ExcelFormatting
 {
     public interface IExcelColumnFormatter
     {

@@ -1,8 +1,8 @@
 using Microsoft.Office.Interop.Excel;
 
-namespace ExcelExport
+namespace ExcelFormatting
 {
-    internal class DateColumnFormatter : IExcelColumnFormatter
+    public class DateColumnFormatter : IExcelColumnFormatter
     {
         public int FormatColumn(Worksheet worksheet, int columnIndex)
         {
