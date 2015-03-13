@@ -80,7 +80,8 @@ namespace ExcelExport
             //their whole point is the side effect, the result is just keeping count
             foreach (var excelColumnFormatter in excelColumnFormatters)
             {
-                columnIndex = excelColumnFormatter.FormatColumn(Sheet, columnIndex);
+                excelColumnFormatter.FormatColumn(Sheet, columnIndex);
+                columnIndex ++;
             }
         }
     }
