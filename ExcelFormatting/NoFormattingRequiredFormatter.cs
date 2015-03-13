@@ -1,10 +1,11 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using System;
+using Microsoft.Office.Interop.Excel;
 
 namespace ExcelFormatting
 {
     public class NoFormattingRequiredFormatter : IExcelColumnFormatter
     {
-        public void FormatColumn(Worksheet worksheet, int columnIndex)
+        public void FormatColumn(Func<Range> columnGetter)
         {
         }
     }

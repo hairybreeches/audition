@@ -1,9 +1,10 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using System;
+using Microsoft.Office.Interop.Excel;
 
 namespace ExcelFormatting
 {
     public interface IExcelColumnFormatter
     {
-        void FormatColumn(Worksheet worksheet, int columnIndex);
+        void FormatColumn(Func<Range> columnGetter);
     }
 }
