@@ -18,15 +18,15 @@ namespace Capabilities
         {
             get
             {
+                yield return Id;
                 yield return TransactionDate;
+                yield return TransactionType;
                 yield return Description;
                 yield return Username;
-                yield return LedgerEntryType;
-                yield return NominalName;
-                yield return Amount;
                 yield return NominalCode;
-                yield return Id;
-                yield return TransactionType;
+                yield return NominalName;
+                yield return LedgerEntryType;
+                yield return Amount;
             }
         }
     }
