@@ -61,13 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColumnFactory.cs" />
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="ExcelExportModule.cs" />
     <Compile Include="ExcelInteropException.cs" />
     <Compile Include="ExcelFormatter.cs" />
     <Compile Include="ExcelWriterFactory.cs" />
-    <Compile Include="IFormatterFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
