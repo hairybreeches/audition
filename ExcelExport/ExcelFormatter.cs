@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExcelFormatting;
 using Microsoft.Office.Interop.Excel;
 
 namespace ExcelExport

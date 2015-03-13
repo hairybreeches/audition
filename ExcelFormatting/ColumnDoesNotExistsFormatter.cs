@@ -1,8 +1,8 @@
 ﻿using Microsoft.Office.Interop.Excel;
 
-namespace ExcelExport
+namespace ExcelFormatting
 {
-    class ColumnDoesNotExistsFormatter : IExcelColumnFormatter
+    public class ColumnDoesNotExistsFormatter : IExcelColumnFormatter
     {
         public int FormatColumn(Worksheet worksheet, int columnIndex)
         {

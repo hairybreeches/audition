@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Autofac;
 using Capabilities;
 using CsvExport;
+using ExcelFormatting;
 using Model;
 
 namespace ExcelExport
