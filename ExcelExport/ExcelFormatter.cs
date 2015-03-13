@@ -78,9 +78,14 @@ namespace ExcelExport
             var columnIndex = 1;
             foreach (var excelColumnFormatter in excelColumnFormatters)
             {
-                excelColumnFormatter.FormatColumn(Sheet, columnIndex);
+                excelColumnFormatter.FormatColumn(() => GetColumnDataCells(Sheet, columnIndex));
                 columnIndex ++;
             }
+        }
+
+        private Range GetColumnDataCells(Worksheet sheet, int columnIndex)
+        {
+            return (Range)sheet.Columns[columnIndex];
         }
     }
 }
