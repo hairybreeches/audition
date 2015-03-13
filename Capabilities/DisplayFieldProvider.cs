@@ -10,7 +10,7 @@ namespace Capabilities
         public DisplayField Description = new DisplayField(DisplayFieldName.Description, MappingFields.Description, entry => entry.Description, "Description");
         public DisplayField LedgerEntryType = new DisplayField(DisplayFieldName.LedgerEntryType, MappingFields.Amount, entry => entry.LedgerEntryType, "Dr/Cr");
         public DisplayField NominalName = new DisplayField(DisplayFieldName.NominalName, MappingFields.NominalName, entry => entry.NominalCodeName, "Nominal name");
-        public DisplayField Amount = new DisplayField(DisplayFieldName.Amount, MappingFields.Amount, entry => entry.Amount, "Amount");
+        public DisplayField Amount = new DisplayField(DisplayFieldName.Amount, MappingFields.Amount, entry => entry.Amount, "Amount", new CurrencyColumnFormatter());
         public DisplayField NominalCode = new DisplayField(DisplayFieldName.NominalCode, MappingFields.NominalCode, entry => entry.NominalCode, "Nominal Code");
         public DisplayField Id = new DisplayField(DisplayFieldName.Id, MappingFields.Id, entry => entry.TransactionId, "Transaction ID");
         public DisplayField TransactionType = new DisplayField(DisplayFieldName.Type, MappingFields.Type, entry => entry.TransactionType, "Transaction type");
