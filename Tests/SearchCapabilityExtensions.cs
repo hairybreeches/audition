@@ -59,7 +59,7 @@ namespace Tests
 
         public static DisplayFieldName[] GetAllValues()
         {
-            return Enum.GetValues(typeof(DisplayFieldName)).OfType<DisplayFieldName>().ToArray();            
+            return new DisplayFieldProvider().AllFields.Select(x=>x.Name).ToArray();            
         }
     }
 }
