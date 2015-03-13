@@ -13,14 +13,12 @@ namespace ExcelExport
         private readonly CsvExporter csvExporter;
         private readonly IFileSystem fileSystem;
         private readonly ExcelFileOpener fileOpener;
-        private readonly IEnumerable<IFormatterFactory> formatterFactories;
 
-        public ExcelExporter(CsvExporter csvExporter, IFileSystem fileSystem, ExcelFileOpener fileOpener, IEnumerable<IFormatterFactory> formatterFactories)
+        public ExcelExporter(CsvExporter csvExporter, IFileSystem fileSystem, ExcelFileOpener fileOpener)
         {
             this.csvExporter = csvExporter;
             this.fileSystem = fileSystem;
             this.fileOpener = fileOpener;
-            this.formatterFactories = formatterFactories;
         }
 
         public void Export(string description, IEnumerable<Transaction> transactions, string filename, IList<DisplayField> availableFields)
@@ -31,7 +29,7 @@ namespace ExcelExport
                 using (var excelWriter = fileOpener.OpenFile(tempFile.Filename))
                 {
                     excelWriter.MergeRow(1);                    
-                    excelWriter.FormatColumns(formatterFactories.Select(x => x.GetFormatter(availableFields.Select(field=>field.Name).ToList())), 2);
+                    excelWriter.FormatColumns(availableFields.Select(x=>x.ColumnFormatter), 2);
                     excelWriter.ApplyFiltersToRow(2);                    
                     excelWriter.AutosizeColumns();
                     excelWriter.NameSheet("Audition search");

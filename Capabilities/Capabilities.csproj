@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcelFormatting\ExcelFormatting.csproj">
+      <Project>{5C8F0BBE-1B47-46FA-B278-5E87987330D7}</Project>
+      <Name>ExcelFormatting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{BF29018B-4B83-4DF4-B0CC-23ACE91A0913}</Project>
       <Name>Model</Name>

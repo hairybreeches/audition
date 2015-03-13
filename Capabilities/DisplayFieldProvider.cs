@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using ExcelFormatting;
 
 namespace Capabilities
 {
     public class DisplayFieldProvider
     {
-        public DisplayField TransactionDate = new DisplayField(DisplayFieldName.TransactionDate, MappingFields.TransactionDate, entry => entry.TransactionDate.ToString("yyyy-MM-dd"), "Transaction date");
+        public DisplayField TransactionDate = new DisplayField(DisplayFieldName.TransactionDate, MappingFields.TransactionDate, entry => entry.TransactionDate.ToString("yyyy-MM-dd"), "Transaction date", new DateColumnFormatter());
         public DisplayField Username = new DisplayField(DisplayFieldName.Username, MappingFields.Username, entry => entry.Username, "Username");
         public DisplayField Description = new DisplayField(DisplayFieldName.Description, MappingFields.Description, entry => entry.Description, "Description");
         public DisplayField LedgerEntryType = new DisplayField(DisplayFieldName.LedgerEntryType, MappingFields.Amount, entry => entry.LedgerEntryType, "Dr/Cr");
