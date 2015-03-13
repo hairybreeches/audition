@@ -57,9 +57,9 @@ namespace Tests
             return fields.Where(x => x != toRemove).ToArray();
         }
 
-        public static T[] GetAllValues<T>()
+        public static DisplayFieldName[] GetAllValues()
         {
-            return Enum.GetValues(typeof(T)).OfType<T>().ToArray();            
+            return Enum.GetValues(typeof(DisplayFieldName)).OfType<DisplayFieldName>().ToArray();            
         }
     }
 }
