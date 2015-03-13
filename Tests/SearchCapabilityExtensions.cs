@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Capabilities;
@@ -54,6 +55,11 @@ namespace Tests
         public static DisplayFieldName[] Without(this IList<DisplayFieldName> fields, DisplayFieldName toRemove)
         {
             return fields.Where(x => x != toRemove).ToArray();
+        }
+
+        public static T[] GetAllValues<T>()
+        {
+            return Enum.GetValues(typeof(T)).OfType<T>().ToArray();            
         }
     }
 }
