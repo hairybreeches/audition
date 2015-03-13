@@ -44,6 +44,11 @@ namespace Webapp.Session
         public SearchCapability GetCurrentSearchCapability()
         {
             return SearcherFactory.GetSearchCapability();
+        }      
+        
+        public IEnumerable<DisplayField> GetCurrentDisplayFields()
+        {
+            return SearcherFactory.GetAvailableFields();
         }
 
         private ISearcherFactory SearcherFactory

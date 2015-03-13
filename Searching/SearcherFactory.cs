@@ -45,6 +45,11 @@ namespace Searching
                 }));
         }
 
+        public IEnumerable<DisplayField> GetAvailableFields()
+        {
+            return availableFields;
+        }
+
         private ISearcher<TParameters> GetSearcher<TParameters>(SearchActionName action, ISearcher<TParameters> functionalSearcher) 
             where TParameters : ISearchParameters
         {
