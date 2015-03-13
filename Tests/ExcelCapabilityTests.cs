@@ -26,8 +26,8 @@ namespace Tests
             {
                 yield return CreateTestCase("ID mapped", 
                     new FieldLookups(id: 1, nominalCode: -1, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
-                    new Dictionary<string, string>().WithAllErrorMessages(), 
-                    DisplayFieldName.TransactionDate, DisplayFieldName.Id);
+                    new Dictionary<string, string>().WithAllErrorMessages(),
+                    DisplayFieldName.Id, DisplayFieldName.TransactionDate);
 
                 yield return CreateTestCase("Nominal Code mapped",
                     new FieldLookups(id: -1, nominalCode: 12, nominalName: -1, amount: -1, description: -1, transactionDate: 18, username: -1, type: -1), 
