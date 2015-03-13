@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyColumnFormatter.cs" />
     <Compile Include="DateColumnFormatter.cs" />
     <Compile Include="IExcelColumnFormatter.cs" />
     <Compile Include="NoFormattingRequiredFormatter.cs" />
