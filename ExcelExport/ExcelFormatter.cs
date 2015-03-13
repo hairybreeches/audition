@@ -76,8 +76,6 @@ namespace ExcelExport
         public void FormatColumns(IEnumerable<IExcelColumnFormatter> excelColumnFormatters, int headerRows)
         {
             var columnIndex = 1;
-            //yes, we could use LINQ here, but these are not side-effect free functions,
-            //their whole point is the side effect, the result is just keeping count
             foreach (var excelColumnFormatter in excelColumnFormatters)
             {
                 excelColumnFormatter.FormatColumn(Sheet, columnIndex);
